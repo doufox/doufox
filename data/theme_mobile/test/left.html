@@ -1,0 +1,24 @@
+ <div class="sidenav bg">
+  <div class="searchform">
+   <form method="Get" action="" >
+    <input type="hidden"  value="index"  name="c" />
+    <input type="hidden"  value="search"  name="a" />
+    <input type="text"  value=""  name="kw" />
+<!--搜索指定栏目 <input type="hidden"  value="1"  name="catid" />-->
+    <button type="submit">搜索</button>
+   </form>
+ </div>
+  <div class="title"><s></s>产品分类</div>
+  <div class="leftbox">
+   <ul>
+{xiao:nav parentid=5 }
+    <li><s></s><a {xiao:if $current}class="select"{/xiao:if} href="{xiao:$xiao['url']}">{xiao:$xiao['catname']}</a></li>
+{/xiao:nav}
+   </ul>
+  </div>
+ </div>
+ <div class="blank10 clear"></div>
+ <div class="contact bg">
+  <div class="newstitle"><h3>联系我们</h3></div>
+ {xiao:block 4}
+ </div>

@@ -1,0 +1,40 @@
+{xiao:template header.html}
+<div class="mainbody">
+  <div class="w210 fl">
+  {xiao:template sidebar.html}
+  </div>
+  <div class="w740 fr">
+  <div class="page bg">
+    <div class="crumbs"><a href="{xiao:$site_url}">Home</a>&nbsp;&gt;&nbsp;Search Results of: "{xiao:$kw}"</div>
+    <div class="blank10 clear"></div>
+{xiao:if empty($searchnum)}
+    <div class="search-result-content">
+      <h3>Sorry, your search</h3>
+      <em>{xiao:$kw}</em>
+      <p>did not match any documents.</p>
+      <p style="margin-top:1em">Suggestions:</p>
+      <ul style="margin-left:1.3em;margin-bottom:2em">
+      <li>Make sure all words are spelled correctly.</li>
+      <li>Try different keywords.</li>
+      <li>Try more general keywords.</li>
+      <li>Try fewer keywords.</li>
+      </ul>
+    </div>
+{xiao:else}
+    <div class="newslist">
+      <ul class="noborder">
+{xiao:loop $searchdata $t}
+        <li>
+          <span class="date">{xiao:function.date("Y-m-d", $t['time'])}</span>
+          <a href="{xiao:$t['url']}">· {xiao:$t['title']}</a>
+      </li>
+{/xiao:loop}
+      </ul>
+      <div class="listpage">{xiao:$pagelist}</div>
+    </div>
+{/xiao:if}
+    <div class="clear"></div>
+  </div>
+  <div class="blank10 clear"></div>
+</div>
+{xiao:template footer.html}

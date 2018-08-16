@@ -849,3 +849,8 @@ function is_https()
     }
     return false;
 }
+
+function get_extension($file)
+{
+    return pathinfo($file, PATHINFO_EXTENSION);
+}

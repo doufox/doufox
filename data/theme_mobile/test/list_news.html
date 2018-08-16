@@ -1,0 +1,39 @@
+{xiao:template head.html}
+{xiao:template header.html}
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#nav-more").click(function(){
+		var id = $("#list_id").val();
+		$("#nav-more").html('<span class="nav-button">加载中...</span>');
+		$.post("/index.php?c=api&a=mobiledata&rand="+Math.random(), { tpl: "ajax_news.html", page:id }, function(data){ 
+			$("#deals").append(data);
+			$("#list_id").val(Number(id) + 1);
+			$("#nav-more").html('<span class="nav-button">查看更多</span>');
+		});
+	});
+});
+</script>
+<div class="title">
+  <h1 class="titname">{xiao:function.position($catid, ' &gt;&gt;&nbsp;&nbsp;')}</h1>
+  <a href="javascript:history.back()"><span class="titback"><img src="{xiao:$site_template}images/backicon.gif" /></span></a>
+</div>
+<div class="newlist">
+ <ul class="tabs" style="margin-top: 0">
+{xiao:nav  parentid=$catid typeid=1}
+  <li><a href="{xiao:$xiao['url']}">{xiao:$xiao['catname']}</a></li>
+{/xiao:nav}
+ </ul>
+ <br class="clear" />
+ <div class="flexslider2">
+  <ul class="slides"></ul>
+ </div>
+ <ul class="newsconlist">
+   <input name="list_id" id="list_id" type="hidden" value="1">
+   {xiao:list catid=$catid page=$page cache=36000}
+   <li><a href="{xiao:$xiao['url']}">{xiao:$xiao['title']}</a></li>
+   {/xiao:list}
+ </ul>
+ <ul class="page_navi"><li><span class="nav-button">查看更多</span></li></ul>
+ <ul class="page_navi"><li><a href="/site/list?catid=8&page=1&size=12">下一页 &gt;</a></li></ul>
+</div>
+{xiao:template footer.html}

@@ -1,0 +1,25 @@
+{xiao:template header.html}
+<div class="mainbody category-list">
+ <div class="w210 fl">
+{xiao:template sidebar.html}
+ </div>
+ <div class="w740 fr">
+  <div class="page bg">
+    {xiao:template crumbs.html}
+{xiao:nav  parentid=$catid typeid=1}
+   <div class="newslist">
+    <h3><span class="bt">{xiao:$xiao['catname']}</span> <span class="more"><a href="{xiao:$xiao['url']}">更多&gt;&gt;</a></span></h3> 	
+    <ul class="noborder">
+{xiao:list catid=$xiao[catid] num=9  order=time}
+     <li><span class="date">{xiao:function.date("Y-m-d", $xiao['time'])}</span> <a href="{xiao:$xiao['url']}">·  {xiao:$xiao['title']}</a></li>
+{/xiao:list}
+    </ul>
+   </div>
+   <div class="blank10 clear"></div>
+{/xiao:nav}
+  </div>
+  <div class="clear"></div>
+ </div>
+ <div class="blank10 clear"></div>
+</div>
+{xiao:template footer.html}

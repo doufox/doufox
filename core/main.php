@@ -29,6 +29,7 @@ define('ADMIN_DIR', 'admin'); // 后台管理文件夹
 define('ADMIN_PATH', CORE_PATH . ADMIN_DIR . DIRECTORY_SEPARATOR); // 后台管理模板的路径
 define('DATA_NAME', 'data'); // 系统数据文件夹名
 define('DATA_DIR', ROOT_PATH . DATA_NAME . DIRECTORY_SEPARATOR); // 数据目录的路径
+define('DATA_PATH', ROOT_PATH . DATA_NAME . DIRECTORY_SEPARATOR); // 数据目录的路径
 define('STATIC_NAME', 'static'); // 静态资源文件夹名
 define('STATIC_DIR', STATIC_NAME . DIRECTORY_SEPARATOR); // 前端静态调用文件的路径
 define('THEME_PATH', DATA_DIR . 'theme' . DIRECTORY_SEPARATOR); // 桌面端模板目录的路径
@@ -88,13 +89,17 @@ abstract class xiaocms
         self::parse_request();
         print(self::$pathinfo[0]);
         $config = self::load_config('config');
+        define('SITE_THEME', $config['SITE_THEME']);
+        define('SITE_THEME_MOBILE', $config['SITE_THEME_MOBILE']);
         if ($config['SITE_MOBILE'] == true && is_mobile()) {
-            $config['SITE_THEME'] = (is_dir(THEME_PATH . 'mobile') ? 'mobile' : $config['SITE_THEME']);
+            define('THEME_CURRENT', THEME_MOBILE_PATH);
+            define('THEME_DIR', is_dir(THEME_MOBILE_PATH . SITE_THEME_MOBILE) ? SITE_THEME_MOBILE : 'default');
+        } else {
+            define('THEME_CURRENT', THEME_PATH);
+            define('THEME_DIR', is_dir(THEME_PATH . SITE_THEME) ? SITE_THEME : 'default');
         }
         static $_app = array();
         $app_id = self::$controller . '_' . self::$action;
-        define('SYS_THEME_DIR', $config['SITE_THEME'] . DIRECTORY_SEPARATOR); // 模板风格
-        define('THEME_NAME', $config['SITE_THEME']); // 模板风格名字
         if (!isset($_app[$app_id]) || $_app[$app_id] == null) {
             $namespace = self::$namespace;
             $controller = self::$controller . 'Controller';

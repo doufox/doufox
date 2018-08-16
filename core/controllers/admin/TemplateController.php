@@ -9,7 +9,7 @@ class TemplateController extends Admin
     public function __construct()
     {
         parent::__construct();
-        $this->dir = THEME_PATH . THEME_NAME . DIRECTORY_SEPARATOR;
+        $this->dir = THEME_PATH . SITE_THEME . DIRECTORY_SEPARATOR;
         if (file_exists($this->dir . 'config.php')) {
             $this->file_info = include $this->dir . 'config.php';
         }

@@ -1,0 +1,59 @@
+{xiao:template member/head.html}
+
+{xiao:template member/header.html}
+
+<div class="member">
+	    <div class="w210 fl">
+		{xiao:template member/left.html}
+        </div>
+	    <div class="w740 fr">
+		<div class="page bg">
+                <form action="" method="post">
+                <div class="datatablepage">
+                <table width="100%" border="0">
+                  <tr>
+                    <td>
+					<select name="catid">
+                    {xiao:nav  }
+                    <option value="{xiao:$xiao['catid']}">{xiao:$xiao['catname']}</option>
+                    {/xiao:nav}
+					</select>
+					<input type="submit" class="button" value="发布文档" name="submit">
+					</td>
+                    <td align="right"><div class="listpage">{xiao:$pagelist}</div></td>
+                  </tr>
+                </table>
+                </div>
+                <table class="datatable" border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <td>标题</td>
+                            <td width="80">栏目</td>
+                            <td width="130">更新时间</td>
+                            <td width="50">操作</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     {xiao:loop $list $t}
+                      <tr>
+                        <td><a href="{xiao:$t['url']}" target="_blank">
+						{xiao:if $t['status']==0}<font color="#FF0000">[未审]</font>
+						{xiao:else if $t['status']==2}<font color="#0000FF">[头条]</font>{/xiao:if}
+						{xiao:$t['title']}</a></td>
+                        <td><a href="{xiao:$cats[$t['catid']]['url']}" target="_blank">{xiao:$cats[$t['catid']]['catname']}</a></td>
+                        <td>{xiao:function.date("Y-m-d H:i:s", $t['time'])}</td>
+                        <td>
+                        <a href="{xiao:function.url('member/content/edit/', array('id'=>$t['id']))}">修改</a>&nbsp;
+                        </td>
+                      </tr>
+                      {/xiao:loop}
+                    </tbody>
+                </table>
+               </form>
+			  
+		   <div class="blank10 clear"></div>		
+		</div>
+
+        </div>
+</div>
+{xiao:template footer.html}

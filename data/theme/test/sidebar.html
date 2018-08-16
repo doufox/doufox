@@ -1,0 +1,10 @@
+<div class="sidebar bg">
+  <div class="sidebar-header">Category</div>
+    <div class="sidebar-body">
+      <ul>
+{xiao:nav  }
+        <li {xiao:if $current}class="select"{/xiao:if}><s></s><a href="{xiao:$xiao['url']}">{xiao:$xiao['catname']}</a></li>
+{/xiao:nav}
+    </ul>
+  </div>
+</div>

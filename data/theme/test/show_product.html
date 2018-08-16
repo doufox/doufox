@@ -1,0 +1,34 @@
+{xiao:template header.html}
+<div class="mainbody">
+  <div class="container">
+    <div class="w210 fr">
+      {xiao:template sidebar.html}
+    </div>
+    <div class="w740 fl">
+      <div class="page bg">
+        {xiao:template crumbs.html}
+        <h2 class="article-title">{xiao:$title}</h2>
+        <div class="article-meta">时间：{xiao:function.date("Y-m-d H:i:s", $time)} 点击：<script type="text/javascript" src="{xiao:function.url('api/hits',array('id'=>$id))}"></script>次</div>
+        <div class="article-content">{xiao:$content}</div>
+        <!--文章内容分页 begin-->
+        {xiao:if $content_page}
+        <div class="listpage">
+          {xiao:loop $content_page $t=>$u}
+          <a{xiao:if $page!=$t} href="{xiao:$u}"{xiao:else} style="background-color: #c00;"{/xiao:if}>{xiao:$t}</a>
+          {/xiao:loop}
+        </div>
+        <div class="clear blank10"></div>
+        {/xiao:if}
+        <!--文章内容分页 end-->
+        <div class="article-prev-next">
+        {xiao:if $prev_page}<div class="article-prev">上一篇：<a href="{xiao:$prev_page['url']}">{xiao:$prev_page['title']}</a></div>{/xiao:if}
+        <div class="blank5 clear"></div>
+        {xiao:if $next_page}<div class="article-next">下一篇：<a href="{xiao:$next_page['url']}">{xiao:$next_page['title']}</a></div>{/xiao:if}
+        </div>
+      </div>
+      <div class="blank10 clear"></div>
+      <div>{xiao:$tag}</div>
+    </div>
+  </div>
+</div>
+{xiao:template footer.html}

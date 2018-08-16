@@ -1,0 +1,76 @@
+{xiao:template member/head.html}
+
+{xiao:template header.html}
+
+<script type="text/javascript">
+function checkpass() {
+	var pass1 = $('#password').val();
+	var pass2 = $('#password2').val();
+	if (pass1 != pass2) {
+		$('#checkpassword2').html('<span>两次密码不一致</span>');
+		$('#password').focus();
+		return false;
+	} else {
+	    $('#checkpassword2').html('<span>正确</span>');
+	}
+}
+</script>
+<div class="register">
+	<form method="post" action="" name="myform" id="myform">
+		{xiao:if count($member_model) == 1}会员类型：
+		<select name="data[modelid]" >
+		{xiao:loop $member_model $t}
+		<option value="{xiao:$t['modelid']}" {xiao:if $member_default_modelid==$t['modelid']}selected{/xiao:if}>{xiao:$t['modelname']}</option>
+		{/xiao:loop}
+		</select>
+		{/xiao:if}
+		<div class="form-continer">
+			<div class="form-item">
+				<div class="input-continer log-name">
+					<input type="text" class="input-tag" id="username" name="data[username]" tabindex="1" placeholder="会员账号" onblur="checkuser()" />
+				</div>
+				<span id="err_username" class="tips_info"></span>
+			</div>
+			<div class="form-item">
+				<div class="input-continer log-pwd">
+				<input type="password" class="input-tag" id="password" name="data[password]" tabindex="2" placeholder="会员密码" />
+				</div>
+			</div>
+			<div class="form-item">
+				<div class="input-continer log-pwd">
+				<input type="password" class="input-tag" id="password" name="data[password]" tabindex="2" placeholder="确认密码" onblur="checkpass()" />
+				</div>
+				<span id="checkpassword2" class="tips_info"></span>
+			</div>
+			<div class="form-item">
+				<div class="input-continer">
+				<input type="text" class="input-tag" id="email" name="data[email]" tabindex="2" placeholder="您的邮箱" onblur="checkemail()" />
+				</div>
+				<span id="err_email" class="tips_info"></span>
+			</div>
+
+			{xiao:if $config['MEMBER_REGCODE']}<div class="form-item">
+				<div class="input-continer">
+				<input type="text" class="input-code" name="code" placeholder="注册验证" />
+				<img id="code" class="code" align="absmiddle" title="看不清楚？换一张" onclick="reflashCode()"
+				src="{xiao:function.url("api/checkcode/", array("width "=>80, "height "=>30))}" />
+				</div>
+			</div>{/xiao:if}
+
+			<div class="form-item">
+				<input type="submit" class="button" value="注 册" name="submit" />
+			</div>
+			<div class="form-item-link">
+				<a href="forget.html">忘记密码？</a>
+				<a href="{xiao:function.url('member/login')}">直接登录</a>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	function reflashCode() {
+	  document.getElementById('code').src='{xiao:function.url("api/checkcode/", array("width "=>80, "height"=>30))}&'+Math.random();
+	}
+</script>
+
+{xiao:template footer.html}

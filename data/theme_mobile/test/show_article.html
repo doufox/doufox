@@ -1,0 +1,31 @@
+{xiao:template head.html}
+
+<div class="header-complement"></div>
+<header class="header clearfix">
+  <div class="logo">{xiao:$site_name}</div>
+  <div class="header-back">
+    <a href="javascript:history.back()">返回</a>
+  </div>
+</header>
+
+<div class="article clearfix">
+  <h1 class="article-title">{xiao:$title}</h1>
+  <div class="article-meta">{xiao:function.date("Y-m-d H:i:s", $time)}(浏览：
+    <script type="text/javascript" src="{xiao:function.url('api/hits',array('id'=>$id))}"></script>)</div>
+  <div class="article-content">
+    {xiao:$content}
+  </div>
+  {xiao:if $content_page}
+  <div class="listpage">
+    {xiao:loop $content_page $t=>$u}
+    <a{xiao:if $page!=$t} href="{xiao:$u}" {xiao:else} style="background-color: #c00;" {/xiao:if}>{xiao:$t}</a>
+      {/xiao:loop}
+  </div>
+  {/xiao:if}
+</div>
+<div id="deals-page">
+  <div id="nav-more">
+    <a class="nav-button" href="javascript:history.back()">返回列表</a>
+  </div>
+</div>
+{xiao:template footer.html}

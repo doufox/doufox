@@ -1,0 +1,20 @@
+<div class="blank5 clear"></div>
+<div class="recommend-article">
+  <div class="container bg">
+    <div class="hd">
+      <h3>Recommend</h3>
+      <a class="next"></a>
+      <a class="prev"></a>
+    </div>
+    <div class="bd">
+      <ul class="picList">
+{xiao:list status=3 num=10 cache=36000 }
+        <li>
+          <div class="pic"><a href="{xiao:$xiao['url']}"><img src="{xiao:function.thumb($xiao[thumb])}" /></a></div>
+          <div class="title"><a href="{xiao:$xiao['url']}">{xiao:function.strcut($xiao[title], 24)}</a></div>
+        </li>
+{/xiao:list}
+      </ul>
+    </div>
+  </div>
+</div>

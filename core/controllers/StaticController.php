@@ -13,15 +13,17 @@ class StaticController
 
     public function indexAction()
     {
-        $pathinfo = explode('/', $_SERVER['PATH_INFO']); // 格式形式/static/js/com.js
-        // $file_name = trim($_REQUEST['file']) ? trim($_REQUEST['file']) : 'index.html';
-        if ($pathinfo[2] && $pathinfo[3]) {
-            if ($pathinfo[2] == 'js') {
+        $file = $_SERVER['REQUEST_URI'];
+        $ext = get_extension($file);
+        if (isset($ext)) {
+            if ($ext == 'js') {
                 header("Content-type: application/x-javascript; charset=utf-8");
-            } else if ($pathinfo[2] == 'css') {
+            } else if ($ext == 'css') {
                 header("Content-type: text/css; charset=utf-8");
+            } else if ($ext == 'html') {
+                header("Content-type: text/html; charset=utf-8");
             }
-            include $this->static_file(trim($pathinfo[2]) . DIRECTORY_SEPARATOR . trim($pathinfo[3]));
+            include $this->load_file($file);
         } else {
             exit('Access Deined!');
         }
@@ -31,11 +33,11 @@ class StaticController
      * 加载静态资源
      * @param string $file_name 文件名
      */
-    protected function static_file($file_name)
+    protected function load_file($file_name)
     {
-        if (!is_file(STATIC_DIR . $file_name)) {
+        if (!is_file(ROOT_PATH . DATA_NAME . $file_name)) {
             exit('File does not Exist.');
         }
-        return STATIC_DIR . $file_name;
+        return ROOT_PATH . DATA_NAME . $file_name;
     }
 }

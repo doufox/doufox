@@ -1,0 +1,37 @@
+{xiao:template header.html}
+<body>
+<!--header-->
+<header class="header clearfix">
+ <div class="logo">{xiao:$site_title}</div>
+ <div class="menu"></a></div>
+</header>
+<!--banner-->
+<section class="slider">
+ <div class="flexslider">
+  <ul class="slides">
+   <li><a href="#"><img src="{xiao:$site_template}images/sm.jpg" /></a></li>
+   <li><a href="#"><img src="{xiao:$site_template}images/sm.jpg" /></a></li>
+   <li><a href="#"><img src="{xiao:$site_template}images/sm.jpg" /></a></li>
+  </ul>
+ </div>
+</section>
+ <!--news-->
+<div id="scrolldiv">
+ <ul>
+  {xiao:list catid=3 order=time num=3}
+  <li><a href="{xiao:$xiao['url']}">{xiao:function.strcut($xiao[title],34,'')}</a></li>
+  {/xiao:list}
+ </ul>
+ <span class="newsmore"><a href="{xiao:$cats[3][url]}">更多</a></span>
+</div>
+<!--icon-->
+<div class="icon">
+ <ul>
+{xiao:nav  }
+  <li><a href="{xiao:$xiao['url']}"><img src="{xiao:$site_template}images/icon01.gif" /><p>{xiao:$xiao['catname']}</p></a></li>
+{/xiao:nav}
+ </ul>
+ <br class="clear" />
+</div>
+
+{xiao:template footer.html}

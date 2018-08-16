@@ -15,9 +15,9 @@ class view {
 	public $viewpath;
 
 	public function __construct() {
-		$this->view_dir    = THEME_PATH;
+		$this->view_dir    = THEME_CURRENT;
 		$this->compile_dir = DATA_DIR . 'tplcache' . DIRECTORY_SEPARATOR;
-		$viewpath          = basename(THEME_PATH) . '/';
+		$viewpath          = basename(THEME_CURRENT) . '/';
 		$this->viewpath    = $viewpath;
 		$this->_options['viewpath'] = $viewpath;
 	}
@@ -75,7 +75,7 @@ class view {
 	 * 分析视图文件名
 	 */
 	protected function parse_file_name($file_name = null) {
-		return  THEME_NAME . DIRECTORY_SEPARATOR . $file_name;
+		return  THEME_DIR . DIRECTORY_SEPARATOR . $file_name;
 	}
 
 	/**
