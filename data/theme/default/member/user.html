@@ -1,0 +1,9 @@
+{xiao:if $member}
+您好，{xiao:$member['username']}&nbsp;&nbsp;&nbsp;
+<a href="{xiao:function.url('member')}">个人中心</a>&nbsp;&nbsp;&nbsp;
+<a href="{xiao:function.url('member/login/out')}">安全退出</a>
+{xiao:else}
+<a href="{xiao:function.url('member/register')}">免费注册</a>&nbsp;&nbsp;&nbsp;
+<a href="{xiao:function.url('member/login')}">会员登录</a>&nbsp;&nbsp;&nbsp;
+<a href="{xiao:function.url('index/post')}">游客投稿</a>&nbsp;&nbsp;&nbsp;
+{/xiao:if}

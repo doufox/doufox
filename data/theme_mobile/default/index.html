@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{xiao:$site_title}</title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <meta name="keywords" content="{xiao:$site_keywords}" />
+  <meta name="description" content="{xiao:$site_description}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+  <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <link href="{xiao:$site_template}css/style.css" rel="stylesheet" type="text/css">
+  <link href="{xiao:$site_template}css/index.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <div class="header-complement"></div>
+  <header class="header clearfix">
+    <div class="logo">{xiao:$site_name}</div>
+  </header>
+
+  <div id="banner" class="banner">
+    <ul class="focus-content">
+      {xiao:list catid=4 order=time num=5}
+      <li>
+        <a class="pic" href="{xiao:$xiao['url']}">
+          <img src="{xiao:$site_template}images/sm.jpg" />
+        </a>
+        <a class="tit" href="{xiao:$xiao['url']}">{xiao:function.strcut($xiao[title],34,'')}</a>
+      </li>
+      {/xiao:list}
+    </ul>
+    <ul class="focus-ctrl"></ul>
+  </div>
+
+  <div class="index-card">
+    {xiao:nav  }
+    <div class="card-item">
+      <a href="{xiao:$xiao['url']}"><img src="{xiao:$site_template}images/icon01.gif" /></a>
+      <a class="title" href="{xiao:$xiao['url']}">{xiao:$xiao['catname']}</a>
+    </div>
+    {/xiao:nav}
+    <br class="clear" />
+  </div>
+  <script type="text/javascript" src="{xiao:$site_template}js/slide.js"></script>
+
+  <script type="text/javascript">
+    window.onload = TouchSlide({
+      slideCell: "#banner",
+      titCell: ".focus-ctrl",
+      mainCell: ".focus-content",
+      effect: "leftLoop",
+      autoPage: true,
+      autoPlay: true
+    });
+  </script>
+{xiao:template footer.html}

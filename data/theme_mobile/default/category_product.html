@@ -1,0 +1,35 @@
+{xiao:template header.html}
+<div class="mainbody">
+	<div class="w210 fl">
+	{xiao:template left.html}
+	</div>
+	<div class="w740 fr">
+		<div class="page bg">
+		<div class="newstitle">您当前位置：<a  href="{xiao:$site_url}">首页</a> >> {xiao:function.position($catid, ' &gt;&gt;&nbsp;&nbsp;')}</div>
+		<div class="blank10 clear"></div>
+
+            <!--列表开始-->
+		    <div class="piclist">
+			    <ul class="noborder">
+                {xiao:list catid=$catid page=$page cache=36000}
+            <li>
+            <div><a href="{xiao:$xiao['url']}"><img src="{xiao:function.thumb($xiao[thumb])}" /></a></div>
+            <div class="picname"><a href="{xiao:$xiao['url']}">{xiao:$xiao['title']}</a></div>
+            </li>
+                {/xiao:list}
+
+                </ul>
+                <div class="listpage" >{xiao:$pagelist}</div>
+		   </div>
+	       <!--列表结束-->
+		
+		</div>
+
+		<div class="clear"></div>
+	</div>
+	<div class="blank10 clear"></div>
+
+
+</div>
+
+{xiao:template footer.html}

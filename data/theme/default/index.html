@@ -1,0 +1,29 @@
+{xiao:template header.html}
+<div class="blank5 clear"></div>
+<div class="mainbody category-card">
+ <div class="container">
+{xiao:nav  }
+  <div class="newwarp bg">
+    <div class="newstitle">
+      <h3>{xiao:$xiao['catname']}</h3>
+      <a href="{xiao:$xiao['url']}" class="more">more&gt;&gt;</a>
+    </div>
+    {xiao:list catid=$xiao[catid] status=2 num=1}
+    <div class="newsfocus">
+      <div><a href="{xiao:$xiao['url']}"><img src="{xiao:function.thumb($xiao[thumb])}" /></a></div>
+      <h3><a href="{xiao:$xiao['url']}" title="{xiao:$xiao['title']}">{xiao:function.strcut($xiao[title],34)}</a></h3>
+      <p>{xiao:function.strcut($xiao[description],80)} </p>
+    </div>
+{/xiao:list}
+    <ul class="indexnewslist">
+{xiao:list catid=$xiao[catid] order=time num=3}
+      <li><span>{xiao:function.date("Y-m-d", $xiao['time'])}</span>· <a href="{xiao:$xiao['url']}">{xiao:function.strcut($xiao[title],34,'')}</a></li>
+{/xiao:list}
+    </ul>
+  </div>
+{/xiao:nav}
+ </div>
+ <div class="link bg">{xiao:block 6}</div>
+</div>
+{xiao:template recommend_article.html}
+{xiao:template footer.html}

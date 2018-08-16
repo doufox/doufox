@@ -1,0 +1,51 @@
+{xiao:template member/head.html}
+
+{xiao:template member/header.html}
+
+<div class="member">
+	    <div class="w210 fl">
+		{xiao:template member/left.html}
+        </div>
+	    <div class="w740 fr">
+		<div class="page bg">
+			<div class="content_info">    
+                <form action="" method="post">
+                <table width="100%" class="table_form ">
+                <tbody>
+                <tr>
+                    <th width="100">会员模型：</th>
+                    <td>{xiao:$member_model[$member['modelid']]['modelname']}</td>
+                </tr>
+                <tr>
+                    <th width="100">会员名称：</th>
+                    <td>{xiao:$member['username']}</td>
+                </tr>
+                <tr>
+                    <th width="100">会员积分：</th>
+                    <td>{xiao:$member['credits']}</td>
+                </tr>
+                <tr>
+                    <th>注册邮箱：</th>
+                    <td>{xiao:$member['email']}</td>
+                </tr>
+
+				
+                <tr>
+                {xiao:$data_fields}
+                <tr>
+                    <th style="border:none">&nbsp;</th>
+                    <td style="border:none"><input type="submit" class="button" value="保 存" name="submit"></td>
+                </tr>
+                </tbody>
+                </table>
+                </form>
+			</div>
+        </div>
+
+		   <div class="blank10 clear"></div>		
+		</div>
+
+        </div>
+	    <!--Content End-->
+</div>
+{xiao:template footer.html}

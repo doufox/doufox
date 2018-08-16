@@ -1,0 +1,44 @@
+{xiao:template member/head.html}
+
+{xiao:template member/header.html}
+
+<div class="login">
+  <form action="" method="post">
+    <input type="hidden" value="{xiao:$backurl}" name="data[back]" />
+    <div class="form-continer">
+      <div class="log-logo"><img src="{xiao:$site_template}images/login.png"></div>
+      <div class="form-item">
+        <div class="input-continer log-name">
+          <input type="text" class="input-tag" name="data[username]" tabindex="1" placeholder="请输入用户名" />
+        </div>
+      </div>
+      <div class="form-item">
+        <div class="input-continer log-pwd">
+          <input type="password" class="input-tag" name="data[password]" tabindex="2" placeholder="请输入密码" />
+        </div>
+      </div>
+
+      {xiao:if $config['MEMBER_LOGINCODE']}<div class="form-item">
+        <div class="input-continer">
+          <input type="text" class="input-code" name="code" placeholder="请输入验证码" />
+          <img id="code" class="code" align="absmiddle" title="看不清楚？换一张" onclick="reflashCode()"
+          src="{xiao:function.url("api/checkcode/", array("width "=>80, "height "=>30))}" />
+        </div>
+      </div>{/xiao:if}
+
+      <div class="form-item">
+          <input type="submit" class="button" value="登 录" name="submit" />
+      </div>
+      <div class="form-item-link">
+        <a href="forget.html">忘记密码？</a>
+        <a href="{xiao:function.url('member/register')}">注册会员</a>
+      </div>
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+  function reflashCode() {
+    document.getElementById('code').src='{xiao:function.url("api/checkcode/", array("width "=>80, "height"=>30))}&'+Math.random();
+  }
+</script>
+{xiao:template footer.html}

@@ -1,0 +1,15 @@
+<div class="header-complement"></div>
+<header class="header clearfix">
+  <div class="header-menu">
+      {xiao:if $member}
+
+      <a href="javascript:void(0)">菜单</a>
+      <a href="{xiao:function.url('member/login/out')}">退出</a>
+      {/xiao:if}
+
+  </div>
+  <div class="logo">{xiao:$site_name}</div>
+  <div class="header-back">
+    <a href="javascript:history.back()">返回</a>
+  </div>
+</header>

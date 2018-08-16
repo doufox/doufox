@@ -1,0 +1,34 @@
+{xiao:template header.html}
+<div class="mainbody">
+ <div class="bg" >
+  <form  action="" method="post" >
+  <table width="100%" class="table_form">
+  <input type="hidden" value="{xiao:$backurl}" name="data[back]" />
+  <tbody>
+   <tr>
+    <th width="300"></th>
+    <td></td>
+   </tr>
+   <tr>
+    <th><font color="red">*</font> 登录会员：</th>
+    <td> <input type="text" class="input-text" name="data[username]" tabindex="1" /><label><a href="{xiao:function.url('member/register')}" target="_blank">注册新会员</a></td>
+   </tr>
+   <tr>
+   <th><font color="red">*</font> 密码：</th><td><input type="password" class="input-text" name="data[password]" tabindex="2" /></td>
+  </tr>
+{xiao:if $config['MEMBER_LOGINCODE']}
+  <tr>
+   <th><font color="red">*</font> 验证码：</th><td><input type="text" class="input-text" name="code" style="width:100px" />
+   <img id="code" src="{xiao:function.url("api/checkcode/", array("width"=>100, "height"=>30))}" align="absmiddle" title="看不清楚？换一张" onclick="document.getElementById('code').src='{xiao:function.url("api/checkcode/", array("width"=>0, "height"=>30))}&'+Math.random();" style="cursor:pointer; margin-top:-3px;"></td>
+   </tr>
+{/xiao:if}
+   <tr>
+    <th>&nbsp;</th>
+    <td><input type="submit" class="button" value="登 录" name="submit"></td>
+   </tr>
+  </tbody>
+  </table>
+  </form>
+ </div>
+</div>
+{xiao:template footer.html}

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>测试 - {xiao:$site_title}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="keywords" content="{xiao:$site_keywords}" />
+  <meta name="description" content="{xiao:$site_description}" />
+  <link rel="stylesheet" href="{xiao:$site_template}css/style.css" type="text/css" />
+  <link rel="shortcut icon" href="{xiao:$site_url}favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+  <div class="header">
+   <div class="container">
+    <a class="logo" href="{xiao:$site_url}" title="{xiao:$site_name}">data目录里的{xiao:$site_name}</a>
+    <div>
+      <div class="slogan">{xiao:$site_slogan}</div>
+      <div class="searchform">
+          <form method="get" action="/">
+            <input type="hidden" value="index" name="c" />
+            <input type="hidden" value="search" name="a" />
+            <input type="text" value="" name="kw" class="keywords-input" />
+            <!--搜索指定栏目 <input type="hidden"  value="1"  name="catid" />-->
+            <button type="submit" class="keywords-submit">Search</button>
+          </form>
+        </div>
+      </div>
+   </div>
+  </div>
+  <div class="nav">
+    <ul id="nav" class="container clearfix">
+      <li class="nav-item"><h3><a href="{xiao:$site_url}">Home</a></h3></li>
+{xiao:nav num=7}
+      <li class="nav-item{xiao:if $current} on{/xiao:if}"><h3><a href="{xiao:$xiao['url']}">{xiao:$xiao['catname']}</a></h3></li>
+{/xiao:nav}
+    </ul>
+  </div>
+  <div class="clear blank5"></div>
