@@ -35,7 +35,7 @@ class view {
 	protected function get_compile_file($file_name) {
 		return $this->compile_dir . $file_name . '.cache.php';
 	}
-	
+
 	/**
 	 * 生成视图编译文件
 	 */
@@ -48,7 +48,7 @@ class view {
 		}
 		file_put_contents($compile_file, $content, LOCK_EX) or exit($compile_dir.'目录没有写入权限');
 	}
-	
+
 	/**
 	 * 缓存重写分析
 	 */

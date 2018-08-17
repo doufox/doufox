@@ -10,7 +10,7 @@ error_reporting(E_ALL ^ E_NOTICE);
  * 系统常量配置
  */
 date_default_timezone_set('Asia/Shanghai'); // 时区设置
-
+define('CMS_NAME', 'SITECMS'); // CMS名称
 define('ENTRY_SCRIPT_NAME', 'index.php'); // 定义入口文件名
 define('SYS_START_TIME', microtime(true)); // 设置程序开始执行时间
 
@@ -87,17 +87,15 @@ abstract class xiaocms
     public static function run()
     {
         self::parse_request();
-        print(self::$pathinfo[0]);
-        $config = self::load_config('config');
-        define('SITE_THEME', $config['SITE_THEME']);
-        define('SITE_THEME_MOBILE', $config['SITE_THEME_MOBILE']);
-        if ($config['SITE_MOBILE'] == true && is_mobile()) {
-            define('THEME_CURRENT', THEME_MOBILE_PATH);
-            define('THEME_DIR', is_dir(THEME_MOBILE_PATH . SITE_THEME_MOBILE) ? SITE_THEME_MOBILE : 'default');
-        } else {
-            define('THEME_CURRENT', THEME_PATH);
-            define('THEME_DIR', is_dir(THEME_PATH . SITE_THEME) ? SITE_THEME : 'default');
-        }
+        self::load_theme();
+        self::load_app();
+    }
+
+    /**
+     * 控制器处理
+     */
+    public static function load_app()
+    {
         static $_app = array();
         $app_id = self::$controller . '_' . self::$action;
         if (!isset($_app[$app_id]) || $_app[$app_id] == null) {
@@ -110,19 +108,17 @@ abstract class xiaocms
                 if (!is_file($controller_file)) {
                     exit('Controller does not exist.');
                 }
-
                 if (is_file(CONTROLLER_DIR . $namespace . DIRECTORY_SEPARATOR . 'Controller.php')) {
                     self::load_file(CONTROLLER_DIR . $namespace . DIRECTORY_SEPARATOR . 'Controller.php');
                 }
-
                 self::load_file($controller_file);
             } elseif (is_file(CONTROLLER_DIR . $controller . '.php')) {
                 self::load_file(CONTROLLER_DIR . $controller . '.php');
             } else {
                 exit('Controller does not exist.');
             }
-            $app_object = new $controller();
             if (method_exists($controller, $action)) {
+                $app_object = new $controller();
                 $_app[$app_id] = $app_object->$action();
             } else {
                 exit('Action does not exist.');
@@ -131,6 +127,22 @@ abstract class xiaocms
         return $_app[$app_id];
     }
 
+    /**
+     * 加载主题
+     */
+    public static function load_theme()
+    {
+        $config = self::load_config('config');
+        define('SITE_THEME', $config['SITE_THEME']);
+        define('SITE_THEME_MOBILE', $config['SITE_THEME_MOBILE']);
+        if ($config['SITE_MOBILE'] == true && is_mobile()) {
+            define('THEME_CURRENT', THEME_MOBILE_PATH);
+            define('THEME_DIR', is_dir(THEME_MOBILE_PATH . SITE_THEME_MOBILE) ? SITE_THEME_MOBILE : 'default');
+        } else {
+            define('THEME_CURRENT', THEME_PATH);
+            define('THEME_DIR', is_dir(THEME_PATH . SITE_THEME) ? SITE_THEME : 'default');
+        }
+    }
     /**
      * 静态加载文件(相当于PHP函数require_once)
      */

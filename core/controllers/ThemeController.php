@@ -15,13 +15,22 @@ class ThemeController
     {
         $file = $_SERVER['REQUEST_URI'];
         $ext = get_extension($file);
+        header('X-Powered-By: ' . CMS_NAME);
         if (isset($ext)) {
             if ($ext == 'js') {
-                header("Content-type: application/x-javascript; charset=utf-8");
+                header('Content-type: application/x-javascript');
             } else if ($ext == 'css') {
-                header("Content-type: text/css; charset=utf-8");
-            } else if ($ext == 'html') {
-                header("Content-type: text/html; charset=utf-8");
+                header('Content-type: text/css');
+            } else if ($ext == 'png') {
+                header('Content-type: image/png');
+            } else if ($ext == 'jpg') {
+                header('Content-type: image/jpeg');
+            } else if ($ext == 'gif') {
+                header('Content-type: image/gif');
+            } else if ($ext == 'ico') {
+                header('Content-type: image/x-icon');
+            } else {
+                header('Content-Type: text/html; charset=UTF-8');
             }
             include $this->load_file($file);
         } else {
@@ -35,20 +44,12 @@ class ThemeController
      */
     protected function load_file($file_name)
     {
-        // $theme = explode('/', $file_name);
-        // $theme = $pathinfo[1];
         $file = strtr($file_name, array('/theme' => ''));
-        // if ($theme == 'theme') {
-        //     THEME_PATH . DIRECTORY_SEPARATOR . $file_name
-        // }
-        // if (is_mobile()) {
-        //     $file_real_path = THEME_MOBILE_PATH . SITE_THEME_MOBILE . $file;
-        // } else {
-        //     $file_real_path = THEME_PATH . SITE_THEME .$file;
-        // }
         $file_real_path = THEME_CURRENT . THEME_DIR . $file;
         if (!is_file($file_real_path)) {
-            exit('File does not Exist.');
+            // header("HTTP/1.0 404 Not Found");
+            header('Refresh: 3; url=' . HTTP_PRE. HTTP_HOST);
+            exit('Not Found.');
         }
         return $file_real_path;
     }
