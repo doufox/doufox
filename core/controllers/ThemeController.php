@@ -47,8 +47,8 @@ class ThemeController
         $file = strtr($file_name, array('/theme' => ''));
         $file_real_path = THEME_CURRENT . THEME_DIR . $file;
         if (!is_file($file_real_path)) {
-            // header("HTTP/1.0 404 Not Found");
-            header('Refresh: 3; url=' . HTTP_PRE. HTTP_HOST);
+            header("HTTP/1.0 404 Not Found");
+            // header('Refresh: 3; url=' . HTTP_PRE. HTTP_HOST);
             exit('Not Found.');
         }
         return $file_real_path;

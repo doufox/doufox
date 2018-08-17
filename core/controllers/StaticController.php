@@ -45,8 +45,8 @@ class StaticController
     protected function load_file($file_name)
     {
         if (!is_file(ROOT_PATH . DATA_NAME . $file_name)) {
-            // header("HTTP/1.0 404 Not Found");
-            header('Refresh: 3; url=' . HTTP_PRE. HTTP_HOST);
+            header("HTTP/1.0 404 Not Found");
+            // header('Refresh: 3; url=' . HTTP_PRE. HTTP_HOST);
             exit('Not Found.');
         }
         return ROOT_PATH . DATA_NAME . $file_name;
