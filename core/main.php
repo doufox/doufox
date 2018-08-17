@@ -17,7 +17,7 @@ define('SYS_START_TIME', microtime(true)); // 设置程序开始执行时间
 define('HTTP_REFERER', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''); // 来源
 define('HTTP_HOST', $_SERVER['HTTP_HOST']); // host
 define('HTTP_PRE', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') ? 'https://' : 'http://'); // http协议
-define('HTTP_URL', HTTP_PRE . HTTP_HOST); // 当前URL
+define('HTTP_URL', HTTP_PRE . HTTP_HOST . DIRECTORY_SEPARATOR); // 当前URL
 define('COOKIE_PRE', 'ui_'); // Cookie 前缀，同一域名下安装多套系统时，请修改Cookie前缀
 
 define('CORE_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR); // 核心文件所在路径, 即当前路径

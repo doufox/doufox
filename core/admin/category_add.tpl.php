@@ -205,7 +205,7 @@ top.document.getElementById('position').innerHTML = '添加栏目';
 function ajaxdir() {
 	var dir = $('#dir_text').val();
 	if (dir == '') {
-	    $.post('<?php echo SITE_PATH;  echo ENTRY_SCRIPT_NAME; ?>?c=api&a=pinyin&id='+Math.random(), { name:$('#dir').val() }, function(data){ $('#dir_text').val(data); });
+	    $.post('<?php echo HTTP_URL . ENTRY_SCRIPT_NAME; ?>/?c=api&a=pinyin&id='+Math.random(), { name:$('#dir').val() }, function(data){ $('#dir_text').val(data); });
 	}
 }
 

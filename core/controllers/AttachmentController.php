@@ -197,7 +197,7 @@ class AttachmentController extends Controller
         $result   = $upload->upload($path, $filename);
 		//上传成功处理图片
         if (!$result && $dir == 'image') $this->watermark($path . $filename);
-        return array('result'=>$result, 'path'=>  SITE_PATH . $path . $filename, 'file'=>$file , 'ext'=>$dir=='image' ? 1 : $ext);
+        return array('result'=>$result, 'path'=>  HTTP_URL . $path . $filename, 'file'=>$file , 'ext'=>$dir=='image' ? 1 : $ext);
     }
 	
 	/**
@@ -255,7 +255,7 @@ class AttachmentController extends Controller
      */
 	public function kindeditor_managerAction() {
 		$root_path = ROOT_PATH . $this->dir;
-		$root_url  = SITE_PATH . $this->dir;
+		$root_url  = HTTP_URL . $this->dir;
 		//用户目录设定
 		$admin     = $this->getAdmin();
 		if (empty($admin) && $this->memberinfo) {

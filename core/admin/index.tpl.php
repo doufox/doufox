@@ -3,9 +3,9 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title><?php echo $this->site_config['SITE_NAME']; ?> - 后台管理中心</title>
-  <link rel="stylesheet" type="text/css" href="<?php echo ADMIN_DIR; ?>/css/backend.css" />
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" type="text/css" href="/static/css/backend.css" />
+  <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon" />
   <script type="text/javascript" src="/static/js/jquery.min.js"></script>
   <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script>
 </head>

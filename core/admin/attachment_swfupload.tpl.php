@@ -1,17 +1,17 @@
 <?php include $this->admin_tpl('header');?>
 
-<link href="img/swfupload/swfupload.css" rel="stylesheet" type="text/css" />
+<link href="/static/swfupload/swfupload.css" rel="stylesheet" type="text/css" />
 <script language="javascript">
 var viewpath = "<?php echo ADMIN_DIR; ?>/img/";
 </script>
-<script type="text/javascript" src="<?php echo SITE_PATH; ?>img/swfupload/swfupload.js"></script>
-<script type="text/javascript" src="<?php echo SITE_PATH; ?>img/swfupload/fileprogress.js"></script>
-<script type="text/javascript" src="<?php echo SITE_PATH; ?>img/swfupload/handlers.js"></script>
+<script type="text/javascript" src="/static/swfupload/swfupload.js"></script>
+<script type="text/javascript" src="/static/swfupload/fileprogress.js"></script>
+<script type="text/javascript" src="/static/swfupload/handlers.js"></script>
 <script type="text/javascript">
 var swfu = '';
 $(document).ready(function(){
 	swfu = new SWFUpload({
-		flash_url:"<?php echo SITE_PATH; ?>img/swfupload/swfupload.swf?"+Math.random(),
+		flash_url:"/static/swfupload/swfupload.swf?"+Math.random(),
 		upload_url:"<?php echo url('attachment/ajaxswfupload/'); ?>",
 		file_post_name : "Filedata",
 		post_params:{"SWFUPLOADSESSID":"<?php echo $sessionid; ?>","submit":"1", "type":"<?php echo $type; ?>", "size":"<?php echo $size; ?>", "admin":"<?php echo $admin; ?>"},

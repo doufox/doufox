@@ -152,7 +152,7 @@ function getfile($url)
         return $url;
     }
 
-    if (strpos($url, SITE_PATH) !== false && SITE_PATH != '/') {
+    if (strpos($url, HTTP_URL) !== false && HTTP_URL != '/') {
         return $url;
     }
 
@@ -160,7 +160,7 @@ function getfile($url)
         $url = substr($url, 1);
     }
 
-    return SITE_PATH . $url;
+    return HTTP_URL . $url;
 }
 
 /**
@@ -169,14 +169,14 @@ function getfile($url)
 function image($url)
 {
     if (empty($url) || strlen($url) == 1) {
-        return SITE_PATH . 'upload/nopic.gif';
+        return HTTP_URL . 'upload/nopic.gif';
     }
 
     if (substr($url, 0, 7) == 'http://') {
         return $url;
     }
 
-    if (strpos($url, SITE_PATH) !== false && SITE_PATH != '/') {
+    if (strpos($url, HTTP_URL) !== false && HTTP_URL != '/') {
         return $url;
     }
 
@@ -184,7 +184,7 @@ function image($url)
         $url = substr($url, 1);
     }
 
-    return SITE_PATH . $url;
+    return HTTP_URL . $url;
 }
 
 /**
@@ -194,7 +194,7 @@ function thumb($img, $width = null, $height = null)
 {
     $config = xiaocms::load_config('config');
     if (empty($img) || strlen($img) == 3) {
-        return SITE_PATH . 'upload/nopic.gif';
+        return HTTP_URL . 'upload/nopic.gif';
     }
 
     if (file_exists(ROOT_PATH . $img)) {
@@ -459,7 +459,7 @@ function getUrl($data, $page = 0)
         $data['page'] = $page;
         $url = !is_numeric($page) || $page > 1 ? preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['SHOW_PAGE_URL']) : preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['SHOW_URL']);
         $url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(safe_replace('\\2'))", $url);
-        return SITE_PATH . $url;
+        return HTTP_URL . $url;
     }
     if ($page) {
         $url = url('index/show', array('id' => $data['id'], 'page' => $page));
@@ -492,7 +492,7 @@ function getCaturl($data, $page = 0)
         $data['page'] = $page;
         $url = !is_numeric($page) || $page > 1 ? preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['LIST_PAGE_URL']) : preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['LIST_URL']);
         $url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(safe_replace('\\2'))", $url);
-        return SITE_PATH . $url;
+        return HTTP_URL . $url;
     }
 
     if ($page) {

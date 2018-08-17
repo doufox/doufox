@@ -116,7 +116,7 @@ class FormController extends Admin {
 		$count[0] = $this->content->count($this->table, null, 'status=0');
 		$count[3] = $this->content->count($this->table, null, 'status=3');
 
-		$form_url  = SITE_PATH . 'index.php?c=index&a=form&modelid=' . $this->model['modelid'] ;
+		$form_url  = HTTP_URL . ENTRY_SCRIPT_NAME . '?c=index&a=form&modelid=' . $this->model['modelid'] ;
 
         $list_code = '
 {xiao:list table=' . $this->model['tablename'] . '   num=10}
@@ -127,7 +127,7 @@ class FormController extends Admin {
 {xiao:list table=' . $this->model['tablename'] . ' cid=被关联的文章id(例如：$id) num=10}
 表单字段信息 例如：id：{xiao:$xiao[\'id\']} 更多信息请参考官方模板帮助文档
 {/xiao:list}';
-		$form_url  = SITE_PATH . 'index.php?c=form&a=post&modelid=' . $this->model['modelid'] . 'cid=$id ($id是被关联内容的id变量)';
+		$form_url  = HTTP_URL . ENTRY_SCRIPT_NAME . '?c=form&a=post&modelid=' . $this->model['modelid'] . 'cid=$id ($id是被关联内容的id变量)';
         }
 		
 		$cid       = $this->cid;

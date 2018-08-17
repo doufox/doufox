@@ -583,7 +583,7 @@ body fieldset.blue legend {
 }
 
 #imgPreview td.on a {
-    background: url(../../img/swfupload/images/msg_bg.png) no-repeat scroll right -250px transparent;
+    background: url(/static/swfupload/images/msg_bg.png) no-repeat scroll right -250px transparent;
     display: -moz-inline-stack;
     height: 16px;
     line-height: 16px;
@@ -770,7 +770,7 @@ select {
     zoom: 1;
     *display: inline;
     vertical-align: middle;
-    background: url(../../img/swfupload/images/msg_bg.png) no-repeat;
+    background: url(/static/swfupload/images/msg_bg.png) no-repeat;
     color: #444;
     line-height: 18px;
     padding: 2px 10px 2px 23px;
