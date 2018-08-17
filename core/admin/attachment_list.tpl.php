@@ -7,11 +7,11 @@
 		<tr><td align="left">当前目录：<?php echo $dir; ?></td></tr>
 		
 		<?php if ($istop) { ?>
-		<tr><td align="left"><a href="<?php echo $pdir; ?>"><img src="<?php echo ADMIN_DIR; ?>/img/folder-closed.gif">上一层目录</a></td></tr>
+		<tr><td align="left"><a href="<?php echo $pdir; ?>"><img src="/static/img/folder-closed.gif">上一层目录</a></td></tr>
 		<?php }  if (is_array($list)) { foreach ($list as $k=>$t) { ?>
 		<tr>
 		<td align="left" onclick="<?php if (!$t['url']) { ?>album_cancel(this)<?php } ?>">
-		<img src="<?php echo ADMIN_DIR; ?>/img/ext/<?php echo $t[ico]; ?>">
+		<img src="/static/img/ext/<?php echo $t[ico]; ?>">
 		&nbsp;<a href="<?php if ($t['url']) {  echo $t['url'];  } else { ?>javascript:;<?php } ?> " rel="<?php echo $dir;  echo $t['name']; ?>" title="<?php echo $t['name']; ?>"><?php echo $t['name']; ?></a></td>
 		</tr>
 		<?php } } ?>

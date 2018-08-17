@@ -430,8 +430,8 @@ abstract class Controller  {
      * @param string $file 文件名
      * @param string $m 模型名
      */
-    protected function admin_tpl($file, $m = ADMIN_DIR) {
-        return  ROOT_PATH.$m.DIRECTORY_SEPARATOR.'template'.DIRECTORY_SEPARATOR.$file.'.tpl.php';
+    protected function admin_tpl($file) {
+        return  ADMIN_PATH . $file . '.tpl.php';
     }
 
 }

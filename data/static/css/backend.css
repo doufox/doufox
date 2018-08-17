@@ -1,10 +1,4 @@
-body,
-h1,
-h2,
-h3,
-ul,
-li,
-p {
+body, h1, h2, h3, ul, li, p {
     margin: 0;
     padding: 0;
 }
@@ -14,17 +8,14 @@ body {
     overflow: hidden;
 }
 
-body,
-html,
-input {
+body, html, input {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 12px;
     line-height: 1.5;
     color: #24292e;
 }
 
-div,
-img {
+div, img {
     border: 0;
 }
 
@@ -93,8 +84,7 @@ a:hover {
     position: relative;
 }
 
-#menu li ul,
-#menu li.iehover ul {
+#menu li ul, #menu li.iehover ul {
     width: 101px;
     display: none;
     position: absolute;
@@ -139,10 +129,7 @@ a:hover {
     cursor: default;
 }
 
-#menu li.iehover a,
-#menu li.iehover a:hover,
-#menu li:hover a,
-#menu li:hover a:hover {
+#menu li.iehover a, #menu li.iehover a:hover, #menu li:hover a, #menu li:hover a:hover {
     background-color: #fff;
     color: #333;
     font-weight: bold;
@@ -154,9 +141,7 @@ a:hover {
     font-weight: bold;
 }
 
-#menu li:hover li a,
-#menu li.iehover li a,
-#menu li li a {
+#menu li:hover li a, #menu li.iehover li a, #menu li li a {
     float: none;
     color: #333;
     height: 24px;
@@ -168,18 +153,13 @@ a:hover {
     border-bottom: 1px solid #ddd;
 }
 
-#menu li:hover li a:hover,
-#menu li:hover li:hover a,
-#menu li.iehover li a:hover,
-#menu li.iehover li.iehover a,
-#menu li li a:hover {
+#menu li:hover li a:hover, #menu li:hover li:hover a, #menu li.iehover li a:hover, #menu li.iehover li.iehover a, #menu li li a:hover {
     background-color: #00bae0;
     color: #fff;
     font-weight: normal;
 }
 
-#menu li:hover ul,
-#menu li.iehover ul {
+#menu li:hover ul, #menu li.iehover ul {
     display: block;
 }
 

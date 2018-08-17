@@ -1,37 +1,10 @@
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-hr,
-p,
-blockquote,
-dl,
-dt,
-dd,
-ul,
-ol,
-li,
-pre,
-form,
-fieldset,
-legend,
-button,
-input,
-textarea,
-th,
-td {
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
     margin: 0;
     padding: 0;
     word-wrap: break-word
 }
 
-body,
-html,
-input,
-textarea {
+body, html, input, textarea {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 12px;
     line-height: 1.5;
@@ -55,12 +28,7 @@ pre {
     word-wrap: break-word;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     font-size: 100%;
 }
 
@@ -96,10 +64,7 @@ h6 {
     font-size: 12px;
 }
 
-input,
-label,
-img,
-th {
+input, label, img, th {
     vertical-align: middle;
 }
 
@@ -110,24 +75,15 @@ th {
     font-weight: 700;
 }
 
-address,
-cite,
-dfn,
-em,
-var {
+address, cite, dfn, em, var {
     font-style: normal;
 }
 
-code,
-kbd,
-pre,
-samp {
+code, kbd, pre, samp {
     font-family: courier new, courier, monospace;
 }
 
-ul,
-ol,
-li {
+ul, ol, li {
     list-style: none;
 }
 
@@ -140,24 +96,19 @@ a:hover {
     text-decoration: underline;
 }
 
-.white,
-.white a {
+.white, .white a {
     color: #fff
 }
 
-.blue,
-.blue a {
+.blue, .blue a {
     color: #004499
 }
 
-.gray4,
-a.gray4 {
+.gray4, a.gray4 {
     color: #999
 }
 
-.red,
-.red a,
-a.red {
+.red, .red a, a.red {
     color: red;
 }
 
@@ -169,15 +120,11 @@ select optgroup {
     color: #CAC8BB;
 }
 
-select,
-input,
-textarea {
+select, input, textarea {
     outline: none;
 }
 
-
 /*通用样式*/
-
 .hidden {
     display: none;
 }
@@ -250,14 +197,7 @@ textarea {
     font-weight: normal
 }
 
-.bk,
-.bk3,
-.bk6,
-.bk8,
-.bk10,
-.bk15,
-.bk20,
-.bk30 {
+.bk, .bk3, .bk6, .bk8, .bk10, .bk15, .bk20, .bk30 {
     clear: both;
     font-size: 1px;
     height: 0;
@@ -312,9 +252,7 @@ textarea {
     width: 20%
 }
 
-.cu,
-.cu-li li,
-.cu-span span {
+.cu, .cu-li li, .cu-span span {
     cursor: hand;
     /*!important;*/
     cursor: pointer
@@ -366,8 +304,8 @@ textarea {
 }
 
 .picBut {
-    background: url("../images/picBnt.png") no-repeat 0 -28px;
-    color: #FFF;
+    background: url(../img/picBnt.png) no-repeat 0 -28px;
+    color: #fff;
     float: left;
     text-align: center;
     font-weight: 700;
@@ -436,11 +374,8 @@ body fieldset.blue legend {
     margin-bottom: 6px
 }
 
-
 /*容器样式*/
-
 /*.col-tab {}*/
-
 .col-tab ul.tabBut {
     height: 27px;
     position: relative;
@@ -465,7 +400,6 @@ body fieldset.blue legend {
 }
 
 /*.col-tab ul.tabBut li {}*/
-
 .col-tab ul.tabBut li.on {
     position: relative;
     background: #fff;
@@ -485,11 +419,8 @@ body fieldset.blue legend {
     _zoom: 1;
 }
 
-
 /*内容菜单*/
-
 /*.content-menu {}*/
-
 .content-menu a {
     text-decoration: none;
     height: 22px;
@@ -513,8 +444,7 @@ body fieldset.blue legend {
 .content-menu a em {
     display: inline-block;
     display: -moz-inline-stack;
-    zoom: 1;
-    *display: inline;
+    zoom: 1; *display: inline;
 }
 
 .content-menu a.add {
@@ -532,9 +462,7 @@ body fieldset.blue legend {
     padding: 0 8px
 }
 
-
 /*分页*/
-
 .pageleft {
     float: left
 }
@@ -583,7 +511,7 @@ body fieldset.blue legend {
 }
 
 #imgPreview td.on a {
-    background: url(/static/swfupload/images/msg_bg.png) no-repeat scroll right -250px transparent;
+    background: url(../swfupload/images/msg_bg.png) no-repeat scroll right -250px transparent;
     display: -moz-inline-stack;
     height: 16px;
     line-height: 16px;
@@ -629,8 +557,7 @@ body fieldset.blue legend {
     border: 1px solid #d5dfe8;
 }
 
-.table-list td,
-.table-list th {
+.table-list td, .table-list th {
     padding-left: 12px;
     font-weight: normal;
 }
@@ -654,8 +581,7 @@ body fieldset.blue legend {
     padding-bottom: 5px
 }
 
-.table-list tr:hover,
-.table-list table tbody tr:hover {
+.table-list tr:hover, .table-list table tbody tr:hover {
     background: #f1f8ff
 }
 
@@ -664,11 +590,7 @@ body fieldset.blue legend {
     height: 18px
 }
 
-.table-list tr.on,
-.table-list tr.on td,
-.table-list tr.on th,
-.table-list td.on,
-.table-list th.on {
+.table-list tr.on, .table-list tr.on td, .table-list tr.on th, .table-list td.on, .table-list th.on {
     background: #fdf9e5;
 }
 
@@ -679,27 +601,22 @@ body fieldset.blue legend {
     margin-right: 5px
 }
 
-.input-text-c,
-.input-text,
-textarea,
-input.date {
-    border: 1px solid #D0D0D0;
+.input-text-c, .input-text, textarea, input.date {
+    border: 1px solid #d0d0d0;
     height: 18px;
     margin: 0 5px 0 0;
     padding: 2px 0 2px 5px;
     border: 1px solid #d0d0d0;
-    background: url("input.png") repeat-x scroll 0 0 #FFFFFF;
+    background: url(../img/input.png) repeat-x scroll 0 0 #fff;
 }
 
 input.date {
-    background: #fff url(input_date.png) no-repeat right 3px;
+    background: #fff url(../img/input_date.png) no-repeat right 3px;
     padding-right: 18px;
     font-size: 12px;
 }
 
-textarea,
-textarea.input-text,
-textarea {
+textarea, textarea.input-text, textarea {
     font-size: 12px;
     height: auto;
     padding: 5px;
@@ -729,9 +646,7 @@ select {
     text-align: center
 }
 
-
 /*表格表单*/
-
 .table_form {
     font-size: 12px
 }
@@ -751,26 +666,17 @@ select {
     vertical-align: middle
 }
 
-.table_form td,
-.table_form th {
+.table_form td, .table_form th {
     padding: 8px 0 8px 8px
 }
 
-
 /*表单验证*/
-
-.onShow,
-.onFocus,
-.onError,
-.onCorrect,
-.onLoad,
-.onTime {
+.onShow, .onFocus, .onError, .onCorrect, .onLoad, .onTime {
     display: inline-block;
     display: -moz-inline-stack;
-    zoom: 1;
-    *display: inline;
+    zoom: 1; *display: inline;
     vertical-align: middle;
-    background: url(/static/swfupload/images/msg_bg.png) no-repeat;
+    background: url(../swfupload/images/msg_bg.png) no-repeat;
     color: #444;
     line-height: 18px;
     padding: 2px 10px 2px 23px;

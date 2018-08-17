@@ -2,7 +2,7 @@
 
 <link href="/static/swfupload/swfupload.css" rel="stylesheet" type="text/css" />
 <script language="javascript">
-var viewpath = "<?php echo ADMIN_DIR; ?>/img/";
+var viewpath = "/static/img/";
 </script>
 <script type="text/javascript" src="/static/swfupload/swfupload.js"></script>
 <script type="text/javascript" src="/static/swfupload/fileprogress.js"></script>

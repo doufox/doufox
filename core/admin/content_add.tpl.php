@@ -64,7 +64,7 @@ top.document.getElementById('position').innerHTML = '添加内容';
 		<tr>
 			<th>&nbsp;</th>
 			<td><input type="submit" class="button" value="提交" name="submit" onClick="$('#load').show()">
-			<span id="load" style="display:none"><img src="<?php echo ADMIN_DIR; ?>/img/loading.gif"></span>
+			<span id="load" style="display:none"><img src="/static/img/loading.gif"></span>
 			</td>
 		</tr>
 		</tbody>

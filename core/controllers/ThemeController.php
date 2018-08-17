@@ -13,7 +13,8 @@ class ThemeController
 
     public function indexAction()
     {
-        $file = $_SERVER['REQUEST_URI'];
+        $path = explode('?', $_SERVER['REQUEST_URI']);
+        $file = $path[0];
         $ext = get_extension($file);
         header('X-Powered-By: ' . CMS_NAME);
         if (isset($ext)) {

@@ -28,7 +28,7 @@ top.document.getElementById('position').innerHTML = '栏目管理';
 		<tr height="25">
 		<td colspan="7" align="left">
 			<input type="submit" class="button" value="排序" name="submit" onClick="$('#load').show()">&nbsp;<div class="onShow">排序方式为“由小到大” 更改排序后请更新缓存</div>
-			<span id="load" style="display:none"><img src="<?php echo ADMIN_DIR; ?>/img/loading.gif"></span>
+			<span id="load" style="display:none"><img src="/static/img/loading.gif"></span>
 		</td>
 		</tr>
 		</tbody>

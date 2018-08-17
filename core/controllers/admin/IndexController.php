@@ -23,7 +23,7 @@ class IndexController extends Admin {
 		}
 		include $this->admin_tpl('index');
 	}
-	
+
 	/**
 	 * 后台首页
 	 */

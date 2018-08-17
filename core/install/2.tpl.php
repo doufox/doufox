@@ -65,7 +65,7 @@
 						<div class="formitm">
 							<label class="lab"></label>
 							<div class="ipt">
-							<span  style="color:#060;font-weight: 700;" >安装中...<img src="<?php echo ADMIN_DIR; ?>/img/loading.gif"></span>
+							<span  style="color:#060;font-weight: 700;" >安装中...<img src="/static/img/loading.gif"></span>
 						</div>
 					</div>
 					</div>

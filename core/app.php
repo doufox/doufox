@@ -26,7 +26,7 @@ define('INSTALL_PATH', CORE_PATH . 'install' . DIRECTORY_SEPARATOR); // 系统�
 define('CONTROLLER_DIR', CORE_PATH . 'controllers' . DIRECTORY_SEPARATOR); // controller目录的路径
 
 define('ADMIN_DIR', 'admin'); // 后台管理文件夹
-define('ADMIN_PATH', CORE_PATH . ADMIN_DIR . DIRECTORY_SEPARATOR); // 后台管理模板的路径
+define('ADMIN_PATH', CORE_PATH . 'admin' . DIRECTORY_SEPARATOR); // 后台管理模板的路径
 define('DATA_NAME', 'data'); // 系统数据文件夹名
 define('DATA_DIR', ROOT_PATH . DATA_NAME . DIRECTORY_SEPARATOR); // 数据目录的路径
 define('DATA_PATH', ROOT_PATH . DATA_NAME . DIRECTORY_SEPARATOR); // 数据目录的路径

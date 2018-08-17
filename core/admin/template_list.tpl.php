@@ -26,7 +26,7 @@ top.document.getElementById('position').innerHTML = '模板管理';
                     <?php if ($dir !='' ):?>
                         <tr>
                             <td align="left" colspan="3"><a href="<?php if (urldecode(dirname($dir)) =='.') echo '?s=admin&c=template'; else echo '?s=admin&c=template&dir='.urldecode(dirname($dir).DIRECTORY_SEPARATOR)?>" >
-							<img src="<?php echo ADMIN_DIR; ?>/img/folder-closed.gif" />返回上一次目录</a></td>
+							<img src="/static/img/folder-closed.gif" />返回上一次目录</a></td>
                         </tr>
                     <?php endif;?>
 
@@ -37,14 +37,14 @@ top.document.getElementById('position').innerHTML = '模板管理';
      					foreach($list as $v):
                             $filename = basename($v);
 							if (is_dir($v))
-                            echo '<tr><td align="left"><img src="'.ADMIN_DIR.'/img/folder-closed.gif" /> <a href="?s=admin&c=template&dir='.urldecode($dir.$filename.DIRECTORY_SEPARATOR).'">'.$filename.'</a></td><td align="left"><input type="text" class="input-text" name="file_explan['.$encode_local.']['.$filename.']" value="'.(isset($file_explan[$encode_local][$filename]) ? $file_explan[$encode_local][$filename] : "").'"></td><td></td> </tr>';
+                            echo '<tr><td align="left"><img src="/static/img/folder-closed.gif" /> <a href="?s=admin&c=template&dir='.urldecode($dir.$filename.DIRECTORY_SEPARATOR).'">'.$filename.'</a></td><td align="left"><input type="text" class="input-text" name="file_explan['.$encode_local.']['.$filename.']" value="'.(isset($file_explan[$encode_local][$filename]) ? $file_explan[$encode_local][$filename] : "").'"></td><td></td> </tr>';
                         endforeach;
 
                         foreach($list as $v):
                             $filename = basename($v);
 							
 							if (!is_dir($v)){
-                            echo '<tr><td align="left"><img src="'.ADMIN_DIR.'/img/file.gif" /> '.$filename.'</td><td align="left"><input type="text" class="input-text" name="file_explan['.$encode_local.']['.$filename.']" value="'.(isset($file_explan[$encode_local][$filename]) ? $file_explan[$encode_local][$filename] : "").'"></td>';
+                            echo '<tr><td align="left"><img src="/static/img/file.gif" /> '.$filename.'</td><td align="left"><input type="text" class="input-text" name="file_explan['.$encode_local.']['.$filename.']" value="'.(isset($file_explan[$encode_local][$filename]) ? $file_explan[$encode_local][$filename] : "").'"></td>';
 							
 							$ext  = strtolower(trim(substr(strrchr($filename, '.'), 1, 10)));
 							if (in_array($ext, array('html', 'css', 'js'))) 
