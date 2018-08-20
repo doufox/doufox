@@ -8,7 +8,7 @@ class StaticController
 
     public function __construct()
     {
-
+        header('X-Powered-By: ' . APP_NAME);
     }
 
     public function indexAction()
@@ -16,7 +16,6 @@ class StaticController
         $path = explode('?', $_SERVER['REQUEST_URI']);
         $file = $path[0];
         $ext = get_extension($file);
-        header('X-Powered-By: ' . CMS_NAME);
         if (isset($ext)) {
             if ($ext == 'js') {
                 header('Content-type: application/x-javascript');
@@ -45,11 +44,11 @@ class StaticController
      */
     protected function load_file($file_name)
     {
-        if (!is_file(ROOT_PATH . DATA_NAME . $file_name)) {
+        if (!is_file(DATA_PATH . $file_name)) {
             header("HTTP/1.0 404 Not Found");
             // header('Refresh: 3; url=' . HTTP_PRE. HTTP_HOST);
             exit('Not Found.');
         }
-        return ROOT_PATH . DATA_NAME . $file_name;
+        return DATA_PATH . $file_name;
     }
 }

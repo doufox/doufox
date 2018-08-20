@@ -164,12 +164,12 @@ class image_lib {
 	 */
 	public function __construct() {
 		$this->font_size = 14;
-		$this->font_name = STATIC_DIR . 'fonts/elephant.ttf';
+		$this->font_name = STATIC_PATH . 'fonts/elephant.ttf';
 		return true;
 	}
 	
 	/**
-	 * 初始化运行环境,获取图片格式并实例化.
+	 * 初始化运行环境, 获取图片格式并实例化.
 	 * 
 	 * @param string $url 图片路径
 	 * @return boolean
@@ -499,13 +499,13 @@ class image_lib {
 	 * 生成图片水印
 	 */
 	public function make_image_watermark($source, $w_pos=null) {
-		$w_img = ROOT_PATH . 'img/watermark/watermark.png';
+		$w_img = STATIC_PATH . 'watermark' . DIRECTORY_SEPARATOR. 'watermark.png';
 		if (!(extension_loaded('gd') && preg_match("/\.(jpg|jpeg|gif|png)/i", $source, $m) && file_exists($source) && function_exists('imagecreatefrom'.($m[1] == 'jpg' ? 'jpeg' : $m[1])))) return false;
 		if (!file_exists($w_img)) return false;
 		$source_info = getimagesize($source);
 		$source_w    = $source_info[0];
 		$source_h    = $source_info[1];
-		//水印图片的透明度参数
+		// 水印图片的透明度参数
 		$this->alpha = empty($this->alpha) ? 85 : $this->alpha;
 		switch ($source_info[2]) {
 			case 1 :

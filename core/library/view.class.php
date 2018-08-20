@@ -16,7 +16,7 @@ class view {
 
 	public function __construct() {
 		$this->view_dir    = THEME_CURRENT;
-		$this->compile_dir = DATA_DIR . 'tplcache' . DIRECTORY_SEPARATOR;
+		$this->compile_dir = DATA_PATH . 'tplcache' . DIRECTORY_SEPARATOR;
 		$viewpath          = basename(THEME_CURRENT) . '/';
 		$this->viewpath    = $viewpath;
 		$this->_options['viewpath'] = $viewpath;

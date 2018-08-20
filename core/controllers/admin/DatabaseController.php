@@ -33,7 +33,7 @@ class DatabaseController extends Admin {
     public function importAction() {
         $file_list=xiaocms::load_class('file_list');
 		
-		$dir  = DATA_DIR .  'bakup' . DIRECTORY_SEPARATOR;
+		$dir  = DATA_PATH .  'bakup' . DIRECTORY_SEPARATOR;
 		$path = $this->get('path');
 		if ($path && is_dir($dir . $path)) {
 		    $fileid = $this->get('fileid');
@@ -172,7 +172,7 @@ class DatabaseController extends Admin {
 			$startfrom  = $numrows == $offset ? $startfrom : 0;
 		}
 		$i   = $startfrom ? $i - 1 : $i;
-		$dir  = DATA_DIR .  'bakup' . DIRECTORY_SEPARATOR;
+		$dir  = DATA_PATH .  'bakup' . DIRECTORY_SEPARATOR;
 		if (!is_dir($dir)) {
 		    mkdir($dir, 0777);
 			file_put_contents($dir . 'index.html', '');
@@ -201,7 +201,7 @@ class DatabaseController extends Admin {
 	 * 数据库恢复
 	 */
 	private function importdb($path, $fileid = 1) {
-		$dir  = DATA_DIR .  'bakup' . DIRECTORY_SEPARATOR;
+		$dir  = DATA_PATH .  'bakup' . DIRECTORY_SEPARATOR;
 	    $fid  = $fileid ? $fileid : 1;
 
 		$data = scandir($dir . $path); //扫描备份目录

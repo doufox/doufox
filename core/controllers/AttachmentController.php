@@ -40,7 +40,7 @@ class AttachmentController extends Controller
 				if (empty($admin) && strpos($t, '.thumb.') !== false) continue;
                 $path = $dir . $t . '/';
                 $ext  = is_dir($this->dir . $path) ? 'dir' : strtolower(trim(substr(strrchr($t, '.'), 1, 10)));
-                $ico  = file_exists(STATIC_DIR . 'img/ext/' . $ext . '.gif') ? $ext . '.gif' : $ext . '.png';
+                $ico  = file_exists(STATIC_PATH . 'img/ext/' . $ext . '.gif') ? $ext . '.gif' : $ext . '.png';
 
                 $list[] = array(
                     'name'     => $t, 

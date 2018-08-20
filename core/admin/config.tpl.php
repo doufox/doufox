@@ -96,7 +96,7 @@
 						<tr id="w_1">
 							<th>水印图片透明度： </th>
 							<td><input class="input-text" type="text" name="data[SITE_WATERMARK_ALPHA]" value="<?php echo $data['SITE_WATERMARK_ALPHA']; ?>" size="25"/>
-							<div class="onShow">填写范围（0-99），图片目录：/img/watermark/watermark.png</div></td>
+							<div class="onShow">填写范围（0-99），图片目录：/static/watermark/watermark.png</div></td>
 						</tr>
 						<tr class="w_2">
 							<th>水印文字： </th>

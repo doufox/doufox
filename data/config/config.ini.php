@@ -6,7 +6,7 @@ return array(
 	'SITE_NAME'               => '网站名称',  // 网站名称
 	'SITE_THEME'              => 'default',  // 桌面端主题样式, 默认default
 	'SITE_THEME_MOBILE'       => 'default',  // 移动端主题样式, 默认default
-	'SITE_MOBILE'             => true,  // 移动端主题样式, 默认关
+	'SITE_MOBILE'             => false,  // 移动端主题样式, 默认关
 	'SITE_TITLE'              => '首页标题',  // 网站首页SEO标题
 	'SITE_SLOGAN'             => '头部标语',  // 网站头部标语
 	'SITE_KEYWORDS'           => '关键字',  // 网站SEO关键字
@@ -32,6 +32,6 @@ return array(
 	'WEIXIN_MP_URL'           => '',  // 接收来自微信服务器的请求,必须以http://或https://开头
 	'WEIXIN_MP_TOKEN'         => '',  // 微信服务器的验证token,必须为英文或数字，长度为3-32字符
 	'WEIXIN_MP_AESKEY'        => '',  // EncodingAESKey,消息加密密钥由43位字符组成
-	'RAND_CODE'               => '96da0ee9cf81932afe4c2b5df5c1771b',  // 随机代码
+	'RAND_CODE'               => 'd2e3047b699f0bbeb340c8a189e009d1',  // 随机代码
 
 );

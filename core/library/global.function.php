@@ -95,7 +95,7 @@ function url($route, $params = null)
  */
 function runtime()
 {
-    $temptime = explode(' ', SYS_START_TIME);
+    $temptime = explode(' ', APP_START_TIME);
     $time = $temptime[1] + $temptime[0];
     $temptime = explode(' ', microtime());
     $now = $temptime[1] + $temptime[0];

@@ -117,7 +117,7 @@ class TemplateController extends Admin
         $file_list = xiaocms::load_class('file_list');
         $list = $file_list->get_file_list(THEME_PATH);
         foreach ($list as $path) {
-            $dir = DATA_DIR . 'tplcache' . DIRECTORY_SEPARATOR . $path . '/';
+            $dir = DATA_PATH . 'tplcache' . DIRECTORY_SEPARATOR . $path . '/';
             $file_list->delete_dir($dir);
             if (!file_exists($dir)) {
                 mkdir($dir, 0777, true);

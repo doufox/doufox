@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8"/>
-	<title>安装向导 </title>
+	<title>安装向导</title>
 	<?php include $this->install_tpl("style")?>
 	<script type="text/javascript">
 		function $(ID) {return document.getElementById(ID);}

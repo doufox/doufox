@@ -11,28 +11,28 @@ echo <<< EOT
         [hidefocus],summary{outline:0;}
         li{list-style:none;}
         h1,h2,h3,h4,h5,h6,small{font-size:100%;}
+        h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
         sup,sub{font-size:83%;}
         pre,code,kbd,samp{font-family:inherit;}
         q:before,q:after{content:none;}
         textarea{overflow:auto;resize:none;}
         label,summary{cursor:default;}
         a,button{cursor:pointer;}
-        h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
         del,ins,u,s,a,a:hover{text-decoration:none;}
-        body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\5b8b\4f53;color:#333;outline:0;}
+        body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial;color:#333;outline:0;}
         a,a:hover{color:#333;}
-        .m-install { width:700px;background-color:#fafafa; margin-left:auto; margin-right: auto; margin-top:8%; margin-bottom:30px; box-shadow: 0 0 10px #333;border-radius:5px; padding-bottom:15px; color:#666;}
-        .m-install .install-head { background-color:#f0f0f0; height:50px;line-height:50px; padding-left:10px; font-size:16px; border-bottom:1px solid #ebebeb; border-radius:5px 5px 0px 0px; text-align:center; color:#909090; text-shadow:#fff 1px 1px 0px;}
+        .m-install {width:700px; margin:8% auto 30px auto; border: 1px solid #ddd;padding-bottom:15px;color:#666;}
+        .m-install .install-head {background-color: #ddd;height:50px;line-height:50px;font-size:16px;text-align:center;}
         .m-install .install-model .formitm{ padding-left:100px; }
         .m-install .install-button { margin-left:auto; margin-right:auto; margin-top:10px; text-align:center; }
-        .m-install .u-install-btn { padding:0px; margin:0px; background-color:#5aa6f4; width:200px; height:45px; line-height:45px; border:0px; font-size:14px; text-align:center; color:#FFF; border-radius: 5px;text-shadow:#4c95e1 -1px -1px 0px; }
-        .m-install .u-install-btn:hover { border-bottom:5px solid #4c95e1; }
+        .m-install .u-install-btn { padding:0px; margin:0px; background-color:#5aa6f4; width:200px; height:45px; line-height:45px; border:0px; font-size:14px; text-align:center; color:#FFF; border-radius: 5px; }
+        .m-install .u-install-btn:hover { background-color: #4c95e1; }
         .m-install .install-status { margin-left:auto; margin-right:auto; line-height:35px; font-size:12px; text-align:center; color:#F00}
         .m-install .install-copyright { line-height:25px; padding-top:10px; font-size:10px; text-align:center; color:#999; display:none}
         .m-install .install-copyright a { color:#999}
-		.m-install .install-status1 { margin-left:auto; margin-right:auto; line-height:35px; font-size:14px; text-align:center;color: #555;text-shadow: #fff 1px 1px 0px;}
+		.m-install .install-status1 { margin-left:auto; margin-right:auto; line-height:35px; font-size:14px; text-align:center;color: #555;}
         /* 3 */
-        .m-form { line-height: 29px; color: #555; border-top: 1px solid #eee; }
+        .m-form { line-height: 29px; color: #555;}
         .m-form .formitm { padding: 10px 0px;height: 30px; line-height: 30px; border-bottom: 1px solid #eee; }
         .m-form .formitm-1 { padding-left: 120px;height: 30px; }
         .m-form .formitm-2 { border-bottom:none;}
@@ -42,8 +42,7 @@ echo <<< EOT
         .m-form .ipt a, .m-form .ipt a:hover { text-decoration: none; color: #3891eb; }
         .m-form .ipt .suffix { margin: 0 0 0 5px; color: #777; }
         .m-form .ipt .suffix a { padding: 0px; }
-        .m-form .ipt .u-btn { margin-top: -2px; *margin-top:0px;
-        }
+        .m-form .ipt .u-btn { margin-top: -2px; *margin-top:0px;}
         .m-form .ipt p { line-height: 22px; color: #999; }
         .m-form .tip { padding-top: 10px; }
         .m-form .tip input { margin: 0 5px 3px 0; }

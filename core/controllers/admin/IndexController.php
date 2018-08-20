@@ -119,8 +119,8 @@ class IndexController extends Admin {
 				}
             }
             $content .= PHP_EOL . ");";
-            file_put_contents(DATA_DIR . 'config' . DIRECTORY_SEPARATOR . 'admin.ini.php', $admin_content);
-            file_put_contents(DATA_DIR . 'config' . DIRECTORY_SEPARATOR . 'config.ini.php', $content);
+            file_put_contents(DATA_PATH . 'config' . DIRECTORY_SEPARATOR . 'admin.ini.php', $admin_content);
+            file_put_contents(DATA_PATH . 'config' . DIRECTORY_SEPARATOR . 'config.ini.php', $content);
             $this->show_message('修改成功', 1, url('admin/index/config', array('type'=>$this->get('type'))));
 		}
 

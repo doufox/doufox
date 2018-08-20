@@ -39,7 +39,7 @@ abstract class Controller  {
 			!isset($_GET)     or $_GET     = $this->add_slashes($_GET);
 			!isset($_SESSION) or $_SESSION = $this->add_slashes($_SESSION);
 		}
-		if (!file_exists(DATA_DIR . 'installed')) {
+		if (!file_exists(DATA_PATH . 'installed')) {
 			Controller::redirect(url('install/index'));
 		}
         $this->view					= xiaocms::load_class('view');

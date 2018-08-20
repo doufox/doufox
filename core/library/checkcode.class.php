@@ -50,7 +50,7 @@ class checkcode
 
     public function __construct()
     {
-        $this->font = STATIC_DIR . 'fonts/elephant.ttf';
+        $this->font = STATIC_PATH . 'fonts/elephant.ttf';
     }
 
     /**

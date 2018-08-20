@@ -10,9 +10,9 @@ error_reporting(E_ALL ^ E_NOTICE);
  * 系统常量配置
  */
 date_default_timezone_set('Asia/Shanghai'); // 时区设置
-define('CMS_NAME', 'SITECMS'); // CMS名称
+define('APP_NAME', 'SITECMS'); // CMS名称
 define('ENTRY_SCRIPT_NAME', 'index.php'); // 定义入口文件名
-define('SYS_START_TIME', microtime(true)); // 设置程序开始执行时间
+define('APP_START_TIME', microtime(true)); // 设置程序开始执行时间
 
 define('HTTP_REFERER', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''); // 来源
 define('HTTP_HOST', $_SERVER['HTTP_HOST']); // host
@@ -25,15 +25,13 @@ define('MODEL_DIR', CORE_PATH . 'models' . DIRECTORY_SEPARATOR); // model目录�
 define('INSTALL_PATH', CORE_PATH . 'install' . DIRECTORY_SEPARATOR); // 系统安装入口
 define('CONTROLLER_DIR', CORE_PATH . 'controllers' . DIRECTORY_SEPARATOR); // controller目录的路径
 
-define('ADMIN_DIR', 'admin'); // 后台管理文件夹
+define('DATA_DIR', 'data'); // 系统数据文件夹名
+define('STATIC_DIR', 'static'); // 静态资源文件夹名
 define('ADMIN_PATH', CORE_PATH . 'admin' . DIRECTORY_SEPARATOR); // 后台管理模板的路径
-define('DATA_NAME', 'data'); // 系统数据文件夹名
-define('DATA_DIR', ROOT_PATH . DATA_NAME . DIRECTORY_SEPARATOR); // 数据目录的路径
-define('DATA_PATH', ROOT_PATH . DATA_NAME . DIRECTORY_SEPARATOR); // 数据目录的路径
-define('STATIC_NAME', 'static'); // 静态资源文件夹名
-define('STATIC_DIR', STATIC_NAME . DIRECTORY_SEPARATOR); // 前端静态调用文件的路径
-define('THEME_PATH', DATA_DIR . 'theme' . DIRECTORY_SEPARATOR); // 桌面端模板目录的路径
-define('THEME_MOBILE_PATH', DATA_DIR . 'theme_mobile' . DIRECTORY_SEPARATOR); // 移动端模板目录的路径
+define('DATA_PATH', ROOT_PATH . DATA_DIR . DIRECTORY_SEPARATOR); // 数据目录的路径
+define('STATIC_PATH', DATA_PATH . STATIC_DIR . DIRECTORY_SEPARATOR); // 静态资源路径
+define('THEME_PATH', DATA_PATH . 'theme' . DIRECTORY_SEPARATOR); // 桌面端模板目录的路径
+define('THEME_MOBILE_PATH', DATA_PATH . 'theme_mobile' . DIRECTORY_SEPARATOR); // 移动端模板目录的路径
 
 xiaocms::load_file(CORE_PATH . 'library' . DIRECTORY_SEPARATOR . 'global.function.php'); // 加载全局函数
 xiaocms::load_file(CORE_PATH . 'version.php');
@@ -51,6 +49,16 @@ abstract class xiaocms
     public static $pathinfo;
 
     /**
+     * 项目运行函数
+     */
+    public static function run()
+    {
+        self::parse_request();
+        self::load_theme();
+        self::load_app();
+    }
+
+    /**
      * 分析URL信息
      */
     private static function parse_request()
@@ -61,10 +69,10 @@ abstract class xiaocms
         $namespace_name = trim((isset($url_info_array['s']) && $url_info_array['s']) ? $url_info_array['s'] : '');
         // $controller_name = trim((isset($url_info_array['c']) && $url_info_array['c']) ? $url_info_array['c'] : 'Index');
         if (isset(self::$pathinfo[1])) {
-            if (self::$pathinfo[1] == DATA_NAME || self::$pathinfo[1] == CORE_NAME) {
+            if (self::$pathinfo[1] == DATA_DIR || self::$pathinfo[1] == CORE_DIR) {
                 exit('Access Deined!');
-            } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == STATIC_NAME) {
-                $controller_name = STATIC_NAME; // 静态资源
+            } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == STATIC_DIR) {
+                $controller_name = STATIC_DIR; // 静态资源
             } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == 'theme') {
                 $controller_name = 'theme'; // 主题资源
             }
@@ -79,16 +87,6 @@ abstract class xiaocms
         self::$action = strtolower($action_name);
         $_GET = array_merge($_GET, $url_info_array);
         return true;
-    }
-
-    /**
-     * 项目运行函数
-     */
-    public static function run()
-    {
-        self::parse_request();
-        self::load_theme();
-        self::load_app();
     }
 
     /**

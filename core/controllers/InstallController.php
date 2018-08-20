@@ -7,10 +7,11 @@ class InstallController
 
 	public function __construct()
 	{
-		if (!is_writable(DATA_DIR)) {
-			exit('系统缓存目录（/data/）没有读写权限, 安装程序无法进行 !');
+        header('X-Powered-By: ' . APP_NAME);
+		if (!is_writable(DATA_PATH)) {
+			exit('系统数据目录（/' . DATA_DIR .'/）没有读写权限, 安装程序无法进行 !');
 		}
-		if (file_exists(DATA_DIR . 'installed')) {
+		if (file_exists(DATA_PATH . 'installed')) {
 			include $this->install_tpl('installed');
 			exit();
 		}
@@ -45,7 +46,7 @@ class InstallController
 				if (!function_exists('json_decode')) {
 					$error = '服务器不支持JSON, 无法进行安装！';
 				}
-				if (!is_writable(DATA_DIR)) {
+				if (!is_writable(DATA_PATH)) {
 					$error = '系统目录data没有写入权限, 无法进行安装！';
 				}
 				if (!is_writable(ROOT_PATH . 'upload')) {
@@ -93,7 +94,7 @@ class InstallController
 				$content .= "	'prefix'   => '" . $ttb_pre . "', " . PHP_EOL;
 				$content .= "	'charset'  => 'utf8', " . PHP_EOL;
 				$content .= PHP_EOL . ");";
-				if (!file_put_contents(DATA_DIR . 'config' . DIRECTORY_SEPARATOR . 'database.ini.php', $content)) {
+				if (!file_put_contents(DATA_PATH . 'config' . DIRECTORY_SEPARATOR . 'database.ini.php', $content)) {
 					dexit('数据库配置文件保存失败, 请检查文件权限！');
 				}
 
@@ -102,7 +103,7 @@ class InstallController
 				$admincontent .= " 'ADMIN_NAME' => '" . $username . "', " . PHP_EOL;
 				$admincontent .= " 'ADMIN_PASS' => '" . md5(md5($password)) . "', " . PHP_EOL;
 				$admincontent .= PHP_EOL . ");";
-				if (!file_put_contents(DATA_DIR .  'config' . DIRECTORY_SEPARATOR . 'admin.ini.php', $admincontent)) {
+				if (!file_put_contents(DATA_PATH .  'config' . DIRECTORY_SEPARATOR . 'admin.ini.php', $admincontent)) {
 					dexit('数据库配置文件保存失败, 请检查文件权限！');
 				}
 
@@ -161,7 +162,7 @@ class InstallController
 				mysql_query($query) or die(exit('数据导入出错<hr>' . mysql_error() . '<br>SQL语句：<br>' . $query));
 			}
 		}
-		file_put_contents(DATA_DIR . 'installed', time());
+		file_put_contents(DATA_PATH . 'installed', time());
 	}
 
     /**
