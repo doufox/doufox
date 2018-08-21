@@ -22,6 +22,26 @@
       <div class="clear blank10"></div>
       {/if}
       <!--文章内容分页 end-->
+      <!-- 评论 start -->
+      <div class="blank20 clear"></div>
+      <div class="bg">
+        <h2>评论列表</h2>
+        {list table=form_comment cid=$id order=time}
+          {$xiao[content]}
+        {/list}
+      </div>
+      <div class="blank20 clear"></div>
+      <form action="{function.url('index/form', array('modelid'=>4, 'cid'=>$id))}" method="post">
+          <table width="100%" class="bg ">
+          <tr><td><h3>评论内容：</h3></td></tr>
+          <tr><td><textarea class="content" name="data[content]"></textarea></td></tr>
+          <tr><td></td></tr>
+          <tr>
+              <td style="border:none"><input type="submit" class="button" value="提 交" name="submit"></td>
+          </tr>
+          </table>
+      </form>
+      <!-- 评论 end -->
       <div class="article-prev-next">
       {if $prev_page}<div class="article-prev">上一篇：<a href="{$prev_page['url']}">{$prev_page['title']}</a></div>{/if}
       <div class="blank5 clear"></div>

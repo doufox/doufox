@@ -9,4 +9,5 @@
     <script type="text/javascript">var sitepath = "<?php echo HTTP_URL . ENTRY_SCRIPT_NAME; ?>";</script>
     <script type="text/javascript" src="/static/js/admin.js"></script>
 </head>
+
 <body>

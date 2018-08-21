@@ -11,7 +11,7 @@ class Model_fieldModel extends Model
     public function set($fieldid = 0, $data)
     {
         if ($fieldid) {
-            //修改字段
+            // 修改字段
             $this->update($data, 'fieldid=' . $fieldid);
             return true;
             exit;
@@ -81,8 +81,8 @@ class Model_fieldModel extends Model
         if (in_array($data['formtype'], array('merge')) || $data['merge']) {
             return true;
         }
-        //不处理的字段
-        //删除附表结构
+        // 不处理的字段
+        // 删除附表结构
         $model = $this->from('model')->where('modelid=' . $data['modelid'])->select(false);
         if (empty($model)) {
             return false;

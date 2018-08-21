@@ -663,7 +663,7 @@ select {
     padding: 8px 0 8px 8px
 }
 
-/*表单验证*/
+/* 表单验证 */
 .onShow, .onFocus, .onError, .onCorrect, .onLoad, .onTime {
     display: inline-block;
     display: -moz-inline-stack;
@@ -673,7 +673,7 @@ select {
     color: #444;
     line-height: 18px;
     padding: 2px 10px 2px 23px;
-    margin-left: 10px;
+    margin-left: 5px;
     _margin-left: 5px
 }
 
