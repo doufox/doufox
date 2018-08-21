@@ -7,7 +7,7 @@ class BlockController extends Admin {
     
     public function __construct() {
 		parent::__construct();
-		$this->block = xiaocms::load_model('block');
+		$this->block = cms::load_model('block');
 		$this->type  = array(1=>'文字', 2=>'图片', 3=>'编辑器');		
 	}
     

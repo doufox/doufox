@@ -18,7 +18,7 @@ class FormController extends Admin {
 		$this->model   = $formmodel[$this->modelid];
 		if (empty($this->model)) $this->show_message('表单模型不存在');
 		$this->table   = $this->model['tablename'];
-		$this->form    = xiaocms::load_model($this->table);
+		$this->form    = cms::load_model($this->table);
 		$joinmodel     = get_cache('joinmodel');
 		$this->join    = isset($joinmodel[$this->model['joinid']]) ? $joinmodel[$this->model['joinid']] : null;
 		$this->join_info     = '独立表单';
@@ -66,7 +66,7 @@ class FormController extends Admin {
 	    } 
 		$page     = $this->get('page')     ? $this->get('page') : 1;
 		$userid   = (int)$this->get('userid');
-	    $pagelist = xiaocms::load_class('pagelist');
+	    $pagelist = cms::load_class('pagelist');
 		$pagelist->loadconfig();
 	    $where    = 'id>0';
 		if ($userid) $where .= ' and userid=' . $userid;
@@ -108,7 +108,7 @@ class FormController extends Admin {
 				'setting'     => array2string($cfg),
 				'categorytpl' => $data['categorytpl'],
 			);
-			$model= xiaocms::load_model('model');
+			$model= cms::load_model('model');
 			$model->update($set, 'modelid=' . $this->modelid);
 			$this->show_message($this->getCacheCode('model') . '操作成功', 1);
 		}
@@ -120,14 +120,15 @@ class FormController extends Admin {
 
         $list_code = '
 {list table=' . $this->model['tablename'] . '   num=10}
-表单字段信息 例如：id：{$xiao[\'id\']} 更多信息请参考官方模板帮助文档
+表单字段信息 例如：id：{$xiao[\'id\']}
 {/list}';
         if ($this->join) {
 		    $list_code = '
 {list table=' . $this->model['tablename'] . ' cid=被关联的文章id(例如：$id) num=10}
-表单字段信息 例如：id：{$xiao[\'id\']} 更多信息请参考官方模板帮助文档
+表单字段信息 例如：id：{$xiao[\'id\']}
 {/list}';
-		$form_url  = HTTP_URL . ENTRY_SCRIPT_NAME . '?c=form&a=post&modelid=' . $this->model['modelid'] . 'cid=$id ($id是被关联内容的id变量)';
+
+		$form_url  = HTTP_URL . ENTRY_SCRIPT_NAME . '?c=form&a=post&modelid=' . $this->model['modelid'] . '&cid=$id ($id是被关联内容的id变量)';
         }
 		
 		$cid       = $this->cid;

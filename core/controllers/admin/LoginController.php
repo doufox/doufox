@@ -10,7 +10,7 @@ class LoginController extends Admin
 
     public function indexAction()
     {
-        $admin = xiaocms::load_config('admin');
+        $admin = cms::load_config('admin');
 
         $url = isset($_GET['url']) && $_GET['url'] ? urldecode($this->get('url')) : url('admin//');
         if ($this->isPostForm()) {

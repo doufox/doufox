@@ -8,7 +8,7 @@ if (!defined('IN_CMS')) exit();
 function formtype() {
     $formtype = function_exists('_formtype') ? _formtype() : null;
 	$return   = array(
-        'input'    =>  '单行文本',
+        'input'    => '单行文本',
         'textarea' => '多行文本',
         'editor'   => '编辑器',
         'select'   => '下拉选择框',
@@ -254,16 +254,16 @@ function form_fields($setting='') {
 
 function get_content_value($content) {
     if ($content != '' && preg_match('/^\{M:(.+)\}$/U', $content, $field)) {
-	    if (xiaocms::get_namespace_id() == 'admin') return null;
+	    if (cms::get_namespace_id() == 'admin') return null;
 		if (!$this->cookie->get('member_id'))       return null;
 		if (!$this->cookie->get('member_id'))          return null; 
 	    $name     = trim($field[1]);
-	    $member   = xiaocms::load_model('member');
+	    $member   = cms::load_model('member');
 	    $data     = $member->find($this->cookie->get('member_id'));
 		if (isset($data[$name])) return $data[$name];
 
 		$model    = get_cache('membermodel');
-		$_member  = xiaocms::load_model($model[$data['modelid']]['tablename']);
+		$_member  = cms::load_model($model[$data['modelid']]['tablename']);
 	    $_data    = $_member->find($this->cookie->get('member_id'));
 		if (isset($_data[$name])) return $_data[$name];
 	} else {
@@ -281,7 +281,6 @@ function content_input($name, $content='', $setting='') {
     return '<input type="text" value="' . $content . '" class="input-text" name="data[' . $name . ']" ' . $style . '>';
 }
 
-
 function content_textarea($name, $content='', $setting='') {
     $content = is_null($content[0]) ? get_content_value($setting['default']) : $content[0];
     $style   = isset($setting['width']) && $setting['width']   ? 'width:' . $setting['width'] . 'px;' : '';
@@ -298,10 +297,9 @@ function content_editor($name, $content='', $setting='') {
 	$str     = '';
 	$page    = !isset($setting['system']) && $name == 'content' ? ", '|', 'pagebreak'" : '';
 	$source  = strpos($_SERVER['QUERY_STRING'], 's=admin') === false || strpos($_SERVER['QUERY_STRING'], 's=admin') === false ? '' : "'source', '|',";
-	if (!defined('XIAOCMS_EDITOR_LD')) {
-        
+	if (!defined('CMS_EDITOR_LD')) {
 	    $str.= '<script type="text/javascript" src="/static/kindeditor/kindeditor.js"></script>';
-		define('XIAOCMS_EDITOR_LD', 1);//防止重复加载JS
+		define('CMS_EDITOR_LD', 1); // 防止重复加载JS
 	}
 	if ($type) {
         $str.= "
@@ -440,14 +438,14 @@ function content_date($name, $content='', $setting='') {
 	$type  = isset($setting['type'])  ? $setting['type']  : '%Y-%m-%d %H:%M:%S';
 	$width = isset($setting['width']) ? $setting['width'] : 150;
 	$str   = '';
-	if (!defined('XIAOCMS_DATE_LD')) {
+	if (!defined('CMS_DATE_LD')) {
 	    $str .= '
 		<link href="/static/calendar/jscal2.css" type="text/css" rel="stylesheet">
 		<link href="/static/calendar/border-radius.css" type="text/css" rel="stylesheet">
 		<link href="/static/calendar/win2k.css" type="text/css" rel="stylesheet">
 		<script type="text/javascript" src="/static/calendar/calendar.js"></script>
 		<script type="text/javascript" src="/static/calendar/cn.js"></script>';
-		define('XIAOCMS_DATE_LD', 1); // 防止重复加载JS
+		define('CMS_DATE_LD', 1); // 防止重复加载JS
 	}
 	return $str . '
 	<input type="hidden" value="' . $c . '" name="data[' . $name . ']" id="date_' . $name . '">

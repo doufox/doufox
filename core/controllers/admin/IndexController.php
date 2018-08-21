@@ -87,8 +87,8 @@ class IndexController extends Admin {
 			'WEIXIN_MP_AESKEY'        => 'EncodingAESKey,消息加密密钥由43位字符组成'
 		);
     	//加载应用程序配置文件.
-		$admin = xiaocms::load_config('admin');
-	    $config =  xiaocms::load_config('config');
+		$admin = cms::load_config('admin');
+	    $config =  cms::load_config('config');
         if ($this->post('submit')) {
             $configdata = $this->post('data');
 			$configdata['RAND_CODE']= md5(microtime());
@@ -124,7 +124,7 @@ class IndexController extends Admin {
             $this->show_message('修改成功', 1, url('admin/index/config', array('type'=>$this->get('type'))));
 		}
 
-        $file_list		= xiaocms::load_class('file_list');
+        $file_list		= cms::load_class('file_list');
         $arr			= $file_list->get_file_list(THEME_PATH);
         $arr_mobile		= $file_list->get_file_list(THEME_MOBILE_PATH);
 		$theme			= array_diff($arr, array('index.html'));
@@ -180,7 +180,7 @@ class IndexController extends Admin {
 		$appa = $appa . 'Action';
 		$file = CONTROLLER_DIR . 'admin' . DIRECTORY_SEPARATOR . $appc . '.php';
 		if (!file_exists($file)) return false;
-		xiaocms::load_file($file);
+		cms::load_file($file);
 		$app  = new $appc();
 		if (method_exists($appc, $appa)) $app->$appa(1);
 	}

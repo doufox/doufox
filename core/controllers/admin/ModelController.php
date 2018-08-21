@@ -13,7 +13,7 @@ class ModelController extends Admin {
 			2 => 'member',  //会员表模型
 			3 => 'form',    //表单表模型
 		);
-		$this->_model = xiaocms::load_model('model');
+		$this->_model = cms::load_model('model');
 	    $this->typeid = $this->get('typeid') ? $this->get('typeid') : 1;
 		if (!isset($this->modeltype[$this->typeid])) $this->show_message('模型类型不存在');
 
@@ -151,8 +151,8 @@ class ModelController extends Admin {
 	    $modelid = (int)$this->get('modelid');
 	    $data    = $this->_model->find($modelid);
 	    if (!$data) $this->show_message('该模型不存在！');
-	    $table   = xiaocms::load_model($data['tablename']);
-	    $field   = xiaocms::load_model('model_field');
+	    $table   = cms::load_model($data['tablename']);
+	    $field   = cms::load_model('model_field');
 	    if ($this->post('submit')) {
 	        foreach ($_POST as $var=>$value) {
 	            if (strpos($var, 'order_')!==false) {
@@ -178,11 +178,11 @@ class ModelController extends Admin {
 	public function addfieldAction() {
 	    $modelid    = (int)$this->get('modelid');
 	    $model_data = $this->_model->find($modelid);
-	    $field      = xiaocms::load_model('model_field');
+	    $field      = cms::load_model('model_field');
 	    if (!$model_data) $this->show_message('该模型不存在！');
 	    if ($this->post('submit')) {
-	        if ($this->typeid != 3) $table = xiaocms::load_model($this->modeltype[$this->typeid]);
-	        $table_data = xiaocms::load_model($model_data['tablename']);
+	        if ($this->typeid != 3) $table = cms::load_model($this->modeltype[$this->typeid]);
+	        $table_data = cms::load_model($model_data['tablename']);
 	        //主表和附表字段集合
 	        $t_fields   = $this->typeid == 3 ? array() : $table->get_fields();
 	        $d_fields   = $table_data->get_fields();
@@ -239,7 +239,7 @@ class ModelController extends Admin {
 	 * 修改字段
 	 */
 	public function editfieldAction() {
-	    $field   = xiaocms::load_model('model_field');
+	    $field   = cms::load_model('model_field');
 	    $fieldid = (int)$this->get('fieldid');
 	    $data    = $field->getOne('fieldid=' . $fieldid);
 	    if (empty($data)) $this->show_message('字段不存在！');
@@ -325,7 +325,7 @@ class ModelController extends Admin {
 	 * 禁用/启用字段
 	 */
 	public function disableAction() {
-	    $field   = xiaocms::load_model('model_field');
+	    $field   = cms::load_model('model_field');
 	    $fieldid = (int)$this->get('fieldid');
 	    $data    = $field->getOne('fieldid=' . $fieldid);
 	    if (empty($data)) $this->show_message('该字段不存在！');
@@ -338,7 +338,7 @@ class ModelController extends Admin {
 	 * 删除字段
 	 */
 	public function delfieldAction() {
-	    $field   = xiaocms::load_model('model_field');
+	    $field   = cms::load_model('model_field');
 	    $fieldid = (int)$this->get('fieldid');
 	    $data    = $field->getOne('fieldid=' . $fieldid);
 	    if (empty($data)) $this->show_message('该字段不存在！');
@@ -374,10 +374,10 @@ class ModelController extends Admin {
 	 * );
 	 */
 	public function cacheAction($show=0) {
-		$file_list=xiaocms::load_class('file_list');
+		$file_list=cms::load_class('file_list');
 		$file_list->delete_dir($this->_model->cache_dir);
 		if (!file_exists($this->_model->cache_dir)) mkdir($this->_model->cache_dir, 0777, true);
-	    $field = xiaocms::load_model('model_field');
+	    $field = cms::load_model('model_field');
 		foreach ($this->modeltype as $typeid=>$c) {
 	        $model = $this->_model->where('typeid=' . $typeid)->select();
 	        $data  = array();

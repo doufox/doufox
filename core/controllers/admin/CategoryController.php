@@ -18,7 +18,7 @@ class CategoryController extends Admin {
 	    }
 
 	    $models   = get_cache('model');
-		$tree =  xiaocms::load_class('tree');
+		$tree =  cms::load_class('tree');
 		$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ','&nbsp;&nbsp;&nbsp;├─ ','&nbsp;&nbsp;&nbsp;└─ ');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		$categorys = array();
@@ -104,7 +104,7 @@ class CategoryController extends Admin {
 		$json_model      = $json_m ? $json_m : '""';
 		$add             = 1;
 
-		$tree =  xiaocms::load_class('tree');
+		$tree =  cms::load_class('tree');
 		$tree->icon = array(' ','  |-','  |-');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		$category_select = array();
@@ -152,7 +152,7 @@ class CategoryController extends Admin {
 
 		
 		$json_model      = $json_m ? $json_m : '""';
-		$tree =  xiaocms::load_class('tree');
+		$tree =  cms::load_class('tree');
 		$tree->icon = array(' ','  |-','  |-');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		$category_select = array();

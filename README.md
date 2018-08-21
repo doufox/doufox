@@ -2,6 +2,8 @@
 
 
 
+投稿地址：url('index/post') , /index.php?c=index&a=post
+
 ###### options
 
 考虑到安全可以将static目录可以放到data目录内，

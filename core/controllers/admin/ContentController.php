@@ -66,7 +66,7 @@ class ContentController extends Admin {
 		    $mcatid = (int)$this->post('movecatid');
 			if (empty($mcatid)) $this->show_message('请选择目标栏目！');
 			$mcat   = $this->category_cache[$mcatid];
-			$mtable = xiaocms::load_model($mcat['tablename']);
+			$mtable = cms::load_model($mcat['tablename']);
 	        foreach ($_POST as $var=>$value) {
 	            if (strpos($var, 'del_')!==false) {
 	                $ids = str_replace('del_', '', $var);
@@ -87,7 +87,7 @@ class ContentController extends Admin {
 	    $username  =  $this->get('username');
 	    $page     = (int)$this->get('page');
 		$page     = (!$page) ? 1 : $page;
-	    $pagelist = xiaocms::load_class('pagelist');
+	    $pagelist = cms::load_class('pagelist');
 		$pagelist->loadconfig();
 		if (empty($catid)) $this->show_message('url缺少栏目id参数');
 		
@@ -129,7 +129,7 @@ class ContentController extends Admin {
 		$join     = $this->getModelJoin($modelid);
 		
 		
-		$tree =  xiaocms::load_class('tree');
+		$tree =  cms::load_class('tree');
 		$tree->icon = array(' ','  |-','  |-');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		$categorys = array();
@@ -154,7 +154,7 @@ class ContentController extends Admin {
 		$catlist =  $this->category_cache;//读取文件缓存
 
 //读取数据库后台不会根据排序显示		$catlist =  $this->category->findAll('catid,typeid,parentid,child,http,catname');
-		$tree = xiaocms::load_class('tree');
+		$tree = cms::load_class('tree');
 		$categorys = array();
 		if(!empty($catlist)) {
 			foreach($catlist as $r) {
@@ -218,7 +218,7 @@ class ContentController extends Admin {
 		$data        = array('catid'=>$this->get('catid'));
 		$model       = $model[$modelid];
 
-		$tree =  xiaocms::load_class('tree');
+		$tree =  cms::load_class('tree');
 		$tree->icon = array(' ','  ','  ');
 		$tree->nbsp = '&nbsp;';
 		$categorys = array();
@@ -263,14 +263,14 @@ class ContentController extends Admin {
 	        $this->show_message('修改成功', 1);
 	    }
 	    //附表内容
-	    $table       = xiaocms::load_model($model[$modelid]['tablename']);
+	    $table       = cms::load_model($model[$modelid]['tablename']);
 	    $table_data  = $table->find($id);
 	    if ($table_data) $data = array_merge($data, $table_data); //合并主表和附表
 	    //自定义字段
 	    $data_fields = $this->getFields($fields, $data);
 		$backurl      = HTTP_REFERER;
 		$model        = $model[$modelid];
-		$tree =  xiaocms::load_class('tree');
+		$tree =  cms::load_class('tree');
 		$tree->icon = array(' ','  ','  ');
 		$tree->nbsp = '&nbsp;';
 		$categorys = array();
@@ -416,7 +416,7 @@ class ContentController extends Admin {
 				exit;
 			}
 		} else {
-		$tree =  xiaocms::load_class('tree');
+		$tree =  cms::load_class('tree');
 		$tree->icon = array(' ','  |-','  |-');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		$categorys = array();

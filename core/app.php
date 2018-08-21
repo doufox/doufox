@@ -33,15 +33,14 @@ define('STATIC_PATH', DATA_PATH . STATIC_DIR . DIRECTORY_SEPARATOR); // 静态�
 define('THEME_PATH', DATA_PATH . 'theme' . DIRECTORY_SEPARATOR); // 桌面端模板目录的路径
 define('THEME_MOBILE_PATH', DATA_PATH . 'theme_mobile' . DIRECTORY_SEPARATOR); // 移动端模板目录的路径
 
-xiaocms::load_file(CORE_PATH . 'library' . DIRECTORY_SEPARATOR . 'global.function.php'); // 加载全局函数
-xiaocms::load_file(CORE_PATH . 'version.php');
-xiaocms::load_class('Model', '', 0);
+cms::load_file(CORE_PATH . 'library' . DIRECTORY_SEPARATOR . 'global.function.php'); // 加载全局函数
+cms::load_file(CORE_PATH . 'version.php');
+cms::load_class('Model', '', 0);
 
 /**
- * 系统核心全局控制类
+ * 系统核心APP
  */
-
-abstract class xiaocms
+abstract class cms
 {
     public static $namespace;
     public static $controller;

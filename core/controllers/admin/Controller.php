@@ -9,7 +9,7 @@ class Admin extends Controller
     {
         parent::__construct();
         $this->isAdminLogin();
-        xiaocms::load_file(CORE_PATH . 'library' . DIRECTORY_SEPARATOR . 'fields.function.php');
+        cms::load_file(CORE_PATH . 'library' . DIRECTORY_SEPARATOR . 'fields.function.php');
         define('IN_ADMIN', true);
     }
 
@@ -18,15 +18,15 @@ class Admin extends Controller
      */
     protected function isAdminLogin($namespace = 'admin', $controller = null)
     {
-        if (xiaocms::get_namespace_id() != $namespace) {
+        if (cms::get_namespace_id() != $namespace) {
             return false;
         }
 
-        if ($controller && xiaocms::get_controller_id() != $controller) {
+        if ($controller && cms::get_controller_id() != $controller) {
             return false;
         }
 
-        if (xiaocms::get_namespace_id() == 'admin' && xiaocms::get_controller_id() == 'login') {
+        if (cms::get_namespace_id() == 'admin' && cms::get_controller_id() == 'login') {
             return false;
         }
 
@@ -35,7 +35,7 @@ class Admin extends Controller
                 return false;
             }
         }
-        $url = xiaocms::get_namespace_id() == 'admin' && isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != 's=admin' ? url('admin/login', array('url' => urlencode(HTTP_URL . ENTRY_SCRIPT_NAME . '?' . $_SERVER['QUERY_STRING']))) : url('admin/login');
+        $url = cms::get_namespace_id() == 'admin' && isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != 's=admin' ? url('admin/login', array('url' => urlencode(HTTP_URL . ENTRY_SCRIPT_NAME . '?' . $_SERVER['QUERY_STRING']))) : url('admin/login');
         $this->redirect($url);
     }
 

@@ -111,7 +111,7 @@ $(function(){
 		</tr>
 		<tr>
 			<th><font color="red">*</font> 字段名称： </th>
-			<td><input class="input-text" type="text" id="field" name="field" value="<?php echo $data['field']; ?>" size="30" <?php if ($data[fieldid]) { ?>disabled<?php } ?> /><div class="onShow">mysql中字段名称，如：xiaocms 必须英文字母开头、数字和下划线组成。</div>
+			<td><input class="input-text" type="text" id="field" name="field" value="<?php echo $data['field']; ?>" size="30" <?php if ($data[fieldid]) { ?>disabled<?php } ?> /><div class="onShow">mysql中字段名称，如：cms 必须英文字母开头、数字和下划线组成。</div>
 		</tr>
 		<tr>
 			<th><font color="red">*</font> 字段类别： </th>

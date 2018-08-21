@@ -192,7 +192,7 @@ function image($url)
  */
 function thumb($img, $width = null, $height = null)
 {
-    $config = xiaocms::load_config('config');
+    $config = cms::load_config('config');
     if (empty($img) || strlen($img) == 3) {
         return HTTP_URL . 'upload/nopic.gif';
     }
@@ -202,7 +202,7 @@ function thumb($img, $width = null, $height = null)
         if ($width && $height && file_exists(ROOT_PATH . $img)) {
             $thumb = $img . '.thumb.' . $width . 'x' . $height . '.' . $ext;
             if (!file_exists(ROOT_PATH . $thumb)) {
-                $image = xiaocms::load_class('image_lib');
+                $image = cms::load_class('image_lib');
                 $image->set_image_size($width, $height)->make_limit_image($img, $thumb);
             }
             return $thumb;
@@ -449,7 +449,7 @@ function getParentName($catid, $prefix, $sort = 1)
 
 function getUrl($data, $page = 0)
 {
-    $config = xiaocms::load_config('config');
+    $config = cms::load_config('config');
     $cats = get_cache('category');
     $cat = $cats[$data['catid']];
     $url = url('index/show', array('id' => $data['id']));
@@ -479,7 +479,7 @@ function getCaturl($data, $page = 0)
         unset($cats);
     }
     $catid = is_numeric($data) ? $data : $data['catid'];
-    $config = xiaocms::load_config('config');
+    $config = cms::load_config('config');
     if ($data['typeid'] == 3) {
         return $data['http'];
     }
@@ -511,7 +511,7 @@ function getCaturl($data, $page = 0)
  */
 function listSeo($cat, $page = 1, $kw = null)
 {
-    $config = xiaocms::load_config('config');
+    $config = cms::load_config('config');
 
     $seo_title = $seo_keywords = $seo_description = '';
     if ($kw) {
@@ -534,7 +534,7 @@ function listSeo($cat, $page = 1, $kw = null)
  */
 function showSeo($data, $page = 1)
 {
-    $config = xiaocms::load_config('config');
+    $config = cms::load_config('config');
     $cats = get_cache('category');
     $seo_title = $seo_keywords = $seo_description = '';
     $cat = $cats[$data['catid']];
@@ -715,7 +715,7 @@ function word2pinyin($word)
         return '';
     }
 
-    $pin = xiaocms::load_class('pinyin');
+    $pin = cms::load_class('pinyin');
     return str_replace('/', '', $pin->output($word));
 }
 

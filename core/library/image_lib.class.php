@@ -411,7 +411,7 @@ class image_lib {
 	 */
 	public function make_text_watermark($image_url, $pos = null, $size = 14) {
 		if (!$image_url) return false;
-		if (empty($this->text_content)) $this->text_content = 'XIAOCMS';
+		if (empty($this->text_content)) $this->text_content = APP_NAME;
 		$this->parse_image_info($image_url);
 		$bbox   = imagettfbbox($size, 0, $this->font_name, $this->text_content);
 		//文字margin_right为5px,特此加5			

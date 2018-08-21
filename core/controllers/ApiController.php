@@ -150,7 +150,7 @@ class ApiController extends Controller
      */
     public function checkcodeAction()
     {
-        $api = xiaocms::load_class('checkcode');
+        $api = cms::load_class('checkcode');
         $width = $this->get('width');
         $height = $this->get('height');
         if ($width) {

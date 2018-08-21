@@ -114,7 +114,7 @@ class TemplateController extends Admin
 
     public function cacheAction($show = 0)
     {
-        $file_list = xiaocms::load_class('file_list');
+        $file_list = cms::load_class('file_list');
         $list = $file_list->get_file_list(THEME_PATH);
         foreach ($list as $path) {
             $dir = DATA_PATH . 'tplcache' . DIRECTORY_SEPARATOR . $path . '/';

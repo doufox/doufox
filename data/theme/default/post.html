@@ -1,59 +1,69 @@
 {template header.html}
-
-<link href="admin/img/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    var sitepath = "index.php";
+    function reload_code() {
+        document.getElementById('code').src = '{function.url("api/checkcode", array("width"=>80, "height"=>28))}&' + Math.random();
+    }
+</script>
 <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script>
-<script type="text/javascript">var sitepath = "index.php";</script>
-<script type="text/javascript" src="admin/js/admin.js"></script>
-
- <div class="blank10 clear"></div>
- <div class="mainbody">
- <div class="bg" style="padding:20px;">
-{if $select}
-<!--选择栏目的模板-->
-  <form action="" method="post">
- <input name="select" type="hidden" value="1" />
-      <div style="text-align:center;padding:20px;">
-      <select name="catid">
-      <option> -选择投稿栏目- </option>
-      {$post_category}
-      </select>
-      &nbsp;<input type="submit" class="button" value="我要投稿" name="submit">
-      </div>
-   </form> 
-   {else}
-    		<!--投稿的模板-->
-   <form action="" method="post">
- <table width="100%" class="table_form">
- <tr>
- 	<th width="100">投稿栏目：</th>
- 	<td>{$cats[$catid]['catname']} <a href="/index.php?c=index&a=post">返回重选</a></td>
- </tr>
+<script type="text/javascript" src="/static/js/admin.js"></script>
+<div class="blank10 clear"></div>
+<div class="mainbody">
+    <div class="bg" style="padding:20px;">
+{if $select}<!--选择栏目的模板-->
+        <form action="" method="post">
+            <input name="select" type="hidden" value="1" />
+            <div style="text-align:center;padding:20px;">
+                <select name="catid">
+                    <option> -选择投稿栏目- </option>
+                    {$post_category}
+                </select>
+                &nbsp;
+                <input type="submit" class="button" value="我要投稿" name="submit">
+            </div>
+        </form>
+{else}<!--投稿的模板-->
+        <form action="" method="post">
+            <table width="100%" class="table_form">
+                <tr>
+                    <th width="100">投稿栏目：</th>
+                    <td>{$cats[$catid]['catname']}<a href="{function.url('index/post')}">返回重选</a></td>
+                </tr>
 {if $model['content']['title']['show']}
-    <tr>
-     <th><font color="red">*</font>&nbsp;{$model['content']['title']['name']}：</th>
-     <td><input type="text" class="input-text" size="50" id="title" value="{$data['title']}" name="data[title]" onBlur="get_kw()">
-     <div class="onShow" id="title_text"></div></td>
-    </tr>
+                <tr>
+                    <th>
+                        <font color="red">*</font>&nbsp;{$model['content']['title']['name']}：</th>
+                    <td>
+                        <input type="text" class="input-text" size="50" id="title" value="{$data['title']}" name="data[title]" onBlur="get_kw()">
+                        <div class="onShow" id="title_text"></div>
+                    </td>
+                </tr>
+{/if} {if $model['content']['description']['show']}
+                <tr>
+                    <th>{$model['content']['description']['name']}：</th>
+                    <td>
+                        <textarea style="width:490px;height:66px;" id="description" name="data[description]">{$data['description']}</textarea>
+                    </td>
+                </tr>
+{/if} {$data_fields}
+                <tr>
+                    <th>验证码：</th>
+                    <td>
+                        <input name="code" type="text" class="input-text" size=10 />
+                        <img id="code" title="看不清楚？换一张" style="cursor:pointer;" align="absmiddle" onclick="reload_code();"
+                            src="{function.url('api/checkcode', array('width'=>80, 'height'=>28))}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="border:none">&nbsp;</th>
+                    <td style="border:none">
+                        <input type="submit" class="button" value="提 交" name="submit">
+                    </td>
+                </tr>
+            </table>
+        </form>
 {/if}
-{if $model['content']['description']['show']}
-    <tr>
-     <th>{$model['content']['description']['name']}：</th>
-     <td><textarea style="width:490px;height:66px;" id="description" name="data[description]">{$data['description']}</textarea></td>
-    </tr>
-{/if}
-{$data_fields}
-    <tr>
-     <th>验证码：</th>
-     <td><input name="code" type="text" class="input-text" size=10 /><img id="code" src="{function.url("api/checkcode/", array("width"=>80, "height"=>28))}" align="absmiddle" title="看不清楚？换一张" onclick="document.getElementById('code').src='{function.url("api/checkcode/", array("width"=>80, "height"=>28))}&'+Math.random();" style="cursor:pointer;" /></td>
-    </tr>
-    <tr>
-     <th style="border:none">&nbsp;</th>
-     <td style="border:none"><input type="submit" class="button" value="提 交" name="submit"></td>
-    </tr>
-   </table>
-  </form>
-{/if}
- </div>
+    </div>
 </div>
 <div class="clear blank10"></div>
 {template footer.html}

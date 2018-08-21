@@ -6,7 +6,7 @@ class AttachmentController extends Admin {
     
     public function __construct() {
 		parent::__construct();
-		if (xiaocms::get_action_id() != 'ajaxswfupload' && !$this->session->get('user_id') && !$this->cookie->get('member_id')) $this->attMsg('无权限操作，请登录。');
+		if (cms::get_action_id() != 'ajaxswfupload' && !$this->session->get('user_id') && !$this->cookie->get('member_id')) $this->attMsg('无权限操作，请登录。');
 		$this->dir = 'upload/';
 	}
 	
@@ -30,7 +30,7 @@ class AttachmentController extends Admin {
 
         $dir    = substr($dir, 0, 1) == '/' ? substr($dir, 1) : $dir;
         $dir    = str_replace(array('\\', '//'), '/', $dir);
-	    $file_list=xiaocms::load_class('file_list');
+	    $file_list=cms::load_class('file_list');
         $data   = $file_list->get_file_list($this->dir . $dir);
         $list   = array();
         if ($data) {
@@ -170,7 +170,7 @@ class AttachmentController extends Admin {
      */
     private function upload($fields, $type, $size, $img=null, $mark=true, $admin=0, $stype=null) {
 	    $path     = $this->dir;
-		$upload   = xiaocms::load_class('file_upload');
+		$upload   = cms::load_class('file_upload');
 		if (empty($admin) && $this->memberinfo) {
 			$uid  = $this->memberinfo['id']; //会员附件归类
 			if ($uid) {
