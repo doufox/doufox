@@ -13,7 +13,7 @@
 <body>
     <div id="head">
         <div id="logo">
-            <a href="<?php echo HTTP_URL; ?>?s=admin">
+            <a href="<?php echo url('admin'); ?>">
                 <h1>后台管理中心</h1>
             </a>
         </div>
@@ -31,37 +31,37 @@
                 </li>
                 <?php }?>
                 <li id="_MP104">
-                    <a href="javascript:_MP(104,'<?php echo HTTP_URL; ?>?s=admin&a=config&type=1');">设置</a>
+                    <a href="javascript:_MP(104, '<?php echo url('admin/index/config'); ?>');">设置</a>
                     <ul>
                         <li id="_MP1041">
-                            <a href="javascript:_MP(1041,'<?php echo HTTP_URL; ?>?s=admin&a=config&type=1');">系统设置</a>
+                            <a href="javascript:_MP(1041,'<?php echo url('admin/index/config', array('type'=> 1)); ?>');">系统设置</a>
                         </li>
                         <li id="_MP1042">
-                            <a href="javascript:_MP(1042,'<?php echo HTTP_URL; ?>?s=admin&a=config&type=2');">水印设置</a>
+                            <a href="javascript:_MP(1042,'<?php echo url('admin/index/config', array('type'=> 2)); ?>');">水印设置</a>
                         </li>
                         <li id="_MP1043">
-                            <a href="javascript:_MP(1043,'<?php echo HTTP_URL; ?>?s=admin&a=config&type=3');">后台密码</a>
+                            <a href="javascript:_MP(1043,'<?php echo url('admin/index/config', array('type'=> 3)); ?>');">后台密码</a>
                         </li>
                         <li id="_MP1044">
-                            <a href="javascript:_MP(1044,'<?php echo HTTP_URL; ?>?s=admin&a=config&type=4');">会员配置</a>
+                            <a href="javascript:_MP(1044,'<?php echo url('admin/index/config', array('type'=> 4)); ?>');">会员配置</a>
                         </li>
                         <li id="_MP1045">
-                            <a href="javascript:_MP(1045,'<?php echo HTTP_URL; ?>?s=admin&a=config&type=5');">URL设置</a>
+                            <a href="javascript:_MP(1045,'<?php echo url('admin/index/config', array('type'=> 5)); ?>');">URL设置</a>
                         </li>
                         <li id="_MP107">
-                            <a href="javascript:_MP(107,'<?php echo HTTP_URL; ?>?s=admin&a=cache');">更新缓存</a>
+                            <a href="javascript:_MP(107,'<?php echo url('admin/index/cache'); ?>');">更新缓存</a>
                         </li>
                         <li id="_MP403">
-                            <a href="javascript:_MP(403,'<?php echo HTTP_URL; ?>?s=admin&c=Content&a=updateurl');">更新内容URL</a>
+                            <a href="javascript:_MP(403,'<?php echo url('admin/content/updateurl'); ?>');">更新内容URL</a>
                         </li>
                         <li id="_MP403">
-                            <a href="javascript:_MP(403,'<?php echo HTTP_URL; ?>?s=admin&c=Database');">数据库备份</a>
+                            <a href="javascript:_MP(403,'<?php echo url('admin/database'); ?>');">数据库备份</a>
                         </li>
                         <li id="_MP1046">
-                            <a href="javascript:_MP(1046,'<?php echo HTTP_URL; ?>?s=admin&c=model');">内容模型</a>
+                            <a href="javascript:_MP(1046,'<?php echo url('admin/model'); ?>');">内容模型</a>
                         </li>
                         <li id="_MP1047">
-                            <a href="javascript:_MP(1047,'<?php echo HTTP_URL; ?>?s=admin&c=model&typeid=3');">表单模型</a>
+                            <a href="javascript:_MP(1047,'<?php echo url('admin/model', array('typeid'=> 3)); ?>');">表单模型</a>
                         </li>
                         <?php if (is_array($menu)) {foreach ($menu as $t) {?>
                         <li id="_MP9<?php echo $t['id'] ?>">
@@ -80,7 +80,7 @@
                     <a href="javascript:_MP(106,'<?php echo url('admin/createhtml'); ?>');">生成</a>
                     <ul>
                         <li id="_MP1061">
-                            <a href="javascript:_MP(1061,'<?php echo url('admin/createhtml'); ?>&a=index');">生成首页</a>
+                            <a href="javascript:_MP(1061,'<?php echo url('admin/createhtml/index'); ?>&a=index');">生成首页</a>
                         </li>
                         <li id="_MP1062">
                             <a href="javascript:_MP(1062,'<?php echo url('admin/createhtml'); ?>&a=category');">生成栏目页</a>
@@ -120,7 +120,7 @@
         <div id="right">
             <div id="home">
                 <div id="shortcut">
-                    <a href="javascript:_MP(107,'<?php echo url('admin/cache'); ?>');" title="更新缓存">更新缓存</a>
+                    <a href="javascript:_MP(107,'<?php echo url('admin/index/cache'); ?>');" title="更新缓存">更新缓存</a>
                     <a href="https://www.crogram.com" title="Crogram" target="_blank" title="帮助">帮助</a>
                     <a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a>
                 </div>

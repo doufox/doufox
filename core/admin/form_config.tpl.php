@@ -100,16 +100,10 @@ top.document.getElementById('position').innerHTML = '表单配置';
 			</tbody>
 			</table>
 			</div>
-			
 
 			<div class="contentList pad-10 hidden" id="div_setting_2" style="display: none;">
-				
 			<table width="100%" class="table_form ">
 			<tbody>
-				<tr>
-					<th width="200"></th>
-					<td>具体调用信息可以参考官方模板或帮助手则 <a href="http://www.xiaocms.com">http://www.xiaocms.com</a></td>
-				</tr>
 				<tr>
 					<th>表单提交地址：</th>
 					<td><?php echo $form_url; ?> </td>
@@ -124,10 +118,6 @@ top.document.getElementById('position').innerHTML = '表单配置';
 			</tbody>
 			</table>
 			</div>
-
-
-			
-			
 			<div class="bk15"></div>
 			<input type="submit" class="button" value="提交" name="submit">
 		</div>

@@ -375,7 +375,7 @@ body fieldset.blue legend {
 }
 
 /*容器样式*/
-/*.col-tab {}*/
+
 .col-tab ul.tabBut {
     height: 27px;
     position: relative;
@@ -387,19 +387,12 @@ body fieldset.blue legend {
     height: 25px;
     line-height: 26px;
     margin-right: 5px;
-    -moz-border-radius-topleft: 3px;
-    -moz-border-radius-topright: 3px;
-    -webkit-border-top-left-radius: 3px;
-    -webkit-border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
     border: 1px solid #d5dfe8;
     font-weight: normal;
     background: #F2F9FB;
     padding: 0 8px;
 }
 
-/*.col-tab ul.tabBut li {}*/
 .col-tab ul.tabBut li.on {
     position: relative;
     background: #fff;
