@@ -1,8 +1,8 @@
-{xiao:template header.html}
+{template header.html}
 <div class="blank10 clear"></div>
 <div class="mainbody ">
  <div class=" bg">
-  <div class="crumbs"><a href="{xiao:$site_url}">Home</a>&nbsp;>>&nbsp;{xiao:$form_name}</div>
+  <div class="crumbs"><a href="{$site_url}">Home</a>&nbsp;>>&nbsp;{$form_name}</div>
   <div class="item-list">
    <form action="" method="post">
     <table width="100%" class="table_form ">
@@ -10,13 +10,13 @@
      <th width="100"></th>
      <td></td>
      </tr>
-{xiao:$fields}
-{xiao:if $code}
+{$fields}
+{if $code}
      <tr>
      <th>验证码：</th>
-     <td><input name="code" type="text" class="input-text" size=10 /><img src="{xiao:function.url('api/checkcode', array('width'=>80,'height'=>25))}" align="absmiddle"></td>
+     <td><input name="code" type="text" class="input-text" size=10 /><img src="{function.url('api/checkcode', array('width'=>80,'height'=>25))}" align="absmiddle"></td>
      </tr>
-{/xiao:if}
+{/if}
      <tr>
      <th >&nbsp;</th>
      <td ><input type="submit" class="button" value="提 交" name="submit"></td>
@@ -27,4 +27,4 @@
  </div>
 </div>
 <div class="clear blank10"></div>
-{xiao:template footer.html}
+{template footer.html}

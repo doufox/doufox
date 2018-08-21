@@ -1,4 +1,4 @@
-{xiao:template header.html}
+{template header.html}
 
 <link href="admin/img/admin.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script>
@@ -8,43 +8,43 @@
  <div class="blank10 clear"></div>
  <div class="mainbody">
  <div class="bg" style="padding:20px;">
-{xiao:if $select}
+{if $select}
 <!--选择栏目的模板-->
   <form action="" method="post">
  <input name="select" type="hidden" value="1" />
       <div style="text-align:center;padding:20px;">
       <select name="catid">
       <option> -选择投稿栏目- </option>
-      {xiao:$post_category}
+      {$post_category}
       </select>
       &nbsp;<input type="submit" class="button" value="我要投稿" name="submit">
       </div>
    </form> 
-   {xiao:else}
+   {else}
     		<!--投稿的模板-->
    <form action="" method="post">
  <table width="100%" class="table_form">
  <tr>
  	<th width="100">投稿栏目：</th>
- 	<td>{xiao:$cats[$catid]['catname']} <a href="/index.php?c=index&a=post">返回重选</a></td>
+ 	<td>{$cats[$catid]['catname']} <a href="/index.php?c=index&a=post">返回重选</a></td>
  </tr>
-{xiao:if $model['content']['title']['show']}
+{if $model['content']['title']['show']}
     <tr>
-     <th><font color="red">*</font>&nbsp;{xiao:$model['content']['title']['name']}：</th>
-     <td><input type="text" class="input-text" size="50" id="title" value="{xiao:$data['title']}" name="data[title]" onBlur="get_kw()">
+     <th><font color="red">*</font>&nbsp;{$model['content']['title']['name']}：</th>
+     <td><input type="text" class="input-text" size="50" id="title" value="{$data['title']}" name="data[title]" onBlur="get_kw()">
      <div class="onShow" id="title_text"></div></td>
     </tr>
-{/xiao:if}
-{xiao:if $model['content']['description']['show']}
+{/if}
+{if $model['content']['description']['show']}
     <tr>
-     <th>{xiao:$model['content']['description']['name']}：</th>
-     <td><textarea style="width:490px;height:66px;" id="description" name="data[description]">{xiao:$data['description']}</textarea></td>
+     <th>{$model['content']['description']['name']}：</th>
+     <td><textarea style="width:490px;height:66px;" id="description" name="data[description]">{$data['description']}</textarea></td>
     </tr>
-{/xiao:if}
-{xiao:$data_fields}
+{/if}
+{$data_fields}
     <tr>
      <th>验证码：</th>
-     <td><input name="code" type="text" class="input-text" size=10 /><img id="code" src="{xiao:function.url("api/checkcode/", array("width"=>80, "height"=>28))}" align="absmiddle" title="看不清楚？换一张" onclick="document.getElementById('code').src='{xiao:function.url("api/checkcode/", array("width"=>80, "height"=>28))}&'+Math.random();" style="cursor:pointer;" /></td>
+     <td><input name="code" type="text" class="input-text" size=10 /><img id="code" src="{function.url("api/checkcode/", array("width"=>80, "height"=>28))}" align="absmiddle" title="看不清楚？换一张" onclick="document.getElementById('code').src='{function.url("api/checkcode/", array("width"=>80, "height"=>28))}&'+Math.random();" style="cursor:pointer;" /></td>
     </tr>
     <tr>
      <th style="border:none">&nbsp;</th>
@@ -52,8 +52,8 @@
     </tr>
    </table>
   </form>
-{/xiao:if}
+{/if}
  </div>
 </div>
 <div class="clear blank10"></div>
-{xiao:template footer.html}
+{template footer.html}

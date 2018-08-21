@@ -94,28 +94,28 @@ class view {
 		if (!$view_content) return false;
 		// 正则表达式匹配的模板标签
 		$regex_array = array(
-		'#{xiao:template\s+(.+?)\s*}#is',
-		'#{xiao:block\s+([0-9]+)}#i',
+		'#{template\s+(.+?)\s*}#is',
+		'#{block\s+([0-9]+)}#i',
 
-		'#{xiao:nav\s+(.+?)\s?}#i',
-		'#{\/xiao:nav}#i',
+		'#{nav\s+(.+?)\s?}#i',
+		'#{\/nav}#i',
 
-		'#{xiao:list\s+(.+?)return=(.+?)\s?}#i',
-		'#{xiao:list\s+(.+?)\s?}#i',
-		'#{\/xiao:list}#i',
+		'#{list\s+(.+?)return=(.+?)\s?}#i',
+		'#{list\s+(.+?)\s?}#i',
+		'#{\/list}#i',
 
-		'#{xiao:loop\s+\$(.+?)\s+\$(\w+?)\s?}#i',
-		'#{xiao:loop\s+\$(.+?)\s+\$(\w+?)\s?=>\s?\$(\w+?)\s?}#i',
-		'#{\/xiao:loop}#i',
+		'#{loop\s+\$(.+?)\s+\$(\w+?)\s?}#i',
+		'#{loop\s+\$(.+?)\s+\$(\w+?)\s?=>\s?\$(\w+?)\s?}#i',
+		'#{\/loop}#i',
 
-		'#{xiao:if\s+(.+?)\s?}#i',
-		'#{xiao:else\sif\s+(.+?)\s?}#i',
-		'#{xiao:else}#i',
-		'#{\/xiao:if}#i',
+		'#{if\s+(.+?)\s?}#i',
+		'#{else\sif\s+(.+?)\s?}#i',
+		'#{else}#i',
+		'#{\/if}#i',
 
-		'#{xiao:function.([a-z_0-9]+)\((.*)\)}#Ui',
-		'#{xiao:\$(.+?)}#i',
-		'#{xiao:php\s+(.+?)}#is',
+		'#{function.([a-z_0-9]+)\((.*)\)}#Ui',
+		'#{\$(.+?)}#i',
+		'#{php\s+(.+?)}#is',
 
 		'#\?\>\s*\<\?php\s#s',
 		);

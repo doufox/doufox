@@ -1,25 +1,25 @@
-{xiao:template head.html}
+{template head.html}
 
-{xiao:template header.html}
+{template header.html}
 
 <div class="list-article">
     <div class="list-title">
-        <a href="{xiao:$site_url}">首页</a>
-        &nbsp;>>&nbsp; {xiao:function.position($catid, ' &gt;&gt;&nbsp;&nbsp;')}
+        <a href="{$site_url}">首页</a>
+        &nbsp;>>&nbsp; {function.position($catid, ' &gt;&gt;&nbsp;&nbsp;')}
 
     </div>
     <div class="list-content">
         <!-- list start -->
         <ul>
-            {xiao:list catid=$catid page=$page cache=36000}<li class="list-item">
-                <span class="list-date">{xiao:function.date("Y-m-d", $xiao['time'])}</span>
-                <a href="{xiao:$xiao['url']}">&gt;{xiao:$xiao['title']}</a>
-            </li>{/xiao:list}
+            {list catid=$catid page=$page cache=36000}<li class="list-item">
+                <span class="list-date">{function.date("Y-m-d", $xiao['time'])}</span>
+                <a href="{$xiao['url']}">&gt;{$xiao['title']}</a>
+            </li>{/list}
 
         </ul><!-- list end -->
     </div>
-    <div class="listpage">{xiao:$pagelist}</div>
+    <div class="listpage">{$pagelist}</div>
     <div class="clear"></div>
     <div class="blank10 clear"></div>
 </div>
-{xiao:template footer.html}
+{template footer.html}

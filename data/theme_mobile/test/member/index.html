@@ -1,33 +1,33 @@
-{xiao:template member/head.html}
+{template member/head.html}
 
-{xiao:template member/header.html}
+{template member/header.html}
 
 <div class="member">
 	<div class="w210 fl">
-		{xiao:template member/left.html}
+		{template member/left.html}
 	</div>
 	<div class="list-article">
 		<div class="list-content">
-			{xiao:if !$member['status']}
+			{if !$member['status']}
 			<h3><span class="bt" style="color:#F00"><b>您还没有通过审核！</b></span></h3>
-			{/xiao:if}
+			{/if}
 			<div class="list-title"><h3>我发布的内容</h3></div>
 			<ul>
-				{xiao:list status=0 username=$member[username] num=10 }
+				{list status=0 username=$member[username] num=10 }
 				<li class="list-item">
-					<span class="date">{xiao:function.date("Y-m-d H:i:s", $xiao['time'])}</span>
-					<a href="{xiao:$xiao['url']}"><font color="#FF0000">[未审]</font>{xiao:$xiao['title']}</a>
+					<span class="date">{function.date("Y-m-d H:i:s", $xiao['time'])}</span>
+					<a href="{$xiao['url']}"><font color="#FF0000">[未审]</font>{$xiao['title']}</a>
 				</li>
-				{/xiao:list}
-				{xiao:list username=$member[username] num=10 }
+				{/list}
+				{list username=$member[username] num=10 }
 				<li class="list-item">
-					<span class="date">{xiao:function.date("Y-m-d H:i:s", $xiao['time'])}</span>
-					<a href="{xiao:$xiao['url']}">{xiao:$xiao['title']}</a>
+					<span class="date">{function.date("Y-m-d H:i:s", $xiao['time'])}</span>
+					<a href="{$xiao['url']}">{$xiao['title']}</a>
 				</li>
-				{/xiao:list}
+				{/list}
 			</ul>
 		</div>
 	</div>
 </div>
 
-{xiao:template footer.html}
+{template footer.html}

@@ -1,20 +1,20 @@
-{xiao:template header.html}
+{template header.html}
 <div class="mainbody">
  <div class="w210 fl">
-{xiao:template sidebar.html}
+{template sidebar.html}
  </div>
   <div class="w740 fr">
   <div class="page bg">
-    {xiao:template crumbs.html}
+    {template crumbs.html}
    <div class="blank10 clear"></div>
 <!--列表开始-->
    <div class="newslist">
     <ul class="noborder">
-{xiao:list catid=$catid page=$page cache=36000}
-     <li><span class="date">{xiao:function.date("Y-m-d", $xiao['time'])}</span> <a href="{xiao:$xiao['url']}">· {xiao:$xiao['title']}</a></li>
-{/xiao:list}
+{list catid=$catid page=$page cache=36000}
+     <li><span class="date">{function.date("Y-m-d", $xiao['time'])}</span> <a href="{$xiao['url']}">· {$xiao['title']}</a></li>
+{/list}
     </ul>
-    <div class="listpage" >{xiao:$pagelist}</div>
+    <div class="listpage" >{$pagelist}</div>
    </div>
 <!--列表结束-->
    </div>
@@ -22,4 +22,4 @@
  </div>
  <div class="blank10 clear"></div>
 </div>
-{xiao:template footer.html}
+{template footer.html}

@@ -2,10 +2,10 @@
 <html>
 
 <head>
-  <title>测试 - {xiao:$site_title}</title>
+  <title>测试 - {$site_title}</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="keywords" content="{xiao:$site_keywords}" />
-  <meta name="description" content="{xiao:$site_description}" />
+  <meta name="keywords" content="{$site_keywords}" />
+  <meta name="description" content="{$site_description}" />
   <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
   <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon" />
 </head>
@@ -13,9 +13,9 @@
 <body>
   <div class="header">
    <div class="container">
-    <a class="logo" href="{xiao:$site_url}" title="{xiao:$site_name}">data目录里的{xiao:$site_name}</a>
+    <a class="logo" href="{$site_url}" title="{$site_name}">data目录里的{$site_name}</a>
     <div>
-      <div class="slogan">{xiao:$site_slogan}</div>
+      <div class="slogan">{$site_slogan}</div>
       <div class="searchform">
           <form method="get" action="/">
             <input type="hidden" value="index" name="c" />
@@ -30,10 +30,10 @@
   </div>
   <div class="nav">
     <ul id="nav" class="container clearfix">
-      <li class="nav-item"><h3><a href="{xiao:$site_url}">Home</a></h3></li>
-{xiao:nav num=7}
-      <li class="nav-item{xiao:if $current} on{/xiao:if}"><h3><a href="{xiao:$xiao['url']}">{xiao:$xiao['catname']}</a></h3></li>
-{/xiao:nav}
+      <li class="nav-item"><h3><a href="{$site_url}">Home</a></h3></li>
+{nav num=7}
+      <li class="nav-item{if $current} on{/if}"><h3><a href="{$xiao['url']}">{$xiao['catname']}</a></h3></li>
+{/nav}
     </ul>
   </div>
   <div class="clear blank5"></div>

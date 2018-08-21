@@ -8,12 +8,12 @@
     </div>
     <div class="bd">
       <ul class="picList">
-{xiao:list status=3 num=10 cache=36000 }
+{list status=3 num=10 cache=36000 }
         <li>
-          <div class="pic"><a href="{xiao:$xiao['url']}"><img src="{xiao:function.thumb($xiao[thumb])}" /></a></div>
-          <div class="title"><a href="{xiao:$xiao['url']}">{xiao:function.strcut($xiao[title], 24)}</a></div>
+          <div class="pic"><a href="{$xiao['url']}"><img src="{function.thumb($xiao[thumb])}" /></a></div>
+          <div class="title"><a href="{$xiao['url']}">{function.strcut($xiao[title], 24)}</a></div>
         </li>
-{/xiao:list}
+{/list}
       </ul>
     </div>
   </div>

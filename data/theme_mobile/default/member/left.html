@@ -2,12 +2,12 @@
   <div class="title">会员中心</div>
   <div class="leftbox">
     <ul>
-      <li><a href="{xiao:function.url('member/index/edit')}">会员资料</a></li>
-      <li><a href="{xiao:function.url('member/index/password')}">修改密码</a></li>
-      <li><a href="{xiao:function.url('member/content/')}">内容管理</a></li>
-{xiao:loop $navigation $n=>$t}
-    <li{xiao:if $n && $form['tablename']==$n} class="on"{/xiao:if}><a href="{xiao:$t['url']}">{xiao:$t['name']}</a></li>
-{/xiao:loop}
+      <li><a href="{function.url('member/index/edit')}">会员资料</a></li>
+      <li><a href="{function.url('member/index/password')}">修改密码</a></li>
+      <li><a href="{function.url('member/content/')}">内容管理</a></li>
+{loop $navigation $n=>$t}
+    <li{if $n && $form['tablename']==$n} class="on"{/if}><a href="{$t['url']}">{$t['name']}</a></li>
+{/loop}
     </ul>
   </div>
 </div>

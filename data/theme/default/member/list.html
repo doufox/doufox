@@ -1,7 +1,7 @@
-{xiao:template header.html}
+{template header.html}
 <div class="mainbody">
 	    <div class="w210 fl">
-		{xiao:template member/sidebar.html}
+		{template member/sidebar.html}
         </div>
 	    <div class="w740 fr">
 		<div class="page bg">
@@ -12,11 +12,11 @@
                     <td>
 
 					<select name="catid">
-					{xiao:$category}
+					{$category}
 					</select>
 					<input type="submit" class="button" value="发布文档" name="submit">
 					</td>
-                    <td align="right"><div class="listpage">{xiao:$pagelist}</div></td>
+                    <td align="right"><div class="listpage">{$pagelist}</div></td>
                   </tr>
                 </table>
                 </div>
@@ -30,19 +30,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                     {xiao:loop $list $t}
+                     {loop $list $t}
                       <tr>
-                        <td><a href="{xiao:$t['url']}" target="_blank">
-						{xiao:if $t['status']==0}<font color="#FF0000">[未审]</font>
-						{xiao:else if $t['status']==2}<font color="#0000FF">[头条]</font>{/xiao:if}
-						{xiao:$t['title']}</a></td>
-                        <td><a href="{xiao:$cats[$t['catid']]['url']}" target="_blank">{xiao:$cats[$t['catid']]['catname']}</a></td>
-                        <td>{xiao:function.date("Y-m-d H:i:s", $t['time'])}</td>
+                        <td><a href="{$t['url']}" target="_blank">
+						{if $t['status']==0}<font color="#FF0000">[未审]</font>
+						{else if $t['status']==2}<font color="#0000FF">[头条]</font>{/if}
+						{$t['title']}</a></td>
+                        <td><a href="{$cats[$t['catid']]['url']}" target="_blank">{$cats[$t['catid']]['catname']}</a></td>
+                        <td>{function.date("Y-m-d H:i:s", $t['time'])}</td>
                         <td>
-                        <a href="{xiao:function.url('member/content/edit/', array('id'=>$t['id']))}">修改</a>&nbsp;
+                        <a href="{function.url('member/content/edit/', array('id'=>$t['id']))}">修改</a>&nbsp;
                         </td>
                       </tr>
-                      {/xiao:loop}
+                      {/loop}
                     </tbody>
                 </table>
                </form>
@@ -52,4 +52,4 @@
 
         </div>
 </div>
-{xiao:template footer.html}
+{template footer.html}

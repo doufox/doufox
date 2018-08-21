@@ -1,7 +1,7 @@
-{xiao:template header.html}
+{template header.html}
 <div class="mainbody">
 	    <div class="w210 fl">
-		{xiao:template member/sidebar.html}
+		{template member/sidebar.html}
         </div>
 	    <div class="w740 fr">
 		<div class="page bg">
@@ -12,24 +12,24 @@
                 <tbody>
                 <tr>
                     <th width="100">会员模型：</th>
-                    <td>{xiao:$member_model[$member['modelid']]['modelname']}</td>
+                    <td>{$member_model[$member['modelid']]['modelname']}</td>
                 </tr>
                 <tr>
                     <th width="100">会员名称：</th>
-                    <td>{xiao:$member['username']}</td>
+                    <td>{$member['username']}</td>
                 </tr>
                 <tr>
                     <th width="100">会员积分：</th>
-                    <td>{xiao:$member['credits']}</td>
+                    <td>{$member['credits']}</td>
                 </tr>
                 <tr>
                     <th>注册邮箱：</th>
-                    <td>{xiao:$member['email']}</td>
+                    <td>{$member['email']}</td>
                 </tr>
 
 				
                 <tr>
-                {xiao:$data_fields}
+                {$data_fields}
                 <tr>
                     <th style="border:none">&nbsp;</th>
                     <td style="border:none"><input type="submit" class="button" value="保 存" name="submit"></td>
@@ -46,4 +46,4 @@
         </div>
 	    <!--Content End-->
 </div>
-{xiao:template footer.html}
+{template footer.html}

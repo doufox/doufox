@@ -11,14 +11,14 @@
   <div class="title"><s></s>产品分类</div>
   <div class="leftbox">
    <ul>
-{xiao:nav parentid=5 }
-    <li><s></s><a {xiao:if $current}class="select"{/xiao:if} href="{xiao:$xiao['url']}">{xiao:$xiao['catname']}</a></li>
-{/xiao:nav}
+{nav parentid=5 }
+    <li><s></s><a {if $current}class="select"{/if} href="{$xiao['url']}">{$xiao['catname']}</a></li>
+{/nav}
    </ul>
   </div>
  </div>
  <div class="blank10 clear"></div>
  <div class="contact bg">
   <div class="newstitle"><h3>联系我们</h3></div>
- {xiao:block 4}
+ {block 4}
  </div>

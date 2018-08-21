@@ -1,12 +1,12 @@
   <div class="clear blank10"></div>
   <div class="footer">
     <div class="container footnav">
-{xiao:nav  }
-      <a href="{xiao:$xiao['url']}">{xiao:$xiao['catname']}</a>
-{/xiao:nav}
+{nav  }
+      <a href="{$xiao['url']}">{$xiao['catname']}</a>
+{/nav}
     </div>
-    <div class="container corporation">2018  &copy; <a href="{xiao:$site_url}">uinote.com</a> | <a href="https://crogram.com" target="_blank" title="Powered by Crogram,Inc.">crogram.com</a></div>
-    <div class="container corporation">{xiao:block 1}</div>
+    <div class="container corporation">2018  &copy; <a href="{$site_url}">uinote.com</a> | <a href="https://crogram.com" target="_blank" title="Powered by Crogram,Inc.">crogram.com</a></div>
+    <div class="container corporation">{block 1}</div>
   </div>
 </body>
 </html>

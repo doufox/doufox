@@ -2,9 +2,9 @@
   <div class="sidebar-header">Category</div>
     <div class="sidebar-body">
       <ul>
-{xiao:nav  }
-        <li {xiao:if $current}class="select"{/xiao:if}><s></s><a href="{xiao:$xiao['url']}">{xiao:$xiao['catname']}</a></li>
-{/xiao:nav}
+{nav  }
+        <li {if $current}class="select"{/if}><s></s><a href="{$xiao['url']}">{$xiao['catname']}</a></li>
+{/nav}
     </ul>
   </div>
 </div>

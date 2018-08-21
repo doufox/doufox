@@ -1,7 +1,7 @@
-{xiao:template header.html}
+{template header.html}
 <div class="mainbody">
 	    <div class="w210 fl">
-		{xiao:template member/sidebar.html}
+		{template member/sidebar.html}
         </div>
 	    <div class="w740 fr">
 		<div class="page bg">
@@ -9,35 +9,35 @@
                 <table class="datatable" border="0" cellpadding="0" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            {xiao:if $join}
+                            {if $join}
 							<td width="60">管理内容Id</td>
-							{/xiao:if}
-							{xiao:loop $showfields $f}
-                            <td>{xiao:$form['fields']['data'][$f]['name']}</td>
-							{/xiao:loop}
+							{/if}
+							{loop $showfields $f}
+                            <td>{$form['fields']['data'][$f]['name']}</td>
+							{/loop}
                             <td width="130">提交时间</td>
                             <td width="80">操作</td>
                         </tr>
                     </thead>
                     <tbody>
-                     {xiao:loop $listdata $t}
+                     {loop $listdata $t}
                       <tr>
-						{xiao:if $join}
-						<td><a href="{xiao:function.url('index/show/',array('id'=>$t['cid']))}" target="_blank">{xiao:$t['cid']}</a></td>
-						{/xiao:if}
+						{if $join}
+						<td><a href="{function.url('index/show/',array('id'=>$t['cid']))}" target="_blank">{$t['cid']}</a></td>
+						{/if}
 						
-                        {xiao:loop $showfields $f}
-                        <td>{xiao:$t[$f]}</td>
-						{/xiao:loop}
+                        {loop $showfields $f}
+                        <td>{$t[$f]}</td>
+						{/loop}
 						
-                        <td>{xiao:function.date("Y-m-d H:i:s", $t['time'])}</td>
-                        <td><a href="{xiao:function.url('member/content/formshow/', array('id'=>$t['id'], 'modelid'=>$modelid))}">查看</a></td>
+                        <td>{function.date("Y-m-d H:i:s", $t['time'])}</td>
+                        <td><a href="{function.url('member/content/formshow/', array('id'=>$t['id'], 'modelid'=>$modelid))}">查看</a></td>
                       </tr>
-                      {/xiao:loop}
+                      {/loop}
                     </tbody>
                 </table>		   <div class="blank10 clear"></div>		
 
-<div class="listpage">{xiao:pagelist}</div>
+<div class="listpage">{pagelist}</div>
                </form>
 
         </div>
@@ -50,6 +50,6 @@
 	    <!--Content End-->
 </div>
 
-{xiao:template footer.html}
+{template footer.html}
 
 

@@ -1,4 +1,4 @@
-{xiao:template header.html}
+{template header.html}
 <link href="admin/img/admin.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="admin/js/dialog.js?skin=green"></script>
 <script type="text/javascript">var sitepath = "index.php";</script>
@@ -6,30 +6,30 @@
 
 <div class="mainbody">
 	    <div class="w210 fl">
-		{xiao:template member/sidebar.html}
+		{template member/sidebar.html}
         </div>
 	    <div class="w740 fr">
 		<div class="page bg">
 	
 			<div class="content_info">
                 <form action="" method="post">
-                {xiao:if $data}<input type="hidden" value="{xiao:$data[catid]}" name="data[catid]">{/xiao:if}
+                {if $data}<input type="hidden" value="{$data[catid]}" name="data[catid]">{/if}
                 <table width="100%" class="table_form" border="0" cellpadding="0" cellspacing="0">
                 <tbody>
                 <tr>
                     <th width="80"><font color="red">*</font>&nbsp;栏目：</th>
-                    <td><select name="data[catid]">{xiao:$category}</select></td>
+                    <td><select name="data[catid]">{$category}</select></td>
                 </tr>
 
-                {xiao:if $model['content']['title']['show']}
+                {if $model['content']['title']['show']}
 				<tr>
-					<th><font color="red">*</font>&nbsp;{xiao:$model['content']['title']['name']}：</th>
-					<td><input type="text" class="input-text" size="50" id="title" value="{xiao:$data['title']}" name="data[title]" onBlur="ajaxtitle()">
+					<th><font color="red">*</font>&nbsp;{$model['content']['title']['name']}：</th>
+					<td><input type="text" class="input-text" size="50" id="title" value="{$data['title']}" name="data[title]" onBlur="ajaxtitle()">
 					<div class="onShow" id="title_text"></div></td>
 				</tr>
-				{/xiao:if}
+				{/if}
 
-                {xiao:$data_fields}
+                {$data_fields}
                 <tr>
                     <th style="border:none">&nbsp;</th>
                     <td style="border:none"><input type="submit" class="button" value="提 交" name="submit"></td>
@@ -44,4 +44,4 @@
 
         </div>
 </div>
-{xiao:template footer.html}
+{template footer.html}

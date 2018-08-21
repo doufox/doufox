@@ -1,49 +1,49 @@
-{xiao:template head.html}
-{xiao:template header.html}
+{template head.html}
+{template header.html}
 <div class="mainbody">
  <div class="w210 fl">
-{xiao:template left.html}
+{template left.html}
  </div>
  <div class="w740 fr">
   <div class="page bg">
    <div class="newstitle">
-    您当前位置：<a href="{xiao:$site_url}">首页</a> >> {xiao:function.position($catid, ' &gt;&gt;&nbsp;&nbsp;')}
+    您当前位置：<a href="{$site_url}">首页</a> >> {function.position($catid, ' &gt;&gt;&nbsp;&nbsp;')}
    </div>
    <div class="blank10 clear"></div>
-   <h2>{xiao:$title}</h2>
+   <h2>{$title}</h2>
    <div class="info">
-    时间：{xiao:function.date("Y-m-d H:i:s", $time)} 点击：<script type="text/javascript" src="{xiao:function.url('api/hits',array('id'=>$id))}"></script>
+    时间：{function.date("Y-m-d H:i:s", $time)} 点击：<script type="text/javascript" src="{function.url('api/hits',array('id'=>$id))}"></script>
     次
    </div>
    <div class="content">
-{xiao:$content}
+{$content}
    </div>
    <div class="blank10 clear"></div>
 <!--文章内容分页 begin-->
-{xiao:if $content_page}
+{if $content_page}
    <div class="listpage">
-{xiao:loop $content_page $t=>$u}
-    <a{xiao:if $page!=$t} href="{xiao:$u}"{xiao:else} style="background-color: #c00;"{/xiao:if}>{xiao:$t}</a>
-{/xiao:loop}
+{loop $content_page $t=>$u}
+    <a{if $page!=$t} href="{$u}"{else} style="background-color: #c00;"{/if}>{$t}</a>
+{/loop}
    </div>
    <div class="clear blank10"></div>
-{/xiao:if}
+{/if}
 <!--文章内容分页 end-->
    <div class="blank20 clear"></div>
-{xiao:if $prev_page}
+{if $prev_page}
    <p>
-    上一篇：<a href="{xiao:$prev_page['url']}">{xiao:$prev_page['title']}</a>
+    上一篇：<a href="{$prev_page['url']}">{$prev_page['title']}</a>
    </p>
-{/xiao:if}
+{/if}
     <div class="blank5 clear"></div>
-{xiao:if $next_page}
+{if $next_page}
    <p>
-    下一篇：<a href="{xiao:$next_page['url']}">{xiao:$next_page['title']}</a>
+    下一篇：<a href="{$next_page['url']}">{$next_page['title']}</a>
    </p>
-{/xiao:if}
+{/if}
   </div>
   <div class="blank20 clear"></div>
  </div>
  <div class="blank10 clear"></div>
 </div>
-{xiao:template footer.html}
+{template footer.html}

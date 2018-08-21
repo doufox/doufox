@@ -1,8 +1,8 @@
-{xiao:template header.html}
+{template header.html}
 <body>
 <!--header-->
 <header class="region clearfix">
- <div class="logo"><a href="{xiao:$site_url}"><img src="{xiao:$site_template}images/logo.gif" /></a></div>
+ <div class="logo"><a href="{$site_url}"><img src="{$site_template}images/logo.gif" /></a></div>
  <div id="search" class="clearfix">
   <form class="search " action="" method="get">
    <input type="hidden" value="index" name="c" />
@@ -27,8 +27,8 @@ $(document).ready(function(){
 </script>
 <header>
 <div class="title">
-  <h1 class="titname">{xiao:function.position($catid, ' &gt;&gt;&nbsp;&nbsp;')}</h1>
-  <a href="javascript:history.back()"><span class="titback"><img src="{xiao:$site_template}images/backicon.gif" /></span></a>
+  <h1 class="titname">{function.position($catid, ' &gt;&gt;&nbsp;&nbsp;')}</h1>
+  <a href="javascript:history.back()"><span class="titback"><img src="{$site_template}images/backicon.gif" /></span></a>
 </div>
 
 
@@ -36,32 +36,32 @@ $(document).ready(function(){
 
  <div id="deals">
     <input name="list_id" id="list_id" type="hidden" value="1">
-{xiao:nav  parentid=$catid typeid=1}
-<h3><span class="bt">{xiao:$xiao['catname']}</span> <span class="more"><a href="{xiao:$xiao['url']}">更多&gt;&gt;</a></span></h3>
-{xiao:list catid=$xiao[catid] num=3 order=time}
+{nav  parentid=$catid typeid=1}
+<h3><span class="bt">{$xiao['catname']}</span> <span class="more"><a href="{$xiao['url']}">更多&gt;&gt;</a></span></h3>
+{list catid=$xiao[catid] num=3 order=time}
 <section class="news">
-<a href="{xiao:$xiao['url']}">
-    <detail><ul><li class="brand">{xiao:$xiao['title']}</li></ul></detail>
+<a href="{$xiao['url']}">
+    <detail><ul><li class="brand">{$xiao['title']}</li></ul></detail>
 </a>
 </section>
-{/xiao:list}
-{/xiao:nav}
+{/list}
+{/nav}
 </div>
 
 
 <div class="newlist">
  <input name="list_id" id="list_id" type="hidden" value="1">
  <ul class="tabs" style="margin-top: 0">
-{xiao:nav  parentid=$catid typeid=1}
-  <li><a href="{xiao:$xiao['url']}">{xiao:$xiao['catname']}</a></li>
-{/xiao:nav}
+{nav  parentid=$catid typeid=1}
+  <li><a href="{$xiao['url']}">{$xiao['catname']}</a></li>
+{/nav}
  </ul>
  <br class="clear" />
  <div class="flexslider2"><ul class="slides"></ul></div>
  <ul class="newsconlist">
-{xiao:list catid=$xiao[catid] num=3 order=time}
-   <li><a href="{xiao:$xiao['url']}">{xiao:$xiao['title']}</a></li>
-{/xiao:list}
+{list catid=$xiao[catid] num=3 order=time}
+   <li><a href="{$xiao['url']}">{$xiao['title']}</a></li>
+{/list}
  </ul>
 
 
@@ -74,4 +74,4 @@ $(document).ready(function(){
 <div id="deals-page" class="">
     <div id="nav-more"><span class="nav-button">查看更多</span></div>
 </div>
-{xiao:template footer.html}
+{template footer.html}

@@ -1,6 +1,6 @@
-{xiao:template member/head.html}
+{template member/head.html}
 
-{xiao:template header.html}
+{template header.html}
 
 <script type="text/javascript">
 function checkpass() {
@@ -17,13 +17,13 @@ function checkpass() {
 </script>
 <div class="register">
 	<form method="post" action="" name="myform" id="myform">
-		{xiao:if count($member_model) == 1}会员类型：
+		{if count($member_model) == 1}会员类型：
 		<select name="data[modelid]" >
-		{xiao:loop $member_model $t}
-		<option value="{xiao:$t['modelid']}" {xiao:if $member_default_modelid==$t['modelid']}selected{/xiao:if}>{xiao:$t['modelname']}</option>
-		{/xiao:loop}
+		{loop $member_model $t}
+		<option value="{$t['modelid']}" {if $member_default_modelid==$t['modelid']}selected{/if}>{$t['modelname']}</option>
+		{/loop}
 		</select>
-		{/xiao:if}
+		{/if}
 		<div class="form-continer">
 			<div class="form-item">
 				<div class="input-continer log-name">
@@ -49,28 +49,28 @@ function checkpass() {
 				<span id="err_email" class="tips_info"></span>
 			</div>
 
-			{xiao:if $config['MEMBER_REGCODE']}<div class="form-item">
+			{if $config['MEMBER_REGCODE']}<div class="form-item">
 				<div class="input-continer">
 				<input type="text" class="input-code" name="code" placeholder="注册验证" />
 				<img id="code" class="code" align="absmiddle" title="看不清楚？换一张" onclick="reflashCode()"
-				src="{xiao:function.url("api/checkcode/", array("width "=>80, "height "=>30))}" />
+				src="{function.url("api/checkcode/", array("width "=>80, "height "=>30))}" />
 				</div>
-			</div>{/xiao:if}
+			</div>{/if}
 
 			<div class="form-item">
 				<input type="submit" class="button" value="注 册" name="submit" />
 			</div>
 			<div class="form-item-link">
 				<a href="forget.html">忘记密码？</a>
-				<a href="{xiao:function.url('member/login')}">直接登录</a>
+				<a href="{function.url('member/login')}">直接登录</a>
 			</div>
 		</div>
 	</form>
 </div>
 <script type="text/javascript">
 	function reflashCode() {
-	  document.getElementById('code').src='{xiao:function.url("api/checkcode/", array("width "=>80, "height"=>30))}&'+Math.random();
+	  document.getElementById('code').src='{function.url("api/checkcode/", array("width "=>80, "height"=>30))}&'+Math.random();
 	}
 </script>
 
-{xiao:template footer.html}
+{template footer.html}
