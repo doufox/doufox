@@ -47,8 +47,8 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		document.querySelector("#checkcode").onclick = function () {
-			document.querySelector("#checkcode").src = '<?php echo url("api/checkcode/", array("width" => 85, "height" => 26)); ?>&' + Math.random();
+		document.getElementById("checkcode").onclick = function () {
+			document.getElementById("#checkcode").src = '<?php echo url("api/checkcode", array("width" => 85, "height" => 26)); ?>&' + Math.random();
 		}
 	</script>
 </body>
