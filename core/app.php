@@ -66,6 +66,12 @@ abstract class cms
         $path_url_string = isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] ? $_SERVER['QUERY_STRING'] : $_SERVER['REQUEST_URI'];
         parse_str($path_url_string, $url_info_array);
         $namespace_name = trim((isset($url_info_array['s']) && $url_info_array['s']) ? $url_info_array['s'] : '');
+        if (isset($url_info_array['s']) && $url_info_array['s']) {
+            $namespace_name = $url_info_array['s'];
+        } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == 'admin') {
+            $namespace_name = 'admin';
+            $controller_name = 'Index';
+        }
         // $controller_name = trim((isset($url_info_array['c']) && $url_info_array['c']) ? $url_info_array['c'] : 'Index');
         if (isset(self::$pathinfo[1])) {
             if (self::$pathinfo[1] == DATA_DIR || self::$pathinfo[1] == CORE_DIR) {

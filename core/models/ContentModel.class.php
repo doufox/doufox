@@ -33,11 +33,11 @@ class ContentModel extends Model
         }
         // 描述截取
         if (empty($data['description']) && isset($data['content'])) {
-            $len = isset($data['xiao_add_introduce']) && $data['xiao_add_introduce'] && $data['xiao_introcude_length'] ? $data['xiao_introcude_length'] : 200;
+            $len = isset($data['add_introduce']) && $data['add_introduce'] && $data['introcude_length'] ? $data['introcude_length'] : 200;
             $data['description'] = str_replace(array(' ', PHP_EOL, '　　'), array('', '', ''), strcut(clearhtml($data['content']), $len));
         }
         // 提取缩略图
-        if (empty($data['thumb']) && isset($data['content']) && isset($data['xiao_auto_thumb']) && $data['xiao_auto_thumb']) {
+        if (empty($data['thumb']) && isset($data['content']) && isset($data['auto_thumb']) && $data['auto_thumb']) {
             $content = htmlspecialchars_decode($data['content']);
             if (preg_match('/<img(.+)>/Ui', $content, $img)) {
                 $img = str_replace(array('\\', '"'), array('', '\''), $img[1]);
