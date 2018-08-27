@@ -143,6 +143,13 @@ img {
     font-size: 16px;
 }
 
+.nav-item a:hover {
+    background-color: #5e5e5f;
+}
+
+.nav-item a:focus {
+    background-color: #345;
+}
 .nav .sub {
     display: none;
     min-width: 120px;
@@ -169,6 +176,17 @@ img {
 .nav .on h3 a {
     background-color: #99cccc;
     color: #000;
+}
+
+.nav-item.member {
+    float: right;
+    position: relative;
+}
+
+.nav-item.member a {
+    display: block;
+    padding: 0 5px;
+    font-size: 16px;
 }
 
 .banner {

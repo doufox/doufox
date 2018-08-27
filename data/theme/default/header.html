@@ -31,9 +31,17 @@
   <div class="nav">
     <ul id="nav" class="container clearfix">
       <li class="nav-item"><h3><a href="{$site_url}">Home</a></h3></li>
-{nav num=7}
+{nav num= 1}
       <li class="nav-item{if $current} on{/if}"><h3><a href="{$xiao['url']}">{$xiao['catname']}</a></h3></li>
 {/nav}
+{if $member}
+      <li class="nav-item member"><a href="{function.url('member/index')}">会员中心</a></li>
+      <li class="nav-item member"><a href="{function.url('member/login/out')}">退出</a></li>
+{else}
+    <li class="nav-item member"><a href="{function.url('member/register')}">注册</a></li>
+    <li class="nav-item member"><a href="{function.url('member/login')}">登录</a></li>
+    <li class="nav-item member"><a href="{function.url('index/post')}">投稿</a></li>
+{/if}
     </ul>
   </div>
   <div class="clear blank5"></div>
