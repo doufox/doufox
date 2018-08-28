@@ -37,7 +37,7 @@
 						<td>
 							<?php if ($data['SITE_MOBILE'] == true) { ?>
 							<select name="data[SITE_THEME_MOBILE]">
-								<?php if (is_array($theme_mobile)) { foreach ($theme_mobile as $t) { if (is_dir(THEME_MOBILE_PATH . $t)) { ?>
+								<?php if (is_array($theme_mobile)) { foreach ($theme_mobile as $t) { if (is_dir(THEME_PATH_MOBILE . $t)) { ?>
 								<option value="<?php echo $t; ?>" <?php if ($data['SITE_THEME_MOBILE']==$t) { ?>selected<?php } ?>><?php echo $t; ?></option>
 								<?php } } } ?>
 								<!-- <option value="mobile" selected>默认模板，功能设计中</option>

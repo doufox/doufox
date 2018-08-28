@@ -16,10 +16,11 @@ class view {
 
 	public function __construct() {
 		$this->view_dir    = THEME_CURRENT;
-		$this->compile_dir = DATA_PATH . 'tplcache' . DIRECTORY_SEPARATOR;
-		$viewpath          = basename(THEME_CURRENT) . '/';
+		$viewpath          = basename(THEME_CURRENT) . DIRECTORY_SEPARATOR;
 		$this->viewpath    = $viewpath;
 		$this->_options['viewpath'] = $viewpath;
+		// 编译主题模板生成的文件路径
+		$this->compile_dir = DATA_PATH . 'cache' . DIRECTORY_SEPARATOR . THEME_TYPE . DIRECTORY_SEPARATOR;
 	}
 
 	/**
@@ -55,7 +56,7 @@ class view {
 	protected function is_compile($view_file, $compile_file) {
 		return (is_file($compile_file) && is_file($view_file) && (filemtime($compile_file) >= filemtime($view_file))) ? false : true;
 	}
-	
+
 	/**
 	 * 设置视图变量
 	 */
@@ -70,7 +71,7 @@ class view {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 分析视图文件名
 	 */
@@ -86,6 +87,7 @@ class view {
 		$view_content = file_get_contents($view_file);
 		return $this->handle_view_file($view_content);
 	}
+
 	/**
 	 * 编译视图标签
 	 */
@@ -150,11 +152,12 @@ class view {
 		);
 		return preg_replace($regex_array, $replace_array, $view_content);
 	}
-	
+
 	/**
 	 * 解析分类标签
 	 */
-	protected function _category($param) {
+	protected function _category($param)
+	{
 	    $_param = explode(' ', $param);
 		$param  = array();
 		foreach ($_param as $p) {
@@ -192,11 +195,9 @@ class view {
 			$data[$catid] = $cat;
 			$i++;
 		}
-
 		unset($_param, $param, $system, $p ,$cats ,$catids);
 	    return $data;
-		}
-	
+	}
 
 	/**
 	 * 解析list标签
@@ -235,7 +236,7 @@ class view {
 			$cats  = get_cache('category');
 			$cat   = $cats[$fields['catid']];
 		}
-       if (isset($system['addfields']) && $system['addfields']) { 
+       	if (isset($system['addfields']) && $system['addfields']) { 
     		$model = null;
 		    if ($table == $db->prefix . 'content') {
 				$models = get_cache('model');
@@ -259,7 +260,7 @@ class view {
 				$table_data = $db->prefix . $table_data;
 			}
 		}
-		//WHERE整合
+		// WHERE整合
 		$fieldsAll = array($table=>$table_fields, $table_data=>$table_data_fields);
 		foreach ($fieldsAll as $_table=>$t) {
 			if (is_array($t)) {
@@ -283,7 +284,7 @@ class view {
 				}
 			}
 		}
-       if ($table == $db->prefix . 'content' && !isset($fields['status'])){
+       	if ($table == $db->prefix . 'content' && !isset($fields['status'])){
 			$where .= ' AND `'.$db->prefix.'content`.`status`!=0';
 		}
 		if ($where) {
@@ -294,12 +295,12 @@ class view {
 			}
 		}
 
-		//FROM整合
+		// FROM整合
 		$from = 'FROM ' . $table;
 		if ($table_data) {
 		    $from .= ' LEFT JOIN ' . $table_data . ' ON `' . $table . '`.`' . $db->get_primary_key() . '`=`' . $table_data . '`.`' . $db_data->get_primary_key() . '`';
 		}
-		//ORDER排序
+		// ORDER排序
 		$order = '';
 		if ($system['order']) {
 			if (strtoupper($system['order']) == 'RAND()') {
@@ -323,7 +324,7 @@ class view {
 		elseif ($table == $db->prefix . 'content'){
 		$order = ' ORDER BY time DESC';
 		}
-		//limit与分页
+		// limit与分页
 		$limit = '';
 		if ($system['num']) {
 		    $limit   = ' LIMIT ' . $system['num'];
@@ -349,10 +350,10 @@ class view {
 			$limit    = ' LIMIT ' . $start_id . ',' . $pagesize;
 			$pagelist = $pagelist->total($total)->url($pageurl)->num($pagesize)->page($system['page'])->output();
 		}
-		//查询结果
+		// 查询结果
 		$sql  = 'SELECT * ' . $from . $where . $order . $limit;
 		$data = $db->execute($sql, true, $dbcache);
-		//释放变量
+		// 释放变量
 		unset($_param, $param, $par, $p, $fields, $_fields,  $dbcache, $sql);
 		unset($table, $db, $table_data, $table_fields, $table_data_fields, $arrchilds, $_table_fields);
 		unset($fieldsAll, $_table_data_fields, $cache, $db_join, $cats, $cat, $models, $model, $db_data, $where, $order, $from);
@@ -366,21 +367,22 @@ class view {
 		return array('pagelist'=>$pagelist, 'return'=>$data,);
 	}
 
-	
     /**
      * 区块
      */
-    protected function block($id) {
-    $data  = get_cache('block');
-    $row   = $data[$id];
-    if (empty($row)) return null;
-    echo htmlspecialchars_decode($row['content']);
+	protected function block($id)
+	{
+		$data = get_cache('block');
+		$row  = $data[$id];
+		if (empty($row)) return null;
+		echo htmlspecialchars_decode($row['content']);
 	}
-	
+
    /**
 	 * 加载include视图
 	 */
-	protected function _include($file_name) {
+	protected function _include($file_name)
+	{
 		if (!$file_name) return false;
 		$file_name    = $this->parse_file_name($file_name);
 		$view_file	  = $this->get_view_file($file_name);
@@ -390,12 +392,13 @@ class view {
 			$this->create_compile_file($compile_file, $view_content);
 		}
 		return $compile_file;
-	}		
-	
+	}
+
 	/**
 	 * 显示视图文件
 	 */
-	public function display($file_name = null) {
+	public function display($file_name = null)
+	{
 		if (!empty($this->_options)) {
 			extract($this->_options, EXTR_PREFIX_SAME, 'data');
 			$this->_options = array();
@@ -409,8 +412,7 @@ class view {
 		}
 		include $compile_file;
 	}
-	
-	
+
 	/**
 	 * 析构函数
 	 */
@@ -418,16 +420,14 @@ class view {
 		//清空不必要的内存占用
 		$this->_options = array();
 	}
-	
+
 	/**
 	 * 单件模式调用方法
 	 */
- 	public static function getInstance(){
-	
+ 	public static function getInstance() {
  		if (!self::$_instance instanceof self) {
  			self::$_instance = new self();
  		}
-		
 		return self::$_instance;
 	}
 }

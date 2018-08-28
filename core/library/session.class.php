@@ -49,8 +49,8 @@ class Session
             return true;
         }
 
-        //设置项目系统session的存放目录
-        $sessionPath = ROOT_PATH . 'data' . DIRECTORY_SEPARATOR . 'session' . DIRECTORY_SEPARATOR;
+        // 设置项目系统session的存放目录
+        $sessionPath = DATA_PATH . 'session' . DIRECTORY_SEPARATOR;
         if (is_dir($sessionPath) && is_writable($sessionPath)) {
             session_save_path($sessionPath);
         }

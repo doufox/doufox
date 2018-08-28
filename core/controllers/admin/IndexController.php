@@ -57,7 +57,7 @@ class IndexController extends Admin {
 		$string = array(
 			'SITE_THEME'              => '桌面端主题样式, 默认default',
 			'SITE_THEME_MOBILE'       => '移动端主题样式, 默认default',
-			'SITE_MOBILE'             => '移动端主题样式, 默认关',
+			'SITE_MOBILE'             => '移动端主题样式, 默认关闭',
 			'SITE_NAME'               => '网站名称',
 			'SITE_SLOGAN'             => '网站头部标语',
 			'SITE_TITLE'              => '网站首页SEO标题',
@@ -86,9 +86,9 @@ class IndexController extends Admin {
 			'WEIXIN_MP_TOKEN'         => '微信服务器的验证token,必须为英文或数字，长度为3-32字符',
 			'WEIXIN_MP_AESKEY'        => 'EncodingAESKey,消息加密密钥由43位字符组成'
 		);
-    	//加载应用程序配置文件.
+    	// 加载应用程序配置文件
 		$admin = cms::load_config('admin');
-	    $config =  cms::load_config('config');
+	    $config = cms::load_config('config');
         if ($this->post('submit')) {
             $configdata = $this->post('data');
 			$configdata['RAND_CODE']= md5(microtime());
@@ -126,15 +126,15 @@ class IndexController extends Admin {
 
         $file_list		= cms::load_class('file_list');
         $arr			= $file_list->get_file_list(THEME_PATH);
-        $arr_mobile		= $file_list->get_file_list(THEME_MOBILE_PATH);
+        $arr_mobile		= $file_list->get_file_list(THEME_PATH_MOBILE);
 		$theme			= array_diff($arr, array('index.html'));
 		$theme_mobile	= array_diff($arr_mobile, array('index.html'));
 
 		$config['ADMIN_PASS'] = '';
         $data  = $config;
 	    $type  = $this->get('type') ? $this->get('type') : 1;
-		
-		//会员模型
+
+		// 会员模型
 		$membermodel = $this->membermodel;
         include $this->admin_tpl('config');
 	}
@@ -146,7 +146,7 @@ class IndexController extends Admin {
 	    $caches = array(
 	        0 => array('模型缓存更新成功..........', 'model', 'cache'),
 	        1 => array('栏目缓存更新成功..........', 'category', 'cache'),
-	        2 => array('文字块缓存更新成功..........', 'block', 'cache'),
+	        2 => array('自定义块缓存更新成功..........', 'block', 'cache'),
 	        3 => array('模板缓存更新成功..........', 'template', 'cache'),
 	    );
 	    if ($this->get('show')) {

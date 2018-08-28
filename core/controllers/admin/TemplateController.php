@@ -88,14 +88,14 @@ class TemplateController extends Admin
         $dir = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $dir);
         $filename = urldecode($this->get('file'));
         $filepath = $this->dir . $dir . $filename;
-//为了错误删除模板先注销掉
+        // 为了错误删除模板先注销掉
         //        if (@unlink($filepath))
         //        $this->show_message('删除成功',1);
         //        else
         //        $this->show_message('删除失败',2, '?s=admin&c=template&dir='.$dir );
     }
 
-//        还未实现
+    // 还未实现
     public function visualizationAction()
     {
         $dir = $this->get('dir') ? urldecode($this->get('dir')) : '';
@@ -114,16 +114,51 @@ class TemplateController extends Admin
 
     public function cacheAction($show = 0)
     {
+        // $file_list = cms::load_class('file_list');
+        // $list_desktop = $file_list->get_file_list(THEME_PATH);
+        // $list_mobile = $file_list->get_file_list(THEME_PATH_MOBILE);
+        // foreach ($list_desktop as $file_path) {
+        //     $dir = DATA_PATH . 'cache' . DIRECTORY_SEPARATOR . 'theme_desktop'. DIRECTORY_SEPARATOR . $file_path . DIRECTORY_SEPARATOR;
+        //     $file_list->delete_dir($dir);
+        //     if (!file_exists($dir)) {
+        //         mkdir($dir, 0777, true);
+        //     }
+        // }
+        // foreach ($list_mobile as $file_path) {
+        //     $dir = DATA_PATH . 'cache' . DIRECTORY_SEPARATOR . 'theme_mobile'. DIRECTORY_SEPARATOR . $file_path . DIRECTORY_SEPARATOR;
+        //     $file_list->delete_dir($dir);
+        //     if (!file_exists($dir)) {
+        //         mkdir($dir, 0777, true);
+        //     }
+        // }
+        $this->cacheDesktopAction();
+        $this->cacheMobileAction();
+        $show or $this->show_message('缓存更新成功', 1, url('admin/template/index'));
+    }
+
+    public function cacheDesktopAction()
+    {
         $file_list = cms::load_class('file_list');
-        $list = $file_list->get_file_list(THEME_PATH);
-        foreach ($list as $path) {
-            $dir = DATA_PATH . 'tplcache' . DIRECTORY_SEPARATOR . $path . '/';
+        $list_desktop = $file_list->get_file_list(THEME_PATH);
+        foreach ($list_desktop as $file_path) {
+            $dir = DATA_PATH . 'cache' . DIRECTORY_SEPARATOR . 'theme_desktop'. DIRECTORY_SEPARATOR . $file_path . DIRECTORY_SEPARATOR;
             $file_list->delete_dir($dir);
             if (!file_exists($dir)) {
                 mkdir($dir, 0777, true);
             }
-
         }
-        $show or $this->show_message('缓存更新成功', 1, url('admin/template/index'));
+    }
+
+    public function cacheMobileAction()
+    {
+        $file_list = cms::load_class('file_list');
+        $list_mobile = $file_list->get_file_list(THEME_PATH_MOBILE);
+        foreach ($list_mobile as $file_path) {
+            $dir = DATA_PATH . 'cache' . DIRECTORY_SEPARATOR . 'theme_mobile'. DIRECTORY_SEPARATOR . $file_path . DIRECTORY_SEPARATOR;
+            $file_list->delete_dir($dir);
+            if (!file_exists($dir)) {
+                mkdir($dir, 0777, true);
+            }
+        }
     }
 }

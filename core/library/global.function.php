@@ -732,16 +732,16 @@ function set_cache($cache_file, $value)
         return false;
     }
 
-    //缓存文件
-    $cache_file = ROOT_PATH . 'data/data' . DIRECTORY_SEPARATOR . $cache_file . '.cache.php';
-    //分析缓存内容
+    // 缓存文件
+    $cache_file = DATA_PATH . 'cache' . DIRECTORY_SEPARATOR . $cache_file . '.cache.php';
+    // 分析缓存内容
     $value = (!is_array($value)) ? serialize(trim($value)) : serialize($value);
-    //分析缓存目录
-    if (!is_dir(ROOT_PATH . 'data/data' . DIRECTORY_SEPARATOR)) {
-        mkdir(ROOT_PATH . 'data/data' . DIRECTORY_SEPARATOR, 0777);
+    // 分析缓存目录
+    if (!is_dir(DATA_PATH . 'cache' . DIRECTORY_SEPARATOR)) {
+        mkdir(DATA_PATH . 'cache' . DIRECTORY_SEPARATOR, 0777);
     } else {
-        if (!is_writeable(ROOT_PATH . 'data/data' . DIRECTORY_SEPARATOR)) {
-            chmod(ROOT_PATH . 'data/data' . DIRECTORY_SEPARATOR, 0777);
+        if (!is_writeable(DATA_PATH . 'cache' . DIRECTORY_SEPARATOR)) {
+            chmod(DATA_PATH . 'cache' . DIRECTORY_SEPARATOR, 0777);
         }
     }
     return file_put_contents($cache_file, $value, LOCK_EX) ? true : false;
@@ -759,8 +759,8 @@ function get_cache($cache_file)
         return false;
     }
 
-    //缓存文件
-    $cache_file = ROOT_PATH . 'data/data' . DIRECTORY_SEPARATOR . $cache_file . '.cache.php';
+    // 缓存文件
+    $cache_file = DATA_PATH . 'cache' . DIRECTORY_SEPARATOR . $cache_file . '.cache.php';
     return is_file($cache_file) ? unserialize(file_get_contents($cache_file)) : false;
 }
 
@@ -776,8 +776,8 @@ function delete_cache($cache_file)
         return true;
     }
 
-    //缓存文件
-    $cache_file = ROOT_PATH . 'data/data' . DIRECTORY_SEPARATOR . $cache_file . '.cache.php';
+    // 缓存文件
+    $cache_file = DATA_PATH . 'cache' . DIRECTORY_SEPARATOR . $cache_file . '.cache.php';
     return is_file($cache_file) ? unlink($cache_file) : true;
 }
 
@@ -827,7 +827,6 @@ function is_mobile()
         if (preg_match("/(" . implode('|', $client) . ")/i", strtolower($_SERVER['HTTP_USER_AGENT']))) {
             return true;
         }
-
     }
     if (isset($_SERVER['HTTP_ACCEPT'])) {
         if ((strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') !== false) && (strpos($_SERVER['HTTP_ACCEPT'], 'text/html') === false || (strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') < strpos($_SERVER['HTTP_ACCEPT'], 'text/html')))) {

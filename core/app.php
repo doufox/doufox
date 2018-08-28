@@ -31,7 +31,7 @@ define('ADMIN_PATH', CORE_PATH . 'admin' . DIRECTORY_SEPARATOR); // 后台管理
 define('DATA_PATH', ROOT_PATH . DATA_DIR . DIRECTORY_SEPARATOR); // 数据目录的路径
 define('STATIC_PATH', DATA_PATH . STATIC_DIR . DIRECTORY_SEPARATOR); // 静态资源路径
 define('THEME_PATH', DATA_PATH . 'theme' . DIRECTORY_SEPARATOR); // 桌面端模板目录的路径
-define('THEME_MOBILE_PATH', DATA_PATH . 'theme_mobile' . DIRECTORY_SEPARATOR); // 移动端模板目录的路径
+define('THEME_PATH_MOBILE', DATA_PATH . 'theme_mobile' . DIRECTORY_SEPARATOR); // 移动端模板目录的路径
 
 cms::load_file(CORE_PATH . 'library' . DIRECTORY_SEPARATOR . 'global.function.php'); // 加载全局函数
 cms::load_file(CORE_PATH . 'version.php');
@@ -139,9 +139,11 @@ abstract class cms
         define('SITE_THEME', $config['SITE_THEME']);
         define('SITE_THEME_MOBILE', $config['SITE_THEME_MOBILE']);
         if ($config['SITE_MOBILE'] == true && is_mobile()) {
-            define('THEME_CURRENT', THEME_MOBILE_PATH);
-            define('THEME_DIR', is_dir(THEME_MOBILE_PATH . SITE_THEME_MOBILE) ? SITE_THEME_MOBILE : 'default');
+            define('THEME_TYPE', 'theme_mobile'); // 当前加载的主题类型
+            define('THEME_CURRENT', THEME_PATH_MOBILE);
+            define('THEME_DIR', is_dir(THEME_PATH_MOBILE . SITE_THEME_MOBILE) ? SITE_THEME_MOBILE : 'default');
         } else {
+            define('THEME_TYPE', 'theme_desktop'); // 当前加载的主题类型
             define('THEME_CURRENT', THEME_PATH);
             define('THEME_DIR', is_dir(THEME_PATH . SITE_THEME) ? SITE_THEME : 'default');
         }
@@ -176,7 +178,7 @@ abstract class cms
     public static function load_config($file)
     {
         static $configs = array();
-        $path = ROOT_PATH . 'data' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . $file . '.ini.php';
+        $path = DATA_PATH . 'config' . DIRECTORY_SEPARATOR . $file . '.ini.php';
         if (file_exists($path)) {
             $configs[$file] = include $path;
             return $configs[$file];
