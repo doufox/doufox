@@ -617,17 +617,11 @@ textarea, textarea.input-text, textarea {
 select {
     vertical-align: middle;
     padding: 2px;
-    -webkit-appearance: menulist;
     box-sizing: border-box;
     align-items: center;
     border: 1px solid #d0d0d0;
-    border-image-source: initial;
-    border-image-slice: initial;
-    border-image-width: initial;
-    border-image-outset: initial;
-    border-image-repeat: initial;
+    border-image: none;
     white-space: pre;
-    -webkit-rtl-ordering: logical;
     color: black;
     background-color: white;
     cursor: default;
