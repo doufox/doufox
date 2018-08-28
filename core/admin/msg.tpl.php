@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>提示信息</title>
-<link rel="shortcut icon" href="/static/img/favicon.ico" mce_href="/static/img/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
 <style type="text/css">
 <!--
 body, h1, p, a, img {margin:0;padding:0;}

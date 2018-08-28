@@ -9,7 +9,7 @@
 	<meta name="author" content="Crogram, Inc." />
 	<meta name="copyright" content="Copyright (c)  Crogram, Inc. All Rights Reserved." />
 	<link href="/static/css/login.css" rel="stylesheet" type="text/css" />
-	<link rel="shortcut icon" href="/static/img/favicon.ico" mce_href="/static/img/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
 	<script type="text/javascript" src="/static/js/jquery.min.js"></script>
 </head>
 
