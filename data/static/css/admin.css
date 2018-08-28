@@ -412,12 +412,10 @@ body fieldset.blue legend {
     _zoom: 1;
 }
 
-/*内容菜单*/
-/*.content-menu {}*/
 .content-menu a {
     text-decoration: none;
     height: 22px;
-    width: 64px;
+    min-width: 60px;
     line-height: 22px;
     padding: 0 4px;
     text-align: center;

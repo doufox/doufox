@@ -21,7 +21,7 @@ table.aui_border, table.aui_dialog { border:0; margin:0; border-collapse:collaps
 .aui_main { text-align:center; min-width:9em; min-width:0 \9/*IE8 BUG*/; }
 .aui_content { display:inline-block; *zoom:1; *display:inline; text-align:left; border:none 0; }
 .aui_content.aui_state_full { display:block; width:100%; margin:0; padding:0!important; height:100%; }
-.aui_loading { width:96px; height:32px; text-align:left; text-indent:-999em; overflow:hidden; background:url(icons/loading.gif) no-repeat center center; }
+.aui_loading { width:96px; height:32px; text-align:left; text-indent:-999em; overflow:hidden; background:url("/static/img/loading.gif") no-repeat center center; }
 .aui_icon { vertical-align: middle; }
 .aui_icon div { width:48px; height:48px; margin:10px 0 10px 10px; background-position: center center; background-repeat:no-repeat; }
 .aui_buttons { padding:8px; text-align:right; white-space:nowrap; }

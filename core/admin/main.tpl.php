@@ -1,6 +1,11 @@
-<?php include $this->admin_tpl('header');?>
-<?php if(!file_exists(DATA_PATH . 'data' . DIRECTORY_SEPARATOR."category.cache.php"))
-echo '<script type="text/javascript">location.href="?s=admin&a=cache";</script>';?>
+<?php
+
+include $this->admin_tpl('header');
+
+if (!file_exists(DATA_PATH . 'cache' . DIRECTORY_SEPARATOR."category.cache.php")) {
+    echo '<script type="text/javascript">location.href="?s=admin&a=cache";</script>';
+}
+?>
 <div class="subnav">
   <div class="col-2 lf mr10" style="width:48%">
     <div class="table-list">
