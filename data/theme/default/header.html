@@ -1,47 +1,47 @@
-<!DOCTYPE HTML>
+<!doctype html>
 <html>
 
 <head>
-  <title>测试 - {$site_title}</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="keywords" content="{$site_keywords}" />
-  <meta name="description" content="{$site_description}" />
-  <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <title>{$site_title}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="{$site_keywords}" />
+    <meta name="description" content="{$site_description}" />
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
-  <div class="header">
-   <div class="container">
-    <a class="logo" href="{$site_url}" title="{$site_name}">data目录里的{$site_name}</a>
-    <div>
-      <div class="slogan">{$site_slogan}</div>
-      <div class="searchform">
-          <form method="get" action="/">
-            <input type="hidden" value="index" name="c" />
-            <input type="hidden" value="search" name="a" />
-            <input type="text" value="" name="kw" class="keywords-input" />
-            <!--搜索指定栏目 <input type="hidden"  value="1"  name="catid" />-->
-            <button type="submit" class="keywords-submit">Search</button>
-          </form>
+    <div class="header">
+        <div class="container">
+            <a class="logo" href="{$site_url}" title="{$site_name}">{$site_name}</a>
+            <div>
+                <div class="slogan">{$site_slogan}</div>
+                <div class="searchform">
+                    <form method="get" action="/">
+                    <input type="hidden" value="index" name="c" />
+                    <input type="hidden" value="search" name="a" />
+                    <input type="text" value="" name="kw" class="keywords-input" />
+                    <!--<input type="hidden" value="1"  name="catid" />-->
+                    <button type="submit" class="keywords-submit">搜索</button>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
-   </div>
-  </div>
-  <div class="nav">
-    <ul id="nav" class="container clearfix">
-      <li class="nav-item"><h3><a href="{$site_url}">Home</a></h3></li>
-{nav num= 1}
-      <li class="nav-item{if $current} on{/if}"><h3><a href="{$xiao['url']}">{$xiao['catname']}</a></h3></li>
+    </div>
+    <div class="nav">
+        <ul id="nav" class="container clearfix">
+            <li class="nav-item"><h3><a href="{$site_url}">Home</a></h3></li>
+{nav num=5}
+            <li class="nav-item{if $current} on{/if}"><h3><a href="{$xiao['url']}">{$xiao['catname']}</a></h3></li>
 {/nav}
 {if $member}
-      <li class="nav-item member"><a href="{function.url('member/index')}">会员中心</a></li>
-      <li class="nav-item member"><a href="{function.url('member/login/out')}">退出</a></li>
+            <li class="nav-item member"><a href="{function.url('member/index')}">会员中心</a></li>
+            <li class="nav-item member"><a href="{function.url('member/login/out')}">退出</a></li>
 {else}
-    <li class="nav-item member"><a href="{function.url('member/register')}">注册</a></li>
-    <li class="nav-item member"><a href="{function.url('member/login')}">登录</a></li>
-    <li class="nav-item member"><a href="{function.url('index/post')}">投稿</a></li>
+            <li class="nav-item member"><a href="{function.url('member/register')}">注册</a></li>
+            <li class="nav-item member"><a href="{function.url('member/login')}">登录</a></li>
+            <li class="nav-item member"><a href="{function.url('index/post')}">投稿</a></li>
 {/if}
-    </ul>
-  </div>
-  <div class="clear blank5"></div>
+        </ul>
+    </div>
+    <div class="clear blank5"></div>
