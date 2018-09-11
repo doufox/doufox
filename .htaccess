@@ -8,6 +8,11 @@ RewriteRule ^(.*)$ /index.php/$1 [L]
 # RewriteCond %{SERVER_PORT} !^443$
 # RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [L,R]
 
+# or
+# RewriteCond %{SERVER_PORT} !^443$
+# RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [L,R=301]
+# RewriteRule ^(.*)?$ https://%{SERVER_NAME}/$1 [L,R]
+
 # Redirect non-www to www
 # RewriteCond %{HTTP_HOST} !^www\.(.*)
 # RewriteRule (.*) https://www.%{HTTP_HOST}/$1 [R=301,L]
