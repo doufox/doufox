@@ -1,6 +1,6 @@
 <?php
 /**
- * pagelist class file
+ * pagination class file
  * 分页类
  */
 
@@ -8,7 +8,7 @@ if (!defined('IN_CMS')) {
     exit();
 }
 
-class pagelist
+class pagination
 {
 
     /**
@@ -152,12 +152,12 @@ class pagelist
      */
     public function __construct()
     {
-        $this->ext              = true;
-        $this->center           = 4;
-        $this->num              = 7;
-        $this->per_circle       = 7;
-        $this->isAjax           = false;
-        $this->hidden_status    = false;
+        $this->ext           = true;
+        $this->center        = 4;
+        $this->num           = 7;
+        $this->per_circle    = 7;
+        $this->isAjax        = false;
+        $this->hidden_status = false;
         return true;
     }
 
@@ -188,7 +188,7 @@ class pagelist
         $this->pre_page     = $this->pre_page   ? $this->pre_page   : '上一页';
         $this->next_page    = $this->next_page  ? $this->next_page  : '下一页';
         $this->last_page    = $this->last_page  ? $this->last_page  : '最末页';
-        $this->note         = $this->note       ? $this->note       : '共{$total_num}条'; // 共{$total_num}条{$total_page}页 {$num}条/页
+        $this->note         = $this->note       ? $this->note       : '共{$total_num}条{$total_page}页 {$num}条/页'; // 共{$total_num}条{$total_page}页 {$num}条/页
         $this->config       = $config;
     }
 
@@ -256,7 +256,7 @@ class pagelist
      * 开启分页的隐藏功能
      *
      * @access public
-     * @param boolean $item    隐藏开关 , 默认为true.
+     * @param boolean $item 隐藏开关 , 默认为true.
      * @return $this
      */
     public function hide($item = true)

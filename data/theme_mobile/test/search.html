@@ -1,21 +1,21 @@
 {template head.html}
 {template header.html}
 <div class="title">
- <a href="/"><span class="titback"><img src="{$site_template}images/backicon.gif" /></span></a>
- <h1 class="titname">搜索结果</h1>
+    <a href="/"><span class="titback"><img src="{$site_template}images/backicon.gif" /></span></a>
+    <h1 class="titname">搜索结果</h1>
 </div>
 <div class="newlist">
- <br class="clear" />
- <ul class="newsconlist">
-  {if empty($searchnum)}
-  <h3>抱歉，没有找到与“{$kw}”相关的内容。</h3>
-  {else}
-  {loop $searchdata $t}
-  <li><a href="{$t['url']}">· {$t['title']}</a></li>
-  {/loop}
-  {/if}
- </ul>
-<ul class="page_navi"><li><a href="/site/list?catid=8&page=1&size=12">下一页 &gt;</a></li></ul>
- <div class="listpage" >{$pagelist}</div>
+    <br class="clear" />
+    <ul class="newsconlist">
+        {if empty($searchnum)}
+        <h3>抱歉，没有找到与“{$kw}”相关的内容。</h3>
+        {else}
+        {loop $searchdata $t}
+        <li><a href="{$t['url']}">· {$t['title']}</a></li>
+        {/loop}
+        {/if}
+    </ul>
+    <ul class="page_navi"><li><a href="/site/list?catid=8&page=1&size=12">下一页 &gt;</a></li></ul>
+    {$pagination}
 </div>
 {template footer.html}

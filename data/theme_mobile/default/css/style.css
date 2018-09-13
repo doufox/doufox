@@ -208,7 +208,7 @@ em {
   float: right;
 }
 
-.listpage {
+.pagination {
   clear: both;
   font-size: 12px;
   height: 50px;
@@ -217,7 +217,7 @@ em {
   text-align: center;
 }
 
-.listpage a {
+.pagination a {
   display: block;
   float: left;
   font-size: 12px;
@@ -230,7 +230,7 @@ em {
   background-color: #d4d4d4;
 }
 
-.listpage span {
+.pagination span {
   color: #fff;
   display: block;
   float: left;

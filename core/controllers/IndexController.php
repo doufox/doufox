@@ -82,12 +82,12 @@ class IndexController extends Controller {
 			$pageid   = count($content) >= $page ? ($page - 1) : (count($content) - 1);
 			$data['content'] = $content[$pageid];
 			$page_id  = 1;
-			$pagelist = array();
+			$pagination = array();
 			foreach ($content as $t) {
-				$pagelist[$page_id] = getUrl($data, $page_id);
+				$pagination[$page_id] = getUrl($data, $page_id);
 				$page_id ++ ;
 			}
-			$this->view->assign('content_page', $pagelist);
+			$this->view->assign('content_page', $pagination);
 		}
 		$prev_page = $this->content->getOne("`catid`=$catid AND `id`<$id AND `status`!=0 ORDER BY `id` DESC", null, 'title,url');
 		$next_page = $this->content->getOne("`catid`=$catid AND `id`>$id AND `status`!=0", null, 'title,url');
@@ -114,8 +114,8 @@ class IndexController extends Controller {
 	    $catid    = $catid ? $catid : (int)$this->get('catid');
 	    $page     = (int)$this->get('page');
 		$page     = (!$page) ? 1 : $page;
-	    $pagelist = cms::load_class('pagelist');
-		$pagelist->loadconfig();
+	    $pagination = cms::load_class('pagination');
+		$pagination->loadconfig();
 	    $pagesize = 10;
 	    $urlparam = array();
 	    if ($kw)      $urlparam['kw']      = $kw;
@@ -126,11 +126,11 @@ class IndexController extends Controller {
 	    $urlparam['page']   = '{page}';
 	    $url      = url('index/search', $urlparam);
 	    $data   = $this->content->page_limit($page, $pagesize)->where($where)->order(array('listorder DESC', 'id DESC'))->select();
-	    $pagelist = $pagelist->total($total)->url($url)->num($pagesize)->page($page)->output();
+	    $pagination = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
 	    $this->view->assign(listSeo($cat, $page, $kw));
 	    $this->view->assign(array(
 			'id'         => $id,
-	        'pagelist' => $pagelist,
+	        'pagination' => $pagination,
 	        'searchdata' => $data,
 			'searchnum' => $total,
 			'kw'         => $kw,

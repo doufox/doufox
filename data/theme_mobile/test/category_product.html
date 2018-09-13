@@ -7,7 +7,6 @@
 		<div class="page bg">
 		<div class="newstitle">您当前位置：<a  href="{$site_url}">首页</a> >> {function.position($catid, ' &gt;&gt;&nbsp;&nbsp;')}</div>
 		<div class="blank10 clear"></div>
-
             <!--列表开始-->
 		    <div class="piclist">
 			    <ul class="noborder">
@@ -19,7 +18,7 @@
                 {/list}
 
                 </ul>
-                <div class="listpage" >{$pagelist}</div>
+                {$pagination}
 		   </div>
 	       <!--列表结束-->
 		

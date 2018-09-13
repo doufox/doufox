@@ -1,12 +1,13 @@
 <?php
 
 class ContentController extends Member {
-    
+
 	private $form;
 	private $cmodel;
 	private $nav;
-    
-    public function __construct() {
+
+	public function __construct()
+	{
 		parent::__construct();
 		$this->isLogin(); //登录验证
 		if (!$this->memberinfo['status']) $this->show_message('对不起，您还没有通过审核。'); //判断审核
@@ -27,11 +28,12 @@ class ContentController extends Member {
 		}
 		$this->view->assign('navigation', $navigation);
 	}
-	
+
 	/*
 	 * 内容管理
 	 */
-	public function indexAction() {
+	public function indexAction()
+	{
 	    if ($this->post('catid')) { //发布
 	        $this->redirect(url('member/content/add', array('catid'=>$this->post('catid'))));
 	    }
@@ -40,14 +42,14 @@ class ContentController extends Member {
 		$modelid  = (int)$this->get('modelid');
 		if (empty($modelid)) $this->redirect($this->nav);
 		if (!isset($this->cmodel[$modelid])) $this->show_message('内容模型' . $modelid . '不存在');
-	    $pagelist = cms::load_class('pagelist');
-		$pagelist->loadconfig();
+	    $pagination = cms::load_class('pagination');
+		$pagination->loadconfig();
 	    $where    = 'username="' . $this->memberinfo['username'] . '" AND modelid=' . $modelid ;
 	    $total    = $this->content->count('content', null, $where);
 	    $pagesize = 10;//分页列表
 	    $data     = $this->content->page_limit($page, $pagesize)->order(array('`status` DESC,time DESC'))->where($where)->select();
-	    $pagelist = $pagelist->total($total)->url(url('member/content', array('modelid'=>$modelid, 'page'=>'{page}')))->num($pagesize)->page($page)->output();
-		
+	    $pagination = $pagination->total($total)->url(url('member/content', array('modelid'=>$modelid, 'page'=>'{page}')))->num($pagesize)->page($page)->output();
+
 		$tree =  cms::load_class('tree');
 		$tree->icon = array(' ','  ','  ');
 		$tree->nbsp = '&nbsp;';
@@ -65,7 +67,7 @@ class ContentController extends Member {
 	    $this->view->assign(array(
 	        'list'       => $data,
 	        'page'       => $page,
-	        'pagelist'   => $pagelist,
+	        'pagination' => $pagination,
 			'site_title' => $this->cmodel[$modelid]['modelname'] . ' - 会员中心 - ' . $this->site_config['SITE_NAME'],
 			'modelid'    => $modelid,
 			'model'		 => $this->cmodel[$modelid],
@@ -73,11 +75,12 @@ class ContentController extends Member {
 	    ));
 	    $this->view->display('member/list.html');
 	}
-	
+
 	/*
 	 * 发布
 	 */
-	public function addAction() {
+	public function addAction()
+	{
 
 	    $catid    = (int)$this->get('catid');
 	    if (empty($catid)) $this->show_message('请选择发布栏目');
@@ -122,7 +125,6 @@ class ContentController extends Member {
 		$tree->init($categorys);
 		$category = $tree->get_tree(0, $str);
 
-		
 	    $this->view->assign(array(
 	        'data'        => array('catid'=>$catid),
 	        'data_fields' => $data_fields,
@@ -136,7 +138,8 @@ class ContentController extends Member {
 	/**
 	 * 修改文章
 	 */
-    public function editAction() {
+	public function editAction()
+	{
 	    $id       = (int)$this->get('id');
 	    $data     = $this->content->where('username=?', $this->memberinfo['username'])->where('id=' . $id)->select(false);
 	    $catid    = $data['catid'];
@@ -148,7 +151,6 @@ class ContentController extends Member {
 	    $modelid  = $this->category_cache[$catid]['modelid'];
 	    $fields   = $this->cmodel[$modelid]['fields'];
 
-		
 	    $url      = getUrl($data);
 	    if ($this->post('submit')) {
 	        unset($data);
@@ -167,7 +169,7 @@ class ContentController extends Member {
 	        if (!is_numeric($result)) $this->show_message($result);
 	        $this->show_message('操作成功', 1, url('member/content/', array('modelid'=>$modelid)));
 	    }
-	    //附表内容
+	    // 附表内容
 	    $table       = cms::load_model($this->cmodel[$modelid]['tablename']);
 	    $table_data  = $table->find($id);
 	    if ($table_data) $data = array_merge($data, $table_data); //合并主表和附表
@@ -218,31 +220,32 @@ class ContentController extends Member {
 		}
 	}
 	*/
-	
+
 	/*
 	 * 表单管理
 	 */
-	public function formAction() {
-		$cid      = (int)$this->get('cid');
-		$page     = (int)$this->get('page');
-		$page     = (!$page) ? 1 : $page;
-		$modelid  = (int)$this->get('modelid');
+	public function formAction()
+	{
+		$cid        = (int)$this->get('cid');
+		$page       = (int)$this->get('page');
+		$page       = (!$page) ? 1 : $page;
+		$modelid    = (int)$this->get('modelid');
 		if (!isset($this->form[$modelid]) || empty($this->form[$modelid])) $this->show_message('表单不存在');
-	    $table    = cms::load_model($this->form[$modelid]['tablename']);
+	    $table      = cms::load_model($this->form[$modelid]['tablename']);
 
-	    $pagelist = cms::load_class('pagelist');
-		$pagelist->loadconfig();
-	    $pagesize = 15;
-	    $url      = url('member/content/form', array('modelid'=>$modelid, 'page'=>'{page}'));
-		    $where = (empty($cid) ? '`status`=1 AND ' : '`status`=1 AND `cid`=' . $cid . ' AND ') . '`userid`=' . $this->memberinfo['id'] . ' AND `username`="' . $this->memberinfo['username'] . '"';
+	    $pagination = cms::load_class('pagination');
+		$pagination->loadconfig();
+	    $pagesize   = 15;
+	    $url        = url('member/content/form', array('modelid'=>$modelid, 'page'=>'{page}'));
+		$where      = (empty($cid) ? '`status`=1 AND ' : '`status`=1 AND `cid`=' . $cid . ' AND ') . '`userid`=' . $this->memberinfo['id'] . ' AND `username`="' . $this->memberinfo['username'] . '"';
 
-		$total    = $table->count($this->form[$modelid]['tablename'], 'id', $where);
-	    $data     = $table->page_limit($page, $pagesize)->order('time DESC')->where($where)->select();
-	    $pagelist = $pagelist->total($total)->url($url)->num($pagesize)->page($page)->output();
+		$total      = $table->count($this->form[$modelid]['tablename'], 'id', $where);
+	    $data       = $table->page_limit($page, $pagesize)->order('time DESC')->where($where)->select();
+	    $pagination = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
 	    $this->view->assign(array(
 	        'listdata'   => $data,
 	        'page'       => $page,
-	        'pagelist'   => $pagelist,
+	        'pagination' => $pagination,
 			'site_title' => $this->form[$modelid]['joinname'] . $this->form[$modelid]['modelname'] . ' - 会员中心 - ' . $this->site_config['SITE_NAME'],
 			'showfields' => isset($this->form[$modelid]['setting']['form']['membershow']) ? $this->form[$modelid]['setting']['form']['membershow'] : array(),
 			'form'       => $this->form[$modelid],
@@ -255,7 +258,8 @@ class ContentController extends Member {
 	/*
 	 * 查看表单内容
 	 */
-	public function formshowAction() {
+	public function formshowAction()
+	{
 		$modelid = (int)$this->get('modelid');
 		if (empty($modelid)) $this->show_message('表单模型参数不存在');
 	    $fmodel  = get_cache('formmodel');
@@ -280,7 +284,5 @@ class ContentController extends Member {
 		    $this->show_message('内容不存在');
 		}
 	}
-
-	
 
 }

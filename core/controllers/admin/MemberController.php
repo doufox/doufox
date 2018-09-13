@@ -1,13 +1,13 @@
 <?php
 
 class MemberController extends Admin {
-    
-    
+
     public function __construct() {
 		parent::__construct();
 	}
-    
-    public function indexAction() {
+
+	public function indexAction()
+	{
 		if ($this->post('submit_status_1') && $this->post('form')=='status_1') {
 	        foreach ($_POST as $var=>$value) {
 	            if (strpos($var, 'del_')!==false) {
@@ -28,8 +28,8 @@ class MemberController extends Admin {
 		$page     = (int)$this->get('page');
 		$page     = (!$page) ? 1 : $page;
 		$modelid  = (int)$this->get('modelid');
-	    $pagelist = cms::load_class('pagelist');
-		$pagelist->loadconfig();
+	    $pagination = cms::load_class('pagination');
+		$pagination->loadconfig();
 	    $where    = '1';
 	    if ($modelid) $where .= ' and modelid=' . $modelid;
 	    $total    = $this->member->count('member', null, $where);
@@ -43,16 +43,17 @@ class MemberController extends Admin {
 	    if ($modelid) $select->where('modelid=' . $modelid);
 
 	    $list     = $select->select();
-	    $pagelist = $pagelist->total($total)->url($url)->num($pagesize)->page($page)->output();
+	    $pagination = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
 
 	    $membermodel = $this->membermodel;
 	    include $this->admin_tpl('member_list');
     }
-	
+
 	/*
 	 * 修改资料
 	 */
-	public function editAction() {
+	public function editAction()
+	{
 	    $id     = (int)$this->get('id');
 		$data = $this->member->find($id);
 		if (empty($data)) $this->show_message('会员不存在');
@@ -85,11 +86,12 @@ class MemberController extends Admin {
 			$info  = $_data;
         include $this->admin_tpl('member_edit');
 	}
-	
+
 	/**
 	 * 删除会员
 	 */
-	public function delAction() {
+	public function delAction()
+	{
 	    $id   = (int)$this->get('id');
 	    if (empty($id)) $this->show_message('参数不存在');
 		$data = $this->member->find($id);
@@ -104,7 +106,7 @@ class MemberController extends Admin {
 			$model = cms::load_model($table);
 			$model->delete('id=' . $id);
 		}
-		
+
 		//删除关联表单
 		$form = get_cache('formmodel');
 		if ($form) {
@@ -126,7 +128,8 @@ class MemberController extends Admin {
 	/**
 	 * Email是否重复检查
 	 */
-	public function ajaxemailAction() {
+	public function ajaxemailAction()
+	{
 	    $email = $this->post('email');
 		if (!is_email($email)) exit('<b><font color=red>Email格式不正确</font></b>');
 	    $id    = $this->post('id');

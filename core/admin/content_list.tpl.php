@@ -87,7 +87,7 @@
 				<?php echo $category; ?>
 				</select>
 				<input type="submit" class="button" value="确定移动" name="submit_move" onClick="$('#list_form').val('move')"></div>
-				<div class="pageright"><?php echo  $pagelist; ?></div>
+				<div class="pageright"><?php echo $pagination; ?></div>
 			</td>
 		</tr>
 		</tbody>

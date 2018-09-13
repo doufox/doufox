@@ -16,7 +16,7 @@
     {$content}
   </div>
   {if $content_page}
-  <div class="listpage">
+  <div class="pagination">
     {loop $content_page $t=>$u}
     <a{if $page!=$t} href="{$u}" {else} style="background-color: #c00;" {/if}>{$t}</a>
       {/loop}

@@ -340,14 +340,14 @@ class view {
 				$pagesize = $system['pagesize'] ? $system['pagesize'] : 10;
 			    $pageurl  = '{page}';
 			}
-			$sql      = 'SELECT count(*) AS total ' . $from . ' ' . $where;
-			$count    = $db->execute($sql, false, $dbcache);
-			$total    = $count['total'];
-			$pagelist = cms::load_class('pagelist');
-			$pagelist->loadconfig();
-			$start_id = $pagesize * ($system['page'] - 1);
-			$limit    = ' LIMIT ' . $start_id . ',' . $pagesize;
-			$pagelist = $pagelist->total($total)->url($pageurl)->num($pagesize)->page($system['page'])->output();
+			$sql        = 'SELECT count(*) AS total ' . $from . ' ' . $where;
+			$count      = $db->execute($sql, false, $dbcache);
+			$total      = $count['total'];
+			$pagination = cms::load_class('pagination');
+			$pagination->loadconfig();
+			$start_id   = $pagesize * ($system['page'] - 1);
+			$limit      = ' LIMIT ' . $start_id . ',' . $pagesize;
+			$pagination = $pagination->total($total)->url($pageurl)->num($pagesize)->page($system['page'])->output();
 		}
 		// 查询结果
 		$sql  = 'SELECT * ' . $from . $where . $order . $limit;
@@ -358,12 +358,12 @@ class view {
 		unset($fieldsAll, $_table_data_fields, $cache, $db_join, $cats, $cat, $models, $model, $db_data, $where, $order, $from);
 		if (isset($system['return']) && $system['return'] && $system['return'] != 'xiao') {
 		    return array(
-			    'pagelist_' . $system['return'] => $pagelist, 
+			    'pagelist_' . $system['return'] => $pagination, 
 				'return_' . $system['return']   => $data, 
 		    );
 		}
 		unset($system);
-		return array('pagelist'=>$pagelist, 'return'=>$data,);
+		return array('pagination'=>$pagination, 'return'=>$data,);
 	}
 
     /**
@@ -416,7 +416,7 @@ class view {
 	 * 析构函数
 	 */
 	public function __destruct() {
-		//清空不必要的内存占用
+		// 清空不必要的内存占用
 		$this->_options = array();
 	}
 

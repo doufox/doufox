@@ -12,7 +12,7 @@
         <div class="article-content">{$content}</div>
         <!--文章内容分页 begin-->
         {if $content_page}
-        <div class="listpage">
+        <div class="pagination">
           {loop $content_page $t=>$u}
           <a{if $page!=$t} href="{$u}"{else} style="background-color: #c00;"{/if}>{$t}</a>
           {/loop}

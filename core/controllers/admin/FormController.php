@@ -9,7 +9,9 @@ class FormController extends Admin {
 	protected $form;
 	protected $join;
 	protected $join_info;
-    public function __construct() {
+
+	public function __construct()
+	{
 		parent::__construct();
 		$formmodel     = get_cache('formmodel');
 		$this->cid     = (int)$this->get('cid');
@@ -33,7 +35,8 @@ class FormController extends Admin {
 	/**
 	 * 表单内容管理
 	 */
-	public function listAction() {
+	public function listAction()
+	{
 		$cid       = (int)$this->get('cid');
 		$modelid   =  (int)$this->get('modelid');
 
@@ -66,8 +69,8 @@ class FormController extends Admin {
 	    } 
 		$page     = $this->get('page')     ? $this->get('page') : 1;
 		$userid   = (int)$this->get('userid');
-	    $pagelist = cms::load_class('pagelist');
-		$pagelist->loadconfig();
+	    $pagination = cms::load_class('pagination');
+		$pagination->loadconfig();
 	    $where    = 'id>0';
 		if ($userid) $where .= ' and userid=' . $userid;
 		if ($this->cid) $where .= ' and cid=' . $this->cid;
@@ -79,19 +82,20 @@ class FormController extends Admin {
 			'page'   => '{page}',
 			'modelid'=> $this->modelid,
 		);
-	    $url      = url('admin/form/list', $urlparam);
-	    $list     = $this->form->page_limit($page, $pagesize)->where($where)->order(array('id DESC'))->select();
-	    $pagelist = $pagelist->total($total)->url($url)->num($pagesize)->page($page)->output();
+	    $url         = url('admin/form/list', $urlparam);
+	    $list        = $this->form->page_limit($page, $pagesize)->where($where)->order(array('id DESC'))->select();
+	    $pagination  = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
 
-		$model     = $this->model;
-		$join     = empty($this->join) ? 0 : 1;
+		$model       = $this->model;
+		$join        = empty($this->join) ? 0 : 1;
 	    include $this->admin_tpl('form_list');
 	}
 	
 	/**
 	 * 表单配置
 	 */
-	public function configAction() {
+	public function configAction()
+	{
 		if ($this->isPostForm()) {
 		    $data = $this->post('data');
 			$cfg  = $this->post('setting');
@@ -130,11 +134,11 @@ class FormController extends Admin {
 
 		$form_url  = HTTP_URL . ENTRY_SCRIPT_NAME . '?c=form&a=post&modelid=' . $this->model['modelid'] . '&cid=$id ($id是被关联内容的id变量)';
         }
-		
+
 		$cid       = $this->cid;
-		$modelid = $this->modelid;
+		$modelid   = $this->modelid;
 		$model     = $this->model;		
-		$join_info     = $this->join_info;
+		$join_info = $this->join_info;
 		$join      = empty($this->join) ? 0 : 1;
 	    include $this->admin_tpl('form_config');
 	}

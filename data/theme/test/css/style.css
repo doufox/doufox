@@ -633,7 +633,7 @@ pre.prettyprint {
     color: #8c8c8c;
 }
 
-.listpage {
+.pagination {
     clear: both;
     font-size: 12px;
     height: 50px;
@@ -642,7 +642,7 @@ pre.prettyprint {
     text-align: center;
 }
 
-.listpage a {
+.pagination a {
     background-color: #456;
     color: #fff;
     display: block;
@@ -655,7 +655,7 @@ pre.prettyprint {
     padding-right: 10px;
 }
 
-.listpage span {
+.pagination span {
     background-color: #c00;
     color: #fff;
     display: block;

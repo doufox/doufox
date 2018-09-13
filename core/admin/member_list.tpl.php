@@ -48,16 +48,15 @@ function setC() {
 			</td>
 		</tr>
 		<?php } } ?>
-		<tr height="25">
-			<td colspan="7" align="left">
-			<div class="pageleft">
-			<input type="submit" class="button" value="设为审核" name="submit_status_1" onClick="$('#list_form').val('status_1')">&nbsp;
-			<input type="submit" class="button" value="设为未审核" name="submit_status_0" onClick="$('#list_form').val('status_0')">
-			</div>
-			<div class="pageright"><?php echo  $pagelist; ?></div>
-			
+			<tr height="25">
+				<td colspan="7" align="left">
+				<div class="pageleft">
+					<input type="submit" class="button" value="设为审核" name="submit_status_1" onClick="$('#list_form').val('status_1')">&nbsp;
+					<input type="submit" class="button" value="设为未审核" name="submit_status_0" onClick="$('#list_form').val('status_0')">
+				</div>
+				<div class="pageright"><?php echo $pagination; ?></div>
 			</td>
-		</tr>    
+		</tr>
 		</tbody>
 		</table>
 		</form>

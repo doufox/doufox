@@ -87,8 +87,8 @@ class ContentController extends Admin {
 	    $username  =  $this->get('username');
 	    $page     = (int)$this->get('page');
 		$page     = (!$page) ? 1 : $page;
-	    $pagelist = cms::load_class('pagelist');
-		$pagelist->loadconfig();
+	    $pagination = cms::load_class('pagination');
+		$pagination->loadconfig();
 		if (empty($catid)) $this->show_message('url缺少栏目id参数');
 		
 		$cats = $this->category_cache;//读取栏目缓存
@@ -125,7 +125,7 @@ class ContentController extends Admin {
 	    $url      = url('admin/content/index', $urlparam);
 	    $list    = $this->content->page_limit($page, $pagesize)->where($where)->order(array('listorder DESC', 'time DESC'))->select();
 
-	    $pagelist = $pagelist->total($total)->url($url)->num($pagesize)->page($page)->output();
+	    $pagination = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
 		$join     = $this->getModelJoin($modelid);
 		
 		
