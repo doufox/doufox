@@ -34,7 +34,7 @@ class ContentController extends Member {
 	 */
 	public function indexAction()
 	{
-	    if ($this->post('catid')) { //发布
+	    if ($this->post('catid')) { // 发布
 	        $this->redirect(url('member/content/add', array('catid'=>$this->post('catid'))));
 	    }
 	    $page     = (int)$this->get('page');
@@ -89,7 +89,7 @@ class ContentController extends Member {
 
 	    $catid    = (int)$this->get('catid');
 	    if (empty($catid)) $this->show_message('请选择发布栏目');
-		$cats = $this->category_cache;
+		$cats     = $this->category_cache;
 	    if (!isset($cats[$catid])) $this->show_message('栏目不存在');
 	    $modelid  = $cats[$catid]['modelid'];
 	    if (!isset($this->cmodel[$modelid])) $this->show_message('模型不存在');
@@ -145,6 +145,7 @@ class ContentController extends Member {
 	    ));
 	    $this->view->display('member/content_add.html');
 	}
+
 	/**
 	 * 修改文章
 	 */
@@ -219,22 +220,22 @@ class ContentController extends Member {
 	}
 
 	/**
-	 * 删除文章 
+	 * 删除内容
 	 */
-	 /**  注销掉此功能 会员只能发布不能删除
-	public function delAction(){
+	public function delAction()
+	{
+		// 未审核的可以直接删除，已审核的需要管理员确认才能删除掉
 	    $id    = (int)$this->get('id');
 	    $catid = $catid ? $catid : (int)$this->get('catid');
 
 		$data  = $this->content->find($id, 'username');
 		if ($data['username'] == $this->memberinfo['username'] && $data['status'] ==0 ) {
 			$this->content->del($id, $catid);
-			$this->show_message('删除成功',1 );
+			$this->show_message('删除成功', 1);
 		} else {
 		    $this->show_message('无权操作');
 		}
 	}
-	*/
 
 	/*
 	 * 表单管理
