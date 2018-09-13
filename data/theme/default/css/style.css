@@ -324,6 +324,17 @@ img {
     color: #0000ff;
 }
 
+.crumbs h3 {
+    color: #325e7f;
+    height: 30px;
+    font-size: 18px;
+    padding-left: 5px;
+}
+
+.crumbs .more {
+    float: right;
+}
+
 .newstitle a {
     color: #929292;
 }
@@ -558,6 +569,10 @@ pre.prettyprint {
     color: #999
 }
 
+.sidebar {
+    padding-bottom: 20px;
+}
+
 .sidebar-header {
     font-size: 17px;
     text-align: center;
@@ -616,21 +631,6 @@ pre.prettyprint {
     position: absolute;
 }
 
-.mainbody .newslist h3 {
-    color: #325e7f;
-    height: 30px;
-    font-size: 18px;
-    padding-left: 5px;
-}
-
-.mainbody .newslist h3 .bt {
-    float: left;
-}
-
-.mainbody .newslist h3 .more {
-    float: right;
-}
-
 .mainbody .newslist li {
     color: #325e7f;
     line-height: 34px;
@@ -651,7 +651,7 @@ pre.prettyprint {
     color: #8c8c8c;
 }
 
-.listpage {
+.pagination {
     clear: both;
     font-size: 12px;
     height: 50px;
@@ -660,22 +660,19 @@ pre.prettyprint {
     text-align: center;
 }
 
-.listpage a {
-    background-color: #456;
-    color: #fff;
-    display: block;
-    float: left;
-    font-size: 12px;
-    height: 26px;
-    line-height: 26px;
-    margin: 5px 2px;
-    padding-left: 10px;
-    padding-right: 10px;
+.pagination a {
+    background-color: #fff;
+    border-color: #ddd;
 }
 
-.listpage span {
-    background-color: #c00;
-    color: #fff;
+.pagination span {
+    cursor: pointer;
+    background-color: #009ad1;
+    border-color:  #009ad1;
+}
+
+.pagination a,
+.pagination span {
     display: block;
     float: left;
     font-size: 12px;
@@ -684,6 +681,14 @@ pre.prettyprint {
     margin: 5px 2px;
     padding-left: 10px;
     padding-right: 10px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.pagination a:hover {
+    background: #f1f1f1;
+    color: #000;
+    text-decoration: none;
 }
 
 .pinglunneirong {

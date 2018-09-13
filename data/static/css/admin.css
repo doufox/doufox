@@ -462,12 +462,12 @@ body fieldset.blue legend {
     float: right
 }
 
-#pages {
+.pagination {
     padding: 2px 10px 0px;
     text-align: right
 }
 
-#pages a {
+.pagination a {
     display: inline-block;
     height: 22px;
     line-height: 22px;
@@ -479,13 +479,13 @@ body fieldset.blue legend {
     margin-left: 1px;
 }
 
-#pages a:hover {
+.pagination a:hover {
     background: #f1f1f1;
     color: #000;
     text-decoration: none;
 }
 
-#pages span {
+.pagination span {
     display: inline-block;
     height: 22px;
     padding: 0 10px;

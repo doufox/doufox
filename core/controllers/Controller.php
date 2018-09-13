@@ -224,7 +224,7 @@ abstract class Controller  {
 	    foreach ($fields['data'] as $t) {
 		    if (cms::get_namespace_id() != 'admin' && !$t['isshow']) continue;
 			if (!@in_array($t['field'], $fields['merge']) && !in_array($t['formtype'], array('merge', 'fields')) && empty($t['merge'])) {
-			    //单独显示的字段。
+			    // 单独显示的字段。
 			    $data_fields .= '<tr>';
 				$data_fields .= isset($t['not_null']) && $t['not_null'] ? '<th><font color="red">*</font> ' . $t['name'] . '：</th>' : '<th>' . $t['name'] . '：</th>';
 				$data_fields .= '<td>';
@@ -240,18 +240,18 @@ abstract class Controller  {
 			} elseif ($t['formtype'] == 'merge') {
 			    $data_fields .= '<tr>';
 				$data_fields .= '<th>' . $t['name'] . '：</th>';
-				$data_fields .= '<td>' ;
+				$data_fields .= '<td>';
 				$setting      = string2array($t['setting']);
 				$string       = $setting['content'];
 				$regex_array  = $replace_array = array();
 				foreach ($t['data'] as $field) {
-				    $zhiduan  = $fields['data'][$field];
+				    $current  = $fields['data'][$field];
 				    $str      = '';
-					$func     = 'content_' . $zhiduan['formtype'];
-					$zhiduan['setting']  = $zhiduan['setting'] ? $zhiduan['setting'] : 0;
+					$func     = 'content_' . $current['formtype'];
+					$current['setting']  = $current['setting'] ? $current['setting'] : 0;
 					$content             = array($data[$field]);
 					$content             = var_export($content, true);
-					if (function_exists($func)) eval("\$str = " . $func . "(" . $field . ", " . $content . ", " . $zhiduan['setting'] . ");");
+					if (function_exists($func)) eval("\$str = " . $func . "(" . $field . ", " . $content . ", " . $current['setting'] . ");");
 					$regex_array[]       = '{' . $field . '}';
 					$replace_array[]     = $str;
 				}

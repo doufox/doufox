@@ -162,10 +162,10 @@ class pagelist
     }
 
     /**
-     * 显示样式配置
+     * 显示样式结构
      * @param array $config
-     * $div HTMLdiv盒结构 (<div id="pages">{content}</div>)
-     * $total 显示统计数量 (<a>{content}</a>)
+     * $div 结构 (<div class="pagination">{content}</div>)
+     * $total 数量 (<a>{content}</a>)
      * $nowpage 当前页 (<span>{content}</span>)
      * $page 普通页 (<a href="{url}">{content}</a>)
      * $pre 上一页 (<a href="{url}">{content}</a>)
@@ -175,9 +175,9 @@ class pagelist
     {
         if (empty($config)) {
             $config = array(
-                'div'       => '<div id="pages">{content}</div>',
+                'div'       => '<div class="pagination">{content}</div>',
                 'total'     => '<a>{content}</a>',
-                'nowpage'   => '<span>{content}</span> ',
+                'nowpage'   => '<span>{content}</span>',
                 'page'      => '<a href="{url}">{content}</a>',
                 'pre'       => '<a href="{url}">{content}</a>',
                 'next'      => '<a href="{url}">{content}</a>',
