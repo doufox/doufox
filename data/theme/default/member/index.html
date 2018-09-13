@@ -1,32 +1,32 @@
 {template header.html}
 <div class="mainbody member">
-	<div class="w210 fl">
-	{template member/sidebar.html}
-	</div>
-	<div class="w740 fr bg">
-		<div class="crumbs">
-			<h3>我发布的内容</h3>
+	<div class="container">
+		<div class="w210 fl">
+		{template member/sidebar.html}
 		</div>
-		<div class="newslist">
-			{if !$member['status']}
-			<h3><span class="bt" style="color:#F00"><b>您还没有通过审核！</b></span></h3>
-			{/if}
-			<ul class="noborder">
-				{list status=0 username=$member[username] num=10 }
-				<li>
-					<span class="date">{function.date("Y-m-d H:i:s", $xiao['time'])}</span>
-					<a href="{$xiao['url']}" target="_blank"><font color="#FF0000">[未审]</font>{$xiao['title']}</a>
-				</li>
-				{/list}
-				{list  username=$member[username] num=10 }
-				<li>
-					<span class="date">{function.date("Y-m-d H:i:s", $xiao['time'])}</span>
-					<a href="{$xiao['url']}" target="_blank">{$xiao['title']}</a>
-				</li>
-				{/list}
-			</ul>
+		<div class="w740 fr bg">
+			{template crumbs.html}
+			<div class="newslist">
+				{if !$member['status']}
+				<h3><span class="bt" style="color:#F00"><b>您还没有通过审核！</b></span></h3>
+				{/if}
+				<ul class="noborder">
+					{list status=0 username=$member[username] num=10 }
+					<li>
+						<span class="date">{function.date("Y-m-d H:i:s", $xiao['time'])}</span>
+						<a href="{$xiao['url']}" target="_blank"><font color="#FF0000">[未审]</font>{$xiao['title']}</a>
+					</li>
+					{/list}
+					{list  username=$member[username] num=10 }
+					<li>
+						<span class="date">{function.date("Y-m-d H:i:s", $xiao['time'])}</span>
+						<a href="{$xiao['url']}" target="_blank">{$xiao['title']}</a>
+					</li>
+					{/list}
+				</ul>
+			</div>
+			{$pagination}
 		</div>
-		{$pagination}
 	</div>
 </div>
 {template footer.html}

@@ -1,10 +1,11 @@
 {template header.html}
 <div class="mainbody">
-    <div class="w210 fl">
-		{template member/sidebar.html}
-    </div>
-    <div class="w740 fr">
-		<div class="page bg">
+    <div class="container">
+        <div class="w210 fl">
+            {template member/sidebar.html}
+        </div>
+		<div class="w740 fr bg">
+            {template crumbs.html}
             <table class="datatable" border="0" cellpadding="0" cellspacing="0" width="100%">
                 <thead>
                     <tr>
@@ -23,9 +24,7 @@
                     {$t['title']}</a></td>
                     <td><a href="{$cats[$t['catid']]['url']}" target="_blank">{$cats[$t['catid']]['catname']}</a></td>
                     <td>{function.date("Y-m-d H:i:s", $t['time'])}</td>
-                    <td>
-                    <a href="{function.url('member/content/edit/', array('id'=>$t['id']))}">修改</a>&nbsp;
-                    </td>
+                    <td><a href="{function.url('member/content/edit/', array('id'=>$t['id']))}">修改</a>&nbsp;</td>
                     </tr>
                     {/loop}
                 </tbody>

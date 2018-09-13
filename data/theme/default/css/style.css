@@ -84,6 +84,8 @@ img {
 .container {
     width: 960px;
     margin: 0 auto;
+    clear: both;
+    overflow: hidden;
 }
 
 .header {
@@ -117,7 +119,7 @@ img {
 
 .nav {
     width: 100%;
-    margin: 0 auto;
+    margin: 5px auto;
     height: 40px;
     line-height: 40px;
     position: relative;
@@ -311,6 +313,7 @@ img {
 }
 
 .crumbs {
+    clear: both;
     color: #999;
     font-size: 14px;
     height: 40px;
@@ -830,7 +833,7 @@ select {
 
 .footer {
     width: 100%;
-    margin: 10px auto 0 auto;
+    margin: 5px auto;
 }
 
 .footer .footnav {
@@ -838,8 +841,8 @@ select {
     min-height: 40px;
     line-height: 40px;
     text-align: center;
-    border-top: 1px solid #0000ff;
-    border-bottom: 1px solid #d8d8d8;
+    border-top: 1px solid #e1e1ea;
+    border-bottom: 1px solid #e1e1ea;
 }
 
 .footer a {
@@ -852,7 +855,7 @@ select {
 }
 
 .footer .container {
-    background-color: #fff0f5;
+    background-color: #f9f9f9;
 }
 
 .footer .corporation {

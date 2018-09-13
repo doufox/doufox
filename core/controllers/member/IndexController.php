@@ -6,16 +6,17 @@ class IndexController extends Member
     private $form;
     private $cmodel;
     private $nav;
+
     public function __construct()
     {
         parent::__construct();
-        $this->isLogin(); //登录验证
+        $this->isLogin(); // 登录验证
         $this->memberdata = cms::load_model($this->membermodel[$this->memberinfo['modelid']]['tablename']);
 
         if (!$this->memberinfo['status']) {
             $this->show_message('您还没有通过审核。', 2, url('index/index/'));
         }
-        //判断审核
+        // 判断审核
         $this->form = $this->getFormMember();
         $this->cmodel = get_cache('model');
         $navigation = $this->nav = array();
@@ -25,7 +26,6 @@ class IndexController extends Member
                 if (empty($this->nav)) {
                     $this->nav = url('member/content/', array('modelid' => $t['modelid']));
                 }
-
             }
         }
         if ($this->form) {
@@ -34,7 +34,6 @@ class IndexController extends Member
                 if (empty($this->nav)) {
                     $this->nav = url('member/content/form', array('modelid' => $t['modelid']));
                 }
-
             }
         }
         $this->view->assign('navigation', $navigation);
@@ -43,10 +42,15 @@ class IndexController extends Member
     public function indexAction()
     {
         $this->view->assign(array(
-            'member_index' => 1,
-            'model' => get_cache('model'),
-            'form' => $this->getFormMember(),
-            'site_title' => '会员中心 - ' . $this->site_config['SITE_NAME'],
+            'member_index'     => 1,
+            'model'            => get_cache('model'),
+            'form'             => $this->getFormMember(),
+            'site_keywords'    => $this->site_config['SITE_KEYWORDS'],
+            'site_description' => $this->site_config['SITE_DESCRIPTION'],
+            'site_title'       => '会员中心 - ' . $this->site_config['SITE_NAME'],
+			'page_title'       => '会员中心',
+			'page_url'         => url('member/index'),
+			'pate_position'    => '<a href="' . url('member/index') . '" title="会员中心">会员中心</a>'
         ));
         $this->view->display('member/index.html');
     }
@@ -58,14 +62,20 @@ class IndexController extends Member
     {
         $page = (int) $this->get('page');
         $page = $page ? $page : 1;
-        $mid = (int) $this->get('modelid');
+        $mid  = (int) $this->get('modelid');
         if ($mid && !isset($this->membermodel[$mid])) {
             $this->show_message('会员模型不存在');
         }
 
         $this->view->assign(array(
-            'page' => $page,
-            'modelid' => $mid,
+            'page'             => $page,
+            'modelid'          => $mid,
+            'site_keywords'    => $this->site_config['SITE_KEYWORDS'],
+            'site_description' => $this->site_config['SITE_DESCRIPTION'],
+            'site_title'       => '会员列表 - ' . $this->site_config['SITE_NAME'],
+			'page_title'       => '会员列表',
+			'page_url'         => url('member/index/list'),
+			'pate_position'    => '<a href="' . url('member/index/list') . '" title="会员列表">会员列表</a>'
         ));
         $this->view->display('list_member.html');
     }
@@ -95,13 +105,18 @@ class IndexController extends Member
             }
             $this->show_message('修改成功', 1, url('member/index/edit'));
         }
-        //自定义字段
+        // 自定义字段
         $data_fields = $this->getFields($fields, $this->memberinfo);
         $this->view->assign(array(
-            'data_fields' => $data_fields,
-            'site_title' => '修改资料 - 会员中心 - ' . $this->site_config['SITE_NAME'],
+            'data_fields'      => $data_fields,
+            'site_keywords'    => $this->site_config['SITE_KEYWORDS'],
+            'site_description' => $this->site_config['SITE_DESCRIPTION'],
+            'site_title'       => '修改资料 - 会员中心 - ' . $this->site_config['SITE_NAME'],
+			'page_title'       => '修改资料',
+			'page_url'         => url('member/index/edit'),
+			'pate_position'    => '<a href="' . url('member/index/edit') . '" title="修改资料">修改资料</a>'
         ));
-        $this->view->display('member/edit.html');
+        $this->view->display('member/profile_edit.html');
     }
 
     /**
@@ -123,7 +138,12 @@ class IndexController extends Member
             $this->show_message('操作成功', 1, url('member/index/password'));
         }
         $this->view->assign(array(
-            'site_title' => '修改密码 - 会员中心 - ' . $this->site_config['SITE_NAME'],
+            'site_keywords'    => $this->site_config['SITE_KEYWORDS'],
+            'site_description' => $this->site_config['SITE_DESCRIPTION'],
+            'site_title'       => '修改密码 - 会员中心 - ' . $this->site_config['SITE_NAME'],
+			'page_title'       => '修改密码',
+			'page_url'         => url('member/index/password'),
+			'pate_position'    => '<a href="' . url('member/index/password') . '" title="修改密码">修改密码</a>'
         ));
         $this->view->display('member/password.html');
     }

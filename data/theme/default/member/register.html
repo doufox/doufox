@@ -11,49 +11,59 @@ function checkpass() {
 	    $('#checkpassword2').html('<span>正确</span>');
 	}
 }
+function reload_code() {
+	document.getElementById('code').src = '{function.url("api/checkcode", array("width"=>80, "height"=>28))}&' + Math.random();
+}
 </script>
-<div  class="mainbody">
-	<form method="post" action="" name="myform" id="myform">
-	<div class="bg ">
-	<table width="100%" class="table_form ">
-			<tbody><tr>
-				<th width="300"></th>
-				<td></td>
-			</tr>
-            {if count($member_model)>1}
-			<tr>
-			<th>会员模型：</th>
-			<td>
-			<select name="data[modelid]" >
-			{loop $member_model $t}
-			<option value="{$t['modelid']}" {if $member_default_modelid==$t['modelid']}selected{/if}>{$t['modelname']}</option>
-			{/loop}
-			</select>
-			</td>
-			</tr>
-            {/if}
 
-			<tr><th><font color="red">*</font> 会员账号：</th><td><input type="text" class="input-text" name="data[username]" id="username" onblur="checkuser()" />
-            <span id="err_username" class="tips_info"></span></td></tr>
-			
-			<tr><th><font color="red">*</font> 会员密码：</th><td><input type="password" class="input-text" name="data[password]" id="password"/></td></tr>
-			
-			<tr><th><font color="red">*</font> 确认密码：</th><td><input type="password" class="input-text" name="data[password2]" id="password2" onblur="checkpass()" />
-            <span id="checkpassword2" class="tips_info"></span></td></tr>
-			<tr><th><font color="red">*</font> 您的邮箱：</th><td><input type="text" class="input-text" onblur="checkemail()" name="data[email]" id="email" />
-            <span id="err_email" class="tips_info"></span></td></tr>
-            {if $config['MEMBER_REGCODE']}
- 			<tr><th><font color="red">*</font> 注册验证：</th><td><input type="text" class="input-text" name="code" style="width:100px" />
-            <img id="code" src="{function.url("api/checkcode/", array("width"=>100, "height"=>30))}" align="absmiddle" title="看不清楚？换一张" onclick="document.getElementById('code').src='{function.url("api/checkcode/", array("width"=>0, "height"=>30))}&'+Math.random();" style="cursor:pointer; margin-top:-3px;"></td></tr>
+<div class="mainbody">
+	<div class="container bg">
+		{template crumbs.html}
+		<form method="post" action="" name="myform" id="myform">
+			<table width="100%" class="table_form ">
+				<tbody>
+					<tr>
+						<th width="300"></th>
+						<td></td>
+					</tr>
+					{if count($member_model)>1}
+					<tr>
+						<th>会员模型：</th>
+						<td>
+							<select name="data[modelid]" >
+							{loop $member_model $t}
+							<option value="{$t['modelid']}" {if $member_default_modelid==$t['modelid']}selected{/if}>{$t['modelname']}</option>
+							{/loop}
+							</select>
+						</td>
+					</tr>
+					{/if}
 
-            {/if}
-		<tr>
-				<th>&nbsp;</th>
-				<td><input type="submit" class="button" value="注 册" name="submit"></td>
-			</tr>
-			</tbody></table>
+					<tr><th><font color="red">*</font> 会员账号：</th><td><input type="text" class="input-text" name="data[username]" id="username" onblur="checkuser()" />
+					<span id="err_username" class="tips_info"></span></td></tr>
 
+					<tr><th><font color="red">*</font> 会员密码：</th><td><input type="password" class="input-text" name="data[password]" id="password"/></td></tr>
+
+					<tr><th><font color="red">*</font> 确认密码：</th><td><input type="password" class="input-text" name="data[password2]" id="password2" onblur="checkpass()" />
+					<span id="checkpassword2" class="tips_info"></span></td></tr>
+					<tr><th><font color="red">*</font> 您的邮箱：</th><td><input type="text" class="input-text" onblur="checkemail()" name="data[email]" id="email" />
+					<span id="err_email" class="tips_info"></span></td></tr>
+					{if $config['MEMBER_REGCODE']}
+					<tr>
+						<th><font color="red">*</font> 注册验证：</th>
+						<td>
+							<input type="text" class="input-text" name="code" style="width:100px" />
+							<img id="code" title="看不清楚？换一张" align="absmiddle" onclick="reload_code();" src="{function.url('api/checkcode', array('width'=>80, 'height'=>28))}"  style="cursor:pointer; margin-top:-3px;" />
+						</td>
+					</tr>
+					{/if}
+					<tr>
+						<th>&nbsp;</th>
+						<td><input type="submit" class="button" value="注 册" name="submit"></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
     </div>
-	</form>
 </div>
 {template footer.html}

@@ -68,12 +68,17 @@ class ContentController extends Member {
 	        'list'       => $data,
 	        'page'       => $page,
 	        'pagination' => $pagination,
-			'site_title' => $this->cmodel[$modelid]['modelname'] . ' - 会员中心 - ' . $this->site_config['SITE_NAME'],
 			'modelid'    => $modelid,
 			'model'		 => $this->cmodel[$modelid],
 			'category'   => $category,
+            'site_keywords'    => $this->site_config['SITE_KEYWORDS'],
+            'site_description' => $this->site_config['SITE_DESCRIPTION'],
+			'site_title' => $this->cmodel[$modelid]['modelname'] . ' - 会员中心 - ' . $this->site_config['SITE_NAME'],
+			'page_title'    => $this->cmodel[$modelid]['modelname'] . ' - 内容管理',
+			'page_url'      => url('member/index'),
+			'pate_position' => $this->cmodel[$modelid]['modelname'] . ' - 内容管理'
 	    ));
-	    $this->view->display('member/list.html');
+	    $this->view->display('member/content_list.html');
 	}
 
 	/*
@@ -96,7 +101,7 @@ class ContentController extends Member {
 	        if (empty($data['title'])) $this->show_message('请填写标题');
 			$this->checkFields($fields, $data, 2);
 	        $data['username']  = $this->memberinfo['username'];
-	        $data['time'] =  time();
+	        $data['time']      =  time();
 			$data['status']    = $cats[$catid]['verify'];
 	        $data['modelid']   = (int)$modelid;
 	        $result            = $this->content->set(0, $this->cmodel[$modelid]['tablename'], $data);
@@ -106,7 +111,7 @@ class ContentController extends Member {
 			$msg = '<a href="' . url('member/content/add', array('catid'=>$data['catid'])) . '" style="font-size:14px;">继续发布</a>&nbsp;&nbsp;<a href="' . url('member/content/', array('modelid'=>$modelid)) . '" style="font-size:14px;">返回列表</a>';
 	        $this->show_message($msg, 1,url('member/content/', array('modelid'=>$modelid)));
 	    }
-	    //自定义字段
+	    // 自定义字段
 	    $data_fields      = $this->getFields($fields, $data);
 
 		$tree =  cms::load_class('tree');
@@ -126,14 +131,19 @@ class ContentController extends Member {
 		$category = $tree->get_tree(0, $str);
 
 	    $this->view->assign(array(
-	        'data'        => array('catid'=>$catid),
-	        'data_fields' => $data_fields,
-			'site_title'  => '发布内容 - 会员中心 - ' . $this->site_config['SITE_NAME'],
-			'model'       => $this->cmodel[$modelid],
-			'modelid'     => $modelid,
-			'category'    => $category,
+	        'data'          => array('catid'=>$catid),
+	        'data_fields'   => $data_fields,
+			'model'         => $this->cmodel[$modelid],
+			'modelid'       => $modelid,
+			'category'      => $category,
+            'site_keywords'    => $this->site_config['SITE_KEYWORDS'],
+            'site_description' => $this->site_config['SITE_DESCRIPTION'],
+			'site_title'    => '发布内容 - 会员中心 - ' . $this->site_config['SITE_NAME'],
+			'page_title'    => '发布内容',
+			'page_url'      => url('member/content/add'),
+			'pate_position' => '<a href="' . url('member/content/add') . '" title="发布内容">发布内容</a>'
 	    ));
-	    $this->view->display('member/add.html');
+	    $this->view->display('member/content_add.html');
 	}
 	/**
 	 * 修改文章
@@ -160,10 +170,10 @@ class ContentController extends Member {
 	        if (empty($data['title'])) $this->show_message('请填写标题');
 	        if ($data['catid'] != $catid && $modelid != $this->category_cache[$data['catid']]['modelid']) $this->show_message('栏目模型不一致，无法修改栏目');
 			$this->checkFields($fields, $data, 2);
-	        $data['time'] = time();
+	        $data['time']       = time();
 	        $data['url']        = $url;
 	        $data['modelid']    = (int)$modelid;
-			$data['status']    = $cats[$catid]['verify'];
+			$data['status']     = $cats[$catid]['verify'];
 			unset($data['username'], $data['userid']);
 	        $result             = $this->content->set($id, $this->cmodel[$modelid]['tablename'], $data);
 	        if (!is_numeric($result)) $this->show_message($result);
@@ -175,11 +185,11 @@ class ContentController extends Member {
 	    if ($table_data) $data = array_merge($data, $table_data); //合并主表和附表
 	    //自定义字段
 	    $data_fields = $this->getFields($fields, $data);
-		
-		$tree =  cms::load_class('tree');
+
+		$tree       =  cms::load_class('tree');
 		$tree->icon = array(' ','  ','  ');
 		$tree->nbsp = '&nbsp;';
-		$categorys = array();
+		$categorys  = array();
 		foreach($this->category_cache as $cid=>$r) {
 			if($modelid && $modelid != $r['modelid']) continue;
 			if(!$r['ispost'] || $r['typeid']!=1) continue;
@@ -193,14 +203,19 @@ class ContentController extends Member {
 		$category = $tree->get_tree(0, $str);
 
 	    $this->view->assign(array(
-	        'data'		  => $data,
-	        'data_fields' => $data_fields,
-			'site_title'  => '修改内容 - 会员中心 -' . $this->site_config['SITE_NAME'],
-			'model'       => $this->cmodel[$modelid],
-			'modelid'     => $modelid,
-			'category'    => $category,
+	        'data'		       => $data,
+	        'data_fields'      => $data_fields,
+			'model'            => $this->cmodel[$modelid],
+			'modelid'          => $modelid,
+			'category'         => $category,
+            'site_keywords'    => $this->site_config['SITE_KEYWORDS'],
+            'site_description' => $this->site_config['SITE_DESCRIPTION'],
+			'site_title'       => '编辑内容 - 会员中心 -' . $this->site_config['SITE_NAME'],
+			'page_title'       => '编辑内容',
+			'page_url'         => url('member/content/edit'),
+			'pate_position'    => '<a href="' . url('member/content/edit', array('id'=>$id)) . '" title="编辑内容">编辑内容</a>'
 	    ));
-	    $this->view->display('member/add.html');
+	    $this->view->display('member/content_add.html');
 	}
 
 	/**
@@ -243,18 +258,20 @@ class ContentController extends Member {
 	    $data       = $table->page_limit($page, $pagesize)->order('time DESC')->where($where)->select();
 	    $pagination = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
 	    $this->view->assign(array(
-	        'listdata'   => $data,
-	        'page'       => $page,
-	        'pagination' => $pagination,
-			'site_title' => $this->form[$modelid]['joinname'] . $this->form[$modelid]['modelname'] . ' - 会员中心 - ' . $this->site_config['SITE_NAME'],
-			'showfields' => isset($this->form[$modelid]['setting']['form']['membershow']) ? $this->form[$modelid]['setting']['form']['membershow'] : array(),
-			'form'       => $this->form[$modelid],
-			'modelid'    => $modelid,
-			'join'       => $this->form[$modelid]['joinid'] ? $this->form[$modelid]['joinname'] : 0,
+	        'listdata'         => $data,
+	        'page'             => $page,
+	        'pagination'       => $pagination,
+			'site_title'       => $this->form[$modelid]['joinname'] . $this->form[$modelid]['modelname'] . ' - 会员中心 - ' . $this->site_config['SITE_NAME'],
+			'showfields'       => isset($this->form[$modelid]['setting']['form']['membershow']) ? $this->form[$modelid]['setting']['form']['membershow'] : array(),
+			'form'             => $this->form[$modelid],
+			'modelid'          => $modelid,
+			'join'             => $this->form[$modelid]['joinid'] ? $this->form[$modelid]['joinname'] : 0,
+            'site_keywords'    => $this->site_config['SITE_KEYWORDS'],
+            'site_description' => $this->site_config['SITE_DESCRIPTION']
 	    ));
 	    $this->view->display('member/form_list.html');
 	}
-	
+
 	/*
 	 * 查看表单内容
 	 */
