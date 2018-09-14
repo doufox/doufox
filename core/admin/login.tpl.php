@@ -30,7 +30,7 @@
 						<div class="cell l">验证码</div>
 						<div class="cell r">
 							<input type="text" name="code" class="text captcha" maxlength="4" autocomplete="off" />
-							<img id="checkcode" src="<?php echo url("api/checkcode/ ", array("width " => 85, "height " => 26)); ?>" title="看不清楚？换一张">
+							<img id="checkcode" src="<?php echo url("api/access/checkcode/ ", array("width " => 85, "height " => 26)); ?>" title="看不清楚？换一张">
 						</div>
 					</div>
 					<div class="row">
@@ -48,7 +48,7 @@
 	</div>
 	<script type="text/javascript">
 		document.getElementById("checkcode").onclick = function () {
-			document.getElementById("checkcode").src = '<?php echo url("api/checkcode", array("width" => 85, "height" => 26)); ?>&' + Math.random();
+			document.getElementById("checkcode").src = '<?php echo url("api/access/checkcode", array("width" => 85, "height" => 26)); ?>&' + Math.random();
 		}
 	</script>
 </body>

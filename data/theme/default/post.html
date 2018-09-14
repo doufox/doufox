@@ -2,7 +2,7 @@
     <script type="text/javascript">
         var sitepath = "index.php";
         function reload_code() {
-            document.getElementById('code').src = '{function.url("api/checkcode", array("width"=>80, "height"=>28))}&' + Math.random();
+            document.getElementById('code').src = '{function.url("api/access/checkcode", array("width"=>80, "height"=>28))}&' + Math.random();
         }
     </script>
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
@@ -49,7 +49,7 @@
                 <div>验证码：</div>
                 <div>
                     <input name="code" type="text" class="input-text" size=10 />
-                    <img id="code" title="看不清楚？换一张" style="cursor:pointer;" align="absmiddle" onclick="reload_code();" src="{function.url('api/checkcode', array('width'=>80, 'height'=>28))}"/>
+                    <img id="code" title="看不清楚？换一张" style="cursor:pointer;" align="absmiddle" onclick="reload_code();" src="{function.url('api/access/checkcode', array('width'=>80, 'height'=>28))}"/>
                 </div>
             </div>
             <div>

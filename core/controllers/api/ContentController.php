@@ -1,6 +1,6 @@
 <?php
 
-class ContentController extends Admin {
+class ContentController extends Api {
 
 	public function indexAction() {
 	    if ($this->post('submit') && $this->post('form')=='search') {
@@ -89,8 +89,11 @@ class ContentController extends Admin {
 		$page     = (!$page) ? 1 : $page;
 	    $pagination = cms::load_class('pagination');
 		$pagination->loadconfig();
-		if (empty($catid)) $this->show_message('url缺少栏目id参数');
-		
+		if (empty($catid)) {
+			$this->response(400, null, 'missing parameters');
+			exit();
+			// $this->show_message('url缺少栏目id参数');
+		}
 		$cats = $this->category_cache;//读取栏目缓存
 		$modelid = $cats[$catid]['modelid'];
 
@@ -174,7 +177,7 @@ class ContentController extends Admin {
 				$categorys[$r['catid']] = $r;
 			}
 		}
-
+		$this->response(200, $categorys, 'success');
 		if(!empty($categorys)) {
 			$tree->init($categorys);
 			$strs = "<span class='\$icon_type'><a href='\$urla' target='right' onclick='open_list(this)'>\$catname</a></span>";
@@ -182,10 +185,11 @@ class ContentController extends Admin {
 			$categorys = $tree->get_treeview(0,'category_tree',$strs,$strs2);
 		} else {
 			$categorys = '没有分类请添加或刷新';
+			$this->response(200, array(), 'success');
 		}
-	    include $this->admin_tpl('content_category');
-	}
 
+		
+	}
 
 	/**
 	 * 发布
@@ -313,7 +317,7 @@ class ContentController extends Admin {
 	    if ($data) exit('<div class="onFocus">已有相同的标题存在</div>');
 	    exit('');
 	}
-	
+
 	/**
 	 * 更新url地址
 	 */
@@ -432,6 +436,25 @@ class ContentController extends Admin {
 			include $this->admin_tpl('content_url');
 		}
 	}
-	
+
+	/**
+     * 点击量
+     */
+    public function hitsAction()
+    {
+        $id = (int) $this->get('id');
+        if (empty($id)) {
+			$this->response(400, null, 'content id required');
+			exit();
+        }
+        $data = $this->content->find($id, 'hits');
+        if (empty($data)) {
+			$this->response(404, null, 'Not found');
+			exit();
+        }
+        $count = $data['hits'] + 1;
+		$this->content->update(array('hits' => 'hits+1'), 'id=' . $id);
+		$this->response(200, array('hits' => $count), 'success');
+    }
 
 }

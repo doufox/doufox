@@ -308,7 +308,7 @@ abstract class Controller  {
 	    }
 	    return $data_fields;
     }
-	
+
 	/**
      * 验证自定义字段
      */
@@ -336,7 +336,7 @@ abstract class Controller  {
 			}
 	    }
 	}
-    
+
     /**
      * 生成水印图片
      */
@@ -351,8 +351,7 @@ abstract class Controller  {
             $image->make_text_watermark($file, $this->site_config['SITE_WATERMARK_POS'], $this->site_config['SITE_WATERMARK_SIZE']);
         }
     }
-    
-	
+
     /**
      * 验证验证码
      */
@@ -362,7 +361,7 @@ abstract class Controller  {
 		$this->session->delete('checkcode');
 		return $code == $value ? true : false;
 	}
-	
+
 	/**
      * 模型栏目
      */
@@ -373,7 +372,7 @@ abstract class Controller  {
 		}
 		return $data;
 	}
-	
+
 	/**
      * 模型的关联表单
      */
@@ -388,7 +387,7 @@ abstract class Controller  {
 		}
 		return $return;
 	}
-	
+
 	/**
      * 可在会员中心显示的表单
      */
@@ -406,7 +405,7 @@ abstract class Controller  {
 		}
 		return $return;
 	}
-	
+
 	/**
      * 格式化字段数据
      */

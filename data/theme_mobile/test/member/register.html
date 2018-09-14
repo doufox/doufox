@@ -53,7 +53,7 @@ function checkpass() {
 				<div class="input-continer">
 				<input type="text" class="input-code" name="code" placeholder="注册验证" />
 				<img id="code" class="code" align="absmiddle" title="看不清楚？换一张" onclick="reflashCode()"
-				src="{function.url("api/checkcode/", array("width "=>80, "height "=>30))}" />
+				src="{function.url("api/access/checkcode/", array("width "=>80, "height "=>30))}" />
 				</div>
 			</div>{/if}
 
@@ -69,7 +69,7 @@ function checkpass() {
 </div>
 <script type="text/javascript">
 	function reflashCode() {
-	  document.getElementById('code').src='{function.url("api/checkcode/", array("width "=>80, "height"=>30))}&'+Math.random();
+	  document.getElementById('code').src='{function.url("api/access/checkcode/", array("width "=>80, "height"=>30))}&'+Math.random();
 	}
 </script>
 

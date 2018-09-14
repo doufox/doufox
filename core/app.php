@@ -10,7 +10,7 @@ error_reporting(E_ALL ^ E_NOTICE);
  * 系统常量配置
  */
 date_default_timezone_set('Asia/Shanghai'); // 时区设置
-define('APP_NAME', 'SITECMS'); // CMS名称
+define('APP_NAME', 'UINOTE'); // CMS名称
 define('ENTRY_SCRIPT_NAME', 'index.php'); // 定义入口文件名
 define('APP_START_TIME', microtime(true)); // 设置程序开始执行时间
 
@@ -32,6 +32,10 @@ define('DATA_PATH', ROOT_PATH . DATA_DIR . DIRECTORY_SEPARATOR); // 数据目录
 define('STATIC_PATH', DATA_PATH . STATIC_DIR . DIRECTORY_SEPARATOR); // 静态资源路径
 define('THEME_PATH', DATA_PATH . 'theme' . DIRECTORY_SEPARATOR); // 桌面端模板目录的路径
 define('THEME_PATH_MOBILE', DATA_PATH . 'theme_mobile' . DIRECTORY_SEPARATOR); // 移动端模板目录的路径
+
+header('Content-Type: text/html; charset=utf-8');
+header('X-Powered-By: Crogram');
+header('Copyright: ' . APP_NAME);
 
 cms::load_file(CORE_PATH . 'library' . DIRECTORY_SEPARATOR . 'global.function.php'); // 加载全局函数
 cms::load_file(CORE_PATH . 'version.php');

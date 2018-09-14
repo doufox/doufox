@@ -6,7 +6,7 @@
                 <h2 class="article-title">{$title}</h2>
                 <div class="article-meta">
                     发布时间&nbsp;:&nbsp;{function.date("Y-m-d H:i:s", $time)}&nbsp;
-                    阅读&nbsp;:&nbsp;<script type="text/javascript" src="{function.url('api/hits',array('id'=>$id))}"></script>次&nbsp;
+                    阅读&nbsp;:&nbsp;<script type="text/javascript" src="{function.url('api/index/hits',array('id'=>$id))}"></script>次&nbsp;
                     {if $originalurl}&nbsp;<a href="{$originalurl}" target="_blank">原文链接</a>{/if}
                 </div>
                 <div class="article-content">

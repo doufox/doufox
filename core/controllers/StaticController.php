@@ -8,7 +8,7 @@ class StaticController
 
     public function __construct()
     {
-        header('X-Powered-By: ' . APP_NAME);
+
     }
 
     public function indexAction()

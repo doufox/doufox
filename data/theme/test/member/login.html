@@ -19,7 +19,7 @@
 {if $config['MEMBER_LOGINCODE']}
   <tr>
    <th><font color="red">*</font> 验证码：</th><td><input type="text" class="input-text" name="code" style="width:100px" />
-   <img id="code" src="{function.url("api/checkcode/", array("width"=>100, "height"=>30))}" align="absmiddle" title="看不清楚？换一张" onclick="document.getElementById('code').src='{function.url("api/checkcode/", array("width"=>0, "height"=>30))}&'+Math.random();" style="cursor:pointer; margin-top:-3px;"></td>
+   <img id="code" src="{function.url("api/access/checkcode/", array("width"=>100, "height"=>30))}" align="absmiddle" title="看不清楚？换一张" onclick="document.getElementById('code').src='{function.url("api/access/checkcode/", array("width"=>0, "height"=>30))}&'+Math.random();" style="cursor:pointer; margin-top:-3px;"></td>
    </tr>
 {/if}
    <tr>

@@ -15,7 +15,7 @@
 {if $code}
      <tr>
      <th>验证码：</th>
-     <td><input name="code" type="text" class="input-text" size=10 /><img src="{function.url('api/checkcode', array('width'=>80,'height'=>25))}" align="absmiddle"></td>
+     <td><input name="code" type="text" class="input-text" size=10 /><img src="{function.url('api/access/checkcode', array('width'=>80,'height'=>25))}" align="absmiddle"></td>
      </tr>
 {/if}
      <tr>

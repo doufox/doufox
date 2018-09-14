@@ -44,7 +44,7 @@ function checkpass() {
             <span id="err_email" class="tips_info"></span></td></tr>
             {if $config['MEMBER_REGCODE']}
  			<tr><th><font color="red">*</font> 注册验证：</th><td><input type="text" class="input-text" name="code" style="width:100px" />
-            <img id="code" src="{function.url("api/checkcode/", array("width"=>100, "height"=>30))}" align="absmiddle" title="看不清楚？换一张" onclick="document.getElementById('code').src='{function.url("api/checkcode/", array("width"=>0, "height"=>30))}&'+Math.random();" style="cursor:pointer; margin-top:-3px;"></td></tr>
+            <img id="code" src="{function.url("api/access/checkcode/", array("width"=>100, "height"=>30))}" align="absmiddle" title="看不清楚？换一张" onclick="document.getElementById('code').src='{function.url("api/access/checkcode/", array("width"=>0, "height"=>30))}&'+Math.random();" style="cursor:pointer; margin-top:-3px;"></td></tr>
 
             {/if}
 		<tr>

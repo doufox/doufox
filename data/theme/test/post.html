@@ -44,7 +44,7 @@
 {$data_fields}
     <tr>
      <th>验证码：</th>
-     <td><input name="code" type="text" class="input-text" size=10 /><img id="code" src="{function.url("api/checkcode/", array("width"=>80, "height"=>28))}" align="absmiddle" title="看不清楚？换一张" onclick="document.getElementById('code').src='{function.url("api/checkcode/", array("width"=>80, "height"=>28))}&'+Math.random();" style="cursor:pointer;" /></td>
+     <td><input name="code" type="text" class="input-text" size=10 /><img id="code" src="{function.url("api/access/checkcode/", array("width"=>80, "height"=>28))}" align="absmiddle" title="看不清楚？换一张" onclick="document.getElementById('code').src='{function.url("api/access/checkcode/", array("width"=>80, "height"=>28))}&'+Math.random();" style="cursor:pointer;" /></td>
     </tr>
     <tr>
      <th style="border:none">&nbsp;</th>
