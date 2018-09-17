@@ -127,11 +127,11 @@ class view {
 		"<?php include \$this->_include('\\1'); echo PHP_EOL; ?>",
 		"<?php \$this->block(\\1);?>",
 
-		"<?php \$return = \$this->_category(\"\\1\");  if (is_array(\$return)) { foreach (\$return as \$key=>\$xiao) { \$arrchilds = @explode(',', \$xiao['arrchilds']);    \$current = in_array(\$catid, \$arrchilds);?>",
+		"<?php \$return = \$this->_category(\"\\1\");  if (is_array(\$return)) { foreach (\$return as \$key=>\$vdata) { \$arrchilds = @explode(',', \$vdata['arrchilds']);    \$current = in_array(\$catid, \$arrchilds);?>",
 		"<?php } } ?>",
 
 		"<?php \$return_\\2 = \$this->_listdata(\"\\1 return=\\2\"); extract(\$return_\\2); if (is_array(\$return_\\2)) { foreach (\$return_\\2 as \$key_\\2=>\$\\2) { ?>",		
-		"<?php \$return = \$this->_listdata(\"\\1\"); extract(\$return); if (is_array(\$return)) { foreach (\$return as \$key=>\$xiao) { ?>",
+		"<?php \$return = \$this->_listdata(\"\\1\"); extract(\$return); if (is_array(\$return)) { foreach (\$return as \$key=>\$vdata) { ?>",
 		"<?php } } ?>",
 
 		"<?php if (is_array(\$\\1)) { foreach (\$\\1 as \$\\2) { ?>",

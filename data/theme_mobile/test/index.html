@@ -27,10 +27,10 @@
     <ul class="focus-content">
       {list catid=4 order=time num=5}
       <li>
-        <a class="pic" href="{$xiao['url']}">
+        <a class="pic" href="{$vdata['url']}">
           <img src="/theme/images/sm.jpg" />
         </a>
-        <a class="tit" href="{$xiao['url']}">{function.strcut($xiao[title],34,'')}</a>
+        <a class="tit" href="{$vdata['url']}">{function.strcut($vdata[title],34,'')}</a>
       </li>
       {/list}
     </ul>
@@ -40,8 +40,8 @@
   <div class="index-card">
     {nav  }
     <div class="card-item">
-      <a href="{$xiao['url']}"><img src="/theme/images/icon01.gif" /></a>
-      <a class="title" href="{$xiao['url']}">{$xiao['catname']}</a>
+      <a href="{$vdata['url']}"><img src="/theme/images/icon01.gif" /></a>
+      <a class="title" href="{$vdata['url']}">{$vdata['catname']}</a>
     </div>
     {/nav}
     <br class="clear" />

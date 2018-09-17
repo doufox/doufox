@@ -13,15 +13,15 @@
     <ul class="noborder">
 {list catid=$catid page=$page cache=36000}
      <li>
-      <div class="picpic"><a href="{$xiao['url']}"><img src="{function.thumb($xiao[thumb])}" /></a></div>
+      <div class="picpic"><a href="{$vdata['url']}"><img src="{function.thumb($vdata[thumb])}" /></a></div>
       <div class="picname">
-       <a href="{$xiao['url']}" target="_self" class="pictitle">{$xiao['title']}</a><br />
+       <a href="{$vdata['url']}" target="_self" class="pictitle">{$vdata['title']}</a><br />
        <span>品牌： &nbsp;</span><br />
        <span>
-        市场租价：<span class="marketprice">￥</span> &nbsp;柯诚价格：<span class="price">￥{$xiao['price']}</span><br />
+        市场租价：<span class="marketprice">￥</span> &nbsp;柯诚价格：<span class="price">￥{$vdata['price']}</span><br />
         <div class="buttonzone"><a href="order">查看商品介绍</a>订购</div>
        </span><br />
-       <span>简介：{$xiao['description']}</span><br />
+       <span>简介：{$vdata['description']}</span><br />
       </div>
 
      </li>

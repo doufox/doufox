@@ -5,19 +5,19 @@
 {nav  }
   <div class="newwarp bg">
     <div class="newstitle">
-      <h3>{$xiao['catname']}</h3>
-      <a href="{$xiao['url']}" class="more">more&gt;&gt;</a>
+      <h3>{$vdata['catname']}</h3>
+      <a href="{$vdata['url']}" class="more">more&gt;&gt;</a>
     </div>
-    {list catid=$xiao[catid] status=2 num=1}
+    {list catid=$vdata[catid] status=2 num=1}
     <div class="newsfocus">
-      <div><a href="{$xiao['url']}"><img src="{function.thumb($xiao[thumb])}" /></a></div>
-      <h3><a href="{$xiao['url']}" title="{$xiao['title']}">{function.strcut($xiao[title],34)}</a></h3>
-      <p>{function.strcut($xiao[description],80)} </p>
+      <div><a href="{$vdata['url']}"><img src="{function.thumb($vdata[thumb])}" /></a></div>
+      <h3><a href="{$vdata['url']}" title="{$vdata['title']}">{function.strcut($vdata[title],34)}</a></h3>
+      <p>{function.strcut($vdata[description],80)} </p>
     </div>
 {/list}
     <ul class="indexnewslist">
-{list catid=$xiao[catid] order=time num=3}
-      <li><span>{function.date("Y-m-d", $xiao['time'])}</span>· <a href="{$xiao['url']}">{function.strcut($xiao[title],34,'')}</a></li>
+{list catid=$vdata[catid] order=time num=3}
+      <li><span>{function.date("Y-m-d", $vdata['time'])}</span>· <a href="{$vdata['url']}">{function.strcut($vdata[title],34,'')}</a></li>
 {/list}
     </ul>
   </div>

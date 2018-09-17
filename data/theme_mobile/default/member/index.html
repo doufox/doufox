@@ -15,14 +15,14 @@
 			<ul>
 				{list status=0 username=$member[username] num=10 }
 				<li class="list-item">
-					<span class="date">{function.date("Y-m-d H:i:s", $xiao['time'])}</span>
-					<a href="{$xiao['url']}"><font color="#FF0000">[未审]</font>{$xiao['title']}</a>
+					<span class="date">{function.date("Y-m-d H:i:s", $vdata['time'])}</span>
+					<a href="{$vdata['url']}"><font color="#FF0000">[未审]</font>{$vdata['title']}</a>
 				</li>
 				{/list}
 				{list username=$member[username] num=10 }
 				<li class="list-item">
-					<span class="date">{function.date("Y-m-d H:i:s", $xiao['time'])}</span>
-					<a href="{$xiao['url']}">{$xiao['title']}</a>
+					<span class="date">{function.date("Y-m-d H:i:s", $vdata['time'])}</span>
+					<a href="{$vdata['url']}">{$vdata['title']}</a>
 				</li>
 				{/list}
 			</ul>

@@ -19,7 +19,7 @@
 <div id="scrolldiv">
  <ul>
   {list catid=3 order=time num=3}
-  <li><a href="{$xiao['url']}">{function.strcut($xiao[title],34,'')}</a></li>
+  <li><a href="{$vdata['url']}">{function.strcut($vdata[title],34,'')}</a></li>
   {/list}
  </ul>
  <span class="newsmore"><a href="{$cats[3][url]}">更多</a></span>
@@ -28,7 +28,7 @@
 <div class="icon">
  <ul>
 {nav  }
-  <li><a href="{$xiao['url']}"><img src="{$site_template}images/icon01.gif" /><p>{$xiao['catname']}</p></a></li>
+  <li><a href="{$vdata['url']}"><img src="{$site_template}images/icon01.gif" /><p>{$vdata['catname']}</p></a></li>
 {/nav}
  </ul>
  <br class="clear" />

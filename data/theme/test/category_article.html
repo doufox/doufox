@@ -8,10 +8,10 @@
     {template crumbs.html}
 {nav  parentid=$catid typeid=1}
    <div class="newslist">
-    <h3><span class="bt">{$xiao['catname']}</span> <span class="more"><a href="{$xiao['url']}">更多&gt;&gt;</a></span></h3> 	
+    <h3><span class="bt">{$vdata['catname']}</span> <span class="more"><a href="{$vdata['url']}">更多&gt;&gt;</a></span></h3> 	
     <ul class="noborder">
-{list catid=$xiao[catid] num=9  order=time}
-     <li><span class="date">{function.date("Y-m-d", $xiao['time'])}</span> <a href="{$xiao['url']}">·  {$xiao['title']}</a></li>
+{list catid=$vdata[catid] num=9  order=time}
+     <li><span class="date">{function.date("Y-m-d", $vdata['time'])}</span> <a href="{$vdata['url']}">·  {$vdata['title']}</a></li>
 {/list}
     </ul>
    </div>

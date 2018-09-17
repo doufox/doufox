@@ -124,12 +124,12 @@ class FormController extends Admin {
 
         $list_code = '
 {list table=' . $this->model['tablename'] . '   num=10}
-表单字段信息 例如：id：{$xiao[\'id\']}
+表单字段信息 例如：id：{$vdata[\'id\']}
 {/list}';
         if ($this->join) {
 		    $list_code = '
 {list table=' . $this->model['tablename'] . ' cid=被关联的文章id(例如：$id) num=10}
-表单字段信息 例如：id：{$xiao[\'id\']}
+表单字段信息 例如：id：{$vdata[\'id\']}
 {/list}';
 
 		$form_url  = HTTP_URL . ENTRY_SCRIPT_NAME . '?c=form&a=post&modelid=' . $this->model['modelid'] . '&cid=$id ($id是被关联内容的id变量)';

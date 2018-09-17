@@ -20,7 +20,7 @@ $(document).ready(function(){
 <div class="newlist">
  <ul class="tabs" style="margin-top: 0">
 {nav  parentid=$catid typeid=1}
-  <li><a href="{$xiao['url']}">{$xiao['catname']}</a></li>
+  <li><a href="{$vdata['url']}">{$vdata['catname']}</a></li>
 {/nav}
  </ul>
  <br class="clear" />
@@ -30,7 +30,7 @@ $(document).ready(function(){
  <ul class="newsconlist">
    <input name="list_id" id="list_id" type="hidden" value="1">
    {list catid=$catid page=$page cache=36000}
-   <li><a href="{$xiao['url']}">{$xiao['title']}</a></li>
+   <li><a href="{$vdata['url']}">{$vdata['title']}</a></li>
    {/list}
  </ul>
  <ul class="page_navi"><li><span class="nav-button">查看更多</span></li></ul>

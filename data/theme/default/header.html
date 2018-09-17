@@ -33,11 +33,11 @@
             <li class="nav-item"><a href="{$site_url}">Home</a></li>
 {nav num=5}
             <li class="nav-item{if $current} on{/if}">
-                <a href="{$xiao['url']}">{$xiao['catname']}</a>
-{if $xiao['child']}
+                <a href="{$vdata['url']}">{$vdata['catname']}</a>
+{if $vdata['child']}
                 <ul class="sub">
-                    {nav parentid=$xiao[catid]}
-                    <li class="nav-item{if $current} on{/if}"><a href="{$xiao['url']}">{$xiao['catname']}</a></li>
+                    {nav parentid=$vdata[catid]}
+                    <li class="nav-item{if $current} on{/if}"><a href="{$vdata['url']}">{$vdata['catname']}</a></li>
                     {/nav}
                 </ul>
 {/if}

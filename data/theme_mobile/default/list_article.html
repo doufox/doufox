@@ -12,8 +12,8 @@
         <!-- list start -->
         <ul>
             {list catid=$catid page=$page cache=36000}<li class="list-item">
-                <span class="list-date">{function.date("Y-m-d", $xiao['time'])}</span>
-                <a href="{$xiao['url']}">&gt;{$xiao['title']}</a>
+                <span class="list-date">{function.date("Y-m-d", $vdata['time'])}</span>
+                <a href="{$vdata['url']}">&gt;{$vdata['title']}</a>
             </li>{/list}
 
         </ul><!-- list end -->
