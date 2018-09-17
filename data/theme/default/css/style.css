@@ -126,22 +126,14 @@ img {
     overflow: unset;
 }
 
-.nav a {
-    color: #fff;
-}
-
 .nav .nav-item {
     float: left;
     position: relative;
     display: inline;
 }
 
-.nav .nav-item h3 {
-    float: left;
-    width: 100%;
-}
-
-.nav .nav-item h3 a {
+.nav .nav-item a {
+    color: #fff;
     display: block;
     padding: 0 28px;
     font-size: 16px;
@@ -165,21 +157,16 @@ img {
     background-color: #3399cc;
 }
 
-.nav .sub .nav-item {
-    width: 100%;
-    border-top: 1px solid #81d4fa;
-}
-
-/* .nav .sub a {
-    display: block;
-    padding: 0 10px;
-} */
-
 .nav .nav-item:hover .sub {
     display: block;
 }
 
-.nav .on h3 a {
+.nav .sub .nav-item {
+    width: 100%;
+    border-top: 1px solid #ddd;
+}
+
+.nav .on a {
     background-color: #99cccc;
     color: #000;
 }
