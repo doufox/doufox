@@ -32,8 +32,18 @@
         <ul id="nav" class="container clearfix">
             <li class="nav-item"><h3><a href="{$site_url}">Home</a></h3></li>
 {nav num=5}
-            <li class="nav-item{if $current} on{/if}"><h3><a href="{$xiao['url']}">{$xiao['catname']}</a></h3></li>
+            <li class="nav-item{if $current} on{/if}">
+                <h3><a href="{$xiao['url']}">{$xiao['catname']}</a></h3>
+{if $xiao['child']}
+                <ul class="sub">
+                    {nav parentid=$xiao[catid]}
+                    <li class="nav-item{if $current} on{/if}"><h3><a href="{$xiao['url']}">{$xiao['catname']}</a></h3></li>
+                    {/nav}
+                </ul>
+{/if}
+            </li>
 {/nav}
+
 {if $member}
             <li class="nav-item member"><a href="{function.url('member/index')}">会员中心</a></li>
             <li class="nav-item member"><a href="{function.url('member/login/out')}">退出</a></li>

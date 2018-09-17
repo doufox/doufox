@@ -82,17 +82,17 @@ class CategoryController extends Admin {
 						$y++;
 					}
 				}
-				$html = '<script type="text/javascript">parent.document.getElementById(\'leftMain\').src =\' ?s=admin&c=content&a=category\';</script>';
+				$html = '<script type="text/javascript">parent.document.getElementById("leftMain").src ="'.url("admin/content/category").'";</script>';
 
 				$this->show_message($this->getCacheCode('category') . $html. '批量添加成功', 1, url('admin/category/index'));
 			} else {
 				if (empty($data['catname'])) $this->show_message('请填写栏目名称');
-				if ($data['typeid'] != 3 && $this->category->check_catdir(0, $data['catdir']))  $this->show_message( '栏目路径为空或者已经存在');
+				if ($data['typeid'] != 3 && $this->category->check_catdir(0, $data['catdir']))  $this->show_message('栏目路径为空或者已经存在');
 				$result = $this->category->set(0, $data);
 				if (!is_numeric($result)) $this->show_message($result);
 				$data['catid'] = $result;
 				$this->category->url($result, getCaturl($data));
-				$html = '<script type="text/javascript">parent.document.getElementById(\'leftMain\').src =\' ?s=admin&c=content&a=category\';</script>';
+				$html = '<script type="text/javascript">parent.document.getElementById("leftMain").src ="'.url("admin/content/category").'";</script>';
 				$this->show_message($this->getCacheCode('category') . '添加成功'. $html, 1, url('admin/category/index'));
 			}
 	    }
@@ -125,22 +125,28 @@ class CategoryController extends Admin {
 	 * 修改栏目
 	 */
     public function editAction() {
-        $catid   = (int)$this->get('catid');
-        if (empty($catid)) $this->show_message('栏目ID不存在');
-        $data    = $this->category->find($catid);
+        $catid = (int)$this->get('catid');
+        if (empty($catid)) {
+			$this->show_message('栏目ID不存在');
+		}
+        $data  = $this->category->find($catid);
 	    if ($this->post('submit')) {
-		
 			unset($data,$catid);
-			
 	        $catid = (int)$this->post('catid');
-            if (empty($catid)) $this->show_message('栏目ID不存在');
+            if (empty($catid)) {
+				$this->show_message('栏目ID不存在');
+			}
 	        $data  = $this->post('data');
-	        if (empty($data['catname'])) $this->show_message('请填写栏目名称');
-	        if ($data['typeid'] != 3 && $this->category->check_catdir($catid, $data['catdir'])) $this->show_message( '栏目路径为空或者已经存在');
+	        if (empty($data['catname'])) {
+				$this->show_message('请填写栏目名称');
+			}
+	        if ($data['typeid'] != 3 && $this->category->check_catdir($catid, $data['catdir'])) {
+				$this->show_message('栏目路径为空或者已经存在');
+			}
 	        $data['typeid']  = $this->post('typeid');
 	        $result = $this->category->set($catid, $data);
 	        if (is_numeric($result)) {
-				$html = '<script type="text/javascript">parent.document.getElementById(\'leftMain\').src =\' ?s=admin&c=content&a=category\';</script>';
+				$html = '<script type="text/javascript">parent.document.getElementById("leftMain").src ="'.url("admin/content/category").'";</script>';
 	            $this->show_message($this->getCacheCode('category') . $data['catname'].' 修改成功'.$html, 1, url('admin/category/index'));
 	        } else {
 	            $this->show_message('操作失败');
@@ -176,7 +182,7 @@ class CategoryController extends Admin {
 	    $catid = $catid ? $catid : (int)$this->get('catid');
         if (empty($catid)) $this->show_message('栏目ID不存在');
 	    if ($this->category->del($catid)) {
-			$html = '<script type="text/javascript">parent.document.getElementById(\'leftMain\').src =\' ?s=admin&c=content&a=category\';</script>';
+			$html = '<script type="text/javascript">parent.document.getElementById("leftMain").src ="' . url("admin/content/category") . '";</script>';
 	        $this->show_message($this->getCacheCode('category') . '删除成功'.$html, 1, url('admin/category/index'));
 	    } else {
 	        $this->show_message('删除失败');

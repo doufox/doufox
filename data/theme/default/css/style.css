@@ -113,16 +113,17 @@ img {
     display: inline-block;
 }
 
-#nav {
-    background-color: #3399cc;
-}
-
 .nav {
     width: 100%;
     margin: 5px auto;
     height: 40px;
     line-height: 40px;
     position: relative;
+}
+
+.nav .container {
+    background-color: #3399cc;
+    overflow: unset;
 }
 
 .nav a {
@@ -137,6 +138,7 @@ img {
 
 .nav .nav-item h3 {
     float: left;
+    width: 100%;
 }
 
 .nav .nav-item h3 a {
@@ -145,34 +147,36 @@ img {
     font-size: 16px;
 }
 
-.nav-item a:hover {
+.nav .nav-item a:hover {
     background-color: #5e5e5f;
 }
 
-.nav-item a:focus {
+.nav .nav-item a:focus {
     background-color: #345;
 }
-.nav .sub {
+
+.nav .nav-item .sub {
     display: none;
-    min-width: 120px;
+    min-width: 100%;
     left: 0;
-    top: 40px;
+    top: 100%;
     position: absolute;
     line-height: 40px;
-    background-color: #7369E9;
-    border-top: 0;
+    background-color: #3399cc;
 }
 
-.nav .sub li {
-    zoom: 1; }
+.nav .sub .nav-item {
+    width: 100%;
+    border-top: 1px solid #81d4fa;
+}
 
-.nav .sub a {
+/* .nav .sub a {
     display: block;
     padding: 0 10px;
-}
+} */
 
-.nav .sub a:hover {
-    background-color: #000;
+.nav .nav-item:hover .sub {
+    display: block;
 }
 
 .nav .on h3 a {
@@ -180,12 +184,12 @@ img {
     color: #000;
 }
 
-.nav-item.member {
+.nav .nav-item.member {
     float: right;
     position: relative;
 }
 
-.nav-item.member a {
+.nav .nav-item.member a {
     display: block;
     padding: 0 5px;
     font-size: 16px;
