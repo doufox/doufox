@@ -3,18 +3,18 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><?php echo $this->site_config['SITE_NAME']; ?> - 后台管理中心</title>
+    <title><?php echo $this->site_config['SITE_NAME']; ?> - 网站管理系统后台</title>
     <link rel="stylesheet" type="text/css" href="/static/css/backend.css" />
     <link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script>
+    <!-- <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script> -->
 </head>
 
 <body>
     <div id="head">
         <div id="logo">
             <a href="<?php echo url('admin'); ?>">
-                <h1>后台管理中心</h1>
+                <h1>网站管理系统后台</h1>
             </a>
         </div>
         <div id="menu_position">
@@ -121,7 +121,7 @@
             <div id="home">
                 <div id="shortcut">
                     <a href="javascript:_MP(107,'<?php echo url('admin/index/cache'); ?>');" title="更新缓存">更新缓存</a>
-                    <a href="https://doufox.com" title="帮助" target="_blank" title="帮助">帮助</a>
+                    <a href="<?php echo APP_SITE; ?>" title="帮助" target="_blank" title="帮助">帮助</a>
                     <a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a>
                 </div>
                 <label id="position">后台首页</label>

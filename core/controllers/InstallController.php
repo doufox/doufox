@@ -1,6 +1,6 @@
 <?php
 /**
- * 安装页面
+ * 系统安装模块
  */
 class InstallController
 {
@@ -25,25 +25,25 @@ class InstallController
 			break;
 			case '2':// 环境检测 填写配置信息
 				if (PHP_VERSION < '5.2.0') {
-					$error = '服务器PHP版本低于5.2, 无法进行安装！';
+					$error = '服务器环境PHP版本低于5.2, 无法进行安装！';
 				}
 				if (!function_exists("session_start")) {
-					$error = '系统不支持session, 无法进行安装！';
+					$error = '服务器环境不支持session, 无法进行安装！';
 				}
 				if (!extension_loaded('mysql') && !extension_loaded('mariadb')) {
-					$error = '服务器不支持mysql, 无法进行安装！';
+					$error = '服务器环境不支持mysql, 无法进行安装！';
 				}
 				if (!function_exists('imagejpeg')) {
-					$error = '服务器不支持GD库(jpeg), 无法进行安装！';
+					$error = '服务器环境不支持GD库(jpeg), 无法进行安装！';
 				}
 				if (!function_exists('imagegif')) {
-					$error = '服务器不支持GD库(gif), 无法进行安装！';
+					$error = '服务器环境不支持GD库(gif), 无法进行安装！';
 				}
 				if (!function_exists('imagepng')) {
-					$error = '服务器不支持GD库(png), 无法进行安装！';
+					$error = '服务器环境不支持GD库(png), 无法进行安装！';
 				}
 				if (!function_exists('json_decode')) {
-					$error = '服务器不支持JSON, 无法进行安装！';
+					$error = '服务器环境不支持JSON, 无法进行安装！';
 				}
 				if (!is_writable(DATA_PATH)) {
 					$error = '系统目录data没有写入权限, 无法进行安装！';

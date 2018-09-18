@@ -1,59 +1,59 @@
 <?php
 echo <<< EOT
     <style>
-        /* reset */
-        html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}
-        header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
-        table{border-collapse:collapse;border-spacing:0;}
-        caption,th{text-align:left;font-weight:normal;}
-        html,body,fieldset,img,iframe,abbr{border:0;}
-        i,cite,em,var,address,dfn{font-style:normal;}
-        [hidefocus],summary{outline:0;}
+        html,body,div,ul,li,p,hr,td,form,input,button{margin:0;padding:0;}
+        html,body,img,iframe{border:0;}
         li{list-style:none;}
-        h1,h2,h3,h4,h5,h6,small{font-size:100%;}
-        h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
-        sup,sub{font-size:83%;}
-        pre,code,kbd,samp{font-family:inherit;}
         q:before,q:after{content:none;}
-        textarea{overflow:auto;resize:none;}
-        label,summary{cursor:default;}
+        label{cursor:default;}
         a,button{cursor:pointer;}
-        del,ins,u,s,a,a:hover{text-decoration:none;}
-        body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial;color:#333;outline:0;}
+        a,a:hover{text-decoration:none;}
+        body,input,button{font:12px/1.14 arial;color:#333;outline:0;}
         a,a:hover{color:#333;}
-        .m-install {width:700px; margin:8% auto 30px auto; border: 1px solid #ddd;padding-bottom:15px;color:#666;}
-        .m-install .install-head {background-color: #ddd;height:50px;line-height:50px;font-size:16px;text-align:center;}
-        .m-install .install-model .formitm{ padding-left:100px; }
-        .m-install .install-button { margin-left:auto; margin-right:auto; margin-top:10px; text-align:center; }
-        .m-install .u-install-btn { padding:0px; margin:0px; background-color:#5aa6f4; width:200px; height:45px; line-height:45px; border:0px; font-size:14px; text-align:center; color:#FFF; border-radius: 5px; }
-        .m-install .u-install-btn:hover { background-color: #4c95e1; }
-        .m-install .install-status { margin-left:auto; margin-right:auto; line-height:35px; font-size:12px; text-align:center; color:#F00}
-        .m-install .install-copyright { line-height:25px; padding-top:10px; font-size:10px; text-align:center; color:#999; display:none}
-        .m-install .install-copyright a { color:#999}
-		.m-install .install-status1 { margin-left:auto; margin-right:auto; line-height:35px; font-size:14px; text-align:center;color: #555;}
-        /* 3 */
-        .m-form { line-height: 29px; color: #555;}
-        .m-form .formitm { padding: 10px 0px;height: 30px; line-height: 30px; border-bottom: 1px solid #eee; }
-        .m-form .formitm-1 { padding-left: 120px;height: 30px; }
-        .m-form .formitm-2 { border-bottom:none;}
-        .m-form .lab { float: left; width: 110px; margin-right: -90px; text-align: right; font-weight: bold; }
-        .m-form .ipt { margin-left: 120px; }
-        .m-form .ipt * { vertical-align: middle; }
-        .m-form .ipt a, .m-form .ipt a:hover { text-decoration: none; color: #3891eb; }
-        .m-form .ipt .suffix { margin: 0 0 0 5px; color: #777; }
-        .m-form .ipt .suffix a { padding: 0px; }
-        .m-form .ipt .u-btn { margin-top: -2px; *margin-top:0px;}
-        .m-form .ipt p { line-height: 22px; color: #999; }
-        .m-form .tip { padding-top: 10px; }
-        .m-form .tip input { margin: 0 5px 3px 0; }
-        .m-form .status { padding-left: 10px; color: #093 }
-        .m-form .status-err { color: #F00 }
-        .m-fieldset {  padding:10px; padding-bottom:0px; margin-top:10px; padding-left:0px;}
-        .m-fieldset legend { font-weight:bold; color:#399dd8; }
+        .install {
+            width:700px;
+            margin:8% auto 30px auto;
+            border: 1px solid #0000ff;
+            color:#666;
+        }
+        .header {
+            background-color: #0000ff;
+            font-size: 16px;
+            padding: 10px;
+            color: #fff;
+        }
+        .main {
+            min-height: 150px;
+            line-height: 29px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        .formitm { padding-left:100px; }
+		.step-1 {
+            font-size: 14px;
+            padding: 10px;
+        }
+        .installed {
+            font-size: 14px;
+            text-align: center;
+        }
+        .main .formitm { padding: 10px 0px;height: 30px; line-height: 30px; border-bottom: 1px solid #eee; }
+        .main .formitm-1 { padding-left: 120px;height: 30px; }
+        .main .formitm-2 { border-bottom:none;}
+        .main .lab { float: left; width: 110px; margin-right: -90px; text-align: right; font-weight: bold; }
+        .main .ipt { margin-left: 120px; }
+        .main .ipt * { vertical-align: middle; }
+        .main .ipt a, .main .ipt a:hover { text-decoration: none; color: #3891eb; }
+        .main .ipt .suffix { margin: 0 0 0 5px; color: #777; }
+        .main .ipt .suffix a { padding: 0px; }
+        .main .ipt .u-btn { margin-top: -2px; *margin-top:0px;}
+        .main .ipt p { line-height: 22px; color: #999; }
+        .main .tip { padding-top: 10px; }
+        .main .tip input { margin: 0 5px 3px 0; }
+        .main .status { padding-left: 10px; color: #093 }
+        .main .status-err { color: #F00 }
         .u-btn-sm { padding: 0 10px; height: 22px; line-height: 22px; }
 
-        /* 2 */
-        /* 文本输入框 */
         .u-ipt { width: 180px; padding: 5px; height: 17px; border: 1px solid #D9D9D9; border-top-color: #c0c0c0; line-height: 17px; font-size: 14px; color: #777; background: #fff; margin-right: 5px; vertical-align: middle; }
         .u-ipt-1 { width: 50px; }
         .u-ipt-2 { width: 100px; }
@@ -68,6 +68,43 @@ echo <<< EOT
         .u-tta-6 { width: 300px; height: 80px; }
         .u-ipt-7 { width: 400px; height: 100px; }
         .u-tta-err { border-color: #c00 #e00 #e00; }
+
+        .install-button {
+            margin-left:auto;
+            margin-right:auto;
+            margin-top:10px;
+            text-align:center;
+        }
+        .install-button .btn {
+            background-color: #00f;
+            width: 100px;
+            border: 0px;
+            font-size: 14px;
+            text-align: center;
+            color: #fff;
+            padding: 10px;
+        }
+        .install-button .btn:hover {
+            background-color: #333;
+        }
+        .install-button .btn:active {
+            background-color: #4c95e1;
+        }
+        .install .install-status { margin-left:auto; margin-right:auto; line-height:35px; font-size:12px; text-align:center; color:#F00}
+
+        .footer {
+            background-color: #0000ff;
+            padding: 10px;
+            color: #fff;
+            overflow: hidden;
+        }
+        .footer .copy {
+            float: left;
+        }
+        .footer .site {
+            color: #fff;
+            float: right;
+        }
     </style>
 EOT;
 echo PHP_EOL;

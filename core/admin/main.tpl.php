@@ -18,7 +18,7 @@ if (!file_exists(DATA_PATH . 'cache' . DIRECTORY_SEPARATOR."category.cache.php")
         <tbody class="line-box">
           <tr>
             <td align="left">
-              doufox 网站整体管理系统<br />
+              doufox 网站管理系统<br />
               当前域名：<?php echo $sysinfo['domain'];?><br />
               程序版本：<?php echo APP_VERSION;?><br />
               发布日期：<?php echo APP_RELEASE;?> [<a href="https://doufox.com" target="_blank">查看最新版本</a>]<br />
