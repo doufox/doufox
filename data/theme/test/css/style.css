@@ -262,12 +262,12 @@ img {
     display: none;
 }
 
-.mainbody {
+.warp {
     width: 960px;
     margin: 0 auto;
 }
 
-.mainbody.category-card {
+.warp.category-card {
     width: 970px;
 }
 
@@ -275,7 +275,7 @@ img {
     width: 970px;
 }
 
-.mainbody .newwarp {
+.warp .newwarp {
     margin: 5px;
     padding: 5px;
     width: -moz-calc(100% / 3 - 22px);
@@ -319,21 +319,21 @@ img {
     float: right;
 }
 
-.mainbody .newsfocus {
+.warp .newsfocus {
     height: 75px;
     padding: 10px 0px 0px 0px;
     margin-bottom: 8px;
     border-bottom: 1px solid #e0e0e0;
 }
 
-.mainbody .newsfocus div {
+.warp .newsfocus div {
     float: left;
     width: 60px;
     height: 60px;
     margin-right: 16px;
 }
 
-.mainbody .newsfocus div a {
+.warp .newsfocus div a {
     width: 60px;
     height: 60px;
     border: 1px solid #d2d2d0;
@@ -345,38 +345,38 @@ img {
     *font-family: Arial;
 }
 
-.mainbody .newsfocus div a img {
+.warp .newsfocus div a img {
     vertical-align: middle;
     width: 58px;
     height: 58px;
 }
 
-.mainbody .newsfocus h3 {
+.warp .newsfocus h3 {
     margin-bottom: 3px;
 }
 
-.mainbody .newsfocus h3 a {
+.warp .newsfocus h3 a {
     font-weight: bold;
     font-size: 12px;
     color: #fe8216;
 }
 
-.mainbody .newsfocus p {
+.warp .newsfocus p {
     color: #8f8f8f;
     line-height: 18px;
 }
 
-.mainbody .indexnewslist li {
+.warp .indexnewslist li {
     color: #325e7f;
     line-height: 24px;
     height: 24px;
 }
 
-.mainbody .indexnewslist li a {
+.warp .indexnewslist li a {
     color: #325e7f;
 }
 
-.mainbody .indexnewslist li span {
+.warp .indexnewslist li span {
     float: right;
     font-family: Verdana;
     color: #8c8c8c;
@@ -410,7 +410,7 @@ img {
     text-align: center;
 }
 
-.mainbody .page .article-title {
+.warp .page .article-title {
     text-align: center;
     margin: 20px;
 }
@@ -598,22 +598,22 @@ pre.prettyprint {
     position: absolute;
 }
 
-.mainbody .newslist h3 {
+.warp .newslist h3 {
     color: #325e7f;
     height: 30px;
     font-size: 18px;
     padding-left: 5px;
 }
 
-.mainbody .newslist h3 .bt {
+.warp .newslist h3 .bt {
     float: left;
 }
 
-.mainbody .newslist h3 .more {
+.warp .newslist h3 .more {
     float: right;
 }
 
-.mainbody .newslist li {
+.warp .newslist li {
     color: #325e7f;
     line-height: 34px;
     height: 34px;
@@ -622,12 +622,12 @@ pre.prettyprint {
     padding: 5px 10px;
 }
 
-.mainbody .newslist li a {
+.warp .newslist li a {
     float: left;
     color: #325e7f;
 }
 
-.mainbody .newslist li span {
+.warp .newslist li span {
     float: right;
     font-family: Verdana;
     color: #8c8c8c;
