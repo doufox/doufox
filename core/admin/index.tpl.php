@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/static/css/backend.css" />
     <link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
-    <!-- <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script> -->
+    <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script>
 </head>
 
 <body>
@@ -144,8 +144,8 @@
 
         function _MP(id, targetUrl) {
             var title = $("#_MP" + id).find('a').html();
-            $("#position").html(title);
-            $("#rightMain").attr('src', targetUrl);
+            document.getElementById('position').innerHTML = title
+            document.getElementById('rightMain').src = targetUrl
             $('.focused').removeClass("focused");
             $('#_MP' + id).addClass("focused");
         }
