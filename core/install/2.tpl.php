@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>系统安装向导 - doufox</title>
-    <meta name="keywords" content="doufox 网站管理系统 - 安装向导" />
-    <meta name="description" content="doufox 网站管理系统 - 安装向导" />
-	<link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon" />
-	<?php include $this->install_tpl("style"); ?>
+<?php include $this->install_tpl("header");?>
+
 	<script type="text/javascript">
 		function $(ID) {return document.getElementById(ID);}
 	</script>
-</head>
-<body>
-<div class="install">
+
 	<div class="header">doufox 系统安装向导 - 基础配置</div>
 	<div class="main">
 		<iframe id="db_tester" name="db_tester" style="display:none;"></iframe>
@@ -80,90 +71,85 @@
 			<?php } ;?>
 		</form>
 	</div>
-	<div class="footer">
-		<div class="copy">Copyright &copy; 2018 Crogram, Inc.</div>
-		<a class="site" href="<?php echo APP_SITE; ?>" target="_blank" title="A member of Crogram, Inc.">doufox.com</a>
-	</div>
-</div>
-<script type="text/javascript">
-function test() {
-	if($('db_host').value == '') {
-		alert('请填写数据库服务器');
-		$('db_host').focus();
-		return;
-	}
-	$('tdb_host').value = $('db_host').value;
+	<script type="text/javascript">
+		function test() {
+			if($('db_host').value == '') {
+				alert('请填写数据库服务器');
+				$('db_host').focus();
+				return;
+			}
+			$('tdb_host').value = $('db_host').value;
 
-	if($('db_user').value == '') {
-		alert('请填写数据库用户名');
-		$('db_user').focus();
-		return;
-	}
-	$('tdb_user').value = $('db_user').value;
-	$('tdb_pass').value = $('db_pass').value;
+			if($('db_user').value == '') {
+				alert('请填写数据库用户名');
+				$('db_user').focus();
+				return;
+			}
+			$('tdb_user').value = $('db_user').value;
+			$('tdb_pass').value = $('db_pass').value;
 
-	if($('db_name').value == '') {
-		alert('请填写数据库名');
-		$('db_name').focus();
-		return;
-	}
-	$('tdb_name').value = $('db_name').value;
+			if($('db_name').value == '') {
+				alert('请填写数据库名');
+				$('db_name').focus();
+				return;
+			}
+			$('tdb_name').value = $('db_name').value;
 
-	if($('tb_pre').value == '') {
-		alert('请填写数据表前缀');
-		$('tb_pre').focus();
-		return;
-	}
-	$('ttb_pre').value = $('tb_pre').value;
-	$('db_form').submit();
-}
-function check() {
-	if($('db_host').value == '') {
-		alert('请填写数据库服务器');
-		$('db_host').focus();
-		return false;
-	}
+			if($('tb_pre').value == '') {
+				alert('请填写数据表前缀');
+				$('tb_pre').focus();
+				return;
+			}
+			$('ttb_pre').value = $('tb_pre').value;
+			$('db_form').submit();
+		}
+		function check() {
+			if($('db_host').value == '') {
+				alert('请填写数据库服务器');
+				$('db_host').focus();
+				return false;
+			}
 
-	if($('db_user').value == '') {
-		alert('请填写数据库用户名');
-		$('db_user').focus();
-		return false;
-	}
+			if($('db_user').value == '') {
+				alert('请填写数据库用户名');
+				$('db_user').focus();
+				return false;
+			}
 
-	if($('db_name').value == '') {
-		alert('请填写数据库名');
-		$('db_name').focus();
-		return false;
-	}
+			if($('db_name').value == '') {
+				alert('请填写数据库名');
+				$('db_name').focus();
+				return false;
+			}
 
-	if($('tb_pre').value == '') {
-		alert('请填写数据表前缀');
-		$('tb_pre').focus();
-		return false;
-	}
+			if($('tb_pre').value == '') {
+				alert('请填写数据表前缀');
+				$('tb_pre').focus();
+				return false;
+			}
 
-	if($('username').value.length < 5) {
-		alert('后台帐号最少5位');
-		$('username').focus();
-		return false;
-	}
+			if($('username').value.length < 5) {
+				alert('后台帐号最少5位');
+				$('username').focus();
+				return false;
+			}
 
-	if(!$('username').value.match(/^[a-z0-9]+$/)) {
-		alert('后台帐号只能使用小写字母(a-z)、数字(0-9)');
-		$('username').focus();
-		return false;
-	}
+			if(!$('username').value.match(/^[a-z0-9]+$/)) {
+				alert('后台帐号只能使用小写字母(a-z)、数字(0-9)');
+				$('username').focus();
+				return false;
+			}
 
-	if($('password').value.length < 5) {
-		alert('后台密码最少5位');
-		$('password').focus();
-		return false;
-	}
+			if($('password').value.length < 5) {
+				alert('后台密码最少5位');
+				$('password').focus();
+				return false;
+			}
 
-	$('tip').style.display = '';
-	$('submit').disabled = true;
-	return true;
-}
-</script>
-</body>
-</html>
+			$('tip').style.display = '';
+			$('submit').disabled = true;
+			return true;
+		}
+	</script>
+
+<?php include $this->install_tpl("footer");?>
