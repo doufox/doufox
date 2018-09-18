@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `crogram_admin`;
-CREATE TABLE IF NOT EXISTS `crogram_admin` (
+DROP TABLE IF EXISTS `doufox_admin`;
+CREATE TABLE IF NOT EXISTS `doufox_admin` (
   `userid` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(20) DEFAULT NULL,
   `password` varchar(32) DEFAULT NULL,
@@ -12,11 +12,10 @@ CREATE TABLE IF NOT EXISTS `crogram_admin` (
   KEY `username` (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `crogram_admin` (`userid`, `username`, `password`, `roleid`, `realname`, `auth`, `list_size`, `left_width`) VALUES
-(1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 1, '超级管理员', '', 10, 150);
+INSERT INTO `doufox_admin` (`userid`, `username`, `password`, `roleid`, `realname`, `auth`, `list_size`, `left_width`) VALUES (1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 1, '超级管理员', '', 10, 150);
 
-DROP TABLE IF EXISTS `crogram_block`;
-CREATE TABLE IF NOT EXISTS `crogram_block` (
+DROP TABLE IF EXISTS `doufox_block`;
+CREATE TABLE IF NOT EXISTS `doufox_block` (
   `id` smallint(8) NOT NULL AUTO_INCREMENT,
   `type` tinyint(1) NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -24,8 +23,8 @@ CREATE TABLE IF NOT EXISTS `crogram_block` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `crogram_category`;
-CREATE TABLE IF NOT EXISTS `crogram_category` (
+DROP TABLE IF EXISTS `doufox_category`;
+CREATE TABLE IF NOT EXISTS `doufox_category` (
   `catid` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `typeid` tinyint(1) NOT NULL,
   `modelid` smallint(5) unsigned NOT NULL DEFAULT '0',
@@ -60,8 +59,8 @@ CREATE TABLE IF NOT EXISTS `crogram_category` (
   KEY `modelid` (`modelid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `crogram_content`;
-CREATE TABLE IF NOT EXISTS `crogram_content` (
+DROP TABLE IF EXISTS `doufox_content`;
+CREATE TABLE IF NOT EXISTS `doufox_content` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `catid` smallint(5) unsigned NOT NULL DEFAULT '0',
   `modelid` smallint(5) NOT NULL,
@@ -82,8 +81,8 @@ CREATE TABLE IF NOT EXISTS `crogram_content` (
   KEY `admin` (`listorder`,`catid`,`modelid`,`status`,`time`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `crogram_content_article`;
-CREATE TABLE IF NOT EXISTS `crogram_content_article` (
+DROP TABLE IF EXISTS `doufox_content_article`;
+CREATE TABLE IF NOT EXISTS `doufox_content_article` (
   `id` mediumint(8) NOT NULL,
   `catid` smallint(5) NOT NULL,
   `content` mediumtext NOT NULL,
@@ -92,8 +91,8 @@ CREATE TABLE IF NOT EXISTS `crogram_content_article` (
   KEY `catid` (`catid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `crogram_content_product`;
-CREATE TABLE IF NOT EXISTS `crogram_content_product` (
+DROP TABLE IF EXISTS `doufox_content_product`;
+CREATE TABLE IF NOT EXISTS `doufox_content_product` (
   `id` mediumint(8) NOT NULL,
   `catid` smallint(5) NOT NULL,
   `content` mediumtext NOT NULL,
@@ -101,8 +100,8 @@ CREATE TABLE IF NOT EXISTS `crogram_content_product` (
   KEY `catid` (`catid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `crogram_form_comment`;
-CREATE TABLE IF NOT EXISTS `crogram_form_comment` (
+DROP TABLE IF EXISTS `doufox_form_comment`;
+CREATE TABLE IF NOT EXISTS `doufox_form_comment` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `cid` mediumint(8) NOT NULL,
   `userid` mediumint(8) NOT NULL,
@@ -119,8 +118,8 @@ CREATE TABLE IF NOT EXISTS `crogram_form_comment` (
   KEY `cid` (`cid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `crogram_form_gestbook`;
-CREATE TABLE IF NOT EXISTS `crogram_form_gestbook` (
+DROP TABLE IF EXISTS `doufox_form_gestbook`;
+CREATE TABLE IF NOT EXISTS `doufox_form_gestbook` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `cid` mediumint(8) NOT NULL,
   `userid` mediumint(8) NOT NULL,
@@ -141,8 +140,8 @@ CREATE TABLE IF NOT EXISTS `crogram_form_gestbook` (
   KEY `cid` (`cid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `crogram_member`;
-CREATE TABLE IF NOT EXISTS `crogram_member` (
+DROP TABLE IF EXISTS `doufox_member`;
+CREATE TABLE IF NOT EXISTS `doufox_member` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `username` char(20) NOT NULL DEFAULT '',
   `password` char(32) NOT NULL DEFAULT '',
@@ -158,8 +157,8 @@ CREATE TABLE IF NOT EXISTS `crogram_member` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `crogram_model`;
-CREATE TABLE IF NOT EXISTS `crogram_model` (
+DROP TABLE IF EXISTS `doufox_model`;
+CREATE TABLE IF NOT EXISTS `doufox_model` (
   `modelid` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `typeid` tinyint(3) NOT NULL,
   `modelname` char(30) NOT NULL,
@@ -174,14 +173,14 @@ CREATE TABLE IF NOT EXISTS `crogram_model` (
   KEY `joinid` (`joinid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `crogram_model` (`modelid`, `typeid`, `modelname`, `tablename`, `categorytpl`, `listtpl`, `showtpl`, `joinid`, `setting`) VALUES
+INSERT INTO `doufox_model` (`modelid`, `typeid`, `modelname`, `tablename`, `categorytpl`, `listtpl`, `showtpl`, `joinid`, `setting`) VALUES
 (1, 1, '文章模型', 'content_article', 'category_article.html', 'list_article.html', 'show_article.html', 0, 'a:1:{s:7:"default";a:4:{s:5:"title";a:2:{s:4:"name";s:6:"标题";s:4:"show";s:1:"1";}s:8:"keywords";a:2:{s:4:"name";s:9:"关键字";s:4:"show";s:1:"1";}s:5:"thumb";a:2:{s:4:"name";s:9:"缩略图";s:4:"show";s:1:"1";}s:11:"description";a:2:{s:4:"name";s:6:"描述";s:4:"show";s:1:"1";}}}'),
 (2, 1, '产品模型', 'content_product', 'category_product.html', 'list_product.html', 'show_product.html', 0, 'a:1:{s:7:"default";a:4:{s:5:"title";a:2:{s:4:"name";s:6:"标题";s:4:"show";s:1:"1";}s:8:"keywords";a:2:{s:4:"name";s:9:"关键字";s:4:"show";s:1:"1";}s:5:"thumb";a:2:{s:4:"name";s:9:"缩略图";s:4:"show";s:1:"1";}s:11:"description";a:2:{s:4:"name";s:6:"描述";s:4:"show";s:1:"1";}}}'),
 (3, 3, '在线留言', 'form_gestbook', 'form.html', 'list_gestbook.html', 'show_gestbook.html', 0, ''),
 (4, 3, '文章评论', 'form_comment', 'form.html', 'list_comment.html', 'show_comment.html', 0, '');
 
-DROP TABLE IF EXISTS `crogram_model_field`;
-CREATE TABLE IF NOT EXISTS `crogram_model_field` (
+DROP TABLE IF EXISTS `doufox_model_field`;
+CREATE TABLE IF NOT EXISTS `doufox_model_field` (
   `fieldid` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `modelid` smallint(5) unsigned NOT NULL DEFAULT '0',
   `field` varchar(20) NOT NULL,
@@ -202,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `crogram_model_field` (
   KEY `modelid` (`modelid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `crogram_model_field` (`fieldid`, `modelid`, `field`, `name`, `type`, `length`, `indexkey`, `isshow`, `tips`, `not_null`, `pattern`, `errortips`, `formtype`, `setting`, `listorder`, `disabled`) VALUES
+INSERT INTO `doufox_model_field` (`fieldid`, `modelid`, `field`, `name`, `type`, `length`, `indexkey`, `isshow`, `tips`, `not_null`, `pattern`, `errortips`, `formtype`, `setting`, `listorder`, `disabled`) VALUES
 (1, 1, 'content', '内容 ', '', '', '', 1, '', 0, '', '', 'editor', '', 0, 0),
 (2, 2, 'content', '内容 ', '', '', '', 1, '', 0, '', '', 'editor', '', 0, 0),
 (3, 3, 'yourname', '您的姓名', '', '', '', 1, '', 1, '', '', 'input', 'array (\n  ''size'' => ''150'',\n  ''default'' => '''',\n)', 0, 0),

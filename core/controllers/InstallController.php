@@ -108,7 +108,7 @@ class InstallController
 
 				// 导入表结构
 				$sql = file_get_contents(INSTALL_PATH . 'initdata.sql');
-				$sql = str_replace('crogram_', $ttb_pre, $sql);
+				$sql = str_replace('doufox_', $ttb_pre, $sql);
 				$this->installsql($sql);
 				include $this->install_tpl('3');
 			break;

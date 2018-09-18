@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 框架入口文件
+ * 系统入口文件
  */
 define('IN_CMS', true);
 error_reporting(E_ALL ^ E_NOTICE);
@@ -9,32 +9,33 @@ error_reporting(E_ALL ^ E_NOTICE);
 /**
  * 系统常量配置
  */
-date_default_timezone_set('Asia/Shanghai'); // 时区设置
-define('APP_NAME', 'UINOTE'); // CMS名称
-define('ENTRY_SCRIPT_NAME', 'index.php'); // 定义入口文件名
+date_default_timezone_set('Asia/Shanghai'); // 系统时区设置
+define('APP_NAME', 'doufox'); // 网站系统名
+define('APP_SITE', 'https://doufox.com/'); // 系统官方网站
+define('ENTRY_SCRIPT_NAME', 'index.php'); // 系统入口文件
 define('APP_START_TIME', microtime(true)); // 设置程序开始执行时间
 
 define('HTTP_REFERER', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''); // 来源
 define('HTTP_HOST', $_SERVER['HTTP_HOST']); // host
 define('HTTP_PRE', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') ? 'https://' : 'http://'); // http协议
-define('HTTP_URL', HTTP_PRE . HTTP_HOST . DIRECTORY_SEPARATOR); // 当前URL
-define('COOKIE_PRE', 'ui_'); // Cookie 前缀，同一域名下安装多套系统时，请修改Cookie前缀
+define('HTTP_URL', HTTP_PRE . HTTP_HOST . DIRECTORY_SEPARATOR); // 当前网站的完整网址
+define('COOKIE_PRE', 'df_'); // Cookie 前缀, 同一个域名下安装多套系统时，请修改Cookie前缀
 
-define('CORE_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR); // 核心文件所在路径, 即当前路径
+define('CORE_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR); // 系统核心模块所在路径, 即当前路径
+define('INSTALL_PATH', CORE_PATH . 'install' . DIRECTORY_SEPARATOR); // 系统安装模块
 define('MODEL_DIR', CORE_PATH . 'models' . DIRECTORY_SEPARATOR); // model目录的路径
-define('INSTALL_PATH', CORE_PATH . 'install' . DIRECTORY_SEPARATOR); // 系统安装入口
 define('CONTROLLER_DIR', CORE_PATH . 'controllers' . DIRECTORY_SEPARATOR); // controller目录的路径
 
 define('DATA_DIR', 'data'); // 系统数据文件夹名
-define('STATIC_DIR', 'static'); // 静态资源文件夹名
-define('ADMIN_PATH', CORE_PATH . 'admin' . DIRECTORY_SEPARATOR); // 后台管理模板的路径
-define('DATA_PATH', ROOT_PATH . DATA_DIR . DIRECTORY_SEPARATOR); // 数据目录的路径
-define('STATIC_PATH', DATA_PATH . STATIC_DIR . DIRECTORY_SEPARATOR); // 静态资源路径
-define('THEME_PATH', DATA_PATH . 'theme' . DIRECTORY_SEPARATOR); // 桌面端模板目录的路径
-define('THEME_PATH_MOBILE', DATA_PATH . 'theme_mobile' . DIRECTORY_SEPARATOR); // 移动端模板目录的路径
+define('STATIC_DIR', 'static'); // 系统静态资源文件夹名
+define('ADMIN_PATH', CORE_PATH . 'admin' . DIRECTORY_SEPARATOR); // 系统后台管理模块的路径
+define('DATA_PATH', ROOT_PATH . DATA_DIR . DIRECTORY_SEPARATOR); // 系统数据目录的路径
+define('STATIC_PATH', DATA_PATH . STATIC_DIR . DIRECTORY_SEPARATOR); // 系统静态资源路径
+define('THEME_PATH', DATA_PATH . 'theme' . DIRECTORY_SEPARATOR); // 网站的桌面端模板目录的路径
+define('THEME_PATH_MOBILE', DATA_PATH . 'theme_mobile' . DIRECTORY_SEPARATOR); // 网站移动端模板目录的路径
 
 header('Content-Type: text/html; charset=utf-8');
-header('X-Powered-By: Crogram');
+header('X-Powered-By: ' . APP_NAME);
 header('Copyright: ' . APP_NAME);
 
 cms::load_file(CORE_PATH . 'library' . DIRECTORY_SEPARATOR . 'global.function.php'); // 加载全局函数

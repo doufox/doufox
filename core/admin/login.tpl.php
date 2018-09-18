@@ -3,11 +3,11 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>管理员登陆</title>
+	<title>管理员登陆 - doufox</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-	<meta name="author" content="Crogram, Inc." />
-	<meta name="copyright" content="Copyright (c)  Crogram, Inc. All Rights Reserved." />
+	<meta name="author" content="doufox.com" />
+	<meta name="copyright" content="Copyright (c) doufox ( A member of Crogram, Inc.) All Rights Reserved." />
 	<link href="/static/css/login.css" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
 	<script type="text/javascript" src="/static/js/jquery.min.js"></script>
@@ -42,7 +42,7 @@
 				</form>
 			</div>
 			<div class="powered">
-				Copyright &copy; <?php echo date('Y'); ?> <a href="https://crogram.com" target="_blank">Crogram, Inc.</a> All Rights Reserved.
+				Copyright &copy; <?php echo date('Y'); ?> <a href="https://doufox.com/" target="_blank" title="A member of Crogram, Inc.">doufox.com</a> All Rights Reserved.
 			</div>
 		</div>
 	</div>

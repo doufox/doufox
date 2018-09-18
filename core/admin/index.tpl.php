@@ -121,7 +121,7 @@
             <div id="home">
                 <div id="shortcut">
                     <a href="javascript:_MP(107,'<?php echo url('admin/index/cache'); ?>');" title="更新缓存">更新缓存</a>
-                    <a href="https://www.crogram.com" title="Crogram" target="_blank" title="帮助">帮助</a>
+                    <a href="https://doufox.com" title="帮助" target="_blank" title="帮助">帮助</a>
                     <a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a>
                 </div>
                 <label id="position">后台首页</label>

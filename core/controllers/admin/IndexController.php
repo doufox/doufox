@@ -42,7 +42,7 @@ class IndexController extends Admin {
 		);
 		$data = http_build_query($pars);
 		$verify = md5($data.$_SERVER['SERVER_NAME']);
-		// $client_url = 'https://uinote.com/client.php?'.$data.'&verify='.$verify; // 反馈到官方网站
+		// $client_url = 'https://doufox.com/client.php?'.$data.'&verify='.$verify; // 反馈到官方网站
 
 		$sysinfo['mysqlv'] = $pars['mysql'];
 		$sysinfo['domain'] = $pars['domain'];
