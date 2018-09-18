@@ -43,7 +43,7 @@ a:hover {
     line-height: 30px;
 }
 
-#logo {
+.logo {
     width: 150px;
     height: 30px;
     float: left;
@@ -51,7 +51,7 @@ a:hover {
     text-align: center;
 }
 
-#logo h1 {
+.logo h1 {
     width: 150px;
     height: 30px;
     line-height: 30px;

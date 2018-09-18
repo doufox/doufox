@@ -20,7 +20,11 @@ top.document.getElementById('position').innerHTML = '区块编辑';
 			<option value="<?php echo $i; ?>" <?php if ($data['type']==$i) { ?>selected<?php } ?>><?php echo $v; ?></option>
 			<?php } } ?>
 			</select></td>
-		</tr>
+        </tr>
+        <tr>
+            <th width="80">备注： </th>
+            <td><input class="input-text" type="text" name="data[remark]" value="<?php echo $data['remark']; ?>" size="100" /></td>
+        </tr>
 		<tr id="text_1" style="display:none">
 			<th>区块内容： </th>
 			<td><textarea name="data[content_1]" id="data[content]" cols="91" rows="8"><?php echo $data['content']; ?></textarea>

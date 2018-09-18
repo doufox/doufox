@@ -12,13 +12,14 @@
 
 <body>
     <div id="head">
-        <div id="logo">
-            <a href="<?php echo url('admin'); ?>">
-                <h1>网站管理系统后台</h1>
-            </a>
+        <div class="logo">
+            <h1>网站管理系统后台</h1>
         </div>
         <div id="menu_position">
             <ul id="menu">
+                <li id="_MP100" class="focused">
+                    <a href="<?php echo url('admin'); ?>">主页</a>
+                </li>
                 <li id="_MP101">
                     <a href="javascript:_MP(101,'<?php echo url('admin/category'); ?>');">栏目</a>
                 </li>

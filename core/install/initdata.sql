@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS `doufox_block` (
   `id` smallint(8) NOT NULL AUTO_INCREMENT,
   `type` tinyint(1) NOT NULL,
   `name` varchar(50) NOT NULL,
+  `remark` varchar(100) NOT NULL,
   `content` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

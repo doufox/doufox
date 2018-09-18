@@ -1,24 +1,25 @@
 <?php
 
-class BlockController extends Admin {
-    
+class BlockController extends Admin
+{
+
     private $block;
     private $type;
-    
+
     public function __construct() {
 		parent::__construct();
 		$this->block = cms::load_model('block');
 		$this->type  = array(1=>'文字', 2=>'图片', 3=>'编辑器');		
 	}
-    
-    public function indexAction() {
 
-		$type     = $this->type;
-	    $list = $this->block->findAll('id,type,name');
+    public function indexAction() {
+		$type = $this->type;
+	    $list = $this->block->findAll('id, type, name, remark');
 	    include $this->admin_tpl('block_list');
     }
-    
-    public function addAction() {
+
+    public function addAction()
+    {
         if ($this->post('submit')) {
             $data = $this->post('data');
             if (empty($data['type'])) $this->show_message('编辑类型不能为空');
@@ -31,7 +32,7 @@ class BlockController extends Admin {
 		$data['type'] = 3;//设置默认类型
         include $this->admin_tpl('block_add');
     }
-    
+
     public function editAction() {
         $id   = (int)$this->get('id');
         $data = $this->block->find($id);
