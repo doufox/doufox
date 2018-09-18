@@ -52,7 +52,7 @@ abstract class Controller  {
 		$this->category_dir_cache	= get_cache('category_dir');
 
 		// 载入会员系统缓存
-		if (is_dir(CONTROLLER_DIR . 'member')) {
+		if (is_dir(CONTROLLER_PATH . 'member')) {
 			$this->member       = cms::load_model('member');
 			$this->membermodel  = get_cache('membermodel');
 			$this->memberinfo   = $this->getMember();

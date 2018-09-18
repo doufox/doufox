@@ -10,8 +10,6 @@ error_reporting(E_ALL ^ E_NOTICE);
  * 系统常量配置
  */
 date_default_timezone_set('Asia/Shanghai'); // 系统时区设置
-define('APP_NAME', 'doufox'); // 网站系统名
-define('APP_SITE', 'https://doufox.com/'); // 系统官方网站
 define('ENTRY_SCRIPT_NAME', 'index.php'); // 系统入口文件
 define('APP_START_TIME', microtime(true)); // 设置程序开始执行时间
 
@@ -22,25 +20,27 @@ define('HTTP_URL', HTTP_PRE . HTTP_HOST . DIRECTORY_SEPARATOR); // 当前网站�
 define('COOKIE_PRE', 'df_'); // Cookie 前缀, 同一个域名下安装多套系统时，请修改Cookie前缀
 
 define('CORE_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR); // 系统核心模块所在路径, 即当前路径
-define('INSTALL_PATH', CORE_PATH . 'install' . DIRECTORY_SEPARATOR); // 系统安装模块
-define('MODEL_DIR', CORE_PATH . 'models' . DIRECTORY_SEPARATOR); // model目录的路径
-define('CONTROLLER_DIR', CORE_PATH . 'controllers' . DIRECTORY_SEPARATOR); // controller目录的路径
-
 define('DATA_DIR', 'data'); // 系统数据文件夹名
 define('STATIC_DIR', 'static'); // 系统静态资源文件夹名
+define('MODEL_DIR', 'models'); // 数据模型文件夹
+define('CONTROLLER_DIR', 'controllers'); // 控制器文件夹
+
 define('ADMIN_PATH', CORE_PATH . 'admin' . DIRECTORY_SEPARATOR); // 系统后台管理模块的路径
+define('INSTALL_PATH', CORE_PATH . 'install' . DIRECTORY_SEPARATOR); // 系统安装模块
 define('DATA_PATH', ROOT_PATH . DATA_DIR . DIRECTORY_SEPARATOR); // 系统数据目录的路径
 define('STATIC_PATH', DATA_PATH . STATIC_DIR . DIRECTORY_SEPARATOR); // 系统静态资源路径
 define('THEME_PATH', DATA_PATH . 'theme' . DIRECTORY_SEPARATOR); // 网站的桌面端模板目录的路径
+define('MODEL_PATH', CORE_PATH . MODEL_DIR . DIRECTORY_SEPARATOR); // 系统数据模型路径
+define('CONTROLLER_PATH', CORE_PATH . CONTROLLER_DIR . DIRECTORY_SEPARATOR); // 控制器路径
 define('THEME_PATH_MOBILE', DATA_PATH . 'theme_mobile' . DIRECTORY_SEPARATOR); // 网站移动端模板目录的路径
+
+cms::load_file(CORE_PATH . 'info.php');
+cms::load_file(CORE_PATH . 'library' . DIRECTORY_SEPARATOR . 'global.function.php'); // 加载全局函数
+cms::load_class('Model', '', 0);
 
 header('Content-Type: text/html; charset=utf-8');
 header('X-Powered-By: ' . APP_NAME);
 header('Copyright: ' . APP_NAME);
-
-cms::load_file(CORE_PATH . 'library' . DIRECTORY_SEPARATOR . 'global.function.php'); // 加载全局函数
-cms::load_file(CORE_PATH . 'version.php');
-cms::load_class('Model', '', 0);
 
 /**
  * 系统核心APP
@@ -110,18 +110,18 @@ abstract class cms
             $namespace = self::$namespace;
             $controller = self::$controller . 'Controller';
             $action = self::$action . 'Action';
-            self::load_file(CONTROLLER_DIR . 'Controller.php');
-            if ($namespace && is_dir(CONTROLLER_DIR . $namespace)) {
-                $controller_file = CONTROLLER_DIR . $namespace . DIRECTORY_SEPARATOR . $controller . '.php';
+            self::load_file(CONTROLLER_PATH . 'Controller.php');
+            if ($namespace && is_dir(CONTROLLER_PATH . $namespace)) {
+                $controller_file = CONTROLLER_PATH . $namespace . DIRECTORY_SEPARATOR . $controller . '.php';
                 if (!is_file($controller_file)) {
                     exit('Controller does not exist.');
                 }
-                if (is_file(CONTROLLER_DIR . $namespace . DIRECTORY_SEPARATOR . 'Controller.php')) {
-                    self::load_file(CONTROLLER_DIR . $namespace . DIRECTORY_SEPARATOR . 'Controller.php');
+                if (is_file(CONTROLLER_PATH . $namespace . DIRECTORY_SEPARATOR . 'Controller.php')) {
+                    self::load_file(CONTROLLER_PATH . $namespace . DIRECTORY_SEPARATOR . 'Controller.php');
                 }
                 self::load_file($controller_file);
-            } elseif (is_file(CONTROLLER_DIR . $controller . '.php')) {
-                self::load_file(CONTROLLER_DIR . $controller . '.php');
+            } elseif (is_file(CONTROLLER_PATH . $controller . '.php')) {
+                self::load_file(CONTROLLER_PATH . $controller . '.php');
             } else {
                 exit('Controller does not exist.');
             }

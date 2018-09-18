@@ -1,6 +1,7 @@
 <?php
+echo PHP_EOL;
 echo <<< EOT
-    <style>
+    <style type="text/css">
         html,body,div,ul,li,p,hr,td,form,input,button{margin:0;padding:0;}
         html,body,img,iframe{border:0;}
         li{list-style:none;}

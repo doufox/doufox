@@ -62,7 +62,7 @@ function url($route, $params = null)
     $arr = array_diff($arr, array(''));
     $count = count($arr);
     $url = ENTRY_SCRIPT_NAME;
-    if (is_dir(CONTROLLER_DIR . $arr[0])) {
+    if (is_dir(CONTROLLER_PATH . $arr[0])) {
         $url .= '?s=' . strtolower($arr[0]);
         if (isset($arr[1]) && $arr[1]) {
             $url .= '&c=' . strtolower($arr[1]);

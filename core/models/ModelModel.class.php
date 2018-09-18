@@ -65,7 +65,7 @@ class ModelModel extends Model
             "        return \$this->get_table_fields();" . PHP_EOL .
             "    }" . PHP_EOL . PHP_EOL .
             "}";
-        $file = MODEL_DIR . $table . 'Model.class.php';
+        $file = MODEL_PATH . $table . 'Model.class.php';
         file_put_contents($file, $content);
     }
 
@@ -74,7 +74,7 @@ class ModelModel extends Model
     {
         $table = ucfirst($table);
 
-        $file = MODEL_DIR . $table . 'Model.class.php';
+        $file = MODEL_PATH . $table . 'Model.class.php';
         if (file_exists($file)) {@unlink($file);}
     }
 }

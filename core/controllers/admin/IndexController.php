@@ -178,7 +178,7 @@ class IndexController extends Admin {
 	    $appc = $this->get('cc');
 		$appc = ucfirst($appc) . 'Controller';
 		$appa = $appa . 'Action';
-		$file = CONTROLLER_DIR . 'admin' . DIRECTORY_SEPARATOR . $appc . '.php';
+		$file = CONTROLLER_PATH . 'admin' . DIRECTORY_SEPARATOR . $appc . '.php';
 		if (!file_exists($file)) return false;
 		cms::load_file($file);
 		$app  = new $appc();
