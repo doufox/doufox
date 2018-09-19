@@ -76,7 +76,7 @@ class ContentController extends Member {
 			'site_title' => $this->cmodel[$modelid]['modelname'] . ' - 会员中心 - ' . $this->site_config['SITE_NAME'],
 			'page_title'    => $this->cmodel[$modelid]['modelname'] . ' - 内容管理',
 			'page_url'      => url('member/index'),
-			'pate_position' => $this->cmodel[$modelid]['modelname'] . ' - 内容管理'
+			'page_position' => $this->cmodel[$modelid]['modelname'] . ' - 内容管理'
 	    ));
 	    $this->view->display('member/content_list.html');
 	}
@@ -141,7 +141,7 @@ class ContentController extends Member {
 			'site_title'    => '发布内容 - 会员中心 - ' . $this->site_config['SITE_NAME'],
 			'page_title'    => '发布内容',
 			'page_url'      => url('member/content/add'),
-			'pate_position' => '<a href="' . url('member/content/add') . '" title="发布内容">发布内容</a>'
+			'page_position' => '<a href="' . url('member/content/add') . '" title="发布内容">发布内容</a>'
 	    ));
 	    $this->view->display('member/content_add.html');
 	}
@@ -214,7 +214,7 @@ class ContentController extends Member {
 			'site_title'       => '编辑内容 - 会员中心 -' . $this->site_config['SITE_NAME'],
 			'page_title'       => '编辑内容',
 			'page_url'         => url('member/content/edit'),
-			'pate_position'    => '<a href="' . url('member/content/edit', array('id'=>$id)) . '" title="编辑内容">编辑内容</a>'
+			'page_position'    => '<a href="' . url('member/content/edit', array('id'=>$id)) . '" title="编辑内容">编辑内容</a>'
 	    ));
 	    $this->view->display('member/content_add.html');
 	}

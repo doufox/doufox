@@ -203,12 +203,11 @@ class IndexController extends Controller {
 			'site_description' => $this->site_config['SITE_DESCRIPTION'],
 			'page_title' => '我要投稿',
 			'page_url' => url('index/post'),
-			'pate_position' => "<a href=\"" . url('index/post') . "\" title=\"我要投稿\">我要投稿</a>"
+			'page_position' => "<a href=\"" . url('index/post') . "\" title=\"我要投稿\">我要投稿</a>"
 		));
 		$this->view->display('post.html');
     }
 
-    
     /*
      * 表单提交页面
      */

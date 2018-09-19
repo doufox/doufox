@@ -43,7 +43,7 @@ class RegisterController extends Member
             'site_title' => '会员注册 - ' . $this->site_config['SITE_NAME'],
             'page_title' => '会员注册',
             'page_url' => url('member/register'),
-            'pate_position' => "<a href=\"" . url('member/register') . "\" title=\"会员注册\">会员注册</a>",
+            'page_position' => "<a href=\"" . url('member/register') . "\" title=\"会员注册\">会员注册</a>",
             'site_keywords' => $this->site_config['SITE_KEYWORDS'],
             'site_description' => $this->site_config['SITE_DESCRIPTION'],
             'member_default_modelid' => $this->site_config['MEMBER_MODELID'],

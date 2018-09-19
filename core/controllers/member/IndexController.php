@@ -50,7 +50,7 @@ class IndexController extends Member
             'site_title'       => '会员中心 - ' . $this->site_config['SITE_NAME'],
 			'page_title'       => '会员中心',
 			'page_url'         => url('member/index'),
-			'pate_position'    => '<a href="' . url('member/index') . '" title="会员中心">会员中心</a>'
+			'page_position'    => '<a href="' . url('member/index') . '" title="会员中心">会员中心</a>'
         ));
         $this->view->display('member/index.html');
     }
@@ -75,7 +75,7 @@ class IndexController extends Member
             'site_title'       => '会员列表 - ' . $this->site_config['SITE_NAME'],
 			'page_title'       => '会员列表',
 			'page_url'         => url('member/index/list'),
-			'pate_position'    => '<a href="' . url('member/index/list') . '" title="会员列表">会员列表</a>'
+			'page_position'    => '<a href="' . url('member/index/list') . '" title="会员列表">会员列表</a>'
         ));
         $this->view->display('list_member.html');
     }
@@ -114,7 +114,7 @@ class IndexController extends Member
             'site_title'       => '修改资料 - 会员中心 - ' . $this->site_config['SITE_NAME'],
 			'page_title'       => '修改资料',
 			'page_url'         => url('member/index/edit'),
-			'pate_position'    => '<a href="' . url('member/index/edit') . '" title="修改资料">修改资料</a>'
+			'page_position'    => '<a href="' . url('member/index/edit') . '" title="修改资料">修改资料</a>'
         ));
         $this->view->display('member/profile_edit.html');
     }
@@ -143,7 +143,7 @@ class IndexController extends Member
             'site_title'       => '修改密码 - 会员中心 - ' . $this->site_config['SITE_NAME'],
 			'page_title'       => '修改密码',
 			'page_url'         => url('member/index/password'),
-			'pate_position'    => '<a href="' . url('member/index/password') . '" title="修改密码">修改密码</a>'
+			'page_position'    => '<a href="' . url('member/index/password') . '" title="修改密码">修改密码</a>'
         ));
         $this->view->display('member/password.html');
     }

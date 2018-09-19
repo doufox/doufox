@@ -50,7 +50,7 @@ class LoginController extends Member
             'site_description' => $this->site_config['SITE_DESCRIPTION'],
             'page_title' => '会员登录',
             'page_url' => url('member/login'),
-            'pate_position' => "<a href=\"" . url('member/login') . "\" title=\"会员登录\">会员登录</a>",
+            'page_position' => "<a href=\"" . url('member/login') . "\" title=\"会员登录\">会员登录</a>",
             'backurl' => urlencode($backurl),
         ));
         $this->view->display('member/login.html');
