@@ -499,7 +499,7 @@ class image_lib {
 	 * 生成图片水印
 	 */
 	public function make_image_watermark($source, $w_pos=null) {
-		$w_img = STATIC_PATH . 'watermark' . DIRECTORY_SEPARATOR. 'watermark.png';
+		$w_img = STATIC_PATH . 'watermark' . DS. 'watermark.png';
 		if (!(extension_loaded('gd') && preg_match("/\.(jpg|jpeg|gif|png)/i", $source, $m) && file_exists($source) && function_exists('imagecreatefrom'.($m[1] == 'jpg' ? 'jpeg' : $m[1])))) return false;
 		if (!file_exists($w_img)) return false;
 		$source_info = getimagesize($source);

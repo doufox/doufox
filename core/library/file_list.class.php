@@ -34,7 +34,7 @@ class file_list
         }
 
         if (substr($dir_name, -1) !== '/' || substr($dir_name, -1) !== '\\') {
-            return $dir_name . DIRECTORY_SEPARATOR;
+            return $dir_name . DS;
         }
 
         return $dir_name;

@@ -16,11 +16,11 @@ class view {
 
 	public function __construct() {
 		$this->view_dir    = THEME_CURRENT;
-		$viewpath          = basename(THEME_CURRENT) . DIRECTORY_SEPARATOR;
+		$viewpath          = basename(THEME_CURRENT) . DS;
 		$this->viewpath    = $viewpath;
 		$this->_options['viewpath'] = $viewpath;
 		// 编译主题模板生成的文件路径
-		$this->compile_dir = DATA_PATH . 'cache' . DIRECTORY_SEPARATOR . THEME_TYPE . DIRECTORY_SEPARATOR;
+		$this->compile_dir = DATA_PATH . 'cache' . DS . THEME_TYPE . DS;
 	}
 
 	/**
@@ -76,7 +76,7 @@ class view {
 	 * 分析视图文件名
 	 */
 	protected function parse_file_name($file_name = null) {
-		return  THEME_DIR . DIRECTORY_SEPARATOR . $file_name;
+		return  THEME_DIR . DS . $file_name;
 	}
 
 	/**

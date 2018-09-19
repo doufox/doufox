@@ -39,7 +39,7 @@ class DatabaseController extends Admin
     {
         $file_list = cms::load_class('file_list');
 
-        $dir = DATA_PATH . 'bakup' . DIRECTORY_SEPARATOR;
+        $dir = DATA_PATH . 'bakup' . DS;
         $path = $this->get('path');
         if ($path && is_dir($dir . $path)) {
             $fileid = $this->get('fileid');
@@ -68,9 +68,9 @@ class DatabaseController extends Admin
                     $size = 0;
                     $_dir = scandir($dir . $path);
                     foreach ($_dir as $c) {
-                        $size += filesize($dir . $path . DIRECTORY_SEPARATOR . $c);
+                        $size += filesize($dir . $path . DS . $c);
                     }
-                    $sqldir = DIRECTORY_SEPARATOR . DATA_DIR . DIRECTORY_SEPARATOR . 'bakup' . DIRECTORY_SEPARATOR . $path . DIRECTORY_SEPARATOR;
+                    $sqldir = DS . DATA_DIR . DS . 'bakup' . DS . $path . DS;
                     $list[] = array('path' => $path, 'size' => formatFileSize($size, 2), 'sqldir' => $sqldir);
                     clearstatcache();
                 }
@@ -194,12 +194,12 @@ class DatabaseController extends Admin
             $startfrom = $numrows == $offset ? $startfrom : 0;
         }
         $i = $startfrom ? $i - 1 : $i;
-        $dir = DATA_PATH . 'bakup' . DIRECTORY_SEPARATOR;
+        $dir = DATA_PATH . 'bakup' . DS;
         if (!is_dir($dir)) {
             mkdir($dir, 0777);
             file_put_contents($dir . 'index.html', '');
         }
-        $bakfile_path = $dir . DIRECTORY_SEPARATOR . $time . DIRECTORY_SEPARATOR;
+        $bakfile_path = $dir . DS . $time . DS;
         if (trim($tabledump)) {
             $tabledump = "# name: " . APP_NAME . " db bakup file\n# version: " . APP_VERSION . " \n# time: " . date('Y-m-d H:i:s') . "\n# ------------------------\n\n\n" . $tabledump;
             $tableid = $i;
@@ -227,13 +227,13 @@ class DatabaseController extends Admin
      */
     private function importdb($path, $fileid = 1)
     {
-        $dir = DATA_PATH . 'bakup' . DIRECTORY_SEPARATOR;
+        $dir = DATA_PATH . 'bakup' . DS;
         $fid = $fileid ? $fileid : 1;
 
         $data = scandir($dir . $path); //扫描备份目录
         $list = array();
         foreach ($data as $t) {
-            if (is_file($dir . $path . DIRECTORY_SEPARATOR . $t) && substr($t, -3) == 'sql') {
+            if (is_file($dir . $path . DS . $t) && substr($t, -3) == 'sql') {
                 $id = substr(strrchr($t, '_'), 1, -4);
                 $list[$id] = $t;
             }
@@ -243,7 +243,7 @@ class DatabaseController extends Admin
         }
 
         $file = $list[$fid];
-        $sql = file_get_contents($dir . $path . DIRECTORY_SEPARATOR . $file);
+        $sql = file_get_contents($dir . $path . DS . $file);
         $this->sql_execute($sql);
         $fid++;
         $this->show_message('恢复数据库文件卷' . $file, 1, url('admin/database/import', array('path' => $path, 'fileid' => $fid)));

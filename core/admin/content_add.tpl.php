@@ -77,7 +77,7 @@ function ajaxtitle() {
 	$('#title_text').html('');
 	get_kw();//读取关键字
 
-	$.post('<?php echo HTTP_URL . DIRECTORY_SEPARATOR . ENTRY_SCRIPT_NAME; ?>?s=admin&c=content&a=ajaxtitle&id='+Math.random(), { title:$('#title').val(), id:<?php echo $data[id] ? $data[id] : 0; ?> }, function(data){ 
+	$.post('<?php echo HTTP_URL . DS . ENTRY_SCRIPT_NAME; ?>?s=admin&c=content&a=ajaxtitle&id='+Math.random(), { title:$('#title').val(), id:<?php echo $data[id] ? $data[id] : 0; ?> }, function(data){ 
         $('#title_text').html(data); 
 	});
 }

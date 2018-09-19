@@ -9,7 +9,7 @@ class TemplateController extends Admin
     public function __construct()
     {
         parent::__construct();
-        $this->dir = THEME_PATH . SITE_THEME . DIRECTORY_SEPARATOR;
+        $this->dir = THEME_PATH . SITE_THEME . DS;
         if (file_exists($this->dir . 'config.php')) {
             $this->file_info = include $this->dir . 'config.php';
         }
@@ -18,7 +18,7 @@ class TemplateController extends Admin
     public function indexAction()
     {
         $dir = $this->get('dir') ? urldecode($this->get('dir')) : '';
-        $dir = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $dir);
+        $dir = str_replace(DS . DS, DS, $dir);
         $filepath = $this->dir . $dir;
         $list = glob($filepath . '*');
         $local = str_replace(ROOT_PATH, '', $filepath);
@@ -43,7 +43,7 @@ class TemplateController extends Admin
     public function editAction()
     {
         $dir = $this->get('dir') ? urldecode($this->get('dir')) : '';
-        $dir = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $dir);
+        $dir = str_replace(DS . DS, DS, $dir);
         $filename = urldecode($this->get('file'));
         $filepath = $this->dir . $dir . $filename;
         $local = str_replace(ROOT_PATH, '', $filepath);
@@ -62,7 +62,7 @@ class TemplateController extends Admin
     public function addAction()
     {
         $dir = $this->get('dir') ? urldecode($this->get('dir')) : '';
-        $dir = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $dir);
+        $dir = str_replace(DS . DS, DS, $dir);
         $filepath = $this->dir . $dir;
         $local = str_replace(ROOT_PATH, '', $filepath);
         $filecontent = '';
@@ -85,7 +85,7 @@ class TemplateController extends Admin
     public function delAction()
     {
         $dir = $this->get('dir') ? urldecode($this->get('dir')) : '';
-        $dir = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $dir);
+        $dir = str_replace(DS . DS, DS, $dir);
         $filename = urldecode($this->get('file'));
         $filepath = $this->dir . $dir . $filename;
         // 为了错误删除模板先注销掉
@@ -99,7 +99,7 @@ class TemplateController extends Admin
     public function visualizationAction()
     {
         $dir = $this->get('dir') ? urldecode($this->get('dir')) : '';
-        $dir = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $dir);
+        $dir = str_replace(DS . DS, DS, $dir);
         $filename = urldecode($this->get('file'));
         $filepath = $this->dir . $dir . $filename;
 
@@ -118,14 +118,14 @@ class TemplateController extends Admin
         // $list_desktop = $file_list->get_file_list(THEME_PATH);
         // $list_mobile = $file_list->get_file_list(THEME_PATH_MOBILE);
         // foreach ($list_desktop as $file_path) {
-        //     $dir = DATA_PATH . 'cache' . DIRECTORY_SEPARATOR . 'theme_desktop'. DIRECTORY_SEPARATOR . $file_path . DIRECTORY_SEPARATOR;
+        //     $dir = DATA_PATH . 'cache' . DS . 'theme_desktop'. DS . $file_path . DS;
         //     $file_list->delete_dir($dir);
         //     if (!file_exists($dir)) {
         //         mkdir($dir, 0777, true);
         //     }
         // }
         // foreach ($list_mobile as $file_path) {
-        //     $dir = DATA_PATH . 'cache' . DIRECTORY_SEPARATOR . 'theme_mobile'. DIRECTORY_SEPARATOR . $file_path . DIRECTORY_SEPARATOR;
+        //     $dir = DATA_PATH . 'cache' . DS . 'theme_mobile'. DS . $file_path . DS;
         //     $file_list->delete_dir($dir);
         //     if (!file_exists($dir)) {
         //         mkdir($dir, 0777, true);
@@ -141,7 +141,7 @@ class TemplateController extends Admin
         $file_list = cms::load_class('file_list');
         $list_desktop = $file_list->get_file_list(THEME_PATH);
         foreach ($list_desktop as $file_path) {
-            $dir = DATA_PATH . 'cache' . DIRECTORY_SEPARATOR . 'theme_desktop'. DIRECTORY_SEPARATOR . $file_path . DIRECTORY_SEPARATOR;
+            $dir = DATA_PATH . 'cache' . DS . 'theme_desktop'. DS . $file_path . DS;
             $file_list->delete_dir($dir);
             if (!file_exists($dir)) {
                 mkdir($dir, 0777, true);
@@ -154,7 +154,7 @@ class TemplateController extends Admin
         $file_list = cms::load_class('file_list');
         $list_mobile = $file_list->get_file_list(THEME_PATH_MOBILE);
         foreach ($list_mobile as $file_path) {
-            $dir = DATA_PATH . 'cache' . DIRECTORY_SEPARATOR . 'theme_mobile'. DIRECTORY_SEPARATOR . $file_path . DIRECTORY_SEPARATOR;
+            $dir = DATA_PATH . 'cache' . DS . 'theme_mobile'. DS . $file_path . DS;
             $file_list->delete_dir($dir);
             if (!file_exists($dir)) {
                 mkdir($dir, 0777, true);

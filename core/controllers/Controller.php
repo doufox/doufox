@@ -218,7 +218,7 @@ abstract class Controller  {
 	* auth   字段权限（是否必填）
 	*/
     protected function getFields($fields, $data=array()) {
-	    cms::load_file(CORE_PATH . 'library' . DIRECTORY_SEPARATOR .'fields.function.php');
+	    cms::load_file(CORE_PATH . 'library' . DS .'fields.function.php');
 	    $data_fields = '';
 	    if (empty($fields['data'])) return false;
 	    foreach ($fields['data'] as $t) {

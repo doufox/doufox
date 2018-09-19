@@ -11,31 +11,32 @@ error_reporting(E_ALL ^ E_NOTICE);
  */
 date_default_timezone_set('Asia/Shanghai'); // 系统时区设置
 define('ENTRY_SCRIPT_NAME', 'index.php'); // 系统入口文件
+define('DS', DIRECTORY_SEPARATOR);
 define('APP_START_TIME', microtime(true)); // 设置程序开始执行时间
 
 define('HTTP_REFERER', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''); // 来源
 define('HTTP_HOST', $_SERVER['HTTP_HOST']); // host
 define('HTTP_PRE', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') ? 'https://' : 'http://'); // http协议
-define('HTTP_URL', HTTP_PRE . HTTP_HOST . DIRECTORY_SEPARATOR); // 当前网站的完整网址
-define('COOKIE_PRE', 'df_'); // Cookie 前缀, 同一个域名下安装多套系统时，请修改Cookie前缀
+define('HTTP_URL', HTTP_PRE . HTTP_HOST . DS); // 当前网站的完整网址
+define('COOKIE_PRE', 'df_'); // Cookie 前缀, 同一个域名下安装多套系统时, 请修改Cookie前缀
 
-define('CORE_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR); // 系统核心模块所在路径, 即当前路径
+define('CORE_PATH', dirname(__FILE__) . DS); // 系统核心模块所在路径, 即当前路径
 define('DATA_DIR', 'data'); // 系统数据文件夹名
 define('STATIC_DIR', 'static'); // 系统静态资源文件夹名
 define('MODEL_DIR', 'models'); // 数据模型文件夹
 define('CONTROLLER_DIR', 'controllers'); // 控制器文件夹
 
-define('ADMIN_PATH', CORE_PATH . 'admin' . DIRECTORY_SEPARATOR); // 系统后台管理模块的路径
-define('INSTALL_PATH', CORE_PATH . 'install' . DIRECTORY_SEPARATOR); // 系统安装模块
-define('DATA_PATH', ROOT_PATH . DATA_DIR . DIRECTORY_SEPARATOR); // 系统数据目录的路径
-define('STATIC_PATH', DATA_PATH . STATIC_DIR . DIRECTORY_SEPARATOR); // 系统静态资源路径
-define('THEME_PATH', DATA_PATH . 'theme' . DIRECTORY_SEPARATOR); // 网站的桌面端模板目录的路径
-define('MODEL_PATH', CORE_PATH . MODEL_DIR . DIRECTORY_SEPARATOR); // 系统数据模型路径
-define('CONTROLLER_PATH', CORE_PATH . CONTROLLER_DIR . DIRECTORY_SEPARATOR); // 控制器路径
-define('THEME_PATH_MOBILE', DATA_PATH . 'theme_mobile' . DIRECTORY_SEPARATOR); // 网站移动端模板目录的路径
+define('ADMIN_PATH', CORE_PATH . 'admin' . DS); // 系统后台管理模块的路径
+define('INSTALL_PATH', CORE_PATH . 'install' . DS); // 系统安装模块
+define('DATA_PATH', ROOT_PATH . DATA_DIR . DS); // 系统数据目录的路径
+define('STATIC_PATH', DATA_PATH . STATIC_DIR . DS); // 系统静态资源路径
+define('THEME_PATH', DATA_PATH . 'theme' . DS); // 网站的桌面端模板目录的路径
+define('MODEL_PATH', CORE_PATH . MODEL_DIR . DS); // 系统数据模型路径
+define('CONTROLLER_PATH', CORE_PATH . CONTROLLER_DIR . DS); // 控制器路径
+define('THEME_PATH_MOBILE', DATA_PATH . 'theme_mobile' . DS); // 网站移动端模板目录的路径
 
 cms::load_file(CORE_PATH . 'info.php');
-cms::load_file(CORE_PATH . 'library' . DIRECTORY_SEPARATOR . 'global.function.php'); // 加载全局函数
+cms::load_file(CORE_PATH . 'library' . DS . 'global.function.php'); // 加载全局函数
 cms::load_class('Model', '', 0);
 
 header('Content-Type: text/html; charset=utf-8');
@@ -80,7 +81,8 @@ abstract class cms
         // $controller_name = trim((isset($url_info_array['c']) && $url_info_array['c']) ? $url_info_array['c'] : 'Index');
         if (isset(self::$pathinfo[1])) {
             if (self::$pathinfo[1] == DATA_DIR || self::$pathinfo[1] == CORE_DIR) {
-                exit('Access Deined!');
+                header("HTTP/1.0 403 Forbidden");
+                exit();
             } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == STATIC_DIR) {
                 $controller_name = STATIC_DIR; // 静态资源
             } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == 'theme') {
@@ -112,12 +114,12 @@ abstract class cms
             $action = self::$action . 'Action';
             self::load_file(CONTROLLER_PATH . 'Controller.php');
             if ($namespace && is_dir(CONTROLLER_PATH . $namespace)) {
-                $controller_file = CONTROLLER_PATH . $namespace . DIRECTORY_SEPARATOR . $controller . '.php';
+                $controller_file = CONTROLLER_PATH . $namespace . DS . $controller . '.php';
                 if (!is_file($controller_file)) {
                     exit('Controller does not exist.');
                 }
-                if (is_file(CONTROLLER_PATH . $namespace . DIRECTORY_SEPARATOR . 'Controller.php')) {
-                    self::load_file(CONTROLLER_PATH . $namespace . DIRECTORY_SEPARATOR . 'Controller.php');
+                if (is_file(CONTROLLER_PATH . $namespace . DS . 'Controller.php')) {
+                    self::load_file(CONTROLLER_PATH . $namespace . DS . 'Controller.php');
                 }
                 self::load_file($controller_file);
             } elseif (is_file(CONTROLLER_PATH . $controller . '.php')) {
@@ -183,7 +185,7 @@ abstract class cms
     public static function load_config($file)
     {
         static $configs = array();
-        $path = DATA_PATH . 'config' . DIRECTORY_SEPARATOR . $file . '.ini.php';
+        $path = DATA_PATH . 'config' . DS . $file . '.ini.php';
         if (file_exists($path)) {
             $configs[$file] = include $path;
             return $configs[$file];
@@ -221,8 +223,8 @@ abstract class cms
                 return true;
             }
         }
-        if (file_exists(CORE_PATH . $path . DIRECTORY_SEPARATOR . $classname . '.class.php')) {
-            include CORE_PATH . $path . DIRECTORY_SEPARATOR . $classname . '.class.php';
+        if (file_exists(CORE_PATH . $path . DS . $classname . '.class.php')) {
+            include CORE_PATH . $path . DS . $classname . '.class.php';
             $name = $classname;
             if ($initialize) {
                 $classes[$key] = new $name;

@@ -2,7 +2,7 @@
 
 include $this->admin_tpl('header');
 
-if (!file_exists(DATA_PATH . 'cache' . DIRECTORY_SEPARATOR."category.cache.php")) {
+if (!file_exists(DATA_PATH . 'cache' . DS."category.cache.php")) {
     echo '<script type="text/javascript">location.href="?s=admin&a=cache";</script>';
 }
 ?>

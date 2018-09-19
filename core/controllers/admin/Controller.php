@@ -9,7 +9,7 @@ class Admin extends Controller
     {
         parent::__construct();
         $this->isAdminLogin();
-        cms::load_file(CORE_PATH . 'library' . DIRECTORY_SEPARATOR . 'fields.function.php');
+        cms::load_file(CORE_PATH . 'library' . DS . 'fields.function.php');
         define('IN_ADMIN', true);
     }
 

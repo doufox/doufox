@@ -93,7 +93,7 @@ class InstallController
 				$content .= "	'prefix'   => '" . $ttb_pre . "', " . PHP_EOL;
 				$content .= "	'charset'  => 'utf8', " . PHP_EOL;
 				$content .= PHP_EOL . ");";
-				if (!file_put_contents(DATA_PATH . 'config' . DIRECTORY_SEPARATOR . 'database.ini.php', $content)) {
+				if (!file_put_contents(DATA_PATH . 'config' . DS . 'database.ini.php', $content)) {
 					dexit('数据库配置文件保存失败, 请检查文件权限！');
 				}
 
@@ -102,7 +102,7 @@ class InstallController
 				$admincontent .= " 'ADMIN_NAME' => '" . $username . "', " . PHP_EOL;
 				$admincontent .= " 'ADMIN_PASS' => '" . md5(md5($password)) . "', " . PHP_EOL;
 				$admincontent .= PHP_EOL . ");";
-				if (!file_put_contents(DATA_PATH .  'config' . DIRECTORY_SEPARATOR . 'admin.ini.php', $admincontent)) {
+				if (!file_put_contents(DATA_PATH .  'config' . DS . 'admin.ini.php', $admincontent)) {
 					dexit('数据库配置文件保存失败, 请检查文件权限！');
 				}
 

@@ -38,7 +38,7 @@ abstract class Model
         $this->dbname = $params['dbname'];
         $params['charset'] = ($params['charset']) ? trim($params['charset']) : 'utf8';
         $this->prefix = ($params['prefix']) ? trim($params['prefix']) : '';
-        $this->cache_dir = DATA_PATH . 'models' . DIRECTORY_SEPARATOR;
+        $this->cache_dir = DATA_PATH . 'models' . DS;
         cms::load_class('mysql', '', 0);
         $this->db = mysql::getInstance($params);
 
