@@ -5,7 +5,7 @@
       <li><s></s><a href="{function.url('member/index/edit')}">会员资料</a></li>
       <li><s></s><a href="{function.url('member/index/password')}">修改密码</a></li>
       <li><s></s><a href="{function.url('member/content/')}">内容管理</a></li>
-      {loop $navigation $n=>$t}
+      {loop $contents $n=>$t}
       <li {if $n && $form['tablename']==$n} class="on"{/if}><s></s><a href="{$t['url']}">{$t['name']}</a></li>
       {/loop}
     </ul>

@@ -13,20 +13,20 @@ class ContentController extends Member {
 		if (!$this->memberinfo['status']) $this->show_message('对不起，您还没有通过审核。'); //判断审核
 		$this->form   = $this->getFormMember();
 		$this->cmodel = get_cache('model');
-		$navigation   = $this->nav = array();
+		$contents   = $this->nav = array();
 		if ($this->cmodel) {
 		    foreach ($this->cmodel as $t) {
-				$navigation[$t['modelid']] = array('name'=>$t['modelname'], 'url'=>url('member/content/', array('modelid'=>$t['modelid'])));
+				$contents[$t['modelid']] = array('name'=>$t['modelname'], 'url'=>url('member/content/', array('modelid'=>$t['modelid'])));
 				if (empty($this->nav)) $this->nav = url('member/content/', array('modelid'=>$t['modelid']));
 			}
 		}
 		if ($this->form) {
 		    foreach ($this->form as $t) {
-			    $navigation[$t['tablename']] = array('name'=>$t['modelname'], 'url'=>url('member/content/form', array('modelid'=>$t['modelid'])));
+			    $contents[$t['tablename']] = array('name'=>$t['modelname'], 'url'=>url('member/content/form', array('modelid'=>$t['modelid'])));
 				if (empty($this->nav)) $this->nav = url('member/content/form', array('modelid'=>$t['modelid']));
 			}
 		}
-		$this->view->assign('navigation', $navigation);
+		$this->view->assign('contents', $contents);
 	}
 
 	/*
