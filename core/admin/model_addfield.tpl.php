@@ -45,7 +45,7 @@ function loadformtype(type) {
 function ajaxname() {
 	var field = $('#field').val();
 	if (field == '') {
-	    $.post('<?php echo HTTP_URL . ENTRY_SCRIPT_NAME; ?>?c=api&a=pinyin&id='+Math.random(), { name:$('#name').val() }, function(data){ $('#field').val(data); });
+	    $.post('<?php echo HTTP_URL . ENTRY_FILE; ?>?c=api&a=pinyin&id='+Math.random(), { name:$('#name').val() }, function(data){ $('#field').val(data); });
 	}
 }
 function setlength() {

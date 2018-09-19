@@ -50,7 +50,7 @@ function gethttp($url)
 }
 
 /**
- * URL函数
+ * 组装URL
  */
 function url($route, $params = null)
 {
@@ -61,7 +61,7 @@ function url($route, $params = null)
     $arr = explode('/', $route);
     $arr = array_diff($arr, array(''));
     $count = count($arr);
-    $url = ENTRY_SCRIPT_NAME;
+    $url = ENTRY_FILE;
     if (is_dir(CONTROLLER_PATH . $arr[0])) {
         $url .= '?s=' . strtolower($arr[0]);
         if (isset($arr[1]) && $arr[1]) {
@@ -78,7 +78,7 @@ function url($route, $params = null)
             }
         }
     }
-    //参数$params变量的键(key),值(value)的URL组装
+    // 参数$params变量的键(key),值(value)的URL组装
     if (!is_null($params) && is_array($params)) {
         $params_url = array();
         foreach ($params as $key => $value) {

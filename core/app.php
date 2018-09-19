@@ -10,8 +10,6 @@ error_reporting(E_ALL ^ E_NOTICE);
  * 系统常量配置
  */
 date_default_timezone_set('Asia/Shanghai'); // 系统时区设置
-define('ENTRY_SCRIPT_NAME', 'index.php'); // 系统入口文件
-define('DS', DIRECTORY_SEPARATOR);
 define('APP_START_TIME', microtime(true)); // 设置程序开始执行时间
 
 define('HTTP_REFERER', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''); // 来源
