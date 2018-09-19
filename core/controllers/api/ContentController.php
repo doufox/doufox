@@ -1,159 +1,27 @@
 <?php
 
-class ContentController extends Api {
+class ContentController extends Api
+{
 
-	public function indexAction() {
-	    if ($this->post('submit') && $this->post('form')=='search') {
-	        $username    = $this->post('username');
-	        $catid = (int)$this->post('catid');
-			$stype = $this->post('stype');
-	    } elseif ($this->post('submit_order') && $this->post('form')=='order') {
-	        foreach ($_POST as $var=>$value) {
-	            if (strpos($var, 'order_')!==false) {
-	                $id = (int)str_replace('order_', '', $var);
-	                $this->content->update(array('listorder'=>$value), 'id=' . $id);
-	            }
-	        }
-					$this->show_message('修改成功', 1);
-
-	    } elseif ($this->post('submit_del') && $this->post('form')=='del') {
-	        foreach ($_POST as $var=>$value) {
-	            if (strpos($var, 'del_')!==false) {
-	                $ids = str_replace('del_', '', $var);
-	                list($_id, $_catid) = explode('_', $ids);
-	                $this->delAction($_id, $_catid, 1);
-	            }
-	        }
-					$this->show_message('删除成功', 1);
-
-	    } elseif ($this->post('submit_status_1') && $this->post('form')=='status_1') {
-	        foreach ($_POST as $var=>$value) {
-	            if (strpos($var, 'del_')!==false) {
-	                $ids = str_replace('del_', '', $var);
-	                list($_id, $_catid) = explode('_', $ids);
-	                $this->content->update(array('status'=>1), 'id=' . (int)$_id);
-	            }
-	        }
-			$this->show_message('设置成功', 1,'',500);
-	    }elseif ($this->post('submit_status_2') && $this->post('form')=='status_2') {
-	        foreach ($_POST as $var=>$value) {
-	            if (strpos($var, 'del_')!==false) {
-	                $ids = str_replace('del_', '', $var);
-	                list($_id, $_catid) = explode('_', $ids);
-	                $this->content->update(array('status'=>2), 'id=' . (int)$_id);
-	            }
-	        }
-			$this->show_message('设置成功', 1);
-	    } elseif ($this->post('submit_status_3') && $this->post('form')=='status_3') {
-	        foreach ($_POST as $var=>$value) {
-	            if (strpos($var, 'del_')!==false) {
-	                $ids = str_replace('del_', '', $var);
-	                list($_id, $_catid) = explode('_', $ids);
-	                $this->content->update(array('status'=>3), 'id=' . (int)$_id);
-	            }
-	        }
-			$this->show_message('设置成功', 1);
-	    } elseif ($this->post('submit_status_0') && $this->post('form')=='status_0') {
-	        foreach ($_POST as $var=>$value) {
-	            if (strpos($var, 'del_')!==false) {
-	                $ids = str_replace('del_', '', $var);
-	                list($_id, $_catid) = explode('_', $ids);
-	                $this->content->update(array('status'=>0), 'id=' . (int)$_id);
-	            }
-	        }
-			$this->show_message('设置成功', 1);
-	    } elseif ($this->post('submit_move') && $this->post('form')=='move') {
-		    $mcatid = (int)$this->post('movecatid');
-			if (empty($mcatid)) $this->show_message('请选择目标栏目！');
-			$mcat   = $this->category_cache[$mcatid];
-			$mtable = cms::load_model($mcat['tablename']);
-	        foreach ($_POST as $var=>$value) {
-	            if (strpos($var, 'del_')!==false) {
-	                $ids = str_replace('del_', '', $var);
-	                list($_id, $_catid) = explode('_', $ids);
-	                $cat = $this->category_cache[$_catid];
-					if ($cat['modelid'] == $mcat['modelid']) { 
-						$this->content->update(array('catid'=>$mcatid), 'id=' . (int)$_id);
-						$mtable->update(array('catid'=>$mcatid), 'id=' . (int)$_id);
-					}
-	            }
-	        }
-			$this->show_message('移动成功', 1);
-	    }
-
-
-	    $catid    = (int)$this->get('catid');
-		$status   = $this->get('status');
-	    $username  =  $this->get('username');
-	    $page     = (int)$this->get('page');
-		$page     = (!$page) ? 1 : $page;
-	    $pagination = cms::load_class('pagination');
-		$pagination->loadconfig();
-		if (empty($catid)) {
-			$this->response(400, null, 'missing parameters');
-			exit();
-			// $this->show_message('url缺少栏目id参数');
-		}
-		$cats = $this->category_cache;//读取栏目缓存
-		$modelid = $cats[$catid]['modelid'];
-
-		$where = 'catid=' . $catid;
-	    if ($status == 1) {
-		    $where .= ' AND status=1';
-		} elseif ($status ==2) {
-		    $where .= ' AND status=2';
-		} elseif ($status ==3) {
-		    $where .= ' AND status=3';
-		} elseif ($status =='0') {
-		    $where .= ' AND status=0';
-		}
-		if ($username) {
-		    $where .= " AND username='" . $username . "'";
-		}
-		
-	    $total    = $this->content->count('content', null, $where);
-		$count    = array();
-		$count[0] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=0');
-		$count[1] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=1');
-		$count[2] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=2');
-		$count[3] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=3');
-		
-	    $pagesize = 15;
-	    $urlparam = array();
-	    $urlparam['catid']   = $catid;
-	    $urlparam['modelid'] = $modelid;
-		if ($status) $urlparam['status'] = $status;
-	    if ($username) $urlparam['username'] = $username;
-	    $urlparam['page']   = '{page}';
-	    $url      = url('admin/content/index', $urlparam);
-	    $list    = $this->content->page_limit($page, $pagesize)->where($where)->order(array('listorder DESC', 'time DESC'))->select();
-
-	    $pagination = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
-		$join     = $this->getModelJoin($modelid);
-		
-		
-		$tree =  cms::load_class('tree');
-		$tree->icon = array(' ','  |-','  |-');
-		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
-		$categorys = array();
-		foreach($cats as $cid=>$r) {
-			if($modelid && $modelid != $r['modelid']) continue;
-			$r['disabled'] = $r['child'] ? 'disabled' : '';
-			$r['selected'] = $cid == $catid ? 'selected' : '';
-			$categorys[$cid] = $r;
-		}
-		$str  = "<option value='\$catid' \$selected \$disabled>\$spacer \$catname</option>";
-		$tree->init($categorys);
-		$category = $tree->get_tree(0, $str);
-
-	    include $this->admin_tpl('content_list');
+	public function __construct()
+    {
+        parent::__construct();
 	}
+
+    public function indexAction() {
+		$data = array(
+            'site_title'       => $this->site_config['SITE_TITLE'],
+            'site_keywords'    => $this->site_config['SITE_KEYWORDS'], 
+            'site_description' => $this->site_config['SITE_DESCRIPTION'],
+		);
+		$this->response(200, $data, 'success');
+    }
 
 	/**
 	 * 显示栏目菜单列表
 	 */
 	public function categoryAction() {
-		$catlist =  $this->category_cache;//读取文件缓存
+		$catlist =  $this->category_cache; // 读取文件缓存
 
 		// 读取数据库后台不会根据排序显示
 		// $catlist =  $this->category->findAll('catid,typeid,parentid,child,http,catname');
@@ -161,34 +29,29 @@ class ContentController extends Api {
 		$categorys = array();
 		if(!empty($catlist)) {
 			foreach($catlist as $r) {
-					if($r['typeid']==1)
-					{
+				if($r['typeid'] == 1) {
 					$r['icon_type'] = 'ico1';
 					$r['urla'] = '?s=admin&c=content&catid='.$r['catid'];
-					}
-					else if ($r['typeid']==2)
-					{$r['icon_type'] = 'ico2';
+				} else if ($r['typeid'] == 2) {
+					$r['icon_type'] = 'ico2';
 					$r['urla'] = '?s=admin&c=category&a=edit&catid='.$r['catid'];
-					}
-					else
-					{$r['icon_type'] = 'ico3';
+				} else {
+					$r['icon_type'] = 'ico3';
 					$r['urla'] = $r['http'];
-					}
+				}
 				$categorys[$r['catid']] = $r;
 			}
 		}
-		$this->response(200, $categorys, 'success');
 		if(!empty($categorys)) {
-			$tree->init($categorys);
-			$strs = "<span class='\$icon_type'><a href='\$urla' target='right' onclick='open_list(this)'>\$catname</a></span>";
-			$strs2 = "<span class='folder'>\$catname</span>";
-			$categorys = $tree->get_treeview(0,'category_tree',$strs,$strs2);
+			// $tree->init($categorys);
+			// $strs = "<span class='\$icon_type'><a href='\$urla' target='right' onclick='open_list(this)'>\$catname</a></span>";
+			// $strs2 = "<span class='folder'>\$catname</span>";
+			// $categorys = $tree->get_treeview(0,'category_tree',$strs,$strs2);
+			$this->response(200, $catlist, '11success');
 		} else {
 			$categorys = '没有分类请添加或刷新';
 			$this->response(200, array(), 'success');
 		}
-
-		
 	}
 
 	/**

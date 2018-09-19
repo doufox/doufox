@@ -24,6 +24,15 @@ class Api extends Controller
         $this->redirect(url('member/login', array('back' => urlencode($back))));
     }
 
+    protected function inlogged()
+    {
+        if ($this->memberinfo) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * API Response
      */

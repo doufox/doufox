@@ -24,10 +24,11 @@ class IndexController extends Api
     {
         $data = $this->post('data');
         if (empty($data)) {
-            exit('');
+            $this->response(200, $data, 'success');
+            exit();
         }
-
-        echo getKw($data);
+        $this->response(200, getKw($data), 'success');
+        // echo getKw($data);
     }
 
     /**
@@ -51,7 +52,7 @@ class IndexController extends Api
     public function categoryAction()
     {
         $this->view->assign('site_title', '栏目-' . $this->site_config['SITE_NAME']);
-        $this->view->display('category.html');
+        $this->response(200, $this->view, 'success');
     }
 
     /**
