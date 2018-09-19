@@ -1,79 +1,77 @@
 <?php include $this->admin_tpl('header');?>
-<script type="text/javascript">
-top.document.getElementById('position').innerHTML = '添加字段';
-</script>
 
 <script type="text/javascript">
-function loadformtype(type) {
-    $("#content").html('loading...');
-	$.get("<?php echo url('admin/model/ajaxformtype/',array('type'=>'')); ?>"+type, function(data) {
-		$("#content").html(data);																		
-	});
-	var merge = $('#merge').val();
-	$('#hidetbody').show();
-	$('#select-ed').show();
-	loadmerge(merge);
-	if (type=='input') {
-		$('#hidetbody').hide();
-	}
-	if (type=='editor') {
-		$('#hidetbody').hide();
-	}
-	if (type=='merge') {
-		$('#hidetbody').hide();
-	}
-	if (type=='fields') {
-		$('#hidetbody').hide();
-	    $('#select-ed').hide();
-	}
-	if (type=='checkbox') {
-		$('#hidetbody').hide();
-	}
-	if (type=='image') {
-		$('#hidetbody').hide();
-	}
-	if (type=='file') {
-		$('#hidetbody').hide();
-	}
-	if (type=='files') {
-		$('#hidetbody').hide();
-	}
-	if (type=='date') {
-		$('#hidetbody').hide();
-	}
-}
-function ajaxname() {
-	var field = $('#field').val();
-	if (field == '') {
-	    $.post('<?php echo HTTP_URL . ENTRY_FILE; ?>?c=api&a=pinyin&id='+Math.random(), { name:$('#name').val() }, function(data){ $('#field').val(data); });
-	}
-}
-function setlength() {
-	var type = new Array(); 
-	type['SMALLINT']='5';
-	type['MEDIUMINT']='8';
-	type['DECIMAL']='10,2';
-	type['VARCHAR']='255';
-	type['TEXT']='50000';
-	var name = $('#type').val();
-	if (name) {
-	    v = type[name];
-		$('#length').val(v);
-	}
-}
-function loadmerge(v) {
-    if (v) {
-	    $('#hidetbody').hide();
-		$('#select-ed').hide();
-	} else {
-	    $('#hidetbody').show();
+	window.top.document.getElementById('position').innerHTML = '添加字段';
+	function loadformtype(type) {
+		$("#content").html('loading...');
+		$.get("<?php echo url('admin/model/ajaxformtype'); ?>&type=" + type, function(data) {
+			$("#content").html(data);
+		});
+		var merge = $('#merge').val();
+		$('#hidetbody').show();
 		$('#select-ed').show();
+		loadmerge(merge);
+		if (type=='input') {
+			$('#hidetbody').hide();
+		}
+		if (type=='editor') {
+			$('#hidetbody').hide();
+		}
+		if (type=='merge') {
+			$('#hidetbody').hide();
+		}
+		if (type=='fields') {
+			$('#hidetbody').hide();
+			$('#select-ed').hide();
+		}
+		if (type=='checkbox') {
+			$('#hidetbody').hide();
+		}
+		if (type=='image') {
+			$('#hidetbody').hide();
+		}
+		if (type=='file') {
+			$('#hidetbody').hide();
+		}
+		if (type=='files') {
+			$('#hidetbody').hide();
+		}
+		if (type=='date') {
+			$('#hidetbody').hide();
+		}
 	}
-}
-<?php if (isset($data['merge']) && $data['merge']) { ?>
-$(function(){
-    loadmerge(<?php echo $data['merge']; ?>);
-});
+	function ajaxname() {
+		var field = $('#field').val();
+		if (field == '') {
+			$.post("<?php echo url('api/index/pinyin', array('id' => rand())); ?>", { name:$("#name").val() }, function(data){ $("#field").val(data); });
+		}
+	}
+	function setlength() {
+		var type = new Array();
+		type['SMALLINT']='5';
+		type['MEDIUMINT']='8';
+		type['DECIMAL']='10,2';
+		type['VARCHAR']='255';
+		type['TEXT']='50000';
+		var name = $('#type').val();
+		if (name) {
+			v = type[name];
+			$('#length').val(v);
+		}
+	}
+	function loadmerge(v) {
+		if (v) {
+			$('#hidetbody').hide();
+			$('#select-ed').hide();
+		} else {
+			$('#hidetbody').show();
+			$('#select-ed').show();
+		}
+	}
+	<?php if (isset($data['merge']) && $data['merge']) { ?>
+	$(function(){
+		loadmerge(<?php echo $data['merge']; ?>);
+	});
 <?php } ?>
 </script>
 
