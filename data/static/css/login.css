@@ -1,41 +1,19 @@
-body,
-div,
-ul,
-ol,
-li,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-form,
-fieldset,
-input,
-p {
+body, div, ul, ol, li, h1, h2, h3, h4, h5, h6, form, input, p {
     padding: 0;
     margin: 0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
     font-size: 100%;
 }
 
-html,
-body {
+html, body {
     width: 100%;
     height: 100%;
 }
 
-body,
-html,
-input {
+body, html, input {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 12px;
     line-height: 1.5;
@@ -60,26 +38,12 @@ img {
 }
 
 input {
-    vertical-align: middle;
-}
-
-input,
-textarea {
     outline: none;
-}
-
-input {
-    -webkit-box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1);
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-    border: 1px solid #999999;
-    /*border-top: 1px solid #999999;
+    vertical-align: middle;
+    border-top: 1px solid #999999;
     border-right: 1px solid #e1e1e1;
     border-bottom: 1px solid #e1e1e1;
-    border-left: 1px solid #999999;*/
+    border-left: 1px solid #999999;
 }
 
 input.text {
@@ -90,21 +54,7 @@ input.text {
     color: #666666;
 }
 
-input.text[type=file] {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-}
-
 input:hover {
-    -webkit-transition: box-shadow linear 0.2s;
-    -moz-transition: box-shadow linear 0.2s;
-    -ms-transition: box-shadow linear 0.2s;
-    -o-transition: box-shadow linear 0.2s;
-    transition: box-shadow linear 0.2s;
-    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
-    -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
     border: 1px solid #74b9ef;
 }
 
@@ -117,6 +67,8 @@ input:hover {
 .cell {
     display: table-cell;
     vertical-align: middle;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .row {
@@ -166,21 +118,6 @@ input:hover {
 .powered a {
     color: #888888;
     margin: 0px 3px;
-}
-
-fieldset {
-    border: 0;
-    line-height: 30px;
-    padding: 0px 10px;
-    margin: 10px 20px;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-    border: 1px solid #cccccc;
-}
-
-fieldset strong {
-    font-weight: bold;
 }
 
 #checkcode {
