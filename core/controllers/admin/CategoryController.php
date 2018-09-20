@@ -38,6 +38,7 @@ class CategoryController extends Admin {
 					<td align='left'><input name='order_\$catid' type='text' size='1' value='\$listorder' class='input-text-c'></td>
 					<td align='left'>\$catid</td>
 					<td >\$spacer\$catname</td>
+					<td align='left'>\$catdir</td>
 					<td>\$typename\$modelname</td>
 					<td>\$items</td>
 					<td>\$display</td>
