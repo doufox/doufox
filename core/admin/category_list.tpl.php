@@ -26,7 +26,7 @@
 				</tr>
 				</thead>
 				<tbody class="line-box">
-					<?php echo $categorys;?> 
+					<?php echo $categorys;?>
 					<tr height="25">
 						<td align="left" colspan="8">
 							<input type="submit" class="button" value="排序" name="submit" onClick="$('#load').show()">

@@ -1,14 +1,12 @@
 <?php
 
-class IndexController extends Admin {
+class IndexController extends Admin
+{
 
     public function __construct() {
 		parent::__construct();
 	}
-	
-	/**
-	 * 首页
-	 */
+
 	public function indexAction() {
     $username = $this->session->get('user_id');
 		$MEMBER_REGISTER = $this->site_config['MEMBER_REGISTER'];
@@ -25,7 +23,7 @@ class IndexController extends Admin {
 	}
 
 	/**
-	 * 后台首页
+	 * 后台主视图
 	 */
 	public function mainAction() {
 		$username = $this->session->get('user_id');
@@ -169,22 +167,15 @@ class IndexController extends Admin {
 	    }
 	}
 
-	
 	/**
 	 * 更新指定缓存
 	 */
 	public function updatecacheAction() {
-	    $appa = $this->get('ca') ? $this->get('ca') : 'cache';
-	    $appc = $this->get('cc');
-		$appc = ucfirst($appc) . 'Controller';
-		$appa = $appa . 'Action';
-		$file = CONTROLLER_PATH . 'admin' . DS . $appc . '.php';
-		if (!file_exists($file)) return false;
-		cms::load_file($file);
-		$app  = new $appc();
-		if (method_exists($appc, $appa)) $app->$appa(1);
+		$controller = $this->get('cc');
+	    $action     = $this->get('ca') ? $this->get('ca') : 'cache';
+		$this->updateCache($controller, $action);
 	}
-	
+
 	/**
 	 * 空格填补
 	 */
