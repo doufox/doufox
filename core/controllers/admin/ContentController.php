@@ -3,19 +3,18 @@
 class ContentController extends Admin {
 
 	public function indexAction() {
-	    if ($this->post('submit') && $this->post('form')=='search') {
-	        $username    = $this->post('username');
-	        $catid = (int)$this->post('catid');
-			$stype = $this->post('stype');
-	    } elseif ($this->post('submit_order') && $this->post('form')=='order') {
+	    if ($this->post('submit') && $this->post('form') == 'search') {
+	        $username  = $this->post('username');
+	        $catid     = (int)$this->post('catid');
+			$stype     = $this->post('stype');
+	    } elseif ($this->post('submit_order') && $this->post('form') == 'order') {
 	        foreach ($_POST as $var=>$value) {
 	            if (strpos($var, 'order_')!==false) {
 	                $id = (int)str_replace('order_', '', $var);
 	                $this->content->update(array('listorder'=>$value), 'id=' . $id);
 	            }
 	        }
-					$this->show_message('修改成功', 1);
-
+			$this->show_message('修改成功', 1);
 	    } elseif ($this->post('submit_del') && $this->post('form')=='del') {
 	        foreach ($_POST as $var=>$value) {
 	            if (strpos($var, 'del_')!==false) {
@@ -24,8 +23,7 @@ class ContentController extends Admin {
 	                $this->delAction($_id, $_catid, 1);
 	            }
 	        }
-					$this->show_message('删除成功', 1);
-
+			$this->show_message('删除成功', 1);
 	    } elseif ($this->post('submit_status_1') && $this->post('form')=='status_1') {
 	        foreach ($_POST as $var=>$value) {
 	            if (strpos($var, 'del_')!==false) {
@@ -81,17 +79,18 @@ class ContentController extends Admin {
 			$this->show_message('移动成功', 1);
 	    }
 
-
-	    $catid    = (int)$this->get('catid');
-		$status   = $this->get('status');
-	    $username  =  $this->get('username');
-	    $page     = (int)$this->get('page');
-		$page     = (!$page) ? 1 : $page;
+	    $catid      = (int)$this->get('catid');
+		$status     = $this->get('status');
+	    $username   = $this->get('username');
+	    $page       = (int)$this->get('page');
+		$page       = (!$page) ? 1 : $page;
 	    $pagination = cms::load_class('pagination');
 		$pagination->loadconfig();
-		if (empty($catid)) $this->show_message('url缺少栏目id参数');
-		
-		$cats = $this->category_cache;//读取栏目缓存
+		if (empty($catid) || (int)$catid < 1) {
+			$this->show_message('缺少栏目id参数');
+		}
+
+		$cats = $this->category_cache; // 读取栏目缓存
 		$modelid = $cats[$catid]['modelid'];
 
 		$where = 'catid=' . $catid;
@@ -107,29 +106,28 @@ class ContentController extends Admin {
 		if ($username) {
 		    $where .= " AND username='" . $username . "'";
 		}
-		
+
 	    $total    = $this->content->count('content', null, $where);
 		$count    = array();
 		$count[0] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=0');
 		$count[1] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=1');
 		$count[2] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=2');
 		$count[3] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=3');
-		
+
 	    $pagesize = 15;
 	    $urlparam = array();
 	    $urlparam['catid']   = $catid;
 	    $urlparam['modelid'] = $modelid;
 		if ($status) $urlparam['status'] = $status;
 	    if ($username) $urlparam['username'] = $username;
-	    $urlparam['page']   = '{page}';
-	    $url      = url('admin/content/index', $urlparam);
-	    $list    = $this->content->page_limit($page, $pagesize)->where($where)->order(array('listorder DESC', 'time DESC'))->select();
+	    $urlparam['page']    = '{page}';
+	    $url  = url('admin/content/index', $urlparam);
+	    $list = $this->content->page_limit($page, $pagesize)->where($where)->order(array('listorder DESC', 'time DESC'))->select();
 
 	    $pagination = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
-		$join     = $this->getModelJoin($modelid);
-		
-		
-		$tree =  cms::load_class('tree');
+		$join = $this->getModelJoin($modelid);
+
+		$tree = cms::load_class('tree');
 		$tree->icon = array(' ','  |-','  |-');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		$categorys = array();
@@ -147,6 +145,80 @@ class ContentController extends Admin {
 	}
 
 	/**
+	 * 所有内容列表
+	 */
+	public function listAction() {
+		$page = (int)$this->get('page');
+		$page = (!$page) ? 1 : $page;
+		$pagesize = 15;
+		$pagination = cms::load_class('pagination');
+		$pagination->loadconfig();
+
+		$total = $this->content->count('content', null, null);
+		$list = $this->content->page_limit($page, $pagesize)->where('status=0')->order(array('listorder DESC', 'time DESC'))->select();
+		// echo $list;
+		// $status     = $this->get('status');
+			// $username   = $this->get('username');
+			// $page       = (int)$this->get('page');
+			// $page       = (!$page) ? 1 : $page;
+			// $pagination = cms::load_class('pagination');
+			// $pagination->loadconfig();
+
+			// $cats = $this->category_cache; // 读取栏目缓存
+			// $modelid = $cats[$catid]['modelid'];
+
+			// $where = 'catid=' . $catid;
+			// if ($status == 1) {
+			//     $where .= ' AND status=1';
+			// } elseif ($status ==2) {
+			//     $where .= ' AND status=2';
+			// } elseif ($status ==3) {
+			//     $where .= ' AND status=3';
+			// } elseif ($status =='0') {
+			//     $where .= ' AND status=0';
+			// }
+			// if ($username) {
+			//     $where .= " AND username='" . $username . "'";
+			// }
+
+			// $total    = $this->content->count('content', null, $where);
+			// $count    = array();
+			// $count[0] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=0');
+			// $count[1] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=1');
+			// $count[2] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=2');
+			// $count[3] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=3');
+
+			// $pagesize = 15;
+			// $urlparam = array();
+			// $urlparam['catid']   = $catid;
+			// $urlparam['modelid'] = $modelid;
+			// if ($status) $urlparam['status'] = $status;
+			// if ($username) $urlparam['username'] = $username;
+			// $urlparam['page']    = '{page}';
+			// $url  = url('admin/content/index', $urlparam);
+	    // $list = $this->content->page_limit($page, $pagesize)->where($where)->order(array('listorder DESC', 'time DESC'))->select();
+
+	    $pagination = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
+		// $join = $this->getModelJoin($modelid);
+
+		$tree = cms::load_class('tree');
+		$tree->icon = array(' ','  |-','  |-');
+		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
+		$categorys = array();
+		// foreach($cats as $cid=>$r) {
+		// 	// if($modelid && $modelid != $r['modelid']) continue;
+		// 	$r['disabled'] = $r['child'] ? 'disabled' : '';
+		// 	$r['selected'] = $cid == $catid ? 'selected' : '';
+		// 	$categorys[$cid] = $r;
+		// }
+		$str  = "<option value='\$catid' \$selected \$disabled>\$spacer \$catname</option>";
+		$tree->init($categorys);
+		$category = $tree->get_tree(0, $str);
+		// echo $category;
+	    include $this->admin_tpl('content_list');
+	}
+
+	/**
 	 * 显示栏目菜单列表
 	 */
 	public function categoryAction() {
@@ -156,21 +228,18 @@ class ContentController extends Admin {
 		// $catlist =  $this->category->findAll('catid,typeid,parentid,child,http,catname');
 		$tree = cms::load_class('tree');
 		$categorys = array();
-		if(!empty($catlist)) {
+		if (!empty($catlist)) {
 			foreach($catlist as $r) {
-					if($r['typeid']==1)
-					{
+				if ($r['typeid']==1) {
 					$r['icon_type'] = 'ico1';
 					$r['urla'] = '?s=admin&c=content&catid='.$r['catid'];
-					}
-					else if ($r['typeid']==2)
-					{$r['icon_type'] = 'ico2';
+				} else if ($r['typeid']==2) {
+					$r['icon_type'] = 'ico2';
 					$r['urla'] = '?s=admin&c=category&a=edit&catid='.$r['catid'];
-					}
-					else
-					{$r['icon_type'] = 'ico3';
+				} else {
+					$r['icon_type'] = 'ico3';
 					$r['urla'] = $r['http'];
-					}
+				}
 				$categorys[$r['catid']] = $r;
 			}
 		}
@@ -185,7 +254,6 @@ class ContentController extends Admin {
 		}
 	    include $this->admin_tpl('content_category');
 	}
-
 
 	/**
 	 * 发布
@@ -432,6 +500,4 @@ class ContentController extends Admin {
 			include $this->admin_tpl('content_url');
 		}
 	}
-	
-
 }
