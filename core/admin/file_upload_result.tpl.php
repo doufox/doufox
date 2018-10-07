@@ -11,7 +11,7 @@
 			<td align="center"><?php echo $data['msg']; ?></td>
 			</tr>
 			</table>
-			<div class="onShow"><?php echo $note; ?></div>
+			<div class="show-tips"><?php echo $note; ?></div>
 			</div>
 		</form>
 	</div>

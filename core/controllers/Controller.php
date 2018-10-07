@@ -233,7 +233,7 @@ abstract class Controller  {
 				$content      = array($data[$t['field']]);
 				$content      = var_export($content, true);
 				if (function_exists($func)) eval("\$data_fields .= " . $func . "(" . $t['field'] . ", " . $content . ", " . $t['setting'] . ");");
-				$data_fields .= $t['tips'] ? '<div class="onShow">' . $t['tips'] . '</div>' : '';
+				$data_fields .= $t['tips'] ? '<div class="show-tips">' . $t['tips'] . '</div>' : '';
 				$data_fields .= '<span id="ck_' . $t['field'] . '"></span>';
 				$data_fields .= '</td>';
 				$data_fields .= '</tr>';

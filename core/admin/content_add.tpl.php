@@ -33,14 +33,14 @@ top.document.getElementById('position').innerHTML = '添加内容';
 			<td><span style="position: relative;">
 <input type="text" class="input-text" size="50" value="<?php echo $data['thumb']; ?>" name="data[thumb]" id="thumb"   onmouseover="preview2('thumb')" onmouseout="preview('thumb')">
 			<input type="button"  class="button" onClick="uploadImage('thumb', 1)" value="上传图片">
-			<div id="urlTip" class="onShow">可直接输入图片地址</div><div id="imgPreviewthumb"></div></span></td>
+			<div id="urlTip" class="show-tips">可直接输入图片地址</div><div id="imgPreviewthumb"></div></span></td>
 		</tr>
 
 		<?php }  if ($model['content']['keywords']['show']) { ?>
 		<tr>
 			<th><?php echo $model['content']['keywords']['name']; ?>：</th>
 			<td><input type="text" class="input-text" size="50" id="keywords" value="<?php echo $data['keywords']; ?>" name="data[keywords]">
-			<div class="onShow">多关键词之间用“,”隔开</div></td>
+			<div class="show-tips">多关键词之间用“,”隔开</div></td>
 		</tr>
 
 		<?php }  if ($model['content']['description']['show']) { ?>

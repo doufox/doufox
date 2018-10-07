@@ -52,7 +52,7 @@ class IndexController extends Admin
 	 */
 	public function configAction() {
     	// 变量注释
-		$string = array(
+		$configTips = array(
 			'SITE_THEME'              => '桌面端主题样式, 默认default',
 			'SITE_THEME_MOBILE'       => '移动端主题样式, 默认default',
 			'SITE_MOBILE'             => '移动端主题样式, 默认关闭',
@@ -113,7 +113,7 @@ class IndexController extends Admin
             foreach ($configdata as $var=>$val) {
 			    if (!in_array($var, $system)) {
                     $value    = $val == 'false' || $val == 'true' ? $val : "'" . $val . "'";
-                    $content .= "	'" . strtoupper($var) . "'" . $this->setspace($var) . " => " . $value . ",  // " . $string[$var] . PHP_EOL;
+                    $content .= "	'" . strtoupper($var) . "'" . $this->setspace($var) . " => " . $value . ",  // " . $configTips[$var] . PHP_EOL;
 				}
             }
             $content .= PHP_EOL . ");";

@@ -35,7 +35,7 @@
 						document.getElementById("ui-upload-filepathtxt").value = this.value; 
 					}
 					</script>
-				<div class="onShow"><?php echo $note; ?></div>
+				<div class="show-tips"><?php echo $note; ?></div>
 			</div>
 		</div>
 		</form>

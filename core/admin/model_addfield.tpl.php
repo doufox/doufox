@@ -100,16 +100,16 @@
 			<option value="<?php echo $t['fieldid']; ?>" <?php if ($t['fieldid']==$data['merge']) { ?>selected<?php } ?>><?php echo $t['name']; ?></option>
 			<?php } } ?>
 			</select>
-			<div class="onShow">该字段将会属于该“组合字段”。</div></td>
+			<div class="show-tips">该字段将会属于该“组合字段”。</div></td>
 		</tr>
 		<?php } ?>
 		<tr>
 			<th><font color="red">*</font> 字段别名： </th>
-			<td><input class="input-text" type="text" name="name" value="<?php echo $data['name']; ?>" size="30" id="name" onBlur="ajaxname()"/><div class="onShow">例如：副标题。</div></td>
+			<td><input class="input-text" type="text" name="name" value="<?php echo $data['name']; ?>" size="30" id="name" onBlur="ajaxname()"/><div class="show-tips">例如：副标题。</div></td>
 		</tr>
 		<tr>
 			<th><font color="red">*</font> 字段名称： </th>
-			<td><input class="input-text" type="text" id="field" name="field" value="<?php echo $data['field']; ?>" size="30" <?php if ($data[fieldid]) { ?>disabled<?php } ?> /><div class="onShow">mysql中字段名称，如：cms 必须英文字母开头、数字和下划线组成。</div>
+			<td><input class="input-text" type="text" id="field" name="field" value="<?php echo $data['field']; ?>" size="30" <?php if ($data[fieldid]) { ?>disabled<?php } ?> /><div class="show-tips">mysql中字段名称，如：cms 必须英文字母开头、数字和下划线组成。</div>
 		</tr>
 		<tr>
 			<th><font color="red">*</font> 字段类别： </th>
@@ -118,7 +118,7 @@
 			<?php if (is_array($formtype)) { foreach ($formtype as $k=>$t) { ?>
 			  <option value="<?php echo $k; ?>" <?php if ($k==$data['formtype']) { ?>selected<?php }  ?>><?php echo $t; ?></option>
 			<?php } } ?>
-			</select><div class="onShow">表单的输入类型</div>
+			</select><div class="show-tips">表单的输入类型</div>
 			</td>
 		</tr>
 		<tr>
@@ -147,14 +147,14 @@
 				<option value="VARCHAR">字符类型(VARCHAR)</option>
 				<option value="TEXT">文本类型(TEXT)</option>
 			</select>
-			<div class="onShow">储存类型 请慎重，一旦创建不能更改。</div>
+			<div class="show-tips">储存类型 请慎重，一旦创建不能更改。</div>
 			<?php } ?>
 			</td>
 		</tr>
 		<tr>
 			<th><font color="red">*</font> 最大长度： </th>
 			<td><?php if ($data['fieldid']) {  echo $data['length'];  } else { ?><input class="input-text" type="text" id="length" name="length" value="<?php echo $data['length']; ?>" size="30"/>
-			<div class="onShow">不能超过字段类型最大长度。</div><?php } ?></td>
+			<div class="show-tips">不能超过字段类型最大长度。</div><?php } ?></td>
 		</tr>
 		<tr>
 			<th>字段索引： </th>
@@ -165,7 +165,7 @@
 				<option value="UNIQUE">唯一索引</option>
 				<option value="INDEX">普通索引</option>
 				</select>
-				<div class="onShow">不懂就留空吧。</div>
+				<div class="show-tips">不懂就留空吧。</div>
 				<?php }  } ?>
 			</td>
 		</tr>
@@ -173,7 +173,7 @@
 		<?php } ?>
 		<tr>
 			<th>输入提示： </th>
-			<td><input class="input-text" type="text" name="tips" value="<?php echo $data['tips']; ?>" size="30"/><div class="onShow">输入框旁边的提示信息。</div></td>
+			<td><input class="input-text" type="text" name="tips" value="<?php echo $data['tips']; ?>" size="30"/><div class="show-tips">输入框旁边的提示信息。</div></td>
 		</tr>
 		<?php if ($typeid==1) { ?>
 		<tr>
@@ -181,7 +181,7 @@
 			<td>
 			<input type="radio" <?php if (!isset($data['isshow']) || $data['isshow']==1) { ?>checked<?php } ?> value="1" name="isshow"> 显示&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="radio" <?php if (isset($data['isshow']) && $data['isshow']==0) { ?>checked<?php } ?> value="0" name="isshow"> 隐藏
-			<div class="onShow">前台游客/会员发布时是否显示该字段。</div>
+			<div class="show-tips">前台游客/会员发布时是否显示该字段。</div>
 			</td>
 		</tr>
 		<?php } ?>
@@ -209,12 +209,12 @@
 			<option value="/^(1)[0-9]{10}$/">手机号码</option>
 			<option value="/^[0-9-]{6,13}$/">电话号码</option>
 			<option value="/^[0-9]{6}$/">邮政编码</option>
-			</select><div class="onShow">选填，通过此正则校验提交数据的合法性，如果不想校验请留空。</div>
+			</select><div class="show-tips">选填，通过此正则校验提交数据的合法性，如果不想校验请留空。</div>
 			</td>
 		</tr>
 		<tr>
 			<th>如未通过提示： </th>
-			<td><input class="input-text" type="text" name="errortips" value="<?php echo $data['errortips']; ?>" size="30"/><div class="onShow">数据校验未通过的提示信息。例如:xxx内容不能为空</div></td>
+			<td><input class="input-text" type="text" name="errortips" value="<?php echo $data['errortips']; ?>" size="30"/><div class="show-tips">数据校验未通过的提示信息。例如:xxx内容不能为空</div></td>
 		</tr>
 		</tbody>
 		<tr>

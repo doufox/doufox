@@ -30,7 +30,7 @@
 					<tr height="25">
 						<td align="left" colspan="8">
 							<input type="submit" class="button" value="排序" name="submit" onClick="$('#load').show()">
-							<span class="onShow">排序方式为“由小到大” 更改排序后请更新缓存</span>
+							<span class="show-tips">排序方式为“由小到大” 更改排序后请更新缓存</span>
 							<span id="load" style="display:none"><img src="/static/img/loading.gif"></span>
 						</td>
 					</tr>

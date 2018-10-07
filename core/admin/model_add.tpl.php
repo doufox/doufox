@@ -25,7 +25,7 @@ top.document.getElementById('position').innerHTML = '添加模型';
 				</tr>
 				<tr>
 					<th><font color="red">*</font> 数据表名： </th>
-					<td><input class="input-text" type="text" name="tablename" value="<?php echo $data['tablename']; ?>" size="30" <?php if ($data['modelid']) { ?>disabled<?php } ?> /><div class="onShow">只能由小写英文和数字组成(无需加表前缀)，此项不能修改。</div></td>
+					<td><input class="input-text" type="text" name="tablename" value="<?php echo $data['tablename']; ?>" size="30" <?php if ($data['modelid']) { ?>disabled<?php } ?> /><div class="show-tips">只能由小写英文和数字组成(无需加表前缀)，此项不能修改。</div></td>
 				</tr>
 				<tbody>
 				<?php if ($typeid == 1) { ?>
@@ -35,20 +35,20 @@ top.document.getElementById('position').innerHTML = '添加模型';
 					<?php if (is_array($formmodel)) { foreach ($formmodel as $t) { ?>
 					<input type="checkbox" value="<?php echo $t['modelid']; ?>" name="join[]" <?php if (in_array($t['modelid'], $join)) { ?>checked=""<?php } else {  if (in_array($t['modelid'], $joindata)) { ?>disabled=""<?php }  } ?> /> <?php echo $t['modelname']; ?>&nbsp;&nbsp;
 					<?php } } ?>
-					<div class="onShow">用于拓展内容（如评论，留言等）。</div>
+					<div class="show-tips">用于拓展内容（如评论，留言等）。</div>
 					</td>
 				</tr>
 				<tr>
 					<th>栏目模板： </th>
-					<td><input class="input-text" type="text" name="categorytpl" value="<?php echo $data['categorytpl']; ?>" size="30"/><div class="onShow">例如：category_news.html。不填写则会是category_+模型名称拼音</div></td>
+					<td><input class="input-text" type="text" name="categorytpl" value="<?php echo $data['categorytpl']; ?>" size="30"/><div class="show-tips">例如：category_news.html。不填写则会是category_+模型名称拼音</div></td>
 				</tr>
 				<tr>
 					<th>列表模板： </th>
-					<td><input class="input-text" type="text" name="listtpl" value="<?php echo $data['listtpl']; ?>" size="30"/><div class="onShow">例如：list_news.html。</div></td>
+					<td><input class="input-text" type="text" name="listtpl" value="<?php echo $data['listtpl']; ?>" size="30"/><div class="show-tips">例如：list_news.html。</div></td>
 				</tr>
 				<tr>
 					<th>内容模板： </th>
-					<td><input class="input-text" type="text" name="showtpl" value="<?php echo $data['showtpl']; ?>" size="30"/><div class="onShow">例如：show_news.html。</div>
+					<td><input class="input-text" type="text" name="showtpl" value="<?php echo $data['showtpl']; ?>" size="30"/><div class="show-tips">例如：show_news.html。</div>
 					</td>
 				</tr>
 				<?php } ?>

@@ -27,12 +27,12 @@ function ajaxemail() {
 		<tr>
 			<th>新密码：</th>
 			<td><input type="text" class="input-text" size="25" value="" name="password">
-			<div class="onShow">不修改密码请留空。</div></td>
+			<div class="show-tips">不修改密码请留空。</div></td>
 		</tr>
 		<tr>
 			<th>邮箱：</th>
 			<td><input type="text" class="input-text" size="25" id="email" value="<?php echo $data['email']; ?>" name="data[email]"onBlur="ajaxemail()">
-			<div class="onShow" id="email_text"></div>
+			<div class="show-tips" id="email_text"></div>
 			</td>
 		</tr>
 		<tr>

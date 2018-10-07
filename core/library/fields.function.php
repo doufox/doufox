@@ -425,7 +425,7 @@ function content_files($name, $content='', $setting='') {
 		<div class="bk10"></div>
         <div class="picBut cu"><a href="javascript:;" onClick="add_null_file(\'' . $name . '\')">添加地址</a></div> 		
 		<div class="picBut cu"><a href="javascript:;" onClick="uploadFiles(\'' . $name . '\',\'' . $set . '\')">批量上传</a></div>
-		<div class="onShow">前者表示文件地址，后者表示文件名称</div><script>$("#' . $name . '-sort-items").sortable();</script>';
+		<div class="show-tips">前者表示文件地址，后者表示文件名称</div><script>$("#' . $name . '-sort-items").sortable();</script>';
     return $str;
 }
 

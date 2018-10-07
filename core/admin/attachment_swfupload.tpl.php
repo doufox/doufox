@@ -55,7 +55,7 @@ $(document).ready(function(){
 					<span id="buttonPlaceHolder"></span>
 				</div>
 				<input type="button" id="btupload" value="开始上传" onClick="swfu.startUpload();" />
-                <div id="nameTip" class="onShow">最多上传个10个，单文件最大<?php echo $size; ?>MB</div>
+                <div id="nameTip" class="show-tips">最多上传个10个，单文件最大<?php echo $size; ?>MB</div>
                 <div class="bk3"></div>
                 <div class="lh24">支持格式: <?php echo str_replace(',', '、', $type); ?></div>
             </div> 	

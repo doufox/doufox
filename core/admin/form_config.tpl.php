@@ -35,7 +35,7 @@ top.document.getElementById('position').innerHTML = '表单配置';
 				<tr>
 					<th>表单提交模板：</th>
 					<td>
-					<input type="text" class="input-text" size="30" value="<?php echo $model['categorytpl']; ?>" name="data[categorytpl]"><div class="onShow">默认为form.html</div>
+					<input type="text" class="input-text" size="30" value="<?php echo $model['categorytpl']; ?>" name="data[categorytpl]"><div class="show-tips">默认为form.html</div>
 					</td>
 				</tr>
 				<tr>
@@ -68,7 +68,7 @@ top.document.getElementById('position').innerHTML = '表单配置';
 					<input type="radio" <?php if (empty($model['setting']['form']['member'])) { ?>checked<?php } ?> value="0" name="setting[form][member]"> 关闭
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="radio" <?php if ($model['setting']['form']['member']==1) { ?>checked<?php } ?> value="1" name="setting[form][member]"> 打开
-					<div class="onShow">会员中心能查看到用户提交的内容</div>
+					<div class="show-tips">会员中心能查看到用户提交的内容</div>
 					</td>
 				</tr>
 
@@ -83,7 +83,7 @@ top.document.getElementById('position').innerHTML = '表单配置';
 				<tr>
 					<th>同一IP提交间隔：</th>
 					<td>
-					<input type="text" class="input-text" size="10" value="<?php echo $model['setting']['form']['time']; ?>" name="setting[form][ip]"><div class="onShow">单位分钟</div>
+					<input type="text" class="input-text" size="10" value="<?php echo $model['setting']['form']['time']; ?>" name="setting[form][ip]"><div class="show-tips">单位分钟</div>
 					</td>
 				</tr>
 						<?php if (is_array($model['fields']['data'])) { foreach ($model['fields']['data'] as $t) { ?>

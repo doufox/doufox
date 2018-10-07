@@ -61,7 +61,7 @@ function url($route, $params = null)
     $arr = explode('/', $route);
     $arr = array_diff($arr, array(''));
     $count = count($arr);
-    $url = ENTRY_FILE;
+    $url =  ''; // ENTRY_FILE;
     if (is_dir(CONTROLLER_PATH . $arr[0])) {
         $url .= '?s=' . strtolower($arr[0]);
         if (isset($arr[1]) && $arr[1]) {

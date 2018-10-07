@@ -68,7 +68,7 @@ function positionLineObj(obj,ta)
 		<table width="100%" class="table_form" style="margin-bottom:10px;">
 		<tr>
 			<td align="left">当前位置：<?php echo $local; if ($this->get('a')=='add') {  ?> <input type="text" class="input-text" size="20" value="" name="file_name">
-			<div class="onShow">只支持后缀为.html、.js、.css。</div><?php } ?></td>
+			<div class="show-tips">只支持后缀为.html、.js、.css。</div><?php } ?></td>
 		</tr>
 		<tr>
 			<td align="left"> 

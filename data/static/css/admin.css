@@ -656,7 +656,7 @@ select {
 }
 
 /* 表单验证 */
-.onShow, .onFocus, .onError, .onCorrect, .onLoad, .onTime {
+.show-tips, .onFocus, .onError, .onCorrect, .onLoad, .onTime {
     display: inline-block;
     display: -moz-inline-stack;
     zoom: 1; *display: inline;
@@ -669,7 +669,7 @@ select {
     _margin-left: 5px
 }
 
-.onShow {
+.show-tips {
     background-position: 3px -1196px;
     border-color: #40B3FF;
     color: #959595

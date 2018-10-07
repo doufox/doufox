@@ -17,7 +17,7 @@ top.document.getElementById('position').innerHTML = '更新内容地址';
 							<option value="0">=== 全部栏目 ===</option>
 							<?php echo $category; ?>
 						</select>
-						<div class="onShow">表单列表模板</div>
+						<div class="show-tips">表单列表模板</div>
 					</td>
 				</tr>
 				<tr>

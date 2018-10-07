@@ -33,7 +33,7 @@
 					<th><font color="red">*</font> 格式见左侧：</th>
 					<td>
 						<textarea style="width:200px;height:110px" name="names"></textarea>
-						<div class="onShow">格式：栏目名称|栏目目录 一行一个 如： 新闻|news</div>
+						<div class="show-tips">格式：栏目名称|栏目目录 一行一个 如： 新闻|news</div>
 					</td>
 				</tr>
 				</tbody>
@@ -85,7 +85,7 @@
 					<?php if (is_array($model)) { foreach ($model as $t) { ?>
 					<option value="<?php echo $t['modelid']; ?>" <?php if ($t['modelid']==$data['modelid']) { ?>selected<?php } ?>><?php echo $t['modelname']; ?></option>
 					<?php } } ?>
-					</select><div class="onShow">只有内部栏目才能选择内容模型</div></td>
+					</select><div class="show-tips">只有内部栏目才能选择内容模型</div></td>
 				</tr>
 
 				<tr>
