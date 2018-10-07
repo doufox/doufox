@@ -58,10 +58,10 @@ function url($route, $params = null)
         return false;
     }
 
-    $arr = explode('/', $route);
-    $arr = array_diff($arr, array(''));
-    $count = count($arr);
-    $url =  ''; // ENTRY_FILE;
+    $arr    = explode('/', $route);
+    $arr    = array_diff($arr, array(''));
+    $count  = count($arr);
+    $url =  '';
     if (is_dir(CONTROLLER_PATH . $arr[0])) {
         $url .= '?s=' . strtolower($arr[0]);
         if (isset($arr[1]) && $arr[1]) {
@@ -85,6 +85,10 @@ function url($route, $params = null)
             $params_url[] = trim($key) . '=' . trim($value);
         }
         $url .= '&' . implode('&', $params_url);
+    }
+    $config = cms::load_config('config');
+    if (!$config['DIY_URL'] && !$config['HIDE_ENTRY_FILE']) {
+        $url =  ENTRY_FILE . $url;
     }
     $url = str_replace('//', '/', $url);
     return Controller::get_base_url() . $url;
