@@ -17,13 +17,13 @@ class CategoryController extends Admin {
 	        }
 	    }
 
-	    $models   = get_cache('model');
-		$tree =  cms::load_class('tree');
+	    $models     = get_cache('model');
+		$tree       = cms::load_class('tree');
 		$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ','&nbsp;&nbsp;&nbsp;├─ ','&nbsp;&nbsp;&nbsp;└─ ');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
-		$categorys = array();
-		$result =  $this->category->order('listorder ASC')->select();
-		$types = array(1 => '',2 => '<font color="blue">单网页</font>',3 => '<font color="red">外部连接</font>');
+		$categorys  = array();
+		$result     =  $this->category->order('listorder ASC')->select();
+		$types      = array(1 => '',2 => '<font color="blue">单网页</font>',3 => '<font color="red">外部连接</font>');
 		if(!empty($result)) {
 			foreach($result as $r) {
 				$r['modelname'] = @$models[$r['modelid']]['modelname'];//读取模型
@@ -34,21 +34,21 @@ class CategoryController extends Admin {
 				$categorys[$r['catid']] = $r;
 			}
 		}
-		$str  = "<tr> 
+		$str = "<tr>
 					<td align='left'><input name='order_\$catid' type='text' size='1' value='\$listorder' class='input-text-c'></td>
 					<td align='left'>\$catid</td>
-					<td >\$spacer\$catname</td>
+					<td>\$spacer\$catname</td>
 					<td align='left'>\$catdir</td>
 					<td>\$typename\$modelname</td>
 					<td>\$items</td>
 					<td>\$display</td>
-					<td >\$str_manage</td>
-					</tr>";
+					<td>\$str_manage</td>
+                </tr>";
 		$tree->init($categorys);
 		$categorys = $tree->get_tree(0, $str);
 		include $this->admin_tpl('category_list');
 	}
-	
+
 	/**
 	 * 添加栏目
 	 */

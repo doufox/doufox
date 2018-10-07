@@ -6,7 +6,6 @@ function redirect(url) {
     location.href = url;
 }
 
-
 function preview(obj) {
     $("#imgPreview" + obj).html('');
 }

@@ -37,10 +37,6 @@ cms::load_file(CORE_PATH . 'info.php');
 cms::load_file(CORE_PATH . 'library' . DS . 'global.function.php'); // 加载全局函数
 cms::load_class('Model', '', 0);
 
-header('Content-Type: text/html; charset=utf-8');
-header('X-Powered-By: ' . APP_NAME);
-header('Copyright: ' . APP_NAME);
-
 /**
  * 系统核心APP
  */

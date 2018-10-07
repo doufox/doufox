@@ -651,6 +651,16 @@ select {
     vertical-align: middle
 }
 
+.table_form label:hover {
+    color: #00f;
+}
+
+.table_form label:hover input[type=radio] {
+    outline-width: 1px;
+    outline-style: dotted;
+    outline-color: #00f;
+}
+
 .table_form td, .table_form th {
     padding: 8px 0 8px 8px
 }
