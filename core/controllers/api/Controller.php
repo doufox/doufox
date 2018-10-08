@@ -42,7 +42,7 @@ class Api extends Controller
         $raw = array(
             'code' => $code,
             'data' => isset($data) ? $data : new ArrayObject(),
-            'message' => $msg,
+            'msg' => $msg,
         );
         $raw = json_encode($raw);
         echo $raw;
