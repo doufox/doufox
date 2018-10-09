@@ -1,30 +1,29 @@
 {template header.html}
     <div class="warp">
-        <div class="container">
-            <div class="page bg">
-                {template crumbs.html}
-                <h2 class="article-title">{$title}</h2>
-                <div class="article-meta">
+        <div class="container bg">
+            {template crumbs.html}
+            <div class="article">
+                <h2 class="title">{$title}</h2>
+                <div class="meta">
                     发布时间&nbsp;:&nbsp;{function.date("Y-m-d H:i:s", $time)}&nbsp;
                     阅读&nbsp;:&nbsp;<script type="text/javascript" src="{function.url('api/index/hits',array('id'=>$id))}"></script>次&nbsp;
                     {if $originalurl}&nbsp;<a href="{$originalurl}" target="_blank">原文链接</a>{/if}
                 </div>
-                <div class="article-content">
+                <div class="content">
                     {$content}
                 </div>
-                <!--文章内容分页 begin-->
                 {if $content_page}
                 <div class="pagination">
                     {loop $content_page $t=>$u}
                     <a{if $page!=$t} href="{$u}"{else} style="background-color: #c00;"{/if}>{$t}</a>
                     {/loop}
                 </div>
-                <div class="clear blank10"></div>
                 {/if}
-
-                <!--文章内容分页 end-->
-                <div class="blank20 clear"></div>
-                <!-- 评论 start -->
+                <div class="blank10 clear"></div>
+                <div class="article-tags">{$tag}</div>
+            </div>
+            <div class="blank20 clear"></div>
+            <div class="comment">
                 <div class="bg">
                     <h2>评论列表</h2>
                     {list table=form_comment cid=$id order=time}
@@ -37,18 +36,16 @@
                     <textarea class="content" name="data[content]"></textarea></td>
                     <input type="submit" class="button" value="提 交" name="submit">
                 </form>
-                <!-- 评论 end -->
-                <div class="article-prev-next">
-                    {if $prev_page}
-                    <div class="article-prev">上一篇：<a href="{$prev_page['url']}">{$prev_page['title']}</a></div>
-                    {/if} {if $next_page}
-                    <div class="blank5 clear"></div>
-                    <div class="article-next">下一篇：<a href="{$next_page['url']}">{$next_page['title']}</a></div>
-                    {/if}
-                </div>
             </div>
-            <div class="blank10 clear"></div>
-            <div class="article-tags">{$tag}</div>
+
+            <div class="article-prev-next">
+                {if $prev_page}
+                <div class="article-prev">上一篇：<a href="{$prev_page['url']}">{$prev_page['title']}</a></div>
+                {/if} {if $next_page}
+                <div class="blank5 clear"></div>
+                <div class="article-next">下一篇：<a href="{$next_page['url']}">{$next_page['title']}</a></div>
+                {/if}
+            </div>
         </div>
     </div>
 {template footer.html}

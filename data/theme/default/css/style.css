@@ -405,40 +405,12 @@ img {
     color: #8c8c8c;
 }
 
-.piclist {
-    width: 750px;
-}
-
-.piclist li {
-    width: 240px;
-    float: left;
-    height: 200px;
-    overflow: hidden;
-}
-
-.piclist img {
-    width: 224px;
-    height: 160px;
-    padding: 2px;
-    border: 1px solid #cfcfcf;
-    margin-bottom: 8px;
-}
-
-.piclist a:hover {
-    color: red;
-    text-decoration: none;
-}
-
-.picname {
-    text-align: center;
-}
-
-.warp .page .article-title {
+.article .title {
     text-align: center;
     margin: 20px;
 }
 
-.article-meta {
+.article .meta {
     text-align: center;
     color: #999;
     margin-top: 10px;
@@ -447,11 +419,11 @@ img {
     padding-right: 10px;
 }
 
-.article-meta a:hover {
+.article .meta a:hover {
     text-decoration: underline;
 }
 
-.article-content {
+.article .content {
     line-height: 24px;
     padding: 10px;
 }
@@ -625,24 +597,24 @@ pre.prettyprint {
     position: absolute;
 }
 
-.category-list .category-item .category-title {
+.category-list .category-title {
     color: #325e7f;
     height: 30px;
     font-size: 18px;
     padding: 10px;
 }
 
-.category-list .category-item .category-title .title {
+.category-list .category-title .title {
     float: left;
     border-bottom: 1px solid #39c;
     width: 80%;
 }
 
-.category-list .category-item .category-title .more {
+.category-list .category-title .more {
     float: right;
 }
 
-.category-list .category-item li {
+.article-list li {
     color: #325e7f;
     line-height: 34px;
     height: 34px;
@@ -651,12 +623,12 @@ pre.prettyprint {
     padding: 5px 10px;
 }
 
-.category-list .category-item li a {
+.article-list li a {
     float: left;
     color: #325e7f;
 }
 
-.category-list .category-item li span {
+.article-list li span {
     float: right;
     font-family: Verdana;
     color: #8c8c8c;

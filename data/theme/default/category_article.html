@@ -1,17 +1,18 @@
 {template header.html}
-<div class="warp category-list">
+
+<div class="warp">
     <div class="container">
         <div class="w210 fl">
             {template sidebar.html}
         </div>
         <div class="w740 fr bg">
             {template crumbs.html} {nav parentid=$catid typeid=1}
-            <div class="category-item">
+            <div class="category-list">
                 <div class="category-title">
                     <span class="title">{$vdata['catname']}</span>
                     <span class="more"><a href="{$vdata['url']}">更多&gt;&gt;</a></span>
                 </div>
-                <ul class="category-contents">
+                <ul class="article-list">
                     {list catid=$vdata[catid] num=9 order=time}
                     <li>
                         <span class="date">{function.date("Y-m-d", $vdata['time'])}</span>
