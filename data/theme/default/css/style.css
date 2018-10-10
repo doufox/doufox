@@ -273,20 +273,20 @@ img {
     display: none;
 }
 
-.warp {
+.main {
     width: 960px;
     margin: 0 auto;
 }
 
-.warp.category-card {
+.main.home-card {
     width: 970px;
 }
 
-.category-card .container {
+.home-card .container {
     width: 970px;
 }
 
-.warp .newwarp {
+.main .newwarp {
     margin: 5px;
     padding: 5px;
     width: -moz-calc(100% / 3 - 22px);
@@ -342,21 +342,21 @@ img {
     float: right;
 }
 
-.warp .newsfocus {
+.main .newsfocus {
     height: 75px;
     padding: 10px 0px 0px 0px;
     margin-bottom: 8px;
     border-bottom: 1px solid #e0e0e0;
 }
 
-.warp .newsfocus div {
+.main .newsfocus div {
     float: left;
     width: 60px;
     height: 60px;
     margin-right: 16px;
 }
 
-.warp .newsfocus div a {
+.main .newsfocus div a {
     width: 60px;
     height: 60px;
     border: 1px solid #d2d2d0;
@@ -368,38 +368,38 @@ img {
     *font-family: Arial;
 }
 
-.warp .newsfocus div a img {
+.main .newsfocus div a img {
     vertical-align: middle;
     width: 58px;
     height: 58px;
 }
 
-.warp .newsfocus h3 {
+.main .newsfocus h3 {
     margin-bottom: 3px;
 }
 
-.warp .newsfocus h3 a {
+.main .newsfocus h3 a {
     font-weight: bold;
     font-size: 12px;
     color: #fe8216;
 }
 
-.warp .newsfocus p {
+.main .newsfocus p {
     color: #8f8f8f;
     line-height: 18px;
 }
 
-.warp .indexnewslist li {
+.main .indexnewslist li {
     color: #325e7f;
     line-height: 24px;
     height: 24px;
 }
 
-.warp .indexnewslist li a {
+.main .indexnewslist li a {
     color: #325e7f;
 }
 
-.warp .indexnewslist li span {
+.main .indexnewslist li span {
     float: right;
     font-family: Verdana;
     color: #8c8c8c;
@@ -448,25 +448,25 @@ pre.prettyprint {
     color: #000;
 }
 
-.recommend-article {
+.recommend {
     overflow: hidden;
     position: relative;
     width: 970px;
     margin: 0 auto;
 }
 
-.recommend-article .hd {
+.recommend .hd {
     overflow: hidden;
     height: 25px;
     margin: 5px;
     border-bottom: 1px solid #ddd;
 }
 
-.recommend-article .hd h3 {
+.recommend .hd h3 {
     float: left;
 }
 
-.recommend-article .hd .prev, .recommend-article .hd .next {
+.recommend .hd .prev, .recommend .hd .next {
     display: block;
     width: 5px;
     height: 9px;
@@ -478,27 +478,27 @@ pre.prettyprint {
     background: url(../img/arrow.png) no-repeat;
 }
 
-.recommend-article .hd .next {
+.recommend .hd .next {
     background-position: 0 -50px;
 }
 
-.recommend-article .hd .prevStop {
+.recommend .hd .prevStop {
     background-position: -60px 0;
 }
 
-.recommend-article .hd .nextStop {
+.recommend .hd .nextStop {
     background-position: -60px -50px;
 }
 
-.recommend-article .bd {
+.recommend .bd {
     padding: 10px 14px;
 }
 
-.recommend-article .bd ul {
+.recommend .bd ul {
     overflow: hidden;
     zoom: 1; }
 
-.recommend-article .bd ul li {
+.recommend .bd ul li {
     margin: 0 8px;
     float: left;
     _display: inline;
@@ -506,11 +506,11 @@ pre.prettyprint {
     text-align: center;
 }
 
-.recommend-article .bd ul li .pic {
+.recommend .bd ul li .pic {
     text-align: center;
 }
 
-.recommend-article .bd ul li .pic img {
+.recommend .bd ul li .pic img {
     width: 130px;
     height: 100px;
     display: block;
@@ -518,11 +518,11 @@ pre.prettyprint {
     border: 1px solid #ccc;
 }
 
-.recommend-article .bd ul li .pic a:hover img {
+.recommend .bd ul li .pic a:hover img {
     border-color: #999;
 }
 
-.recommend-article .bd ul li .title {
+.recommend .bd ul li .title {
     line-height: 24px;
 }
 

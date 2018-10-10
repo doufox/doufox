@@ -1,20 +1,23 @@
-<div class="blank5 clear"></div>
-<div class="recommend-article">
-  <div class="container bg">
-    <div class="hd">
-      <h3>Recommend</h3>
-      <a class="next"></a>
-      <a class="prev"></a>
+<div class="recommend">
+    <div class="container bg">
+        <div class="hd">
+            <h3>Recommend</h3>
+            <a class="next"></a>
+            <a class="prev"></a>
+        </div>
+        <div class="bd">
+            <ul class="picList">
+                {list status=3 num=10 cache=36000 }
+            <li>
+                <div class="pic">
+                    <a href="{$vdata['url']}"><img src="{function.thumb($vdata[thumb])}" /></a>
+                </div>
+                <div class="title">
+                    <a href="{$vdata['url']}">{function.strcut($vdata[title], 24)}</a>
+                </div>
+            </li>
+                {/list}
+            </ul>
+        </div>
     </div>
-    <div class="bd">
-      <ul class="picList">
-{list status=3 num=10 cache=36000 }
-        <li>
-          <div class="pic"><a href="{$vdata['url']}"><img src="{function.thumb($vdata[thumb])}" /></a></div>
-          <div class="title"><a href="{$vdata['url']}">{function.strcut($vdata[title], 24)}</a></div>
-        </li>
-{/list}
-      </ul>
-    </div>
-  </div>
 </div>

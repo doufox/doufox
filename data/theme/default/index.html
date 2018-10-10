@@ -1,29 +1,29 @@
 {template header.html}
 
-<div class="warp category-card">
- <div class="container">
-{nav  }
-  <div class="newwarp bg">
-    <div class="newstitle">
-      <h3><a href="{$vdata['url']}" class="more">{$vdata['catname']}</a></h3>
-      <a href="{$vdata['url']}" class="more">more&gt;&gt;</a>
+<div class="main home-card">
+    <div class="container">
+        {nav  }
+        <div class="newwarp bg">
+            <div class="newstitle">
+                <h3><a href="{$vdata['url']}" class="more">{$vdata['catname']}</a></h3>
+                <a href="{$vdata['url']}" class="more">more&gt;&gt;</a>
+            </div>
+            {list catid=$vdata[catid] status=2 num=1}
+            <div class="newsfocus">
+                <div><a href="{$vdata['url']}"><img src="{function.thumb($vdata[thumb])}" /></a></div>
+                <h3><a href="{$vdata['url']}" title="{$vdata['title']}">{function.strcut($vdata[title],34)}</a></h3>
+                <p>{function.strcut($vdata[description],80)} </p>
+            </div>
+            {/list}
+            <ul class="indexnewslist">
+                {list catid=$vdata[catid] order=time num=3}
+                <li><span>{function.date("Y-m-d", $vdata['time'])}</span> · <a href="{$vdata['url']}">{function.strcut($vdata[title],34,'')}</a></li>
+                {/list}
+            </ul>
+        </div>
+        {/nav}
     </div>
-    {list catid=$vdata[catid] status=2 num=1}
-    <div class="newsfocus">
-      <div><a href="{$vdata['url']}"><img src="{function.thumb($vdata[thumb])}" /></a></div>
-      <h3><a href="{$vdata['url']}" title="{$vdata['title']}">{function.strcut($vdata[title],34)}</a></h3>
-      <p>{function.strcut($vdata[description],80)} </p>
-    </div>
-{/list}
-    <ul class="indexnewslist">
-{list catid=$vdata[catid] order=time num=3}
-      <li><span>{function.date("Y-m-d", $vdata['time'])}</span>· <a href="{$vdata['url']}">{function.strcut($vdata[title],34,'')}</a></li>
-{/list}
-    </ul>
-  </div>
-{/nav}
- </div>
- <div class="link bg">{block 6}</div>
+    <div class="link bg">{block 6}</div>
 </div>
 {template recommend_article.html}
 {template footer.html}
