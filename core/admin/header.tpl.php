@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
     <title>admin</title>
     <link href="/static/css/admin.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>

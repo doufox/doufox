@@ -16,9 +16,8 @@ class view {
 
 	public function __construct() {
 		$this->view_dir    = THEME_CURRENT;
-		$viewpath          = basename(THEME_CURRENT) . DS;
-		$this->viewpath    = $viewpath;
-		$this->_options['viewpath'] = $viewpath;
+		$this->viewpath    = basename(THEME_CURRENT) . DS;
+		$this->_options['viewpath'] = $this->viewpath;
 		// 编译主题模板生成的文件路径
 		$this->compile_dir = DATA_PATH . 'cache' . DS . THEME_TYPE . DS;
 	}

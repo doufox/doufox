@@ -58,6 +58,7 @@ abstract class Controller  {
 			$this->memberinfo   = $this->getMember();
 		}
 		$this->view->assign(array(
+			'site_generator' => APP_NAME,
 			'site_url' => HTTP_URL,
 			'site_name' => $this->site_config['SITE_NAME'],
 			'site_slogan' => $this->site_config['SITE_SLOGAN'],
