@@ -30,7 +30,7 @@ define('MODEL_PATH', CORE_PATH . MODEL_DIR . DS);           // 数据模型路�
 define('VIEW_PATH', CORE_PATH . VIEW_DIR . DS);             // 视图模板路径
 define('CONTROLLER_PATH', CORE_PATH . CONTROLLER_DIR . DS); // 控制器路径
 define('STATIC_PATH', DATA_PATH . STATIC_DIR . DS);         // 静态资源路径
-define('ADMIN_PATH', VIEW_PATH . 'management' . DS);        // 管理模块路径
+define('ADMIN_PATH', VIEW_PATH . 'admin' . DS);             // 管理模块路径
 define('INSTALL_PATH', VIEW_PATH . 'install' . DS);         // 安装模块路径
 define('THEME_PATH_D', DATA_PATH . 'theme' . DS);           // 桌面端模板路径
 define('THEME_PATH_M', DATA_PATH . 'theme_mobile' . DS);    // 移动端模板路径
