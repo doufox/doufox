@@ -116,7 +116,7 @@ class DatabaseController extends Admin
     {
         $data = $this->content->execute('SHOW TABLE STATUS FROM `' . $this->content->dbname . '`');
         foreach ($data as $key => $t) {
-            $data[$key]['xiaosys'] = substr($t['Name'], 0, strlen($this->content->prefix)) != $this->content->prefix ? 0 : 1;
+            $data[$key]['tables_sys'] = substr($t['Name'], 0, strlen($this->content->prefix)) != $this->content->prefix ? 0 : 1;
         }
         return $data;
     }
