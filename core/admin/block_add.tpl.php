@@ -32,9 +32,13 @@ top.document.getElementById('position').innerHTML = '区块编辑';
 		</tr>
 		<tr id="text_2" style="display:none">
 			<th>区块内容： </th>
-			<td><span style="position: relative;"><input type="text" class="input-text"  size="50" value="<?php echo $data[content]; ?>" name="data[content_2]"  id="thumb"   onmouseover="preview2('thumb')" onmouseout="preview('thumb')">
-				<input type="button"  class="button" onClick="uploadImage('thumb')" value="上传图片">
-				<div id="urlTip" class="show-tips">可直接输入图片地址</div><div id="imgPreviewthumb"></div></span></td>
+			<td>
+				<span style="position: relative;">
+					<input type="text" class="input-text" size="50" value="<?php echo $data[content]; ?>" name="data[content_2]" id="thumb" onmouseover="admin_command.preview2('thumb')" onmouseout="admin_command.preview('thumb')">
+					<input type="button" class="button" onClick="admin_command.uploadImage('thumb')" value="上传图片">
+					<div id="urlTip" class="show-tips">可直接输入图片地址</div><div id="imgPreviewthumb"></div>
+				</span>
+			</td>
 		</tr>
 		<tr id="text_3" style="display:none;">
 			<th>区块内容：</th>

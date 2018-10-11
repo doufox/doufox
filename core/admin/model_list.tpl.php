@@ -44,7 +44,7 @@ function cdisabled(id, c) {
 				<a href="<?php echo url('admin/model/fields/',array('typeid'=>$typeid, 'modelid'=>$t['modelid'])); ?>">字段管理</a> | 
 				<a href="<?php echo url('admin/model/edit',array('typeid'=>$typeid, 'modelid'=>$t['modelid'])); ?>">编辑</a> | 
 				<a href="javascript:cdisabled(<?php echo $t['modelid']; ?>, <?php echo $disable; ?>);"><?php if ($disable) { ?><font color=red><?php echo '启用'; ?></font><?php } else {  echo '禁用 ';  } ?></a> | 
-				<a  href="javascript:confirmurl('<?php echo url('admin/model/del/',array('typeid'=>$typeid,'modelid'=>$t['modelid'])); ?>','确定删除 『 <?php echo $t['modelname']; ?> 』吗？ ')" >删除</a> </td>
+				<a  href="javascript:admin_command.confirmurl('<?php echo url('admin/model/del/',array('typeid'=>$typeid,'modelid'=>$t['modelid'])); ?>','确定删除 『 <?php echo $t['modelname']; ?> 』吗？ ')" >删除</a> </td>
 			</tr>
 			<?php } } ?>
 			<tbody>

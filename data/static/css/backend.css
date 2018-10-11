@@ -32,55 +32,40 @@ a:hover {
     color: #000;
 }
 
-#head {
+.header {
     height: 30px;
     color: #fff;
     background-color: #00bae0;
 }
 
-#head>div {
-    height: 30px;
-    line-height: 30px;
-}
-
-.logo {
+.header .title {
     width: 150px;
     height: 30px;
     float: left;
     line-height: 30px;
     text-align: center;
+    font-size: 1.2em;
 }
 
-.logo h1 {
-    width: 150px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    font-size: 15px;
-}
-
-#menu_position {
-    float: left;
-}
-
-#head .user {
+.header .user {
     height: 30px;
     line-height: 30px;
     float: right;
 }
 
-#head .user a {
+.header .user a {
     display: block;
     float: right;
     padding-right: 5px;
     padding-left: 5px;
 }
 
-#head .user a:hover {
+.header .user a:hover {
     background-color: #fff;
 }
 
 #menu {
+    float: left;
     position: relative;
 }
 

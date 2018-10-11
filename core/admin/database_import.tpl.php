@@ -30,7 +30,7 @@ top.document.getElementById('position').innerHTML = '数据库恢复';
 	<td align="left"><?php echo $v['sqldir']?></td>
 	<td align="center"><?php echo $v['size']?></td>
 	<td  align="left">
-	<a href="javascript:confirmurl('<?php echo url("admin/database/import", array("path"=>$v['path']))?>', '确定恢复数据库吗')">恢复数据库</a>
+	<a href="javascript:admin_command.confirmurl('<?php echo url("admin/database/import", array("path"=>$v['path']))?>', '确定恢复数据库吗')">恢复数据库</a>
     </td>
 	</tr>
 	<?php } }?>

@@ -1,9 +1,8 @@
 {template header.html}
 
-<link href="admin/img/admin.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/admin.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script>
-<script type="text/javascript">var sitepath = "index.php";</script>
-<script type="text/javascript" src="admin/js/admin.js"></script>
+<script type="text/javascript" src="/static/js/admin.js"></script>
 
  <div class="blank10 clear"></div>
  <div class="main">
@@ -31,7 +30,7 @@
 {if $model['content']['title']['show']}
     <tr>
      <th><font color="red">*</font>&nbsp;{$model['content']['title']['name']}：</th>
-     <td><input type="text" class="input-text" size="50" id="title" value="{$data['title']}" name="data[title]" onBlur="get_kw()">
+     <td><input type="text" class="input-text" size="50" id="title" value="{$data['title']}" name="data[title]" onBlur="admin_command.get_kw()">
      <div class="show-tips" id="title_text"></div></td>
     </tr>
 {/if}

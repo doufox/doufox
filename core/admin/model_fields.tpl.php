@@ -108,7 +108,7 @@ top.document.getElementById('position').innerHTML = '模型字段管理';
 			<td align="left">
 			<a href="<?php echo url('admin/model/editfield/',array('typeid'=>$typeid,'fieldid'=>$t['fieldid'])); ?>">编辑</a> | 
 			<a href="<?php echo url('admin/model/disable/',array('typeid'=>$typeid,'fieldid'=>$t['fieldid'])); ?>"><?php if ($t['disabled']==1) { ?><font color="#FF0000">启用</font><?php } else {  echo '禁用';  } ?></a> | 
-			<?php if ($t['field'] == 'content') { ?><a href="javascript:;" style="color:#ACA899">删除</a> <?php } else { ?><a  href="javascript:confirmurl('<?php echo url('admin/model/delfield/',array('typeid'=>$typeid,'fieldid'=>$t['fieldid'])); ?>','一旦删除字段，将会把 【<?php echo $t['name']; ?>】字段的数据全部删除，确定删除 <?php echo $t['name']; ?> 吗？ ')" >删除</a> <?php } ?></td>
+			<?php if ($t['field'] == 'content') { ?><a href="javascript:;" style="color:#ACA899">删除</a> <?php } else { ?><a  href="javascript:admin_command.confirmurl('<?php echo url('admin/model/delfield/',array('typeid'=>$typeid,'fieldid'=>$t['fieldid'])); ?>','一旦删除字段，将会把 【<?php echo $t['name']; ?>】字段的数据全部删除，确定删除 <?php echo $t['name']; ?> 吗？ ')" >删除</a> <?php } ?></td>
 		</tr>
 		<?php } } ?>
 		<tr height="25">

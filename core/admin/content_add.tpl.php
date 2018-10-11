@@ -31,8 +31,8 @@ top.document.getElementById('position').innerHTML = '添加内容';
 		<tr>
 			<th><?php echo $model['content']['thumb']['name']; ?>：</th>
 			<td><span style="position: relative;">
-<input type="text" class="input-text" size="50" value="<?php echo $data['thumb']; ?>" name="data[thumb]" id="thumb"   onmouseover="preview2('thumb')" onmouseout="preview('thumb')">
-			<input type="button"  class="button" onClick="uploadImage('thumb', 1)" value="上传图片">
+<input type="text" class="input-text" size="50" value="<?php echo $data['thumb']; ?>" name="data[thumb]" id="thumb" onmouseover="admin_command.preview2('thumb')" onmouseout="admin_command.preview('thumb')">
+			<input type="button"  class="button" onClick="admin_command.uploadImage('thumb', 1)" value="上传图片">
 			<div id="urlTip" class="show-tips">可直接输入图片地址</div><div id="imgPreviewthumb"></div></span></td>
 		</tr>
 
@@ -75,13 +75,11 @@ top.document.getElementById('position').innerHTML = '添加内容';
 <script type="text/javascript">
 function ajaxtitle() {
 	$('#title_text').html('');
-	get_kw();//读取关键字
-
+	admin_command.get_kw();//读取关键字
 	$.post('<?php echo HTTP_URL . DS . ENTRY_FILE; ?>?s=admin&c=content&a=ajaxtitle&id='+Math.random(), { title:$('#title').val(), id:<?php echo $data[id] ? $data[id] : 0; ?> }, function(data){ 
         $('#title_text').html(data); 
 	});
 }
-
 </script>
 
 </body>

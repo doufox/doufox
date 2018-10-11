@@ -27,7 +27,7 @@ class CategoryController extends Admin {
 		if(!empty($result)) {
 			foreach($result as $r) {
 				$r['modelname'] = @$models[$r['modelid']]['modelname'];//读取模型
-				$r['str_manage'] = '<a href="?s=admin&c=category&a=add&catid='.$r['catid'].'" >添加子栏目</a> | <a href="?s=admin&c=category&a=edit&catid='.$r['catid'].'">编辑</a> | <a href="javascript:confirmurl(\'?s=admin&c=category&a=del&catid='.$r['catid'].'\',\''.'确定删除 『 '.$r['catname'].' 』栏目吗？ '.'\')">删除</a>';
+				$r['str_manage'] = '<a href="?s=admin&c=category&a=add&catid='.$r['catid'].'" >添加子栏目</a> | <a href="?s=admin&c=category&a=edit&catid='.$r['catid'].'">编辑</a> | <a href="javascript:admin_command.confirmurl(\'?s=admin&c=category&a=del&catid='.$r['catid'].'\',\''.'确定删除 『 '.$r['catname'].' 』栏目吗？ '.'\')">删除</a>';
 				$r['typename'] = $types[$r['typeid']];// 读取是类型
 				$r['display'] = $r['ismenu'] ? '是' : '<font color="blue">否</font>';
 				$r['catname'] = "<a href='$r[url]' target='_blank'>".$r['catname']."</a>";

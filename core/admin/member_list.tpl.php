@@ -44,7 +44,7 @@ function setC() {
 			<td align="left"><?php echo date('Y-m-d H:i:s', $t['regdate']); ?></td>
 			<td align="left"><?php echo $t['regip']; ?></td>
 			<td align="left"><a href="<?php echo url('admin/member/edit',array('id'=>$t['id'])); ?>">详细</a> | 
-			<a href="javascript:confirmurl('<?php echo url('admin/member/del/',array('modelid'=>$t['modelid'],'id'=>$t['id']));?>','确定删除会员 『 <?php echo $t['username']; ?> 』吗？ ')" >删除</a> 
+			<a href="javascript:admin_command.confirmurl('<?php echo url('admin/member/del/',array('modelid'=>$t['modelid'],'id'=>$t['id']));?>','确定删除会员 『 <?php echo $t['username']; ?> 』吗？ ')" >删除</a> 
 			</td>
 		</tr>
 		<?php } } ?>

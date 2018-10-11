@@ -154,8 +154,8 @@
 				</tr>
 				<tr>
 					<th>栏目图片：</th>
-					<td><span style="position: relative;"><input type="text" class="input-text" size="30" value="<?php echo $data['image']; ?>" name="data[image]" id="image"   onmouseover="preview2('image')" onmouseout="preview('image')">
-					<input type="button"  class="button" onClick="uploadImage('image')" value="上传图片"><div id="imgPreviewimage"></span></div>
+					<td><span style="position: relative;"><input type="text" class="input-text" size="30" value="<?php echo $data['image']; ?>" name="data[image]" id="image" onmouseover="admin_command.preview2('image')" onmouseout="admin_command.preview('image')">
+					<input type="button" class="button" onClick="admin_command.uploadImage('image')" value="上传图片"><div id="imgPreviewimage"></span></div>
 					</td>
 				</tr>
 				<tr>

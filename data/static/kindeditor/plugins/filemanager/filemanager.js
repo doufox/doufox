@@ -9,7 +9,7 @@
 
 KindEditor.plugin('filemanager', function(K) {
 	var self = this, name = 'filemanager',
-		fileManagerJson = K.undef(self.fileManagerJson, sitepath + '?c=attachment&a=kindeditor_manager'),
+		fileManagerJson = K.undef(self.fileManagerJson, admin_command.sitepath + '?c=attachment&a=kindeditor_manager'),
 		imgPath = self.pluginsPath + name + '/images/',
 		lang = self.lang(name + '.');
 	function makeFileTitle(filename, filesize, datetime) {

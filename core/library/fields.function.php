@@ -386,8 +386,8 @@ function content_image($name, $content='', $setting='') {
     $size    = (int)$setting['size'];
 	$height  = isset($setting['height']) ? $setting['height'] : '';
 	$width   = isset($setting['width'])  ? $setting['width']  : '';
-    $str     = '<span style="position: relative;"><input type="text" class="input-text" size="50" value="' . $content . '" name="data[' . $name . ']" id="' . $name . '"  onmouseover="preview2(\'' . $name . '\')" onmouseout="preview(\'' . $name . '\')">
-    <input type="button"  class="button" onClick="uploadImage(\'' . $name . '\',\'' . $width . '\',\'' . $height . '\',\'' . $size . '\')" value="上传图片"><div id="imgPreview' . $name . '"></div></span>';
+    $str     = '<span style="position: relative;"><input type="text" class="input-text" size="50" value="' . $content . '" name="data[' . $name . ']" id="' . $name . '" onmouseover="admin_command.preview2(\'' . $name . '\')" onmouseout="admin_command.preview(\'' . $name . '\')">
+    <input type="button" class="button" onClick="admin_command.uploadImage(\'' . $name . '\',\'' . $width . '\',\'' . $height . '\',\'' . $size . '\')" value="上传图片"><div id="imgPreview' . $name . '"></div></span>';
     return $str;
 }
 
@@ -396,7 +396,7 @@ function content_file($name, $content='', $setting='') {
     $type    = base64_encode($setting['type']);
     $size    = (int)$setting['size'];
     return '<input type="text" class="input-text" size="50" value="' . $content . '" name="data[' . $name . ']" id="' . $name . '">
-    <input type="button"  class="button" onClick="uploadFile(\'' . $name . '\',\'' . $type . '\',\'' . $size . '\')" value="上传文件">';
+    <input type="button"  class="button" onClick="admin_command.uploadFile(\'' . $name . '\',\'' . $type . '\',\'' . $size . '\')" value="上传文件">';
 }
 
 function content_files($name, $content='', $setting='') {
@@ -417,14 +417,14 @@ function content_files($name, $content='', $setting='') {
 				$str .= '<li id="files_999' . $id . '">';
 				$str .= '<input type="text" class="input-text" style="width:310px;" value="' . $path . '" name="data[' . $name . '][file][]">';
 				$str .= '<input type="text" class="input-text" style="width:160px;" value="' . $alt . '" name="data[' . $name . '][alt][]">';
-				$str .= '<a href="javascript:removediv(\'999' . $id . '\');">删除</a></li>';
+				$str .= '<a href="javascript:admin_command.removediv(\'999' . $id . '\');">删除</a></li>';
 			}
 		}
     }
     $str .= '</ul></fieldset>
 		<div class="bk10"></div>
-        <div class="picBut cu"><a href="javascript:;" onClick="add_null_file(\'' . $name . '\')">添加地址</a></div> 		
-		<div class="picBut cu"><a href="javascript:;" onClick="uploadFiles(\'' . $name . '\',\'' . $set . '\')">批量上传</a></div>
+        <div class="picBut cu"><a href="javascript:;" onClick="admin_command.add_null_file(\'' . $name . '\')">添加地址</a></div> 		
+		<div class="picBut cu"><a href="javascript:;" onClick="admin_command.uploadFiles(\'' . $name . '\',\'' . $set . '\')">批量上传</a></div>
 		<div class="show-tips">前者表示文件地址，后者表示文件名称</div><script>$("#' . $name . '-sort-items").sortable();</script>';
     return $str;
 }

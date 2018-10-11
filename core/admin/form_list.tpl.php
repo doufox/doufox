@@ -41,7 +41,7 @@ top.document.getElementById('position').innerHTML = '表单列表';
 				<td align="left"><span style="<?php if (date('Y-m-d', $t['time']) == date('Y-m-d')) { ?>color:#F00<?php } ?>"><?php echo date('Y-m-d H:i:s', $t['time']); ?></span></td>
 				<td align="left">
 				<a href="<?php echo url('admin/form/edit',array('id'=>$t['id'],'modelid'=>$modelid, 'cid'=>$cid)); ?>">查看编辑</a> | 
-				<a  href="javascript:confirmurl('<?php $del = url('admin/form/del/',array('modelid'=>$modelid,'id'=>$t['id'], 'cid'=>$cid));?>','确定删除 吗？')" >删除</a> 
+				<a  href="javascript:admin_command.confirmurl('<?php $del = url('admin/form/del/',array('modelid'=>$modelid,'id'=>$t['id'], 'cid'=>$cid));?>','确定删除 吗？')" >删除</a> 
 				</td>
 			</tr>
 			<?php } } ?>

@@ -2,14 +2,19 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>管理员登陆 - doufox</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-	<meta name="author" content="doufox.com" />
-	<meta name="copyright" content="Copyright &copy; doufox ( A member of Crogram, Inc.) All Rights Reserved." />
-	<link href="/static/css/login.css" rel="stylesheet" type="text/css" />
-	<link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="author" content="doufox"/>
+	<meta name="referrer" content="never"/>
+	<meta name="generator" content="doufox"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta name="renderer" content="webkit"/>
+	<meta name="copyright" content="Copyright &copy; doufox ( A Member of Crogram, Inc.) All Rights Reserved."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>管理员登陆 - doufox 网站管理系统</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico">
 </head>
 
 <body>
@@ -42,7 +47,7 @@
 				</form>
 			</div>
 			<div class="powered">
-				Copyright &copy; <?php echo date('Y'); ?> <a href="https://doufox.com/" target="_blank" title="A member of Crogram, Inc.">doufox.com</a> All Rights Reserved.
+				Copyright &copy; <?php echo date('Y'); ?> <a href="https://doufox.com/" target="_blank" title="A Member of Crogram, Inc.">doufox.com</a> All Rights Reserved.
 			</div>
 		</div>
 	</div>

@@ -29,7 +29,7 @@ top.document.getElementById('position').innerHTML = '区块管理';
                         <td align="left">{block <?php echo $t['id']; ?>}</td>
                         <td align="left">
                             <a href="<?php echo url('admin/block/edit',array('id'=>$t['id'])); ?>">编辑</a> | 
-                            <a href="javascript:confirmurl('<?php echo url('admin/block/del/',array('id'=>$t['id']));?>','确定删除 『<?php echo $t['name']; ?> 』栏目吗？')" >删除</a>
+                            <a href="javascript:admin_command.confirmurl('<?php echo url('admin/block/del/',array('id'=>$t['id']));?>','确定删除 『<?php echo $t['name']; ?> 』栏目吗？')" >删除</a>
                         </td>
                     </tr>
                     <?php } } ?>
