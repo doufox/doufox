@@ -9,7 +9,7 @@ class TemplateController extends Admin
     public function __construct()
     {
         parent::__construct();
-        $this->dir = THEME_PATH . SITE_THEME . DS;
+        $this->dir = THEME_PATH_D . SITE_THEME . DS;
         if (file_exists($this->dir . 'config.php')) {
             $this->file_info = include $this->dir . 'config.php';
         }
@@ -115,8 +115,8 @@ class TemplateController extends Admin
     public function cacheAction($show = 0)
     {
         // $file_list = cms::load_class('file_list');
-        // $list_desktop = $file_list->get_file_list(THEME_PATH);
-        // $list_mobile = $file_list->get_file_list(THEME_PATH_MOBILE);
+        // $list_desktop = $file_list->get_file_list(THEME_PATH_D);
+        // $list_mobile = $file_list->get_file_list(THEME_PATH_M);
         // foreach ($list_desktop as $file_path) {
         //     $dir = DATA_PATH . 'cache' . DS . 'theme_desktop'. DS . $file_path . DS;
         //     $file_list->delete_dir($dir);
@@ -139,7 +139,7 @@ class TemplateController extends Admin
     public function cacheDesktopAction()
     {
         $file_list = cms::load_class('file_list');
-        $list_desktop = $file_list->get_file_list(THEME_PATH);
+        $list_desktop = $file_list->get_file_list(THEME_PATH_D);
         foreach ($list_desktop as $file_path) {
             $dir = DATA_PATH . 'cache' . DS . 'theme_desktop'. DS . $file_path . DS;
             $file_list->delete_dir($dir);
@@ -152,7 +152,7 @@ class TemplateController extends Admin
     public function cacheMobileAction()
     {
         $file_list = cms::load_class('file_list');
-        $list_mobile = $file_list->get_file_list(THEME_PATH_MOBILE);
+        $list_mobile = $file_list->get_file_list(THEME_PATH_M);
         foreach ($list_mobile as $file_path) {
             $dir = DATA_PATH . 'cache' . DS . 'theme_mobile'. DS . $file_path . DS;
             $file_list->delete_dir($dir);

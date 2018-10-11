@@ -9,29 +9,31 @@ error_reporting(E_ALL ^ E_NOTICE);
 /**
  * 系统常量配置
  */
-date_default_timezone_set('Asia/Shanghai'); // 系统时区设置
-define('APP_START_TIME', microtime(true)); // 设置程序开始执行时间
-
+date_default_timezone_set('Asia/Shanghai');    // 系统时区设置
+define('APP_START_TIME', microtime(true));     // 设置程序开始执行时间
 define('HTTP_REFERER', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''); // 来源
-define('HTTP_HOST', $_SERVER['HTTP_HOST']); // host
+define('HTTP_HOST', $_SERVER['HTTP_HOST']);    // host
 define('HTTP_PRE', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') ? 'https://' : 'http://'); // http协议
-define('HTTP_URL', HTTP_PRE . HTTP_HOST . DS); // 当前网站的完整网址
-define('COOKIE_PRE', 'df_'); // Cookie 前缀, 同一个域名下安装多套系统时, 请修改Cookie前缀
+define('HTTP_URL', HTTP_PRE . HTTP_HOST . DS); // 当前网站的完整域名
+define('COOKIE_PRE', 'df_');                   // Cookie 前缀, 同一个域名下安装多套系统时, 请修改Cookie前缀
 
-define('CORE_PATH', dirname(__FILE__) . DS); // 系统核心模块所在路径, 即当前路径
-define('DATA_DIR', 'data'); // 系统数据文件夹名
-define('STATIC_DIR', 'static'); // 系统静态资源文件夹名
-define('MODEL_DIR', 'models'); // 数据模型文件夹
-define('CONTROLLER_DIR', 'controllers'); // 控制器文件夹
+define('CORE_DIR', 'core');                    // 核心模块文件夹
+define('DATA_DIR', 'data');                    // 数据模块文件夹
+define('MODEL_DIR', 'models');                 // 数据模型文件夹
+define('VIEW_DIR', 'views');                   // 视图模板文件夹
+define('CONTROLLER_DIR', 'controllers');       // 控制器文件夹
+define('STATIC_DIR', 'static');                // 静态资源文件夹
 
-define('ADMIN_PATH', CORE_PATH . 'admin' . DS); // 系统后台管理模块的路径
-define('INSTALL_PATH', CORE_PATH . 'install' . DS); // 系统安装模块
-define('DATA_PATH', ROOT_PATH . DATA_DIR . DS); // 系统数据目录的路径
-define('STATIC_PATH', DATA_PATH . STATIC_DIR . DS); // 系统静态资源路径
-define('THEME_PATH', DATA_PATH . 'theme' . DS); // 网站的桌面端模板目录的路径
-define('MODEL_PATH', CORE_PATH . MODEL_DIR . DS); // 系统数据模型路径
+define('CORE_PATH', dirname(__FILE__) . DS);                // 核心模块路径
+define('DATA_PATH', ROOT_PATH . DATA_DIR . DS);             // 数据模块路径
+define('MODEL_PATH', CORE_PATH . MODEL_DIR . DS);           // 数据模型路径
+define('VIEW_PATH', CORE_PATH . VIEW_DIR . DS);             // 视图模板路径
 define('CONTROLLER_PATH', CORE_PATH . CONTROLLER_DIR . DS); // 控制器路径
-define('THEME_PATH_MOBILE', DATA_PATH . 'theme_mobile' . DS); // 网站移动端模板目录的路径
+define('STATIC_PATH', DATA_PATH . STATIC_DIR . DS);         // 静态资源路径
+define('ADMIN_PATH', VIEW_PATH . 'management' . DS);        // 管理模块路径
+define('INSTALL_PATH', VIEW_PATH . 'install' . DS);         // 安装模块路径
+define('THEME_PATH_D', DATA_PATH . 'theme' . DS);           // 桌面端模板路径
+define('THEME_PATH_M', DATA_PATH . 'theme_mobile' . DS);    // 移动端模板路径
 
 cms::load_file(CORE_PATH . 'info.php');
 cms::load_file(CORE_PATH . 'library' . DS . 'global.function.php'); // 加载全局函数
@@ -141,12 +143,12 @@ abstract class cms
         define('SITE_THEME_MOBILE', $config['SITE_THEME_MOBILE']);
         if ($config['SITE_MOBILE'] == true && is_mobile()) {
             define('THEME_TYPE', 'theme_mobile'); // 当前加载的主题类型
-            define('THEME_CURRENT', THEME_PATH_MOBILE);
-            define('THEME_DIR', is_dir(THEME_PATH_MOBILE . SITE_THEME_MOBILE) ? SITE_THEME_MOBILE : 'default');
+            define('THEME_CURRENT', THEME_PATH_M);
+            define('THEME_DIR', is_dir(THEME_PATH_M . SITE_THEME_MOBILE) ? SITE_THEME_MOBILE : 'default');
         } else {
             define('THEME_TYPE', 'theme_desktop'); // 当前加载的主题类型
-            define('THEME_CURRENT', THEME_PATH);
-            define('THEME_DIR', is_dir(THEME_PATH . SITE_THEME) ? SITE_THEME : 'default');
+            define('THEME_CURRENT', THEME_PATH_D);
+            define('THEME_DIR', is_dir(THEME_PATH_D . SITE_THEME) ? SITE_THEME : 'default');
         }
     }
     /**

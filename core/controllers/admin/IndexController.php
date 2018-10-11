@@ -124,8 +124,8 @@ class IndexController extends Admin
 		}
 
         $file_list		= cms::load_class('file_list');
-        $arr			= $file_list->get_file_list(THEME_PATH);
-        $arr_mobile		= $file_list->get_file_list(THEME_PATH_MOBILE);
+        $arr			= $file_list->get_file_list(THEME_PATH_D);
+        $arr_mobile		= $file_list->get_file_list(THEME_PATH_M);
 		$theme			= array_diff($arr, array('index.html'));
 		$theme_mobile	= array_diff($arr_mobile, array('index.html'));
 
