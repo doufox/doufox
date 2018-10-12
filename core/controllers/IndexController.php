@@ -138,7 +138,7 @@ class IndexController extends Controller {
         ));
         $this->view->display('search.html');
     }
-    
+
     /**
      * 游客投稿
      */
@@ -198,12 +198,12 @@ class IndexController extends Controller {
 			));
 		}
 		$this->view->assign(array(
-			'site_title'       => '我要投稿 - ' . $this->site_config['SITE_NAME'],
+			'site_title'       => '在线投稿 - ' . $this->site_config['SITE_NAME'],
 			'site_keywords'    => $this->site_config['SITE_KEYWORDS'], 
 			'site_description' => $this->site_config['SITE_DESCRIPTION'],
-			'page_title' => '我要投稿',
+			'page_title' => '在线投稿',
 			'page_url' => url('index/post'),
-			'page_position' => "<a href=\"" . url('index/post') . "\" title=\"我要投稿\">我要投稿</a>"
+			'page_position' => "<a href=\"" . url('index/post') . "\" title=\"在线投稿\">在线投稿</a>"
 		));
 		$this->view->display('post.html');
     }
@@ -300,7 +300,7 @@ class IndexController extends Controller {
         }
         return false;
     }
-    
+
     /*
      * 表单提交同一IP提交间隔
      */
@@ -315,5 +315,19 @@ class IndexController extends Controller {
         if (time() - $data['time'] < $time) return true;
         return false;
     }
-        
+
+    /**
+     * 站点地图
+     */
+    public function sitemapAction() {
+        $this->view->assign(array(
+            'site_title'       => '网站地图 - ' . $this->site_config['SITE_TITLE'],
+            'site_keywords'    => $this->site_config['SITE_KEYWORDS'], 
+            'site_description' => $this->site_config['SITE_DESCRIPTION'],
+            'page_title'       => '网站地图',
+			'page_url' => url('index/sitemap'),
+			'page_position' => "<a href=\"" . url('index/sitemap') . "\" title=\"网站地图\">网站地图</a>"
+        ));
+        $this->view->display('sitemap.html');
+    }
 }
