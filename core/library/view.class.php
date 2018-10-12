@@ -211,22 +211,22 @@ class view {
 				if (isset($var) && $var) $param[$var] = $val;
 			}
 		}
-		$system  = $fields = $_fields = array();
+		$system = $fields = $_fields = array();
 		if (is_array($param)) {
 		    foreach($param as $key=>$val) {
-				if (in_array($key, array('table', 'addfields', 'cache', 'page', 'urlrule', 'num', 'order', 'pagesize', 'return'))) {
+				if (in_array($key, array('table', 'optional', 'cache', 'page', 'urlrule', 'num', 'order', 'pagesize', 'return'))) {
 				    $system[$key] = $val;
 				} else {
-				    $fields[$key]  = $val;
-					$_fields[]     = $key;
+				    $fields[$key] = $val;
+					$_fields[]    = $key;
 				}
 			}
 		}
 		$dbcache = isset($system['cache']) ? (int)$system['cache'] : 0;
-		$where = '';
-		$table  = isset($system['table']) && $system['table'] ? $system['table'] : 'content';
-		$db = cms::load_model($table);
-		$table         = $db->prefix . $table;
+		$where   = '';
+		$table   = isset($system['table']) && $system['table'] ? $system['table'] : 'content';
+		$db      = cms::load_model($table);
+		$table   = $db->prefix . $table;
 		$table_data = $table_fields = $table_data_fields = $arrchilds = null;
 		$_table_fields = $db->get_table_fields();
 		$table_fields  = array_intersect($_fields, $_table_fields);
@@ -234,7 +234,8 @@ class view {
 			$cats  = get_cache('category');
 			$cat   = $cats[$fields['catid']];
 		}
-       	if (isset($system['addfields']) && $system['addfields']) { 
+		if (isset($system['optional']) && $system['optional']) {
+			// show optional fields
     		$model = null;
 		    if ($table == $db->prefix . 'content') {
 				$models = get_cache('model');
