@@ -1,4 +1,4 @@
-@charset "utf-8"; html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, p {
+@charset "utf-8";html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, p {
     margin: 0;
     padding: 0;
 }
@@ -27,6 +27,10 @@ a {
     text-decoration: none;
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
 a, a:focus, a:active, a:hover, input, textarea {
     outline: 0 none!important
 }
@@ -41,8 +45,8 @@ img {
     font-size: 0;
 }
 
-.clearfix:after {
-    content: ".";
+.clearfix::after, .container::after {
+    content: "  ";
     display: block;
     height: 0;
     clear: both;
@@ -95,7 +99,7 @@ img {
     position: relative;
 }
 
-.header .logo {
+.logo {
     max-width: 50%;
     height: 100px;
     line-height: 100px;
@@ -104,7 +108,7 @@ img {
     display: inline-block;
 }
 
-.header .slogan {
+.slogan {
     max-width: 50%;
     height: 50px;
     line-height: 50px;
@@ -119,10 +123,11 @@ img {
     height: 40px;
     line-height: 40px;
     position: relative;
+    background-color: #008eff;
+    font-size: 14px;
 }
 
 .nav .container {
-    background-color: #3399cc;
     overflow: unset;
 }
 
@@ -136,15 +141,15 @@ img {
     color: #fff;
     display: block;
     padding: 0 28px;
-    font-size: 16px;
+    text-decoration: none;
 }
 
 .nav .nav-item a:hover {
-    background-color: #5e5e5f;
+    background-color: #047ee0;
 }
 
 .nav .nav-item a:focus {
-    background-color: #345;
+    background-color: #5e5e5f;
 }
 
 .nav .nav-item .sub {
@@ -179,7 +184,6 @@ img {
 .nav .nav-item.member a {
     display: block;
     padding: 0 5px;
-    font-size: 16px;
 }
 
 .banner {
@@ -813,33 +817,20 @@ select {
 
 .footer {
     width: 100%;
-    margin: 5px auto;
-}
-
-.footer .footnav {
-    font-size: 15px;
-    min-height: 40px;
-    line-height: 40px;
+    margin: 20px auto 0;
+    padding: 13px 0;
+    background-color: #313131;
+    color: #aaa;
+    font-size: 13px;
     text-align: center;
-    border-top: 1px solid #e1e1ea;
-    border-bottom: 1px solid #e1e1ea;
+    line-height: 24px;
 }
 
 .footer a {
     padding: 0px 10px;
-    color: #333;
+    color: #aaa;
 }
 
 .footer a:hover {
     color: red;
-}
-
-.footer .container {
-    background-color: #f9f9f9;
-}
-
-.footer .corporation {
-    font-size: 13px;
-    text-align: center;
-    line-height: 24px;
 }
