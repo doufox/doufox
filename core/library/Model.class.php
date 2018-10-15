@@ -247,10 +247,7 @@ abstract class Model
      */
     public function set_table_name($table_name)
     {
-        if (!$table_name) {
-            return false;
-        }
-
+        if (!$table_name) { return false;}
         $this->table_name = $this->prefix . trim($table_name);
         return $this;
     }

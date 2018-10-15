@@ -857,3 +857,14 @@ function get_extension($file)
 {
     return pathinfo($file, PATHINFO_EXTENSION);
 }
+
+/**
+ * 递归创建目录
+ */
+function mkdirs($dir) {
+    if (empty($dir)) { return false; }
+    if (!is_dir($dir)) {
+        mkdirs(dirname($dir));
+        mkdir($dir);
+    }
+}
