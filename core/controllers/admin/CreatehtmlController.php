@@ -45,40 +45,20 @@ class CreatehtmlController extends Admin
             }
         }
         $show = '请选择要生成的栏目页';
-        // $db = cms::load_model('category');
-        // // $catdata = $db->set_table_name('category')->getAll(null, null, null, 'listorder DESC,catid ASC');
-        // $catdata = $db->getAll(null, null, null, 'listorder DESC,catid ASC');
-        // $this->tree->icon = array(' ', '  |-', '  |-');
-        // $this->tree->nbsp = '&nbsp;&nbsp;&nbsp;';
-        // $category_select = array();
-        // if (!empty($catdata)) {
-        //     foreach ($catdata as $r) {
-        //         $category_select[$r['catid']] = $r;
-        //     }
-        // }
-        // $str = "<option value='\$catid' \$selected>\$spacer \$catname</option>";
-        // $this->tree->init($category_select);
-        // $category_select = $this->tree->get_tree_category(0, $str, '2', $catid);
-        $model   = get_cache('model');
-	    $catdata = $this->category->order('listorder ASC')->select();
-	    $catid   = (int)$this->get('catid');
-		$json_m  = json_encode($model);
-
-		$json_model = $json_m ? $json_m : '""';
-		$add = 1;
-
+	    $catdata = $this->category->order('listorder ASC, catid ASC')->select();
+	    $catid = (int)$this->get('catid');
 		$tree = cms::load_class('tree');
-		$tree->icon = array(' ','  |-','  |-');
+		$tree->icon = array(' ','├','   ∟');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		$category_select = array();
 		if(!empty($catdata)) {
-			foreach($catdata as $r) { 
+			foreach($catdata as $r) {
 				$category_select[$r['catid']] = $r;
 			}
 		}
 		$str  = "<option value='\$catid' \$selected>\$spacer \$catname</option>";
 		$tree->init($category_select);
-		$category_select = $tree->get_tree_category(0, $str,'2',$catid);
+        $category_select = $tree->get_tree_category(0, $str, '2', $catid);
         include $this->admin_tpl('create_html');
     }
 
@@ -193,18 +173,20 @@ class CreatehtmlController extends Admin
         }
         $isshow = 1;
         $show = '按照栏目生成内容页';
-        $catdata = $this->db->set_table_name('category')->getAll(null, null, null, 'listorder DESC,catid ASC');
-        $this->tree->icon = array(' ', '  |-', '  |-');
-        $this->tree->nbsp = '&nbsp;&nbsp;&nbsp;';
-        $category_select = array();
-        if (!empty($catdata)) {
-            foreach ($catdata as $r) {
-                $category_select[$r['catid']] = $r;
-            }
-        }
-        $str = "<option value='\$catid' \$selected>\$spacer \$catname</option>";
-        $this->tree->init($category_select);
-        $category_select = $this->tree->get_tree_category(0, $str, '2', $catid);
+        $catdata = $this->category->order('listorder ASC, catid ASC')->select();
+	    $catid = (int)$this->get('catid');
+		$tree = cms::load_class('tree');
+		$tree->icon = array(' ','├','   ∟');
+		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
+		$category_select = array();
+		if(!empty($catdata)) {
+			foreach($catdata as $r) {
+				$category_select[$r['catid']] = $r;
+			}
+		}
+		$str  = "<option value='\$catid' \$selected>\$spacer \$catname</option>";
+		$tree->init($category_select);
+        $category_select = $tree->get_tree_category(0, $str, '2', $catid);
         include $this->admin_tpl('create_html');
     }
 
@@ -250,11 +232,11 @@ class CreatehtmlController extends Admin
         $pagesize = 10;
         $totalpage = ceil($total / $pagesize);
         if ($time) {
-            $data = $db->pageLimit($page, $pagesize)->where($where)->order('id ASC')->getAll();
+            $data = $db->page_limit($page, $pagesize)->where($where)->order('id ASC')->select();
         } else if ($cats) {
-            $data = $db->pageLimit($page, $pagesize)->where('`catid` IN(' . $cats . ')')->order('id ASC')->getAll();
+            $data = $db->page_limit($page, $pagesize)->where('`catid` IN(' . $cats . ')')->order('id ASC')->select();
         } else {
-            $data = $db->pageLimit($page, $pagesize)->where('`status`!=0')->order('id ASC')->getAll();
+            $data = $db->page_limit($page, $pagesize)->where('`status`!=0')->order('id ASC')->select();
         }
 
         if (empty($data)) {

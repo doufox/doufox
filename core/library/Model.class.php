@@ -452,12 +452,14 @@ abstract class Model
      * @param int $count     每页显示的数据行数
      * @return $this
      */
-    public function page_limit($page, $count)
+    public function page_limit($page, $listNum)
     {
-        $page = (int) $page;
-        $count = (int) $count;
-        $start_id = $count * ($page - 1);
-        return $this->limit($start_id, $count);
+        $page = (int)$page;
+        $listNum = (int)$listNum;
+        if (!$listNum) return false;
+        $page = ($page < 1) ? 1 : $page;
+        $startId = (int)$listNum * ($page - 1);
+        return $this->limit($startId, $listNum);
     }
 
     /**
@@ -768,10 +770,10 @@ abstract class Model
      * @access public
      * @param mixed    $where 查询条件
      * @param sring    $value 数值
-     * @param array $fields    返回数据的数据表字段.默认为全部字段.注:本参数为数组
-     * @param mixed $order 排序条件
-     * @param integer    $offset    limit启起ID
-     * @param integer    $count    显示的行数
+     * @param array    $fields    返回数据的数据表字段.默认为全部字段.注:本参数为数组
+     * @param mixed    $order 排序条件
+     * @param integer  $offset    limit启起ID
+     * @param integer  $count    显示的行数
      * @return array
      */
     public function getAll($where, $value = null, $fields = null, $order = null, $offset = null, $count = null)
