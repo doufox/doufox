@@ -661,6 +661,11 @@ select {
     outline-color: #00f;
 }
 
+.table_form input[type=radio],
+.table_form input[type=checkbox] {
+    margin-right: 5px;
+}
+
 .table_form td, .table_form th {
     padding: 8px 0 8px 8px
 }

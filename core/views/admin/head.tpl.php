@@ -7,9 +7,11 @@
         <?php if ($MEMBER_REGISTER) {?>
         <li id="_MP103"><a href="javascript:_MP(103,'<?php echo url('admin/member'); ?>');">会员</a></li>
         <?php }?>
+        <li id="_MP108" ><a href="javascript:_MP(108,'<?php echo url('admin/my'); ?>');" >我的账号</a></li>
         <li id="_MP104">
             <a href="javascript:_MP(104, '<?php echo url('admin/index/config'); ?>');">设置</a>
             <ul>
+                <li id="_MP1099" ><a href="javascript:_MP(1099,'<?php echo url('admin/account'); ?>');" >账号管理</a></li>
                 <li id="_MP1041"><a href="javascript:_MP(1041,'<?php echo url('admin/index/config', array('type'=>1)); ?>');">系统设置</a></li>
                 <li id="_MP1042"><a href="javascript:_MP(1042,'<?php echo url('admin/index/config', array('type'=>2)); ?>');">水印设置</a></li>
                 <li id="_MP1043"><a href="javascript:_MP(1043,'<?php echo url('admin/index/config', array('type'=>3)); ?>');">后台密码</a></li>

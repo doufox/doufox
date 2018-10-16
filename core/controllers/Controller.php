@@ -12,6 +12,7 @@ abstract class Controller  {
 	protected $session;
 	protected $cookie;
 
+	protected $account;
 	protected $member;
 	protected $memberinfo;
 	protected $membermodel;
@@ -50,6 +51,16 @@ abstract class Controller  {
 		$this->content				= cms::load_model('content');
 		$this->category_cache		= get_cache('category');
 		$this->category_dir_cache	= get_cache('category_dir');
+
+		$this->account              = cms::load_model('account');
+		$this->account_cache		= get_cache('account');
+
+		// $userid = session::get('user_id');
+        // if ($account_cache) {
+        //     $this->account = $account_cache[$userid];
+        // } else {
+        //     $this->account = $db->account->findAll();
+		// }
 
 		// 载入会员系统缓存
 		if (is_dir(CONTROLLER_PATH . 'member')) {

@@ -1,7 +1,10 @@
 window.admin_command = {
     sitepath: "<?php echo HTTP_URL . ENTRY_FILE; ?>",
+    redirect: function (url) {
+        location.href = url
+    },
     confirmurl: function (url, message) {
-        if (confirm(message)) redirect(url);
+        if (confirm(message)) this.redirect(url);
     },
     preview: function (obj) {
         $("#imgPreview" + obj).html('');
