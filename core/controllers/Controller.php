@@ -105,7 +105,7 @@ abstract class Controller  {
 		}
 		return $post_array;
 	}
-	
+
 	/**
 	 * 验证表单是否POST提交
 	 */

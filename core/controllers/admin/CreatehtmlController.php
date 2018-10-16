@@ -36,7 +36,7 @@ class CreatehtmlController extends Admin
      */
     public function categoryAction()
     {
-        if ($this->post('submit')) {
+        if ($this->isPostForm()) {
             $catid = $this->post('catid');
             if (!empty($catid)) {
                 $this->show_message('正在生成栏目，请稍候', 1, url('admin/createhtml/one_cat', array('create' => 1, 'catid' => $catid)), 100);
@@ -165,7 +165,7 @@ class CreatehtmlController extends Admin
      */
     public function showAction()
     {
-        if ($this->post('submit')) {
+        if ($this->isPostForm()) {
             $catid = $this->post('catid');
             $time = $this->post('time');
             $time = $time ? $time : 0;

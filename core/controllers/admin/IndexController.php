@@ -86,7 +86,7 @@ class IndexController extends Admin
 			'WEIXIN_MP_AESKEY'        => 'EncodingAESKey,消息加密密钥由43位字符组成'
 		);
 		$admin = cms::load_config('admin'); // 管理员配置
-        if ($this->post('submit')) {
+        if ($this->isPostForm()) {
             $configdata = $this->post('data');
 			$configdata['RAND_CODE']= md5(microtime());
 

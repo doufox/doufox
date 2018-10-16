@@ -63,8 +63,7 @@ class ContentController extends Api
 	    $model    = get_cache('model');
 	    if (!isset($model[$modelid])) $this->show_message('模型不存在');
 	    $fields   = $model[$modelid]['fields'];
-	    if ($this->post('submit')) {
-
+	    if ($this->isPostForm()) {
 	        $data = $this->post('data');
 		    if (empty($data['catid'])) $this->show_message('请选择发布栏目');
 	        if (empty($data['title'])) $this->show_message('标题没有填写');
@@ -114,7 +113,7 @@ class ContentController extends Api
 	    $model    = get_cache('model');
 	    if (!isset($model[$modelid])) $this->show_message('模型不存在');
 	    $fields   = $model[$modelid]['fields'];
-	    if ($this->post('submit')) {
+	    if ($this->isPostForm()) {
 	        unset($data);
 	        $data = $this->post('data');
 	        if (empty($data['title'])) $this->show_message('标题没有填写');

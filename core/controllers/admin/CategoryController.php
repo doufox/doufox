@@ -8,7 +8,7 @@ class CategoryController extends Admin {
 	}
 
 	public function indexAction() {
-	    if ($this->post('submit')) {
+	    if ($this->isPostForm()) {
 	        foreach ($_POST as $var=>$value) {
 	            if (strpos($var, 'order_')!==false) {
 	                $id = (int)str_replace('order_', '', $var);
@@ -53,7 +53,7 @@ class CategoryController extends Admin {
 	 * 添加栏目
 	 */
 	public function addAction() {
-	    if ($this->post('submit')) {
+	    if ($this->isPostForm()) {
 	        $data = $this->post('data');
 	        if ($data['typeid'] == 1) {
 	            if (empty($data['modelid'])) $this->show_message('请选择内容模型');
@@ -131,7 +131,7 @@ class CategoryController extends Admin {
 			$this->show_message('栏目ID不存在');
 		}
         $data  = $this->category->find($catid);
-	    if ($this->post('submit')) {
+	    if ($this->isPostForm()) {
 			unset($data,$catid);
 	        $catid = (int)$this->post('catid');
             if (empty($catid)) {

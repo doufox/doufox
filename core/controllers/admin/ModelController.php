@@ -31,7 +31,7 @@ class ModelController extends Admin {
 	 * 添加模型
 	 */
 	public function addAction() {
-	    if ($this->post('submit')) {
+	    if ($this->isPostForm()) {
 	        $tablename = $this->post('tablename');
 	        if (!$tablename) $this->show_message('数据表名不能为空！');
 	        if (!preg_match('/^[0-9a-z]+$/', $tablename)) $this->show_message('数据表名只能由小写字母和数字组成！');
@@ -84,7 +84,7 @@ class ModelController extends Admin {
 	 * 修改模型
 	 */
     public function editAction() {
-	    if ($this->post('submit')) {
+	    if ($this->isPostForm()) {
 	        $modelid  = (int)$this->post('modelid');
 			$data     = $this->_model->find($modelid);
 			if (empty($data)) $this->show_message('该模型不存在！');
@@ -153,7 +153,7 @@ class ModelController extends Admin {
 	    if (!$data) $this->show_message('该模型不存在！');
 	    $table   = cms::load_model($data['tablename']);
 	    $field   = cms::load_model('model_field');
-	    if ($this->post('submit')) {
+	    if ($this->isPostForm()) {
 	        foreach ($_POST as $var=>$value) {
 	            if (strpos($var, 'order_')!==false) {
 	                $id = (int)str_replace('order_', '', $var);
@@ -180,7 +180,7 @@ class ModelController extends Admin {
 	    $model_data = $this->_model->find($modelid);
 	    $field      = cms::load_model('model_field');
 	    if (!$model_data) $this->show_message('该模型不存在！');
-	    if ($this->post('submit')) {
+	    if ($this->isPostForm()) {
 	        if ($this->typeid != 3) $table = cms::load_model($this->modeltype[$this->typeid]);
 	        $table_data = cms::load_model($model_data['tablename']);
 	        //主表和附表字段集合
@@ -246,7 +246,7 @@ class ModelController extends Admin {
 	    $modelid    = $data['modelid'];
 	    $model_data = $this->_model->find($modelid);
 	    if (!$model_data) $this->show_message('该模型不存在！');
-	    if ($this->post('submit')) {
+	    if ($this->isPostForm()) {
 	        $fieldid = $this->post('fieldid');
 	        if (empty($fieldid)) $this->show_message('字段不存在！');
 	        $name    = $this->post('name');
@@ -293,7 +293,7 @@ class ModelController extends Admin {
 		$setting = string2array($data['setting']);
 		if (!isset($setting['default'][$name])) $this->show_message('该字段不存在！');
 		$field   = $setting['default'][$name];
-	    if ($this->post('submit')) {
+	    if ($this->isPostForm()) {
 			$setting['default'][$name] = $this->post('data');
 			$this->_model->update(array('setting'=>array2string($setting)), 'modelid=' . $modelid);
 			$this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/fields/', array('typeid'=>$this->typeid, 'modelid'=>$modelid)));

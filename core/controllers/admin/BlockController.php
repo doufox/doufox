@@ -20,7 +20,7 @@ class BlockController extends Admin
 
     public function addAction()
     {
-        if ($this->post('submit')) {
+        if ($this->isPostForm()) {
             $data = $this->post('data');
             if (empty($data['type'])) $this->show_message('编辑类型不能为空');
 			$data['content'] = $data['content_' . $data['type']];
@@ -37,7 +37,7 @@ class BlockController extends Admin
         $id   = (int)$this->get('id');
         $data = $this->block->find($id);
         if (empty($data)) $this->show_message('区块不存在');
-        if ($this->post('submit')) {
+        if ($this->isPostForm()) {
             unset($data);
             $data = $this->post('data');
             if (empty($data['type'])) $this->show_message('类型不能为空');

@@ -18,7 +18,7 @@ class AccountController extends Admin
 
     public function addAction()
     {
-        if ($this->post('submit')) {
+        if ($this->isPostForm()) {
             $data = $this->post('data');
             if (!$data['username']) {
                 $this->show_message('用户名不能为空', 2, url('admin/account/add'));
@@ -54,13 +54,12 @@ class AccountController extends Admin
             $this->show_message('该用户不存在', 2);
         }
 
-        if ($this->post('submit')) {
+        if ($this->isPostForm()) {
             $data = $this->post('data');
             if (!empty($data['password'])) {
                 if (strlen($data['password']) < 6) {
                     $this->show_message('密码最少6位数', 2, 1);
                 }
-
                 $data['password'] = md5(md5($data['password']));
             } else {
                 unset($data['password']);

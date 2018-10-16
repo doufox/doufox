@@ -86,7 +86,6 @@ class ContentController extends Member {
 	 */
 	public function addAction()
 	{
-
 	    $catid    = (int)$this->get('catid');
 	    if (empty($catid)) $this->show_message('请选择发布栏目');
 		$cats     = $this->category_cache;
@@ -96,7 +95,7 @@ class ContentController extends Member {
 	    $fields   = $this->cmodel[$modelid]['fields'];
 		if ($cats[$catid]['child']) $this->show_message('只能发布到子栏目');
 		if (!$cats[$catid]['ispost']) $this->show_message('该栏目不能投稿');
-	    if ($this->post('submit')) {
+	    if ($this->isPostForm()) {
 	        $data  = $this->post('data');
 	        if (empty($data['title'])) $this->show_message('请填写标题');
 			$this->checkFields($fields, $data, 2);
@@ -163,7 +162,7 @@ class ContentController extends Member {
 	    $fields   = $this->cmodel[$modelid]['fields'];
 
 	    $url      = getUrl($data);
-	    if ($this->post('submit')) {
+	    if ($this->isPostForm()) {
 	        unset($data);
 	        $data = $this->post('data');
 		if ($cats[$data['catid']]['child']) $this->show_message('只能发布到子栏目');
