@@ -37,10 +37,8 @@ class Admin extends Controller
         }
 
         $url = cms::get_namespace_id() == 'admin' && isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != 's=admin'
-        ?
-        url('admin/login', array('url' => urlencode(HTTP_URL . ENTRY_FILE . '?' . $_SERVER['QUERY_STRING'])))
-        :
-        url('admin/login');
+        ? url('admin/login', array('url' => urlencode(HTTP_URL . ENTRY_FILE . '?' . $_SERVER['QUERY_STRING'])))
+        : url('admin/login');
         $this->redirect($url);
     }
 

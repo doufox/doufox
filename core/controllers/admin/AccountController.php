@@ -21,16 +21,16 @@ class AccountController extends Admin
         if ($this->isPostForm()) {
             $data = $this->post('data');
             if (!$data['username']) {
-                $this->show_message('用户名不能为空', 2, url('admin/account/add'));
+                $this->show_message('用户名不能为空', 2);
             }
 
             if (strlen($data['password']) < 6) {
-                $this->show_message('密码最少6位数', 2, url('admin/account/add'));
+                $this->show_message('密码最少6位数', 2);
             }
 
             $data['password'] = md5(md5($data['password']));
             if ($this->account->getOne('username=?', $data['username'])) {
-                $this->show_message('已存在相同的用户名', 2, url('admin/account/add'));
+                $this->show_message('已存在相同的用户名', 2);
             }
 
             $auth = $this->post('auth');
@@ -58,7 +58,7 @@ class AccountController extends Admin
             $data = $this->post('data');
             if (!empty($data['password'])) {
                 if (strlen($data['password']) < 6) {
-                    $this->show_message('密码最少6位数', 2, 1);
+                    $this->show_message('密码最少6位数', 2);
                 }
                 $data['password'] = md5(md5($data['password']));
             } else {

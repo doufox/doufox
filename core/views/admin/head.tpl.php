@@ -43,7 +43,7 @@
         <li id="_MP107"><a href="javascript:_MP(107,'<?php echo url('admin/attachment'); ?>');">附件</a></li>
     </ul>
     <div class="user">
-        <span><?php echo $username; ?>&nbsp;</span>
+        <span>您好，<?php echo $username; ?>&nbsp;</span>
         <a href="javascript:void(0);" onClick="logout();">退出</a>
     </div>
 </div>

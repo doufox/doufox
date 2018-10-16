@@ -8,7 +8,7 @@ class IndexController extends Admin
 	}
 
 	public function indexAction() {
-    $username = $this->session->get('user_id');
+		$username = $this->session->get('user_id');
 		$MEMBER_REGISTER = $this->site_config['MEMBER_REGISTER'];
 		$menu = '';
 		$form  = get_cache('formmodel');
