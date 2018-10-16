@@ -85,12 +85,11 @@ class IndexController extends Admin
 			'WEIXIN_MP_TOKEN'         => '微信服务器的验证token,必须为英文或数字，长度为3-32字符',
 			'WEIXIN_MP_AESKEY'        => 'EncodingAESKey,消息加密密钥由43位字符组成'
 		);
-    	// 加载应用程序配置文件
-		$admin = cms::load_config('admin');
-	    $config = cms::load_config('config');
+		$admin = cms::load_config('admin'); // 管理员配置
         if ($this->post('submit')) {
             $configdata = $this->post('data');
 			$configdata['RAND_CODE']= md5(microtime());
+
             $postadmin = $this->post('admin');
 			if(empty($postadmin['ADMIN_PASS']) ) {
 				$postadmin['ADMIN_PASS'] =$admin['ADMIN_PASS'];
@@ -98,7 +97,7 @@ class IndexController extends Admin
 				$postadmin['ADMIN_PASS'] = md5(md5($postadmin['ADMIN_PASS']));
 			}
 			$admin_content = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) exit();" . PHP_EOL . "return array(" . PHP_EOL;
-			$adminsystem     = array();
+			$adminsystem = array();
             foreach ($postadmin as $var=>$val) {
 			    if (!in_array($var, $adminsystem)) {
                     $value    = $val == 'false' || $val == 'true' ? $val : "'" . $val . "'";
@@ -123,18 +122,18 @@ class IndexController extends Admin
             $this->show_message('修改成功', 1, url('admin/index/config', array('type'=>$this->get('type'))));
 		}
 
-        $file_list		= cms::load_class('file_list');
-        $arr			= $file_list->get_file_list(THEME_PATH_D);
-        $arr_mobile		= $file_list->get_file_list(THEME_PATH_M);
-		$theme			= array_diff($arr, array('index.html'));
-		$theme_mobile	= array_diff($arr_mobile, array('index.html'));
+		$data         = cms::load_config('config'); // 应用程序配置文件
+        $file_list    = cms::load_class('file_list');
+        $arr_d        = $file_list->get_file_list(THEME_PATH_D);
+        $arr_m        = $file_list->get_file_list(THEME_PATH_M);
+		$theme        = array_diff($arr_d, array('index.html'));
+		$theme_mobile = array_diff($arr_m, array('index.html'));
+	    $type         = $this->get('type') ? $this->get('type') : 1;
+		$membermodel  = $this->membermodel; // 会员模型
 
-		$config['ADMIN_PASS'] = '';
-        $data  = $config;
-	    $type  = $this->get('type') ? $this->get('type') : 1;
+		$data['ADMIN_PASS'] = '';
+		$data['WEIXIN_MP_URL'] = HTTP_PRE . HTTP_HOST . url('api/weixin/index');
 
-		// 会员模型
-		$membermodel = $this->membermodel;
         include $this->admin_tpl('config');
 	}
 
