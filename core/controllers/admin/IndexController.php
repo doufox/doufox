@@ -2,14 +2,13 @@
 
 class IndexController extends Admin
 {
-
     public function __construct() {
-		parent::__construct();
+        parent::__construct();
 	}
 
 	public function indexAction() {
-		$username = $this->session->get('user_id');
-		$MEMBER_REGISTER = $this->site_config['MEMBER_REGISTER'];
+        $account = $this->account->find($this->userid);
+        $name = empty($account['realname']) ? $account['username'] : $account['realname'];
 		$menu = '';
 		$form  = get_cache('formmodel');
 		if ($form) {
@@ -26,7 +25,6 @@ class IndexController extends Admin
 	 * 后台主视图
 	 */
 	public function mainAction() {
-		$username = $this->session->get('user_id');
 		$sysinfo = get_sysinfo();
 		$pars = array(
 			'sitename' => urlencode($this->site_config['SITE_NAME']),

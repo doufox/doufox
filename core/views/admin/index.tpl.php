@@ -40,7 +40,6 @@
             <div id="home">
                 <div id="shortcut">
                     <a href="javascript:_MP(107,'<?php echo url('admin/index/cache'); ?>');" title="更新缓存">更新缓存</a>
-                    <a href="<?php echo APP_SITE; ?>" title="帮助" target="_blank" title="帮助">帮助</a>
                     <a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a>
                 </div>
                 <label id="position">后台首页</label>
@@ -52,11 +51,14 @@
             </div>
         </div>
     </div>
+    <div class="footer">
+        <p>&copy; CopyRight 2018 <?php echo ucfirst(APP_NAME); ?> All Rights Reserved.</p>
+    </div>
     <script type="text/javascript">
         window.onresize = function () {
             var heights = document.documentElement.clientHeight;
-            document.getElementById('rightMain').height = heights - 61;
-            document.getElementById('leftMain').height = heights - 61;
+            document.getElementById('rightMain').height = heights - 90;
+            document.getElementById('leftMain').height = heights - 90;
         }
         window.onresize();
 

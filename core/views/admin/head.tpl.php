@@ -1,13 +1,10 @@
 <div class="header">
     <h1 class="title">网站管理系统后台</h1>
-    <ul id="menu">
+    <ul id="menu" class="menu">
         <li id="_MP100" class="focused"><a href="<?php echo url('admin'); ?>">主页</a></li>
         <li id="_MP101"><a href="javascript:_MP(101,'<?php echo url('admin/category'); ?>');">栏目</a></li>
         <li id="_MP102"><a href="javascript:_MP(102,'<?php echo url('admin/block'); ?>');">区块</a></li>
-        <?php if ($MEMBER_REGISTER) {?>
         <li id="_MP103"><a href="javascript:_MP(103,'<?php echo url('admin/member'); ?>');">会员</a></li>
-        <?php }?>
-        <li id="_MP108" ><a href="javascript:_MP(108,'<?php echo url('admin/my'); ?>');" >我的账号</a></li>
         <li id="_MP104">
             <a href="javascript:_MP(104, '<?php echo url('admin/index/config'); ?>');">设置</a>
             <ul>
@@ -17,7 +14,7 @@
                 <li id="_MP1043"><a href="javascript:_MP(1043,'<?php echo url('admin/index/config', array('type'=>3)); ?>');">后台密码</a></li>
                 <li id="_MP1044"><a href="javascript:_MP(1044,'<?php echo url('admin/index/config', array('type'=>4)); ?>');">会员配置</a></li>
                 <li id="_MP1045"><a href="javascript:_MP(1045,'<?php echo url('admin/index/config', array('type'=>5)); ?>');">URL设置</a></li>
-                <li id="_MP107"><a href="javascript:_MP(107,'<?php echo url('admin/index/cache'); ?>');">更新缓存</a></li>
+                <li id="_MP1071"><a href="javascript:_MP(1071,'<?php echo url('admin/index/cache'); ?>');">更新缓存</a></li>
                 <li id="_MP403"><a href="javascript:_MP(403,'<?php echo url('admin/content/updateurl'); ?>');">更新内容URL</a></li>
                 <li id="_MP403"><a href="javascript:_MP(403,'<?php echo url('admin/database'); ?>');">数据库备份</a></li>
                 <li id="_MP1046"><a href="javascript:_MP(1046,'<?php echo url('admin/model'); ?>');">内容模型</a></li>
@@ -41,9 +38,14 @@
             </ul>
         </li>
         <li id="_MP107"><a href="javascript:_MP(107,'<?php echo url('admin/attachment'); ?>');">附件</a></li>
+        <li id="_MP108" class="account">
+            <a href="javascript:void(0);">您好，<?php echo $name; ?></a>
+            <ul>
+                <li id="_MP1081"><a href="javascript:_MP(1081,'<?php echo url('admin/account/mine'); ?>');">我的账号</a></li>
+                <li id="_MP1082"><a href="javascript:_MP(1081,'<?php echo url('admin/account/mine'); ?>');" title="帮助">帮助</a></li>
+                <li id="_MP1082"><a href="javascript:logout();" title="退出系统">退出系统</a></li>
+                <li class="menubtm"></li>
+            </ul>
+        </li>
     </ul>
-    <div class="user">
-        <span>您好，<?php echo $username; ?>&nbsp;</span>
-        <a href="javascript:void(0);" onClick="logout();">退出</a>
-    </div>
 </div>

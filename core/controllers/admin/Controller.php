@@ -3,7 +3,7 @@
 class Admin extends Controller
 {
 
-    protected $admin;
+    protected $userid;
 
     public function __construct()
     {
@@ -30,8 +30,9 @@ class Admin extends Controller
             return false;
         }
 
-        if ($username = $this->session->get('user_id')) {
-            if ($username) {
+        if ($this->session->get('user_id')) {
+            $this->userid = $this->session->get('user_id');
+            if ($this->userid) {
                 return false;
             }
         }

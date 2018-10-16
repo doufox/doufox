@@ -7,10 +7,10 @@ if (!defined('IN_CMS')) exit();
 
 abstract class Controller  {
 
-
 	protected $cache;
 	protected $session;
-	protected $cookie;
+    protected $cookie;
+    protected $site_config;
 
 	protected $account;
 	protected $member;

@@ -80,7 +80,7 @@ class AccountController extends Admin
             $this->show_message('用户不存在', 2);
         }
 
-        if (session::get('user_id') == $userid) {
+        if ($this->userid == $userid) {
             $this->show_message('自己不能删除自己', 2);
         }
 
@@ -89,6 +89,9 @@ class AccountController extends Admin
         $this->show_message('删除成功', 1, url('admin/account'));
     }
 
+    /**
+     * 更新缓存文件
+     */
     public function cacheAction()
     {
         $data = array();
@@ -97,5 +100,24 @@ class AccountController extends Admin
             $data[$t['userid']] = $t;
         }
         set_cache('account', $data);
+    }
+
+    public function mineAction() {
+        if ($this->isPostForm()) {
+            $data = $this->post('data');
+            if (!empty($data['password'])) {
+                if (strlen($data['password']) < 6) {
+                    $this->show_message('密码最少6位数', 2);
+                }
+                $data['password'] = md5(md5($data['password']));
+            } else {
+                unset($data['password']);
+            }
+            $this->account->update($data, 'userid=?', $this->userid);
+            $this->cacheAction();
+            $this->show_message('修改成功', 1);
+        }
+        $data = $this->account->find($this->userid);
+        include $this->admin_tpl('account_mine');
     }
 }

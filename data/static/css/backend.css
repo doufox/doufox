@@ -1,4 +1,4 @@
-body, h1, h2, h3, ul, li, p {
+html, body, h1, h2, h3, ul, li, p {
     margin: 0;
     padding: 0;
 }
@@ -6,6 +6,11 @@ body, h1, h2, h3, ul, li, p {
 body {
     position: relative;
     overflow: hidden;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
 }
 
 body, html, input {
@@ -47,29 +52,22 @@ a:hover {
     font-size: 1.2em;
 }
 
-.header .user {
-    height: 30px;
-    line-height: 30px;
-    float: right;
-}
-
-.header .user a {
-    display: block;
-    float: right;
-    padding-right: 5px;
-    padding-left: 5px;
-}
-
-.header .user a:hover {
-    background-color: #fff;
-}
-
-#menu {
-    float: left;
+.menu {
     position: relative;
 }
 
-#menu li ul, #menu li.iehover ul {
+.menu li {
+    float: left;
+    position: relative;
+    line-height: 24px;
+}
+
+.menu li.account {
+    float: right;
+    margin-right: 1px;
+}
+
+.menu li ul {
     width: 101px;
     display: none;
     position: absolute;
@@ -78,82 +76,82 @@ a:hover {
     padding: 2px 0 0;
     background-color: #fff;
     margin-top: 0px;
-    border-width: 1px;
-    border-color: #ddd;
-    border-style: solid;
+    border: 1px solid #00bae0;
     border-top-width: 0;
 }
 
-#menu li {
-    float: left;
-    /*display: inline;*/
-    position: relative;
-    width: 40px;
-    line-height: 24px;
+.menu li.account ul {
+    left: unset;
+    right: -1px;
 }
 
-#menu ul li {
+.menu ul li {
     width: 100%;
     display: block;
 }
 
-#menu ul li.menubtm {
+.menu ul li.menubtm {
     height: 4px;
     overflow: hidden;
 }
 
-#menu li a {
+.menu li a {
+    padding-left: 5px;
+    padding-right: 5px;
     float: left;
     display: block;
     color: #fff;
     text-align: center;
     height: 30px;
     line-height: 30px;
-    width: 100%;
     font-weight: bold;
     cursor: default;
 }
 
-#menu li.iehover a, #menu li.iehover a:hover, #menu li:hover a, #menu li:hover a:hover {
+.menu li:hover a {
     background-color: #fff;
     color: #333;
     font-weight: bold;
 }
 
-#menu li.focused a {
+.menu li.focused a {
     background-color: #fff;
     color: #666;
     font-weight: bold;
 }
 
-#menu li:hover li a, #menu li.iehover li a, #menu li li a {
+.menu li:hover li a,
+.menu li li a {
     float: none;
     color: #333;
     height: 24px;
     line-height: 24px;
     text-align: left;
-    padding-left: 8px;
-    width: 93px;
     font-weight: normal;
     border-bottom: 1px solid #ddd;
 }
 
-#menu li:hover li a:hover, #menu li:hover li:hover a, #menu li.iehover li a:hover, #menu li.iehover li.iehover a, #menu li li a:hover {
+.menu li:hover li a:hover,
+.menu li:hover li:hover a,
+.menu li li a:hover {
     background-color: #00bae0;
     color: #fff;
-    font-weight: normal;
 }
 
-#menu li:hover ul, #menu li.iehover ul {
+.menu li:hover ul {
     display: block;
+}
+
+.menu .account:hover li a,
+.menu .account li a {
+    text-align: right;
 }
 
 #left {
     width: 149px;
-    background: #fff;
+    background-color: #fff;
     position: absolute;
     border-right: 1px solid #ddd;
-    position: absolute;
 }
 
 #left .left-head {
@@ -229,4 +227,14 @@ a:hover {
     width: 100%;
     height: 100%;
     display: none;
+}
+
+.footer {
+    height: 28px;
+    width: 100%;
+    border-top: 1px solid #ddd;
+    background-color: #f7f7f7;
+    color: #aaa;
+    text-align: center;
+    line-height: 22px;
 }
