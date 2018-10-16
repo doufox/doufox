@@ -10,12 +10,10 @@ class LoginController extends Admin
 
     public function indexAction()
     {
-        $admin = cms::load_config('admin');
-
-        $url = isset($_GET['url']) && $_GET['url'] ? urldecode($this->get('url')) : url('admin//');
+        $url = isset($_GET['url']) && $_GET['url'] ? urldecode($this->get('url')) : url('admin');
         if ($this->isPostForm()) {
             if (!$this->checkCode($this->post('code'))) {
-                $this->show_message('验证码不正确');
+                $this->show_message('验证码不正确', 2, url('admin/login'));
             }
 
             if ($this->cookie->get('admin_login')) {
@@ -28,12 +26,13 @@ class LoginController extends Admin
 
             $username = $this->post('username');
             $password = $this->post('password');
-            if ($admin['ADMIN_NAME'] == $username && $admin['ADMIN_PASS'] == md5(md5($password))) {
-                $this->session->set('user_id', $username);
-                if ($this->session->get('admin_login_error_num')) {
-                    $this->session->delete('admin_login_error_num'); // 如果存在登录错误次数则删除
+            $admin = $this->account->getOne('username=?', $username);
+            if ($admin['username'] == $username && $admin['password'] == md5(md5($password))) {
+                session::set('user_id', $admin['userid']);
+                if (session::get('admin_login_error_num')) {
+                    session::delete('admin_login_error_num');
                 }
-                $this->show_message('登录成功', 1, $url);
+                $this->show_message('欢迎！' . $username . ' 登录成功', 1, $url);
             } else {
                 if ($this->session->get('admin_login_error_num')) {
                     $error = (int) $this->session->get('admin_login_error_num') - 1;
