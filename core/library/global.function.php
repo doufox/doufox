@@ -95,22 +95,21 @@ function url($route, $params = null)
 }
 
 /**
- * 程序执行时间
+ * Application execution time
+ *
  */
-function runtime()
+function appExecutionTime()
 {
-    $temptime = explode(' ', APP_START_TIME);
-    $time = $temptime[1] + $temptime[0];
-    $temptime = explode(' ', microtime());
-    $now = $temptime[1] + $temptime[0];
-    return number_format($now - $time, 6);
+    $tmp = explode(' ', APP_START_TIME);
+    $start = $tmp[1] + $tmp[0];
+    $tmp = explode(' ', microtime());
+    $now = $tmp[1] + $tmp[0];
+    return number_format($now - $start, 6);
 }
 
 /**
- * 获取客户端IP
+ * Get Client IP Address
  *
- * @access public
- * @return string
  */
 function get_user_ip()
 {

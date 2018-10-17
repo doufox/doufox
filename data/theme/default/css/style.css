@@ -39,6 +39,14 @@ img {
     border: none;
 }
 
+
+.container {
+    width: 960px;
+    margin: 0 auto;
+    clear: both;
+    overflow: hidden;
+}
+
 .clear {
     clear: both;
     overflow: hidden;
@@ -85,15 +93,9 @@ img {
     width: 210px;
 }
 
-.container {
-    width: 960px;
-    margin: 0 auto;
-    clear: both;
-    overflow: hidden;
-}
-
 .header {
     width: 100%;
+    min-width: 960px;
     height: 100px;
     margin: 0 auto;
     position: relative;
@@ -119,6 +121,7 @@ img {
 
 .nav {
     width: 100%;
+    min-width: 960px;
     margin: 5px auto;
     height: 40px;
     line-height: 40px;
@@ -817,6 +820,7 @@ select {
 
 .footer {
     width: 100%;
+    min-width: 960px;
     margin: 20px auto 0;
     padding: 13px 0;
     background-color: #313131;

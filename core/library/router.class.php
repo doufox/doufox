@@ -1,7 +1,7 @@
 <?php
 /**
- * router Class
- * 路由处理
+ * router class
+ *
  */
 
 if (!defined('IN_CMS')) {
@@ -10,8 +10,7 @@ if (!defined('IN_CMS')) {
 
 class router
 {
-
-    public $router;
+    private $router;
     private $url;
     private $namespace_name;
     private $controller_name;
@@ -19,9 +18,7 @@ class router
 
     public function __construct()
     {
-        // parent::__construct();
-        $root = $_SERVER['SCRIPT_NAME'];
-        $this->url = strtolower(trim(str_replace($root, '', $_SERVER['PATH_INFO']), '/'));
+        $this->url = strtolower(trim(str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['PATH_INFO']), '/'));
         $this->namespace_name = '';
         $this->controller_name = 'index';
         $this->action_name = 'index';
@@ -80,15 +77,10 @@ class router
             $this->action_name = trim((isset($url_info_array['a']) && $url_info_array['a']) ? $url_info_array['a'] : 'index');
         }
 
-        $this->router['namespace'] = strtolower($this->namespace_name);
+        $this->router['namespace']  = strtolower($this->namespace_name);
         $this->router['controller'] = ucfirst(strtolower($this->controller_name));
-        $this->router['action'] = strtolower($this->action_name);
+        $this->router['action']     = strtolower($this->action_name);
         return $this->router;
-        // return array(
-        //     'namespace'  => strtolower($this->namespace_name),
-        //     'controller' => ucfirst(strtolower($this->controller_name)),
-        //     'action'     => strtolower($this->action_name)
-        // );
     }
 
     private function inNameSpace($path)
@@ -105,5 +97,21 @@ class router
             return true;
         }
         return false;
+    }
+
+    /**
+     * destructor
+     *
+     * @access public
+     * @return void
+     */
+    public function __destruct()
+    {
+        if (isset($this->router)) {
+            unset($this->router);
+        }
+        if (isset($this->url)) {
+            unset($this->url);
+        }
     }
 }

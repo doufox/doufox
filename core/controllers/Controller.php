@@ -76,8 +76,9 @@ abstract class Controller  {
 			'site_template' => HTTP_URL . basename(THEME_PATH_D) .'/',
 			'cats' => $this->category_cache,
 			'member_model' => $this->membermodel,
-			'member' => $this->memberinfo
-		));
+			'member' => $this->memberinfo,
+			'app_execution_time' => appExecutionTime()
+        ));
 	}
 
 	/**

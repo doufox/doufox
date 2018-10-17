@@ -412,11 +412,13 @@ class view {
 		include $compile_file;
 	}
 
-	/**
-	 * 析构函数
-	 */
+    /**
+     * destructor
+     *
+     * @access public
+     * @return void
+     */
 	public function __destruct() {
-		// 清空不必要的内存占用
 		$this->_options = array();
 	}
 

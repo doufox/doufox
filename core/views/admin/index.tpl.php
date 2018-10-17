@@ -20,66 +20,67 @@
 
 <body>
 <?php include $this->admin_tpl('head');?>
-    <div id="main">
-        <div id="left">
-            <div class="left-head">
-                <span style="float:right;">
-                    <a href="javascript:void(0);" onClick="refresh();" class="refresh">
-                        <img src="/static/img/space.gif" alt="刷新菜单" title="刷新菜单" height="18" width="16" />
-                    </a>
-                </span>
-                <label id='root_menu_name'>内容管理</label>
-            </div>
-            <div id="browser">
-                <iframe name="leftMain" id="leftMain" frameborder="false" scrolling="auto" height="auto" allowtransparency="true" src="<?php echo url('admin/content/category'); ?>"
-                    style="border:none" width="100%">
-                </iframe>
-            </div>
+
+<div id="main">
+    <div id="left">
+        <div class="left-head">
+            <span style="float:right;">
+                <a href="javascript:void(0);" onClick="refresh();" class="refresh">
+                    <img src="/static/img/space.gif" alt="刷新菜单" title="刷新菜单" height="18" width="16" />
+                </a>
+            </span>
+            <label id='root_menu_name'>内容管理</label>
         </div>
-        <div id="right">
-            <div id="home">
-                <div id="shortcut">
-                    <a href="javascript:_MP(107,'<?php echo url('admin/index/cache'); ?>');" title="更新缓存">更新缓存</a>
-                    <a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a>
-                </div>
-                <label id="position">后台首页</label>
-            </div>
-            <div id="frame_container" style="width:100%;">
-                <iframe name="right" id="rightMain" frameborder="false" scrolling="auto" style="border:none;" width="100%" allowtransparency="true"
-                    src="<?php echo url('admin/index/main'); ?>">
-                </iframe>
-            </div>
+        <div id="browser">
+            <iframe name="leftMain" id="leftMain" frameborder="false" scrolling="auto" height="auto" allowtransparency="true" src="<?php echo url('admin/content/category'); ?>"
+                style="border:none" width="100%">
+            </iframe>
         </div>
     </div>
-    <div class="footer">
-        <p>&copy; CopyRight 2018 <?php echo ucfirst(APP_NAME); ?> All Rights Reserved.</p>
+    <div id="right">
+        <div id="home">
+            <div id="shortcut">
+                <a href="javascript:_MP(107,'<?php echo url('admin/index/cache'); ?>');" title="更新缓存">更新缓存</a>
+                <a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a>
+            </div>
+            <label id="position">后台首页</label>
+        </div>
+        <div id="frame_container" style="width:100%;">
+            <iframe name="right" id="rightMain" frameborder="false" scrolling="auto" style="border:none;" width="100%" allowtransparency="true"
+                src="<?php echo url('admin/index/main'); ?>">
+            </iframe>
+        </div>
     </div>
-    <script type="text/javascript">
-        window.onresize = function () {
-            var heights = document.documentElement.clientHeight;
-            document.getElementById('rightMain').height = heights - 90;
-            document.getElementById('leftMain').height = heights - 90;
-        }
-        window.onresize();
+</div>
 
-        function _MP(id, targetUrl) {
-            var title = $("#_MP" + id).find('a').html();
-            document.getElementById('position').innerHTML = title
-            document.getElementById('rightMain').src = targetUrl
-            $('.focused').removeClass("focused");
-            $('#_MP' + id).addClass("focused");
-        }
+<?php include $this->admin_tpl('footer');?>
 
-        function logout() {
-            if (confirm("确定退出吗"))
-                top.location = '<?php echo url("admin/login/logout/"); ?>';
-            return false;
-        }
+<script type="text/javascript">
+    window.onresize = function () {
+        var heights = document.documentElement.clientHeight;
+        document.getElementById('rightMain').height = heights - 90;
+        document.getElementById('leftMain').height = heights - 90;
+    }
+    window.onresize();
 
-        function refresh() {
-            document.getElementById('leftMain').src = '<?php echo url('admin/content/category'); ?>';
-        }
-    </script>
+    function _MP(id, targetUrl) {
+        var title = $("#_MP" + id).find('a').html();
+        document.getElementById('position').innerHTML = title
+        document.getElementById('rightMain').src = targetUrl
+        $('.focused').removeClass("focused");
+        $('#_MP' + id).addClass("focused");
+    }
+
+    function logout() {
+        if (confirm("确定退出吗"))
+            top.location = '<?php echo url("admin/login/logout/"); ?>';
+        return false;
+    }
+
+    function refresh() {
+        document.getElementById('leftMain').src = '<?php echo url('admin/content/category'); ?>';
+    }
+</script>
 </body>
 
 </html>
