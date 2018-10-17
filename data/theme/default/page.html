@@ -1,18 +1,12 @@
 {template header.html}
+
 <div class="main">
- <div class="w210 fl">
-{template sidebar.html}
- </div>
- <div class="w740 fr">
-  <div class="page bg">
-    {template crumbs.html}
-   <div class="blank10 clear"></div>
-   <div class="content">
-{$content}
-   </div>
-  </div>
-  <div class="clear"></div>
- </div>
- <div class="blank10 clear"></div>
+    <div class="container bg">
+        {template crumbs.html}
+        <div class="content">
+            {$content}
+        </div>
+    </div>
 </div>
+
 {template footer.html}

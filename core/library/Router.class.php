@@ -1,6 +1,6 @@
 <?php
 /**
- * Router Class
+ * router Class
  * 路由处理
  */
 
@@ -8,12 +8,14 @@ if (!defined('IN_CMS')) {
     exit();
 }
 
-class Router
+class router
 {
-    protected $url;
-    protected $namespace_name;
-    protected $controller_name;
-    protected $action_name;
+
+    public $router;
+    private $url;
+    private $namespace_name;
+    private $controller_name;
+    private $action_name;
 
     public function __construct()
     {
@@ -24,7 +26,6 @@ class Router
         $this->controller_name = 'index';
         $this->action_name = 'index';
         $this->router = array();
-        // $this->get();
     }
 
     public function get()
@@ -90,17 +91,17 @@ class Router
         // );
     }
 
-    protected function inNameSpace($path)
+    private function inNameSpace($path)
     {
-        if (is_dir(ROOT_PATH . 'core/controllers/' . $path)) {
+        if (is_dir(CONTROLLER_PATH . $path)) {
             return true;
         }
         return false;
     }
 
-    protected function isController($path = '', $file)
+    private function isController($path = '', $file)
     {
-        if (is_file(ROOT_PATH . 'core/controllers/' . $path . ucfirst($file) . 'Controller.php')) {
+        if (is_file(CONTROLLER_PATH . $path . ucfirst($file) . 'Controller.php')) {
             return true;
         }
         return false;

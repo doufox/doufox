@@ -38,7 +38,6 @@ define('THEME_PATH_M', DATA_PATH . 'theme_mobile' . DS);    // 移动端模板�
 cms::load_file(CORE_PATH . 'info.php');
 cms::load_file(CORE_PATH . 'library' . DS . 'global.function.php'); // 加载全局函数
 cms::load_class('Model', '', 0);
-cms::load_class('Router', '', 0);
 
 /**
  * 系统核心APP
@@ -48,7 +47,7 @@ abstract class cms
     public static $namespace;
     public static $controller;
     public static $action;
-    public static $pathinfo;
+    public static $router;
 
     /**
      * 项目运行函数
@@ -97,12 +96,13 @@ abstract class cms
 
         $path_url_string = isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] ? $_SERVER['QUERY_STRING'] : $_SERVER['REQUEST_URI'];
         parse_str($path_url_string, $url_info_array);
-        $r = new router();
-        $router = $r->get();
-        self::$namespace = $router['namespace'];
-        self::$controller = $router['controller'];
-        self::$action = $router['action'];
-        $_GET = array_merge($_GET, $url_info_array);
+
+        // $router = cms::load_class('router');
+        self::$router     = cms::load_class('router')->get();
+        self::$namespace  = self::$router['namespace'];
+        self::$controller = self::$router['controller'];
+        self::$action     = self::$router['action'];
+        $_GET             = array_merge($_GET, $url_info_array);
         return true;
     }
 
