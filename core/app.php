@@ -38,6 +38,7 @@ define('THEME_PATH_M', DATA_PATH . 'theme_mobile' . DS);    // 移动端模板�
 cms::load_file(CORE_PATH . 'info.php');
 cms::load_file(CORE_PATH . 'library' . DS . 'global.function.php'); // 加载全局函数
 cms::load_class('Model', '', 0);
+cms::load_class('Router', '', 0);
 
 /**
  * 系统核心APP
@@ -64,35 +65,43 @@ abstract class cms
      */
     private static function parse_request()
     {
-        self::$pathinfo = explode('/', $_SERVER['PATH_INFO']);
+        // self::$pathinfo = explode('/', $_SERVER['PATH_INFO']);
+        // $path_url_string = isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] ? $_SERVER['QUERY_STRING'] : $_SERVER['REQUEST_URI'];
+        // parse_str($path_url_string, $url_info_array);
+        // $namespace_name = trim((isset($url_info_array['s']) && $url_info_array['s']) ? $url_info_array['s'] : '');
+        // if (isset($url_info_array['s']) && $url_info_array['s']) {
+        //     $namespace_name = $url_info_array['s'];
+        // } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == 'admin') {
+        //     $namespace_name = 'admin';
+        //     $controller_name = 'Index';
+        // }
+        // // $controller_name = trim((isset($url_info_array['c']) && $url_info_array['c']) ? $url_info_array['c'] : 'Index');
+        // if (isset(self::$pathinfo[1])) {
+        //     if (self::$pathinfo[1] == DATA_DIR || self::$pathinfo[1] == CORE_DIR) {
+        //         header("HTTP/1.0 403 Forbidden");
+        //         exit();
+        //     } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == STATIC_DIR) {
+        //         $controller_name = STATIC_DIR; // 静态资源
+        //     } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == 'theme') {
+        //         $controller_name = 'theme'; // 主题资源
+        //     }
+        // } else if (isset($url_info_array['c']) && $url_info_array['c']) {
+        //     $controller_name = trim($url_info_array['c']);
+        // } else {
+        //     $controller_name = 'Index'; // controller默认为index
+        // }
+        // $action_name = trim((isset($url_info_array['a']) && $url_info_array['a']) ? $url_info_array['a'] : 'index'); // action默认为index
+        // self::$namespace = strtolower($namespace_name);
+        // self::$controller = ucfirst(strtolower($controller_name));
+        // self::$action = strtolower($action_name);
+
         $path_url_string = isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] ? $_SERVER['QUERY_STRING'] : $_SERVER['REQUEST_URI'];
         parse_str($path_url_string, $url_info_array);
-        $namespace_name = trim((isset($url_info_array['s']) && $url_info_array['s']) ? $url_info_array['s'] : '');
-        if (isset($url_info_array['s']) && $url_info_array['s']) {
-            $namespace_name = $url_info_array['s'];
-        } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == 'admin') {
-            $namespace_name = 'admin';
-            $controller_name = 'Index';
-        }
-        // $controller_name = trim((isset($url_info_array['c']) && $url_info_array['c']) ? $url_info_array['c'] : 'Index');
-        if (isset(self::$pathinfo[1])) {
-            if (self::$pathinfo[1] == DATA_DIR || self::$pathinfo[1] == CORE_DIR) {
-                header("HTTP/1.0 403 Forbidden");
-                exit();
-            } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == STATIC_DIR) {
-                $controller_name = STATIC_DIR; // 静态资源
-            } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == 'theme') {
-                $controller_name = 'theme'; // 主题资源
-            }
-        } else if (isset($url_info_array['c']) && $url_info_array['c']) {
-            $controller_name = trim($url_info_array['c']);
-        } else {
-            $controller_name = 'Index'; // controller默认为index
-        }
-        $action_name = trim((isset($url_info_array['a']) && $url_info_array['a']) ? $url_info_array['a'] : 'index'); // action默认为index
-        self::$namespace = strtolower($namespace_name);
-        self::$controller = ucfirst(strtolower($controller_name));
-        self::$action = strtolower($action_name);
+        $r = new router();
+        $router = $r->get();
+        self::$namespace = $router['namespace'];
+        self::$controller = $router['controller'];
+        self::$action = $router['action'];
         $_GET = array_merge($_GET, $url_info_array);
         return true;
     }
