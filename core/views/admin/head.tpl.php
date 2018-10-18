@@ -16,7 +16,7 @@
                 <li id="_MP1045"><a href="javascript:_MP(1045,'<?php echo url('admin/index/config', array('type'=>5)); ?>');">URL设置</a></li>
                 <li id="_MP1071"><a href="javascript:_MP(1071,'<?php echo url('admin/index/cache'); ?>');">更新缓存</a></li>
                 <li id="_MP403"><a href="javascript:_MP(403,'<?php echo url('admin/content/updateurl'); ?>');">更新内容URL</a></li>
-                <li id="_MP403"><a href="javascript:_MP(403,'<?php echo url('admin/database'); ?>');">数据库备份</a></li>
+                <li id="_MP403"><a href="javascript:_MP(403,'<?php echo url('admin/database'); ?>');">数据库管理</a></li>
                 <li id="_MP1046"><a href="javascript:_MP(1046,'<?php echo url('admin/model'); ?>');">内容模型</a></li>
                 <li id="_MP1047"><a href="javascript:_MP(1047,'<?php echo url('admin/model', array('typeid'=>3)); ?>');">表单模型</a></li>
                 <?php if (is_array($menu)) {foreach ($menu as $t) {?>

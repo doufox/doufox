@@ -100,13 +100,39 @@ class DatabaseController extends Admin
     }
 
     /*
-     * 数据表结构
+     * 表结构
      */
-    public function tableAction()
+    public function structureAction()
     {
         $name = $this->get('name');
         $data = $this->content->execute("SHOW CREATE TABLE $name", false);
         echo '<div class="subnav"><pre>' . $data['Create Table'] . '</pre></div>';
+    }
+
+    /*
+     * 表数据
+     */
+    public function selectAction()
+    {
+        $name = $this->get('name');
+        $data = $this->content->execute("SELECT * FROM $name LIMIT 10");
+        if (empty($data)) {
+            exit('合计： 0 条数据');
+        }
+        echo '合计：' . count($data) . ' 条数据（最多 10 条）';
+        echo '<style>';
+        echo 'table {border-collapse: collapse;border-spacing: 0;}';
+        echo 'td {white-space: nowrap;padding: 5px;}';
+        echo '</style>';
+        echo '<div class="subnav"><table border="1">';
+        foreach ($data as $v) {
+            echo '<tr>';
+            foreach ($v as $i) {
+                echo '<td>' .$i. '</td>';
+            }
+            echo '</tr>';
+        }
+        echo '</table></div>';
     }
 
     /*

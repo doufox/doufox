@@ -1,10 +1,11 @@
 <?php include $this->admin_tpl('header');?>
 <script type="text/javascript">
-top.document.getElementById('position').innerHTML = '数据库备份';
+top.document.getElementById('position').innerHTML = '数据库管理';
 </script>
 <div class="subnav">
 	<div class="content-menu">
-		<a href="<?php echo url('admin/database/import'); ?>" class="on"><em>数据库恢复</em></a>
+		<a href="<?php echo url('admin/database/index'); ?>" class="on">数据表</a>
+		<a href="<?php echo url('admin/database/import'); ?>" class="on">备份列表</a>
 	</div>
 	<div class="bk10"></div>
 
@@ -40,9 +41,10 @@ top.document.getElementById('position').innerHTML = '数据库备份';
 			<td><?php echo formatFileSize($v['Data_length'] + $v['Index_length'])?></td>
 			<td><?php echo formatFileSize($v['Data_free'])?></td>
 			<td>
+				<a href="javascript:void(0);" onclick="showTableStructure('<?php echo $v['Name']?>')">结构</a> | 
+				<a href="javascript:void(0);" onclick="showTableDatas('<?php echo $v['Name']?>')">数据</a> | 
 				<a href="<?php echo url("admin/database/repair", array("name"=>$v['Name']))?>">修复</a> | 
-				<a href="<?php echo url("admin/database/optimize", array("name"=>$v['Name']))?>">优化</a> | 
-				<a href="javascript:void(0);" onclick="showTableStructure('<?php echo $v['Name']?>')">结构</a>
+				<a href="<?php echo url("admin/database/optimize", array("name"=>$v['Name']))?>">优化</a>
 			</td>
 		</tr>
 		<?php } if (is_array($data)) { ?>
@@ -70,11 +72,20 @@ top.document.getElementById('position').innerHTML = '数据库备份';
 
 	function showTableStructure (table) {
 		window.top.art.dialog({
-			title: table + '表结构', 
-			id: 'show', 
-			iframe: '<?php echo url("admin/database/table")?>&name=' + table,
+			title: '表 ' + table + ' 结构',
+			id: 'show',
+			iframe: '<?php echo url("admin/database/structure")?>&name=' + table,
 			width: '700px',
 			height: '400px'
+		});
+	}
+	function showTableDatas (table) {
+		window.top.art.dialog({
+			title: '表 ' + table + ' 数据（最多查询10条）', 
+			id: 'show',
+			iframe: '<?php echo url("admin/database/select")?>&name=' + table,
+			width: '80%',
+			height: '80%'
 		});
 	}
 </script>

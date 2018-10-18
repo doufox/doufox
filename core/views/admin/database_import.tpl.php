@@ -1,11 +1,12 @@
 <?php include $this->admin_tpl('header'); ?>
 
 <script type="text/javascript">
-	top.document.getElementById('position').innerHTML = '数据库恢复';
+	top.document.getElementById('position').innerHTML = '备份列表';
 </script>
 <div class="subnav">
 	<div class="content-menu">
-		<a href="<?php echo url('admin/database'); ?>" class="on"><em>数据库备份</em></a>
+		<a href="<?php echo url('admin/database/index'); ?>" class="on">数据表</a>
+		<a href="<?php echo url('admin/database/import'); ?>" class="on">备份列表</a>
 	</div>
 	<div class="bk10"></div>
 
