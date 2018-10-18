@@ -10,7 +10,7 @@ error_reporting(E_ALL ^ E_NOTICE);
  * 系统常量配置
  */
 date_default_timezone_set('Asia/Shanghai');    // 系统时区设置
-define('APP_START_TIME', microtime(true));     // 设置程序开始执行时间
+define('APP_START_TIME', isset($_SERVER['REQUSET_TIME']) ? $_SERVER['REQUSET_TIME'] : microtime(true)); // 设置程序开始执行时间
 define('HTTP_REFERER', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''); // 来源
 define('HTTP_HOST', $_SERVER['HTTP_HOST']);    // host
 define('HTTP_PRE', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') ? 'https://' : 'http://'); // http协议
@@ -47,62 +47,28 @@ abstract class cms
     public static $namespace;
     public static $controller;
     public static $action;
-    public static $router;
 
     /**
-     * 项目运行函数
+     * run application
      */
     public static function run()
     {
-        self::parse_request();
+        self::load_router();
         self::load_theme();
         self::load_app();
     }
 
     /**
-     * 分析URL信息
+     * parse request to router
      */
-    private static function parse_request()
+    private static function load_router()
     {
-        // self::$pathinfo = explode('/', $_SERVER['PATH_INFO']);
-        // $path_url_string = isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] ? $_SERVER['QUERY_STRING'] : $_SERVER['REQUEST_URI'];
-        // parse_str($path_url_string, $url_info_array);
-        // $namespace_name = trim((isset($url_info_array['s']) && $url_info_array['s']) ? $url_info_array['s'] : '');
-        // if (isset($url_info_array['s']) && $url_info_array['s']) {
-        //     $namespace_name = $url_info_array['s'];
-        // } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == 'admin') {
-        //     $namespace_name = 'admin';
-        //     $controller_name = 'Index';
-        // }
-        // // $controller_name = trim((isset($url_info_array['c']) && $url_info_array['c']) ? $url_info_array['c'] : 'Index');
-        // if (isset(self::$pathinfo[1])) {
-        //     if (self::$pathinfo[1] == DATA_DIR || self::$pathinfo[1] == CORE_DIR) {
-        //         header("HTTP/1.0 403 Forbidden");
-        //         exit();
-        //     } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == STATIC_DIR) {
-        //         $controller_name = STATIC_DIR; // 静态资源
-        //     } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == 'theme') {
-        //         $controller_name = 'theme'; // 主题资源
-        //     }
-        // } else if (isset($url_info_array['c']) && $url_info_array['c']) {
-        //     $controller_name = trim($url_info_array['c']);
-        // } else {
-        //     $controller_name = 'Index'; // controller默认为index
-        // }
-        // $action_name = trim((isset($url_info_array['a']) && $url_info_array['a']) ? $url_info_array['a'] : 'index'); // action默认为index
-        // self::$namespace = strtolower($namespace_name);
-        // self::$controller = ucfirst(strtolower($controller_name));
-        // self::$action = strtolower($action_name);
-
-        $path_url_string = isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] ? $_SERVER['QUERY_STRING'] : $_SERVER['REQUEST_URI'];
-        parse_str($path_url_string, $url_info_array);
-
-        // $router = cms::load_class('router');
-        self::$router     = cms::load_class('router')->get();
-        self::$namespace  = self::$router['namespace'];
-        self::$controller = self::$router['controller'];
-        self::$action     = self::$router['action'];
-        $_GET             = array_merge($_GET, $url_info_array);
+        $router  = cms::load_class('router');
+        $request = $router->parse_request();
+        $_GET    = $request['GET'];
+        self::$namespace  = $request['namespace'];
+        self::$controller = $request['controller'];
+        self::$action     = $request['action'];
         return true;
     }
 
