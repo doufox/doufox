@@ -40,7 +40,7 @@ a:hover {
 .header {
     height: 30px;
     color: #fff;
-    background-color: #00bae0;
+    background-color: #008eff;
 }
 
 .header .title {
@@ -62,9 +62,14 @@ a:hover {
     line-height: 24px;
 }
 
+.menu li:hover {
+    background-color: #fff;
+}
+
 .menu li.account {
     float: right;
     margin-right: 1px;
+    padding-right: 15px;
 }
 
 .menu li ul {
@@ -76,7 +81,7 @@ a:hover {
     padding: 2px 0 0;
     background-color: #fff;
     margin-top: 0px;
-    border: 1px solid #00bae0;
+    border: 1px solid #008eff;
     border-top-width: 0;
 }
 
@@ -109,7 +114,7 @@ a:hover {
 }
 
 .menu li:hover a {
-    background-color: #fff;
+    /* background-color: #fff; */
     color: #333;
     font-weight: bold;
 }
@@ -134,7 +139,7 @@ a:hover {
 .menu li:hover li a:hover,
 .menu li:hover li:hover a,
 .menu li li a:hover {
-    background-color: #00bae0;
+    background-color: #008eff;
     color: #fff;
 }
 
@@ -144,7 +149,28 @@ a:hover {
 
 .menu .account:hover li a,
 .menu .account li a {
-    text-align: right;
+    text-align: center;
+}
+
+.menu .account::before {
+    position: absolute;
+    top: 11px;
+    right: 4px;
+    content: ' ';
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid #ffffff;
+}
+
+.menu li:hover.account::before {
+    top: 9px;
+    right: 5px;
+    border-left: none;
+    border-right: 8px solid #008eff;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
 }
 
 #left {
