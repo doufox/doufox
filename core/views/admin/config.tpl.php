@@ -6,9 +6,9 @@
         <div class="pad-10">
             <div class="col-tab">
                 <ul class="tabBut cu-li">
-                    <li onClick="SwapTab('setting','on','',7,1);" class="<?php if ($type==1) { ?>on<?php } ?>" id="tab_setting_1">系统配置</li>
+                    <li onClick="SwapTab('setting','on','',7,1);" id="tab_setting_1" class="<?php if ($type==1) { ?>on<?php } ?>">系统配置</li>
                     <li onClick="SwapTab('setting','on','',7,2);" id="tab_setting_2" class="<?php if ($type==2) { ?>on<?php } ?>">水印设置</li>
-                    <li onClick="SwapTab('setting','on','',7,3);" id="tab_setting_3" class="<?php if ($type==3) { ?>on<?php } ?>">后台帐号</li>
+                    <li onClick="SwapTab('setting','on','',7,3);" id="tab_setting_3" class="<?php if ($type==3) { ?>on<?php } ?>">帐号配置</li>
                     <li onClick="SwapTab('setting','on','',7,4);" id="tab_setting_4" class="<?php if ($type==4) { ?>on<?php } ?>">会员配置</li>
                     <li onClick="SwapTab('setting','on','',7,5);" id="tab_setting_5" class="<?php if ($type==5) { ?>on<?php } ?>">URL配置</li>
                     <li onClick="SwapTab('setting','on','',7,6);" id="tab_setting_6" class="<?php if ($type==6) { ?>on<?php } ?>">微信配置</li>
@@ -197,29 +197,29 @@
                     <tr>
                         <th>新会员审核： </th>
                         <td>
-                <label><input name="data[MEMBER_STATUS]" type="radio" value="1" <?php if ($data['MEMBER_STATUS']==1) { ?>checked<?php } ?>> 打开</label>
-                &nbsp;&nbsp;&nbsp;
-                <label><input name="data[MEMBER_STATUS]" type="radio" value="0" <?php if ($data['MEMBER_STATUS']==0) { ?>checked<?php } ?>> 关闭</label>
-            </td>
+                            <label><input name="data[MEMBER_STATUS]" type="radio" value="1" <?php if ($data['MEMBER_STATUS']==1) { ?>checked<?php } ?>> 打开</label>
+                            &nbsp;&nbsp;&nbsp;
+                            <label><input name="data[MEMBER_STATUS]" type="radio" value="0" <?php if ($data['MEMBER_STATUS']==0) { ?>checked<?php } ?>> 关闭</label>
+                        </td>
                     </tr>
                     <tr>
                         <th>注册验证码： </th>
                         <td>
-                <label><input name="data[MEMBER_REGCODE]" type="radio" value="1" <?php if ($data['MEMBER_REGCODE']==1) { ?>checked<?php } ?>> 打开</label>
-                &nbsp;&nbsp;&nbsp;
-                <label><input name="data[MEMBER_REGCODE]" type="radio" value="0" <?php if ($data['MEMBER_REGCODE']==0) { ?>checked<?php } ?>> 关闭</label>
-            </td>
+                            <label><input name="data[MEMBER_REGCODE]" type="radio" value="1" <?php if ($data['MEMBER_REGCODE']==1) { ?>checked<?php } ?>> 打开</label>
+                            &nbsp;&nbsp;&nbsp;
+                            <label><input name="data[MEMBER_REGCODE]" type="radio" value="0" <?php if ($data['MEMBER_REGCODE']==0) { ?>checked<?php } ?>> 关闭</label>
+                        </td>
                     </tr>
                     <tr>
                         <th>登录验证码： </th>
-            <td>
-                <label><input name="data[MEMBER_LOGINCODE]" type="radio" value="1" <?php if ($data['MEMBER_LOGINCODE']==1) { ?>checked<?php } ?>> 打开</label>
-                &nbsp;&nbsp;&nbsp;
-                <label><input name="data[MEMBER_LOGINCODE]" type="radio" value="0" <?php if ($data['MEMBER_LOGINCODE']==0) { ?>checked<?php } ?>> 关闭</label>
-            </td>
+                        <td>
+                            <label><input name="data[MEMBER_LOGINCODE]" type="radio" value="1" <?php if ($data['MEMBER_LOGINCODE']==1) { ?>checked<?php } ?>> 打开</label>
+                            &nbsp;&nbsp;&nbsp;
+                            <label><input name="data[MEMBER_LOGINCODE]" type="radio" value="0" <?php if ($data['MEMBER_LOGINCODE']==0) { ?>checked<?php } ?>> 关闭</label>
+                        </td>
                     </tr>
                     </table>
-                    </div>
+                </div>
 
                 <div class="contentList pad-10 hidden" id="div_setting_5" style="display: none;">
                     <table width="100%" class="table_form">
@@ -311,7 +311,7 @@
                         </tr>
                     </table>
                 </div>
-        
+
                 <div class="bk15"></div>
                 <input type="submit" class="button" value="提交" name="submit">
             </div>

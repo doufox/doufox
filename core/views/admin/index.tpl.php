@@ -40,7 +40,7 @@
     <div id="right">
         <div id="home">
             <div id="shortcut">
-                <a href="javascript:_MP(107,'<?php echo url('admin/index/cache'); ?>');" title="更新缓存">更新缓存</a>
+                <a href="javascript:_open_url(107,'<?php echo url('admin/index/cache'); ?>');" title="更新缓存">更新缓存</a>
                 <a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a>
             </div>
             <label id="position">后台首页</label>
@@ -63,12 +63,12 @@
     }
     window.onresize();
 
-    function _MP(id, targetUrl) {
-        var title = $("#_MP" + id).find('a').html();
+    function _open_url(id, targetUrl) {
+        var title = $("#M_" + id).find('a').html();
         document.getElementById('position').innerHTML = title
         document.getElementById('rightMain').src = targetUrl
         $('.focused').removeClass("focused");
-        $('#_MP' + id).addClass("focused");
+        $('#M_' + id).addClass("focused");
     }
 
     function logout() {
