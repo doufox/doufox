@@ -372,7 +372,7 @@ abstract class Controller  {
 	    $code  = $this->session->get('checkcode');
 		$value = strtolower($value);
 		$this->session->delete('checkcode');
-		return $code == $value ? true : false;
+		return $code == $value;
 	}
 
 	/**

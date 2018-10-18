@@ -72,13 +72,13 @@
     }
 
     function logout() {
-        if (confirm("确定退出吗"))
-            top.location = '<?php echo url("admin/login/logout/"); ?>';
+        if (confirm('确定退出吗'))
+            top.location = '<?php echo url("admin/login/logout"); ?>';
         return false;
     }
 
     function refresh() {
-        document.getElementById('leftMain').src = '<?php echo url('admin/content/category'); ?>';
+        document.getElementById('leftMain').src = "<?php echo url('admin/content/category'); ?>";
     }
 </script>
 </body>

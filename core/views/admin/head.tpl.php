@@ -47,8 +47,8 @@
         <li id="M_108" class="account">
             <a href="javascript:void(0);">您好，<?php echo $name; ?></a>
             <ul>
-                <li id="M_1081"><a href="javascript:_open_url(1081,'<?php echo url('admin/account/mine'); ?>');">我的账号</a></li>
-                <li id="M_1082"><a href="javascript:_open_url(1081,'<?php echo url('admin/account/mine'); ?>');" title="帮助">帮助</a></li>
+                <li id="M_1081"><a href="javascript:_open_url(1081,'<?php echo url('admin/account/me'); ?>');">我的账号</a></li>
+                <li id="M_1082"><a href="javascript:_open_url(1081,'<?php echo url('admin/account/me'); ?>');" title="帮助">帮助</a></li>
                 <li id="M_1082"><a href="javascript:logout();" title="退出系统">退出系统</a></li>
                 <li class="menubtm"></li>
             </ul>

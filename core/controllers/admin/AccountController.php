@@ -102,7 +102,7 @@ class AccountController extends Admin
         set_cache('account', $data);
     }
 
-    public function mineAction() {
+    public function meAction() {
         if ($this->isPostForm()) {
             $data = $this->post('data');
             if (!empty($data['password'])) {
@@ -118,6 +118,6 @@ class AccountController extends Admin
             $this->show_message('修改成功', 1);
         }
         $data = $this->account->find($this->userid);
-        include $this->admin_tpl('account_mine');
+        include $this->admin_tpl('account_me');
     }
 }
