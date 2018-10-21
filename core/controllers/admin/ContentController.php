@@ -64,7 +64,7 @@ class ContentController extends Admin {
 		    $mcatid = (int)$this->post('movecatid');
 			if (empty($mcatid)) $this->show_message('请选择目标栏目！');
 			$mcat   = $this->category_cache[$mcatid];
-			$mtable = cms::load_model($mcat['tablename']);
+			$mtable = core::load_model($mcat['tablename']);
 	        foreach ($_POST as $var=>$value) {
 	            if (strpos($var, 'del_')!==false) {
 	                $ids = str_replace('del_', '', $var);
@@ -84,7 +84,7 @@ class ContentController extends Admin {
 	    $username   = $this->get('username');
 	    $page       = (int)$this->get('page');
 		$page       = (!$page) ? 1 : $page;
-	    $pagination = cms::load_class('pagination');
+	    $pagination = core::load_class('pagination');
 		$pagination->loadconfig();
 		if (empty($catid) || (int)$catid < 1) {
 			$this->show_message('缺少栏目id参数');
@@ -127,7 +127,7 @@ class ContentController extends Admin {
 	    $pagination = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
 		$join = $this->getModelJoin($modelid);
 
-		$tree = cms::load_class('tree');
+		$tree = core::load_class('tree');
 		$tree->icon = array(' ','  |-','  |-');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		$categorys = array();
@@ -151,7 +151,7 @@ class ContentController extends Admin {
 		$page = (int)$this->get('page');
 		$page = (!$page) ? 1 : $page;
 		$pagesize = 15;
-		$pagination = cms::load_class('pagination');
+		$pagination = core::load_class('pagination');
 		$pagination->loadconfig();
 
 		$total = $this->content->count('content', null, null);
@@ -161,7 +161,7 @@ class ContentController extends Admin {
 			// $username   = $this->get('username');
 			// $page       = (int)$this->get('page');
 			// $page       = (!$page) ? 1 : $page;
-			// $pagination = cms::load_class('pagination');
+			// $pagination = core::load_class('pagination');
 			// $pagination->loadconfig();
 
 			// $cats = $this->category_cache; // 读取栏目缓存
@@ -201,7 +201,7 @@ class ContentController extends Admin {
 	    $pagination = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
 		// $join = $this->getModelJoin($modelid);
 
-		$tree = cms::load_class('tree');
+		$tree = core::load_class('tree');
 		$tree->icon = array(' ','  |-','  |-');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		$categorys = array();
@@ -226,7 +226,7 @@ class ContentController extends Admin {
 
 		// 读取数据库后台不会根据排序显示
 		// $catlist =  $this->category->findAll('catid,typeid,parentid,child,http,catname');
-		$tree = cms::load_class('tree');
+		$tree = core::load_class('tree');
 		$categorys = array();
 		if (!empty($catlist)) {
 			foreach($catlist as $r) {
@@ -285,7 +285,7 @@ class ContentController extends Admin {
 		$data        = array('catid'=>$this->get('catid'));
 		$model       = $model[$modelid];
 
-		$tree =  cms::load_class('tree');
+		$tree =  core::load_class('tree');
 		$tree->icon = array(' ','  ','  ');
 		$tree->nbsp = '&nbsp;';
 		$categorys = array();
@@ -330,14 +330,14 @@ class ContentController extends Admin {
 	        $this->show_message('修改成功', 1);
 	    }
 	    //附表内容
-	    $table       = cms::load_model($model[$modelid]['tablename']);
+	    $table       = core::load_model($model[$modelid]['tablename']);
 	    $table_data  = $table->find($id);
 	    if ($table_data) $data = array_merge($data, $table_data); //合并主表和附表
 	    //自定义字段
 	    $data_fields = $this->getFields($fields, $data);
 		$backurl      = HTTP_REFERER;
 		$model        = $model[$modelid];
-		$tree =  cms::load_class('tree');
+		$tree =  core::load_class('tree');
 		$tree->icon = array(' ','  ','  ');
 		$tree->nbsp = '&nbsp;';
 		$categorys = array();
@@ -483,7 +483,7 @@ class ContentController extends Admin {
 				exit;
 			}
 		} else {
-		$tree =  cms::load_class('tree');
+		$tree =  core::load_class('tree');
 		$tree->icon = array(' ','  |-','  |-');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		$categorys = array();

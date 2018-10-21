@@ -153,7 +153,7 @@ class file_upload
 
         //验证路径
         if (!is_dir($path)) {
-            $file_list = cms::load_class('file_list');
+            $file_list = core::load_class('file_list');
             $file_list->make_dir($path);
         }
         if (!@move_uploaded_file($this->file_name['tmp_name'], $path . $file_name)) {

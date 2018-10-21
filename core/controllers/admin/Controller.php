@@ -9,7 +9,7 @@ class Admin extends Controller
     {
         parent::__construct();
         $this->isAdminLogin();
-        cms::load_file(CORE_PATH . 'library' . DS . 'fields.function.php');
+        core::load_file(CORE_PATH . 'library' . DS . 'fields.function.php');
         define('IN_ADMIN', true);
     }
 
@@ -18,15 +18,15 @@ class Admin extends Controller
      */
     protected function isAdminLogin($namespace = 'admin', $controller = null)
     {
-        if (cms::get_namespace_id() != $namespace) {
+        if (core::get_namespace_id() != $namespace) {
             return false;
         }
 
-        if ($controller && cms::get_controller_id() != $controller) {
+        if ($controller && core::get_controller_id() != $controller) {
             return false;
         }
 
-        if (cms::get_namespace_id() == 'admin' && cms::get_controller_id() == 'login') {
+        if (core::get_namespace_id() == 'admin' && core::get_controller_id() == 'login') {
             return false;
         }
 
@@ -37,7 +37,7 @@ class Admin extends Controller
             }
         }
 
-        $url = cms::get_namespace_id() == 'admin' && isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != 's=admin'
+        $url = core::get_namespace_id() == 'admin' && isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != 's=admin'
         ? url('admin/login', array('url' => urlencode(HTTP_URL . ENTRY_FILE . '?' . $_SERVER['QUERY_STRING'])))
         : url('admin/login');
         $this->redirect($url);
@@ -60,7 +60,7 @@ class Admin extends Controller
 		if (!file_exists($file)) {
             return false;
         }
-		cms::load_file($file);
+		core::load_file($file);
 		$application = new $controller();
 		if (method_exists($controller, $action)) {
             $application->$action(1);

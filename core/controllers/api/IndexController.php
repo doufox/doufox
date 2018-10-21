@@ -45,7 +45,7 @@ class IndexController extends Api
             exit();
         }
 
-        $table = cms::load_model($cat['tablename']);
+        $table = core::load_model($cat['tablename']);
         $_data = $table->find($id);
         $data  = array_merge($data, $_data); // 合并主表和附表
         $data  = $this->getFieldData($model[$cat['modelid']], $data);

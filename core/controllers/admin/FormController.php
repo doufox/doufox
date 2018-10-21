@@ -20,7 +20,7 @@ class FormController extends Admin {
 		$this->model   = $formmodel[$this->modelid];
 		if (empty($this->model)) $this->show_message('表单模型不存在');
 		$this->table   = $this->model['tablename'];
-		$this->form    = cms::load_model($this->table);
+		$this->form    = core::load_model($this->table);
 		$joinmodel     = get_cache('joinmodel');
 		$this->join    = isset($joinmodel[$this->model['joinid']]) ? $joinmodel[$this->model['joinid']] : null;
 		$this->join_info     = '独立表单';
@@ -69,7 +69,7 @@ class FormController extends Admin {
 	    } 
 		$page     = $this->get('page')     ? $this->get('page') : 1;
 		$userid   = (int)$this->get('userid');
-	    $pagination = cms::load_class('pagination');
+	    $pagination = core::load_class('pagination');
 		$pagination->loadconfig();
 	    $where    = 'id>0';
 		if ($userid) $where .= ' and userid=' . $userid;
@@ -112,7 +112,7 @@ class FormController extends Admin {
 				'setting'     => array2string($cfg),
 				'categorytpl' => $data['categorytpl'],
 			);
-			$model= cms::load_model('model');
+			$model= core::load_model('model');
 			$model->update($set, 'modelid=' . $this->modelid);
 			$this->show_message($this->getCacheCode('model') . '操作成功', 1);
 		}

@@ -26,7 +26,7 @@ abstract class Model
     public function __construct()
     {
         //加载数据库配置文件
-        $params = cms::load_config('database');
+        $params = core::load_config('database');
         if (!is_array($params)) {
             exit('数据库配置文件不存在');
         }
@@ -39,7 +39,7 @@ abstract class Model
         $params['charset'] = ($params['charset']) ? trim($params['charset']) : 'utf8';
         $this->prefix = ($params['prefix']) ? trim($params['prefix']) : '';
         $this->cache_dir = DATA_PATH . 'models' . DS;
-        cms::load_class('mysql', '', 0);
+        core::load_class('mysql', '', 0);
         $this->db = mysql::getInstance($params);
 
         unset($params['username']);
@@ -963,7 +963,7 @@ abstract class Model
             return false;
         }
 
-        return cms::load_model($model_name);
+        return core::load_model($model_name);
     }
 
     /**

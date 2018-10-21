@@ -73,7 +73,7 @@ class IndexController extends Controller {
         $cat   = $this->category_cache[$catid];
         if($cat['islook'] && !$this->getMember) $this->show_message('当前栏目游客不允许查看');
 
-        $table = cms::load_model($cat['tablename']);
+        $table = core::load_model($cat['tablename']);
         $_data = $table->find($id);
         $data  = array_merge($data, $_data); //合并主表和附表
         $data  = $this->getFieldData($model[$cat['modelid']], $data);
@@ -114,7 +114,7 @@ class IndexController extends Controller {
         $catid    = $catid ? $catid : (int)$this->get('catid');
         $page     = (int)$this->get('page');
         $page     = (!$page) ? 1 : $page;
-        $pagination = cms::load_class('pagination');
+        $pagination = core::load_class('pagination');
         $pagination->loadconfig();
         $pagesize = 10;
         $urlparam = array();
@@ -145,7 +145,7 @@ class IndexController extends Controller {
     public function postAction() {
         if ($this->post('select') && $this->isPostForm()) $this->redirect(url('index/post', array('catid'=>(int)$this->post('catid'))));
         $catid = (int)$this->get('catid');
-        $tree =  cms::load_class('tree');
+        $tree =  core::load_class('tree');
         $tree->icon = array(' ','  ','  ');
         $tree->nbsp = '&nbsp;';
         $categorys = array();
@@ -218,7 +218,7 @@ class IndexController extends Controller {
         $model = $formmodel[$modelid];
         unset($formmodel);
         if (empty($model)) $this->show_message('表单模型'.$modelid.'不存在');
-        $this->form    = cms::load_model($model['tablename']);
+        $this->form    = core::load_model($model['tablename']);
         $this->modelid = $modelid;
 
         $cid       = (int)$this->get('cid');

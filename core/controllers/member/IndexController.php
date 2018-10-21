@@ -11,7 +11,7 @@ class IndexController extends Member
     {
         parent::__construct();
         $this->isLogin(); // 登录验证
-        $this->memberdata = cms::load_model($this->membermodel[$this->memberinfo['modelid']]['tablename']);
+        $this->memberdata = core::load_model($this->membermodel[$this->memberinfo['modelid']]['tablename']);
 
         if (!$this->memberinfo['status']) {
             $this->show_message('您还没有通过审核。', 2, url('index/index/'));

@@ -42,7 +42,7 @@ class ContentController extends Member {
 		$modelid  = (int)$this->get('modelid');
 		if (empty($modelid)) $this->redirect($this->nav);
 		if (!isset($this->cmodel[$modelid])) $this->show_message('内容模型' . $modelid . '不存在');
-	    $pagination = cms::load_class('pagination');
+	    $pagination = core::load_class('pagination');
 		$pagination->loadconfig();
 	    $where    = 'username="' . $this->memberinfo['username'] . '" AND modelid=' . $modelid ;
 	    $total    = $this->content->count('content', null, $where);
@@ -50,7 +50,7 @@ class ContentController extends Member {
 	    $data     = $this->content->page_limit($page, $pagesize)->order(array('`status` DESC,time DESC'))->where($where)->select();
 	    $pagination = $pagination->total($total)->url(url('member/content', array('modelid'=>$modelid, 'page'=>'{page}')))->num($pagesize)->page($page)->output();
 
-		$tree =  cms::load_class('tree');
+		$tree =  core::load_class('tree');
 		$tree->icon = array(' ','  ','  ');
 		$tree->nbsp = '&nbsp;';
 		$categorys = array();
@@ -113,7 +113,7 @@ class ContentController extends Member {
 	    // 自定义字段
 	    $data_fields      = $this->getFields($fields, $data);
 
-		$tree =  cms::load_class('tree');
+		$tree =  core::load_class('tree');
 		$tree->icon = array(' ','  ','  ');
 		$tree->nbsp = '&nbsp;';
 		$categorys = array();
@@ -180,13 +180,13 @@ class ContentController extends Member {
 	        $this->show_message('操作成功', 1, url('member/content/', array('modelid'=>$modelid)));
 	    }
 	    // 附表内容
-	    $table       = cms::load_model($this->cmodel[$modelid]['tablename']);
+	    $table       = core::load_model($this->cmodel[$modelid]['tablename']);
 	    $table_data  = $table->find($id);
 	    if ($table_data) $data = array_merge($data, $table_data); //合并主表和附表
 	    //自定义字段
 	    $data_fields = $this->getFields($fields, $data);
 
-		$tree       =  cms::load_class('tree');
+		$tree       =  core::load_class('tree');
 		$tree->icon = array(' ','  ','  ');
 		$tree->nbsp = '&nbsp;';
 		$categorys  = array();
@@ -246,9 +246,9 @@ class ContentController extends Member {
 		$page       = (!$page) ? 1 : $page;
 		$modelid    = (int)$this->get('modelid');
 		if (!isset($this->form[$modelid]) || empty($this->form[$modelid])) $this->show_message('表单不存在');
-	    $table      = cms::load_model($this->form[$modelid]['tablename']);
+	    $table      = core::load_model($this->form[$modelid]['tablename']);
 
-	    $pagination = cms::load_class('pagination');
+	    $pagination = core::load_class('pagination');
 		$pagination->loadconfig();
 	    $pagesize   = 15;
 	    $url        = url('member/content/form', array('modelid'=>$modelid, 'page'=>'{page}'));
@@ -284,7 +284,7 @@ class ContentController extends Member {
 		if (empty($model)) $this->show_message('表单模型不存在');
 	    $id      = (int)$this->get('id');
 		if (empty($id)) $this->show_message('id不能为空');
-		$form    = cms::load_model($model['tablename']);
+		$form    = core::load_model($model['tablename']);
 		$data    = $form->find($id);
 		if (empty($data)) $this->show_message('内容不存在');
 		if ($data['username'] ==  $this->memberinfo['username'] && $data['userid'] == $this->memberinfo['id']) {

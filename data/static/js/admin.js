@@ -1,21 +1,21 @@
 window.admin_command = {
     sitepath: "<?php echo HTTP_URL . ENTRY_FILE; ?>",
-    redirect: function (url) {
+    redirect: function(url) {
         location.href = url
     },
-    confirmurl: function (url, message) {
+    confirmurl: function(url, message) {
         if (confirm(message)) this.redirect(url);
     },
-    preview: function (obj) {
+    preview: function(obj) {
         $("#imgPreview" + obj).html('');
     },
-    preview2: function (obj) {
+    preview2: function(obj) {
         var filepath = $('#' + obj).val();
         if (filepath) {
             $("#imgPreview" + obj).html('<div id="imgPreviewContainer" style="position: absolute; top: 0px; left: 10px; display: block;"><img src="' + filepath + '" style="width: 280px; display: inline;"></div>');
         }
     },
-    uploadImage: function (obj, w, h, size) {
+    uploadImage: function(obj, w, h, size) {
         var url = this.sitepath + '?c=attachment&a=image&w=' + w + '&h=' + h + '&size=' + size;
         var winid = 'win_' + obj;
         window.top.art.dialog({
@@ -27,7 +27,7 @@ window.admin_command = {
                 height: '100',
                 lock: true
             },
-            function () {
+            function() {
                 var d = window.top.art.dialog({
                     id: winid
                 }).data.iframe;
@@ -39,7 +39,7 @@ window.admin_command = {
                     return false;
                 }
             },
-            function () {
+            function() {
                 window.top.art.dialog({
                     id: winid
                 }).close();
@@ -47,7 +47,7 @@ window.admin_command = {
         );
         void(0);
     },
-    uploadFile: function (obj, type, size) {
+    uploadFile: function(obj, type, size) {
         var url = this.sitepath + '?c=attachment&a=file&type=' + type + '&size=' + size;
         var winid = 'win_' + obj;
         window.top.art.dialog({
@@ -59,7 +59,7 @@ window.admin_command = {
                 height: '150',
                 lock: true
             },
-            function () {
+            function() {
                 var d = window.top.art.dialog({
                     id: winid
                 }).data.iframe;
@@ -71,7 +71,7 @@ window.admin_command = {
                     return false;
                 }
             },
-            function () {
+            function() {
                 window.top.art.dialog({
                     id: winid
                 }).close();
@@ -79,7 +79,7 @@ window.admin_command = {
         );
         void(0);
     },
-    uploadFiles: function (obj, setting) {
+    uploadFiles: function(obj, setting) {
         var url = this.sitepath + '?c=attachment&a=files&setting=' + setting;
         var winid = 'win_' + obj;
         window.top.art.dialog({
@@ -91,7 +91,7 @@ window.admin_command = {
                 height: '420',
                 lock: true
             },
-            function () {
+            function() {
                 var d = window.top.art.dialog({
                     id: winid
                 }).data.iframe;
@@ -112,7 +112,7 @@ window.admin_command = {
                 }
 
             },
-            function () {
+            function() {
                 window.top.art.dialog({
                     id: winid
                 }).close();
@@ -120,17 +120,19 @@ window.admin_command = {
         );
         void(0);
     },
-    get_kw: function () {
-        $.post(this.sitepath + '?c=api&a=ajaxkw&id=' + Math.random(), {
+    get_kw: function() {
+        $.post(this.sitepath + '?s=api&a=ajaxkw&id=' + Math.random(), {
             data: $('#title').val()
-        }, function (data) {
-            if (data && $('#keywords').val() == '') $('#keywords').val(data);
+        }, function(res) {
+            if (res && res.data && $('#keywords').val() == '') {
+                $('#keywords').val(res.data);
+            }
         });
     },
-    removediv: function (fileid) {
+    removediv: function(fileid) {
         $('#files_' + fileid).remove();
     },
-    add_null_file: function (obj) {
+    add_null_file: function(obj) {
         var id = parseInt(Math.random() * 1000);
         var c = '<li id="files_' + id + '">';
         c += '<input type="text" class="input-text" style="width:310px;" value="" name="data[' + obj + '][file][]">';

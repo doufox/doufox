@@ -83,7 +83,7 @@ class IndexController extends Admin
 			'WEIXIN_MP_TOKEN'         => '微信服务器的验证token,必须为英文或数字，长度为3-32字符',
 			'WEIXIN_MP_AESKEY'        => 'EncodingAESKey,消息加密密钥由43位字符组成'
 		);
-		$admin = cms::load_config('admin'); // 管理员配置
+		$admin = core::load_config('admin'); // 管理员配置
         if ($this->isPostForm()) {
             $configdata = $this->post('data');
 			$configdata['RAND_CODE']= md5(microtime());
@@ -120,8 +120,8 @@ class IndexController extends Admin
             $this->show_message('修改成功', 1, url('admin/index/config', array('type'=>$this->get('type'))));
 		}
 
-		$data         = cms::load_config('config'); // 应用程序配置文件
-        $file_list    = cms::load_class('file_list');
+		$data         = core::load_config('config'); // 应用程序配置文件
+        $file_list    = core::load_class('file_list');
         $arr_d        = $file_list->get_file_list(THEME_PATH_D);
         $arr_m        = $file_list->get_file_list(THEME_PATH_M);
 		$theme        = array_diff($arr_d, array('index.html'));

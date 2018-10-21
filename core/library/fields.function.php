@@ -252,16 +252,16 @@ function form_fields($setting='') {
 
 function get_content_value($content) {
     if ($content != '' && preg_match('/^\{M:(.+)\}$/U', $content, $field)) {
-	    if (cms::get_namespace_id() == 'admin') return null;
+	    if (core::get_namespace_id() == 'admin') return null;
 		if (!$this->cookie->get('member_id'))       return null;
 		if (!$this->cookie->get('member_id'))          return null; 
 	    $name     = trim($field[1]);
-	    $member   = cms::load_model('member');
+	    $member   = core::load_model('member');
 	    $data     = $member->find($this->cookie->get('member_id'));
 		if (isset($data[$name])) return $data[$name];
 
 		$model    = get_cache('membermodel');
-		$_member  = cms::load_model($model[$data['modelid']]['tablename']);
+		$_member  = core::load_model($model[$data['modelid']]['tablename']);
 	    $_data    = $_member->find($this->cookie->get('member_id'));
 		if (isset($_data[$name])) return $_data[$name];
 	} else {

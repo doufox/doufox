@@ -28,7 +28,7 @@ class MemberController extends Admin {
 		$page     = (int)$this->get('page');
 		$page     = (!$page) ? 1 : $page;
 		$modelid  = (int)$this->get('modelid');
-	    $pagination = cms::load_class('pagination');
+	    $pagination = core::load_class('pagination');
 		$pagination->loadconfig();
 	    $where    = '1';
 	    if ($modelid) $where .= ' and modelid=' . $modelid;
@@ -59,7 +59,7 @@ class MemberController extends Admin {
 		if (empty($data)) $this->show_message('会员不存在');
 		$model  = $this->membermodel[$data['modelid']];
 		if (empty($model)) $this->show_message('会员模型不存在');
-		$info   = cms::load_model($model['tablename']);
+		$info   = core::load_model($model['tablename']);
 		$_data  = $info->find($id);
 		if ($this->isPostForm()) {
 		    $data = $this->post('data');
@@ -103,7 +103,7 @@ class MemberController extends Admin {
 		//删除模型数据
 		$table = $this->membermodel[$data['modelid']]['tablename'];
 		if ($table) {
-			$model = cms::load_model($table);
+			$model = core::load_model($table);
 			$model->delete('id=' . $id);
 		}
 
@@ -111,14 +111,14 @@ class MemberController extends Admin {
 		$form = get_cache('formmodel');
 		if ($form) {
 		    foreach ($form as $m) {
-			    $db = cms::load_model($m['tablename']);
+			    $db = core::load_model($m['tablename']);
 		        $db->delete('userid=' . $id);
 			}
 		}
 		//删除会员附件目录
 		$path = 'upload/member/' . $id . '/';
 		if (file_exists($path)) {
-		$file_list=cms::load_class('file_list');
+		$file_list=core::load_class('file_list');
 
 		$file_list->delete_dir($path);
 		}

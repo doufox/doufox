@@ -20,9 +20,10 @@ class router
         $this->path_info = strtolower(trim(str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['PATH_INFO']), '/'));
         $this->search_string = isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] ? $_SERVER['QUERY_STRING'] : $_SERVER['REQUEST_URI'];
         parse_str($this->search_string, $this->search_array);
+        $_GET = array_merge($_GET, $this->search_array);
     }
 
-    public function parse_request()
+    public function get()
     {
         $namespace = '';
         $controller = 'Index';
@@ -74,12 +75,16 @@ class router
             $controller = trim((isset($this->search_array['c']) && $this->search_array['c']) ? $this->search_array['c'] : 'Index');
             $action     = trim((isset($this->search_array['a']) && $this->search_array['a']) ? $this->search_array['a'] : 'index');
         }
-        return $this->router =  array(
-            'GET' => array_merge($_GET, $this->search_array),
-            'namespace' => strtolower($namespace),
-            'controller' => ucfirst(strtolower($controller)),
-            'action' => strtolower($action)
-        );
+        // return $this->router =  array(
+        //     'GET' => array_merge($_GET, $this->search_array),
+        //     'namespace' => strtolower($namespace),
+        //     'controller' => ucfirst(strtolower($controller)),
+        //     'action' => strtolower($action)
+        // );
+        $this->router['namespace'] = strtolower($namespace);
+        $this->router['controller'] = ucfirst(strtolower($controller));
+        $this->router['action'] = strtolower($action);
+        return $this->router;
     }
 
     private function inNameSpace($path)
@@ -156,7 +161,7 @@ class router
 // $path_url_string = isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] ? $_SERVER['QUERY_STRING'] : $_SERVER['REQUEST_URI'];
 // parse_str($path_url_string, $url_info_array);
 
-// self::$router     = cms::load_class('router')->parse_request();
+// self::$router     = core::load_class('router')->parse_request();
 // self::$namespace  = self::$router['namespace'];
 // self::$controller = self::$router['controller'];
 // self::$action     = self::$router['action'];

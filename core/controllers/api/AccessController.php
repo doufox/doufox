@@ -35,7 +35,7 @@ class AccessController extends Api
      */
     public function checkcodeAction()
     {
-        $checkcode   = cms::load_class('checkcode');
+        $checkcode   = core::load_class('checkcode');
         $width       = $this->get('width');
         $height      = $this->get('height');
         if ($width)  $checkcode->width = $width;

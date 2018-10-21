@@ -35,25 +35,35 @@ define('INSTALL_PATH', VIEW_PATH . 'install' . DS);         // 安装模块路�
 define('THEME_PATH_D', DATA_PATH . 'theme' . DS);           // 桌面端模板路径
 define('THEME_PATH_M', DATA_PATH . 'theme_mobile' . DS);    // 移动端模板路径
 
-cms::load_file(CORE_PATH . 'info.php');
-cms::load_file(CORE_PATH . 'library' . DS . 'global.function.php'); // 加载全局函数
-cms::load_class('Model', '', 0);
+core::load_file(CORE_PATH . 'info.php');
+core::load_file(CORE_PATH . 'library' . DS . 'global.function.php'); // 加载全局函数
+core::load_class('Model', '', 0);
 
 /**
  * 系统核心APP
  */
-abstract class cms
+abstract class core
 {
     public static $namespace;
     public static $controller;
     public static $action;
+    public static $config;
+    public static $router;
 
     /**
      * run application
      */
     public static function run()
     {
-        self::load_router();
+        self::$config  = self::load_config('config');
+        self::$router  = self::load_class('router');
+        // $_GET    = $request['_GET'];
+        $request = self::$router->get();
+
+        self::$namespace  = $request['namespace'];
+        self::$controller = $request['controller'];
+        self::$action     = $request['action'];
+        // self::load_router();
         self::load_theme();
         self::load_app();
     }
@@ -63,8 +73,8 @@ abstract class cms
      */
     private static function load_router()
     {
-        $router  = cms::load_class('router');
-        $request = $router->parse_request();
+        self::$router  = core::load_class('router');
+        $request = self::$router->get();
         $_GET    = $request['GET'];
         self::$namespace  = $request['namespace'];
         self::$controller = $request['controller'];
@@ -113,10 +123,9 @@ abstract class cms
      */
     public static function load_theme()
     {
-        $config = self::load_config('config');
-        define('SITE_THEME', $config['SITE_THEME']);
-        define('SITE_THEME_MOBILE', $config['SITE_THEME_MOBILE']);
-        if ($config['SITE_MOBILE'] == true && is_mobile()) {
+        define('SITE_THEME', self::$config['SITE_THEME']);
+        define('SITE_THEME_MOBILE', self::$config['SITE_THEME_MOBILE']);
+        if (self::$config['SITE_MOBILE'] == true && is_mobile()) {
             define('THEME_TYPE', 'theme_mobile'); // 当前加载的主题类型
             define('THEME_CURRENT', THEME_PATH_M);
             define('THEME_DIR', is_dir(THEME_PATH_M . SITE_THEME_MOBILE) ? SITE_THEME_MOBILE : 'default');

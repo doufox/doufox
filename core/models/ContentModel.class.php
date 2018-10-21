@@ -19,7 +19,7 @@ class ContentModel extends Model
             return $tablename . '表不存在';
         }
 
-        $table = cms::load_model($tablename); // 加载附表Model
+        $table = core::load_model($tablename); // 加载附表Model
         if (empty($data['catid'])) {
             return '请选择发布栏目';
         }
@@ -101,7 +101,7 @@ class ContentModel extends Model
         }
 
         $ext = substr(strrchr(trim($data['thumb']), '.'), 1);
-        $config = cms::load_config('config');
+        $config = core::load_config('config');
         $thumb = $data['thumb'] . '.thumb.' . $config['SITE_THUMB_WIDTH'] . 'x' . $config['SITE_THUMB_HEIGHT'] . '.' . $ext;
         if (file_exists(ROOT_PATH . $thumb)) {
             @unlink(ROOT_PATH . $thumb);

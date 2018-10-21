@@ -49,9 +49,9 @@ class mysql
     {
         $result = mysql_query($sql, $this->db_link);
         //获取当前运行的namespace、controller及action名称
-        $namespace_id = cms::get_namespace_id();
-        $controller_id = cms::get_controller_id();
-        $action_id = cms::get_action_id();
+        $namespace_id = core::get_namespace_id();
+        $controller_id = core::get_controller_id();
+        $action_id = core::get_action_id();
         $namespace_code = $namespace_id ? '[' . $namespace_id . ']' : '';
 
         return $result;

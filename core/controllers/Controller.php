@@ -43,16 +43,16 @@ abstract class Controller  {
 		if (!file_exists(DATA_PATH . 'installed')) {
 			Controller::redirect(url('install/index'));
 		}
-        $this->view					= cms::load_class('view');
-    	$this->cookie				= cms::load_class('cookie');
-        $this->session				= cms::load_class('session');
-        $this->site_config			= cms::load_config('config');
-		$this->category				= cms::load_model('category');
-		$this->content				= cms::load_model('content');
+        $this->view					= core::load_class('view');
+    	$this->cookie				= core::load_class('cookie');
+        $this->session				= core::load_class('session');
+        $this->site_config			= core::load_config('config');
+		$this->category				= core::load_model('category');
+		$this->content				= core::load_model('content');
 		$this->category_cache		= get_cache('category');
 		$this->category_dir_cache	= get_cache('category_dir');
 
-		$this->account              = cms::load_model('account');
+		$this->account              = core::load_model('account');
 		$this->account_cache		= get_cache('account');
 
 		// $userid = session::get('user_id');
@@ -64,7 +64,7 @@ abstract class Controller  {
 
 		// 载入会员系统缓存
 		if (is_dir(CONTROLLER_PATH . 'member')) {
-			$this->member       = cms::load_model('member');
+			$this->member       = core::load_model('member');
 			$this->membermodel  = get_cache('membermodel');
 			$this->memberinfo   = $this->getMember();
 		}
@@ -198,7 +198,7 @@ abstract class Controller  {
 				$member_table   = $this->membermodel[$_memberinfo['modelid']]['tablename'];
 				if ($_memberinfo && $member_table)
 				{
-				    $_member    = cms::load_model($member_table);
+				    $_member    = core::load_model($member_table);
 				    $memberdata = $_member->find($uid);
 					if ($memberdata)
 					{
@@ -231,11 +231,11 @@ abstract class Controller  {
 	* auth   字段权限（是否必填）
 	*/
     protected function getFields($fields, $data=array()) {
-	    cms::load_file(CORE_PATH . 'library' . DS .'fields.function.php');
+	    core::load_file(CORE_PATH . 'library' . DS .'fields.function.php');
 	    $data_fields = '';
 	    if (empty($fields['data'])) return false;
 	    foreach ($fields['data'] as $t) {
-		    if (cms::get_namespace_id() != 'admin' && !$t['isshow']) continue;
+		    if (core::get_namespace_id() != 'admin' && !$t['isshow']) continue;
 			if (!@in_array($t['field'], $fields['merge']) && !in_array($t['formtype'], array('merge', 'fields')) && empty($t['merge'])) {
 			    // 单独显示的字段。
 			    $data_fields .= '<tr>';
@@ -332,7 +332,7 @@ abstract class Controller  {
 			return false;
 		}
 		foreach ($fields['data'] as $t) {
-		    if (cms::get_namespace_id() != 'admin' && !$t['isshow']) continue;
+		    if (core::get_namespace_id() != 'admin' && !$t['isshow']) continue;
 			if ($t['formtype'] != 'merge' && isset($t['not_null']) && $t['not_null']) {
 				if (is_null($data[$t['field']]) || $data[$t['field']] == '')
 				{
@@ -355,7 +355,7 @@ abstract class Controller  {
      */
     protected function watermark($file) {
         if (!$this->site_config['SITE_WATERMARK']) return false;
-        $image = cms::load_class('image_lib');
+        $image = core::load_class('image_lib');
         if ($this->site_config['SITE_WATERMARK'] == 1) {
             $image->set_watermark_alpha($this->site_config['SITE_WATERMARK_ALPHA']);
             $image->make_image_watermark($file, $this->site_config['SITE_WATERMARK_POS']);

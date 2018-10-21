@@ -225,7 +225,7 @@ class view {
 		$dbcache = isset($system['cache']) ? (int)$system['cache'] : 0;
 		$where   = '';
 		$table   = isset($system['table']) && $system['table'] ? $system['table'] : 'content';
-		$db      = cms::load_model($table);
+		$db      = core::load_model($table);
 		$table   = $db->prefix . $table;
 		$table_data = $table_fields = $table_data_fields = $arrchilds = null;
 		$_table_fields = $db->get_table_fields();
@@ -250,7 +250,7 @@ class view {
 			}
 			if ($model) {
 				$table_data = $model['tablename'];
-				$db_data    = cms::load_model($table_data);
+				$db_data    = core::load_model($table_data);
 				$_table_data_fields = $db_data->get_table_fields();
 				$table_data_fields  = array_intersect($_fields, $_table_data_fields);
 				foreach ($table_data_fields as $k=>$c) {
@@ -343,7 +343,7 @@ class view {
 			$sql        = 'SELECT count(*) AS total ' . $from . ' ' . $where;
 			$count      = $db->execute($sql, false, $dbcache);
 			$total      = $count['total'];
-			$pagination = cms::load_class('pagination');
+			$pagination = core::load_class('pagination');
 			$pagination->loadconfig();
 			$start_id   = $pagesize * ($system['page'] - 1);
 			$limit      = ' LIMIT ' . $start_id . ',' . $pagesize;

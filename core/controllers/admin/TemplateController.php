@@ -114,7 +114,7 @@ class TemplateController extends Admin
 
     public function cacheAction($show = 0)
     {
-        // $file_list = cms::load_class('file_list');
+        // $file_list = core::load_class('file_list');
         // $list_desktop = $file_list->get_file_list(THEME_PATH_D);
         // $list_mobile = $file_list->get_file_list(THEME_PATH_M);
         // foreach ($list_desktop as $file_path) {
@@ -138,7 +138,7 @@ class TemplateController extends Admin
 
     public function cacheDesktopAction()
     {
-        $file_list = cms::load_class('file_list');
+        $file_list = core::load_class('file_list');
         $list_desktop = $file_list->get_file_list(THEME_PATH_D);
         foreach ($list_desktop as $file_path) {
             $dir = DATA_PATH . 'cache' . DS . 'theme_desktop'. DS . $file_path . DS;
@@ -151,7 +151,7 @@ class TemplateController extends Admin
 
     public function cacheMobileAction()
     {
-        $file_list = cms::load_class('file_list');
+        $file_list = core::load_class('file_list');
         $list_mobile = $file_list->get_file_list(THEME_PATH_M);
         foreach ($list_mobile as $file_path) {
             $dir = DATA_PATH . 'cache' . DS . 'theme_mobile'. DS . $file_path . DS;

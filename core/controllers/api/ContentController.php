@@ -25,7 +25,7 @@ class ContentController extends Api
 
 		// 读取数据库后台不会根据排序显示
 		// $catlist =  $this->category->findAll('catid,typeid,parentid,child,http,catname');
-		$tree = cms::load_class('tree');
+		$tree = core::load_class('tree');
 		$categorys = array();
 		if(!empty($catlist)) {
 			foreach($catlist as $r) {
@@ -84,7 +84,7 @@ class ContentController extends Api
 		$data        = array('catid'=>$this->get('catid'));
 		$model       = $model[$modelid];
 
-		$tree =  cms::load_class('tree');
+		$tree =  core::load_class('tree');
 		$tree->icon = array(' ','  ','  ');
 		$tree->nbsp = '&nbsp;';
 		$categorys = array();
@@ -129,14 +129,14 @@ class ContentController extends Api
 	        $this->show_message('修改成功', 1);
 	    }
 	    //附表内容
-	    $table       = cms::load_model($model[$modelid]['tablename']);
+	    $table       = core::load_model($model[$modelid]['tablename']);
 	    $table_data  = $table->find($id);
 	    if ($table_data) $data = array_merge($data, $table_data); //合并主表和附表
 	    //自定义字段
 	    $data_fields = $this->getFields($fields, $data);
 		$backurl      = HTTP_REFERER;
 		$model        = $model[$modelid];
-		$tree =  cms::load_class('tree');
+		$tree =  core::load_class('tree');
 		$tree->icon = array(' ','  ','  ');
 		$tree->nbsp = '&nbsp;';
 		$categorys = array();
@@ -282,7 +282,7 @@ class ContentController extends Api
 				exit;
 			}
 		} else {
-		$tree =  cms::load_class('tree');
+		$tree =  core::load_class('tree');
 		$tree->icon = array(' ','  |-','  |-');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		$categorys = array();

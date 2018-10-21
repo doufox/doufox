@@ -12,7 +12,7 @@ class CreatehtmlController extends Admin
             $this->show_message('请开启系统生成静态功能', 2, url('admin/index/config', array('type' => 5)));
         }
 
-        $this->tree = cms::load_class('tree');
+        $this->tree = core::load_class('tree');
     }
 
     /**
@@ -21,9 +21,9 @@ class CreatehtmlController extends Admin
     public function indexAction()
     {
         ob_start();
-        cms::load_file(CONTROLLER_PATH . 'IndexController.php');
-        $app = new IndexController();
-        $app->indexAction();
+        core::load_file(CONTROLLER_PATH . 'IndexController.php');
+        $c = new IndexController();
+        $c->indexAction();
         if (!file_put_contents(ROOT_PATH . 'index.html', ob_get_clean(), LOCK_EX)) {
             $this->show_message($url . '生成失败！', 2, '');
         }
@@ -47,7 +47,7 @@ class CreatehtmlController extends Admin
         $show = '请选择要生成的栏目页';
 	    $catdata = $this->category->order('listorder ASC, catid ASC')->select();
 	    $catid = (int)$this->get('catid');
-		$tree = cms::load_class('tree');
+		$tree = core::load_class('tree');
 		$tree->icon = array(' ','├','   ∟');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		$category_select = array();
@@ -78,7 +78,7 @@ class CreatehtmlController extends Admin
         } else if ($cat['typeid'] == 2) { //单页面
             $this->create_category_html($cat);
         } else {
-            $db = cms::load_model('content');
+            $db = core::load_model('content');
             // $total = $this->db->set_table_name('content')->count('`status`!=0 AND `catid` IN (' . $cat['allchildids'] . ')');
             $total = $db->count('`status`!=0 AND `catid` IN (' . $cat['allchildids'] . ')');
             $pagesize = $cat['pagesize'];
@@ -121,7 +121,7 @@ class CreatehtmlController extends Admin
             } elseif ($cat['typeid'] == 2) {
                 $this->create_category_html($cat);
             } elseif ($cat['typeid'] == 1) {
-                $db = cms::load_model('content');
+                $db = core::load_model('content');
                 // $total = $this->db->set_table_name('content')->count('`status`!=0 AND `catid` IN (' . $cat['allchildids'] . ')');
                 $total = $db->count('`status`!=0 AND `catid` IN (' . $cat['allchildids'] . ')');
                 $pagesize = $cat['pagesize'];
@@ -175,7 +175,7 @@ class CreatehtmlController extends Admin
         $show = '按照栏目生成内容页';
         $catdata = $this->category->order('listorder ASC, catid ASC')->select();
 	    $catid = (int)$this->get('catid');
-		$tree = cms::load_class('tree');
+		$tree = core::load_class('tree');
 		$tree->icon = array(' ','├','   ∟');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		$category_select = array();
@@ -218,7 +218,7 @@ class CreatehtmlController extends Admin
      */
     private function show_skip($cats, $page, $time)
     {
-        $db = cms::load_model('content');
+        $db = core::load_model('content');
         if ($time) {
             $a = $time * 3600;
             $b = time() - $a;
@@ -271,9 +271,9 @@ class CreatehtmlController extends Admin
         ob_start();
         $_GET['catid'] = $cat['catid'];
         $_GET['page'] = $page;
-        cms::load_file(CONTROLLER_PATH . 'IndexController.php');
-        $app = new IndexController();
-        $app->listAction();
+        core::load_file(CONTROLLER_PATH . 'IndexController.php');
+        $c = new IndexController();
+        $c->listAction();
         if (!file_put_contents($htmlfile, ob_get_clean(), LOCK_EX)) {
             $this->show_message($url . '生成失败！', 2, '');
         }
@@ -307,7 +307,7 @@ class CreatehtmlController extends Admin
         $id = $content['id'];
         //以下代码和首页部分代码无区别 唯一的区别就是少了一层主表数据查询
         $category = $this->category_cache[$content['catid']];
-        $db = cms::load_model($category['tablename']);
+        $db = core::load_model($category['tablename']);
         $content_add = $db->find($id);
         $content_add = $this->handle_fields($this->content_model[$content['modelid']]['fields'], $content_add);
         $content = $content_add ? array_merge($content, $content_add) : $content;
@@ -316,7 +316,7 @@ class CreatehtmlController extends Admin
             $pagenumber = count($pdata);
             $content['content'] = $pdata[$content['page'] - 1];
             $pageurl = $this->view->get_show_url($content, 1);
-            $pagelist = cms::load_class('pagination');
+            $pagelist = core::load_class('pagination');
             $pagelist = $pagelist->total($pagenumber)->url($pageurl)->num(1)->hide()->page($content['page'])->output();
             $this->view->assign('pagelist', $pagelist);
         }

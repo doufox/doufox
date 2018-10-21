@@ -37,7 +37,7 @@ class DatabaseController extends Admin
      */
     public function importAction()
     {
-        $file_list = cms::load_class('file_list');
+        $file_list = core::load_class('file_list');
 
         $dir = DATA_PATH . 'bakup' . DS;
         $path = $this->get('path');
