@@ -4,8 +4,8 @@ top.document.getElementById('position').innerHTML = '区块管理';
 </script>
 <div class="subnav">
 	<div class="content-menu">
-		<a href="<?php echo url('admin/block'); ?>" class="on"><em>全部区块</em></a>
-		<a href="<?php echo url('admin/block/add'); ?>" class="add"><em>添加区块</em></a>
+		<a href="<?php echo url('admin/block'); ?>" class="on">全部区块</a>
+		<a href="<?php echo url('admin/block/add'); ?>" class="add">添加区块</a>
 	</div>
 	<div class="bk10"></div>
 	<div class="table-list">

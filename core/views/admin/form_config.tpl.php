@@ -5,9 +5,9 @@ top.document.getElementById('position').innerHTML = '表单配置';
 
 <div class="subnav">
 	<div class="content-menu">
-<?php if (!$join) { ?>	<a href="<?php echo url('index/form',array('modelid'=>$modelid)); ?>" class="add"  target="_blank"><em>发布内容</em></a><?php };?>
-		<a href="<?php echo url('admin/form/list',array('modelid'=>$modelid,'cid'=>$cid)); ?>" class="on"><em>信息管理</em></a>
-		<a href="<?php echo url('admin/form/config',array('modelid'=>$modelid, 'cid'=>$cid)); ?>" class="on"><em>表单设置</em></a>
+<?php if (!$join) { ?>	<a href="<?php echo url('index/form',array('modelid'=>$modelid)); ?>" class="add"  target="_blank">发布内容</a><?php };?>
+		<a href="<?php echo url('admin/form/list',array('modelid'=>$modelid,'cid'=>$cid)); ?>" class="on">信息管理</a>
+		<a href="<?php echo url('admin/form/config',array('modelid'=>$modelid, 'cid'=>$cid)); ?>" class="on">表单设置</a>
 	</div>
 	<div class="bk10"></div>
 	<div class="table-list">

@@ -1,12 +1,13 @@
 <?php include $this->admin_tpl('header');?>
+
 <script type="text/javascript">
-top.document.getElementById('position').innerHTML = '添加模型';
+    top.document.getElementById('position').innerHTML = '添加模型';
 </script>
 
 <div class="subnav">
 	<div class="content-menu">
-		<a href="<?php echo url('admin/model/index',  array('typeid'=>$typeid)); ?>" class="on"><em>模型管理</em></a>
-		<a href="<?php echo url('admin/model/add',    array('typeid'=>$typeid)); ?>" class="add"><em>添加模型</em></a>
+		<a href="<?php echo url('admin/model/index', array('typeid'=>$typeid)); ?>" class="on">模型管理</a>
+		<a href="<?php echo url('admin/model/add',   array('typeid'=>$typeid)); ?>" class="add">添加模型</a>
 	</div>
 		<div class="bk10"></div>
 
@@ -33,7 +34,7 @@ top.document.getElementById('position').innerHTML = '添加模型';
 					<th>关联表单：</th>
 					<td>
 					<?php if (is_array($formmodel)) { foreach ($formmodel as $t) { ?>
-					<input type="checkbox" value="<?php echo $t['modelid']; ?>" name="join[]" <?php if (in_array($t['modelid'], $join)) { ?>checked=""<?php } else {  if (in_array($t['modelid'], $joindata)) { ?>disabled=""<?php }  } ?> /> <?php echo $t['modelname']; ?>&nbsp;&nbsp;
+					<label><input type="checkbox" value="<?php echo $t['modelid']; ?>" name="join[]" <?php if (in_array($t['modelid'], $join)) { ?>checked=""<?php } else {  if (in_array($t['modelid'], $joindata)) { ?>disabled=""<?php }  } ?>/><?php echo $t['modelname']; ?></label>&nbsp;&nbsp;
 					<?php } } ?>
 					<div class="show-tips">用于拓展内容（如评论，留言等）。</div>
 					</td>
@@ -58,12 +59,7 @@ top.document.getElementById('position').innerHTML = '添加模型';
 				</tr>
 				</tbody>
 				</table>
-
-				
-
-				
 				<div class="bk15"></div>
-				
 		</form>
 </div>
 </body>

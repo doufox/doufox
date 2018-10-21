@@ -3,33 +3,36 @@
 class ModelController extends Admin {
     
     protected $_model;
-	protected $modeltype; //模型类型
-	protected $typeid;
+	protected $modelType; // 模型类型
+    protected $typeid;
+    protected $modelTypeName;
     
     public function __construct() {
 		parent::__construct();
-		$this->modeltype = array(
-		    1 => 'content', //内容表模型
-			2 => 'member',  //会员表模型
-			3 => 'form',    //表单表模型
+		$this->modelType = array(
+		    1 => 'content', // 内容表模型
+			2 => 'member',  // 会员表模型
+			3 => 'form',    // 表单表模型
 		);
+        $this->modelTypeName = array(
+            1 => '内容模型',
+            2 => '会员模型',
+            3 => '表单模型'
+        );
 		$this->_model = core::load_model('model');
 	    $this->typeid = $this->get('typeid') ? $this->get('typeid') : 1;
-		if (!isset($this->modeltype[$this->typeid])) $this->show_message('模型类型不存在');
-
+		if (!isset($this->modelType[$this->typeid])) $this->show_message('模型类型不存在');
 	}
 
 	public function indexAction() {
 		    $typeid    = $this->typeid;
-			$modeltype = $this->modeltype;
-			$typename  = array(1 => '内容模型',2 => '会员模型',3 => '表单模型',);
-			$list  = $this->_model->where('typeid=' . $this->typeid)->select();
+			$modeltype = $this->modelType;
+            $typename  = $this->modelTypeName;
+            $modelname = $typename[$typeid];
+			$list  = $this->_model->where('typeid=' . $typeid)->select();
 			include $this->admin_tpl('model_list');
 	}
-	
-	/*
-	 * 添加模型
-	 */
+
 	public function addAction() {
 	    if ($this->isPostForm()) {
 	        $tablename = $this->post('tablename');
@@ -38,7 +41,7 @@ class ModelController extends Admin {
 	        $category  = $this->post('categorytpl') ? $this->post('categorytpl') : ($this->typeid == 3 ? 'form.html' : 'category_' . $tablename . '.html') ;
 	        $list      = $this->post('listtpl')     ? $this->post('listtpl') : 'list_' . $tablename . '.html';
 	        $show      = $this->post('showtpl')     ? $this->post('showtpl') : 'show_' . $tablename . '.html';
-			$tablename = $this->modeltype[$this->typeid]. '_' . $tablename;
+			$tablename = $this->modelType[$this->typeid]. '_' . $tablename;
 	        $data      = array(
 	            'tablename'   => $tablename,
 	            'modelname'   => $this->post('modelname'),
@@ -69,20 +72,17 @@ class ModelController extends Admin {
 			    if (!empty($t['joinid'])) $jdata[] = $t['modelid'];
 			}
 		}
-		
+
 		$typeid    = $this->typeid;
-		$modeltype = $this->modeltype;
-		$typename  = array(1 => '内容模型',2 => '会员模型',3 => '表单模型',);
+		$modeltype = $this->modelType;
+        $typename  = $this->modelTypeName;
 		$join      = array();
 		$formmodel = $fdata;
 		$joindata  = $jdata;
 
 	    include $this->admin_tpl('model_add');
 	}
-	
-	/*
-	 * 修改模型
-	 */
+
     public function editAction() {
 	    if ($this->isPostForm()) {
 	        $modelid  = (int)$this->post('modelid');
@@ -120,30 +120,26 @@ class ModelController extends Admin {
 				if ($t['joinid'] == $modelid) $join[]  = $t['modelid'];
 			}
 		}
-		    $typeid    = $this->typeid;
-			$modeltype = $this->modeltype;
-			$typename  = array(1 => '内容模型',2 => '会员模型',3 => '表单模型',);
-
-			$joindata  = $jdata;
-		    $formmodel = $fdata;
+        $typeid    = $this->typeid;
+        $modeltype = $this->modelType;
+        $typename  = $this->modelTypeName;
+        $joindata  = $jdata;
+        $formmodel = $fdata;
 	    include $this->admin_tpl('model_add');
 	}
-	
-	/*
-	 * 删除模型
-	 */
+
 	public function delAction() {
 	    $mid  = (int)$this->get('modelid');
 	    $data = $this->_model->find($mid);
 	    if (!$data) $this->show_message('该模型不存在！');
 	    $this->_model->del($data);
-		$name = $this->typeid == 1 ? 'model' : $this->modeltype[$this->typeid] . 'model';
+		$name = $this->typeid == 1 ? 'model' : $this->modelType[$this->typeid] . 'model';
 		$data = get_cache($name);
 		unset($data[$mid]);
 		set_cache($name, $data);
 	    $this->show_message($this->getCacheCode('model') . '删除成功', 1, url('admin/model/index/', array('typeid'=>$this->typeid)));
 	}
-	
+
 	/**
 	 * 字段管理
 	 */
@@ -164,8 +160,8 @@ class ModelController extends Admin {
 	    }
 		$setting = string2array($data['setting']);
 		$typeid    = $this->typeid;
-		$modeltype = $this->modeltype;
-		$typename  = array(1 => '内容模型',2 => '会员模型',3 => '表单模型',);
+		$modeltype = $this->modelType;
+		$typename  = $this->modelTypeName;
 		$list    = $field->where('modelid=' . $modelid)->order('listorder ASC')->select();
 		$content = $setting['default'];
 		
@@ -181,7 +177,7 @@ class ModelController extends Admin {
 	    $field      = core::load_model('model_field');
 	    if (!$model_data) $this->show_message('该模型不存在！');
 	    if ($this->isPostForm()) {
-	        if ($this->typeid != 3) $table = core::load_model($this->modeltype[$this->typeid]);
+	        if ($this->typeid != 3) $table = core::load_model($this->modelType[$this->typeid]);
 	        $table_data = core::load_model($model_data['tablename']);
 	        //主表和附表字段集合
 	        $t_fields   = $this->typeid == 3 ? array() : $table->get_fields();
@@ -229,8 +225,8 @@ class ModelController extends Admin {
 	    $formtype = formtype();
 		
 	    $typeid    = $this->typeid;
-	    $modeltype = $this->modeltype;
-	    $typename  = array(1 => '内容模型',2 => '会员模型',3 => '表单模型',);
+	    $modeltype = $this->modelType;
+	    $typename  = $this->modelTypeName;
 	    $merge      = $field->where('modelid=' . $modelid)->where('formtype=?', 'fields')->select();
 	    include $this->admin_tpl('model_addfield');
 	}
@@ -275,9 +271,9 @@ class ModelController extends Admin {
 	    $formtype = formtype();
 		
 	    $typeid    = $this->typeid;
-	    $modeltype = $this->modeltype;
-	    $typename  = array(1 => '内容模型',2 => '会员模型',3 => '表单模型',);
-	    $merge      = $field->where('modelid=' . $modelid)->where('formtype=?', 'fields')->select();
+	    $modeltype = $this->modelType;
+	    $typename  = $this->modelTypeName;
+	    $merge     = $field->where('modelid=' . $modelid)->where('formtype=?', 'fields')->select();
 
 	    include $this->admin_tpl('model_addfield');
 	}
@@ -299,16 +295,15 @@ class ModelController extends Admin {
 			$this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/fields/', array('typeid'=>$this->typeid, 'modelid'=>$modelid)));
 	    }
 
-		    $typeid    = $this->typeid;
-			$modeltype = $this->modeltype;
-			$typename  = array(1 => '内容模型',2 => '会员模型',3 => '表单模型',);
-
-			$name    = $data['modelname'];
-	        $data    = $field;
+        $typeid    = $this->typeid;
+        $modeltype = $this->modelType;
+        $typename  = $this->modelTypeName;
+        $name      = $data['modelname'];
+        $data      = $field;
 
 	    include $this->admin_tpl('model_ajaxedit');
 	}
-	
+
 	/**
 	 * 动态加载字段类型配置信息
 	 */
@@ -318,9 +313,8 @@ class ModelController extends Admin {
 	    $func = 'form_' . $type;
 	    if (!function_exists($func)) exit('');
 	    eval('echo ' . $func . '();');
-	    
 	}
-	
+
 	/**
 	 * 禁用/启用字段
 	 */
@@ -333,7 +327,7 @@ class ModelController extends Admin {
 	    $field->update(array('disabled'=>$disable), 'fieldid=' . $fieldid);
 	    $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/fields/', array('typeid'=>$this->typeid, 'modelid'=>$data['modelid'])));
 	}
-	
+
 	/**
 	 * 删除字段
 	 */
@@ -349,8 +343,7 @@ class ModelController extends Admin {
 	        $this->show_message('删除失败');
 	    }
 	}
-	
-	
+
 	/**
 	 * 更新模型缓存
 	 * array(
@@ -378,7 +371,7 @@ class ModelController extends Admin {
 		$file_list->delete_dir($this->_model->cache_dir);
 		if (!file_exists($this->_model->cache_dir)) mkdir($this->_model->cache_dir, 0777, true);
 	    $field = core::load_model('model_field');
-		foreach ($this->modeltype as $typeid=>$c) {
+		foreach ($this->modelType as $typeid=>$c) {
 	        $model = $this->_model->where('typeid=' . $typeid)->select();
 	        $data  = array();
 			foreach ($model as $t) {
@@ -441,7 +434,7 @@ class ModelController extends Admin {
 		$setting = string2array($data['setting']);
 	    $setting['disable'] = $setting['disable'] == 1 ? 0 : 1;
 	    $this->_model->update(array('setting'=>array2string($setting)), 'modelid=' . $modelid);
-	    $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/index/', array('typeid'=>$this->typeid)));
+	    $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/index', array('typeid'=>$this->typeid)));
 	}
 
 }

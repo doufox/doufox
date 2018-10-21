@@ -12,12 +12,12 @@
 </script>
 <div class="subnav">
 	<div class="content-menu">
-		<a href="<?php echo url('admin/content/index', array('catid'=>$catid, )); ?>" class="on"><em>全部内容</em></a>
-		<a href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>1)); ?>" class="on"><em>正常(<?php echo $count[1]; ?>)</em></a>
-		<a href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>2)); ?>" class="on"><em>头条(<?php echo $count[2]; ?>)</em></a>
-		<a href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>3)); ?>" class="on"><em>推荐(<?php echo $count[3]; ?>)</em></a>
-		<a href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>0)); ?>" class="on"><em>未审核(<?php echo $count[0]; ?>)</em></a>
-		<a href="<?php echo url('admin/content/add',   array('catid'=>$catid, 'modelid'=>$modelid)); ?>" class="add"><em>发布内容</em></a>
+		<a href="<?php echo url('admin/content/index', array('catid'=>$catid, )); ?>" class="on">全部内容</a>
+		<a href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>1)); ?>" class="on">正常(<?php echo $count[1]; ?>)</a>
+		<a href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>2)); ?>" class="on">头条(<?php echo $count[2]; ?>)</a>
+		<a href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>3)); ?>" class="on">推荐(<?php echo $count[3]; ?>)</a>
+		<a href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>0)); ?>" class="on">未审核(<?php echo $count[0]; ?>)</a>
+		<a href="<?php echo url('admin/content/add',   array('catid'=>$catid, 'modelid'=>$modelid)); ?>" class="add">发布内容</a>
 	</div>
 	<div class="bk10"></div>
 

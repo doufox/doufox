@@ -13,9 +13,9 @@ $(document).keyup(function(event){
 
 <div class="subnav">
 	<div class="content-menu">
-		<a href="<?php echo url('admin/model/index', array('typeid'=>$typeid)); ?>"><em>模型管理</em></a><span>|</span>
-		<a href="<?php echo url('admin/model/fields/', array('typeid'=>$typeid, 'modelid'=>$modelid)); ?>"><em>字段管理</em></a><span>|</span>
-		<a href="javascript:;" class="on"><em>编辑</em></a><span>|</span>
+		<a href="<?php echo url('admin/model/index', array('typeid'=>$typeid)); ?>">模型管理</a><span>|</span>
+		<a href="<?php echo url('admin/model/fields/', array('typeid'=>$typeid, 'modelid'=>$modelid)); ?>">字段管理</a><span>|</span>
+		<a href="javascript:;" class="on">编辑</a><span>|</span>
 	</div>
 	<div class="bk10"></div>
 	<div class="table_form">

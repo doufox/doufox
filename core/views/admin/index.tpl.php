@@ -21,7 +21,7 @@
 <body>
 <?php include $this->admin_tpl('head');?>
 
-<div id="main">
+<div class="main">
     <div id="left">
         <div class="left-head">
             <span style="float:right;">
@@ -63,10 +63,10 @@
     }
     window.onresize();
 
-    function _open_url(id, targetUrl) {
+    function _open_url(id, url) {
         var title = $("#M_" + id).find('a').html();
         document.getElementById('position').innerHTML = title
-        document.getElementById('rightMain').src = targetUrl
+        document.getElementById('rightMain').src = url
         $('.focused').removeClass("focused");
         $('#M_' + id).addClass("focused");
     }

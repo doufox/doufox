@@ -12,6 +12,11 @@ function ajaxemail() {
 }
 </script>
 <div class="subnav">
+	<div class="content-menu">
+		<a href="<?php echo url('admin/model',array('typeid'=>2)); ?>" class="add">后台添加</a>
+		<a href="<?php echo url('member'); ?>" class="add" target="_blank">前台注册</a>
+		<a href="<?php echo url('admin/model',array('typeid'=>2)); ?>"  class="on">会员模型</a>
+	</div>
 	<div class="table_form">
 		<form method="post" action="" id="myform" name="myform">
 		<table width="100%" class="table_form ">

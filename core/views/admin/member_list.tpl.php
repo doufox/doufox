@@ -14,8 +14,9 @@ function setC() {
 </script>
 <div class="subnav">
 	<div class="content-menu">
-		<a href="<?php echo url('member'); ?>"   class="add" target="_blank"><em>注册会员</em></a>
-		<a href="<?php echo url('admin/model',array('typeid'=>2)); ?>"  class="on"><em>会员模型</em></a>
+		<a href="<?php echo url('admin/member'); ?>" class="on">会员管理</a>
+		<a href="<?php echo url('member'); ?>" class="add" target="_blank">注册会员</a>
+		<a href="<?php echo url('admin/model',array('typeid'=>2)); ?>"  class="on">会员模型</a>
 	</div>
 	<div class="bk10"></div>
 	<div class="table-list">

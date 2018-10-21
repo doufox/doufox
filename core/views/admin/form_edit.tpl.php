@@ -5,7 +5,7 @@ top.document.getElementById('position').innerHTML = '表单信息';
 
 <div class="subnav">
 	<div class="content-menu">
-		<a href="<?php echo url('admin/form/list',array('modelid'=>$modelid,'cid'=>$cid)); ?>" class="on"><em>返回列表</em></a>
+		<a href="<?php echo url('admin/form/list',array('modelid'=>$modelid,'cid'=>$cid)); ?>" class="on">返回列表</a>
 	</div>
 	<div class="bk10"></div> 
 	<div class="table_form">

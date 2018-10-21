@@ -6,9 +6,9 @@ top.document.getElementById('position').innerHTML = '模型字段管理';
 <div class="subnav">
 <form action="" method="post">
 	<div class="content-menu">
-		<a href="<?php echo url('admin/model/index',     array('typeid'=>$typeid)); ?>" class="on"><em>模型管理</em></a>
-		<a href="<?php echo url('admin/model/fields/', array('typeid'=>$typeid, 'modelid'=>$modelid)); ?>" class="on"><em>字段管理</em></a>
-		<a href="<?php echo url('admin/model/addfield/', array('typeid'=>$typeid, 'modelid'=>$modelid)); ?>" class="add"><em>添加字段</em></a>
+		<a href="<?php echo url('admin/model/index', array('typeid'=>$typeid)); ?>" class="on">模型管理</a>
+		<a href="<?php echo url('admin/model/fields', array('typeid'=>$typeid, 'modelid'=>$modelid)); ?>" class="on">字段管理</a>
+		<a href="<?php echo url('admin/model/addfield', array('typeid'=>$typeid, 'modelid'=>$modelid)); ?>" class="add">添加字段</a>
 	</div>
 	<div class="bk10"></div>
 	<div class="table-list">

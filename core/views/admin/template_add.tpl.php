@@ -52,9 +52,9 @@ function positionLineObj(obj,ta)
 </script>
 <div class="subnav">
 	<div class="content-menu">
-		<a href="<?php echo url('admin/template/index')?>" class="on"><em>模板管理</em></a>
-		<a href="<?php echo url('admin/template/add', array('dir'=>$dir))?>"  class="add"><em>添加模板</em></a>
-		<a href="<?php echo url('admin/template/cache')?>"  class="on"><em>更新缓存</em></a>
+		<a href="<?php echo url('admin/template/index')?>" class="on">模板管理</a>
+		<a href="<?php echo url('admin/template/add', array('dir'=>$dir))?>"  class="add">添加模板</a>
+		<a href="<?php echo url('admin/template/cache')?>"  class="on">更新缓存</a>
 	</div>
 	<div class="bk10"></div>
 	<div class="table_form">

@@ -4,7 +4,7 @@ top.document.getElementById('position').innerHTML = '更新内容地址';
 </script>
 <div class="subnav">
 	<div class="content-menu">
-		<a href="<?php echo url('admin/content/updateurl'); ?>" class="on"><em>更新内容地址</em></a>
+		<a href="<?php echo url('admin/content/updateurl'); ?>" class="on">更新内容地址</a>
 	</div>
 	<div class="bk10"></div>
 	<div class="table_form">

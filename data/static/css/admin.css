@@ -124,6 +124,13 @@ select, input, textarea {
     outline: none;
 }
 
+input[readonly],
+input[disabled],
+select[disabled] {
+    background-image: none;
+    background-color: #ddd;
+}
+
 /*通用样式*/
 .hidden {
     display: none;
@@ -430,12 +437,6 @@ body fieldset.blue legend {
 .content-menu a:hover {
     color: #fff;
     background-color: #00f;
-}
-
-.content-menu a em {
-    display: inline-block;
-    display: -moz-inline-stack;
-    zoom: 1; *display: inline;
 }
 
 .content-menu a.add {

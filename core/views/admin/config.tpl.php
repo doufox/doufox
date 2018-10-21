@@ -8,7 +8,7 @@
                 <ul class="tabBut cu-li">
                     <li onClick="SwapTab('setting','on','',7,1);" id="tab_setting_1" class="<?php if ($type==1) { ?>on<?php } ?>">系统配置</li>
                     <li onClick="SwapTab('setting','on','',7,2);" id="tab_setting_2" class="<?php if ($type==2) { ?>on<?php } ?>">水印设置</li>
-                    <li onClick="SwapTab('setting','on','',7,3);" id="tab_setting_3" class="<?php if ($type==3) { ?>on<?php } ?>">帐号配置</li>
+                    <li onClick="SwapTab('setting','on','',7,3);" id="tab_setting_3" class="<?php if ($type==3) { ?>on<?php } ?>">暂无配置</li>
                     <li onClick="SwapTab('setting','on','',7,4);" id="tab_setting_4" class="<?php if ($type==4) { ?>on<?php } ?>">会员配置</li>
                     <li onClick="SwapTab('setting','on','',7,5);" id="tab_setting_5" class="<?php if ($type==5) { ?>on<?php } ?>">URL配置</li>
                     <li onClick="SwapTab('setting','on','',7,6);" id="tab_setting_6" class="<?php if ($type==6) { ?>on<?php } ?>">微信配置</li>
@@ -36,18 +36,14 @@
                         <tr>
                             <th>移动端主题样式： </th>
                             <td>
-                                <?php if ($data['SITE_MOBILE'] == true) { ?>
-                                <select name="data[SITE_THEME_MOBILE]">
+                                <select class="config-theme-m" name="data[SITE_THEME_MOBILE]" <?php if ($data['SITE_MOBILE'] !== true) { echo 'disabled'; }?>>
                                     <?php if (is_array($theme_mobile)) { foreach ($theme_mobile as $t) { if (is_dir(THEME_PATH_M . $t)) { ?>
                                     <option value="<?php echo $t; ?>" <?php if ($data['SITE_THEME_MOBILE']==$t) { ?>selected<?php } ?>><?php echo $t; ?></option>
                                     <?php } } } ?>
-                                    <!-- <option value="mobile" selected>默认模板，功能设计中</option>
-                                    <option value="simple">简洁风格</option> -->
                                 </select>
-                                <?php } ?>
-                                <label><input name="data[SITE_MOBILE]" type="radio" value="true" <?php if ($data['SITE_MOBILE']==true) { ?>checked<?php } ?> /> 打开</label>
+                                <label><input name="data[SITE_MOBILE]" type="radio" value="true" <?php if ($data['SITE_MOBILE']==true) { ?>checked<?php } ?> onClick="$('.config-theme-m').attr('disabled', false);" />打开</label>
                                 &nbsp;&nbsp;&nbsp;
-                                <label><input name="data[SITE_MOBILE]" type="radio" value="false" <?php if (empty($data['SITE_MOBILE'])) { ?>checked<?php } ?> /> 关闭</label>
+                                <label><input name="data[SITE_MOBILE]" type="radio" value="false" <?php if (empty($data['SITE_MOBILE'])) { ?>checked<?php } ?>  onClick="$('.config-theme-m').attr('disabled', true);"/>关闭</label>
                                 <div class="show-tips"><?php echo $configTips['SITE_MOBILE']; ?></div>
                             </td>
                         </tr>
@@ -86,11 +82,11 @@
                         <tr>
                             <th width="100">水印类型： </th>
                             <td>
-                                <label><input name="data[SITE_WATERMARK]" type="radio" value="1" <?php if ($data['SITE_WATERMARK']==1) { ?>checked<?php } ?> onClick="setSateType(1)"> 图片水印</label>
+                                <label><input name="data[SITE_WATERMARK]" type="radio" value="1" <?php if ($data['SITE_WATERMARK']==1) { ?>checked<?php } ?> onClick="setSateType(1)">图片水印</label>
                                 &nbsp;&nbsp;&nbsp;
-                                <label><input name="data[SITE_WATERMARK]" type="radio" value="2" <?php if ($data['SITE_WATERMARK']==2) { ?>checked<?php } ?> onClick="setSateType(2)"> 文字水印</label>
+                                <label><input name="data[SITE_WATERMARK]" type="radio" value="2" <?php if ($data['SITE_WATERMARK']==2) { ?>checked<?php } ?> onClick="setSateType(2)">文字水印</label>
                                 &nbsp;&nbsp;&nbsp;
-                                <label><input name="data[SITE_WATERMARK]" type="radio" value="0" <?php if ($data['SITE_WATERMARK']==0) { ?>checked<?php } ?> onClick="setSateType(0)"> 关闭</label>
+                                <label><input name="data[SITE_WATERMARK]" type="radio" value="0" <?php if ($data['SITE_WATERMARK']==0) { ?>checked<?php } ?> onClick="setSateType(0)">关闭</label>
                         </td>
                         </tr>
                         <tbody id="w_0">
@@ -114,19 +110,19 @@
                                 <td>
                                     <table>
                                         <tr>
-                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==1) { ?>checked=""<?php } ?> value="1" name="data[SITE_WATERMARK_POS]"> 顶部居左</label></td>
-                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==2) { ?>checked=""<?php } ?> value="2" name="data[SITE_WATERMARK_POS]"> 顶部居中</label></td>
-                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==3) { ?>checked=""<?php } ?> value="3" name="data[SITE_WATERMARK_POS]"> 顶部居右</label></td>
+                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==1) { ?>checked=""<?php } ?> value="1" name="data[SITE_WATERMARK_POS]">顶部居左</label></td>
+                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==2) { ?>checked=""<?php } ?> value="2" name="data[SITE_WATERMARK_POS]">顶部居中</label></td>
+                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==3) { ?>checked=""<?php } ?> value="3" name="data[SITE_WATERMARK_POS]">顶部居右</label></td>
                                         </tr>
                                         <tr>
-                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==4) { ?>checked=""<?php } ?> value="4" name="data[SITE_WATERMARK_POS]"> 中部居左</label></td>
-                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==5) { ?>checked=""<?php } ?> value="5" name="data[SITE_WATERMARK_POS]"> 中部居中</label></td>
-                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==6) { ?>checked=""<?php } ?> value="6" name="data[SITE_WATERMARK_POS]"> 中部居右</label></td>
+                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==4) { ?>checked=""<?php } ?> value="4" name="data[SITE_WATERMARK_POS]">中部居左</label></td>
+                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==5) { ?>checked=""<?php } ?> value="5" name="data[SITE_WATERMARK_POS]">中部居中</label></td>
+                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==6) { ?>checked=""<?php } ?> value="6" name="data[SITE_WATERMARK_POS]">中部居右</label></td>
                                         </tr>
                                         <tr>
-                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==7) { ?>checked=""<?php } ?> value="7" name="data[SITE_WATERMARK_POS]"> 底部居左</label></td>
-                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==8) { ?>checked=""<?php } ?> value="8" name="data[SITE_WATERMARK_POS]"> 底部居中</label></td>
-                                            <td><label><input type="radio" <?php if (empty($data['SITE_WATERMARK_POS'])) { ?>checked=""<?php } ?> value="" name="data[SITE_WATERMARK_POS]"> 底部居右</label></td>
+                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==7) { ?>checked=""<?php } ?> value="7" name="data[SITE_WATERMARK_POS]">底部居左</label></td>
+                                            <td><label><input type="radio" <?php if ($data['SITE_WATERMARK_POS']==8) { ?>checked=""<?php } ?> value="8" name="data[SITE_WATERMARK_POS]">底部居中</label></td>
+                                            <td><label><input type="radio" <?php if (empty($data['SITE_WATERMARK_POS'])) { ?>checked=""<?php } ?> value="" name="data[SITE_WATERMARK_POS]">底部居右</label></td>
                                         </tr>
                                     </table>
                                 </td>
@@ -163,7 +159,8 @@
                 </div>
 
                 <div class="contentList pad-10 hidden" id="div_setting_3" style="display: none;">
-                    <table width="100%" class="table_form">
+                    <div>暂无</div>
+                    <!-- <table width="100%" class="table_form">
                         <tr>
                             <th width="100">管理员帐号： </th>
                             <td><input class="input-text" type="text" name="admin[ADMIN_NAME]" value="<?php echo $admin['ADMIN_NAME']; ?>" size="30"/><div class="show-tips">后台帐号管理员</div></td>
@@ -172,7 +169,7 @@
                             <th>管理员密码： </th>
                             <td><input class="input-text" type="text" name="admin[ADMIN_PASS]" value="" size="30"/><div class="show-tips">如果不修改请留空</div></td>
                         </tr>
-                    </table>
+                    </table> -->
                 </div>
 
                 <div class="contentList pad-10 hidden" id="div_setting_4" style="display: none;" >
@@ -188,34 +185,34 @@
                     <tr>
                         <th>新会员注册： </th>
                         <td>
-                            <label><input name="data[MEMBER_REGISTER]" type="radio" value="1" <?php if ($data['MEMBER_REGISTER']==1) { ?>checked<?php } ?>> 打开</label>
+                            <label><input name="data[MEMBER_REGISTER]" type="radio" value="1" <?php if ($data['MEMBER_REGISTER']==1) { ?>checked<?php } ?>>打开</label>
                             &nbsp;&nbsp;&nbsp;
-                            <label><input name="data[MEMBER_REGISTER]" type="radio" value="0" <?php if ($data['MEMBER_REGISTER']==0) { ?>checked<?php } ?>> 关闭</label>
+                            <label><input name="data[MEMBER_REGISTER]" type="radio" value="0" <?php if ($data['MEMBER_REGISTER']==0) { ?>checked<?php } ?>>关闭</label>
                             <div class="show-tips">关闭后 后台顶部导航不显示会员连接，不需要会员功能建议关闭</div>
                         </td>
                     </tr>
                     <tr>
                         <th>新会员审核： </th>
                         <td>
-                            <label><input name="data[MEMBER_STATUS]" type="radio" value="1" <?php if ($data['MEMBER_STATUS']==1) { ?>checked<?php } ?>> 打开</label>
+                            <label><input name="data[MEMBER_STATUS]" type="radio" value="1" <?php if ($data['MEMBER_STATUS']==1) { ?>checked<?php } ?>>打开</label>
                             &nbsp;&nbsp;&nbsp;
-                            <label><input name="data[MEMBER_STATUS]" type="radio" value="0" <?php if ($data['MEMBER_STATUS']==0) { ?>checked<?php } ?>> 关闭</label>
+                            <label><input name="data[MEMBER_STATUS]" type="radio" value="0" <?php if ($data['MEMBER_STATUS']==0) { ?>checked<?php } ?>>关闭</label>
                         </td>
                     </tr>
                     <tr>
                         <th>注册验证码： </th>
                         <td>
-                            <label><input name="data[MEMBER_REGCODE]" type="radio" value="1" <?php if ($data['MEMBER_REGCODE']==1) { ?>checked<?php } ?>> 打开</label>
+                            <label><input name="data[MEMBER_REGCODE]" type="radio" value="1" <?php if ($data['MEMBER_REGCODE']==1) { ?>checked<?php } ?>>打开</label>
                             &nbsp;&nbsp;&nbsp;
-                            <label><input name="data[MEMBER_REGCODE]" type="radio" value="0" <?php if ($data['MEMBER_REGCODE']==0) { ?>checked<?php } ?>> 关闭</label>
+                            <label><input name="data[MEMBER_REGCODE]" type="radio" value="0" <?php if ($data['MEMBER_REGCODE']==0) { ?>checked<?php } ?>>关闭</label>
                         </td>
                     </tr>
                     <tr>
                         <th>登录验证码： </th>
                         <td>
-                            <label><input name="data[MEMBER_LOGINCODE]" type="radio" value="1" <?php if ($data['MEMBER_LOGINCODE']==1) { ?>checked<?php } ?>> 打开</label>
+                            <label><input name="data[MEMBER_LOGINCODE]" type="radio" value="1" <?php if ($data['MEMBER_LOGINCODE']==1) { ?>checked<?php } ?>>打开</label>
                             &nbsp;&nbsp;&nbsp;
-                            <label><input name="data[MEMBER_LOGINCODE]" type="radio" value="0" <?php if ($data['MEMBER_LOGINCODE']==0) { ?>checked<?php } ?>> 关闭</label>
+                            <label><input name="data[MEMBER_LOGINCODE]" type="radio" value="0" <?php if ($data['MEMBER_LOGINCODE']==0) { ?>checked<?php } ?>>关闭</label>
                         </td>
                     </tr>
                     </table>
@@ -227,10 +224,10 @@
                             <tr>
                                 <th width="200">URL模式： </th>
                                 <td>
-                                    <label><input name="data[DIY_URL]" type="radio" value="0" <?php if (!$data['DIY_URL']) { ?>checked<?php } ?> onClick="$('#url').hide()"> 默认动态</label>&nbsp;&nbsp;
-                                    <label><input name="data[DIY_URL]" type="radio" value="1" <?php if ($data['DIY_URL']==1) { ?>checked<?php } ?> onClick="$('#url').show()"> 伪静态</label>&nbsp;&nbsp;
-                                    <label><input name="data[DIY_URL]" type="radio" value="2" <?php if ($data['DIY_URL']==2) { ?>checked<?php } ?> onClick="$('#url').show()"> 生成静态</label>&nbsp;&nbsp;
-                                    <div class="show-tips">伪静态需要服务器支持并配置相关规则文件。更改模式后需  <a href="<?php echo url('admin/content/updateurl'); ?>">更新内容URL</a> 才生效</div>
+                                    <label><input name="data[DIY_URL]" type="radio" value="0" <?php if (!$data['DIY_URL']) { ?>checked<?php } ?> onClick="$('#url').hide()">默认动态</label>&nbsp;&nbsp;
+                                    <label><input name="data[DIY_URL]" type="radio" value="1" <?php if ($data['DIY_URL']==1) { ?>checked<?php } ?> onClick="$('#url').show()">伪静态</label>&nbsp;&nbsp;
+                                    <label><input name="data[DIY_URL]" type="radio" value="2" <?php if ($data['DIY_URL']==2) { ?>checked<?php } ?> onClick="$('#url').show()">生成静态</label>&nbsp;&nbsp;
+                                    <div class="show-tips">伪静态需要服务器支持并配置相关规则文件。更改模式后需 <a href="<?php echo url('admin/content/updateurl'); ?>">更新内容URL</a> 才生效</div>
                                 </td>
                             </tr>
                         </tbody>
@@ -268,8 +265,8 @@
                             <tr>
                                 <th>入口文件： </th>
                                 <td>
-                                    <label><input name="data[HIDE_ENTRY_FILE]" type="radio" value="false" <?php if (!$data['HIDE_ENTRY_FILE']) { ?>checked<?php } ?>> 默认显示</label>&nbsp;&nbsp;
-                                    <label><input name="data[HIDE_ENTRY_FILE]" type="radio" value="true" <?php if ($data['HIDE_ENTRY_FILE']) { ?>checked<?php } ?>> 隐藏</label>&nbsp;&nbsp;
+                                    <label><input name="data[HIDE_ENTRY_FILE]" type="radio" value="false" <?php if (!$data['HIDE_ENTRY_FILE']) { ?>checked<?php } ?>>默认显示</label>&nbsp;&nbsp;
+                                    <label><input name="data[HIDE_ENTRY_FILE]" type="radio" value="true" <?php if ($data['HIDE_ENTRY_FILE']) { ?>checked<?php } ?>>隐藏</label>&nbsp;&nbsp;
                                     <div class="show-tips"><?php echo $configTips['HIDE_ENTRY_FILE']; ?></div>
                                 </td>
                             </tr>
@@ -282,9 +279,9 @@
                         <tr>
                             <th>微信公众号： </th>
                             <td>
-                                <label><input name="data[WEIXIN_MP_OPENED]" type="radio" value="true" <?php if ($data['WEIXIN_MP_OPENED']==1) { ?>checked<?php } ?>> 打开</label>
+                                <label><input name="data[WEIXIN_MP_OPENED]" type="radio" value="true" <?php if ($data['WEIXIN_MP_OPENED']==1) { ?>checked<?php } ?>>打开</label>
                                 &nbsp;&nbsp;&nbsp;
-                                <label><input name="data[WEIXIN_MP_OPENED]" type="radio" value="false" <?php if ($data['WEIXIN_MP_OPENED']==0) { ?>checked<?php } ?>> 关闭</label>
+                                <label><input name="data[WEIXIN_MP_OPENED]" type="radio" value="false" <?php if ($data['WEIXIN_MP_OPENED']==0) { ?>checked<?php } ?>>关闭</label>
                                 <div class="show-tips"><?php echo $configTips['WEIXIN_MP_OPENED']; ?></div>
                             </td>
                         </tr>
