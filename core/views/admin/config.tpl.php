@@ -41,9 +41,9 @@
                                     <option value="<?php echo $t; ?>" <?php if ($data['SITE_THEME_MOBILE']==$t) { ?>selected<?php } ?>><?php echo $t; ?></option>
                                     <?php } } } ?>
                                 </select>
-                                <label><input name="data[SITE_MOBILE]" type="radio" value="true" <?php if ($data['SITE_MOBILE']==true) { ?>checked<?php } ?> onClick="$('.config-theme-m').attr('disabled', false);" />打开</label>
+                                <label><input name="data[SITE_MOBILE]" type="radio" value="true" <?php if ($data['SITE_MOBILE']==true) { ?>checked<?php } ?> onClick="$('.config-theme-m').prop('disabled', false);" />打开</label>
                                 &nbsp;&nbsp;&nbsp;
-                                <label><input name="data[SITE_MOBILE]" type="radio" value="false" <?php if (empty($data['SITE_MOBILE'])) { ?>checked<?php } ?>  onClick="$('.config-theme-m').attr('disabled', true);"/>关闭</label>
+                                <label><input name="data[SITE_MOBILE]" type="radio" value="false" <?php if (empty($data['SITE_MOBILE'])) { ?>checked<?php } ?>  onClick="$('.config-theme-m').prop('disabled', true);"/>关闭</label>
                                 <div class="show-tips"><?php echo $configTips['SITE_MOBILE']; ?></div>
                             </td>
                         </tr>
