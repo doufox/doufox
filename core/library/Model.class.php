@@ -644,10 +644,10 @@ abstract class Model
      *
      * 获取某数据表满足一定条件的数据的总行数,分页程序常用
      * @access public
-     * @param string $table_name    所要查询的数据表名
-     * @param string $field_name    所要查询字段名称
-     * @param string $where            查询条件
-     * @param string $value            数值（数据表某字段所对应的数据，通常都为字符串或字符）
+     * @param string $table_name 所要查询的数据表名
+     * @param string $field_name 所要查询字段名称
+     * @param string $where 查询条件
+     * @param string $value 数值（数据表某字段所对应的数据，通常都为字符串或字符）
      * @return integer
      */
     public function count($table_name, $field_name = null, $where = null, $value = null, $order = null)

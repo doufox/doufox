@@ -69,10 +69,10 @@ function confirm_del() {
 	}
 }
 function setC() {
-	if($("#deletec").attr('checked')==true) {
-		$(".deletec").attr("checked",true);
+	if($("#deletec").prop('checked')==true) {
+		$(".deletec").prop("checked",true);
 	} else {
-		$(".deletec").attr("checked",false);
+		$(".deletec").prop("checked",false);
 	}
 }
 </script>

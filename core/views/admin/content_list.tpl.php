@@ -3,10 +3,10 @@
 <script type="text/javascript">
 	top.document.getElementById('position').innerHTML = '内容列表';
 	function setC() {
-		if($("#deletec").attr('checked')==true) {
-			$(".deletec").attr("checked",true);
+		if($("#deletec").prop('checked')==true) {
+			$(".deletec").prop("checked",true);
 		} else {
-			$(".deletec").attr("checked",false);
+			$(".deletec").prop("checked",false);
 		}
 	}
 </script>
@@ -25,18 +25,18 @@
 		<form action="" method="post" name="myform">
 		<input name="form" id="list_form" type="hidden" value="order">
 		<table width="100%">
-		<thead>
-		<tr>
-			<th width="20" align="left"><input name="deletec" id="deletec" type="checkbox" onClick="setC()"></th>
-			<th width="30" align="left">ID </th>
-			<th align="left">标题</th>
-			<th width="80" align="left">栏目</th>
-			<th width="80" align="left">发布人</th>
-			<th width="150" align="left">最后更新时间</th>
-			<th width="200" align="left">操作</th>
-			<th width="40" align="left">排序</th>
-		</tr>
-		</thead>
+			<thead>
+				<tr>
+					<th align="left" width="20"><input name="deletec" id="deletec" type="checkbox" onClick="setC()"></th>
+					<th align="left" width="30">ID</th>
+					<th align="left">标题</th>
+					<th align="left" width="80">栏目</th>
+					<th align="left" width="80">发布人</th>
+					<th align="left" width="150">最后更新时间</th>
+					<th align="left" width="200">操作</th>
+					<th align="left" width="40">排序</th>
+				</tr>
+			</thead>
 		<tbody  class="line-box">
 		<?php if (is_array($list)) { foreach ($list as $t) { ?>
 		<tr height="25">
