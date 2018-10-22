@@ -33,7 +33,7 @@ class ContentController extends Admin {
 	            }
 	        }
 			$this->show_message('设置成功', 1,'',500);
-	    }elseif ($this->post('submit_status_2') && $this->post('form')=='status_2') {
+	    } elseif ($this->post('submit_status_2') && $this->post('form')=='status_2') {
 	        foreach ($_POST as $var=>$value) {
 	            if (strpos($var, 'del_')!==false) {
 	                $ids = str_replace('del_', '', $var);
@@ -147,75 +147,81 @@ class ContentController extends Admin {
 	/**
 	 * 所有内容列表
 	 */
-	public function listAction() {
-		$page = (int)$this->get('page');
-		$page = (!$page) ? 1 : $page;
+	public function allAction() {
+		$catid    = (int)$this->get('catid');
+		$status   = $this->get('status');
+		$username = $this->get('username');
+		$title    = $this->get('title');
+		$page     = (int)$this->get('page');
+		$page     = (!$page) ? 1 : $page;
+		$where    = ' ';
+		if ($catid) {
+			$where .= ' catid=' . $catid;
+		}
+        if (!empty($username)) {
+			$where .= " AND username='" . $username . "'";
+		}
+        // if (!empty($title)) {
+		// 	$where .= " AND `title` LIKE '%' . $title . '%'";
+		// 	// $this->content->where("`title` LIKE  ?", '%' . $title . '%');
+		// }
+		$statusNum = array(
+			0 => $this->content->count('content', null, $where . " AND status='0'"),
+			1 => $this->content->count('content', null, $where . " AND status='1'"),
+			2 => $this->content->count('content', null, $where . " AND status='2'"),
+			3 => $this->content->count('content', null, $where . " AND status='3'")
+		);
+		echo '<br/>where条件1' . $where . " AND status='0'". PHP_EOL;
+		$where = array();
+		if ($catid) {
+			$where[] = 'catid=' . $catid;
+		}
+        if (!empty($username)) {
+			$where[] = "username='" . $username . "'";
+		}
+		if ($status =='0') {
+		    $where[] = "status='0'";
+		} elseif (isset($status) && !empty($status)) {
+		    $where[] = "status='" . $status . "'";
+		}
+		
+		echo '<br/>where条件2' . json_encode($where). PHP_EOL;
+		// $where = ' status=0';
+		// 分页
 		$pagesize = 15;
+		$urlparam = array();
+		if ($catid) $urlparam['catid'] = $catid;
+		if ($title) $urlparam['title'] = $title;
+		
+		if ($modelid) $urlparam['modelid'] = $modelid;
+		if ($status) $urlparam['status'] = $status;
+		if ($username) $urlparam['username'] = $username;
+		$urlparam['page'] = '{page}';
+		$url = url('admin/content/all', $urlparam);
+
+		$total = $this->content->count('content', null, $where);
+		echo '<br/>分页，总数' . $total. PHP_EOL;
+		// 列表
+		// $list = $this->content->page_limit($page, $pagesize)->where($where)->order(array('listorder DESC', 'time DESC'))->select();
+		// $list = $this->content->page_limit($page, $pagesize)->select();
+		echo '<br/>列表长度' . count($list). PHP_EOL;
 		$pagination = core::load_class('pagination');
 		$pagination->loadconfig();
-
-		$total = $this->content->count('content', null, null);
-		$list = $this->content->page_limit($page, $pagesize)->where('status=0')->order(array('listorder DESC', 'time DESC'))->select();
-		// echo $list;
-		// $status     = $this->get('status');
-			// $username   = $this->get('username');
-			// $page       = (int)$this->get('page');
-			// $page       = (!$page) ? 1 : $page;
-			// $pagination = core::load_class('pagination');
-			// $pagination->loadconfig();
-
-			// $cats = $this->category_cache; // 读取栏目缓存
-			// $modelid = $cats[$catid]['modelid'];
-
-			// $where = 'catid=' . $catid;
-			// if ($status == 1) {
-			//     $where .= ' AND status=1';
-			// } elseif ($status ==2) {
-			//     $where .= ' AND status=2';
-			// } elseif ($status ==3) {
-			//     $where .= ' AND status=3';
-			// } elseif ($status =='0') {
-			//     $where .= ' AND status=0';
-			// }
-			// if ($username) {
-			//     $where .= " AND username='" . $username . "'";
-			// }
-
-			// $total    = $this->content->count('content', null, $where);
-			// $count    = array();
-			// $count[0] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=0');
-			// $count[1] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=1');
-			// $count[2] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=2');
-			// $count[3] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=3');
-
-			// $pagesize = 15;
-			// $urlparam = array();
-			// $urlparam['catid']   = $catid;
-			// $urlparam['modelid'] = $modelid;
-			// if ($status) $urlparam['status'] = $status;
-			// if ($username) $urlparam['username'] = $username;
-			// $urlparam['page']    = '{page}';
-			// $url  = url('admin/content/index', $urlparam);
-	    // $list = $this->content->page_limit($page, $pagesize)->where($where)->order(array('listorder DESC', 'time DESC'))->select();
-
 	    $pagination = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
-		// $join = $this->getModelJoin($modelid);
 
 		$tree = core::load_class('tree');
 		$tree->icon = array(' ','  |-','  |-');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		$categorys = array();
-		// foreach($cats as $cid=>$r) {
-		// 	// if($modelid && $modelid != $r['modelid']) continue;
-		// 	$r['disabled'] = $r['child'] ? 'disabled' : '';
-		// 	$r['selected'] = $cid == $catid ? 'selected' : '';
-		// 	$categorys[$cid] = $r;
-		// }
-		$str  = "<option value='\$catid' \$selected \$disabled>\$spacer \$catname</option>";
+		$cats = $this->category_cache; // 读取栏目缓存
+		foreach($cats as $cid=>$r) {
+			$r['disabled'] = $r['child'] ? 'disabled' : '';
+			$r['selected'] = $cid == $catid ? 'selected' : '';
+			$categorys[$cid] = $r;
+		}
 		$tree->init($categorys);
-		$category = $tree->get_tree(0, $str);
-		// echo $category;
-	    include $this->admin_tpl('content_list');
+		$category = $tree->get_tree(0, "<option value='\$catid' \$selected \$disabled>\$spacer \$catname</option>");
+	    include $this->admin_tpl('content_all');
 	}
 
 	/**
@@ -499,4 +505,5 @@ class ContentController extends Admin {
 			include $this->admin_tpl('content_url');
 		}
 	}
+
 }
