@@ -25,10 +25,13 @@ abstract class Model
      */
     public function __construct()
     {
-        //加载数据库配置文件
+        // 加载数据库配置文件
         $params = core::load_config('database');
         if (!is_array($params)) {
             exit('数据库配置文件不存在');
+        }
+        foreach ($params as $key => $value) {
+            $params[$key] = trim($value);
         }
 
         $params['host'] = trim($params['host']);
