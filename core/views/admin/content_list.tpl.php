@@ -43,12 +43,12 @@
 			<td align="left"><input name="del_<?php echo $t['id'].'_'.$t['catid']; ?>" type="checkbox" class="deletec"></td>
 			<td align="left"><?php echo $t['id']; ?></td>
 			<td align="left">
-			<div id="s_title" style="height:20px;overflow: hidden;">
-			<a href="<?php echo url('admin/content/edit', array('id'=>$t['id'])); ?>" title="<?php echo $t['title']; ?>">
-			<?php if (!$t['status']) { ?><font color="#FF0000">[未审]</font>
-			<?php } else if ($t['status']==2) { ?><font color="#0000FF">[头条]</font>
-			<?php } else if ($t['status']==3) { ?><font color="#f00">[推荐]</font>
-			<?php }  echo $t['title']; ?></a>
+				<div id="s_title" style="height:20px;overflow: hidden;">
+				<a href="<?php echo url('admin/content/edit', array('id'=>$t['id'])); ?>" title="<?php echo $t['title']; ?>">
+				<?php if (!$t['status']) { ?><font color="#FF0000">[未审]</font>
+				<?php } else if ($t['status']==2) { ?><font color="#0000FF">[头条]</font>
+				<?php } else if ($t['status']==3) { ?><font color="#f00">[推荐]</font>
+				<?php }  echo $t['title']; ?></a>
 			</div>
 			</td>
 			<td align="left">
@@ -64,7 +64,10 @@
 				<?php if (is_array($join)) { foreach ($join as $j) { ?>
 				<a href="<?php echo url('admin/form/list', array('cid'=>$t['id'], 'modelid'=>$j['modelid'])); ?>"><?php echo $j['modelname']; ?></a> |
 				<?php } } ?>
-				<a href="<?php echo $t[url]; ?>" target="_blank">查看</a> | 
+				
+				<?php if (!$t['status']) { ?><a href="javascript:void(0);" onclick="showPreviewArticle(<?php echo $t['id']?>)">预览</a> | 
+				<?php } else { ?><a href="<?php echo $t[url]; ?>" target="_blank">查看</a> | 
+				<?php } ?>
 				<a href="<?php echo url('admin/content/edit',array('id'=>$t['id'])); ?>" clz="1">编辑</a> | 
 				<a href="javascript:admin_command.confirmurl('<?php echo url('admin/content/del/',array('catid'=>$t['catid'],'id'=>$t['id'])); ?>','确定删除 『 <?php echo $t['title']; ?> 』吗？ ')" >删除</a> 
 			</td>
@@ -95,5 +98,16 @@
 		</form>
 	</div>
 </div>
+<script type="text/javascript">
+	function showPreviewArticle (id) {
+		window.top.art.dialog({
+			title: '预览文章',
+			id: 'show',
+			iframe: '<?php echo url("admin/content/preview")?>&id=' + id,
+			width: '700px',
+			height: '400px'
+		});
+	}
+</script>
 </body>
 </html>

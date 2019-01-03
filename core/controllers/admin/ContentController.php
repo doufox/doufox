@@ -307,7 +307,7 @@ class ContentController extends Admin {
 
 	    include $this->admin_tpl('content_add');
 	}
-	
+
 	/**
 	 * 修改
 	 */
@@ -359,7 +359,30 @@ class ContentController extends Admin {
 
 	    include $this->admin_tpl('content_add');
 	}
-	
+
+	/**
+	 * 预览
+	 */
+    public function previewAction() {
+	    $id         = (int)$this->get('id');
+	    $data       = $this->content->find($id);
+	    if (empty($data)) $this->show_message('内容不存在');
+	    $catid      = $data['catid'];
+        $catname    = $this->category_cache[$catid]['catname'];
+	    $modelid    = $data['modelid'];
+	    $model      = get_cache('model');
+	    if (!isset($model[$modelid])) $this->show_message('模型不存在');
+	    $fields     = $model[$modelid]['fields'];
+	    // 附表内容
+	    $table      = core::load_model($model[$modelid]['tablename']);
+	    $table_data = $table->find($id);
+	    if ($table_data) $data = array_merge($data, $table_data); // 合并主表和附表
+	    // 自定义字段
+	    $data_fields = $this->getFields($fields, $data);
+		$model      = $model[$modelid];
+	    include $this->admin_tpl('content_preview');
+	}
+
 	/**
 	 * 删除
 	 */
