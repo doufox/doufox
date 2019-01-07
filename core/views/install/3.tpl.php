@@ -7,15 +7,15 @@
 	<div class="main">
 		<div class="install-success">
 			<div class="formitm">
-				<label class="lab">后台地址：</label>
+				<label class="lab">后台管理地址：</label>
 				<div class="ipt"><a href="<?php echo url('admin'); ?>"><?php echo HTTP_URL; ?>admin/</a></div>
 			</div>
 			<div class="formitm">
-				<label class="lab">后台账号：</label>
+				<label class="lab">超级管理员账号：</label>
 				<div class="ipt"><?php echo $username; ?></div>
 			</div>
 			<div class="formitm">
-				<label class="lab">后台密码：</label>
+				<label class="lab">超级管理员密码：</label>
 				<div class="ipt"><?php echo $password; ?></div>
 			</div>
 		</div>

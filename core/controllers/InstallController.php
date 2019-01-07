@@ -68,10 +68,10 @@ class InstallController
 				$password = $_POST['password'];
 
 				if (!preg_match('/^[a-z0-9]+$/i', $username) || strlen($password) < 5) {
-					dexit('请填写正确的后台帐号');
+					dexit('超级管理员帐号不符合要求');
 				}
 				if (strlen($password) < 5) {
-					dexit('后台密码最少5位');
+					dexit('超级管理员的密码最少5位');
 				}
 				if (!@mysql_connect($tdb_host, $tdb_user, $tdb_pass)) {
 					dexit('无法连接到数据库, 请检查数据库配置信息');
@@ -97,18 +97,21 @@ class InstallController
 					dexit('数据库配置文件保存失败, 请检查文件权限！');
 				}
 
-				// 保存管理员配置文件
-				$admincontent  = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) exit();" . PHP_EOL . PHP_EOL . "return array(" . PHP_EOL . PHP_EOL;
-				$admincontent .= " 'ADMIN_NAME' => '" . $username . "', " . PHP_EOL;
-				$admincontent .= " 'ADMIN_PASS' => '" . md5(md5($password)) . "', " . PHP_EOL;
-				$admincontent .= PHP_EOL . ");";
-				if (!file_put_contents(DATA_PATH .  'config' . DS . 'admin.ini.php', $admincontent)) {
-					dexit('数据库配置文件保存失败, 请检查文件权限！');
-				}
+				// // 保存管理员配置文件
+				// $admincontent  = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) exit();" . PHP_EOL . PHP_EOL . "return array(" . PHP_EOL . PHP_EOL;
+				// $admincontent .= " 'ADMIN_NAME' => '" . $username . "', " . PHP_EOL;
+				// $admincontent .= " 'ADMIN_PASS' => '" . md5(md5($password)) . "', " . PHP_EOL;
+				// $admincontent .= PHP_EOL . ");";
+				// if (!file_put_contents(DATA_PATH .  'config' . DS . 'admin.ini.php', $admincontent)) {
+				// 	dexit('数据库配置文件保存失败, 请检查文件权限！');
+				// }
 
 				// 导入表结构
-				$sql = file_get_contents(INSTALL_PATH . 'initdata.sql');
+                $sql = file_get_contents(INSTALL_PATH . 'initdata.sql');
+                // 表前缀处理
 				$sql = str_replace('doufox_', $ttb_pre, $sql);
+                // 超级管理员默认帐号密码
+                $sql = preg_replace("/\s*'admin'\s*,\s*'c3284d0f94606de1fd2af172aba15bf3'/", " '" . $username . "', '" . md5(md5($password)) . "'", $sql);
 				$this->installsql($sql);
 				include $this->install_tpl('3');
 			break;

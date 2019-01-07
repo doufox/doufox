@@ -24,7 +24,7 @@
 				<div class="ipt"><input name="db_host" type="text" id="db_host" value="localhost" class="u-ipt" /></div>
 			</div>
 			<div class="formitm">
-				<label class="lab">数据库用户名：</label>
+				<label class="lab">数据库用户：</label>
 				<div class="ipt"><input name="db_user" type="text" id="db_user" value="" class="u-ipt" /></div>
 			</div>
 			<div class="formitm">
@@ -45,11 +45,11 @@
 				</div>
 			</div>
 			<div class="formitm">
-				<label class="lab">后台帐号：</label>
+				<label class="lab">超级管理员帐号：</label>
 				<div class="ipt"><input name="username" type="text" id="username" value="admin" class="u-ipt" /></div>
 			</div>
 			<div class="formitm">
-				<label class="lab">后台密码：</label>
+				<label class="lab">超级管理员密码：</label>
 				<div class="ipt"><input name="password" type="text" id="password" value="admin" class="u-ipt" /></div>
 			</div>
 			<div id="tip" style="display:none">

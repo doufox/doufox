@@ -1,19 +1,3 @@
-DROP TABLE IF EXISTS `doufox_admin`;
-CREATE TABLE IF NOT EXISTS `doufox_admin` (
-  `userid` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) DEFAULT NULL,
-  `password` varchar(32) DEFAULT NULL,
-  `roleid` smallint(5) DEFAULT '0',
-  `realname` varchar(50) NOT NULL DEFAULT '',
-  `auth` text NOT NULL,
-  `list_size` smallint(5) NOT NULL,
-  `left_width` smallint(5) NOT NULL DEFAULT '150',
-  PRIMARY KEY (`userid`),
-  KEY `username` (`username`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-INSERT INTO `doufox_admin` (`userid`, `username`, `password`, `roleid`, `realname`, `auth`, `list_size`, `left_width`) VALUES (1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 1, '超级管理员', '', 10, 150);
-
 DROP TABLE IF EXISTS `doufox_account`;
 CREATE TABLE IF NOT EXISTS `doufox_account` (
   `userid` smallint(5) unsigned NOT NULL AUTO_INCREMENT,

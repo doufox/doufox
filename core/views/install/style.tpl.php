@@ -14,14 +14,14 @@ echo <<< EOT
         .install {
             width:700px;
             margin:8% auto 30px auto;
-            border: 1px solid #0000ff;
             color:#666;
         }
         .header {
-            background-color: #0000ff;
+            background-color: #ddd;
             font-size: 16px;
             padding: 10px;
-            color: #fff;
+            color: #000;
+            font-weight: bold;
         }
         .main {
             min-height: 150px;
@@ -71,22 +71,19 @@ echo <<< EOT
         .u-tta-err { border-color: #c00 #e00 #e00; }
 
         .install-button {
-            margin-left:auto;
-            margin-right:auto;
-            margin-top:10px;
+            margin: 10px auto;
             text-align:center;
         }
         .install-button .btn {
-            background-color: #00f;
-            width: 100px;
+            background-color: #ddd;
             border: 0px;
             font-size: 14px;
             text-align: center;
-            color: #fff;
-            padding: 10px;
+            color: #00f;
+            padding: 8px;
         }
         .install-button .btn:hover {
-            background-color: #333;
+            background-color: #b59f9f;
         }
         .install-button .btn:active {
             background-color: #4c95e1;
@@ -94,17 +91,16 @@ echo <<< EOT
         .install .install-status { margin-left:auto; margin-right:auto; line-height:35px; font-size:12px; text-align:center; color:#F00}
 
         .footer {
-            background-color: #0000ff;
+            background-color: #ddd;
             padding: 10px;
-            color: #fff;
+            color: #333;
             overflow: hidden;
         }
         .footer .copy {
-            float: left;
+            float: right;
         }
         .footer .site {
-            color: #fff;
-            float: right;
+            float: left;
         }
     </style>
 EOT;
