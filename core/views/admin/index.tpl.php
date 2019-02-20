@@ -10,10 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta name="robots" content="none, nofollow, noarchive, nocache">
     <meta name="referrer" content="never"/>
-    <meta name="generator" content="<?php echo APP_NAME; ?>"/>
-    <title><?php echo $this->site_config['SITE_NAME']; ?> - 网站管理系统后台</title>
+    <title>网站管理系统 - <?php echo $this->site_config['SITE_NAME']; ?></title>
     <link rel="stylesheet" type="text/css" href="/static/css/backend.css"/>
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico">
+	<link rel="icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico"/>
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico"/>
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script>
 </head>

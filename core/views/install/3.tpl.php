@@ -3,7 +3,7 @@
 	<script type="text/javascript">
 		function $(ID) {return document.getElementById(ID);}
 	</script>
-	<div class="header">doufox 系统安装向导 - 安装成功</div>
+	<div class="header">系统安装向导 - 安装成功</div>
 	<div class="main">
 		<div class="install-success">
 			<div class="formitm">

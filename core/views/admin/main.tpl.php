@@ -2,7 +2,7 @@
 
 include $this->admin_tpl('header');
 
-if (!file_exists(DATA_PATH . 'cache' . DS."category.cache.php")) {
+if (!file_exists(DATA_PATH . 'cache' . DS . "category.cache.php")) {
     echo '<script type="text/javascript">location.href="?s=admin&a=cache";</script>';
 }
 ?>
@@ -18,14 +18,14 @@ if (!file_exists(DATA_PATH . 'cache' . DS."category.cache.php")) {
         <tbody class="line-box">
           <tr>
             <td align="left">
-              doufox 网站管理系统<br />
-              当前域名：<?php echo $sysinfo['domain'];?><br />
-              程序版本：<?php echo APP_VERSION;?><br />
-              发布日期：<?php echo APP_RELEASE;?> [<a href="https://doufox.com" target="_blank">查看最新版本</a>]<br />
-              操作系统：<?php echo $sysinfo['os'];?><br />
-              运行环境：<?php echo $sysinfo['web_server'];?><br />
-              上传文件：<?php echo $sysinfo['fileupload'];?><br />
-              MySQL版本：<?php echo $sysinfo['mysqlv'];?><br />
+              网站管理系统<br />
+              当前域名：<?php echo $sysinfo['domain']; ?><br />
+              程序版本：<?php echo APP_VERSION; ?><br />
+              发布日期：<?php echo APP_RELEASE; ?><br />
+              操作系统：<?php echo $sysinfo['os']; ?><br />
+              运行环境：<?php echo $sysinfo['web_server']; ?><br />
+              上传文件：<?php echo $sysinfo['fileupload']; ?><br />
+              MySQL版本：<?php echo $sysinfo['mysqlv']; ?><br />
             </td>
           </tr>
         </tbody>
@@ -43,8 +43,8 @@ if (!file_exists(DATA_PATH . 'cache' . DS."category.cache.php")) {
         <tbody class="line-box">
           <tr>
             <td align="left">
-              社区支持：<a target="_blank" href="https://crogram.com/">https://crogram.com</a><br />
-              技术支持：<a target="_blank" href="https://crogram.com/">https://crogram.com</a><span style="color: red;">(付费)</span><br />
+              <!-- 社区支持：<a target="_blank" href="">社区支持</a><br />
+              技术支持：<a target="_blank" href="">技术支持</a><span style="color: red;">(付费)</span><br /> -->
               联系QQ：1146171115<br />
               E-mail：crogram@qq.com<br />
               官方网站：<a target="_blank" href="https://doufox.com/">https://doufox.com</a><br />

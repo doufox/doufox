@@ -4,7 +4,7 @@
 		function $(ID) {return document.getElementById(ID);}
 	</script>
 
-	<div class="header">doufox 系统安装向导 - 基础配置</div>
+	<div class="header">系统安装向导 - 基础配置</div>
 	<div class="main">
 		<iframe id="db_tester" name="db_tester" style="display:none;"></iframe>
 		<form action="" method="post" id="db_form" target="db_tester">
