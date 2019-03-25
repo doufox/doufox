@@ -58,10 +58,10 @@ function url($route, $params = null)
         return false;
     }
 
-    $arr    = explode('/', $route);
-    $arr    = array_diff($arr, array(''));
-    $count  = count($arr);
-    $url =  '';
+    $arr = explode('/', $route);
+    $arr = array_diff($arr, array(''));
+    $count = count($arr);
+    $url = '';
     if (is_dir(CONTROLLER_PATH . $arr[0])) {
         $url .= '?s=' . strtolower($arr[0]);
         if (isset($arr[1]) && $arr[1]) {
@@ -88,7 +88,7 @@ function url($route, $params = null)
     }
     $config = core::load_config('config');
     if (!$config['DIY_URL'] && !$config['HIDE_ENTRY_FILE']) {
-        $url =  ENTRY_FILE . $url;
+        $url = ENTRY_FILE . $url;
     }
     $url = str_replace('//', '/', $url);
     return Controller::get_base_url() . $url;
@@ -307,7 +307,7 @@ function clearhtml($str)
  * @param $symbol 栏目间隔符
  * @return NULL|string
  */
-function position($catid, $symbol = ' > ')
+function position($catid, $symbol = ' > ', $link_class = 'btn btn-link')
 {
     $cats = get_cache('category');
     $catids = catposids($catid, '', $cats);
@@ -319,16 +319,18 @@ function position($catid, $symbol = ' > ')
         $catids = substr($catids, 0, -1);
     }
 
+    if ($link_class) {
+        $link_class = ' class="' . $link_class . '"';
+    }
     $ids = explode(',', $catids);
     krsort($ids);
     $str = '';
     foreach ($ids as $cid) {
         $cat = $cats[$cid];
-        $str .= "<a href=\"" . $cat['url'] . "\" title=\"" . $cat['catname'] . "\">" . $cat['catname'] . "</a>";
+        $str .= "<a" . $link_class . " href=\"" . $cat['url'] . "\" title=\"" . $cat['catname'] . "\">" . $cat['catname'] . "</a>";
         if ($catid != $cid) {
             $str .= $symbol;
         }
-
     }
     return $str;
 }
@@ -860,8 +862,9 @@ function get_extension($file)
 /**
  * 递归创建目录
  */
-function mkdirs($dir) {
-    if (empty($dir)) { return false; }
+function mkdirs($dir)
+{
+    if (empty($dir)) {return false;}
     if (!is_dir($dir)) {
         mkdirs(dirname($dir));
         mkdir($dir);
