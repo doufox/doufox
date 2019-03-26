@@ -1,0 +1,404 @@
+html, body, div, dl, dt, dd, ul, ol, li, form, fieldset, input, textarea, th, td{
+    margin: 0;
+    padding: 0;
+}
+
+body, html, input, textarea {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 13px;
+}
+
+a, a:focus, a:active, a:hover, input, textarea, button {
+    outline: 0 none!important
+}
+
+.navbar {
+    margin-top: -40px;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.crumbs {
+    clear: both;
+    color: #999;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #dcdcdc;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.article .title {
+    text-align: center;
+    margin: 20px;
+}
+
+.article .meta {
+    text-align: center;
+    color: #999;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.article .meta a:hover {
+    text-decoration: underline;
+}
+
+.article .content {
+    line-height: 24px;
+    padding: 10px;
+}
+
+.article-prev-next {
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
+
+.article-prev a:hover, .article-next a:hover {
+    text-decoration: underline;
+}
+
+pre.prettyprint {
+    background-color: #f5f5f5;
+    font-family: Courier New!important;
+    font-size: 12px!important;
+    border: 1px solid #ccc;
+    padding: 5px;
+    overflow: auto;
+    margin: 5px 0;
+    color: #000;
+}
+
+.recommend {
+    overflow: hidden;
+    position: relative;
+    width: 970px;
+    margin: 0 auto;
+}
+
+.recommend .hd {
+    overflow: hidden;
+    height: 25px;
+    margin: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.recommend .hd h3 {
+    float: left;
+}
+
+.recommend .hd .prev, .recommend .hd .next {
+    display: block;
+    width: 5px;
+    height: 9px;
+    float: right;
+    margin-right: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    background: url(../img/arrow.png) no-repeat;
+}
+
+.recommend .hd .next {
+    background-position: 0 -50px;
+}
+
+.recommend .hd .prevStop {
+    background-position: -60px 0;
+}
+
+.recommend .hd .nextStop {
+    background-position: -60px -50px;
+}
+
+.recommend .bd {
+    padding: 10px 14px;
+}
+
+.recommend .bd ul {
+    overflow: hidden;
+    zoom: 1; }
+
+.recommend .bd ul li {
+    margin: 0 8px;
+    float: left;
+    _display: inline;
+    overflow: hidden;
+    text-align: center;
+}
+
+.recommend .bd ul li .pic {
+    text-align: center;
+}
+
+.recommend .bd ul li .pic img {
+    width: 130px;
+    height: 100px;
+    display: block;
+    padding: 2px;
+    border: 1px solid #ccc;
+}
+
+.recommend .bd ul li .pic a:hover img {
+    border-color: #999;
+}
+
+.recommend .bd ul li .title {
+    line-height: 24px;
+}
+
+.link {
+    display: none;
+}
+
+.link a {
+    padding: 0 5px;
+    color: #999
+}
+
+.sidebar {
+    padding-bottom: 20px;
+}
+
+.sidebar-header {
+    font-size: 17px;
+    text-align: center;
+    line-height: 40px;
+    height: 40px;
+    border-bottom: 1px solid #eee;
+}
+
+.sidebar-header a {
+    color: #929292;
+}
+
+.sidebar .sidebar-body li {
+    _display: inline;
+    overflow: hidden;
+}
+
+.sidebar .sidebar-body a {
+    display: block;
+    border-bottom: #e5e7e6 1px solid;
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    color: #666;
+    padding-left: 10px;
+}
+
+.sidebar .sidebar-body a:hover {
+    background-color: #eee;
+}
+
+.sidebar s {
+    display: block;
+    width: 5px;
+    height: 9px;
+    float: left;
+    margin-right: 5px;
+    margin-top: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    background: url(../img/arrow.png) no-repeat;
+    background-position: 0 -50px;
+}
+
+.sidebar .sidebar-body .select a {
+    background-color: #fff0f5;
+    color: #f00;
+}
+
+.sidebar .sidebar-body .select s {
+    margin-top: -1px;
+    margin-left: -1px;
+    height: 37px;
+    background-image: none;
+    background-color: #0000ff;
+    position: absolute;
+}
+
+.category-list .category-title {
+    color: #325e7f;
+    height: 30px;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.category-list .category-title .title {
+    float: left;
+    border-bottom: 1px solid #39c;
+    width: 80%;
+}
+
+.category-list .category-title .more {
+    float: right;
+}
+
+.article-list li {
+    color: #325e7f;
+    line-height: 34px;
+    height: 34px;
+    font-size: 14px;
+    border-bottom: #E5E7E6 1px dashed;
+    padding: 5px 10px;
+}
+
+.article-list li a {
+    float: left;
+    color: #325e7f;
+}
+
+.article-list li span {
+    float: right;
+    font-family: Verdana;
+    color: #8c8c8c;
+}
+
+.pagination {
+    clear: both;
+    font-size: 12px;
+    height: 50px;
+    line-height: 30px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.pagination a {
+    background-color: #fff;
+    border-color: #eee;
+}
+
+.pagination span {
+    cursor: pointer;
+    background-color: #009ad1;
+    border-color:  #009ad1;
+}
+
+.pagination a,
+.pagination span {
+    display: block;
+    float: left;
+    font-size: 12px;
+    height: 26px;
+    line-height: 26px;
+    margin: 5px 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.pagination a:hover {
+    background: #f1f1f1;
+    color: #000;
+    text-decoration: none;
+}
+
+.pinglunneirong {
+    border: 1px solid #CCCCCC;
+    width: 706px;
+    height: 80px;
+}
+
+.input-text-c, .input-text, textarea, input.date {
+    border: 1px solid #D0D0D0;
+    height: 18px;
+    margin: 0 5px 0 0;
+    padding: 2px 0 2px 5px;
+    border: 1px solid #d0d0d0;
+}
+
+input.date {
+    padding-right: 18px;
+}
+
+textarea, textarea.input-text, textarea {
+    height: auto;
+    padding: 5px;
+    margin: 0;
+}
+
+select {
+    vertical-align: middle;
+    padding: 2px;
+    -webkit-appearance: menulist;
+    box-sizing: border-box;
+    align-items: center;
+    border: 1px solid #d0d0d0;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    white-space: pre;
+    -webkit-rtl-ordering: logical;
+    color: black;
+    background-color: white;
+    cursor: default;
+}
+
+#reply {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.forum-list .media {
+    padding: 4px 0;
+    border-bottom: 1px solid #eee;
+}
+
+#reply .media-body.guest {
+    height: 180px;
+    background-color: #f5f5f5;
+    padding: 10px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    border-top: 1px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+/* Not required for template or sticky footer method. */
+
+body>.container {
+    padding: 60px 15px 0;
+}
+
+.container .text-muted {
+    margin-top: 20px;
+}
+
+.footer>.container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .navbar-form .form-control {
+        width: 55px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-form .form-control {
+        display: none;
+    }
+}

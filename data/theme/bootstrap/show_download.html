@@ -1,0 +1,34 @@
+{template header.html}
+<div class="main">
+  <div class="container">
+    <div class="w210 fr">
+      {template sidebar.html}
+    </div>
+    <div class="w740 fl">
+      <div class="page bg">
+        {template crumbs.html}
+        <h2 class="article-title">{$title}</h2>
+        <div class="article-meta">时间：{function.date("Y-m-d H:i:s", $time)} 点击：<script type="text/javascript" src="{function.url('api/index/hits',array('id'=>$id))}"></script>次</div>
+        <div class="article-content">{$content}</div>
+        <!--文章内容分页 begin-->
+        {if $content_page}
+        <div class="pagination">
+          {loop $content_page $t=>$u}
+          <a{if $page!=$t} href="{$u}"{else} style="background-color: #c00;"{/if}>{$t}</a>
+          {/loop}
+        </div>
+        <div class="clear blank10"></div>
+        {/if}
+        <!--文章内容分页 end-->
+        <div class="article-prev-next">
+        {if $prev_page}<div class="article-prev">上一篇：<a href="{$prev_page['url']}">{$prev_page['title']}</a></div>{/if}
+        <div class="blank5 clear"></div>
+        {if $next_page}<div class="article-next">下一篇：<a href="{$next_page['url']}">{$next_page['title']}</a></div>{/if}
+        </div>
+      </div>
+      <div class="blank10 clear"></div>
+      <div>{$tag}</div>
+    </div>
+  </div>
+</div>
+{template footer.html}

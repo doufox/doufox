@@ -1,0 +1,41 @@
+{template header.html}
+{template member/member_nav.html}
+
+<div class="row">
+    <div class="col-sm-3 col-md-3 col-xs-3">
+        {template member/sidebar.html}
+    </div>
+    <div class="col-sm-8 col-md-8 col-xs-8">
+        <form action="" method="post">
+            <table width="100%" class="table_form">
+                <tbody>
+                    <tr>
+                        <th width="100">会员模型：</th>
+                        <td>{$member_model[$member['modelid']]['modelname']}</td>
+                    </tr>
+                    <tr>
+                        <th width="100">会员名称：</th>
+                        <td>{$member['username']}</td>
+                    </tr>
+                    <tr>
+                        <th width="100">会员积分：</th>
+                        <td>{$member['credits']}</td>
+                    </tr>
+                    <tr>
+                        <th>注册邮箱：</th>
+                        <td>{$member['email']}</td>
+                    </tr>
+
+
+                    <tr>
+                        {$data_fields}
+                        <tr>
+                            <th style="border:none">&nbsp;</th>
+                            <td style="border:none"><input type="submit" class="button" value="保 存" name="submit"></td>
+                        </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+{template footer.html}

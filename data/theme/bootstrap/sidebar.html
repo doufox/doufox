@@ -1,0 +1,10 @@
+<div class="sidebar bg">
+  <div class="sidebar-header">Category</div>
+    <div class="sidebar-body">
+      <ul>
+{nav  }
+        <li{if $current} class="select"{/if}><s></s><a href="{$vdata['url']}">{$vdata['catname']}</a></li>
+{/nav}
+    </ul>
+  </div>
+</div>

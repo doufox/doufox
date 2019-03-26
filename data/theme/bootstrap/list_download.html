@@ -1,0 +1,24 @@
+{template header.html}
+<div class="main article-list">
+ <div class="w210 fl">
+{template sidebar.html}
+ </div>
+  <div class="w740 fr">
+  <div class="page bg">
+    {template crumbs.html}
+<!--列表开始-->
+   <div class="newslist">
+    <ul class="noborder">
+{list catid=$catid page=$page cache=36000}
+     <li><span class="date">{function.date("Y-m-d", $vdata['time'])}</span> <a href="{$vdata['url']}">· {$vdata['title']}</a></li>
+{/list}
+    </ul>
+    {$pagination}
+   </div>
+<!--列表结束-->
+   </div>
+  <div class="clear"></div>
+ </div>
+ <div class="blank10 clear"></div>
+</div>
+{template footer.html}

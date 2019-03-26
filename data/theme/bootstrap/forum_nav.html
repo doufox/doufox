@@ -1,0 +1,17 @@
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+{if $member}
+            <a class="btn btn-default" href="{function.url('member/index')}">个人中心</a>
+            <a class="btn btn-default" href="{function.url('member/login/out')}">退出</a>
+{else}
+            <a class="btn btn-default" href="{function.url('member/login')}">会员登录</a>
+            <a class="btn btn-default" href="{function.url('member/register')}">免费注册</a>
+{/if}
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+            <a class="btn btn-default" href="{function.url('member/content/add', array('catid'=>$catid))}">发帖</a>
+            <a class="btn btn-default" href="#reply">回复</a>
+        </div>
+    </div>
+</div>

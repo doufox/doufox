@@ -1,0 +1,9 @@
+{if $member}
+您好，{$member['username']}&nbsp;&nbsp;&nbsp;
+<a href="{function.url('member')}">个人中心</a>&nbsp;&nbsp;&nbsp;
+<a href="{function.url('member/login/out')}">安全退出</a>
+{else}
+<a href="{function.url('member/register')}">免费注册</a>&nbsp;&nbsp;&nbsp;
+<a href="{function.url('member/login')}">会员登录</a>&nbsp;&nbsp;&nbsp;
+<a href="{function.url('index/post')}">游客投稿</a>&nbsp;&nbsp;&nbsp;
+{/if}

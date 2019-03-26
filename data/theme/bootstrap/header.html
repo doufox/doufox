@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="referrer" content="always"/>
+    <meta name="generator" content="{$site_generator}"/>
+    <meta name="keywords" content="{$site_keywords}"/>
+    <meta name="description" content="{$site_description}"/>
+    <title>{$site_title}</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                        <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{$site_url}">{$site_name}</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="hidden-sm"><a href="{$site_url}">首页</a></li>
+                        {nav num=7}<li{if $current} class="active"{/if}><a href="{$vdata['url']}">{$vdata['catname']}</a></li>{/nav}
+                    </ul>
+                    <form class="navbar-form navbar-right" method="get" action="/">
+                        <input type="hidden" value="index" name="c" />
+                        <input type="hidden" value="search" name="a" />
+                        <input type="hidden" value="6"  name="catid" />
+                        <div class="form-group">
+                            <input type="text" class="form-control" value="" name="kw" placeholder="搜索" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+

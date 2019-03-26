@@ -1,0 +1,63 @@
+{template header.html} {if !$select}
+    <script type="text/javascript">
+        function reload_code() {
+            document.getElementById('code').src = '{function.url("api/access/checkcode", array("width"=>80, "height"=>28))}&' + Math.random();
+        }
+    </script>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script>
+    <script type="text/javascript" src="/static/js/admin.js"></script>
+{/if}
+
+<div class="main">
+    <div class="post bg">
+        {template crumbs.html}
+        <form action="" method="post">
+{if $select}
+            <input name="select" type="hidden" value="1" />
+            <div style="text-align:center;padding:20px;">
+                <select name="catid">
+                    <option> -选择投稿栏目- </option>
+                    {$post_category}
+                </select>
+                &nbsp;
+                <input type="submit" class="button" value="我要投稿" name="submit">
+            </div>
+{else}
+            <div>
+                <div>投稿栏目：{$cats[$catid]['catname']}</div>
+                <div><a href="{function.url('index/post')}">返回重选</a></div>
+            </div>
+    {if $model['content']['title']['show']}
+            <div>
+                <div><font color="red">*</font>&nbsp;{$model['content']['title']['name']}：</div>
+                <div><input type="text" class="input-text" size="50" id="title" value="{$data['title']}" name="data[title]" onBlur="admin_command.get_kw()"></div>
+                <div class="show-tips" id="title_text"></div>
+            </div>
+    {/if}
+
+    {if $model['content']['description']['show']}
+            <div>
+                <div>{$model['content']['description']['name']}：</div>
+                <div><textarea style="width:490px;height:66px;" id="description" name="data[description]">{$data['description']}</textarea></div>
+            </div>
+    {/if}
+
+    {$data_fields}
+            <div>
+                <div>验证码：</div>
+                <div>
+                    <input name="code" type="text" class="input-text" size=10 />
+                    <img id="code" title="看不清楚？换一张" style="cursor:pointer;" align="absmiddle" onclick="reload_code();" src="{function.url('api/access/checkcode', array('width'=>80, 'height'=>28))}"/>
+                </div>
+            </div>
+            <div>
+                <input type="submit" class="button" value="提 交" name="submit">
+            </div>
+
+{/if}
+        </form>
+    </div>
+</div>
+
+{template footer.html}

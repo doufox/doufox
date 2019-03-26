@@ -1,0 +1,24 @@
+{template header.html}
+{template forum_nav.html}
+
+    <div>
+        {nav parentid=$catid typeid=1}
+        <div class="category-list">
+            <div class="category-title">
+                <span class="title">{$vdata['catname']}</span>
+                <span class="more"><a href="{$vdata['url']}">更多&gt;&gt;</a></span>
+            </div>
+            <ul class="article-list">
+                {list catid=$vdata[catid] num=9 order=time}
+                <li>
+                    <span class="date">{function.date("Y-m-d", $vdata['time'])}</span>
+                    <a href="{$vdata['url']}">·  {$vdata['title']}</a>
+                </li>
+                {/list}
+            </ul>
+        </div>
+        {/nav}
+    </div>
+
+
+{template footer.html}

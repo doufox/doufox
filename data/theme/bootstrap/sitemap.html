@@ -1,0 +1,13 @@
+{template header.html}
+
+<div class="main sitemap">
+    <div class="container">
+        {template crumbs.html}
+        <ul>
+            {nav  }
+                <li><a href="{$vdata['url']}">{$vdata['catname']}</a></li>
+            {/nav}
+        </ul>
+    </div>
+</div>
+{template footer.html}

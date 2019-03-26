@@ -1,0 +1,32 @@
+{template header.html}
+{template member/member_nav.html}
+
+<div class="row member">
+    <div class="col-sm-3 col-md-3 col-xs-3">
+{template member/sidebar.html}
+    </div>
+    <div class="col-sm-8 col-md-8 col-xs-8">
+        <div class="newslist">
+            {if !$member['status']}
+            <h3><span class="bt" style="color:#F00"><b>您还没有通过审核！</b></span></h3>
+            {/if}
+            <ul class="noborder">
+                {list status=0 username=$member[username] num=10 }
+                <li>
+                    <span class="date">{function.date("Y-m-d H:i:s", $vdata['time'])}</span>
+                    <a href="{$vdata['url']}" target="_blank">
+                        <font color="#FF0000">[未审]</font>{$vdata['title']}</a>
+                </li>
+                {/list} {list username=$member[username] num=10 }
+                <li>
+                    <span class="date">{function.date("Y-m-d H:i:s", $vdata['time'])}</span>
+                    <a href="{$vdata['url']}" target="_blank">{$vdata['title']}</a>
+                </li>
+                {/list}
+            </ul>
+        </div>
+{$pagination}
+    </div>
+</div>
+
+{template footer.html}
