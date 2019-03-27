@@ -12,8 +12,8 @@
     <meta name="referrer" content="never"/>
     <title>网站管理系统 - <?php echo $this->site_config['SITE_NAME']; ?></title>
     <link rel="stylesheet" type="text/css" href="/static/css/backend.css"/>
-	<link rel="icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico"/>
-	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico"/>
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script>
 </head>
@@ -65,8 +65,8 @@
 
     function _open_url(id, url) {
         var title = $("#M_" + id).find('a').html();
-        document.getElementById('position').innerHTML = title
-        document.getElementById('rightMain').src = url
+        document.getElementById('position').innerHTML = title;
+        document.getElementById('rightMain').src = url;
         $('.focused').removeClass("focused");
         $('#M_' + id).addClass("focused");
     }

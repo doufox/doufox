@@ -1,4 +1,4 @@
-html, body, h1, h2, h3, ul, li, p {
+html, body, ul, li, p {
     margin: 0;
     padding: 0;
 }
@@ -40,7 +40,7 @@ a:hover {
 .header {
     height: 30px;
     color: #fff;
-    background-color: #008eff;
+    background-color: #ff9800;
 }
 
 .header .title {
@@ -50,6 +50,11 @@ a:hover {
     line-height: 30px;
     text-align: center;
     font-size: 1.2em;
+    margin: 0;
+    padding: 0;
+}
+.header .title a {
+    color: #fff;
 }
 
 .menu {
@@ -81,7 +86,7 @@ a:hover {
     padding: 2px 0 0;
     background-color: #fff;
     margin-top: 0px;
-    border: 1px solid #008eff;
+    border: 1px solid #eee;
     border-top-width: 0;
 }
 
@@ -133,7 +138,7 @@ a:hover {
     line-height: 24px;
     text-align: left;
     font-weight: normal;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #eee;
 }
 
 .menu li:hover li a:hover,
@@ -161,7 +166,7 @@ a:hover {
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 8px solid #ffffff;
+    border-top: 8px solid #fff;
 }
 
 .menu li:hover.account::before {
@@ -177,7 +182,7 @@ a:hover {
     width: 149px;
     background-color: #fff;
     position: absolute;
-    border-right: 1px solid #ddd;
+    border-right: 1px solid #eee;
 }
 
 #left .left-head {
@@ -186,7 +191,7 @@ a:hover {
     line-height: 30px;
     text-align: center;
     background-color: #f3f9fa;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #eee;
 }
 
 #left .left-head span {
@@ -222,7 +227,7 @@ a:hover {
     height: 29px;
     line-height: 29px;
     background-color: #f3f9fa;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #eee;
 }
 
 #position {
@@ -241,7 +246,7 @@ a:hover {
 }
 
 #shortcut a:hover {
-    background-color: #ddd;
+    background-color: #eee;
 }
 
 #frame_container {
@@ -258,9 +263,8 @@ a:hover {
 .footer {
     height: 28px;
     width: 100%;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #eee;
     background-color: #f7f7f7;
-    color: #aaa;
     text-align: center;
     line-height: 22px;
 }

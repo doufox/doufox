@@ -1,5 +1,5 @@
 window.admin_command = {
-    sitepath: "<?php echo HTTP_URL . ENTRY_FILE; ?>",
+    sitepath: window.location.origin + window.location.pathname,
     redirect: function(url) {
         location.href = url
     },
