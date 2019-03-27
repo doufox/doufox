@@ -1,28 +1,61 @@
 {template header.html}
 {template member/member_nav.html}
 
+
+{if !$member['status']}
+    <div class="alert alert-warning" role="alert"><h3>您的账号暂时未通过审核！</h3></div>
+{/if}
 <div class="row member">
-    <div class="col-sm-3 col-md-3 col-xs-3">
+    <div class="col-sm-3 col-md-3 col-xs-4">
 {template member/sidebar.html}
     </div>
-    <div class="col-sm-8 col-md-8 col-xs-8">
-        <div class="newslist">
-            {if !$member['status']}
-            <h3><span class="bt" style="color:#F00"><b>您还没有通过审核！</b></span></h3>
-            {/if}
-            <ul class="noborder">
-                {list status=0 username=$member[username] num=10 }
+    <div class="col-sm-9 col-md-9 col-xs-8">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th width="100">会员类型：</th>
+                    <td>{$member_model[$member['modelid']]['modelname']}</td>
+                </tr>
+                <tr>
+                    <th>会员账号：</th>
+                    <td>{$member['username']}</td>
+                </tr>
+                <tr>
+                    <th>会员昵称：</th>
+                    <td>{$member['nickname']}</td>
+                </tr>
+                <tr>
+                    <th>会员积分：</th>
+                    <td>{$member['credits']}</td>
+                </tr>
+                <tr>
+                    <th>注册邮箱：</th>
+                    <td>{$member['email']}</td>
+                </tr>
+                <tr>
+                    <th>操作：</th>
+                    <td>
+                        <a class="btn btn-default" href="{function.url('member/index/edit')}">修改资料</a>
+                        <a class="btn btn-danger" href="{function.url('member/index/password')}">修改密码</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p>最近发表：</p>
+        <div>
+            <ul>
+{list status=0 username=$member[username] num=10 }
                 <li>
                     <span class="date">{function.date("Y-m-d H:i:s", $vdata['time'])}</span>
-                    <a href="{$vdata['url']}" target="_blank">
-                        <font color="#FF0000">[未审]</font>{$vdata['title']}</a>
+                    <a href="{$vdata['url']}" target="_blank"><font color="#FF0000">[未审]</font>{$vdata['title']}</a>
                 </li>
-                {/list} {list username=$member[username] num=10 }
+{/list}
+{list username=$member[username] num=10 }
                 <li>
                     <span class="date">{function.date("Y-m-d H:i:s", $vdata['time'])}</span>
                     <a href="{$vdata['url']}" target="_blank">{$vdata['title']}</a>
                 </li>
-                {/list}
+{/list}
             </ul>
         </div>
 {$pagination}
