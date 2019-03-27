@@ -141,7 +141,7 @@ class TemplateController extends Admin
         $file_list = core::load_class('file_list');
         $list_desktop = $file_list->get_file_list(THEME_PATH_D);
         foreach ($list_desktop as $file_path) {
-            $dir = DATA_PATH . 'cache' . DS . 'theme_desktop'. DS . $file_path . DS;
+            $dir = DATA_PATH . 'cache' . DS . 'theme_desktop' . DS . $file_path . DS;
             $file_list->delete_dir($dir);
             if (!file_exists($dir)) {
                 mkdir($dir, 0777, true);
@@ -154,7 +154,7 @@ class TemplateController extends Admin
         $file_list = core::load_class('file_list');
         $list_mobile = $file_list->get_file_list(THEME_PATH_M);
         foreach ($list_mobile as $file_path) {
-            $dir = DATA_PATH . 'cache' . DS . 'theme_mobile'. DS . $file_path . DS;
+            $dir = DATA_PATH . 'cache' . DS . 'theme_mobile' . DS . $file_path . DS;
             $file_list->delete_dir($dir);
             if (!file_exists($dir)) {
                 mkdir($dir, 0777, true);

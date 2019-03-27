@@ -128,7 +128,7 @@ class DatabaseController extends Admin
         foreach ($data as $v) {
             echo '<tr>';
             foreach ($v as $i) {
-                echo '<td>' .$i. '</td>';
+                echo '<td>' . $i . '</td>';
             }
             echo '</tr>';
         }
@@ -158,11 +158,11 @@ class DatabaseController extends Admin
      */
     private function export_database($sizelimit, $action, $fileid, $random, $tableid, $startfrom)
     {
-		if (function_exists('set_time_limit')) {
-			set_time_limit(0);
-		} else {
-			ini_set('max_execution_time', 0);
-		}
+        if (function_exists('set_time_limit')) {
+            set_time_limit(0);
+        } else {
+            ini_set('max_execution_time', 0);
+        }
         $dumpcharset = 'utf8';
         $fileid = ($fileid != '') ? $fileid : 1;
         $c_data = get_cache('bakup_tables');

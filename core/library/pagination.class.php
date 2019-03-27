@@ -152,11 +152,11 @@ class pagination
      */
     public function __construct()
     {
-        $this->ext           = true;
-        $this->center        = 4;
-        $this->num           = 7;
-        $this->per_circle    = 7;
-        $this->isAjax        = false;
+        $this->ext = true;
+        $this->center = 4;
+        $this->num = 7;
+        $this->per_circle = 7;
+        $this->isAjax = false;
         $this->hidden_status = false;
         return true;
     }
@@ -175,21 +175,21 @@ class pagination
     {
         if (empty($config)) {
             $config = array(
-                'div'       => '<div class="pagination">{content}</div>',
-                'total'     => '<a>{content}</a>',
-                'nowpage'   => '<span>{content}</span>',
-                'page'      => '<a href="{url}">{content}</a>',
-                'pre'       => '<a href="{url}">{content}</a>',
-                'next'      => '<a href="{url}">{content}</a>',
-                'note'      => '<a>{content}</a>',
+                'div' => '<div class="pagination">{content}</div>',
+                'total' => '<a>{content}</a>',
+                'nowpage' => '<span>{content}</span>',
+                'page' => '<a href="{url}">{content}</a>',
+                'pre' => '<a href="{url}">{content}</a>',
+                'next' => '<a href="{url}">{content}</a>',
+                'note' => '<a>{content}</a>',
             );
         }
-        $this->first_page   = $this->first_page ? $this->first_page : '第一页';
-        $this->pre_page     = $this->pre_page   ? $this->pre_page   : '上一页';
-        $this->next_page    = $this->next_page  ? $this->next_page  : '下一页';
-        $this->last_page    = $this->last_page  ? $this->last_page  : '最末页';
-        $this->note         = $this->note       ? $this->note       : '共{$total_num}条{$total_page}页 {$num}条/页'; // 共{$total_num}条{$total_page}页 {$num}条/页
-        $this->config       = $config;
+        $this->first_page = $this->first_page ? $this->first_page : '第一页';
+        $this->pre_page = $this->pre_page ? $this->pre_page : '上一页';
+        $this->next_page = $this->next_page ? $this->next_page : '下一页';
+        $this->last_page = $this->last_page ? $this->last_page : '最末页';
+        $this->note = $this->note ? $this->note : '共{$total_num}条{$total_page}页 {$num}条/页'; // 共{$total_num}条{$total_page}页 {$num}条/页
+        $this->config = $config;
     }
 
     private function preg_c($content, $url = '', $config)
@@ -435,16 +435,16 @@ class pagination
         if ($this->total_pages > $this->per_circle) {
             if ($this->page + $this->per_circle >= $this->total_pages + $this->center) {
                 $list_start = $this->total_pages - $this->per_circle + 1;
-                $list_end   = $this->total_pages;
+                $list_end = $this->total_pages;
             } else {
                 $list_start = ($this->page > $this->center) ? $this->page - $this->center + 1 : 1;
-                $list_end   = ($this->page > $this->center) ? $this->page + $this->per_circle - $this->center : $this->per_circle;
+                $list_end = ($this->page > $this->center) ? $this->page + $this->per_circle - $this->center : $this->per_circle;
             }
         } else {
-            $list_start     = 1;
-            $list_end       = $this->total_pages;
+            $list_start = 1;
+            $list_end = $this->total_pages;
         }
-        $pagelist_queue     = '';
+        $pagelist_queue = '';
         for ($i = $list_start; $i <= $list_end; $i++) {
             $pagelist_queue .= ($this->page == $i) ? $this->preg_c($i, null, $this->config['nowpage']) : $this->preg_c($i, $this->seturl($this->url, $i), $this->config['page']);
         }

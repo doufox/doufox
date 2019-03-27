@@ -89,7 +89,7 @@ class router
 
     private function inNameSpace($path)
     {
-        if (is_dir(CONTROLLER_PATH . $path)) {
+        if (is_dir(CTRL_PATH . $path)) {
             return true;
         }
         return false;
@@ -97,7 +97,7 @@ class router
 
     private function isController($path = '', $file)
     {
-        if (is_file(CONTROLLER_PATH . $path . ucfirst($file) . 'Controller.php')) {
+        if (is_file(CTRL_PATH . $path . ucfirst($file) . 'Controller.php')) {
             return true;
         }
         return false;

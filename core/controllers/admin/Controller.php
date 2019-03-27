@@ -46,24 +46,26 @@ class Admin extends Controller
     /**
      * 获取更新缓存JS代码
      */
-    protected function getCacheCode($c, $a = 'cache') {
+    protected function getCacheCode($c, $a = 'cache')
+    {
         return '<script type="text/javascript" src="' . url('admin/index/updatecache', array('cc' => $c, 'ca' => $a)) . '"></script>';
     }
 
-	/**
-	 * 更新缓存
-	 */
-	protected function updateCache($c, $a) {
-		$controller  = ucfirst($c) . 'Controller';
-		$action      = $a . 'Action';
-		$file        = CONTROLLER_PATH . 'admin' . DS . $controller . '.php';
-		if (!file_exists($file)) {
+    /**
+     * 更新缓存
+     */
+    protected function updateCache($c, $a)
+    {
+        $controller = ucfirst($c) . 'Controller';
+        $action = $a . 'Action';
+        $file = CTRL_PATH . 'admin' . DS . $controller . '.php';
+        if (!file_exists($file)) {
             return false;
         }
-		core::load_file($file);
-		$application = new $controller();
-		if (method_exists($controller, $action)) {
+        core::load_file($file);
+        $application = new $controller();
+        if (method_exists($controller, $action)) {
             $application->$action(1);
         }
-	}
+    }
 }

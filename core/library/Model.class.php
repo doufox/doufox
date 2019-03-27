@@ -250,7 +250,7 @@ abstract class Model
      */
     public function set_table_name($table_name)
     {
-        if (!$table_name) { return false;}
+        if (!$table_name) {return false;}
         $this->table_name = $this->prefix . trim($table_name);
         return $this;
     }
@@ -277,8 +277,8 @@ abstract class Model
      *
      * 用于处理 SELECT fields FROM table之类的SQL语句部分
      * @access public
-     * @param mixed $table_name	所要查询的数据表名，参数支持数组
-     * @param mixed $columns	所要查询的数据表字段，参数支持数组，默认为null, 即数据表全部字段
+     * @param mixed $table_name    所要查询的数据表名，参数支持数组
+     * @param mixed $columns    所要查询的数据表字段，参数支持数组，默认为null, 即数据表全部字段
      * @return $this
      *
      */
@@ -457,11 +457,14 @@ abstract class Model
      */
     public function page_limit($page, $listNum)
     {
-        $page = (int)$page;
-        $listNum = (int)$listNum;
-        if (!$listNum) return false;
+        $page = (int) $page;
+        $listNum = (int) $listNum;
+        if (!$listNum) {
+            return false;
+        }
+
         $page = ($page < 1) ? 1 : $page;
-        $startId = (int)$listNum * ($page - 1);
+        $startId = (int) $listNum * ($page - 1);
         return $this->limit($startId, $listNum);
     }
 

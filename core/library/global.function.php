@@ -62,7 +62,7 @@ function url($route, $params = null)
     $arr = array_diff($arr, array(''));
     $count = count($arr);
     $url = '';
-    if (is_dir(CONTROLLER_PATH . $arr[0])) {
+    if (is_dir(CTRL_PATH . $arr[0])) {
         $url .= '?s=' . strtolower($arr[0]);
         if (isset($arr[1]) && $arr[1]) {
             $url .= '&c=' . strtolower($arr[1]);
@@ -787,7 +787,7 @@ function delete_cache($cache_file)
 }
 
 /**
- * 判断客服端是否是手机客服端
+ * 判断客服端是否是移动端
  */
 function is_mobile()
 {

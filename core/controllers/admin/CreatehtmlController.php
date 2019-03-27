@@ -21,7 +21,7 @@ class CreatehtmlController extends Admin
     public function indexAction()
     {
         ob_start();
-        core::load_file(CONTROLLER_PATH . 'IndexController.php');
+        core::load_file(CTRL_PATH . 'IndexController.php');
         $c = new IndexController();
         $c->indexAction();
         if (!file_put_contents(ROOT_PATH . 'index.html', ob_get_clean(), LOCK_EX)) {
@@ -271,7 +271,7 @@ class CreatehtmlController extends Admin
         ob_start();
         $_GET['catid'] = $cat['catid'];
         $_GET['page'] = $page;
-        core::load_file(CONTROLLER_PATH . 'IndexController.php');
+        core::load_file(CTRL_PATH . 'IndexController.php');
         $c = new IndexController();
         $c->listAction();
         if (!file_put_contents($htmlfile, ob_get_clean(), LOCK_EX)) {

@@ -102,7 +102,8 @@ class AccountController extends Admin
         set_cache('account', $data);
     }
 
-    public function meAction() {
+    public function meAction()
+    {
         if ($this->isPostForm()) {
             $data = $this->post('data');
             if (!empty($data['password'])) {

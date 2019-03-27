@@ -20,11 +20,12 @@ class IndexController extends Api
     /**
      * 内容展示
      */
-    public function showAction() {
-        $page  = (int)$this->get('page');
-        $page  = $page ? $page : 1;
-        $id    = (int)$this->get('id');
-        $data  = $this->content->find($id);
+    public function showAction()
+    {
+        $page = (int) $this->get('page');
+        $page = $page ? $page : 1;
+        $id = (int) $this->get('id');
+        $data = $this->content->find($id);
         if (empty($data)) {
             $this->response(404, null, '内容不存在！');
             exit();
@@ -39,7 +40,7 @@ class IndexController extends Api
             exit();
         }
         $catid = $data['catid'];
-        $cat   = $this->category_cache[$catid];
+        $cat = $this->category_cache[$catid];
         if ($cat['islook'] && !$this->getMember) {
             $this->response(401, null, '当前栏目游客不允许查看！');
             exit();
@@ -47,17 +48,17 @@ class IndexController extends Api
 
         $table = core::load_model($cat['tablename']);
         $_data = $table->find($id);
-        $data  = array_merge($data, $_data); // 合并主表和附表
-        $data  = $this->getFieldData($model[$cat['modelid']], $data);
+        $data = array_merge($data, $_data); // 合并主表和附表
+        $data = $this->getFieldData($model[$cat['modelid']], $data);
         if (isset($data['content']) && strpos($data['content'], '{-page-}') !== false) {
-            $content  = explode('{-page-}', $data['content']);
-            $pageid   = count($content) >= $page ? ($page - 1) : (count($content) - 1);
+            $content = explode('{-page-}', $data['content']);
+            $pageid = count($content) >= $page ? ($page - 1) : (count($content) - 1);
             $data['content'] = $content[$pageid];
-            $page_id  = 1;
+            $page_id = 1;
             $pagination = array();
             foreach ($content as $t) {
                 $pagination[$page_id] = getUrl($data, $page_id);
-                $page_id ++ ;
+                $page_id++;
             }
             $this->view->assign('content_page', $pagination);
         }
@@ -65,13 +66,13 @@ class IndexController extends Api
         $next = $this->content->getOne("`catid`=$catid AND `id`>$id AND `status`!=0", null, 'title, id');
         $seo = showSeo($data, $page);
         $tmp = array(
-            'data'     => $data,
-            'seo'      => $seo,
-            'prev'     => $prev,
-            'page'     => $page,
-            'next'     => $next,
-            'pageurl'  => getUrl($data, '{page}'),
-            'pagination' => $pagination
+            'data' => $data,
+            'seo' => $seo,
+            'prev' => $prev,
+            'page' => $page,
+            'next' => $next,
+            'pageurl' => getUrl($data, '{page}'),
+            'pagination' => $pagination,
         );
         $this->response(200, $tmp, 'success');
         // $this->view->assign($data);
@@ -224,6 +225,5 @@ class IndexController extends Api
     {
         echo word2pinyin($this->post('name'));
     }
-
 
 }
