@@ -5,7 +5,7 @@ html, body, div, dl, dt, dd, ul, ol, li, form, fieldset, input, textarea, th, td
 
 body, html, input, textarea {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 13px;
+    font-size: 14px;
 }
 
 a, a:focus, a:active, a:hover, input, textarea, button {
