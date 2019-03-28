@@ -24,7 +24,7 @@ class TemplateController extends Admin
         $local = str_replace(ROOT_PATH, '', $filepath);
         $encode_local = str_replace(array('/', '\\'), '|', $local);
         $file_explan = $this->file_info['file_explan'];
-        include $this->admin_tpl('template_list');
+        include $this->admin_tpl('template/list');
 
     }
 
@@ -56,7 +56,7 @@ class TemplateController extends Admin
             $this->show_message('提交成功', 1);
         }
         $filecontent = htmlspecialchars(file_get_contents($filepath));
-        include $this->admin_tpl('template_add');
+        include $this->admin_tpl('template/add');
     }
 
     public function addAction()
@@ -79,7 +79,7 @@ class TemplateController extends Admin
             file_put_contents($filepath . $filename, stripslashes($_POST['file_content']), LOCK_EX);
             $this->show_message('提交成功', 1, '?s=admin&c=template&dir=' . $dir);
         }
-        include $this->admin_tpl('template_add');
+        include $this->admin_tpl('template/add');
     }
 
     public function delAction()

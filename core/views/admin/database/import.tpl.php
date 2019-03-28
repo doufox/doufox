@@ -66,7 +66,7 @@
 			title: '查看备份数据' + path, 
 			id: 'show', 
 			iframe: '<?php echo url("admin/database/view")?>&file=' + path,
-			width: '700px',
+			width: '80%',
 			height: '400px'
 		});
 	}

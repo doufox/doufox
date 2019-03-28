@@ -56,7 +56,7 @@ class MemberController extends Admin
         $pagination = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
 
         $membermodel = $this->membermodel;
-        include $this->admin_tpl('member_list');
+        include $this->admin_tpl('member/list');
     }
 
     /*
@@ -106,7 +106,7 @@ class MemberController extends Admin
         $count[2] = $this->member->count('member', null, 'status=0');
         $model = $model;
         $info = $_data;
-        include $this->admin_tpl('member_edit');
+        include $this->admin_tpl('member/edit');
     }
 
     /**

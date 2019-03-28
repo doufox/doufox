@@ -101,7 +101,7 @@ class FormController extends Admin
 
         $model = $this->model;
         $join = empty($this->join) ? 0 : 1;
-        include $this->admin_tpl('form_list');
+        include $this->admin_tpl('form/list');
     }
 
     /**
@@ -156,7 +156,7 @@ class FormController extends Admin
         $model = $this->model;
         $join_info = $this->join_info;
         $join = empty($this->join) ? 0 : 1;
-        include $this->admin_tpl('form_config');
+        include $this->admin_tpl('form/config');
     }
 
     /**
@@ -209,7 +209,7 @@ class FormController extends Admin
 
         $join = empty($this->join) ? 0 : 1;
         $fields = $this->getFields($this->model['fields'], $data, $this->model['setting']['form']['field']);
-        include $this->admin_tpl('form_edit');
+        include $this->admin_tpl('form/edit');
     }
 
     /**

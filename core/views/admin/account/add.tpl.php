@@ -3,11 +3,11 @@
 <script type="text/javascript">
 	top.document.getElementById('position').innerHTML = '添加/修改后台用户';
 </script>
-
 <div class="subnav">
 	<div class="content-menu">
-		<a href="<?php echo url('admin/account'); ?>" class="on">全部账号</a>
+		<a href="<?php echo url('admin/account'); ?>">全部账号</a>
 		<a href="<?php echo url('admin/account/add'); ?>" class="add">添加账号</a>
+		<a href="<?php echo url('admin/account/me'); ?>">我的账号</a>
 	</div>
 	<div class="bk10"></div>
 	<div class="table_form">
@@ -21,14 +21,14 @@
 			<div class="contentList pad-10" id="div_setting_1" style="display: block;">
 				<table width="100%" class="table_form">
 					<tr>
-						<th width="100">账号： </th>
+						<th width="100">账号：</th>
 						<td><?php if ($data['username']) { echo $data['username'];} else { ?>
 							<input class="input-text" type="text" name="data[username]" value="" size="30"/>
 							<div class="show-tips">后台登陆账号</div><?php } ?>
 						</td>
 					</tr>
 					<tr>
-						<th>密码： </th>
+						<th>密码：</th>
 						<td>
 							<input class="input-text" type="text" name="data[password]" value="" size="30"/>
 							<?php if ($data['username']) { ?><div class="show-tips">不修改密码，请留空。</div>
@@ -36,14 +36,14 @@
 						</td>
 					</tr>
 					<tr>
-						<th>姓名： </th>
+						<th>姓名：</th>
 						<td>
 							<input class="input-text" type="text" name="data[realname]" value="<?php echo $data['realname']; ?>" size="30"/>
 							<div class="show-tips">账号显示姓名</div>
 						</td>
 					</tr>
 					<tr>
-						<th>超级管理员： </th>
+						<th>超级管理员：</th>
 						<td>
 							<label><input name="data[roleid]" type="radio" value="1" <?php if ($data['roleid']) echo 'checked' ?>>是</label>&nbsp;&nbsp;&nbsp;
 							<label><input name="data[roleid]" type="radio" value="0" <?php if (!$data['roleid']) echo 'checked' ?>>否</label>

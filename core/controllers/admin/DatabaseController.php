@@ -28,7 +28,7 @@ class DatabaseController extends Admin
             $this->export_database($size, $action, $fileid, $random, $tableid, $startfrom);
         } else {
             $data = $this->getTables();
-            include $this->admin_tpl('database_list');
+            include $this->admin_tpl('database/list');
         }
     }
 
@@ -76,7 +76,7 @@ class DatabaseController extends Admin
                 }
             }
         }
-        include $this->admin_tpl('database_import');
+        include $this->admin_tpl('database/import');
     }
 
     /*
@@ -133,6 +133,19 @@ class DatabaseController extends Admin
             echo '</tr>';
         }
         echo '</table></div>';
+    }
+
+    /*
+     * 预览备份文件内容
+     */
+    public function viewAction()
+    {
+        $db_file = $this->get('file');
+        $data = '';
+        if ($db_file) {
+            $data = $db_file;
+        }
+        include $this->admin_tpl('database/view');
     }
 
     /*

@@ -507,7 +507,7 @@ class ContentController extends Admin
                 $cats = @implode(',', $cats);
             }
             if (empty($cats)) {
-                echo '<style type="text/css">div, a { color: #777777;}</style>
+                echo '<style type="text/css">body{margin:0;overflow: hidden;}div, a { color: #777777;}</style>
                 <div style="font-size:12px;padding-top:0px;">
                 <font color=red>栏目列表为空，请选择栏目！</font>
                 </div>';
@@ -515,7 +515,7 @@ class ContentController extends Admin
             }
             $url = url('admin/content/updateurl', array('submit' => 1, 'catids' => $cats, 'nums' => $this->post('nums')));
             echo '
-            <style type="text/css">div, a { color: #777777;}</style>
+            <style type="text/css">body{margin:0;overflow: hidden;}div, a { color: #777777;}</style>
             <div style="font-size:12px;padding-top:0px;">
             <meta http-equiv="refresh" content="0; url=' . $url . '">
             <a href="' . $url . '">如果您的浏览器没有自动跳转，请点击这里</a>
@@ -533,7 +533,7 @@ class ContentController extends Admin
             $cat = isset($this->category_cache[$catid]) ? $this->category_cache[$catid] : null;
             if (!$cat) {
                 echo '
-                <style type="text/css">div, a { color: #777777;}</style>
+                <style type="text/css">body{margin:0;overflow: hidden;}div, a { color: #777777;}</style>
                 <div style="font-size:12px;padding-top:0px;">
                 <font color=green>更新完毕！</font>
                 </div>
@@ -560,7 +560,7 @@ class ContentController extends Admin
                 }
                 if (!isset($this->category_cache[$_catid])) {
                     echo '
-                    <style type="text/css">div, a { color: #777777;}</style>
+                    <style type="text/css">body{margin:0;overflow: hidden;}div, a { color: #777777;}</style>
                     <div style="font-size:12px;padding-top:0px;">
                     <font color=green>更新完毕！</font>
                     </div>
@@ -569,7 +569,7 @@ class ContentController extends Admin
                 }
                 $url = url('admin/content/updateurl', array('submit' => 1, 'nums' => $nums, 'page' => 1, 'catid' => $_catid, 'catids' => $catids));
                 echo '
-                <style type="text/css">div, a { color: #777777;}</style>
+                <style type="text/css">body{margin:0;overflow: hidden;}div, a { color: #777777;}</style>
                 <div style="font-size:12px;padding-top:0px;">
                 <meta http-equiv="refresh" content="0; url=' . $url . '">
                 <a href="' . $url . '">正在更新' . $this->category_cache[$_catid]['catname'] . '</a>
@@ -582,7 +582,7 @@ class ContentController extends Admin
                 }
                 $url = url('admin/content/updateurl', array('submit' => 1, 'nums' => $nums, 'page' => $page + 1, 'catid' => $catid, 'catids' => $catids));
                 echo '
-                <style type="text/css">div, a { color: #777777;}</style>
+                <style type="text/css">body{margin:0;overflow: hidden;}div, a { color: #777777;}</style>
                 <div style="font-size:12px;padding-top:0px;">
                 <meta http-equiv="refresh" content="0; url=' . $url . '">
                 <a href="' . $url . '">正在更新 ' . $this->category_cache[$_catid]['catname'] . $this->category_cache[$catid]['catname'] . $page . $total . '</a>

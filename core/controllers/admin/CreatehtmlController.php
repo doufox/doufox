@@ -9,16 +9,24 @@ class CreatehtmlController extends Admin
     {
         parent::__construct();
         if ($this->site_config['DIY_URL'] != 2) {
-            $this->show_message('请开启系统生成静态功能', 2, url('admin/index/config', array('type' => 5)));
+            $this->show_message('请开启系统生成静态功能', 2, url('admin/config', array('type' => 5)));
         }
 
         $this->tree = core::load_class('tree');
     }
 
     /**
-     * 生成首页
+     * 页面静态化
      */
     public function indexAction()
+    {
+        include $this->admin_tpl('html/index');
+    }
+
+    /**
+     * 生成首页
+     */
+    public function homeAction()
     {
         ob_start();
         core::load_file(CTRL_PATH . 'IndexController.php');
@@ -45,21 +53,21 @@ class CreatehtmlController extends Admin
             }
         }
         $show = '请选择要生成的栏目页';
-	    $catdata = $this->category->order('listorder ASC, catid ASC')->select();
-	    $catid = (int)$this->get('catid');
-		$tree = core::load_class('tree');
-		$tree->icon = array(' ','├','   ∟');
-		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
-		$category_select = array();
-		if(!empty($catdata)) {
-			foreach($catdata as $r) {
-				$category_select[$r['catid']] = $r;
-			}
-		}
-		$str  = "<option value='\$catid' \$selected>\$spacer \$catname</option>";
-		$tree->init($category_select);
+        $catdata = $this->category->order('listorder ASC, catid ASC')->select();
+        $catid = (int) $this->get('catid');
+        $tree = core::load_class('tree');
+        $tree->icon = array(' ', '├', '   ∟');
+        $tree->nbsp = '&nbsp;&nbsp;&nbsp;';
+        $category_select = array();
+        if (!empty($catdata)) {
+            foreach ($catdata as $r) {
+                $category_select[$r['catid']] = $r;
+            }
+        }
+        $str = "<option value='\$catid' \$selected>\$spacer \$catname</option>";
+        $tree->init($category_select);
         $category_select = $tree->get_tree_category(0, $str, '2', $catid);
-        include $this->admin_tpl('create_html');
+        include $this->admin_tpl('html/create_html');
     }
 
     /**
@@ -68,7 +76,7 @@ class CreatehtmlController extends Admin
     public function one_catAction()
     {
         $create = $this->get('create');
-        if (empty($create)) { exit; }
+        if (empty($create)) {exit;}
 
         $catid = $this->get('catid');
         $page = $this->get('page') ? $this->get('page') : 0;
@@ -174,20 +182,20 @@ class CreatehtmlController extends Admin
         $isshow = 1;
         $show = '按照栏目生成内容页';
         $catdata = $this->category->order('listorder ASC, catid ASC')->select();
-	    $catid = (int)$this->get('catid');
-		$tree = core::load_class('tree');
-		$tree->icon = array(' ','├','   ∟');
-		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
-		$category_select = array();
-		if(!empty($catdata)) {
-			foreach($catdata as $r) {
-				$category_select[$r['catid']] = $r;
-			}
-		}
-		$str  = "<option value='\$catid' \$selected>\$spacer \$catname</option>";
-		$tree->init($category_select);
+        $catid = (int) $this->get('catid');
+        $tree = core::load_class('tree');
+        $tree->icon = array(' ', '├', '   ∟');
+        $tree->nbsp = '&nbsp;&nbsp;&nbsp;';
+        $category_select = array();
+        if (!empty($catdata)) {
+            foreach ($catdata as $r) {
+                $category_select[$r['catid']] = $r;
+            }
+        }
+        $str = "<option value='\$catid' \$selected>\$spacer \$catname</option>";
+        $tree->init($category_select);
         $category_select = $tree->get_tree_category(0, $str, '2', $catid);
-        include $this->admin_tpl('create_html');
+        include $this->admin_tpl('html/create_html');
     }
 
     /**
@@ -368,7 +376,7 @@ class CreatehtmlController extends Admin
             'member' => $this->member_info,
             'site_url' => HTTP_URL,
             'site_name' => $this->site_config['SITE_NAME'],
-            'site_template' => HTTP_URL . basename(THEME_PATH_D) .'/',
+            'site_template' => HTTP_URL . basename(THEME_PATH_D) . '/',
         ));
         $this->view->display($category['showtpl']);
 

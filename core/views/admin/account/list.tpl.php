@@ -5,8 +5,9 @@
 </script>
 <div class="subnav">
 	<div class="content-menu">
-		<a href="<?php echo url('admin/account'); ?>" class="on">全部账号</a>
-		<a href="<?php echo url('admin/account/add'); ?>" class="add">添加账号</a>
+		<a href="<?php echo url('admin/account'); ?>" class="add">全部账号</a>
+		<a href="<?php echo url('admin/account/add'); ?>">添加账号</a>
+		<a href="<?php echo url('admin/account/me'); ?>">我的账号</a>
 	</div>
 	<div class="bk10"></div>
 	<table width="100%"  class="table-list">
@@ -28,7 +29,7 @@
 				<td align="left"><?php if($t['roleid'] == 1) {echo '超级管理员';} else {echo '一般账号';} ?></td>
 				<td align="left">
 					<a href="<?php echo url('admin/account/edit',array('userid'=>$t['userid'])); ?>">编辑</a> |
-					<a href="javascript:admin_command.confirmurl('<?php echo url('admin/account/del', array('userid'=>$t['userid']));?>','确定删除账号： 『<?php echo $t['username']; ?> 』吗？')" >删除</a>
+					<a href="javascript:admin_command.confirmurl('<?php echo url('admin/account/del', array('userid'=>$t['userid']));?>','确定删除账号：『<?php echo $t['username']; ?> 』吗？')" >删除</a>
 				</td>
 			</tr>
 			<?php } ?>

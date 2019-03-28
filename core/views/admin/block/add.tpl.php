@@ -13,7 +13,7 @@ top.document.getElementById('position').innerHTML = '区块编辑';
 		<input name="id" type="hidden" value="<?php echo $data['id']; ?>">
 		<table width="100%" class="table_form">
 		<tr>
-			<th width="60">区块名称： </th>
+			<th width="60">区块名称：</th>
 			<td><input class="input-text" type="text" name="data[name]" value="<?php echo $data['name']; ?>" size="40"/>    编辑方式：<select id="type" name="data[type]" onChange="select_type(this.value)">
 			<option value="0"> ... 请选择方式</option>
 			<?php if (is_array($type)) { foreach ($type as $i=>$v) { ?>
@@ -22,16 +22,16 @@ top.document.getElementById('position').innerHTML = '区块编辑';
 			</select></td>
         </tr>
         <tr>
-            <th width="80">备注： </th>
+            <th width="80">备注：</th>
             <td><input class="input-text" type="text" name="data[remark]" value="<?php echo $data['remark']; ?>" size="100" /></td>
         </tr>
 		<tr id="text_1" style="display:none">
-			<th>区块内容： </th>
+			<th>区块内容：</th>
 			<td><textarea name="data[content_1]" id="data[content]" cols="91" rows="8"><?php echo $data['content']; ?></textarea>
 			<br><div class="show-tips">区块内容支持HTML标签</div></td>
 		</tr>
 		<tr id="text_2" style="display:none">
-			<th>区块内容： </th>
+			<th>区块内容：</th>
 			<td>
 				<span style="position: relative;">
 					<input type="text" class="input-text" size="50" value="<?php echo $data[content]; ?>" name="data[content_2]" id="thumb" onmouseover="admin_command.preview2('thumb')" onmouseout="admin_command.preview('thumb')">

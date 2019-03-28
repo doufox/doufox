@@ -13,7 +13,7 @@ class AccountController extends Admin
     public function indexAction()
     {
         $list = $this->account->select();
-        include $this->admin_tpl('account_list');
+        include $this->admin_tpl('account/list');
     }
 
     public function addAction()
@@ -40,7 +40,7 @@ class AccountController extends Admin
             $this->show_message('添加成功', 1, url('admin/account'));
         }
         $cats = get_cache('category');
-        include $this->admin_tpl('account_add');
+        include $this->admin_tpl('account/add');
     }
 
     public function editAction()
@@ -70,7 +70,7 @@ class AccountController extends Admin
             $this->cacheAction();
             $this->show_message('修改成功', 1);
         }
-        include $this->admin_tpl('account_add');
+        include $this->admin_tpl('account/add');
     }
 
     public function delAction()
@@ -119,6 +119,6 @@ class AccountController extends Admin
             $this->show_message('修改成功', 1);
         }
         $data = $this->account->find($this->userid);
-        include $this->admin_tpl('account_me');
+        include $this->admin_tpl('account/me');
     }
 }

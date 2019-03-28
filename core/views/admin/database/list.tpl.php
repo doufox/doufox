@@ -4,8 +4,8 @@ top.document.getElementById('position').innerHTML = '数据库管理';
 </script>
 <div class="subnav">
 	<div class="content-menu">
-		<a href="<?php echo url('admin/database/index'); ?>" class="on">数据表</a>
-		<a href="<?php echo url('admin/database/import'); ?>" class="on">备份列表</a>
+		<a href="<?php echo url('admin/database/index'); ?>" class="add">数据表</a>
+		<a href="<?php echo url('admin/database/import'); ?>">备份列表</a>
 	</div>
 	<div class="bk10"></div>
 
