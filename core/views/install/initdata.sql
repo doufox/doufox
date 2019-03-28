@@ -145,6 +145,7 @@ DROP TABLE IF EXISTS `doufox_member`;
 CREATE TABLE IF NOT EXISTS `doufox_member` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `username` char(20) NOT NULL DEFAULT '',
+  `nickname` varchar(50) DEFAULT '',
   `password` char(32) NOT NULL DEFAULT '',
   `salt` char(10) NOT NULL,
   `email` varchar(100) NOT NULL,

@@ -1,20 +1,17 @@
 <?php include $this->admin_tpl('header');?>
 <script type="text/javascript">
-top.document.getElementById('position').innerHTML = '会员信息';
-</script>
-
-<script type="text/javascript">
-function ajaxemail() {
-	$('#email_text').html('');
-	$.post('<?php echo url('admin/member/ajaxemail'); ?>&rid='+Math.random(), { email:$('#email').val(), id:<?php echo $id; ?> }, function(data){ 
-        $('#email_text').html(data); 
-	});
-}
+	top.document.getElementById('position').innerHTML = '添加会员';
+	function ajaxemail() {
+		$('#email_text').html('');
+		$.post('<?php echo url('admin/member/ajaxemail'); ?>&rid='+Math.random(), { email:$('#email').val(), id:<?php echo $id; ?> }, function(data){ 
+			$('#email_text').html(data); 
+		});
+	}
 </script>
 <div class="subnav">
 	<div class="content-menu">
 		<a href="<?php echo url('admin/member/index'); ?>">会员管理</a>
-		<a href="<?php echo url('admin/member/add'); ?>">添加会员</a>
+		<a href="<?php echo url('admin/member/add'); ?>" class="add">添加会员</a>
 		<a href="<?php echo url('member/register'); ?>" target="_blank">前台注册</a>
 	</div>
 	<div class="bk10"></div>
@@ -24,37 +21,36 @@ function ajaxemail() {
 		<tbody>
 			<tr>
 				<th width="100">会员类型：</th>
-				<td><?php echo $model['modelname']; ?></td>
+				<td><?php echo $model['modelname']; ?>
+			
+				<select name="data[modelid]">
+					<option value="0"> == 会员类型 == </option>
+					<?php if (is_array($membermodel)) {foreach ($membermodel as $t) { ?>
+					<option value="<?php echo $t['modelid']; ?>"><?php echo $t['modelname']; ?></option>
+					<?php } } ?>
+				</select>
+			</td>
 			</tr>
 			<tr>
 				<th>登陆账号：</th>
-				<td><?php echo $data['username']; ?></td>
-			</tr>
-			<tr>
-				<th>会员昵称：</th>
-				<td><input type="text" class="input-text" size="50" value="<?php echo $data['nickname']; ?>" name="data[nickname]" maxlength="50"></td>
-			</tr>
-			<tr>
-				<th>重置密码：</th>
-				<td><input type="text" class="input-text" size="50" value="" name="password">
-				<div class="show-tips">不修改密码请留空。</div></td>
-			</tr>
-			<tr>
-				<th>电子邮箱：</th>
-				<td><input type="text" class="input-text" size="50" id="email" value="<?php echo $data['email']; ?>" name="data[email]"onBlur="ajaxemail()">
-				<div class="show-tips" id="email_text"></div>
+				<td>
+					<input class="input-text" type="text" size="20" value="" name="data[username]" maxlength="20" />
 				</td>
 			</tr>
 			<tr>
-				<th>注册时间：</th>
-				<td><?php echo date('Y-m-d H:i:s', $data['regdate']); ?></td>
+				<th>会员昵称：</th>
+				<td><input type="text" class="input-text" size="50" value="" name="data[nickname]" maxlength="50"></td>
 			</tr>
 			<tr>
-				<th>注册IP：</th>
-				<td><?php echo $data['regip']; ?></td>
+				<th>登陆密码：</th>
+				<td><input type="text" class="input-text" size="50" value="" name="data[password]"></td>
 			</tr>
 			<tr>
-				<th>会员状态：</th>
+				<th>电子邮箱：</th>
+				<td><input type="text" class="input-text" size="50" id="email" value="" name="data[email]"onBlur="ajaxemail()"></td>
+			</tr>
+			<tr>
+				<th>设置状态：</th>
 				<td>
 					<label><input type="radio" <?php if (!isset($data['status']) || $data['status']==1) { ?>checked<?php } ?> value="1" name="data[status]"> 已审核</label>
 					&nbsp;&nbsp;&nbsp;&nbsp;

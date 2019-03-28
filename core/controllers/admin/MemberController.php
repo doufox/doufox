@@ -60,6 +60,46 @@ class MemberController extends Admin
     }
 
     /*
+     * 添加会员
+     */
+    public function addAction()
+    {
+        if ($this->isPostForm()) {
+            $data = $this->post('data');
+            if (!$data['username']) {
+                $this->show_message('用户名不能为空', 2);
+            }
+            if (strlen($data['password']) < 6) {
+                $this->show_message('密码最少6位数', 2);
+            }
+            $data['password'] = md5(md5($data['password']));
+            if ($this->account->getOne('username=?', $data['username'])) {
+                $this->show_message('已存在相同的用户名', 2);
+            }
+            $member = $this->member->from(null, 'id')->where('email=?', $data['email'])->select(false);
+            if ($member) {
+                $this->show_message('邮箱已经存在，请重新注册');
+            }
+    
+            $member = $this->member->from(null, 'id')->where('username=?', $data['username'])->select(false);
+            if ($member) {
+                $this->show_message('会员已经存在');
+            }
+            $data['regdate'] = time();
+            $data['regip'] = get_user_ip();
+            $data['status'] = $this->site_config['MEMBER_STATUS'] ? 0 : 1;
+            $data['modelid'] = (!isset($data['modelid']) || empty($data['modelid'])) ? $this->site_config['MEMBER_MODELID'] : $data['modelid'];
+            if (!isset($this->membermodel[$data['modelid']])) {
+                $this->show_message('会员模型不存在');
+            }
+            $this->member->insert($data);
+            $this->show_message('添加成功', 1, url('admin/member'));
+        }
+        $membermodel = $this->membermodel;
+        include $this->admin_tpl('member/add');
+    }
+
+    /*
      * 修改资料
      */
     public function editAction()
