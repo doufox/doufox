@@ -913,10 +913,10 @@ abstract class Model
      */
     public function delete($where, $value = null)
     {
-        //获取数据表名及字段信息
+        // 获取数据表名及字段信息
         $this->get_table_name();
         $sql_str = 'DELETE FROM ' . $this->table_name;
-        //处理SQL的条件查询语句
+        // 处理SQL的条件查询语句
         $this->_parts['where'] = '';
         $this->where($where, $value);
         $sql_str .= $this->_parts['where'];

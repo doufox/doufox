@@ -155,7 +155,7 @@ class ContentController extends Admin
         $tree->init($categorys);
         $category = $tree->get_tree(0, $str);
 
-        include $this->admin_tpl('content_list');
+        include $this->admin_tpl('content/list');
     }
 
     /**
@@ -244,7 +244,7 @@ class ContentController extends Admin
         }
         $tree->init($categorys);
         $category = $tree->get_tree(0, "<option value='\$catid' \$selected \$disabled>\$spacer \$catname</option>");
-        include $this->admin_tpl('content_all');
+        include $this->admin_tpl('content/all');
     }
 
     /**
@@ -282,7 +282,7 @@ class ContentController extends Admin
         } else {
             $categorys = '没有分类请添加或刷新';
         }
-        include $this->admin_tpl('content_category');
+        include $this->admin_tpl('content/category');
     }
 
     /**
@@ -343,7 +343,7 @@ class ContentController extends Admin
         $tree->init($categorys);
         $category = $tree->get_tree(0, $str);
 
-        include $this->admin_tpl('content_add');
+        include $this->admin_tpl('content/add');
     }
 
     /**
@@ -416,7 +416,7 @@ class ContentController extends Admin
         $tree->init($categorys);
         $category = $tree->get_tree(0, $str);
 
-        include $this->admin_tpl('content_add');
+        include $this->admin_tpl('content/add');
     }
 
     /**
@@ -449,7 +449,7 @@ class ContentController extends Admin
         // 自定义字段
         $data_fields = $this->getFields($fields, $data);
         $model = $model[$modelid];
-        include $this->admin_tpl('content_preview');
+        include $this->admin_tpl('content/preview');
     }
 
     /**
@@ -607,7 +607,7 @@ class ContentController extends Admin
             $str = "<option value='\$catid' \$selected \$disabled>\$spacer \$catname</option>";
             $tree->init($categorys);
             $category = $tree->get_tree(0, $str);
-            include $this->admin_tpl('content_url');
+            include $this->admin_tpl('content/url');
         }
     }
 

@@ -1,5 +1,5 @@
 <div class="header">
-    <h1 class="title"><a href="<?php echo url('admin'); ?>">网站管理系统后台</a></h1>
+    <h1 class="title"><a href="<?php echo url('admin'); ?>">网站管理系统</a></h1>
     <ul id="menu" class="menu">
         <li id="M_200"><a href="javascript:_open_url(200,'<?php echo url('admin/category'); ?>');">栏目</a></li>
         <li id="M_300"><a href="javascript:_open_url(300,'<?php echo url('admin/block'); ?>');">区块</a></li>

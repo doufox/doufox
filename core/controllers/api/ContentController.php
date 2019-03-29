@@ -119,7 +119,7 @@ class ContentController extends Api
         $tree->init($categorys);
         $category = $tree->get_tree(0, $str);
 
-        include $this->admin_tpl('content_add');
+        include $this->admin_tpl('content/add');
     }
 
     /**
@@ -192,7 +192,7 @@ class ContentController extends Api
         $tree->init($categorys);
         $category = $tree->get_tree(0, $str);
 
-        include $this->admin_tpl('content_add');
+        include $this->admin_tpl('content/add');
     }
 
     /**
@@ -346,7 +346,7 @@ class ContentController extends Api
             $str = "<option value='\$catid' \$selected \$disabled>\$spacer \$catname</option>";
             $tree->init($categorys);
             $category = $tree->get_tree(0, $str);
-            include $this->admin_tpl('content_url');
+            include $this->admin_tpl('content/url');
         }
     }
 

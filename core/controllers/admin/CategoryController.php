@@ -28,7 +28,7 @@ class CategoryController extends Admin
         $types = array(1 => '', 2 => '<font color="blue">单网页</font>', 3 => '<font color="red">外部连接</font>');
         if (!empty($result)) {
             foreach ($result as $r) {
-                $r['modelname'] = @$models[$r['modelid']]['modelname']; //读取模型
+                $r['modelname'] = @$models[$r['modelid']]['modelname']; // 读取模型
                 $r['str_manage'] = '<a href="?s=admin&c=category&a=add&catid=' . $r['catid'] . '" >添加子栏目</a> | <a href="?s=admin&c=category&a=edit&catid=' . $r['catid'] . '">编辑</a> | <a href="javascript:admin_command.confirmurl(\'?s=admin&c=category&a=del&catid=' . $r['catid'] . '\',\'' . '确定删除 『 ' . $r['catname'] . ' 』栏目吗？ ' . '\')">删除</a>';
                 $r['typename'] = $types[$r['typeid']]; // 读取是类型
                 $r['display'] = $r['ismenu'] ? '是' : '<font color="blue">否</font>';
@@ -48,7 +48,7 @@ class CategoryController extends Admin
                 </tr>";
         $tree->init($categorys);
         $categorys = $tree->get_tree(0, $str);
-        include $this->admin_tpl('category_list');
+        include $this->admin_tpl('category/list');
     }
 
     /**
@@ -146,7 +146,7 @@ class CategoryController extends Admin
         $tree->init($category_select);
         $category_select = $tree->get_tree_category(0, $str, '2', $catid);
 
-        include $this->admin_tpl('category_add');
+        include $this->admin_tpl('categoryadd');
     }
 
     /**
@@ -200,7 +200,7 @@ class CategoryController extends Admin
         $str = "<option value='\$catid' \$selected>\$spacer \$catname</option>";
         $tree->init($category_select);
         $category_select = $tree->get_tree_category(0, $str, '2', $data['parentid']);
-        include $this->admin_tpl('category_add');
+        include $this->admin_tpl('category/add');
     }
 
     /**

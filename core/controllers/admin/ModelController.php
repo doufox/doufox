@@ -36,7 +36,7 @@ class ModelController extends Admin
         $typename = $this->modelTypeName;
         $modelname = $typename[$typeid];
         $list = $this->_model->where('typeid=' . $typeid)->select();
-        include $this->admin_tpl('model_list');
+        include $this->admin_tpl('model/list');
     }
 
     public function addAction()
@@ -99,7 +99,7 @@ class ModelController extends Admin
         $formmodel = $fdata;
         $joindata = $jdata;
 
-        include $this->admin_tpl('model_add');
+        include $this->admin_tpl('model/add');
     }
 
     public function editAction()
@@ -154,7 +154,7 @@ class ModelController extends Admin
         $typename = $this->modelTypeName;
         $joindata = $jdata;
         $formmodel = $fdata;
-        include $this->admin_tpl('model_add');
+        include $this->admin_tpl('model/add');
     }
 
     public function delAction()
@@ -202,7 +202,7 @@ class ModelController extends Admin
         $list = $field->where('modelid=' . $modelid)->order('listorder ASC')->select();
         $content = $setting['default'];
 
-        include $this->admin_tpl('model_fields');
+        include $this->admin_tpl('model/fields');
     }
 
     /**
@@ -284,7 +284,7 @@ class ModelController extends Admin
         $modeltype = $this->modelType;
         $typename = $this->modelTypeName;
         $merge = $field->where('modelid=' . $modelid)->where('formtype=?', 'fields')->select();
-        include $this->admin_tpl('model_addfield');
+        include $this->admin_tpl('model/addfield');
     }
 
     /**
@@ -344,7 +344,7 @@ class ModelController extends Admin
         $typename = $this->modelTypeName;
         $merge = $field->where('modelid=' . $modelid)->where('formtype=?', 'fields')->select();
 
-        include $this->admin_tpl('model_addfield');
+        include $this->admin_tpl('model/addfield');
     }
 
     /**
@@ -377,7 +377,7 @@ class ModelController extends Admin
         $name = $data['modelname'];
         $data = $field;
 
-        include $this->admin_tpl('model_ajaxedit');
+        include $this->admin_tpl('model/ajaxedit');
     }
 
     /**
