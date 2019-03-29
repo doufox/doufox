@@ -1,5 +1,11 @@
 RewriteEngine on
 RewriteBase /
+RewriteRule ^index.html$ index.php?c=index [L]
+RewriteRule ^([a-z0-9A-Z]+).html$ index.php?c=index&a=list&catdir=$1 [L]
+RewriteRule ^([a-z0-9A-Z]+)_([0-9]+).html$ index.php?c=index&a=list&catdir=$1&page=$2 [L]
+RewriteRule ^([a-z0-9A-Z]+)/([0-9]+).html$ index.php?c=index&a=show&catdir=$1&id=$2 [L]
+RewriteRule ^([a-z0-9A-Z]+)/([0-9]+)_([0-9]+).html$ index.php?c=index&a=show&catdir=$1&id=$2&page=$3 [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /index.php/$1 [L]
