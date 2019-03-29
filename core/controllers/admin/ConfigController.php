@@ -40,6 +40,7 @@ class ConfigController extends Admin
             'SHOW_URL' => '内容页url',
             'SHOW_PAGE_URL' => '内容分页url',
             'HIDE_ENTRY_FILE' => '隐藏入口文件需要服务器配置默认文件，如index.php。当服务器配置的默认文件与程序入口文件一致时，设置才生效',
+            'URL_LIST_TYPE' => '栏目参数形式，ID形式：catid=123，目录形式：catdir=catdir',
             'RAND_CODE' => '随机代码',
             'WEIXIN_MP_OPENED' => '微信公众号开关',
             'WEIXIN_MP_URL' => '接收来自微信服务器的请求,必须以http://或https://开头',
@@ -72,11 +73,11 @@ class ConfigController extends Admin
             $content = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) exit();" . PHP_EOL . "return array(" . PHP_EOL;
             $system = array();
 
-            $content .= PHP_EOL . "	/* Site Config */" . PHP_EOL;
+            $content .= PHP_EOL . "    /* Site Config */" . PHP_EOL;
             foreach ($configdata as $var => $val) {
                 if (!in_array($var, $system)) {
                     $value = $val == 'false' || $val == 'true' ? $val : "'" . $val . "'";
-                    $content .= "	'" . strtoupper($var) . "'" . $this->setspace($var) . " => " . $value . ",  // " . $configTips[$var] . PHP_EOL;
+                    $content .= "    '" . strtoupper($var) . "'" . $this->setspace($var) . " => " . $value . ", // " . $configTips[$var] . PHP_EOL;
                 }
             }
             $content .= PHP_EOL . ");";

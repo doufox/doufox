@@ -60,7 +60,7 @@ function url($route, $params = null)
 
     $arr = explode('/', $route);
     $arr = array_diff($arr, array(''));
-    $count = count($arr);
+    // $count = count($arr);
     $url = '';
     if (is_dir(CTRL_PATH . $arr[0])) {
         $url .= '?s=' . strtolower($arr[0]);
@@ -78,6 +78,7 @@ function url($route, $params = null)
             }
         }
     }
+    unset($arr);
     // 参数$params变量的键(key),值(value)的URL组装
     if (!is_null($params) && is_array($params)) {
         $params_url = array();
@@ -90,6 +91,7 @@ function url($route, $params = null)
     if (!$config['DIY_URL'] && !$config['HIDE_ENTRY_FILE']) {
         $url = ENTRY_FILE . $url;
     }
+    unset($config);
     $url = str_replace('//', '/', $url);
     return Controller::get_base_url() . $url;
 }
@@ -457,24 +459,26 @@ function getUrl($data, $page = 0)
     $config = core::load_config('config');
     $cats = get_cache('category');
     $cat = $cats[$data['catid']];
-    $url = url('index/show', array('id' => $data['id']));
     unset($cats);
     if ($config['DIY_URL'] && $config['SHOW_URL']) {
         $data['dir'] = $cat['catdir'];
         $data['page'] = $page;
         $url = !is_numeric($page) || $page > 1 ? preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['SHOW_PAGE_URL']) : preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['SHOW_URL']);
         $url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(safe_replace('\\2'))", $url);
+        unset($config, $cat);
         return HTTP_URL . $url;
     }
+    unset($config, $cat);
+    $params = array('id' => $data['id']);
     if ($page) {
-        $url = url('index/show', array('id' => $data['id'], 'page' => $page));
+        $params['page'] = $page;
     }
-
-    return $url;
+    unset($data);
+    return url('index/show', $params);
 }
 
 /**
- * 栏目URL
+ * 组装栏目URL
  */
 function getCaturl($data, $page = 0)
 {
@@ -483,28 +487,33 @@ function getCaturl($data, $page = 0)
         $data = $cats[$data];
         unset($cats);
     }
-    $catid = is_numeric($data) ? $data : $data['catid'];
+    // $catid = is_numeric($data) ? $data : $data['catid'];
     $config = core::load_config('config');
     if ($data['typeid'] == 3) {
+        unset($config);
         return $data['http'];
     }
 
-    $url = url('index/list', array('catid' => $data['catid']));
-
     if ($config['DIY_URL'] && $config['LIST_URL']) {
+        // 禁止默认的动态参数URL，使用自定义URL
         $data['id'] = $data['catid'];
         $data['dir'] = $data['catdir'];
         $data['page'] = $page;
         $url = !is_numeric($page) || $page > 1 ? preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['LIST_PAGE_URL']) : preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['LIST_URL']);
         $url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(safe_replace('\\2'))", $url);
+        unset($config, $data);
         return HTTP_URL . $url;
     }
-
-    if ($page) {
-        $url = url('index/list', array('catid' => $data['catid'], 'page' => $page));
+    if ($config['URL_LIST_TYPE']) {
+        $params = array('catdir' => $data['catdir']);
+    } else {
+        $params = array('catid' => $data['catid']);
     }
-
-    return $url;
+    unset($config, $data);
+    if ($page) {
+        $params['page'] = $page;
+    }
+    return url('index/list', $params);
 }
 
 /**
