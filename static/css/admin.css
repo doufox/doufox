@@ -227,6 +227,11 @@ select[disabled] {
     height: 10px
 }
 
+.bk10.bottom-line {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
 .bk15 {
     height: 15px
 }
@@ -452,6 +457,10 @@ body fieldset.blue legend {
 .content-menu span {
     color: #ddd;
     padding: 0 8px
+}
+
+.content-menu .options {
+    float: right;
 }
 
 /*分页*/

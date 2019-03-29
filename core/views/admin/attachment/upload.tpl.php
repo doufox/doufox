@@ -10,36 +10,36 @@
 .uploadlay{padding-left:25px;} 
 </style>
 <div class="subnav">
-	<div class="table-list">
-		<form method="post" action="" id="myform" name="myform" enctype="multipart/form-data">
-		<input name="filename" id="filename" type="hidden" value="<?php echo $fielname; ?>">
-		<input name="size" id="size" type="hidden" value="<?php echo $size; ?>">
-		<input name="admin" id="admin" type="hidden" value="<?php echo $admin; ?>">
-		<div class="pad-10">
-			<div class="col-tab">
+    <div class="table-list">
+        <form method="post" action="" id="myform" name="myform" enctype="multipart/form-data">
+        <input name="filename" id="filename" type="hidden" value="<?php echo $fielname; ?>">
+        <input name="size" id="size" type="hidden" value="<?php echo $size; ?>">
+        <input name="admin" id="admin" type="hidden" value="<?php echo $admin; ?>">
+        <div class="pad-10">
+            <div class="col-tab">
 
-				<div class="uploadlay"> 
-						<div id="ui-upload-filepath"> 
-							<input type="text" id="ui-upload-filepathtxt" class="filepathtxt" disabled /> 
-						</div> 
-						<div id="ui-upload-holder"> 
-							<div id="ui-upload-txt">浏览</div> 
-							<input type="file" id="ui-upload-input" name="file" /> 
-						</div>
-						<div id="ui-upload-button"> 
-							<input type="submit" class="button" value="点击上传" name="submit" align="absmiddle" <?php if ($isimage) {?>onClick="this.value='正在上传'"<?php } else { ?>onClick="uploading()"<?php };?> />
-						</div>
-					</div>
-					<script> 
-					document.getElementById("ui-upload-input").onchange=function(){ 
-						document.getElementById("ui-upload-filepathtxt").value = this.value; 
-					}
-					</script>
-				<div class="show-tips"><?php echo $note; ?></div>
-			</div>
-		</div>
-		</form>
-	</div>
+                <div class="uploadlay"> 
+                        <div id="ui-upload-filepath"> 
+                            <input type="text" id="ui-upload-filepathtxt" class="filepathtxt" disabled /> 
+                        </div> 
+                        <div id="ui-upload-holder"> 
+                            <div id="ui-upload-txt">浏览</div> 
+                            <input type="file" id="ui-upload-input" name="file" /> 
+                        </div>
+                        <div id="ui-upload-button"> 
+                            <input type="submit" class="button" value="点击上传" name="submit" align="absmiddle" <?php if ($isimage) {?>onClick="this.value='正在上传'"<?php } else { ?>onClick="uploading()"<?php };?> />
+                        </div>
+                    </div>
+                    <script> 
+                    document.getElementById("ui-upload-input").onchange=function(){ 
+                        document.getElementById("ui-upload-filepathtxt").value = this.value; 
+                    }
+                    </script>
+                <div class="show-tips"><?php echo $note; ?></div>
+            </div>
+        </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

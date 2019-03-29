@@ -5,11 +5,12 @@
 </script>
 <div class="subnav">
     <div class="content-menu">
-		<a href="<?php echo url('admin/account'); ?>">全部账号</a>
-		<a href="<?php echo url('admin/account/add'); ?>">添加账号</a>
-		<a href="<?php echo url('admin/account/me'); ?>" class="add">我的账号</a>
-	</div>
-	<div class="bk10"></div>
+        <a href="<?php echo url('admin/account'); ?>">全部账号</a>
+        <a href="<?php echo url('admin/account/add'); ?>">添加账号</a>
+        <a href="<?php echo url('admin/account/me'); ?>" class="add">我的账号</a>
+        <a href="<?php echo url('admin/account/cache'); ?>" class="options">更新缓存</a>
+    </div>
+    <div class="bk10 bottom-line"></div>
     <form method="post" action="" id="myform" name="myform">
         <table width="100%" class="table_form">
             <tr>

@@ -146,7 +146,7 @@ class CategoryController extends Admin
         $tree->init($category_select);
         $category_select = $tree->get_tree_category(0, $str, '2', $catid);
 
-        include $this->admin_tpl('categoryadd');
+        include $this->admin_tpl('category/add');
     }
 
     /**
@@ -276,7 +276,7 @@ class CategoryController extends Admin
             }
             $category[$t['catid']]['arrmodelid'] = array_unique($category[$t['catid']]['arrmodelid']);
         }
-        //保存到缓存文件
+        // 保存到缓存文件
         set_cache('category', $category);
         set_cache('category_dir', $category_dir);
         $show or $this->show_message('缓存更新成功', 1, url('admin/category/index'));

@@ -18,14 +18,14 @@
 
 <div class="subnav">
 <form action="" method="post">
-	<div class="content-menu">
-		<a href="<?php echo url('admin/model/index', array('typeid'=>$typeid)); ?>" class="on">模型管理</a>
-		<a href="<?php echo url('admin/model/add', array('typeid'=>$typeid)); ?>" class="add">添加模型</a>
-	</div>
-	<div class="bk10"></div>
-	<div class="table-list">
-		<table width="100%">
-			<thead>
+    <div class="content-menu">
+        <a href="<?php echo url('admin/model/index', array('typeid'=>$typeid)); ?>" class="on">模型管理</a>
+        <a href="<?php echo url('admin/model/add', array('typeid'=>$typeid)); ?>" class="add">添加模型</a>
+    </div>
+    <div class="bk10"></div>
+    <div class="table-list">
+        <table width="100%">
+            <thead>
                 <tr>
                     <th align="left" width="40">ID</th>
                     <th align="left">模型名称</th>
@@ -33,8 +33,8 @@
                     <th align="left">数据表名</th>
                     <th align="left" width="200">操作</th>
                 </tr>
-			</thead>
-			<tbody class="line-box">
+            </thead>
+            <tbody class="line-box">
                 <?php if (is_array($list)) {foreach ($list as $t) {  $setting=string2array($t['setting']);$disable = isset($setting['disable']) && $setting['disable'] == 1 ? 1 : 0; ?>
                 <tr height="25">
                     <td align="left"><?php echo $t['modelid']; ?></td>
@@ -49,9 +49,9 @@
                     </td>
                 </tr>
                 <?php } } ?>
-			<tbody>
-		</table>
-	</div>
+            <tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>

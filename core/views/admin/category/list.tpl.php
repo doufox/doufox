@@ -8,6 +8,7 @@
     <div class="content-menu">
         <a href="<?php echo url('admin/category'); ?>" class="on">全部栏目</a>
         <a href="<?php echo url('admin/category/add'); ?>" class="add">添加栏目</a>
+        <a href="<?php echo url('admin/category/cache'); ?>" class="options">更新缓存</a>
     </div>
     <div class="bk10"></div>
     <div class="table-list">

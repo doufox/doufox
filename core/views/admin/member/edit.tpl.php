@@ -7,21 +7,23 @@
     function ajaxemail() {
         $('#email_text').html('');
         $.post('<?php echo url('api/member/ajaxemail'); ?>&rid=' + Math.random(), {
-                email: $('#email').val(),
-                id: <?php echo $id; ?>
-            },
-            function(data) {
-                $('#email_text').html(data.msg);
-            });
+            email: $('#email').val(),
+            id: <?php echo $id; ?>
+        }, function(data) {
+            $('#email_text').html(data.msg);
+        });
     }
 </script>
 <div class="subnav">
     <div class="content-menu">
         <a href="<?php echo url('admin/member/index'); ?>">会员管理</a>
         <a href="<?php echo url('admin/member/add'); ?>">添加会员</a>
-        <a href="<?php echo url('member/register'); ?>" target="_blank">前台注册</a>
+        <div class="options">
+            <a href="<?php echo url('member/register'); ?>" target="_blank">前台注册</a>
+            <a href="<?php echo url('admin/member/cache'); ?>">更新缓存</a>
+        </div>
     </div>
-    <div class="bk10"></div>
+    <div class="bk10 bottom-line"></div>
     <div class="table_form">
         <form method="post" action="" id="myform" name="myform">
             <table width="100%" class="table_form ">

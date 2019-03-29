@@ -23,7 +23,7 @@
         <li id="M_104">
             <a href="javascript:_open_url(104, '<?php echo url('admin/config/index'); ?>');">设置</a>
             <ul>
-                <li id="M_1041"><a href="javascript:_open_url(1041,'<?php echo url('admin/config/index', array('type'=>1)); ?>');">网站信息</a></li>
+                <li id="M_1041"><a href="javascript:_open_url(1041,'<?php echo url('admin/config/index', array('type'=>1)); ?>');">系统设置</a></li>
                 <li id="M_1042"><a href="javascript:_open_url(1042,'<?php echo url('admin/config/index', array('type'=>2)); ?>');">水印设置</a></li>
                 <li id="M_1043"><a href="javascript:_open_url(1043,'<?php echo url('admin/config/index', array('type'=>3)); ?>');">帐号配置</a></li>
                 <li id="M_1044"><a href="javascript:_open_url(1044,'<?php echo url('admin/config/index', array('type'=>4)); ?>');">会员配置</a></li>

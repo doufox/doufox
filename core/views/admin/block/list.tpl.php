@@ -1,14 +1,15 @@
 <?php include $this->admin_tpl('header');?>
 <script type="text/javascript">
-top.document.getElementById('position').innerHTML = '区块管理';
+    top.document.getElementById('position').innerHTML = '区块管理';
 </script>
 <div class="subnav">
-	<div class="content-menu">
-		<a href="<?php echo url('admin/block'); ?>" class="on">全部区块</a>
-		<a href="<?php echo url('admin/block/add'); ?>" class="add">添加区块</a>
-	</div>
-	<div class="bk10"></div>
-	<div class="table-list">
+    <div class="content-menu">
+        <a href="<?php echo url('admin/block'); ?>" class="on">全部区块</a>
+        <a href="<?php echo url('admin/block/add'); ?>" class="add">添加区块</a>
+        <a href="<?php echo url('admin/block/cache'); ?>" class="options">更新缓存</a>
+    </div>
+    <div class="bk10"></div>
+    <div class="table-list">
         <form action="" method="post" name="myform">
             <table width="100%">
                 <thead>
@@ -36,7 +37,7 @@ top.document.getElementById('position').innerHTML = '区块管理';
                 </tbody>
             </table>
         </form>
-	</div>
+    </div>
 </div>
 
 </body>
