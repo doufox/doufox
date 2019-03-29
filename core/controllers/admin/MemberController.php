@@ -73,21 +73,17 @@ class MemberController extends Admin
                 $this->show_message('密码最少6位数', 2);
             }
             $data['password'] = md5(md5($data['password']));
-            if ($this->account->getOne('username=?', $data['username'])) {
-                $this->show_message('已存在相同的用户名', 2);
+            if ($this->member->getOne('username=?', $data['username'])) {
+                $this->show_message('会员已经存在', 2);
             }
-            $member = $this->member->from(null, 'id')->where('email=?', $data['email'])->select(false);
-            if ($member) {
-                $this->show_message('邮箱已经存在，请重新注册');
+            // $member = $this->member->getOne('email=?', $data['email']);
+            if ($this->member->getOne('email=?', $data['email'])) {
+                $this->show_message('邮箱已经存在，请重新填写');
             }
-    
-            $member = $this->member->from(null, 'id')->where('username=?', $data['username'])->select(false);
-            if ($member) {
-                $this->show_message('会员已经存在');
-            }
+
             $data['regdate'] = time();
             $data['regip'] = get_user_ip();
-            $data['status'] = $this->site_config['MEMBER_STATUS'] ? 0 : 1;
+            $data['status'] = $data['status'] || 0;
             $data['modelid'] = (!isset($data['modelid']) || empty($data['modelid'])) ? $this->site_config['MEMBER_MODELID'] : $data['modelid'];
             if (!isset($this->membermodel[$data['modelid']])) {
                 $this->show_message('会员模型不存在');
@@ -127,7 +123,6 @@ class MemberController extends Admin
                 if (is_array($t)) {
                     $data[$i] = array2string($t);
                 }
-
             }
             $this->member->update($data, 'id=' . $id);
             if ($_data) {
@@ -166,16 +161,16 @@ class MemberController extends Admin
 
         $modelist = $this->member->from('model')->where('typeid=1')->select();
 
-        //删除会员
+        // 删除会员
         $this->member->delete('id=' . $id);
-        //删除模型数据
+        // 删除模型数据
         $table = $this->membermodel[$data['modelid']]['tablename'];
         if ($table) {
             $model = core::load_model($table);
             $model->delete('id=' . $id);
         }
 
-        //删除关联表单
+        // 删除关联表单
         $form = get_cache('formmodel');
         if ($form) {
             foreach ($form as $m) {
@@ -183,38 +178,13 @@ class MemberController extends Admin
                 $db->delete('userid=' . $id);
             }
         }
-        //删除会员附件目录
+        // 删除会员附件目录
         $path = 'upload/member/' . $id . '/';
         if (file_exists($path)) {
             $file_list = core::load_class('file_list');
-
             $file_list->delete_dir($path);
         }
         $this->show_message('删除成功', 1, url('admin/member'));
-    }
-
-    /**
-     * Email是否重复检查
-     */
-    public function ajaxemailAction()
-    {
-        $email = $this->post('email');
-        if (!is_email($email)) {
-            exit('<b><font color=red>Email格式不正确</font></b>');
-        }
-
-        $id = $this->post('id');
-        if (empty($email)) {
-            exit('<b><font color=red>Email不能为空</font></b>');
-        }
-
-        $where = $id ? "email='" . $email . "' and id<>" . $id : "email='" . $email . "'";
-        $data = $this->member->getOne($where);
-        if ($data) {
-            exit('<b><font color=red>Email已经存在</font></b>');
-        }
-
-        exit('<b><font color=green>√</font></b>');
     }
 
 }

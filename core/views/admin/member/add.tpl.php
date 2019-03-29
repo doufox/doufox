@@ -3,7 +3,7 @@
 	top.document.getElementById('position').innerHTML = '添加会员';
 	function ajaxemail() {
 		$('#email_text').html('');
-		$.post('<?php echo url('admin/member/ajaxemail'); ?>&rid='+Math.random(), { email:$('#email').val(), id:<?php echo $id; ?> }, function(data){ 
+		$.post('<?php echo url('api/member/ajaxemail'); ?>&rid='+Math.random(), { email:$('#email').val(), id:<?php echo $id; ?> }, function(data){ 
 			$('#email_text').html(data); 
 		});
 	}
