@@ -1,14 +1,13 @@
 <?php
+if (!defined('IN_CMS')) {
+    exit();
+}
+
 /**
  * pinyin class file
  * 将汉字转化为拼音类
  * 注：支持的汉字编码为gbk,汉字也是常用的汉字,对于生僻的汉字可能无法支持
  */
-
-if (!defined('IN_CMS')) {
-    exit();
-}
-
 class pinyin
 {
 
@@ -473,12 +472,12 @@ class pinyin
      */
     public function output($str, $utf8 = true)
     {
-        //参数分析
+        // 参数分析
         if (!$str) {
             return false;
         }
 
-        //编码转换.
+        // 编码转换.
         $str = ($utf8 == true) ? iconv('utf-8', 'gbk', $str) : $str;
         $num = strlen($str);
         $pinyin = '';
@@ -490,7 +489,7 @@ class pinyin
             }
             $pinyin .= $this->num2str($temp);
         }
-        //输出的拼音编码转换.
+        // 输出的拼音编码转换.
         return ($utf8 == true) ? iconv('gbk', 'utf-8', $pinyin) : $pinyin;
     }
 

@@ -1,13 +1,11 @@
 <?php
-
-/**
- * 联动菜单树型类
- */
-
 if (!defined('IN_CMS')) {
     exit();
 }
 
+/**
+ * 联动菜单树型类
+ */
 class tree
 {
     /**
@@ -67,7 +65,6 @@ class tree
                 if ($a['parentid'] == $pid) {
                     $newarr[$id] = $a;
                 }
-
             }
         }
         return $newarr;
@@ -86,7 +83,6 @@ class tree
                 if ($a['parentid'] == $myid) {
                     $newarr[$id] = $a;
                 }
-
             }
         }
         return $newarr ? $newarr : false;
@@ -182,9 +178,9 @@ class tree
     }
     /**
      * @param integer $myid 要查询的ID
-     * @param string $str   第一种HTML代码方式
-     * @param string $str2  第二种HTML代码方式
-     * @param integer $sid  默认选中
+     * @param string $str 第一种HTML代码方式
+     * @param string $str2 第二种HTML代码方式
+     * @param integer $sid 默认选中
      * @param integer $adds 前缀
      */
     public function get_tree_category($myid, $str, $str2, $sid = 0, $adds = '')
@@ -304,6 +300,7 @@ class tree
 
         return json_encode($data);
     }
+
     private function have($list, $item)
     {
         return (strpos(',,' . $list . ',', ',' . $item . ','));

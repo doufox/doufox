@@ -18,7 +18,7 @@ class RegisterController extends Member
         }
 
         if (!$this->isLogin(1)) {
-            $this->show_message('您已经登录了，不能再次注册。', url('member/'));
+            $this->show_message('您已经登录了，不能再次注册。', url('member/index'));
         }
 
         if ($this->isPostForm()) {
@@ -52,39 +52,41 @@ class RegisterController extends Member
     }
 
     /**
-     * 验证
+     * 验证表单内容
      */
     private function check($data)
     {
 
         if (empty($data['username'])) {
-            $this->show_message('请填写会员名');
+            $this->show_message('用户名不能为空', 2);
         }
 
-        if (!$this->is_username($data['username'])) {
-            $this->show_message('两次输入密码不一致');
+        if (!verify_username($data['username'])) {
+            $this->show_message('用户名不规范', 2);
+        }
+
+        if ($this->member->getOne('username=?', $data['username'])) {
+            $this->show_message('用户名【' . $data['username'] . '】已经存在', 2);
         }
 
         if (empty($data['password'])) {
-            $this->show_message('密码不能为空');
+            $this->show_message('密码不能为空', 2);
+        }
+
+        if (strlen($data['password']) < 6) {
+            $this->show_message('密码最少6位数', 2);
         }
 
         if ($data['password'] != $data['password2']) {
-            $this->show_message('两次输入密码不一致');
+            $this->show_message('两次输入密码不一致', 2);
         }
 
-        if (!is_email($data['email'])) {
-            $this->show_message('邮箱格式不正确');
+        if (!verify_email($data['email'])) {
+            $this->show_message('邮箱格式不正确', 2);
         }
 
-        $member = $this->member->from(null, 'id')->where('email=?', $data['email'])->select(false);
-        if ($member) {
-            $this->show_message('邮箱已经存在，请重新注册');
-        }
-
-        $member = $this->member->from(null, 'id')->where('username=?', $data['username'])->select(false);
-        if ($member) {
-            $this->show_message('会员已经存在');
+        if ($this->member->getOne('email=?', $data['email'])) {
+            $this->show_message('邮箱已注册，请使用其它邮箱');
         }
 
     }
@@ -98,30 +100,15 @@ class RegisterController extends Member
             return false;
         }
 
-        $data['regdate'] = time();
-        $data['regip'] = get_user_ip();
-        $data['status'] = $this->site_config['MEMBER_STATUS'] ? 0 : 1;
         $data['modelid'] = (!isset($data['modelid']) || empty($data['modelid'])) ? $this->site_config['MEMBER_MODELID'] : $data['modelid'];
         if (!isset($this->membermodel[$data['modelid']])) {
             $this->show_message('会员模型不存在');
         }
-
+        $data['regdate'] = time();
+        $data['regip'] = get_user_ip();
+        $data['status'] = $this->site_config['MEMBER_STATUS'] ? 0 : 1;
         $data['password'] = md5(md5($data['password']));
         return $this->member->insert($data);
-    }
-
-    /**
-     * 检查会员名是否符合规定
-     */
-    private function is_username($username)
-    {
-        $strlen = strlen($username);
-        if (!preg_match('/^[a-zA-Z0-9_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+$/', $username)) {
-            return false;
-        } elseif (20 < $strlen || $strlen < 2) {
-            return false;
-        }
-        return true;
     }
 
 }

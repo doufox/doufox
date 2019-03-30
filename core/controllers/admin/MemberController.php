@@ -38,7 +38,7 @@ class MemberController extends Admin
         }
 
         $total = $this->member->count('member', null, $where);
-        $pagesize = 15; //分页数量
+        $pagesize = 15; // 分页数量
         $urlparam = array();
         if ($modelid) {
             $urlparam['modelid'] = $modelid;
@@ -66,28 +66,15 @@ class MemberController extends Admin
     {
         if ($this->isPostForm()) {
             $data = $this->post('data');
-            if (!$data['username']) {
-                $this->show_message('用户名不能为空', 2);
-            }
-            if (strlen($data['password']) < 6) {
-                $this->show_message('密码最少6位数', 2);
-            }
-            $data['password'] = md5(md5($data['password']));
-            if ($this->member->getOne('username=?', $data['username'])) {
-                $this->show_message('会员已经存在', 2);
-            }
-            // $member = $this->member->getOne('email=?', $data['email']);
-            if ($this->member->getOne('email=?', $data['email'])) {
-                $this->show_message('邮箱已经存在，请重新填写');
-            }
-
-            $data['regdate'] = time();
-            $data['regip'] = get_user_ip();
-            $data['status'] = $data['status'] || 0;
+            $this->check($data);
             $data['modelid'] = (!isset($data['modelid']) || empty($data['modelid'])) ? $this->site_config['MEMBER_MODELID'] : $data['modelid'];
             if (!isset($this->membermodel[$data['modelid']])) {
                 $this->show_message('会员模型不存在');
             }
+            $data['password'] = md5(md5($data['password']));
+            $data['regdate'] = time();
+            $data['regip'] = get_user_ip();
+            $data['status'] = $data['status'] || 0;
             $this->member->insert($data);
             $this->show_message('添加成功', 1, url('admin/member'));
         }
@@ -187,4 +174,38 @@ class MemberController extends Admin
         $this->show_message('删除成功', 1, url('admin/member'));
     }
 
+    /**
+     * 验证表单内容
+     */
+    private function check($data)
+    {
+
+        if (empty($data['username'])) {
+            $this->show_message('用户名不能为空', 2);
+        }
+
+        if (!verify_username($data['username'])) {
+            $this->show_message('用户名不规范', 2);
+        }
+
+        if ($this->member->getOne('username=?', $data['username'])) {
+            $this->show_message('用户名【' . $data['username'] . '】已经存在', 2);
+        }
+
+        if (empty($data['password'])) {
+            $this->show_message('密码不能为空', 2);
+        }
+
+        if (strlen($data['password']) < 6) {
+            $this->show_message('密码最少6位数', 2);
+        }
+
+        if (!verify_email($data['email'])) {
+            $this->show_message('邮箱格式不正确');
+        }
+
+        if ($this->member->getOne('email=?', $data['email'])) {
+            $this->show_message('邮箱已注册，请使用其它邮箱');
+        }
+    }
 }

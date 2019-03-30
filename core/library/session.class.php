@@ -1,13 +1,12 @@
 <?php
-/**
- * session class file
- * 处理session操作
- */
-
 if (!defined('IN_CMS')) {
     exit();
 }
 
+/**
+ * session class file
+ * 处理session操作
+ */
 class Session
 {
 
@@ -27,12 +26,11 @@ class Session
     public function __construct()
     {
 
-        //设置session的生存周期
+        // 设置session的生存周期
         $this->_setTimeout();
 
-        //启动session
+        // 启动session
         $this->start();
-
         return true;
     }
 
@@ -57,7 +55,6 @@ class Session
 
         session_start();
         self::$_start = true;
-
         return true;
     }
 
@@ -74,18 +71,17 @@ class Session
     public static function set($key, $value = null)
     {
 
-        //参数分析
+        // 参数分析
         if (!$key) {
             return false;
         }
 
-        //分析是否开启session
+        // 分析是否开启session
         if (self::$_start === false) {
             self::start();
         }
 
         $_SESSION[$key] = $value;
-
         return true;
     }
 
@@ -102,17 +98,17 @@ class Session
     public static function get($key, $default = null)
     {
 
-        //参数分析
+        // 参数分析
         if (!$key) {
             return isset($_SESSION) ? $_SESSION : null;
         }
 
-        //分析是否开启session
+        // 分析是否开启session
         if (self::$_start === false) {
             self::start();
         }
 
-        //当查询的session不存在时，返回默认值
+        // 当查询的session不存在时，返回默认值
         if (!isset($_SESSION[$key])) {
             return $default;
         }
@@ -129,7 +125,7 @@ class Session
     public static function delete($key)
     {
 
-        //参数分析
+        // 参数分析
         if (!$key) {
             return false;
         }
@@ -139,7 +135,6 @@ class Session
         }
 
         unset($_SESSION[$key]);
-
         return true;
     }
 
@@ -153,7 +148,6 @@ class Session
     {
 
         $_SESSION = array();
-
         return true;
     }
 
@@ -199,18 +193,14 @@ class Session
     protected static function _setTimeout()
     {
 
-        //获取session的系统配置信息
-
+        // 获取session的系统配置信息
         return ini_set('session.gc_maxlifetime', 21600);
     }
 
     /**
      * 析构函数
      *
-     * 程序执行完毕，打扫战场
-     *
      * @access public
-     *
      * @return void
      */
     public function __destruct()

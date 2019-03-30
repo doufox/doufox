@@ -1,13 +1,12 @@
 <?php
-/**
- * file_list class file
- * 用于文件夹内容的读取, 复制, 剪切等操作
- */
-
 if (!defined('IN_CMS')) {
     exit();
 }
 
+/**
+ * file_list class file
+ * 用于文件夹内容的读取, 复制, 剪切等操作
+ */
 class file_list
 {
 
@@ -90,8 +89,8 @@ class file_list
     /**
      * 将一个文件夹内容复制到另一个文件夹
      *
-     * @param string $source    被复制的文件夹名
-     * @param string $dest        所要复制文件的目标文件夹
+     * @param string $source 被复制的文件夹名
+     * @param string $dest 所要复制文件的目标文件夹
      * @return boolean
      */
     public static function copy_dir($source, $dest)

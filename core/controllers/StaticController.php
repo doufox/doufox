@@ -15,7 +15,7 @@ class StaticController
     {
         $path = explode('?', $_SERVER['REQUEST_URI']);
         $file = $path[0];
-        $ext = get_extension($file);
+        $ext = get_file_extension($file);
         if (isset($ext)) {
             if ($ext == 'js') {
                 header('Content-type: application/x-javascript');

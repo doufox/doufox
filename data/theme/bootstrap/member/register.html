@@ -1,19 +1,32 @@
 {template header.html}
 <script type="text/javascript">
-	function checkpass() {
-		var pass1 = $('#password').val();
-		var pass2 = $('#password2').val();
-		if (pass1 != pass2) {
-			$('#checkpassword2').html('<span>两次密码不一致</span>');
-			$('#password').focus();
-			return false;
-		} else {
-			$('#checkpassword2').html('<span>正确</span>');
-		}
-	}
-	function reload_code() {
-		document.getElementById('code').src = '{function.url("api/access/checkcode", array("width"=>80, "height"=>28))}&' + Math.random();
-	}
+    function checkpass() {
+        var pass1 = $('#password').val();
+        var pass2 = $('#password2').val();
+        if (!pass1) {
+            $('#password').focus();
+            $("#err_password").html("密码不能为空");
+        }
+        if (pass1 != pass2) {
+            $('#checkpassword2').html('<span>两次密码不一致</span>');
+            $('#password').focus();
+            return false;
+        } else {
+            $('#checkpassword2').html('<span>正确</span>');
+        }
+    }
+    function check_email() {
+        $('#err_email').html('');
+        $.post('{function.url("api/member/ajaxemail")}&' + Math.random(), {
+            email:$('#email').val()
+        }, function(data) {
+            console.log(data);
+            $('#err_email').html(data.msg); 
+        });
+    }
+    function reload_code() {
+        document.getElementById('code').src = '{function.url("api/access/checkcode", array("width"=>80, "height"=>28))}&' + Math.random();
+    }
 </script>
 
 {template member/member_nav.html}
@@ -22,53 +35,53 @@
 {if count($member_model)>1}
 会员模型：<select name="data[modelid]">
 {loop $member_model $t}
-		<option value="{$t['modelid']}" {if $member_default_modelid==$t['modelid']}selected{/if}>{$t['modelname']}</option>
+        <option value="{$t['modelid']}" {if $member_default_modelid==$t['modelid']}selected{/if}>{$t['modelname']}</option>
 {/loop}
-	</select>
+    </select>
 {/if}
-	<div class="form-group form-inline">
-		<label class="control-label col-sm-2" for="username"><font color="red">*</font>登录账号</label>
-		<div class="col-sm-10">
-			<input class="form-control" type="text" name="data[username]" autocomplete="off" placeholder="登陆账号" id="username" autofocus />
-			<span id="err_username" class="tips_info"></span>
-		</div>
-	</div>
-	<div class="form-group form-inline">
-		<label class="control-label col-sm-2" for="password"><font color="red">*</font>登录密码</label>
-		<div class="col-sm-10">
-			<input class="form-control" type="text" name="data[password]" autocomplete="off" placeholder="登录密码" id="password" />
-			<span id="err_password" class="tips_info"></span>
-		</div>
-	</div>
-	<div class="form-group form-inline">
-		<label class="control-label col-sm-2" for="password2"><font color="red">*</font>确认密码</label>
-		<div class="col-sm-10">
-			<input class="form-control" type="text" name="data[password2]" autocomplete="off" placeholder="确认密码" id="password2" onblur="checkpass()" />
-			<span id="checkpassword2" class="tips_info"></span>
-		</div>
-	</div>
-	<div class="form-group form-inline">
-		<label class="control-label col-sm-2" for="email">邮箱地址</label>
-		<div class="col-sm-10">
-			<input class="form-control" type="email" name="data[email]" autocomplete="off" placeholder="确认密码" id="email" />
-			<span id="err_email" class="tips_info"></span>
-		</div>
-	</div>
+    <div class="form-group form-inline">
+        <label class="control-label col-sm-2" for="username"><font color="red">*</font>登录账号</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="data[username]" autocomplete="off" placeholder="登陆账号" id="username" autofocus />
+            <span id="err_username" class="tips_info"></span>
+        </div>
+    </div>
+    <div class="form-group form-inline">
+        <label class="control-label col-sm-2" for="password"><font color="red">*</font>登录密码</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="data[password]" autocomplete="off" placeholder="登录密码" id="password" />
+            <span id="err_password" class="tips_info"></span>
+        </div>
+    </div>
+    <div class="form-group form-inline">
+        <label class="control-label col-sm-2" for="password2"><font color="red">*</font>确认密码</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="data[password2]" autocomplete="off" placeholder="确认密码" id="password2" onblur="checkpass()" />
+            <span id="checkpassword2" class="tips_info"></span>
+        </div>
+    </div>
+    <div class="form-group form-inline">
+        <label class="control-label col-sm-2" for="email">邮箱地址</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="email" name="data[email]" autocomplete="off" placeholder="确认密码" id="email" onblur="check_email()" />
+            <span id="err_email" class="tips_info"></span>
+        </div>
+    </div>
 {if $config['MEMBER_REGCODE']}
-	<div class="form-group form-inline">
-		<label class="control-label col-sm-2" for="code"><font color="red">*</font>注册验证</label>
-		<div class="col-sm-10">
-			<input class="form-control" type="text" name="code" autocomplete="off" placeholder="输入验证码" style="width:100px" />
-			<img id="code" title="看不清楚？换一张" align="absmiddle" onclick="reload_code();" src="{function.url('api/access/checkcode', array('width'=>80, 'height'=>28))}"  style="cursor:pointer; margin-top:-3px;" />
-		</div>
-	</div>
+    <div class="form-group form-inline">
+        <label class="control-label col-sm-2" for="code"><font color="red">*</font>注册验证</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="code" autocomplete="off" placeholder="输入验证码" style="width:100px" />
+            <img id="code" title="看不清楚？换一张" align="absmiddle" onclick="reload_code();" src="{function.url('api/access/checkcode', array('width'=>80, 'height'=>28))}"  style="cursor:pointer; margin-top:-3px;" />
+        </div>
+    </div>
 {/if}
-	<div class="form-group form-inline">
-		<label class="control-label col-sm-2">&nbsp;</label>
-		<div class="col-sm-10">
-			<button type="submit" class="btn btn-default" name="submit">提交注册</button>
-		</div>
-	</div>
+    <div class="form-group form-inline">
+        <label class="control-label col-sm-2">&nbsp;</label>
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-default" name="submit">提交注册</button>
+        </div>
+    </div>
 </form>
 
 {template footer.html}

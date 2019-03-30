@@ -1,12 +1,11 @@
 <?php
-/**
- * file_upload class file
- */
-
 if (!defined('IN_CMS')) {
     exit();
 }
 
+/**
+ * file_upload class file
+ */
 class file_upload
 {
 
@@ -46,7 +45,7 @@ class file_upload
      */
     public function __construct()
     {
-        $this->limit_size = 2097152; //默认文件大小 2M
+        $this->limit_size = 2097152; // 默认文件大小 2M
         return true;
     }
 
@@ -151,7 +150,7 @@ class file_upload
             return $result;
         }
 
-        //验证路径
+        // 验证路径
         if (!is_dir($path)) {
             $file_list = core::load_class('file_list');
             $file_list->make_dir($path);
@@ -180,8 +179,8 @@ class file_upload
 
     /**
      * 处理图片，生成缩略图和剪切图
-     * @param  $path
-     * @param  $file_name
+     * @param $path
+     * @param $file_name
      * @return boolean
      */
     protected function image($path, $file_name)
@@ -190,7 +189,7 @@ class file_upload
             return false;
         }
 
-        //图片处理
+        // 图片处理
         $width = (int) $this->image['0'];
         $height = (int) $this->image['1'];
         $type = $this->image['2'];
@@ -200,9 +199,9 @@ class file_upload
 
         $srcfile = $path . $file_name;
         $tofile = $srcfile . '.thumb.' . $width . 'x' . $height . '.' . $this->fileext();
-        //$tofile  = $srcfile;
+        // $tofile  = $srcfile;
         list($src_w, $src_h, $src_t) = getimagesize($srcfile); // 获取原图尺寸
-        $dst_scale = $width / $height; //目标图像长宽比
+        $dst_scale = $width / $height; // 目标图像长宽比
         $src_scale = $src_h / $src_w; // 原图长宽比
         if ($src_scale >= $dst_scale) { // 过高
             $w = intval($src_w);
@@ -216,13 +215,13 @@ class file_upload
             $y = 0;
         }
         switch ($src_t) {
-            case 1: //图片类型，1是gif图
+            case 1: // 图片类型，1是gif图
                 $source = @imagecreatefromgif($srcfile);
                 break;
-            case 2: //图片类型，2是jpg图
+            case 2: // 图片类型，2是jpg图
                 $source = @imagecreatefromjpeg($srcfile);
                 break;
-            case 3: //图片类型，3是png图
+            case 3: // 图片类型，3是png图
                 $source = @imagecreatefrompng($srcfile);
                 break;
         }

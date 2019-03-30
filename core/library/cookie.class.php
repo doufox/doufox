@@ -1,13 +1,12 @@
 <?php
-/**
- * cookie class file
- * 用于cookie处理操作
- */
-
 if (!defined('IN_CMS')) {
     exit();
 }
 
+/**
+ * cookie class file
+ * 用于cookie处理操作
+ */
 class cookie
 {
 

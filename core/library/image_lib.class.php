@@ -1,13 +1,12 @@
 <?php
-/**
- * image_lib class file
- * 用于处理图片常用操作,如:生成缩略图,图片水印生成等
- */
-
 if (!defined('IN_CMS')) {
     exit();
 }
 
+/**
+ * image_lib class file
+ * 用于处理图片常用操作,如:生成缩略图,图片水印生成等
+ */
 class image_lib
 {
 
@@ -204,8 +203,8 @@ class image_lib
     /**
      * 设置字体名称.
      *
-     * @param sting $name    字体名称(字体的路径)
-     * @param integer $size    字体大小
+     * @param sting $name 字体名称(字体的路径)
+     * @param integer $size 字体大小
      */
     public function set_font_name($name, $size = null)
     {
@@ -223,7 +222,7 @@ class image_lib
     /**
      * 设置字体大小.
      *
-     * @param integer $size    字体大小
+     * @param integer $size 字体大小
      * @return $this
      */
     public function set_font_size($size)
@@ -238,9 +237,9 @@ class image_lib
     /**
      * 获取颜色参数.
      *
-     * @param integer $x    RGB色彩中的R的数值
-     * @param integer $y    RGB色彩中的G的数值
-     * @param integer $z    RGB色彩中的B的数值
+     * @param integer $x RGB色彩中的R的数值
+     * @param integer $y RGB色彩中的G的数值
+     * @param integer $z RGB色彩中的B的数值
      * @return $this
      */
     public function set_font_color($x = false, $y = false, $z = false)
@@ -252,7 +251,7 @@ class image_lib
     /**
      * 水印图片的URL.
      *
-     * @param string $url    图片的路径(图片的实际地址)
+     * @param string $url 图片的路径(图片的实际地址)
      * @return $this
      */
     public function set_image_url($url)
@@ -267,8 +266,8 @@ class image_lib
     /**
      * 设置生成图片的大小.
      *
-     * @param integer $width    图片的宽度
-     * @param integer $height    图片的高度
+     * @param integer $width 图片的宽度
+     * @param integer $height 图片的高度
      * @return $this
      */
     public function set_image_size($width, $height)
@@ -302,8 +301,8 @@ class image_lib
     /**
      * 设置文字水印图片文字的坐标位置.
      *
-     * @param integer $x    水印区域的横坐标
-     * @param integer $y    水印区域的纵坐标
+     * @param integer $x 水印区域的横坐标
+     * @param integer $y 水印区域的纵坐标
      * @return $this
      */
     public function set_text_position($x, $y)
@@ -322,8 +321,8 @@ class image_lib
     /**
      * 设置水印图片水印的坐标位置.
      *
-     * @param integer $x    水印区域的横坐标
-     * @param integer $y    水印区域的纵坐标
+     * @param integer $x 水印区域的横坐标
+     * @param integer $y 水印区域的纵坐标
      * @return $this
      */
     public function set_watermark_position($x, $y)
@@ -342,7 +341,7 @@ class image_lib
     /**
      * 设置水印图片水印区域的透明度.
      *
-     * @param integer $param    水印区域的透明度
+     * @param integer $param 水印区域的透明度
      * @return $this
      */
     public function set_watermark_alpha($param)
@@ -375,7 +374,7 @@ class image_lib
      */
     protected function handle_image_size()
     {
-        //当没有所生成的图片的宽度和高度设置时.
+        // 当没有所生成的图片的宽度和高度设置时.
         if (!$this->width || !$this->height) {
             exit('You do not set the image height size or width size!');
         }
@@ -395,8 +394,8 @@ class image_lib
     /**
      * 生成图片的缩略图.
      *
-     * @param string $url            原始图片路径
-     * @param string $dist_name     生成图片的路径(注:无须后缀名)
+     * @param string $url 原始图片路径
+     * @param string $dist_name 生成图片的路径(注:无须后缀名)
      * @return boolean
      */
     public function make_limit_image($url, $dist_name = null)
@@ -405,12 +404,12 @@ class image_lib
             return false;
         }
 
-        //原图片分析.
+        // 原图片分析.
         $this->parse_image_info($url);
         $this->handle_image_size();
-        //新图片分析.
+        // 新图片分析.
         $image_dist = imagecreatetruecolor($this->width_new, $this->height_new);
-        //生成新图片.
+        // 生成新图片.
         imagecopyresampled($image_dist, $this->image, 0, 0, 0, 0, $this->width_new, $this->height_new, $this->image_width, $this->image_height);
         $this->create_image($image_dist, $dist_name, $this->type);
         imagedestroy($image_dist);
@@ -421,9 +420,9 @@ class image_lib
     /**
      * 生成目标图片.
      *
-     * @param string $image_dist    原始图片的路径
-     * @param string $dist_name        生成图片的路径
-     * @param string $image_type    图片格式
+     * @param string $image_dist 原始图片的路径
+     * @param string $dist_name 生成图片的路径
+     * @param string $image_type 图片格式
      */
     protected function create_image($image_dist, $dist_name = null, $image_type)
     {
@@ -485,28 +484,28 @@ class image_lib
 
         $this->parse_image_info($image_url);
         $bbox = imagettfbbox($size, 0, $this->font_name, $this->text_content);
-        //文字margin_right为5px,特此加5
+        // 文字margin_right为5px,特此加5
         $width = $bbox[2] - $bbox[0] + 5;
         $height = abs($bbox[7] - $bbox[1]);
-        //当所要生成的文字水印图片有大小尺寸限制时(缩略图功能)
+        // 当所要生成的文字水印图片有大小尺寸限制时(缩略图功能)
         if ($this->width && $this->height) {
             $this->handle_image_size();
-            //新图片分析
+            // 新图片分析
             $image_dist = imagecreatetruecolor($this->width_new, $this->height_new);
-            //生成新图片
+            // 生成新图片
             imagecopyresampled($image_dist, $this->image, 0, 0, 0, 0, $this->width_new, $this->height_new, $this->image_width, $this->image_height);
-            //所生成的图片进行分析
+            // 所生成的图片进行分析
             $font_color = $this->handle_font_color();
             list($wx, $wy) = $this->make_image_pos($pos, $this->width_new, $this->height_new, $width, $height);
-            //生成新图片
+            // 生成新图片
             imagettftext($image_dist, $size, 0, $wx, $wy, $font_color, $this->font_name, $this->text_content);
             $this->create_image($image_dist, $image_url, $this->type);
             imagedestroy($image_dist);
         } else {
-            //所生成的图片进行分析.
+            // 所生成的图片进行分析.
             $font_color = $this->handle_font_color();
             list($wx, $wy) = $this->make_image_pos($pos, $this->image_width, $this->image_height, $width, $height);
-            //生成新图片.
+            // 生成新图片.
             imagettftext($this->image, $size, 0, $wx, $wy, $font_color, $this->font_name, $this->text_content);
             $this->create_image($this->image, $image_url, $this->type);
         }
@@ -517,12 +516,12 @@ class image_lib
     /**
      * 图片位置
      *
-     * @param int $w_pos    位置代码
+     * @param int $w_pos 位置代码
      * @param int $source_w 原图宽
-     * @param int $source_h    原图高
-     * @param int $source_h    原图高
-     * @param int $width    缩略图/文字宽
-     * @param int $height    缩略图/文字高
+     * @param int $source_h 原图高
+     * @param int $source_h 原图高
+     * @param int $width 缩略图/文字宽
+     * @param int $height 缩略图/文字高
      */
     private function make_image_pos($w_pos, $source_w, $source_h, $width, $height)
     {

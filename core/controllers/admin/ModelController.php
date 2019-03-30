@@ -277,8 +277,8 @@ class ModelController extends Admin
                 $this->show_message('添加失败');
             }
         }
-        //加载字段配置文件
-        $formtype = formtype();
+        // 加载字段配置文件
+        $formtype = form_type();
 
         $typeid = $this->typeid;
         $modeltype = $this->modelType;
@@ -336,8 +336,8 @@ class ModelController extends Admin
                 $this->show_message('修改失败');
             }
         }
-        //加载字段配置文件
-        $formtype = formtype();
+        // 加载字段配置文件
+        $formtype = form_type();
 
         $typeid = $this->typeid;
         $modeltype = $this->modelType;

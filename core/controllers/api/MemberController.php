@@ -19,7 +19,7 @@ class MemberController extends Api
     public function ajaxemailAction()
     {
         $email = $this->post('email');
-        if (!is_email($email)) {
+        if (!verify_email($email)) {
             $this->response(200, null, 'Email格式不正确');
             exit();
         }
@@ -34,7 +34,7 @@ class MemberController extends Api
             $this->response(200, null, 'Email已经存在');
             exit();
         }
-        $this->response(200, null, '√');
+        $this->response(200, null, 'Email 可以使用');
         exit();
     }
 

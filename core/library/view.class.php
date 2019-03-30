@@ -1,12 +1,11 @@
 <?php
-/**
- * 模板解析类
- */
-
 if (!defined('IN_CMS')) {
     exit();
 }
 
+/**
+ * 模板解析类
+ */
 class view
 {
 
@@ -186,7 +185,6 @@ class view
                 if (isset($var) && $var) {
                     $param[$var] = $val;
                 }
-
             }
         }
         $system = array();
@@ -230,7 +228,6 @@ class view
                 if (!in_array($cat['catid'], $catids)) {
                     continue;
                 }
-
             } else
             if ($cat['parentid'] != $parentid) {
                 continue;
@@ -258,7 +255,6 @@ class view
                 if (isset($var) && $var) {
                     $param[$var] = $val;
                 }
-
             }
         }
         $system = $fields = $_fields = array();
@@ -372,12 +368,10 @@ class view
                     if ($_name) {
                         $order .= ' `' . $_name . '`.`' . $_field . '` ' . $_orderby . ',';
                     }
-
                 }
                 if (substr($order, -1) == ',') {
                     $order = ' ORDER BY' . substr($order, 0, -1);
                 }
-
             }
         } elseif ($table == $db->prefix . 'content') {
             $order = ' ORDER BY time DESC';

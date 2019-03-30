@@ -3,8 +3,11 @@
     top.document.getElementById('position').innerHTML = '添加会员';
     function ajaxemail() {
         $('#email_text').html('');
-        $.post('<?php echo url('api/member/ajaxemail'); ?>&rid='+Math.random(), { email:$('#email').val(), id:<?php echo $id; ?> }, function(data){ 
-            $('#email_text').html(data); 
+        $.post('<?php echo url('api/member/ajaxemail'); ?>&_=' + Math.random(), {
+            email: $('#email').val(),
+            id: '<?php echo $id; ?>'
+        }, function (data) {
+            $('#email_text').html(data.msg); 
         });
     }
 </script>
@@ -49,7 +52,10 @@
             </tr>
             <tr>
                 <th>电子邮箱：</th>
-                <td><input type="text" class="input-text" size="50" id="email" value="" name="data[email]"onBlur="ajaxemail()"></td>
+                <td>
+                    <input type="text" class="input-text" size="50" id="email" value="" name="data[email]" onBlur="ajaxemail()">
+                    <div class="show-tips" id="email_text"></div>
+                </td>
             </tr>
             <tr>
                 <th>设置状态：</th>

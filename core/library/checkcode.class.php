@@ -1,4 +1,8 @@
 <?php
+if (!defined('IN_CMS')) {
+    exit();
+}
+
 /**
  * 生成验证码
  * 类用法
@@ -7,46 +11,20 @@
  * 取得验证
  * $_SESSION['code']=$checkcode->get_code();
  */
-
-if (!defined('IN_CMS')) {
-    exit();
-}
-
 class checkcode
 {
 
-    //验证码的宽度
-    public $width = 80;
-
-    //验证码的高
-    public $height = 30;
-
-    //设置字体的地址
-    private $font;
-
-    //设置字体色
-    public $font_color;
-
-    //设置随机生成因子
-    public $charset = 'abcdefghkmnprstuvwyzABCDEFGHKLMNPRSTUVWYZ23456789';
-
-    //设置背景色
-    public $background = '#ffffff';
-
-    //生成验证码字符数
-    public $code_len = 4;
-
-    //字体大小
-    public $font_size = 12;
-
-    //验证码
-    private $code;
-
-    //图片内存
-    private $img;
-
-    //文字X轴开始的地方
-    private $x_start;
+    public $width = 80; // 验证码的宽度
+    public $height = 30; // 验证码的高
+    public $font_color; // 设置字体色
+    public $charset = 'abcdefghkmnprstuvwyzABCDEFGHKLMNPRSTUVWYZ23456789'; // 设置随机生成因子
+    public $background = '#ffffff'; // 设置背景色
+    public $code_len = 4; // 生成验证码字符数
+    public $font_size = 12; // 字体大小
+    private $font; // 设置字体的地址
+    private $code; // 验证码
+    private $img; // 图片内存
+    private $x_start; // 文字X轴开始的地方
 
     public function __construct()
     {
@@ -86,9 +64,9 @@ class checkcode
         } else {
             $this->font_color = imagecolorallocate($this->img, hexdec(substr($this->font_color, 1, 2)), hexdec(substr($this->font_color, 3, 2)), hexdec(substr($this->font_color, 5, 2)));
         }
-        //设置背景色
+        // 设置背景色
         $background = imagecolorallocate($this->img, hexdec(substr($this->background, 1, 2)), hexdec(substr($this->background, 3, 2)), hexdec(substr($this->background, 5, 2)));
-        //画一个柜形，设置背景颜色。
+        // 画一个柜形，设置背景颜色。
         imagefilledrectangle($this->img, 0, $this->height, $this->width, 0, $background);
         $this->creat_font();
         $this->output($mode);

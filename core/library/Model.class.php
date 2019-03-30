@@ -1,12 +1,11 @@
 <?php
-/**
- * 系统model的基类
- */
-
 if (!defined('IN_CMS')) {
     exit();
 }
 
+/**
+ * 系统model的基类
+ */
 abstract class Model
 {
 
@@ -53,17 +52,17 @@ abstract class Model
     /**
      * 获取当前model所对应的数据表的名称
      *
-     * 注:若数据表有前缀($prefix)时，将自动加上数据表前缀。
+     * 注:若数据表有前缀($prefix)时,将自动加上数据表前缀
      * @access protected
-     * @return string    数据表名
+     * @return string 数据表名
      */
     protected function get_table_name()
     {
-        //当$this->table_name不存在时
+        // 当$this->table_name不存在时
         if (!$this->table_name) {
-            //获取当前model的类名
+            // 获取当前model的类名
             $model_id = substr(strtolower(get_class($this)), 0, -5);
-            //分析数据表名，当有前缀时，加上前缀
+            // 分析数据表名,当有前缀时,加上前缀
             $this->table_name = !empty($this->prefix) ? $this->prefix . $model_id : $model_id;
         }
         return $this->table_name;
@@ -74,12 +73,12 @@ abstract class Model
      *
      * 主键及所有字段信息,返回数据类型为数组
      * @access protected
-     * @return array    字段信息
+     * @return array 字段信息
      */
     protected function get_table_info()
     {
         $this->get_table_name();
-        //查询数据表字段信息
+        // 查询数据表字段信息
         $sql = "SHOW FIELDS FROM {$this->table_name}";
         return $this->db->get_array($sql);
     }
@@ -88,17 +87,16 @@ abstract class Model
      * 获取数据表主键
      *
      * @access protected
-     * @return string    数据表主键
+     * @return string 数据表主键
      */
     protected function get_primary_key()
     {
-        //当$this->primary_key内容为空时
+        // 当$this->primary_key内容为空时
         if (!$this->primary_key) {
-            //加载缓存文件不存在时,则创建缓存文件
+            // 加载缓存文件不存在时,则创建缓存文件
             if (!$this->load_cache()) {
                 $this->create_cache();
             }
-
         }
         return $this->primary_key;
     }
@@ -107,17 +105,16 @@ abstract class Model
      * 获取数据表字段信息
      *
      * @access public
-     * @return array    数据表字段信息
+     * @return array 数据表字段信息
      */
     public function get_table_fields($is_news = false)
     {
-        //当$this->table_field内容为空时,则加载model缓存文件
+        // 当$this->table_field内容为空时,则加载model缓存文件
         if (!$this->table_field || $is_news) {
-            //加载model缓存文件失败或缓存文件不存在时,创建model缓存文件
+            // 加载model缓存文件失败或缓存文件不存在时,创建model缓存文件
             if (!$this->load_cache()) {
                 $this->create_cache();
             }
-
         }
         return $this->table_field;
     }
@@ -126,17 +123,16 @@ abstract class Model
      * 获取数据表字段类型
      *
      * @access public
-     * @return array    数据表字段类型
+     * @return array 数据表字段类型
      */
     public function get_field_type($is_news = false)
     {
-        //当$this->field_type,则加载model缓存文件
+        // 当$this->field_type,则加载model缓存文件
         if (!$this->field_type || $is_news) {
-            //加载model缓存文件失败或缓存文件不存在时,创建model缓存文件
+            // 加载model缓存文件失败或缓存文件不存在时,创建model缓存文件
             if (!$this->load_cache()) {
                 $this->create_cache();
             }
-
         }
         return $this->field_type;
     }
@@ -144,46 +140,45 @@ abstract class Model
     /**
      * 创建当前model的缓存文件
      *
-     * 用于创建当前model的缓存文件，用于减轻数据反复查询数据表字段信息的操作，从而提高程序的运行效率
+     * 用于创建当前model的缓存文件,用于减轻数据反复查询数据表字段信息的操作,从而提高程序的运行效率
      * @access protected
      * @return boolean
      */
     protected function create_cache()
     {
-        //获取当前model的缓存文件路径
+        // 获取当前model的缓存文件路径
         $cache_file = $this->parse_cache_file();
-        //获取数据表字段信息
+        // 获取数据表字段信息
         $table_info = $this->get_table_info();
         $fields = array();
         $primary_key = array();
         foreach ($table_info as $lines) {
-            //获取主键信息
+            // 获取主键信息
             if ($lines['Key'] == 'PRI') {
                 $primary_key[] = $lines['Field'];
             }
-
-            //获取字段信息
+            // 获取字段信息
             $fields[] = $lines['Field'];
         }
         $this->primary_key = empty($primary_key) ? '' : $primary_key[0];
         $this->table_field = $fields;
         $this->field_type = $this->db->get_fields_type($this->table_name);
-        //缓存文件内容整理
+        // 缓存文件内容整理
         $cache_data_array = array(
             'primary_key' => $this->primary_key,
             'fields' => $this->table_field,
             'types' => $this->field_type,
         );
         $cache_content = "<?php\r\nif (!defined('IN_CMS')) exit();\r\nreturn " . var_export($cache_data_array, true) . ";";
-        //分析model缓存文件目录
+        // 分析model缓存文件目录
         if (!is_dir($this->cache_dir)) {
-            //生成目录
+            // 生成目录
             mkdir($this->cache_dir, 0777);
         } else if (!is_writable($this->cache_dir)) {
-            //更改目录权限
+            // 更改目录权限
             chmod($this->cache_dir, 0777);
         }
-        //将缓存内容写入缓存文件
+        // 将缓存内容写入缓存文件
         file_put_contents($cache_file, $cache_content, LOCK_EX);
         return true;
     }
@@ -192,12 +187,12 @@ abstract class Model
      * 加载当前model的缓存文件内容
      *
      * @access protected
-     * @return array    缓存文件内容
+     * @return array 缓存文件内容
      */
     protected function load_cache()
     {
         $cache_file = $this->parse_cache_file();
-        //分析缓存文件是否存在
+        // 分析缓存文件是否存在
         if (!is_file($cache_file)) {
             return false;
         }
@@ -206,7 +201,7 @@ abstract class Model
         $this->primary_key = $cache_data_array['primary_key'];
         $this->table_field = $cache_data_array['fields'];
         $this->field_type = $cache_data_array['types'];
-        //清空不必要的内存占用
+        // 清空不必要的内存占用
         unset($cache_data_array);
         return true;
     }
@@ -219,9 +214,9 @@ abstract class Model
      */
     protected function clear_cache()
     {
-        //分析model缓存文件名
+        // 分析model缓存文件名
         $cache_file = $this->parse_cache_file();
-        //当model缓存文件存在时
+        // 当model缓存文件存在时
         if (is_file($cache_file)) {
             unlink($cache_file);
         }
@@ -233,7 +228,7 @@ abstract class Model
      * 分析当前model缓存文件的路径
      *
      * @access protected
-     * @return string    缓存文件的路径
+     * @return string 缓存文件的路径
      */
     protected function parse_cache_file()
     {
@@ -277,8 +272,8 @@ abstract class Model
      *
      * 用于处理 SELECT fields FROM table之类的SQL语句部分
      * @access public
-     * @param mixed $table_name    所要查询的数据表名，参数支持数组
-     * @param mixed $columns    所要查询的数据表字段，参数支持数组，默认为null, 即数据表全部字段
+     * @param mixed $table_name 所要查询的数据表名,参数支持数组
+     * @param mixed $columns 所要查询的数据表字段,参数支持数组,默认为null, 即数据表全部字段
      * @return $this
      *
      */
@@ -291,7 +286,7 @@ abstract class Model
         if (is_array($table_name)) {
             $option_array = array();
             foreach ($table_name as $key => $value) {
-                //当有数据表前缀时
+                // 当有数据表前缀时
                 if (!empty($this->prefix)) {
                     $option_array[] = is_int($key) ? ' ' . $this->prefix . trim($value) : ' ' . $this->prefix . trim($value) . ' AS ' . $key;
                 } else {
@@ -303,9 +298,9 @@ abstract class Model
         } else {
             $table_str = (!empty($this->prefix)) ? $this->prefix . trim($table_name) : trim($table_name);
         }
-        //对数据表字段的分析
+        // 对数据表字段的分析
         $item_str = $this->_parse_fields($fields);
-        //组装SQL中的FROM片段
+        // 组装SQL中的FROM片段
         $this->_parts['from'] = 'SELECT ' . $item_str . ' FROM ' . $table_str;
         return $this;
     }
@@ -313,9 +308,9 @@ abstract class Model
     /**
      * 分析数据表字段信息
      *
-     * @access     protected
-     * @param    array    $fields    数据表字段信息.本参数为数组
-     * @return     string
+     * @access protected
+     * @param array $fields 数据表字段信息
+     * @return string
      */
     protected static function _parse_fields($fields = null)
     {
@@ -329,7 +324,7 @@ abstract class Model
                 $fields_array[] = is_int($key) ? $value : $value . ' AS ' . $key;
             }
             $fields_str = implode(',', $fields_array);
-            //清空不必要的内存占用
+            // 清空不必要的内存占用
             unset($fields_array);
         } else {
             $fields_str = $fields;
@@ -343,7 +338,7 @@ abstract class Model
      * 用于处理 WHERE id=3721 诸如此类的SQL语句部分
      * @access public
      * @param string $where WHERE的条件
-     * @param string $value 数据参数，一般为字符或字符串
+     * @param string $value 数据参数,一般为字符或字符串
      * @return $this
      */
     public function where($where, $value = null)
@@ -357,7 +352,7 @@ abstract class Model
      * 用于处理 ORWHERE id=2011 诸如此类的SQL语句部分
      * @access public
      * @param string $where WHERE的条件
-     * @param string $value 数据参数，一般为字符或字符串
+     * @param string $value 数据参数,一般为字符或字符串
      * @return $this
      */
     public function orwhere($where, $value = null)
@@ -371,8 +366,8 @@ abstract class Model
      * 本方法用来为方法where()及orwhere()提供"配件"
      * @access protected
      * @param string $where SQL中的WHERE语句中的条件.
-     * @param string $value 数值（数据表某字段所对应的数据，通常都为字符串或字符）
-     * @param boolean $is_where 注:为true时是为where()， 反之 为orwhere()
+     * @param string $value 数值（数据表某字段所对应的数据,通常都为字符串或字符）
+     * @param boolean $is_where 注:为true时是为where(), 反之 为orwhere()
      * @return $this
      */
     protected function _where($where, $value = null, $is_where = true)
@@ -406,7 +401,7 @@ abstract class Model
      *
      * 用于处理 ORDER BY post_id ASC 诸如之类的SQL语句部分
      * @access public
-     * @param mixed $string 排序条件。注：本参数支持数组
+     * @param mixed $string 排序条件.注:本参数支持数组
      * @return $this
      */
     public function order($string)
@@ -434,7 +429,7 @@ abstract class Model
      * limit(10,20)用于处理LIMIT 10, 20之类的SQL语句部分
      * @access public
      * @param int $offset 启始id, 注:参数为整形
-     * @param int $count  显示的行数
+     * @param int $count 显示的行数
      * @return $this
      */
     public function limit($offset, $count = null)
@@ -449,10 +444,10 @@ abstract class Model
     /**
      * 组装SQL语句的LIMIT语句
      *
-     * 注:本方法与$this->limit()功能相类，区别在于:本方法便于分页,参数不同
+     * 注:本方法与$this->limit()功能相类,区别在于:本方法便于分页,参数不同
      * @access public
-     * @param int $page     当前的页数
-     * @param int $count     每页显示的数据行数
+     * @param int $page 当前的页数
+     * @param int $count 每页显示的数据行数
      * @return $this
      */
     public function page_limit($page, $listNum)
@@ -473,8 +468,8 @@ abstract class Model
      *
      * jion('表名2', '关系语句')相当于SQL语句中LEFT JOIN 表2 ON 关系SQL语句部分
      * @access public
-     * @param string $table_name    数据表名，注：本参数支持数组，主要用于数据表的alias别名
-     * @param string $where            join条件，注：不支持数组
+     * @param string $table_name 数据表名,注:本参数支持数组,主要用于数据表的alias别名
+     * @param string $where join条件,注:不支持数组
      * @return $this
      */
     public function join($table_name, $where)
@@ -490,7 +485,7 @@ abstract class Model
                 } else {
                     $table_name_str = is_int($key) ? trim($string) : trim($string) . ' AS ' . $key;
                 }
-                //数据处理，只处理一个数组元素
+                // 数据处理,只处理一个数组元素
                 break;
             }
         } else {
@@ -507,7 +502,7 @@ abstract class Model
      *
      * 用于处理SQL语句中GROUP BY语句部分
      * @access public
-     * @param mixed $group_name    所要排序的字段对象
+     * @param mixed $group_name 所要排序的字段对象
      * @return $this
      */
     public function group($group_name)
@@ -534,7 +529,7 @@ abstract class Model
      * 用于处理 having id=2011 诸如此类的SQL语句部分
      * @access pulbic
      * @param string|array $where 条件语句
-     * @param string $value    数据表某字段的数据值
+     * @param string $value 数据表某字段的数据值
      * @return $this
      */
     public function having($where, $value = null)
@@ -548,7 +543,7 @@ abstract class Model
      * 用于处理or having id=2011 诸如此类的SQL语句部分
      * @access pulbic
      * @param string|array $where 条件语句
-     * @param string $value    数据表某字段的数据值
+     * @param string $value 数据表某字段的数据值
      * @return $this
      */
     public function orhaving($where, $value = null)
@@ -562,8 +557,8 @@ abstract class Model
      * 为having()及orhaving()方法的执行提供'配件'
      * @access protected
      * @param mixed $where 条件语句
-     * @param string $value    数据表某字段的数据值
-     * @param boolean $is_having 当参数为true时，处理having()，当为false时，则为orhaving()
+     * @param string $value 数据表某字段的数据值
+     * @param boolean $is_having 当参数为true时,处理having(),当为false时,则为orhaving()
      * @return $this
      */
     protected function _having($where, $value = null, $is_having = true)
@@ -595,9 +590,9 @@ abstract class Model
     /**
      * 执行SQL语句中的SELECT查询语句
      *
-     * 组装SQL语句并完成查询，并返回查询结果，返回结果可以是多行，也可以是单行
+     * 组装SQL语句并完成查询,并返回查询结果,返回结果可以是多行,也可以是单行
      * @access public
-     * @param boolean $all_data 是否输出为多行数据，默认为true,即多行数据；当false时输出的为单行数据
+     * @param boolean $all_data 是否输出为多行数据,默认为true,即多行数据;当false时输出的为单行数据
      * @return array
      */
     public function select($all_data = true, $cache = 0)
@@ -606,7 +601,7 @@ abstract class Model
             $this->from(substr(strtolower(get_class($this)), 0, -5));
         }
 
-        //组装完整的SQL查询语句
+        // 组装完整的SQL查询语句
         $parts_name_array = array('from', 'join', 'where', 'or_where', 'group', 'having', 'or_having', 'order', 'limit');
         $sql_str = '';
         if (!isset($this->_parts['order'])) {
@@ -627,7 +622,7 @@ abstract class Model
      *
      * SQL语句指令安全过滤,用于字符转义
      * @access public
-     * @param mixed $value 所要转义的字符或字符串,注：参数支持数组
+     * @param mixed $value 所要转义的字符或字符串,注:参数支持数组
      * @return string|string
      */
     public static function quote_into($value)
@@ -637,7 +632,7 @@ abstract class Model
                 $value[$key] = self::quote_into($string);
             }
         } else {
-            //当参数为字符串或字符时
+            // 当参数为字符串或字符时
             if (is_string($value)) {
                 $value = '\'' . addslashes($value) . '\'';
             }
@@ -645,7 +640,7 @@ abstract class Model
         return $value;
     }
 
-    /*
+    /**
      * 获取数据的总行数
      *
      * 获取某数据表满足一定条件的数据的总行数,分页程序常用
@@ -653,7 +648,7 @@ abstract class Model
      * @param string $table_name 所要查询的数据表名
      * @param string $field_name 所要查询字段名称
      * @param string $where 查询条件
-     * @param string $value 数值（数据表某字段所对应的数据，通常都为字符串或字符）
+     * @param string $value 数值（数据表某字段所对应的数据,通常都为字符串或字符）
      * @return integer
      */
     public function count($table_name, $field_name = null, $where = null, $value = null, $order = null)
@@ -678,12 +673,12 @@ abstract class Model
     /**
      * 对数据表的主键查询
      *
-     * 根据主键，获取某个主键的一行信息,主键可以类内设置。默认主键为数据表的物理主键
-     * 如果数据表没有主键，可以在model中定义
+     * 根据主键,获取某个主键的一行信息,主键可以类内设置.默认主键为数据表的物理主键
+     * 如果数据表没有主键,可以在model中定义
      * @access public
-     * @param int|string|array $id 所要查询的主键值.注：本参数支持数组，当参数为数组时，可以查询多行数据
-     * @param array    $fields    返回数据的有效字段(数据表字段)
-     * @return string    所要查询数据信息（单行或多行）
+     * @param int|string|array $id 所要查询的主键值.注:本参数支持数组,当参数为数组时,可以查询多行数据
+     * @param array $fields 返回数据的有效字段(数据表字段)
+     * @return string 所要查询数据信息（单行或多行）
      *
      */
     public function find($id, $fields = null)
@@ -711,20 +706,20 @@ abstract class Model
     /**
      * 获取数据表的全部数据信息
      *
-     * 以主键为中心排序，获取数据表全部数据信息. 注:如果数据表数据量较大时，慎用此函数，以免数据表数据量过大，造成数据库服务器内存溢出,甚至服务器宕机
+     * 以主键为中心排序,获取数据表全部数据信息. 注:如果数据表数据量较大时,慎用此函数,以免数据表数据量过大,造成数据库服务器内存溢出,甚至服务器宕机
      * @access public
-     * @param array        $fields    返回的数据表字段,默认为全部.即SELECT * FROM table_name
-     * @param  boolean    $order_asc数据排序,若为true时为ASC,为false时为DESC, 默认为ASC
-     * @param integer    $offset    limit启起ID
-     * @param integer    $count    显示的行数
-     * @return array    数据表数据信息
+     * @param array $fields 返回的数据表字段,默认为全部.即SELECT * FROM table_name
+     * @param boolean $order_asc 数据排序,若为true时为ASC,为false时为DESC, 默认为ASC
+     * @param integer $offset limit启起ID
+     * @param integer $count 显示的行数
+     * @return array 数据表数据信息
      */
     public function findAll($fields = null, $order_asc = true, $offset = null, $count = null)
     {
-        //获取主键及数据表名
+        // 获取主键及数据表名
         $this->get_table_name();
         $this->get_primary_key();
-        //分析查询的字段信息
+        // 分析查询的字段信息
         $fields_str = $this->_parse_fields($fields);
         $sql_str = 'SELECT ' . $fields_str . ' FROM ' . $this->table_name . ' ORDER BY ' . $this->primary_key . (($order_asc == true) ? ' ASC' : ' DESC');
         if (!is_null($offset)) {
@@ -739,12 +734,12 @@ abstract class Model
     /**
      * 查询数据表单行数据
      *
-     * 根据一个查询条件，获取一行数据，返回数据为数组型，索引为数据表字段名
+     * 根据一个查询条件,获取一行数据,返回数据为数组型,索引为数据表字段名
      * @access public
-     * @param mixed     $where 查询条件
-     * @param sring      $value 数值
-     * @param array        $fields    返回数据的数据表字段,默认为全部字段.注：本参数为数组
-     * @return array     所要查询的数据表数据
+     * @param mixed $where 查询条件
+     * @param string $value 数值
+     * @param array $fields 返回数据的数据表字段,默认为全部字段.注:本参数为数组
+     * @return array 所要查询的数据表数据
      */
     public function getOne($where, $value = null, $fields = null)
     {
@@ -752,11 +747,11 @@ abstract class Model
             return false;
         }
 
-        //获取数据表名
+        // 获取数据表名
         $this->get_table_name();
-        //分析查询的字段信息
+        // 分析查询的字段信息
         $fields_str = $this->_parse_fields($fields);
-        //处理查询的SQL语句
+        // 处理查询的SQL语句
         $this->_parts['where'] = '';
         $this->where($where, $value);
         $where_str = $this->_parts['where'];
@@ -772,14 +767,14 @@ abstract class Model
     /**
      * 查询数据表多行数据
      *
-     * 根据一个查询条件，获取多行数据。并且支持数据排序
+     * 根据一个查询条件,获取多行数据.并且支持数据排序
      * @access public
-     * @param mixed    $where 查询条件
-     * @param sring    $value 数值
-     * @param array    $fields    返回数据的数据表字段.默认为全部字段.注:本参数为数组
-     * @param mixed    $order 排序条件
-     * @param integer  $offset    limit启起ID
-     * @param integer  $count    显示的行数
+     * @param mixed $where 查询条件
+     * @param string $value 数值
+     * @param array $fields 返回数据的数据表字段.默认为全部字段.注:本参数为数组
+     * @param mixed $order 排序条件
+     * @param integer $offset limit启起ID
+     * @param integer $count 显示的行数
      * @return array
      */
     public function getAll($where, $value = null, $fields = null, $order = null, $offset = null, $count = null)
@@ -788,17 +783,17 @@ abstract class Model
             return false;
         }
 
-        //获取数据表名
+        // 获取数据表名
         $this->get_table_name();
-        //分析查询的字段信息
+        // 分析查询的字段信息
         $fields_str = $this->_parse_fields($fields);
         $sql_str = 'SELECT ' . $fields_str . ' FROM ' . $this->table_name;
-        //处理查询的SQL语句
+        // 处理查询的SQL语句
         $this->_parts['where'] = '';
         $this->where($where, $value);
         $sql_str .= $this->_parts['where'];
         unset($this->_parts['where']);
-        //处理排序的SQL语句
+        // 处理排序的SQL语句
         if (!is_null($order)) {
             $this->_parts['order'] = '';
             $this->order($order);
@@ -807,7 +802,7 @@ abstract class Model
         } else {
             $sql_str .= ' ORDER BY NULL';
         }
-        //处理limit语句
+        // 处理limit语句
         if (!is_null($offset)) {
             $this->_parts['limit'] = '';
             $this->limit($offset, $count);
@@ -822,7 +817,7 @@ abstract class Model
      *
      * 向当前model对应的数据表插入数据
      * @access public
-     * @param array $data 所要写入的数据内容。注：数据必须为数组
+     * @param array $data 所要写入的数据内容.注:数据必须为数组
      * @return boolean
      */
     public function insert($data)
@@ -831,10 +826,10 @@ abstract class Model
             return false;
         }
 
-        //获取数据表名及字段信息
+        // 获取数据表名及字段信息
         $this->get_table_name();
         $this->get_table_fields();
-        //处理数据表字段与数据的对应关系
+        // 处理数据表字段与数据的对应关系
         $field_array = array();
         $content_array = array();
         foreach ($data as $key => $value) {
@@ -849,7 +844,7 @@ abstract class Model
             return false;
         }
 
-        //清空不必要的内存占用
+        // 清空不必要的内存占用
         unset($field_array);
         unset($content_array);
         $sql_str = 'INSERT INTO ' . $this->table_name . ' (' . $field_str . ') VALUES (' . $content_str . ')';
@@ -861,9 +856,9 @@ abstract class Model
      *
      * 更改当前model所对应的数据表的数据内容
      * @access public
-     * @param array     $data 所要更改的数据内容
-     * @param mixed        $where 更改数据所要满足的条件
-     * @param string    $$params 数值，对满足更改的条件的进一步补充
+     * @param array $data 所要更改的数据内容
+     * @param mixed $where 更改数据所要满足的条件
+     * @param string $$params 数值,对满足更改的条件的进一步补充
      * @return boolean
      */
     public function update($data, $where, $params = null)
@@ -872,7 +867,7 @@ abstract class Model
             return false;
         }
 
-        //获取数据表名及字段信息
+        // 获取数据表名及字段信息
         $this->get_table_name();
         $this->get_table_fields();
         $this->get_field_type();
@@ -898,9 +893,9 @@ abstract class Model
             return false;
         }
 
-        //组装SQL语句
+        // 组装SQL语句
         $sql_str = 'UPDATE ' . $this->table_name . ' SET ' . $content_str;
-        //条件查询SQL语句的处理
+        // 条件查询SQL语句的处理
         $this->_parts['where'] = '';
         $this->where($where, $params);
         $sql_str .= $this->_parts['where'];
@@ -926,8 +921,8 @@ abstract class Model
 
     /**
      * 执行SQL查询语句
-     * $all_rows 是否显示全部数据开关，当为true时，显示全部数据，为false时，显示一行数据，默认为true
-     * $cache    缓存时间，单位秒。
+     * $all_rows 是否显示全部数据开关,当为true时,显示全部数据,为false时,显示一行数据,默认为true
+     * $cache 缓存时间,单位秒.
      */
     public function execute($sql, $all_data = true, $cache = 0)
     {
@@ -1027,7 +1022,7 @@ abstract class Model
         if (is_object($this->myrow)) {
             $this->myrow->$name = addslashes($value);
         } else {
-            //允许model对数据表名，数据表主键的自定义
+            // 允许model对数据表名,数据表主键的自定义
             if (in_array($name, array('table_name', 'primary_key'))) {
                 $this->$name = addslashes($value);
             }
@@ -1064,7 +1059,6 @@ abstract class Model
             if (isset($name)) {
                 unset($name);
             }
-
         }
     }
 

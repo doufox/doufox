@@ -1,13 +1,12 @@
 <?php
-/**
- * router class
- *
- */
-
 if (!defined('IN_CMS')) {
     exit();
 }
 
+/**
+ * router class
+ * 路由处理类
+ */
 class router
 {
     private $router;

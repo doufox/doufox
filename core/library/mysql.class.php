@@ -1,12 +1,11 @@
 <?php
-/**
- * mysql数据库驱动,完成对mysql数据库的操作
- */
-
 if (!defined('IN_CMS')) {
     exit();
 }
 
+/**
+ * mysql数据库驱动,完成对mysql数据库的操作
+ */
 class mysql
 {
 
@@ -29,12 +28,11 @@ class mysql
             exit('Mysql服务器连接失败 ');
         } else {
             if (mysql_select_db($params['dbname'], $this->db_link)) {
-                //设置数据库编码
+                // 设置数据库编码
                 mysql_query("SET NAMES {$params['charset']}", $this->db_link);
                 if (version_compare($this->get_server_info(), '5.0.2', '>=')) {
                     mysql_query("SET SESSION SQL_MODE=''", $this->db_link);
                 }
-
             } else {
                 exit('MySQL服务器无法连接数据库表');
             }
@@ -48,7 +46,7 @@ class mysql
     public function query($sql)
     {
         $result = mysql_query($sql, $this->db_link);
-        //获取当前运行的namespace、controller及action名称
+        // 获取当前运行的namespace、controller及action名称
         $namespace_id = core::get_namespace_id();
         $controller_id = core::get_controller_id();
         $action_id = core::get_action_id();

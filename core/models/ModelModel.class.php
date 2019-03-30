@@ -27,7 +27,7 @@ class ModelModel extends Model
         if ($data['typeid'] == 1) {
             $sql = "CREATE TABLE IF NOT EXISTS `" . $table . "` (`id` MEDIUMINT( 8 ) NOT NULL ,`catid` SMALLINT( 5 ) NOT NULL ,`content` MEDIUMTEXT NOT NULL ,PRIMARY KEY (`id`), KEY `catid` (`catid`)) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
             $this->query($sql);
-            //内容表默认字段
+            // 内容表默认字段
             $this->query("INSERT INTO `" . $this->prefix . "model_field` (fieldid,modelid,field,name,formtype,isshow) VALUES (NULL, $modelid,'content','内容 ','editor',1)");
         } elseif ($data['typeid'] == 2) {
             $sql = "CREATE TABLE IF NOT EXISTS `" . $table . "` (`id` MEDIUMINT( 8 ) NOT NULL ,PRIMARY KEY (`id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8;";

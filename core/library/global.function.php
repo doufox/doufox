@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('IN_CMS')) {
     exit();
 }
@@ -22,11 +21,11 @@ function getKw($data)
             if ($valuearray['tag'] == 'kw' || $valuearray['tag'] == 'ekw') {
                 $kws[] = $kw;
             }
-
         }
         return implode(',', $kws);
     }
 }
+
 /**
  * 调用远程数据
  */
@@ -98,7 +97,6 @@ function url($route, $params = null)
 
 /**
  * Application execution time
- *
  */
 function appExecutionTime()
 {
@@ -111,7 +109,6 @@ function appExecutionTime()
 
 /**
  * Get Client IP Address
- *
  */
 function get_user_ip()
 {
@@ -210,16 +207,18 @@ function thumb($img, $width = null, $height = null)
                 $image = core::load_class('image_lib');
                 $image->set_image_size($width, $height)->make_limit_image($img, $thumb);
             }
+            unset($config);
             return $thumb;
         }
         if ($config['SITE_THUMB_WIDTH'] && $config['SITE_THUMB_HEIGHT']) {
             $thumb = $img . '.thumb.' . $config['SITE_THUMB_WIDTH'] . 'x' . $config['SITE_THUMB_HEIGHT'] . '.' . $ext;
+            unset($config);
             if (file_exists(ROOT_PATH . $thumb)) {
                 return image($thumb);
             }
-
         }
     }
+    unset($config);
     return image($img);
 }
 
@@ -267,28 +266,40 @@ function strcut($string, $length, $dot = '')
         if ($noc >= $length) {
             break;
         }
-
     }
     if ($noc > $length) {
         $n -= $tn;
     }
 
     $strcut = substr($string, 0, $n);
-
     $strcut = str_replace(array('&', '"', '<', '>'), array('&amp;', '&quot;', '&lt;', '&gt;'), $strcut);
     return $strcut . $dot;
 }
 
 /**
- * 正则表达式验证email格式
+ * 验证Email格式
  */
-function is_email($str)
+function verify_email($str)
 {
     if (!$str) {
         return false;
     }
 
     return preg_match('#[a-z0-9&\-_.]+@[\w\-_]+([\w\-.]+)?\.[\w\-]+#is', $str) ? true : false;
+}
+
+/**
+ * 检查会员名是否符合规定
+ */
+function verify_username($username)
+{
+    $strlen = strlen($username);
+    if (!preg_match('/^[a-zA-Z0-9_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+$/', $username)) {
+        return false;
+    } elseif (20 < $strlen || $strlen < 2) {
+        return false;
+    }
+    return true;
 }
 
 /**
@@ -305,7 +316,7 @@ function clearhtml($str)
 
 /**
  * 栏目面包屑导航 当前位置
- * @param $catid  栏目id
+ * @param $catid 栏目id
  * @param $symbol 栏目间隔符
  * @return NULL|string
  */
@@ -314,6 +325,7 @@ function position($catid, $symbol = ' > ', $link_class = 'btn btn-link')
     $cats = get_cache('category');
     $catids = catposids($catid, '', $cats);
     if (empty($catids)) {
+        unset($cats);
         return null;
     }
 
@@ -334,13 +346,14 @@ function position($catid, $symbol = ' > ', $link_class = 'btn btn-link')
             $str .= $symbol;
         }
     }
+    unset($cats);
     return $str;
 }
 
 /**
  * 栏目上级ID集合
- * @param  $catid
- * @param  $catids
+ * @param $catid
+ * @param $catids
  * @return string 返回栏目所有上级ID
  */
 function catposids($catid, $catids = '', $category)
@@ -360,8 +373,8 @@ function catposids($catid, $catids = '', $category)
 
 /**
  * 栏目下级ID集合
- * @param  $catid
- * @param  $catids
+ * @param $catid
+ * @param $catids
  * @return string 返回栏目所有下级ID
  */
 function _catposids($catid, $catids = '', $category)
@@ -383,19 +396,21 @@ function _catposids($catid, $catids = '', $category)
 
 /**
  * 当前栏目同级菜单
- * @param  $catid
+ * @param $catid
  */
 function getCatNav($catid)
 {
     $cats = get_cache('category');
     $cat = $cats[$catid];
     if (!$cat['child'] && !$cat['parentid']) {
+        unset($cats);
         return array();
     }
 
-    //当前栏目有子菜单时，同级栏目则是所有子菜单；否则为其父级同级菜单
+    // 当前栏目有子菜单时，同级栏目则是所有子菜单；否则为其父级同级菜单
     $catids = $cat['child'] ? $cat['arrchildid'] : $cat['arrparentid'];
     if (empty($catids)) {
+        unset($cats);
         return array();
     }
 
@@ -404,18 +419,20 @@ function getCatNav($catid)
     foreach ($ids as $cid) {
         $data[] = $cats[$cid];
     }
+    unset($cats);
     return $data;
 }
 
 /**
  * 递归查询所有父级栏目信息
- * @param  int $catid  当前栏目ID
+ * @param int $catid 当前栏目ID
  * @return array
  */
 function getParentData($catid)
 {
     $cats = get_cache('category');
     $cat = $cats[$catid];
+    unset($cats);
     if ($cat['parentid']) {
         $cat = getParentData($cat['parentid']);
     }
@@ -425,10 +442,10 @@ function getParentData($catid)
 
 /**
  * 递归查询所有父级栏目名称
- * @param  int    $catid   当前栏目ID
- * @param  string $prefix  分隔符
- * @param  int    $sort    排序方式 1正序，0反序
- * @return string          返回格式：顶级栏目[分隔符]一级栏目[分隔符]二级栏目...[分隔符]当前栏目
+ * @param int $catid 当前栏目ID
+ * @param string $prefix 分隔符
+ * @param int $sort 排序方式 1正序，0反序
+ * @return string 返回格式：顶级栏目[分隔符]一级栏目[分隔符]二级栏目...[分隔符]当前栏目
  */
 function getParentName($catid, $prefix, $sort = 1)
 {
@@ -445,15 +462,14 @@ function getParentName($catid, $prefix, $sort = 1)
         if ($cid) {
             $str .= $cats[$cid]['catname'] . $prefix;
         }
-
     }
+    unset($cats);
     return substr($str, -1) == $prefix ? substr($str, 0, -1) : $str;
 }
 
 /**
  * 内容页URL地址
  */
-
 function getUrl($data, $page = 0)
 {
     $config = core::load_config('config');
@@ -518,8 +534,8 @@ function getCaturl($data, $page = 0)
 
 /**
  * 栏目页SEO信息
- * @param int    $cat
- * @param int    $page
+ * @param int $cat
+ * @param int $page
  * @param string $kw
  * @return array
  */
@@ -537,6 +553,7 @@ function listSeo($cat, $page = 1, $kw = null)
         $seo_keywords = empty($cat['seo_keywords']) ? getParentName($cat['catid'], ',', 0) . ',' . $config['SITE_KEYWORDS'] : $cat['seo_keywords'];
         $seo_description = empty($cat['seo_description']) ? $config['SITE_DESCRIPTION'] : $cat['seo_description'];
     }
+    unset($config);
     return array('site_title' => $seo_title, 'site_keywords' => $seo_keywords, 'site_description' => $seo_description);
 }
 
@@ -548,10 +565,10 @@ function listSeo($cat, $page = 1, $kw = null)
  */
 function showSeo($data, $page = 1)
 {
-    $config = core::load_config('config');
     $cats = get_cache('category');
     $seo_title = $seo_keywords = $seo_description = '';
     $cat = $cats[$data['catid']];
+    unset($cats);
     $listseo = listSeo($cat);
     $seo_title = $data['title'] . ' - ' . ($page > 1 ? '第' . $page . '页' . ' - ' : '') . $listseo['site_title'];
 
@@ -562,8 +579,8 @@ function showSeo($data, $page = 1)
 
 /**
  * 格式SQL查询IN(ID序列)
- * @param  $str
- * @param  $glue
+ * @param $str
+ * @param $glue
  * @return boolean|string
  */
 function formatStr($str, $glue = ',')
@@ -575,9 +592,10 @@ function formatStr($str, $glue = ',')
 
     $arr = array_unique($arr);
     $ids = '';
-    foreach ($arr as $id) {if ($id) {
-        $ids .= ',' . $id;
-    }
+    foreach ($arr as $id) {
+        if ($id) {
+            $ids .= ',' . $id;
+        }
     }
     return substr($ids, 1);
 }
@@ -620,7 +638,7 @@ function new_stripslashes($string)
 
 /**
  * 返回经addslashe处理过的字符串或数组
- * @param $obj 需要处理的字符串或数组
+ * @param $string 需要处理的字符串或数组
  * @return mixed
  */
 function new_html_special_chars($string)
@@ -796,7 +814,7 @@ function delete_cache($cache_file)
 }
 
 /**
- * 判断客服端是否是移动端
+ * 判断客户端是否是移动端
  */
 function is_mobile()
 {
@@ -863,7 +881,10 @@ function is_https()
     return false;
 }
 
-function get_extension($file)
+/**
+ * 获取文件扩展名
+ */
+function get_file_extension($file)
 {
     return pathinfo($file, PATHINFO_EXTENSION);
 }
@@ -873,7 +894,9 @@ function get_extension($file)
  */
 function mkdirs($dir)
 {
-    if (empty($dir)) {return false;}
+    if (empty($dir)) {
+        return false;
+    }
     if (!is_dir($dir)) {
         mkdirs(dirname($dir));
         mkdir($dir);

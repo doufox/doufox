@@ -35,24 +35,24 @@ class CategoryModel extends Model
             return false;
         }
 
-        $this->repair($catid); //修复该栏目数据
+        $this->repair($catid); // 修复该栏目数据
         $data = $this->child($catid, true);
         if (empty($data)) {
             return false;
         }
 
-        //转换为数组
+        // 转换为数组
         $catids = explode(',', $data);
-        //加载栏目缓存文件
+        // 加载栏目缓存文件
         $category = get_cache('category');
         foreach ($catids as $catid) {
             if (empty($catid)) {
                 continue;
             }
 
-            //删除栏目数据
+            // 删除栏目数据
             $this->delete('catid=' . $catid);
-            //删除内容表数据
+            // 删除内容表数据
             if ($category[$catid]['tablename']) {
                 $this->query('DELETE FROM `' . $this->prefix . 'content` WHERE `catid`=' . $catid);
                 $this->query('DELETE FROM `' . $this->prefix . $category[$catid]['tablename'] . '` WHERE `catid`=' . $catid);
@@ -76,7 +76,7 @@ class CategoryModel extends Model
         }
 
         $str = '';
-        if ($data['child'] && $data['arrchildid']) { //存在子栏目
+        if ($data['child'] && $data['arrchildid']) { // 存在子栏目
             if ($parent && ($typeid ? $typeid == $data['typeid'] : true)) {
                 $str .= $catid . ',';
             }
@@ -107,29 +107,29 @@ class CategoryModel extends Model
     {
         $data = $this->where('parentid=?', $parentid)->order('listorder ASC')->select();
         foreach ($data as $t) {
-            //检查该栏目下是否有子栏目
+            // 检查该栏目下是否有子栏目
             $catid = $t['catid'];
             $parentid = $t['parentid'];
-            //当前栏目的所有父栏目ID(arrparentid)
+            // 当前栏目的所有父栏目ID(arrparentid)
             $arrparentid = array();
             foreach ($data as $s) {
                 $arrparentid[] = $s['catid'];
             }
-            //组合父栏目ID
+            // 组合父栏目ID
             $arrparentid = implode(',', $arrparentid);
-            //查询子栏目
+            // 查询子栏目
             $s_data = $this->where('parentid=?', $t['catid'])->order('listorder ASC')->select();
-            if ($s_data) { //存在子栏目
-                //当前栏目的所有子栏目ID($arrchildid)
+            if ($s_data) { // 存在子栏目
+                // 当前栏目的所有子栏目ID($arrchildid)
                 $arrchildid = array();
                 foreach ($s_data as $s) {
                     $arrchildid[] = $s['catid'];
                 }
-                //组合子栏目ID
+                // 组合子栏目ID
                 $arrchildid = implode(',', $arrchildid);
                 $this->update(array('child' => 1, 'arrchildid' => $arrchildid, 'arrparentid' => $arrparentid), 'catid=' . $catid);
-                $this->repair($catid); //递归调用
-            } else { //没有子栏目
+                $this->repair($catid); // 递归调用
+            } else { // 没有子栏目
                 $this->update(array('child' => 0, 'arrchildid' => '', 'arrparentid' => $arrparentid), 'catid=' . $catid);
             }
         }
@@ -166,7 +166,7 @@ class CategoryModel extends Model
 
     /**
      * 递归查询所有父级栏目信息
-     * @param  int $catid  当前栏目ID
+     * @param int $catid 当前栏目ID
      * @return array
      */
     public function getParentData($catid)

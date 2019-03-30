@@ -1,13 +1,12 @@
 <?php
-/**
- * pagination class file
- * 分页类
- */
-
 if (!defined('IN_CMS')) {
     exit();
 }
 
+/**
+ * pagination class file
+ * 分页类
+ */
 class pagination
 {
 
@@ -281,11 +280,11 @@ class pagination
      */
     public function url($url = null)
     {
-        //当url为空时,自动获取url参数. 注:默认当前页的参数为page
+        // 当url为空时,自动获取url参数. 注:默认当前页的参数为page
         if (is_null($url)) {
-            //当网址没有参数时
+            // 当网址没有参数时
             $url = (!$_SERVER['QUERY_STRING']) ? $_SERVER['REQUEST_URI'] . ((substr($_SERVER['REQUEST_URI'], -1) == '?') ? 'page=' : '?page=') : '';
-            //当网址有参数时,且有分页参数(page)时
+            // 当网址有参数时,且有分页参数(page)时
             if (!$url && (stristr($_SERVER['QUERY_STRING'], 'page='))) {
                 $url = str_ireplace('page=' . $this->page, '', $_SERVER['REQUEST_URI']);
                 $end_str = substr($url, -1);
@@ -295,13 +294,13 @@ class pagination
                     $url .= '&page=';
                 }
             }
-            //当网址中未发现含有分页参数(page)时
+            // 当网址中未发现含有分页参数(page)时
             if (!$url) {
                 $url = $_SERVER['REQUEST_URI'] . '&page=';
             }
 
         }
-        //自动获取都没获取到url...额..没有办法啦, 趁早返回false
+        // 自动获取都没获取到url...额..没有办法啦, 趁早返回false
         if (!$url) {
             return false;
         }
@@ -458,11 +457,11 @@ class pagination
      */
     public function output()
     {
-        //支持长的url.
+        // 支持长的url.
         $this->url = trim(str_replace(array("\n", "\r"), '', $this->url));
-        //获取总页数.
+        // 获取总页数.
         $this->total_pages = $this->get_total_page();
-        //获取当前页.
+        // 获取当前页.
         $this->page = $this->get_page_num();
         return ($this->total <= $this->num) ? '' : $this->preg_c($this->get_note() . $this->get_first_page() . $this->get_list() . $this->get_last_page(), '', $this->config['div']);
     }
