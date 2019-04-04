@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `doufox_category` (
   `categorytpl` varchar(50) NOT NULL,
   `listtpl` varchar(50) NOT NULL,
   `showtpl` varchar(50) NOT NULL,
+  `searchtpl` varchar(30) NOT NULL,
   `pagetpl` varchar(50) NOT NULL,
   `pagesize` smallint(5) NOT NULL,
   PRIMARY KEY (`catid`),
