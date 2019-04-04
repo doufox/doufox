@@ -1,4 +1,5 @@
 <?php include $this->admin_tpl('header');?>
+
 <script type="text/javascript">
     top.document.getElementById('position').innerHTML = '会员列表';
     function setC() {
@@ -18,7 +19,6 @@
             <a href="<?php echo url('admin/member/cache'); ?>">更新缓存</a>
         </div>
     </div>
-    <div class="bk10"></div>
     <div class="table-list">
         <form action="" method="post">
         <input name="form" id="list_form" type="hidden" value="">

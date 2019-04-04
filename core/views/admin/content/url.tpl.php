@@ -6,7 +6,6 @@
     <div class="content-menu">
         <a href="<?php echo url('admin/content/updateurl'); ?>">更新内容地址</a>
     </div>
-    <div class="bk10"></div>
     <form action="" method="post" target='result'>
         <table width="100%" class="table_form">
             <tr>

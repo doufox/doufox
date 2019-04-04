@@ -1,4 +1,5 @@
 <?php include $this->admin_tpl('header');?>
+
 <script type="text/javascript">
     top.document.getElementById('position').innerHTML = '表单列表';
 </script>
@@ -8,7 +9,6 @@
 <?php if (!$join) { ?><a href="<?php echo url('index/form',array('modelid'=>$modelid)); ?>" class="add" target="_blank">发布内容</a><?php };?>
         <a href="<?php echo url('admin/form/config',array('modelid'=>$modelid, 'cid'=>$cid)); ?>" class="on">表单设置</a>
     </div>
-    <div class="bk10"></div>
     <div class="table-list">
     <form action="" method="post" name="myform">
         <input name="form" id="list_form" type="hidden" value="order">

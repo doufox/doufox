@@ -31,16 +31,11 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="hidden-sm"><a href="{$site_url}">首页</a></li>
-                        {nav num=7}<li{if $current} class="active"{/if}><a href="{$vdata['url']}">{$vdata['catname']}</a></li>{/nav}
+                        {nav num=6}<li{if $current} class="active"{/if}><a href="{$vdata['url']}">{$vdata['catname']}</a></li>{/nav}
                     </ul>
-                    <form class="navbar-form navbar-right" method="get" action="/">
-                        <input type="hidden" value="index" name="c" />
-                        <input type="hidden" value="search" name="a" />
-                        <input type="hidden" value="6"  name="catid" />
-                        <div class="form-group">
-                            <input type="text" class="form-control" value="" name="kw" placeholder="搜索" />
-                        </div>
-                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="https://github.com/inpanel/inpanel" target="_blank">源码</a></li>
+                    </ul>
                 </div>
             </div>
         </nav>

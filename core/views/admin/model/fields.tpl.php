@@ -1,4 +1,5 @@
 <?php include $this->admin_tpl('header');?>
+
 <script type="text/javascript">
     top.document.getElementById('position').innerHTML = '模型字段管理';
 </script>
@@ -10,7 +11,6 @@
         <a href="<?php echo url('admin/model/fields', array('typeid'=>$typeid, 'modelid'=>$modelid)); ?>">字段管理</a>
         <a href="<?php echo url('admin/model/addfield', array('typeid'=>$typeid, 'modelid'=>$modelid)); ?>" class="add">添加字段</a>
     </div>
-    <div class="bk10"></div>
     <div class="table-list">
         <form action="" method="post">
         <table width="100%">

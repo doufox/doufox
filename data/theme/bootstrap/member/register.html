@@ -1,31 +1,118 @@
 {template header.html}
 <script type="text/javascript">
-    function checkpass() {
-        var pass1 = $('#password').val();
-        var pass2 = $('#password2').val();
-        if (!pass1) {
-            $('#password').focus();
-            $("#err_password").html("密码不能为空");
-        }
-        if (pass1 != pass2) {
-            $('#checkpassword2').html('<span>两次密码不一致</span>');
-            $('#password').focus();
+    function usernameFocus() {
+        document.getElementById("username_prompt").innerHTML = "请输入登录账号";
+    }
+    function pwdFocus() {
+        document.getElementById("pwd_prompt").innerHTML = "密码可由大小写英文字母、数字组成，长度6-20个字符";
+    }
+    function repwdFocus() {
+        document.getElementById("repwd_prompt").innerHTML = "请再次输入您的密码";
+    }
+    function emailFocus() {
+        document.getElementById("email_prompt").innerHTML = "请输入您的电子邮箱地址";
+    }
+
+    function usernameBlur() {
+        var username = document.getElementById("inputUsername");
+        var prompt = document.getElementById("username_prompt");
+        prompt.innerHTML = "";
+        if (username.value == "") {
+            prompt.innerHTML = "请输入您的登陆账号";
             return false;
-        } else {
-            $('#checkpassword2').html('<span>正确</span>');
+        }
+        if (/^[a-zA-Z0-9_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+$/.test(username.value) == false) {
+            prompt.innerHTML = "登陆账号格式不正确，请重新输入";
+            return false;
         }
     }
-    function check_email() {
-        $('#err_email').html('');
+    function emailBlur() {
+        var email = document.getElementById("inputEmail");
+        var promptId = document.getElementById("email_prompt");
+        promptId.innerHTML = "";
+        var reg = /^[a-z0-9&\-_.]+@[\w\-_]+([\w\-.]+)?\.[\w\-]+$/;
+        if (email.value == "") {
+            promptId.innerHTML = "请输入您的电子邮箱";
+            return false;
+        }
+        if (reg.test(email.value) == false) {
+            promptId.innerHTML = "电子邮件格式不正确，请重新输入";
+            return false;
+        }
         $.post('{function.url("api/member/ajaxemail")}&' + Math.random(), {
-            email:$('#email').val()
-        }, function(data) {
+            email: email.value
+        }, function (data) {
             console.log(data);
-            $('#err_email').html(data.msg); 
+            promptId.innerHTML = data.msg;
+            return true;
         });
+        return true;
     }
+    function pwdBlur() {
+        var pwd = document.getElementById("inputPwd");
+        var prompt = document.getElementById("pwd_prompt");
+        prompt.innerHTML = "";
+        var reg = /^[a-zA-Z0-9]{6,20}$/;
+        if (pwd.value == "") {
+            prompt.innerHTML = "密码为必填项，请设置您的密码";
+            return false;
+        }
+        if (reg.test(pwd.value) == false) {
+            prompt.innerHTML = "密码格式错误，请用大小写英文字母、数字，长度6-20个字符";
+            return false;
+        }
+        return true;
+    }
+    function repwdBlur() {
+        var pwd = document.getElementById("inputPwd");
+        var repwd = document.getElementById("inputRepwd");
+        var prompt = document.getElementById("repwd_prompt");
+        prompt.innerHTML = "";
+        if (repwd.value == "") {
+            prompt.innerHTML = "请再次输入密码予以确认";
+            return false;
+        }
+        if (pwd.value != repwd.value) {
+            prompt.innerHTML = "两次输入密码不一致，请重新输入";
+            return false;
+        }
+        return true;
+    }
+    function checkRegister() {
+        emailBlur();
+        pwdBlur();
+        repwdBlur();
+        var flagEmail = emailBlur();
+        var flagNickName = nickNameBlur();
+        var flagPwd = pwdBlur();
+        var flagRepwd = repwdBlur();
+        if (flagEmail == true && flagPwd == true && flagRepwd == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function reload_code() {
         document.getElementById('code').src = '{function.url("api/access/checkcode", array("width"=>80, "height"=>28))}&' + Math.random();
+    }
+
+    function checkLogin() {
+        emailBlur();
+        pwdBlur();
+        var flagEmail = emailBlur();
+        var flagPwd = pwdBlur();
+        if (flagEmail == true && flagPwd == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function unset_se() {
+        unset($_SESSION['u_pwd']);
+        unset($_SESSION['u_name']);
+        alert("已退出");
     }
 </script>
 
@@ -40,31 +127,31 @@
     </select>
 {/if}
     <div class="form-group form-inline">
-        <label class="control-label col-sm-2" for="username"><font color="red">*</font>登录账号</label>
+        <label class="control-label col-sm-2" for="inputUsername"><font color="red">*</font>登录账号</label>
         <div class="col-sm-10">
-            <input class="form-control" type="text" name="data[username]" autocomplete="off" placeholder="登陆账号" id="username" autofocus />
-            <span id="err_username" class="tips_info"></span>
+            <input class="form-control" type="text" name="data[username]" autocomplete="off" placeholder="登陆账号" id="inputUsername" onfocus="usernameFocus()" onblur="usernameBlur()" />
+            <span id="username_prompt" class="tips_info"></span>
         </div>
     </div>
     <div class="form-group form-inline">
-        <label class="control-label col-sm-2" for="password"><font color="red">*</font>登录密码</label>
+        <label class="control-label col-sm-2" for="inputPwd"><font color="red">*</font>登录密码</label>
         <div class="col-sm-10">
-            <input class="form-control" type="text" name="data[password]" autocomplete="off" placeholder="登录密码" id="password" />
-            <span id="err_password" class="tips_info"></span>
+            <input class="form-control" type="text" name="data[password]" autocomplete="off" placeholder="登录密码" id="inputPwd" onfocus="pwdFocus()" onblur="pwdBlur()" />
+            <span id="pwd_prompt" class="tips_info"></span>
         </div>
     </div>
     <div class="form-group form-inline">
-        <label class="control-label col-sm-2" for="password2"><font color="red">*</font>确认密码</label>
+        <label class="control-label col-sm-2" for="inputRepwd"><font color="red">*</font>确认密码</label>
         <div class="col-sm-10">
-            <input class="form-control" type="text" name="data[password2]" autocomplete="off" placeholder="确认密码" id="password2" onblur="checkpass()" />
-            <span id="checkpassword2" class="tips_info"></span>
+            <input class="form-control" type="text" name="data[password2]" autocomplete="off" placeholder="确认密码" id="inputRepwd" onfocus="repwdFocus()" onblur="repwdBlur()" />
+            <span id="repwd_prompt" class="tips_info"></span>
         </div>
     </div>
     <div class="form-group form-inline">
-        <label class="control-label col-sm-2" for="email">邮箱地址</label>
+        <label class="control-label col-sm-2" for="inputEmail">邮箱地址</label>
         <div class="col-sm-10">
-            <input class="form-control" type="email" name="data[email]" autocomplete="off" placeholder="确认密码" id="email" onblur="check_email()" />
-            <span id="err_email" class="tips_info"></span>
+            <input class="form-control" type="email" name="data[email]" autocomplete="off" placeholder="确认密码" id="inputEmail" onfocus="emailFocus()" onblur="emailBlur()" />
+            <span id="email_prompt" class="tips_info"></span>
         </div>
     </div>
 {if $config['MEMBER_REGCODE']}

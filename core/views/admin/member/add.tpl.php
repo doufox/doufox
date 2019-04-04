@@ -20,7 +20,6 @@
             <a href="<?php echo url('admin/member/cache'); ?>">更新缓存</a>
         </div>
     </div>
-    <div class="bk10 bottom-line"></div>
     <div class="table_form">
         <form method="post" action="" id="myform" name="myform">
         <table width="100%" class="table_form ">

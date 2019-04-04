@@ -1,4 +1,5 @@
 <?php include $this->admin_tpl('header');?>
+
 <script type="text/javascript">
     top.document.getElementById('position').innerHTML = '模板管理';
 </script>
@@ -8,7 +9,6 @@
         <a href="<?php echo url('admin/template/add', array('dir'=>$dir))?>">添加模板</a>
         <a href="<?php echo url('admin/template/cache')?>" class="options">更新缓存</a>
     </div>
-    <div class="bk10"></div>
     <div class="table-list">
         <form action="<?php echo url('admin/template/updatefilename')?>" method="post">
             <table width="100%" cellspacing="0">

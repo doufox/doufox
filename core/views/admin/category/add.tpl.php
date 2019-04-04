@@ -117,7 +117,7 @@
                 </tr>
                 <tr>
                     <th>搜索展示模板：</th>
-                    <td id="search_template">
+                    <td>
                         <input type="text" class="input-text" size="30" value="<?php echo $data['searchtpl']; ?>" name="data[searchtpl]" id="searchtpl">
                     </td>
                 </tr>

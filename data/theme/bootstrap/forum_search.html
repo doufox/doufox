@@ -1,0 +1,39 @@
+{template header.html}
+
+{template forum_nav.html}
+
+<div class="main">
+    <div class="container">
+        <div class="bg">
+            {if empty($searchnum)}
+            <div class="search-result-content">
+                <h3>Sorry, your search</h3>
+                <em>{$kw}</em>
+                <p>did not match any documents.</p>
+                <p style="margin-top:1em">Suggestions:</p>
+                <ul style="margin-left:1.3em;margin-bottom:2em">
+                <li>Make sure all words are spelled correctly.</li>
+                <li>Try different keywords.</li>
+                <li>Try more general keywords.</li>
+                <li>Try fewer keywords.</li>
+                </ul>
+            </div>
+            {else}
+            <div class="newslist">
+            <ul class="noborder">
+                {loop $searchdata $t}
+                <li>
+                    <span class="date">{function.date("Y-m-d", $t['time'])}</span>
+                    <a href="{$t['url']}">· {$t['title']}</a>
+                </li>
+                {/loop}
+            </ul>
+            {$pagination}
+            </div>
+            {/if}
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
+{template footer.html}

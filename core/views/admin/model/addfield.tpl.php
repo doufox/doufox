@@ -88,7 +88,6 @@
         <a href="<?php echo url('admin/model/fields/', array('typeid'=>$typeid, 'modelid'=>$modelid)); ?>" class="on">字段管理</a>
         <a href="<?php echo url('admin/model/addfield/', array('typeid'=>$typeid, 'modelid'=>$modelid)); ?>" class="add">添加字段</a>
     </div>
-    <div class="bk10 bottom-line"></div>
     <div class="table_form">
         <form action="" method="post">
         <input name="modelid" type="hidden" value="<?php echo $modelid; ?>">

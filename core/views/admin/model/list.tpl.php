@@ -19,10 +19,9 @@
 <div class="subnav">
 <form action="" method="post">
     <div class="content-menu">
-        <a href="<?php echo url('admin/model/index', array('typeid'=>$typeid)); ?>" class="on">模型管理</a>
+        <a href="<?php echo url('admin/model/index', array('typeid'=>$typeid)); ?>">模型管理</a>
         <a href="<?php echo url('admin/model/add', array('typeid'=>$typeid)); ?>" class="add">添加模型</a>
     </div>
-    <div class="bk10"></div>
     <div class="table-list">
         <table width="100%">
             <thead>

@@ -10,7 +10,6 @@
         <a href="<?php echo url('admin/account/me'); ?>">我的账号</a>
         <a href="<?php echo url('admin/account/cache'); ?>" class="options">更新缓存</a>
     </div>
-    <div class="bk10"></div>
     <div class="table_form">
         <form action="" method="post">
         <div class="col-tab">

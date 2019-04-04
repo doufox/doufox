@@ -19,8 +19,6 @@
         <a href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>0)); ?>" class="on">未审核(<?php echo $count[0]; ?>)</a>
         <a href="<?php echo url('admin/content/add',   array('catid'=>$catid, 'modelid'=>$modelid)); ?>" class="add">发布内容</a>
     </div>
-    <div class="bk10"></div>
-
     <div class="table-list">
         <form action="" method="post" name="myform">
         <input name="form" id="list_form" type="hidden" value="order">

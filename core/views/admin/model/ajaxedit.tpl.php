@@ -14,7 +14,6 @@
         <a href="<?php echo url('admin/model/fields/', array('typeid'=>$typeid, 'modelid'=>$modelid)); ?>">字段管理</a>
         <a href="javascript:;" class="on">编辑</a>
     </div>
-    <div class="bk10 bottom-line"></div>
     <div class="table_form">
         <form action="" method="post">
         <table width="100%" class="table_form">

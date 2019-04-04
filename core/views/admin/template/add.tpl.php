@@ -31,7 +31,6 @@
         <a href="<?php echo url('admin/template/add', array('dir' => $dir)) ?>" class="add">添加模板</a>
         <a href="<?php echo url('admin/template/cache') ?>" class="options">更新缓存</a>
     </div>
-    <div class="bk10 bottom-line"></div>
     <div class="table_form">
         <?php if (!is_writable($filepath)) {?>
         <div style="color:red">

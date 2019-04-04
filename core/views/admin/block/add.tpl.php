@@ -8,7 +8,6 @@
         <a href="<?php echo url('admin/block/add'); ?>" class="add">添加区块</a>
         <a href="<?php echo url('admin/block/cache'); ?>" class="options">更新缓存</a>
     </div>
-    <div class="bk10 bottom-line"></div>
     <div class="table_form">
         <form action="" method="post">
         <input name="id" type="hidden" value="<?php echo $data['id']; ?>">

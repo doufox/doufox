@@ -227,11 +227,6 @@ select[disabled] {
     height: 10px
 }
 
-.bk10.bottom-line {
-    border-bottom: 1px solid #eee;
-    margin-bottom: 10px;
-}
-
 .bk15 {
     height: 15px
 }
@@ -386,7 +381,11 @@ body fieldset.blue legend {
     margin-bottom: 6px
 }
 
-/*容器样式*/
+.content-menu {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
 
 .col-tab ul.tabBut {
     height: 27px;
