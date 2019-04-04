@@ -133,7 +133,6 @@ class IndexController extends Controller
             $this->show_message('请输入关键字');
         }
 
-        $catid = $catid ? $catid : (int) $this->get('catid');
         $page = (int) $this->get('page');
         $page = (!$page) ? 1 : $page;
         $pagination = core::load_class('pagination');
@@ -144,13 +143,12 @@ class IndexController extends Controller
             $urlparam['kw'] = $kw;
         }
 
-        if ($catid) {
-            $urlparam['catid'] = $catid;
-        }
-
         $where = "title like '%" . $kw . "%'";
+        $catid = $catid ? $catid : (int) $this->get('catid');
         if ($catid) {
             $where .= " AND catid='" . $catid . "'";
+            $urlparam['catid'] = $catid;
+            $cat = $this->category_cache[$catid];
         }
 
         $total = $this->content->count('content', null, $where);
@@ -167,7 +165,8 @@ class IndexController extends Controller
             'kw' => $kw,
             'catid' => $catid,
         ));
-        $this->view->display('search.html');
+        $tplfile = $cat && $cat['searchtpl'] ? $cat['searchtpl'] : 'search.html';
+        $this->view->display($tplfile);
     }
 
     /**
