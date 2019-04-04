@@ -9,21 +9,20 @@
         <a href="<?php echo url('admin/model/index', array('typeid'=>$typeid)); ?>" class="on">模型管理</a>
         <a href="<?php echo url('admin/model/add', array('typeid'=>$typeid)); ?>" class="add">添加模型</a>
     </div>
-    <div class="bk10 bottom-line"></div>
     <div class="table_form">
         <form action="" method="post">
         <input name="modelid" type="hidden" value="<?php echo $data['modelid']; ?>">
                 <table width="100%" class="table_form">
                 <tr>
-                    <th width="150">模型类型： </th>
+                    <th width="150">模型类型：</th>
                     <td><?php echo $typename[$typeid]; ?></td>
                 </tr>
                 <tr>
-                    <th><font color="red">*</font> 名称： </th>
+                    <th><font color="red">*</font> 名称：</th>
                     <td><input class="input-text" type="text" name="modelname" value="<?php echo $data['modelname']; ?>" size="30"/></td>
                 </tr>
                 <tr>
-                    <th><font color="red">*</font> 数据表名： </th>
+                    <th><font color="red">*</font> 数据表名：</th>
                     <td><input class="input-text" type="text" name="tablename" value="<?php echo $data['tablename']; ?>" size="30" <?php if ($data['modelid']) { ?>disabled<?php } ?> /><div class="show-tips">只能由小写英文和数字组成(无需加表前缀)，此项不能修改。</div></td>
                 </tr>
                 <tbody>
@@ -38,16 +37,22 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>栏目模板： </th>
+                    <th>栏目展示模板：</th>
                     <td><input class="input-text" type="text" name="categorytpl" value="<?php echo $data['categorytpl']; ?>" size="30"/><div class="show-tips">例如：category_news.html。不填写则会是category_+模型名称拼音</div></td>
                 </tr>
                 <tr>
-                    <th>列表模板： </th>
+                    <th>内容列表模板：</th>
                     <td><input class="input-text" type="text" name="listtpl" value="<?php echo $data['listtpl']; ?>" size="30"/><div class="show-tips">例如：list_news.html。</div></td>
                 </tr>
                 <tr>
-                    <th>内容模板： </th>
+                    <th>内容展示模板：</th>
                     <td><input class="input-text" type="text" name="showtpl" value="<?php echo $data['showtpl']; ?>" size="30"/><div class="show-tips">例如：show_news.html。</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>搜索展示模板：</th>
+                    <td>
+                        <input class="input-text" type="text" name="searchtpl" value="<?php echo $data['searchtpl']; ?>" size="30"/><div class="show-tips">例如：search_news.html。</div>
                     </td>
                 </tr>
                 <?php } ?>

@@ -8,7 +8,6 @@
         <a href="<?php echo url('admin/category/add'); ?>"  class="add">添加栏目</a>
         <a href="<?php echo url('admin/category/cache'); ?>" class="options">更新缓存</a>
     </div>
-    <div class="bk10"></div>
     <div class="table_form">
         <form method="post" action="" id="myform" name="myform">
             <input type="hidden" value="<?php echo $catid; ?>" name="catid">
@@ -100,7 +99,8 @@
                 <tr>
                     <th>栏目展示模板：</th>
                     <td id="category_template">
-                    <input type="text" class="input-text" size="30" value="<?php echo $data['categorytpl']; ?>" name="data[categorytpl]" id="categorytpl">
+                        <input type="text" class="input-text" size="30" value="<?php echo $data['categorytpl']; ?>" name="data[categorytpl]" id="categorytpl">
+                        <div class="show-tips">当有下级栏目时有效</div>
                     </td>
                 </tr>
                 <tr>
@@ -112,7 +112,13 @@
                 <tr>
                     <th>内容展示模板：</th>
                     <td id="list_template">
-                    <input type="text" class="input-text" size="30" value="<?php echo $data['showtpl']; ?>" name="data[showtpl]" id="showtpl">
+                        <input type="text" class="input-text" size="30" value="<?php echo $data['showtpl']; ?>" name="data[showtpl]" id="showtpl">
+                    </td>
+                </tr>
+                <tr>
+                    <th>搜索展示模板：</th>
+                    <td id="search_template">
+                        <input type="text" class="input-text" size="30" value="<?php echo $data['searchtpl']; ?>" name="data[searchtpl]" id="searchtpl">
                     </td>
                 </tr>
                 </tbody>
@@ -123,7 +129,7 @@
                 <tr>
                     <th width="100">单页模板：</th>
                     <td id="show_template">
-                    <input type="text" class="input-text" size="30" value="<?php echo $data['pagetpl']; ?>" name="data[pagetpl]" id="pagetpl">
+                        <input type="text" class="input-text" size="30" value="<?php echo $data['pagetpl']; ?>" name="data[pagetpl]" id="pagetpl">
                     </td>
                 </tr>
 
@@ -167,7 +173,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th >seo标题：</th>
+                    <th >SEO标题：</th>
                     <td><input type="text" maxlength="60" size="60" value="<?php echo $data['seo_title']; ?>"   name="data[seo_title]" class="input-text"></td>
                 </tr>
                 <tr>
@@ -222,6 +228,7 @@
         $("#categorytpl").val(data[mid]['categorytpl']);
         $("#listtpl").val(data[mid]['listtpl']);
         $("#showtpl").val(data[mid]['showtpl']);
+        $("#searchtpl").val(data[mid]['searchtpl']);
     }
     settype(<?php echo $data[typeid]; ?>);
 </script>

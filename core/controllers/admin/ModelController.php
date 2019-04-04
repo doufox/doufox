@@ -42,6 +42,10 @@ class ModelController extends Admin
     public function addAction()
     {
         if ($this->isPostForm()) {
+            $modelname = $this->post('modelname');
+            if (!$modelname) {
+                $this->show_message('模型名称不能为空！');
+            }
             $tablename = $this->post('tablename');
             if (!$tablename) {
                 $this->show_message('数据表名不能为空！');
@@ -54,19 +58,21 @@ class ModelController extends Admin
             $category = $this->post('categorytpl') ? $this->post('categorytpl') : ($this->typeid == 3 ? 'form.html' : 'category_' . $tablename . '.html');
             $list = $this->post('listtpl') ? $this->post('listtpl') : 'list_' . $tablename . '.html';
             $show = $this->post('showtpl') ? $this->post('showtpl') : 'show_' . $tablename . '.html';
+            $search = $this->post('searchtpl') ? $this->post('searchtpl') : 'search_' . $tablename . '.html';
             $tablename = $this->modelType[$this->typeid] . '_' . $tablename;
-            $data = array(
-                'tablename' => $tablename,
-                'modelname' => $this->post('modelname'),
-                'categorytpl' => $category,
-                'listtpl' => $list,
-                'showtpl' => $show,
-                'typeid' => $this->typeid,
-            );
             if ($this->_model->is_table_exists($tablename)) {
                 $this->show_message('数据表名已经存在');
             }
 
+            $data = array(
+                'tablename' => $tablename,
+                'modelname' => $modelname,
+                'categorytpl' => $category,
+                'listtpl' => $list,
+                'showtpl' => $show,
+                'searchtpl' => $search,
+                'typeid' => $this->typeid,
+            );
             if ($modelid = $this->_model->set(0, $data)) {
                 if ($this->typeid != 3) {
                     $join = $this->post('join');
@@ -114,12 +120,14 @@ class ModelController extends Admin
             $category = $this->post('categorytpl');
             $list = $this->post('listtpl');
             $show = $this->post('showtpl');
+            $search = $this->post('searchtpl');
             $update = array(
                 'listtpl' => $list,
                 'showtpl' => $show,
                 'joinid' => $this->post('joinid'),
                 'modelname' => $this->post('modelname'),
                 'categorytpl' => $category,
+                'searchtpl' => $search,
             );
             $this->_model->set($modelid, $update);
             if ($this->typeid != 3) {
