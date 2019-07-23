@@ -1,4 +1,5 @@
 <?php include $this->admin_tpl('header');?>
+<?php include $this->admin_tpl('navbar');?>
 
 <script type="text/javascript">
     window.top.document.getElementById('position').innerHTML = '栏目管理';
@@ -39,6 +40,5 @@
         </form>
     </div>
 </div>
-</body>
 
-</html>
+<?php include $this->admin_tpl('footer');?>

@@ -9,17 +9,22 @@ class IndexController extends Admin
 
     public function indexAction()
     {
-        $account = $this->account->find($this->userid);
-        $name = empty($account['realname']) ? $account['username'] : $account['realname'];
-        $menu = '';
-        $form = get_cache('formmodel');
-        if ($form) {
-            foreach ($form as $t) {
-                $id = $t['modelid'];
-                $url = url('admin/form/list', array('modelid' => $id));
-                $menu[$id] = array('id' => $id, 'name' => $t['modelname'], 'url' => $url);
-            }
-        }
+        $sysinfo = get_sysinfo();
+        $pars = array(
+            // 'sitename' => urlencode($this->site_config['SITE_NAME']),
+            'domain' => HTTP_HOST,
+            // 'version' => APP_VERSION,
+            // 'release' => APP_RELEASE,
+            // 'os' => PHP_OS,
+            // 'php' => phpversion(),
+            'mysql' => $this->category->get_server_info(),
+            // 'browser' => urlencode($_SERVER['HTTP_USER_AGENT']),
+        );
+        // $data = http_build_query($pars);
+        // $verify = md5($data.$_SERVER['SERVER_NAME']);
+        // $client_url = 'https://doufox.com/client.php?'.$data.'&verify='.$verify; // 反馈到官方网站
+        $sysinfo['mysqlv'] = $pars['mysql'];
+        $sysinfo['domain'] = $pars['domain'];
         include $this->admin_tpl('index');
     }
 

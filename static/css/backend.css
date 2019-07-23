@@ -4,24 +4,19 @@ html, body, ul, li, p {
 }
 
 body {
-    position: relative;
-    overflow: hidden;
+    padding-top: 20px;
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
-}
-
-body, html, input {
+body, html, input, textarea {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 12px;
-    line-height: 1.5;
-    color: #24292e;
 }
 
 div, img {
     border: 0;
+}
+
+input, label, img, th {
+    vertical-align: middle;
 }
 
 ul li {
@@ -35,6 +30,13 @@ a {
 
 a:hover {
     color: #000;
+}
+
+/* header nav */
+
+.nav>li>a {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .header {
@@ -57,135 +59,14 @@ a:hover {
     color: #fff;
 }
 
-.menu {
-    position: relative;
-}
-
-.menu li {
-    float: left;
-    position: relative;
-}
-
-.menu li:hover {
-    background-color: #fff;
-}
-
-.menu li ul {
-    width: 101px;
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: -1px;
-    padding: 2px 0 0;
-    background-color: #fff;
-    margin-top: 0px;
-    border: 1px solid #eee;
-    border-top-width: 0;
-}
-
-.menu .account {
-    float: right;
-    margin-right: 1px;
-    padding-right: 15px;
-}
-
-.menu .account ul {
-    left: unset;
-    right: -1px;
-}
-
-.menu ul li {
-    width: 100%;
-    display: block;
-}
-
-.menu ul li.menubtm {
-    height: 1px;
-    overflow: hidden;
-    background-color: #eee;
-    border-bottom: 1px solid #d5dfe8;
-}
-
-.menu li a {
-    padding-left: 10px;
-    padding-right: 10px;
-    float: left;
-    display: block;
-    color: #fff;
-    text-align: center;
-    height: 30px;
-    line-height: 30px;
-    font-weight: bold;
-    cursor: default;
-}
-
-.menu li:hover a {
-    color: #333;
-    font-weight: bold;
-}
-
-.menu li.focused a {
-    background-color: #fff;
-    color: #666;
-    font-weight: bold;
-}
-
-.menu li:hover li a,
-.menu li li a {
-    float: none;
-    color: #333;
-    height: 24px;
-    line-height: 24px;
-    text-align: left;
-    font-weight: normal;
-    border-bottom: 1px solid #eee;
-}
-
-.menu li:hover li a:hover,
-.menu li:hover li:hover a,
-.menu li li a:hover {
-    background-color: #008eff;
-    color: #fff;
-}
-
-.menu li:hover ul {
-    display: block;
-}
-
-.menu .account:hover li a,
-.menu .account li a {
-    text-align: center;
-}
-
-.menu .account::before {
-    position: absolute;
-    top: 11px;
-    right: 4px;
-    content: ' ';
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 8px solid #fff;
-}
-
-.menu li:hover.account::before {
-    top: 9px;
-    right: 5px;
-    border-left: none;
-    border-right: 8px solid #008eff;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-}
-
-#left {
+.page_menu {
     width: 149px;
     background-color: #fff;
     position: absolute;
     border-right: 1px solid #eee;
 }
 
-#left .left-head {
+.page_menu .left-head {
     clear: both;
     height: 29px;
     line-height: 30px;
@@ -194,21 +75,21 @@ a:hover {
     border-bottom: 1px solid #eee;
 }
 
-#left .left-head span {
+.page_menu .left-head span {
     padding-right: 12px;
     height: 16px;
     float: right;
     margin-top: 5px;
 }
 
-#left .left-head span a.refresh {
+.page_menu .left-head span a.refresh {
     width: 16px;
     height: 16px;
     font-size: 16px;
     background: url(../img/bg.gif) no-repeat -89px -569px;
 }
 
-#left .left-head span a.refresh:hover {
+.page_menu .left-head span a.refresh:hover {
     background-position: -109px -569px;
 }
 

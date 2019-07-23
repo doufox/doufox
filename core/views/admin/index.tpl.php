@@ -1,28 +1,9 @@
-<!DOCTYPE html>
-<html>
+<?php include $this->admin_tpl('header');?>
 
-<head>
-    <meta charset="utf-8"/>
-    <meta name="renderer" content="webkit"/>
-    <meta name="force-rendering" content="webkit"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta name="robots" content="none, nofollow, noarchive, nocache">
-    <meta name="referrer" content="never"/>
-    <title>网站管理系统 - <?php echo $this->site_config['SITE_NAME']; ?></title>
-    <link rel="stylesheet" type="text/css" href="/static/css/backend.css"/>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico"/>
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico"/>
-    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script>
-</head>
+<?php include $this->admin_tpl('navbar');?>
 
-<body>
-<?php include $this->admin_tpl('head');?>
-
-<div class="main">
-    <div id="left">
+<div class="container">
+    <div class="page_menu">
         <div class="left-head">
             <span style="float:right;">
                 <a href="javascript:void(0);" onClick="refresh();" class="refresh">
@@ -37,50 +18,10 @@
             </iframe>
         </div>
     </div>
+    
     <div id="right">
-        <div id="home">
-            <div id="shortcut">
-                <a href="javascript:_open_url(107,'<?php echo url('admin/index/cache'); ?>');" title="更新缓存">更新缓存</a>
-                <a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a>
-            </div>
-            <label id="position">后台首页</label>
-        </div>
-        <div id="frame_container" style="width:100%;">
-            <iframe name="right" id="rightMain" frameborder="false" scrolling="auto" style="border:none;" width="100%" allowtransparency="true"
-                src="<?php echo url('admin/index/main'); ?>">
-            </iframe>
-        </div>
+        <?php include $this->admin_tpl('main');?>
     </div>
 </div>
 
 <?php include $this->admin_tpl('footer');?>
-
-<script type="text/javascript">
-    window.onresize = function () {
-        var heights = document.documentElement.clientHeight;
-        document.getElementById('rightMain').height = heights - 90;
-        document.getElementById('leftMain').height = heights - 90;
-    }
-    window.onresize();
-
-    function _open_url(id, url) {
-        var title = $("#M_" + id).find('a').html();
-        document.getElementById('position').innerHTML = title;
-        document.getElementById('rightMain').src = url;
-        $('.focused').removeClass("focused");
-        $('#M_' + id).addClass("focused");
-    }
-
-    function logout() {
-        if (confirm('确定退出吗'))
-            top.location = '<?php echo url("admin/login/logout"); ?>';
-        return false;
-    }
-
-    function refresh() {
-        document.getElementById('leftMain').src = "<?php echo url('admin/content/category'); ?>";
-    }
-</script>
-</body>
-
-</html>

@@ -28,7 +28,7 @@
             <td><span style="position: relative;">
 <input type="text" class="input-text" size="50" value="<?php echo $data['thumb']; ?>" name="data[thumb]" id="thumb" onmouseover="admin_command.preview2('thumb')" onmouseout="admin_command.preview('thumb')">
             <input type="button"  class="button" onClick="admin_command.uploadImage('thumb', 1)" value="上传图片">
-            <div id="urlTip" class="show-tips">可直接输入图片地址</div><div id="imgPreviewthumb"></div></span></td>
+            <div class="show-tips">可直接输入图片地址</div><div id="imgPreviewthumb"></div></span></td>
         </tr>
 
         <?php }  if ($model['content']['keywords']['show']) { ?>

@@ -18,7 +18,7 @@ window.admin_command = {
     uploadImage: function(obj, w, h, size) {
         var url = this.sitepath + '?c=attachment&a=image&w=' + w + '&h=' + h + '&size=' + size;
         var winid = 'win_' + obj;
-        window.top.art.dialog({
+        window.art.dialog({
                 id: winid,
                 iframe: url,
                 title: '上传',
@@ -28,7 +28,7 @@ window.admin_command = {
                 lock: true
             },
             function() {
-                var d = window.top.art.dialog({
+                var d = window.art.dialog({
                     id: winid
                 }).data.iframe;
                 var filename = d.document.getElementById('filename').value;
@@ -40,7 +40,7 @@ window.admin_command = {
                 }
             },
             function() {
-                window.top.art.dialog({
+                window.art.dialog({
                     id: winid
                 }).close();
             }

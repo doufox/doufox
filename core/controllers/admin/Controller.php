@@ -4,19 +4,23 @@ class Admin extends Controller
 {
 
     protected $userid;
+    protected $current_account;
+    protected $current_account_name;
+    protected $menu_model;
 
     public function __construct()
     {
         parent::__construct();
-        $this->isAdminLogin();
+        $this->is_admin_login();
         core::load_file(CORE_PATH . 'library' . DS . 'fields.function.php');
+        $this->init_common_data();
         define('IN_ADMIN', true);
     }
 
-    /**
-     * 后台登陆检查
+    /** 后台登陆检查
+     * 
      */
-    protected function isAdminLogin($namespace = 'admin', $controller = null)
+    protected function is_admin_login($namespace = 'admin', $controller = null)
     {
         if (core::get_namespace_id() != $namespace) {
             return false;
@@ -38,11 +42,29 @@ class Admin extends Controller
         }
 
         $url = core::get_namespace_id() == 'admin' && isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != 's=admin'
-        ? url('admin/login', array('url' => urlencode(HTTP_URL . ENTRY_FILE . '?' . $_SERVER['QUERY_STRING'])))
-        : url('admin/login');
+            ? url('admin/login', array('url' => urlencode(HTTP_URL . ENTRY_FILE . '?' . $_SERVER['QUERY_STRING'])))
+            : url('admin/login');
         $this->redirect($url);
     }
 
+    /** 加载公共数据
+     * 
+     */
+    protected function init_common_data()
+    {
+        $this->current_account = $this->account->find($this->userid);
+        $this->current_account_name = empty($this->current_account['realname']) ? $this->current_account['username'] : $this->current_account['realname'];
+        $this->menu_model = '';
+        $form = get_cache('formmodel');
+        if ($form) {
+            foreach ($form as $t) {
+                $id = $t['modelid'];
+                $url = url('admin/form/list', array('modelid' => $id));
+                $this->menu_model[$id] = array('id' => $id, 'name' => $t['modelname'], 'url' => $url);
+            }
+        }
+        unset($form);
+    }
     /**
      * 获取更新缓存JS代码
      */
