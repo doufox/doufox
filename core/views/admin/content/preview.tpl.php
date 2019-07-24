@@ -28,7 +28,7 @@
             <th><?php echo $model['content']['thumb']['name']; ?>：</th>
             <td>
                 <input hidden value="<?php echo $data['thumb']; ?>" id="-thumb">
-                <span onmouseover="admin_command.preview2('-thumb');" onmouseout="admin_command.preview('-thumb');"><?php echo $data['thumb']; ?></span>
+                <span onmouseover="admin_command.preview_img('-thumb');"><?php echo $data['thumb']; ?></span>
                 <div id="imgPreview-thumb" style="position:relative;"></div>
             </td>
         </tr>

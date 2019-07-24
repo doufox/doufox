@@ -12,7 +12,6 @@
     <meta name="referrer" content="never" />
     <title>网站管理系统</title>
     <link type="text/css" href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link type="text/css" href="/static/css/backend.css" rel="stylesheet" />
     <link type="text/css" href="/static/css/admin.css" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico" />

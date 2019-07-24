@@ -163,7 +163,7 @@ class pagination
     /**
      * 显示样式结构
      * @param array $config
-     * $div 结构 (<div class="pagination">{content}</div>)
+     * $div 结构 (<ul class="pagination">{content}</ul>)
      * $total 数量 (<a>{content}</a>)
      * $nowpage 当前页 (<span>{content}</span>)
      * $page 普通页 (<a href="{url}">{content}</a>)
@@ -174,20 +174,21 @@ class pagination
     {
         if (empty($config)) {
             $config = array(
-                'div' => '<div class="pagination">{content}</div>',
-                'total' => '<a>{content}</a>',
-                'nowpage' => '<span>{content}</span>',
-                'page' => '<a href="{url}">{content}</a>',
-                'pre' => '<a href="{url}">{content}</a>',
-                'next' => '<a href="{url}">{content}</a>',
-                'note' => '<a>{content}</a>',
+                'div'      => '<ul class="pagination">{content}</ul>',
+                'total'    => '<a>{content}</a>',
+                'nowpage'  => '<li class="active"><span>{content}</span></li>',
+                'page'     => '<li><a href="{url}">{content}</a></li>',
+                'pre'      => '<li><a href="{url}">{content}</a></li>',
+                'next'     => '<li><a href="{url}">{content}</a></li>',
+                'disabled' => '<li class="disabled"><span>{content}</span></li>',
+                'note'     => '<li><span>{content}</span><li>',
             );
         }
-        $this->first_page = $this->first_page ? $this->first_page : '第一页';
+        $this->first_page = $this->first_page ? $this->first_page : '首页';
         $this->pre_page = $this->pre_page ? $this->pre_page : '上一页';
         $this->next_page = $this->next_page ? $this->next_page : '下一页';
-        $this->last_page = $this->last_page ? $this->last_page : '最末页';
-        $this->note = $this->note ? $this->note : '共{$total_num}条{$total_page}页 {$num}条/页'; // 共{$total_num}条{$total_page}页 {$num}条/页
+        $this->last_page = $this->last_page ? $this->last_page : '末页';
+        $this->note = $this->note ? $this->note : '共 {$total_num} 条 {$total_page} 页 {$num} 条/页'; // 共{$total_num}条{$total_page}页 {$num}条/页
         $this->config = $config;
     }
 
@@ -298,7 +299,6 @@ class pagination
             if (!$url) {
                 $url = $_SERVER['REQUEST_URI'] . '&page=';
             }
-
         }
         // 自动获取都没获取到url...额..没有办法啦, 趁早返回false
         if (!$url) {
@@ -383,11 +383,10 @@ class pagination
     private function get_first_page()
     {
         if ($this->page == 1 || $this->total_pages <= 1) {
-            return false;
+            return $this->preg_c($this->first_page, null, $this->config['disabled']) . $this->preg_c($this->pre_page, null, $this->config['disabled']);
         }
 
-        $string = $this->preg_c($this->first_page, $this->seturl($this->url, 1), $this->config['pre']) . $this->preg_c($this->pre_page, $this->seturl($this->url, $this->page - 1), $this->config['pre']);
-        return $string;
+        return $this->preg_c($this->first_page, $this->seturl($this->url, 1), $this->config['pre']) . $this->preg_c($this->pre_page, $this->seturl($this->url, $this->page - 1), $this->config['pre']);
     }
 
     /**
@@ -398,11 +397,10 @@ class pagination
     private function get_last_page()
     {
         if ($this->page == $this->total_pages || $this->total_pages <= 1) {
-            return false;
+            return $this->preg_c($this->next_page, null, $this->config['disabled']) . $this->preg_c($this->last_page, null, $this->config['disabled']);
         }
 
-        $string = $this->preg_c($this->next_page, $this->seturl($this->url, $this->page + 1), $this->config['next']) . $this->preg_c($this->last_page, $this->seturl($this->url, $this->total_pages), $this->config['next']);
-        return $string;
+        return $this->preg_c($this->next_page, $this->seturl($this->url, $this->page + 1), $this->config['next']) . $this->preg_c($this->last_page, $this->seturl($this->url, $this->total_pages), $this->config['next']);
     }
 
     /**
@@ -473,7 +471,5 @@ class pagination
      * @return void
      */
     public function __destruct()
-    {
-
-    }
+    { }
 }

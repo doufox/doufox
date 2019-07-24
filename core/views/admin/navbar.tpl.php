@@ -9,6 +9,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul id="menu" class="menu nav navbar-nav">
+                    <li><a href="<?php echo url('admin/content', array('catid'=>1)); ?>">内容</a></li>
                     <li><a href="<?php echo url('admin/category'); ?>">栏目</a></li>
                     <li><a href="<?php echo url('admin/block'); ?>">区块</a></li>
                     <li><a href="<?php echo url('admin/member'); ?>">会员</a></li>
@@ -65,6 +66,7 @@
                             <li role="separator" class="divider"></li>
                         </ul>
                     </li>
+                    <li><a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">首页</a></li>
                 </ul>
             </div>
         </div>

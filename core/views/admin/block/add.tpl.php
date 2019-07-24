@@ -8,9 +8,10 @@
         <a class="list-group-item active" href="<?php echo url('admin/block/add'); ?>">添加区块</a>
         <a class="list-group-item" href="<?php echo url('admin/block/cache'); ?>">更新缓存</a>
     </div>
-    <div id="right">
-        <div id="frame_container" style="width:100%;">
-            <div class="table_form">
+    <div class="page_content">
+        <div class="panel panel-default">
+            <div class="panel-heading">添加区块</div>
+            <div class="panel-body">
                 <form action="" method="post">
                     <input name="id" type="hidden" value="<?php echo $data['id']; ?>">
                     <table width="100%" class="table_form">
@@ -45,9 +46,9 @@
                         <tr id="text_2" style="display:none">
                             <th>区块图片：</th>
                             <td>
+                                <div id="imgPreviewthumb"></div>
                                 <div class="input-group">
-                                    <div id="imgPreviewthumb"></div>
-                                    <input type="text" class="form-control" size="50" value="<?php echo $data[content]; ?>" name="data[content_2]" id="thumb" onmouseover="admin_command.preview2('thumb')" onmouseout="admin_command.preview('thumb')">
+                                    <input type="text" class="form-control" size="50" value="<?php echo $data[content]; ?>" name="data[content_2]" id="thumb" onmouseover="admin_command.preview_img('thumb')">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" type="button" onClick="admin_command.uploadImage('thumb')">上传图片</button>
                                     </span>
@@ -83,7 +84,6 @@
             <?php } ?>
         </script>
     </div>
-</div>
 </div>
 
 <?php include $this->admin_tpl('footer'); ?>

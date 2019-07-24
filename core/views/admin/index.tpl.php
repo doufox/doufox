@@ -4,23 +4,37 @@
 
 <div class="container">
     <div class="page_menu">
-        <div class="left-head">
-            <span style="float:right;">
-                <a href="javascript:void(0);" onClick="refresh();" class="refresh">
-                    <img src="/static/img/space.gif" alt="刷新菜单" title="刷新菜单" height="18" width="16" />
-                </a>
-            </span>
-            <label id='root_menu_name'>内容管理</label>
-        </div>
-        <div id="browser">
-            <iframe name="leftMain" id="leftMain" frameborder="false" scrolling="auto" height="auto" allowtransparency="true" src="<?php echo url('admin/content/category'); ?>"
-                style="border:none" width="100%">
-            </iframe>
-        </div>
+        侧边栏功能区
     </div>
-    
-    <div id="right">
-        <?php include $this->admin_tpl('main');?>
+    <div class="page_content">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">系统信息</div>
+                    <div class="panel-body">
+                    <p>网站管理系统<br />
+                        当前域名：<?php echo $sysinfo['domain']; ?><br />
+                        程序版本：<?php echo APP_VERSION; ?><br />
+                        发布日期：<?php echo APP_RELEASE; ?><br />
+                        操作系统：<?php echo $sysinfo['os']; ?><br />
+                        运行环境：<?php echo $sysinfo['web_server']; ?><br />
+                        上传文件：<?php echo $sysinfo['fileupload']; ?><br />
+                        MySQL版本：<?php echo $sysinfo['mysqlv']; ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">技术支持</div>
+                    <div class="panel-body">
+                        <p>社区支持：<a href="https://doufox.com/forum" target="_blank">社区支持</a><br />
+                        联系QQ：1146171115<br />
+                        E-mail：crogram@qq.com<br />
+                        官方网站：<a href="https://doufox.com/" target="_blank">https://doufox.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
