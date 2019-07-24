@@ -61,12 +61,12 @@
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo url('admin/account/me'); ?>">我的账号</a></li>
                             <li><a href="<?php echo url('admin/account/me'); ?>" title="帮助">帮助</a></li>
+                            <li><a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="javascript:logout();" title="退出系统">退出系统</a></li>
                             <li role="separator" class="divider"></li>
                         </ul>
                     </li>
-                    <li><a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">首页</a></li>
                 </ul>
             </div>
         </div>
