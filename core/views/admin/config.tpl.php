@@ -2,9 +2,38 @@
 
 <?php include $this->admin_tpl('navbar'); ?>
 
+<script type="text/javascript">
+    $('#div_setting_<?php echo $type; ?>').show();
+    function set_url_type(type) {
+        if (type && type == 'diy') {
+            $('.url-type-diy').show();
+            $('.url-type-default').hide();
+        } else {
+            $('.url-type-diy').hide();
+            $('.url-type-default').show();
+        }
+    }
+    function setSateType(id) {
+        if (id == 0) {
+            $('#w_1').hide();
+            $('.w_2').hide();
+            $('#w_0').hide();
+        } else if (id == 1) {
+            $('.w_2').hide();
+            $('#w_1').show();
+            $('#w_0').show();
+        } else if (id == 2) {
+            $('#w_1').hide();
+            $('.w_2').show();
+            $('#w_0').show();
+        }
+    }
+    setSateType(<?php echo $data['SITE_WATERMARK']; ?>);
+</script>
+
 <div class="container">
     <div class="table_form">
-        <form method="post" action="" id="myform" name="myform">
+        <form method="post" action="" class="form-inline">
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="<?php if ($type == 1) { ?>active<?php } ?>"><a href="#system" aria-controls="system" role="tab" data-toggle="tab">系统设置</a></li>
                 <li role="presentation" class="<?php if ($type == 2) { ?>active<?php } ?>"><a href="#watermark" aria-controls="watermark" role="tab" data-toggle="tab">水印设置</a></li>
@@ -13,19 +42,27 @@
                 <li role="presentation" class="<?php if ($type == 5) { ?>active<?php } ?>"><a href="#weixin" aria-controls="weixin" role="tab" data-toggle="tab">微信设置</a></li>
             </ul>
             <div class="tab-content">
-                <div role="tabpanel" id="system" class="tab-pane<?php if ($type == 1) { echo ' active'; } ?>">
+                <div role="tabpanel" id="system" class="tab-pane<?php if ($type == 1) {
+                                                                    echo ' active';
+                                                                } ?>">
                     <table width="100%" class="table_form">
                         <tr>
                             <th width="100">网站名称：</th>
                             <td>
-                                <input class="input-text" type="text" name="data[SITE_NAME]" value="<?php echo $data['SITE_NAME']; ?>" size="30" />
+                                <input class="form-control" type="text" name="data[SITE_NAME]" value="<?php echo $data['SITE_NAME']; ?>" size="30" />
                                 <div class="show-tips"><?php echo $configTips['SITE_NAME']; ?></div>
                             </td>
                         </tr>
                         <tr>
-                            <th>桌面端主题样式：</th>
+                            <th>网站头部标语：</th>
+                            <td><input class="form-control" type="text" name="data[SITE_SLOGAN]" value="<?php echo $data['SITE_SLOGAN']; ?>" size="50" />
+                                <div class="show-tips"><?php echo $configTips['SITE_SLOGAN']; ?></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>桌面端主题：</th>
                             <td>
-                                <select name="data[SITE_THEME]">
+                                <select class="form-control" name="data[SITE_THEME]">
                                     <?php if (is_array($theme)) {
                                         foreach ($theme as $t) {
                                             if (is_dir(THEME_PATH_D . $t)) { ?>
@@ -38,11 +75,11 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>移动端主题样式：</th>
+                            <th>移动端主题：</th>
                             <td>
-                                <select class="config-theme-m" name="data[SITE_THEME_MOBILE]" <?php if ($data['SITE_MOBILE'] !== true) {
-                                                                                                    echo 'disabled';
-                                                                                                } ?>>
+                                <select <?php if ($data['SITE_MOBILE'] !== true) {
+                                            echo 'disabled';
+                                        } ?> class="form-control config-theme-m" name="data[SITE_THEME_MOBILE]">
                                     <?php if (is_array($theme_mobile)) {
                                         foreach ($theme_mobile as $t) {
                                             if (is_dir(THEME_PATH_M . $t)) { ?>
@@ -60,51 +97,29 @@
                         <tr>
                             <th>首页标题：</th>
                             <td>
-                                <input class="input-text" type="text" name="data[SITE_TITLE]" value="<?php echo $data['SITE_TITLE']; ?>" size="50" />
+                                <input class="form-control" type="text" name="data[SITE_TITLE]" value="<?php echo $data['SITE_TITLE']; ?>" size="50" />
                                 <div class="show-tips"><?php echo $configTips['SITE_TITLE']; ?></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>头部标语：</th>
-                            <td><input class="input-text" type="text" name="data[SITE_SLOGAN]" value="<?php echo $data['SITE_SLOGAN']; ?>" size="50" />
-                                <div class="show-tips"><?php echo $configTips['SITE_SLOGAN']; ?></div>
                             </td>
                         </tr>
                         <tr>
                             <th>关键字：</th>
                             <td class="y-bg">
-                                <input class="input-text" type="text" name="data[SITE_KEYWORDS]" value="<?php echo $data['SITE_KEYWORDS']; ?>" size="50" />
+                                <input class="form-control" type="text" name="data[SITE_KEYWORDS]" value="<?php echo $data['SITE_KEYWORDS']; ?>" size="50" />
                                 <div class="show-tips"><?php echo $configTips['SITE_KEYWORDS']; ?></div>
                             </td>
                         </tr>
                         <tr>
                             <th>网站描述：</th>
                             <td>
-                                <textarea name="data[SITE_DESCRIPTION]" rows="3" cols="55" class="text"><?php echo $data['SITE_DESCRIPTION']; ?></textarea>
+                                <textarea class="form-control" name="data[SITE_DESCRIPTION]" rows="3" cols="55"><?php echo $data['SITE_DESCRIPTION']; ?></textarea>
                                 <div class="show-tips"><?php echo $configTips['SITE_DESCRIPTION']; ?></div>
                             </td>
                         </tr>
                     </table>
-                    <script type="text/javascript">
-                        function setSateType(id) {
-                            if (id == 0) {
-                                $('#w_1').hide();
-                                $('.w_2').hide();
-                                $('#w_0').hide();
-                            } else if (id == 1) {
-                                $('.w_2').hide();
-                                $('#w_1').show();
-                                $('#w_0').show();
-                            } else if (id == 2) {
-                                $('#w_1').hide();
-                                $('.w_2').show();
-                                $('#w_0').show();
-                            }
-                        }
-                        setSateType(<?php echo $data['SITE_WATERMARK']; ?>);
-                    </script>
                 </div>
-                <div role="tabpanel" id="watermark" class="tab-pane<?php if ($type == 2) { echo ' active'; } ?>">
+                <div role="tabpanel" id="watermark" class="tab-pane<?php if ($type == 2) {
+                                                                        echo ' active';
+                                                                    } ?>">
                     <table width="100%" class="table_form ">
                         <tr>
                             <th width="100">水印类型：</th>
@@ -118,20 +133,20 @@
                         </tr>
                         <tbody id="w_0">
                             <tr id="w_1">
-                                <th>水印图片透明度：</th>
-                                <td><input class="input-text" type="text" name="data[SITE_WATERMARK_ALPHA]" value="<?php echo $data['SITE_WATERMARK_ALPHA']; ?>" size="25" />
+                                <th>图片透明度：</th>
+                                <td><input class="form-control" type="text" name="data[SITE_WATERMARK_ALPHA]" value="<?php echo $data['SITE_WATERMARK_ALPHA']; ?>" size="25" />
                                     <div class="show-tips">填写范围（0-99），图片目录：/static/watermark/watermark.png</div>
                                 </td>
                             </tr>
                             <tr class="w_2">
                                 <th>水印文字：</th>
-                                <td><input class="input-text" type="text" name="data[SITE_WATERMARK_TEXT]" value="<?php echo $data['SITE_WATERMARK_TEXT']; ?>" size="25" />
+                                <td><input class="form-control" type="text" name="data[SITE_WATERMARK_TEXT]" value="<?php echo $data['SITE_WATERMARK_TEXT']; ?>" size="25" />
                                     <div class="show-tips">默认字体文件：/static/fonts/elephant.ttf（若有中文请下载字体文件覆盖）</div>
                                 </td>
                             </tr>
                             <tr class="w_2">
                                 <th>文字大小：</th>
-                                <td><input class="input-text" type="text" name="data[SITE_WATERMARK_SIZE]" value="<?php echo $data['SITE_WATERMARK_SIZE']; ?>" size="25" />
+                                <td><input class="form-control" type="text" name="data[SITE_WATERMARK_SIZE]" value="<?php echo $data['SITE_WATERMARK_SIZE']; ?>" size="25" />
                                     <div class="show-tips">单位像素，默认14</div>
                                 </td>
                             </tr>
@@ -161,27 +176,30 @@
                         <tr>
                             <th>缩略图宽高：</th>
                             <td>
-                                <input class="input-text" type="text" name="data[SITE_THUMB_WIDTH]" value="<?php echo $data['SITE_THUMB_WIDTH']; ?>" size="6" />
+                                <input class="form-control" type="text" name="data[SITE_THUMB_WIDTH]" value="<?php echo $data['SITE_THUMB_WIDTH']; ?>" size="6" />
                                 x&nbsp;
-                                <input class="input-text" type="text" name="data[SITE_THUMB_HEIGHT]" value="<?php echo $data['SITE_THUMB_HEIGHT']; ?>" size="6" />
+                                <input class="form-control" type="text" name="data[SITE_THUMB_HEIGHT]" value="<?php echo $data['SITE_THUMB_HEIGHT']; ?>" size="6" />
                                 &nbsp;px
                             </td>
                         </tr>
                     </table>
                 </div>
-                <div role="tabpanel" class="tab-pane<?php if ($type == 3) { echo ' active'; } ?>" id="member">
+                <div role="tabpanel" class="tab-pane<?php if ($type == 3) {
+                                                        echo ' active';
+                                                    } ?>" id="member">
                     <table width="100%" class="table_form">
                         <tr>
                             <th width="150">默认会员模型：</th>
                             <td>
-                                <select name="data[MEMBER_MODELID]">
-                                    <option value="0"> -- </option>
+                                <select name="data[MEMBER_MODELID]" class="form-control">
+                                    <option value="0">==会员模型==</option>
                                     <?php if (is_array($membermodel)) {
                                         foreach ($membermodel as $t) { ?>
                                             <option value="<?php echo $t['modelid']; ?>" <?php if ($data['MEMBER_MODELID'] == $t['modelid']) { ?>selected<?php } ?>><?php echo $t['modelname']; ?></option>
                                         <?php }
                                     } ?>
-                                </select></td>
+                                </select>
+                            </td>
                         </tr>
 
                         <tr>
@@ -219,7 +237,9 @@
                         </tr>
                     </table>
                 </div>
-                <div role="tabpanel" class="tab-pane<?php if ($type == 4) { echo ' active'; } ?>" id="url">
+                <div role="tabpanel" class="tab-pane<?php if ($type == 4) {
+                                                        echo ' active';
+                                                    } ?>" id="url">
                     <table width="100%" class="table_form">
                         <tbody>
                             <tr>
@@ -246,28 +266,28 @@
                             <tr>
                                 <th width="150">栏目URL格式：</th>
                                 <td>
-                                    <input class="input-text" type="text" name="data[LIST_URL]" value="<?php echo $data['LIST_URL']; ?>" size="40" />
+                                    <input class="form-control" type="text" name="data[LIST_URL]" value="<?php echo $data['LIST_URL']; ?>" size="40" />
                                     <div class="show-tips">参数说明：&nbsp;{dir} 表示栏目目录 ，{id} 表示栏目ID ，{page}表示分页参数</div>
                                 </td>
                             </tr>
                             <tr>
                                 <th>栏目URL格式(带分页)：</th>
                                 <td>
-                                    <input class="input-text" type="text" name="data[LIST_PAGE_URL]" value="<?php echo $data['LIST_PAGE_URL']; ?>" size="40" />
+                                    <input class="form-control" type="text" name="data[LIST_PAGE_URL]" value="<?php echo $data['LIST_PAGE_URL']; ?>" size="40" />
                                     <div class="show-tips">参数说明：&nbsp;{dir} 表示栏目目录 ，{id} 表示栏目ID ，{page}表示分页参数</div>
                                 </td>
                             </tr>
                             <tr>
                                 <th>内容展示页：</th>
                                 <td>
-                                    <input class="input-text" type="text" name="data[SHOW_URL]" value="<?php echo $data['SHOW_URL']; ?>" size="40" />
+                                    <input class="form-control" type="text" name="data[SHOW_URL]" value="<?php echo $data['SHOW_URL']; ?>" size="40" />
                                     <div class="show-tips">参数说明：&nbsp;{dir} 表示栏目目录 ，{id} 表示内容ID ，{page}表示分页参数 备注：&nbsp;{id}必须存在</div>
                                 </td>
                             </tr>
                             <tr>
                                 <th>内容展示页(带分页)：</th>
                                 <td>
-                                    <input class="input-text" type="text" name="data[SHOW_PAGE_URL]" value="<?php echo $data['SHOW_PAGE_URL']; ?>" size="40" />
+                                    <input class="form-control" type="text" name="data[SHOW_PAGE_URL]" value="<?php echo $data['SHOW_PAGE_URL']; ?>" size="40" />
                                     <div class="show-tips">参数说明：&nbsp;{dir} 表示栏目目录 ，{id} 表示内容ID ，{page}表示分页参数 备注：&nbsp;{id}必须存在</div>
                                 </td>
                             </tr>
@@ -284,7 +304,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div role="tabpanel" class="tab-pane<?php if ($type == 5) { echo ' active'; } ?>" id="weixin">
+                <div role="tabpanel" class="tab-pane<?php if ($type == 5) { echo ' active';} ?>" id="weixin">
                     <table width="100%" class="table_form">
                         <tr>
                             <th>微信公众号：</th>
@@ -298,27 +318,28 @@
                         <tr>
                             <th width="100">URL：</th>
                             <td>
-                                <input class="input-text" readonly="readonly" type="text" name="data[WEIXIN_MP_URL]" value="<?php echo $data['WEIXIN_MP_URL'] ?>" size="60" />
+                                <input class="form-control" readonly="readonly" type="text" name="data[WEIXIN_MP_URL]" value="<?php echo $data['WEIXIN_MP_URL'] ?>" size="60" />
                                 <div class="show-tips"><?php echo $configTips['WEIXIN_MP_URL']; ?></div>
                             </td>
                         </tr>
                         <tr>
                             <th>Token：</th>
                             <td>
-                                <input class="input-text" type="text" name="data[WEIXIN_MP_TOKEN]" value="<?php echo $data['WEIXIN_MP_TOKEN']; ?>" size="32" />
+                                <input class="form-control" type="text" name="data[WEIXIN_MP_TOKEN]" value="<?php echo $data['WEIXIN_MP_TOKEN']; ?>" size="32" />
                                 <div class="show-tips"><?php echo $configTips['WEIXIN_MP_TOKEN']; ?></div>
                             </td>
                         </tr>
                         <tr>
                             <th>加密密钥：</th>
                             <td>
-                                <input class="input-text" type="text" name="data[WEIXIN_MP_AESKEY]" value="<?php echo $data['WEIXIN_MP_AESKEY']; ?>" size="43" />
+                                <input class="form-control" type="text" name="data[WEIXIN_MP_AESKEY]" value="<?php echo $data['WEIXIN_MP_AESKEY']; ?>" size="43" />
                                 <div class="show-tips"><?php echo $configTips['WEIXIN_MP_AESKEY']; ?></div>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
+            <hr />
             <button type="submit" name="submit" class="btn btn-default">提交</button>
         </form>
     </div>

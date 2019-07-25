@@ -5,13 +5,13 @@
 <div class="container">
     <div class="list-group page_menu">
         <a class="list-group-item" href="<?php echo url('admin/account'); ?>">全部账号</a>
-        <a class="list-group-item active" href="<?php echo url('admin/account/add'); ?>">添加/修改账号</a>
+        <a class="list-group-item active" href="<?php echo url('admin/account/add'); ?>">添加账号</a>
         <a class="list-group-item" href="<?php echo url('admin/account/me'); ?>">我的账号</a>
         <a class="list-group-item" href="<?php echo url('admin/account/cache'); ?>">更新缓存</a>
     </div>
     <div class="page_content">
         <div class="panel panel-default">
-            <div class="panel-heading">添加/修改账号</div>
+            <div class="panel-heading"><?php echo $userid ? '修改' : '添加';?>账号</div>
             <div class="panel-body">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#basic" aria-controls="basic" role="tab" data-toggle="tab">基本信息</a></li>
@@ -215,7 +215,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="bk15"></div>
+                    <hr />
                     <button class="btn btn-default" type="submit" name="submit">提交</button>
                 </form>
             </div>

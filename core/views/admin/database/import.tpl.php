@@ -39,14 +39,11 @@
                             </td>
                         </tr>
                         <?php } }?>
-                        <tr height="28">
-                            <td colspan="5" align="left">
-                                <button type="submit" name="submit" class="btn btn-default" value="1">批量删除</button>&nbsp;备份目录：/data/bakup/
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
-                <div class="panel-body"></div>
+                <div class="panel-body">
+                    <button type="submit" name="submit" class="btn btn-default" value="1">批量删除</button>&nbsp;备份目录：/data/bakup/
+                </div>
             </div>
         </form>
     </div>
@@ -70,5 +67,5 @@
         });
     }
 </script>
-</body>
-</html>
+
+<?php include $this->admin_tpl('footer'); ?>

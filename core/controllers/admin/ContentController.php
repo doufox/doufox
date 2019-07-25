@@ -91,11 +91,18 @@ class ContentController extends Admin
         $page = (!$page) ? 1 : $page;
         $pagination = core::load_class('pagination');
         $pagination->loadconfig();
-        if (empty($catid) || (int) $catid < 1) {
-            $this->show_message('缺少栏目id参数');
-        }
 
         $cats = $this->category_cache; // 读取栏目缓存
+        // print_r($cats);
+        // return;
+        if (empty($catid) || (int) $catid < 1) {
+            // 取第一个栏目 ID
+            if (reset($cats)) {
+                $catid = (int) $cats[key($cats)]['catid'];
+            } else {
+                $this->show_message('缺少栏目id参数');
+            }
+        }
         $modelid = $cats[$catid]['modelid'];
 
         $where = 'catid=' . $catid;

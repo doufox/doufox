@@ -27,7 +27,7 @@
                     <table width="100%" class="table_form">
                         <tbody>
                             <tr>
-                                <th width="100">类型：</th>
+                                <th width="100">会员类型：</th>
                                 <td><?php echo $model['modelname']; ?></td>
                             </tr>
                             <tr>
@@ -70,12 +70,10 @@
                             <?php if ($model) {
                                 echo $data_fields;
                             } ?>
-                            <tr>
-                                <th>&nbsp;</th>
-                                <td><button type="submit" class="btn btn-default" value="提交" name="submit">提交</button></td>
-                            </tr>
                         </tbody>
                     </table>
+                    <hr />
+                    <button type="submit" class="btn btn-default" value="提交" name="submit">提交</button>
                 </div>
             </div>
         </form>

@@ -5,14 +5,14 @@
 <div class="container">
     <div class="list-group page_menu">
         <a class="list-group-item" href="<?php echo url('admin/block'); ?>">全部区块</a>
-        <a class="list-group-item active" href="<?php echo url('admin/block/add'); ?>">添加区块</a>
+        <a class="list-group-item" href="<?php echo url('admin/block/add'); ?>">添加区块</a>
         <a class="list-group-item" href="<?php echo url('admin/block/cache'); ?>">更新缓存</a>
     </div>
     <div class="page_content">
-        <div class="panel panel-default">
-            <div class="panel-heading">添加区块</div>
-            <div class="panel-body">
-                <form action="" method="post">
+        <form action="" method="post">
+            <div class="panel panel-default">
+                <div class="panel-heading"><?php echo $id ? '编辑' : '添加'; ?>区块</div>
+                <div class="panel-body">
                     <input name="id" type="hidden" value="<?php echo $data['id']; ?>">
                     <table width="100%" class="table_form">
                         <tr>
@@ -62,16 +62,12 @@
                                 <?php echo content_editor('content_3', array(0 => $data['content']), array('system' => 1)); ?>
                             </td>
                         </tr>
-                        <tr>
-                            <th>&nbsp;</th>
-                            <td>
-                                <button type="submit" name="submit" class="btn btn-default">提交</button>
-                            </td>
-                        </tr>
                     </table>
-                </form>
+                    <hr />
+                    <button type="submit" name="submit" class="btn btn-default">提交</button>
+                </div>
             </div>
-        </div>
+        </form>
         <script type="text/javascript">
             function select_type(id) {
                 $("#text_1").hide();

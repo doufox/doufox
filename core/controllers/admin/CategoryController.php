@@ -29,8 +29,11 @@ class CategoryController extends Admin
         if (!empty($result)) {
             foreach ($result as $r) {
                 $r['modelname'] = @$models[$r['modelid']]['modelname']; // 读取模型
-                $r['str_manage'] = '<a href="?s=admin&c=category&a=add&catid=' . $r['catid'] . '" >添加子栏目</a> | <a href="?s=admin&c=category&a=edit&catid=' . $r['catid'] . '">编辑</a> | <a href="javascript:admin_command.confirmurl(\'?s=admin&c=category&a=del&catid=' . $r['catid'] . '\',\'' . '确定删除 『 ' . $r['catname'] . ' 』栏目吗？ ' . '\')">删除</a>';
-                $r['typename'] = $types[$r['typeid']]; // 读取是类型
+                url('admin/category/del', array('catid' => $r['catid']));
+                $r['manage_edit'] = '<a href="' . url('admin/category/edit', array('catid' => $r['catid'])) . '">编辑</a>';
+                $r['manage_add'] = '<a href="' . url('admin/category/add', array('catid' => $r['catid'])) . '" >添加子栏目</a>';
+                $r['manage_del'] = '<a href="javascript:admin_command.confirmurl(\'' . url('admin/category/del', array('catid' => $r['catid'])) . '\',\'' . '确定删除 『 ' . $r['catname'] . ' 』栏目吗？ ' . '\')">删除</a>';
+                $r['typename'] = $types[$r['typeid']]; // 模型
                 $r['display'] = $r['ismenu'] ? '是' : '<font color="blue">否</font>';
                 $r['catname'] = "<a href='$r[url]' target='_blank'>" . $r['catname'] . "</a>";
                 $categorys[$r['catid']] = $r;
@@ -44,7 +47,7 @@ class CategoryController extends Admin
                     <td>\$typename\$modelname</td>
                     <td>\$items</td>
                     <td>\$display</td>
-                    <td>\$str_manage</td>
+                    <td>\$manage_edit \$manage_add \$manage_del</td>
                 </tr>";
         $tree->init($categorys);
         $categorys = $tree->get_tree(0, $str);

@@ -71,12 +71,10 @@
                             <?php if ($model) {
                                 echo $data_fields;
                             } ?>
-                            <tr>
-                                <th>&nbsp;</th>
-                                <td><button type="submit" class="btn btn-default" value="1" name="submit">提交</button></td>
-                            </tr>
                         </tbody>
                     </table>
+                    <hr />
+                    <button type="submit" class="btn btn-default" value="1" name="submit">提交</button>
                 </div>
             </div>
         </form>

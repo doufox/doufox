@@ -1,7 +1,7 @@
-<?php include $this->admin_tpl('header');?>
-<script type="text/javascript">
-    top.document.getElementById('position').innerHTML = '模板编辑';
-</script>
+<?php include $this->admin_tpl('header'); ?>
+
+<?php include $this->admin_tpl('navbar'); ?>
+
 <style type="text/css">
     #codeTextarea {
         height: 500px;
@@ -25,42 +25,42 @@
         color: #666;
     }
 </style>
-<div class="subnav">
-    <div class="content-menu">
-        <a href="<?php echo url('admin/template/index') ?>">模板管理</a>
-        <a href="<?php echo url('admin/template/add', array('dir' => $dir)) ?>" class="add">添加模板</a>
-        <a href="<?php echo url('admin/template/cache') ?>" class="options">更新缓存</a>
+
+<div class="container">
+    <div class="list-group page_menu">
+        <a class="list-group-item" href="<?php echo url('admin/template/index'); ?>">模板管理</a>
+        <a class="list-group-item" href="<?php echo url('admin/template/add'); ?>">添加模板</a>
+        <a class="list-group-item" href="<?php echo url('admin/template/cache'); ?>">更新缓存</a>
     </div>
-    <div class="table_form">
-        <?php if (!is_writable($filepath)) {?>
-        <div style="color:red">
-        <b><?php echo $filepath . '不可写'; ?></b>
-        </div>
-        <div class="bk10"></div>
-        <?php }?>
-        <form method="post" action="" id="myform" name="myform">
-        <table width="100%" class="table_form" style="margin-bottom:10px;">
-            <tr>
-                <td align="left">当前位置：<?php echo $local;if ($this->get('a') == 'add') { ?> <input type="text"
-                    class="input-text" size="20" value="" name="file_name">
-                    <div class="show-tips">只支持后缀为.html、.js、.css。</div><?php }?>
-                </td>
-            </tr>
-            <tr>
-                <td align="left">
+    <div class="page_content">
+        <div class="panel panel-default">
+            <div class="panel-heading"><?php echo $filename ? '编辑' : '添加' ?>模板</div>
+            <?php if (!is_writable($filepath)) { ?>
+                <div class="panel-body">
+                    <b style="color:red"><?php echo $filepath . '不可写'; ?></b>
+                </div>
+            <?php } ?>
+            <div class="panel-body">
+                <form method="post" action="" class="form-inline">
+                    <p>
+                        <span>当前位置：<?php echo $local; ?></span>
+                        <?php if ($this->get('a') == 'add') { ?>
+                            <input type="text" class="form-control input-sm" size="20" value="" name="file_name">
+                            <span class="show-tips">只支持后缀为.html、.js、.css。</span>
+                        <?php } ?>
+                    </p>
                     <textarea name="file_content" id="codeTextarea"><?php echo $filecontent; ?></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td align="left"><input type="submit" class="button" value="提交" name="submit"></td>
-            </tr>
-        </table>
-        </form>
+                    <hr />
+                    <button type="submit" class="btn btn-default" value="提交" name="submit">提交</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
 <script type="text/javascript">
     var lineObjOffsetTop = 2;
+
     function createTextAreaWithLines(id) {
         var el = document.createElement('DIV');
         var ta = document.getElementById(id);
@@ -87,31 +87,31 @@
             if (string.length > 0) string = string + '<br>';
             string = string + no;
         }
-        ta.onkeydown = function () {
+        ta.onkeydown = function() {
             positionLineObj(lineObj, ta);
         };
-        ta.onmousedown = function () {
+        ta.onmousedown = function() {
             positionLineObj(lineObj, ta);
         };
-        ta.onscroll = function () {
+        ta.onscroll = function() {
             positionLineObj(lineObj, ta);
         };
-        ta.onblur = function () {
+        ta.onblur = function() {
             positionLineObj(lineObj, ta);
         };
-        ta.onfocus = function () {
+        ta.onfocus = function() {
             positionLineObj(lineObj, ta);
         };
-        ta.onmouseover = function () {
+        ta.onmouseover = function() {
             positionLineObj(lineObj, ta);
         };
         lineObj.innerHTML = string;
     }
+
     function positionLineObj(obj, ta) {
         obj.style.top = (ta.scrollTop * -1 + lineObjOffsetTop) + 'px';
     }
     createTextAreaWithLines('codeTextarea');
 </script>
-</body>
 
-</html>
+<?php include $this->admin_tpl('footer'); ?>

@@ -56,11 +56,9 @@
                                 <span class="show-tips"> 后台左栏宽度,单位px 默认为150 (修改后重新打开后台生效)</span>
                             </td>
                         </tr>
-                        <tr>
-                            <th>&nbsp;</th>
-                            <td><button class="btn btn-default" type="submit" name="submit">提交</button></td>
-                        </tr>
                     </table>
+                    <hr />
+                    <button class="btn btn-default" type="submit" name="submit">提交</button>
                 </div>
             </div>
         </form>
