@@ -70,11 +70,22 @@
                         <tr>
                             <th>状态：</th>
                             <td>
-                                <input type="radio" <?php if (!isset($data['status']) || $data['status'] == 1) { ?>checked<?php } ?> value="1" name="data[status]"> 正常 &nbsp;
-                                <input type="radio" <?php if ($data['status'] == 2) { ?>checked<?php } ?> value="2" name="data[status]"> 头条 &nbsp;
-                                <input type="radio" <?php if ($data['status'] == 3) { ?>checked<?php } ?> value="3" name="data[status]"> 推荐 &nbsp;
-                                <input type="radio" <?php if (isset($data['status']) && $data['status'] == 0) { ?>checked<?php } ?> value="0" name="data[status]"> 未审核 &nbsp;
-                                发布时间：<?php echo content_date('time'); ?> &nbsp;阅读数：<input type="text" class="form-control" size="5" value="<?php echo $data['hits']; ?>" name="data[hits]">
+                                <label><input type="radio" <?php if (!isset($data['status']) || $data['status'] == 1) { ?>checked<?php } ?> value="1" name="data[status]">正常</label>
+                                <label><input type="radio" <?php if ($data['status'] == 2) { ?>checked<?php } ?> value="2" name="data[status]">头条</label>
+                                <label><input type="radio" <?php if ($data['status'] == 3) { ?>checked<?php } ?> value="3" name="data[status]">推荐</label>
+                                <label><input type="radio" <?php if (isset($data['status']) && $data['status'] == 0) { ?>checked<?php } ?> value="0" name="data[status]">未审核</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>发布时间：</th>
+                            <td>
+                                <?php echo content_date('time'); ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>阅读数：</th>
+                            <td>
+                                <input type="text" class="form-control" size = "5" value="<?php echo $data['hits']; ?>" name="data[hits]">
                             </td>
                         </tr>
                     </tbody>

@@ -3,28 +3,38 @@
 <table width="100%" class="table_form">
     <tbody>
         <tr>
-            <th width="80">栏目ID：</th>
-            <td><?php echo $catid; ?></td>
+            <th width="80">ID：</th>
+            <td><?php echo $data['id']; ?></td>
         </tr>
         <tr>
-            <th>栏目名称：</th>
-            <td><?php echo $catname; ?></td>
+            <th width="80">栏目：</th>
+            <td><?php echo $data['catname'] . '(ID:' . $data['catid'] . ')'; ?></td>
+        </tr>
+        <tr>
+            <th width="80">模型：</th>
+            <td><?php echo $data['modelname'] . '(ID:' . $data['modelid'] . ')'; ?></td>
         </tr>
         <tr>
             <th>发表时间：</th>
             <td><?php echo date("Y-m-d H:i:s", $data['time']); ?></td>
         </tr>
         <tr>
-            <th>阅读数：</th>
+            <th>点击量：</th>
             <td><?php echo $data['hits']; ?></td>
+        </tr>
+        <tr>
+            <th>地址：</th>
+            <td><?php echo $data['url']; ?></td>
         </tr>
         <?php if ($model['content']['title']['show']) { ?>
         <tr>
+            <!-- title -->
             <th><?php echo $model['content']['title']['name']; ?>：</th>
             <td><?php echo $data['title']; ?></td>
         </tr>
         <?php } if ($model['content']['thumb']['show']) { ?>
         <tr>
+            <!-- thumb -->
             <th><?php echo $model['content']['thumb']['name']; ?>：</th>
             <td>
                 <input hidden value="<?php echo $data['thumb']; ?>" id="-thumb">
@@ -34,15 +44,19 @@
         </tr>
         <?php } if ($model['content']['keywords']['show']) { ?>
         <tr>
+            <!-- keywords -->
             <th><?php echo $model['content']['keywords']['name']; ?>：</th>
             <td><?php echo $data['keywords']; ?></td>
         </tr>
         <?php } if ($model['content']['description']['show']) { ?>
         <tr>
+            <!-- description -->
             <th><?php echo $model['content']['description']['name']; ?>：</th>
             <td><?php echo $data['description']; ?></td>
         </tr>
-        <?php } echo $data_fields; ?>
+        <?php }
+            // echo $data_fields;
+        ?>
         <tr>
             <th>状态：</th>
             <td>

@@ -9,7 +9,7 @@
         <a class="list-group-item" href="<?php echo url('admin/block/cache'); ?>">更新缓存</a>
     </div>
     <div class="page_content">
-        <form action="" method="post">
+        <form action="" method="post" class="form-inline">
             <div class="panel panel-default">
                 <div class="panel-heading"><?php echo $id ? '编辑' : '添加'; ?>区块</div>
                 <div class="panel-body">
@@ -34,7 +34,7 @@
                         </tr>
                         <tr>
                             <th width="80">备注：</th>
-                            <td><input class="form-control" type="text" name="data[remark]" value="<?php echo $data['remark']; ?>" size="100" /></td>
+                            <td><input class="form-control" type="text" name="data[remark]" value="<?php echo $data['remark']; ?>" size="40" /></td>
                         </tr>
                         <tr id="text_1" style="display:none">
                             <th>区块内容：</th>

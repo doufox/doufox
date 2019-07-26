@@ -427,25 +427,25 @@ class ContentController extends Admin
     }
 
     /**
-     * 预览
+     * 预览内容
      */
     public function previewAction()
     {
         $id = (int) $this->get('id');
+        // 主表内容
         $data = $this->content->find($id);
         if (empty($data)) {
             $this->show_message('内容不存在');
         }
 
-        $catid = $data['catid'];
-        $catname = $this->category_cache[$catid]['catname'];
+        $data['catname'] = $this->category_cache[$data['catid']]['catname'];
+        $data['modelname'] = $this->category_cache[$data['catid']]['modelname'];
         $modelid = $data['modelid'];
         $model = get_cache('model');
         if (!isset($model[$modelid])) {
             $this->show_message('模型不存在');
         }
 
-        $fields = $model[$modelid]['fields'];
         // 附表内容
         $table = core::load_model($model[$modelid]['tablename']);
         $table_data = $table->find($id);
@@ -454,6 +454,7 @@ class ContentController extends Admin
         }
         // 合并主表和附表
         // 自定义字段
+        $fields = $model[$modelid]['fields'];
         $data_fields = $this->getFields($fields, $data);
         $model = $model[$modelid];
         include $this->admin_tpl('content/preview');

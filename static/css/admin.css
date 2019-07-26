@@ -493,18 +493,24 @@ select {
     color: #777
 }
 
+.table_form label {
+    margin-right: 5px;
+    font-weight: normal;
+}
+
 .table_form label:hover {
     color: #00f;
 }
 
-.table_form label:hover input[type=radio] {
+.table_form label:hover input[type=radio],
+.table_form label:hover input[type=checkbox] {
     outline-width: 1px;
     outline-style: dotted;
     outline-color: #00f;
 }
 
-.table_form input[type=radio],
-.table_form input[type=checkbox] {
+.table_form label input[type=radio],
+.table_form label input[type=checkbox] {
     margin-right: 5px;
 }
 

@@ -11,67 +11,72 @@
     <div class="page_content">
         <form action="" method="post">
             <div class="panel panel-default">
-                <div class="panel-heading">模型字段管理</div>
+                <div class="panel-heading">
+                    <span class="panel-title"><?php echo $data['modelname'] . '[' . $modelTypeName[$typeid] . ']'; ?>字段管理</span>
+                    <div class="pull-right">
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/model/addfield', array('typeid'=>$typeid, 'modelid'=>$modelid)); ?>">添加字段</a>
+                    </div>
+                </div>
                 <table class="table table-bordered table-hover" width="100%">
                     <thead>
                         <tr>
-                            <th width="40" align="left">排序</th>
+                            <th width="50" align="left">排序</th>
                             <th width="90" align="left">字段别名</th>
                             <th width="80" align="left">输入类型</th>
-                            <th  align="left">字段名称</th>
+                            <th align="left">字段名称</th>
                             <th width="70" align="left">前台显示</th>
                             <th width="80" align="left">是否必填</th>
-                            <th width="120"  align="left">操作</th>
+                            <th width="140" align="left">操作</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if ($typeid == 1) { ?>
                             <tr>
-                                <td align="left"></td>
-                                <td align="left"><?php echo $content['title']['name']; ?></td>
-                                <td align="left"></td>
-                                <td align="left">title</td>
-                                <td align="left"><?php if ($content['title']['show']) {  echo '显示';  } else {  echo '隐藏';  } ?></td>
-                                <td align="left"> </td>
-                                <td align="left">
+                                <td></td>
+                                <td><?php echo $content['title']['name']; ?></td>
+                                <td></td>
+                                <td>title</td>
+                                <td><?php if ($content['title']['show']) {  echo '显示';  } else {  echo '隐藏';  } ?></td>
+                                <td> </td>
+                                <td>
                                 <a href="<?php echo url('admin/model/ajaxedit/',array('modelid'=>$modelid,'name'=>'title')); ?>">编辑</a></td>
                             </tr>
                             <tr>
-                                <td align="left"></td>
-                                <td align="left"><?php echo $content['thumb']['name']; ?></td>
-                                <td align="left"> </td>
-                                <td align="left">thumb</td>
-                                <td align="left"><?php if ($content['thumb']['show']) {  echo '显示';  } else {  echo '隐藏';  } ?></td>
-                                <td align="left"> </td>
-                                <td align="left">
+                                <td></td>
+                                <td><?php echo $content['thumb']['name']; ?></td>
+                                <td> </td>
+                                <td>thumb</td>
+                                <td><?php if ($content['thumb']['show']) {  echo '显示';  } else {  echo '隐藏';  } ?></td>
+                                <td> </td>
+                                <td>
                                 <a href="<?php echo url('admin/model/ajaxedit/',array('modelid'=>$modelid,'name'=>'thumb')); ?>">编辑</a></td>
                             </tr>
                             <tr>
-                                <td align="left"></td>
-                                <td align="left"><?php echo $content['keywords']['name']; ?></td>
-                                <td align="left"> </td>
-                                <td align="left">keywords</td>
-                                <td align="left"><?php if ($content['keywords']['show']) {  echo '显示';  } else {  echo '隐藏';  } ?></td>
-                                <td align="left"> </td>
-                                <td align="left">
+                                <td></td>
+                                <td><?php echo $content['keywords']['name']; ?></td>
+                                <td> </td>
+                                <td>keywords</td>
+                                <td><?php if ($content['keywords']['show']) {  echo '显示';  } else {  echo '隐藏';  } ?></td>
+                                <td> </td>
+                                <td>
                                 <a href="<?php echo url('admin/model/ajaxedit/',array('modelid'=>$modelid,'name'=>'keywords')); ?>">编辑</a></td>
                             </tr>
                             <tr>
-                                <td align="left"></td>
-                                <td align="left"><?php echo $content['description']['name']; ?></td>
-                                <td align="left"></td>
-                                <td align="left">description</td>
-                                <td align="left"><?php if ($content['description']['show']) {  echo '显示';  } else {  echo '隐藏';  } ?></td>
-                                <td align="left"> </td>
-                                <td align="left">
+                                <td></td>
+                                <td><?php echo $content['description']['name']; ?></td>
+                                <td></td>
+                                <td>description</td>
+                                <td><?php if ($content['description']['show']) {  echo '显示';  } else {  echo '隐藏';  } ?></td>
+                                <td> </td>
+                                <td>
                                 <a href="<?php echo url('admin/model/ajaxedit/',array('modelid'=>$modelid,'name'=>'description')); ?>">编辑</a></td>
                             </tr>
                         <?php } if (is_array($list)) { foreach ($list as $t) { ?>
                             <tr >
-                                <td align="left">
-                                <input type="text" name="order_<?php echo $t['fieldid']; ?>" class="input-text" style="width:25px;height:15px;" value="<?php echo $t['listorder']; ?>"></td>
-                                <td align="left"><?php echo $t['name']; ?></td>
-                                <td align="left">
+                                <td>
+                                <input type="text" name="order_<?php echo $t['fieldid']; ?>" style="width:25px;height:15px;" value="<?php echo $t['listorder']; ?>"></td>
+                                <td><?php echo $t['name']; ?></td>
+                                <td>
                                 <?php 
                                     if ($t['formtype']=='merge') {echo '<span style="color:#f00;font-weight:700;">组合字段<span>';}
                                     elseif ($t['formtype']=='input') {echo '单行文本';}
@@ -88,21 +93,21 @@
                                     else {echo $t['formtype']; }
                                 ?>
                                 </td>
-                                <td align="left"><?php echo $t['field']; ?></td>
-                                <td align="left"><?php if ($t['isshow']) echo '显示'; else echo '隐藏'; ?></td>
-                                <td align="left"><?php if ($t['not_null']) echo '必填'; else echo '选填'; ?></td>
-                                <td align="left">
-                                    <a href="<?php echo url('admin/model/editfield/',array('typeid'=>$typeid,'fieldid'=>$t['fieldid'])); ?>">编辑</a> 
-                                    <a href="<?php echo url('admin/model/disable/',array('typeid'=>$typeid,'fieldid'=>$t['fieldid'])); ?>"><?php if ($t['disabled']==1) { ?><font color="#FF0000">启用</font><?php } else {  echo '禁用';  } ?></a> 
-                                    <?php if ($t['field'] == 'content') { ?><a href="javascript:;" style="color:#ACA899">删除</a> <?php } else { ?><a  href="javascript:admin_command.confirmurl('<?php echo url('admin/model/delfield/',array('typeid'=>$typeid,'fieldid'=>$t['fieldid'])); ?>','一旦删除字段，将会把 【<?php echo $t['name']; ?>】字段的数据全部删除，确定删除 <?php echo $t['name']; ?> 吗？ ')" >删除</a> <?php } ?>
+                                <td><?php echo $t['field']; ?></td>
+                                <td><?php if ($t['isshow']) echo '显示'; else echo '隐藏'; ?></td>
+                                <td><?php if ($t['not_null']) echo '必填'; else echo '选填'; ?></td>
+                                <td>
+                                    <a href="<?php echo url('admin/model/editfield/',array('typeid'=>$typeid,'fieldid'=>$t['fieldid'])); ?>">[编辑]</a>
+                                    <a href="<?php echo url('admin/model/disable/',array('typeid'=>$typeid,'fieldid'=>$t['fieldid'])); ?>"><?php if ($t['disabled']==1) { ?><font color="#FF0000">[启用]</font><?php } else {  echo '[禁用]'; } ?></a> 
+                                    <?php if ($t['field'] == 'content') { ?><a href="javascript:;" style="color:#ACA899">[删除]</a> <?php } else { ?><a  href="javascript:admin_command.confirmurl('<?php echo url('admin/model/delfield/',array('typeid'=>$typeid,'fieldid'=>$t['fieldid'])); ?>','一旦删除字段，将会把 【<?php echo $t['name']; ?>】字段的数据全部删除，确定删除 <?php echo $t['name']; ?> 吗？ ')" >[删除]</a> <?php } ?>
                                 </td>
                             </tr>
                         <?php } } ?>
-                            <tr>
-                                <td colspan="7" align="left"><input class="button" type="submit" name="submit" value="排序" /></td>
-                            </tr>
                     </tbody>
                 </table>
+                <div class="panel-body">
+                    <button class="btn btn-default" type="submit" name="submit" value="排序">排序</button>
+                </div>
             </div>
         </div>
     </div>

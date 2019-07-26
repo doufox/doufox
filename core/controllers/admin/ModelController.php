@@ -12,29 +12,28 @@ class ModelController extends Admin
     {
         parent::__construct();
         $this->modelType = array(
-            1 => 'content', // 内容表模型
-            2 => 'member', // 会员表模型
-            3 => 'form', // 表单表模型
+            1 => 'content', // 内容模型表
+            2 => 'member',  // 会员模型表
+            3 => 'form',    // 表单模型表
         );
         $this->modelTypeName = array(
             1 => '内容模型',
             2 => '会员模型',
             3 => '表单模型',
         );
-        $this->_model = core::load_model('model');
         $this->typeid = $this->get('typeid') ? $this->get('typeid') : 1;
         if (!isset($this->modelType[$this->typeid])) {
             $this->show_message('模型类型不存在');
         }
-
+        $this->_model = core::load_model('model');
     }
 
     public function indexAction()
     {
         $typeid = $this->typeid;
         $modeltype = $this->modelType;
-        $typename = $this->modelTypeName;
-        $modelname = $typename[$typeid];
+        $modelTypeName = $this->modelTypeName;
+        $modelname = $modelTypeName[$typeid];
         $list = $this->_model->where('typeid=' . $typeid)->select();
         include $this->admin_tpl('model/list');
     }
@@ -205,8 +204,7 @@ class ModelController extends Admin
         }
         $setting = string2array($data['setting']);
         $typeid = $this->typeid;
-        $modeltype = $this->modelType;
-        $typename = $this->modelTypeName;
+        $modelTypeName = $this->modelTypeName;
         $list = $field->where('modelid=' . $modelid)->order('listorder ASC')->select();
         $content = $setting['default'];
 

@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="robots" content="none, nofollow, noarchive, nocache">
     <meta name="referrer" content="never" />
-    <title>网站管理系统</title>
+    <title>内容管理系统</title>
     <link type="text/css" href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link type="text/css" href="/static/css/admin.css" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico" />
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
-    <!-- <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script> -->
+    <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script>
 </head>
 
 <body>
