@@ -93,17 +93,16 @@ class ModelController extends Admin
                 if (!empty($t['joinid'])) {
                     $jdata[] = $t['modelid'];
                 }
-
             }
         }
 
         $typeid = $this->typeid;
         $modeltype = $this->modelType;
-        $typename = $this->modelTypeName;
+        $modelTypeName = $this->modelTypeName;
         $join = array();
         $formmodel = $fdata;
         $joindata = $jdata;
-
+        $page_title = '添加' . $modelTypeName[$typeid]; // 格式：添加表单模型
         include $this->admin_tpl('model/add');
     }
 
@@ -158,9 +157,10 @@ class ModelController extends Admin
         }
         $typeid = $this->typeid;
         $modeltype = $this->modelType;
-        $typename = $this->modelTypeName;
+        $modelTypeName = $this->modelTypeName;
         $joindata = $jdata;
         $formmodel = $fdata;
+        $page_title = '编辑' . $modelTypeName[$typeid] . '[' . $data['modelname'] . ']'; // 格式：编辑表单模型[文章评论]
         include $this->admin_tpl('model/add');
     }
 

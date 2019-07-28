@@ -1,8 +1,8 @@
 <?php
+
 /**
  * 网站配置
  */
-
 class ConfigController extends Admin
 {
     public function __construct()
@@ -92,7 +92,6 @@ class ConfigController extends Admin
         $arr_m = $file_list->get_file_list(THEME_PATH_M);
         $theme = array_diff($arr_d, array('index.html'));
         $theme_mobile = array_diff($arr_m, array('index.html'));
-        $type = $this->get('type') ? $this->get('type') : 1;
         $membermodel = $this->membermodel; // 会员模型
 
         // $data['ADMIN_PASS'] = '';
@@ -115,5 +114,4 @@ class ConfigController extends Admin
 
         return $str;
     }
-
 }

@@ -10,7 +10,7 @@ top.document.getElementById('position').innerHTML = '表单配置';
         <a href="<?php echo url('admin/form/config',array('modelid'=>$modelid, 'cid'=>$cid)); ?>" class="on">表单设置</a>
     </div>
     <div class="table-list">
-        <form method="post" action="" id="myform" name="myform">
+        <form method="post" action="" class="form-inline">
             <input type="hidden" value="<?php echo $catid; ?>" name="catid">
             <input type="hidden" value="<?php echo $data['typeid']; ?>" name="typeid">
             <div class="col-tab">
@@ -23,7 +23,7 @@ top.document.getElementById('position').innerHTML = '表单配置';
                 <tbody>
                     <tr>
                         <th width="200">表单名称：</th>
-                        <td><input type="text" class="input-text" size="10" value="<?php echo $model['modelname']; ?>" name="data[modelname]"></td>
+                        <td><input type="text" class="form-control" size="10" value="<?php echo $model['modelname']; ?>" name="data[modelname]"></td>
                     </tr>
                     <tr>
                         <th>表单类型：</th>
@@ -34,7 +34,7 @@ top.document.getElementById('position').innerHTML = '表单配置';
                     <tr>
                         <th>表单提交模板：</th>
                         <td>
-                        <input type="text" class="input-text" size="30" value="<?php echo $model['categorytpl']; ?>" name="data[categorytpl]"><div class="show-tips">默认为form.html</div>
+                        <input type="text" class="form-control" size="30" value="<?php echo $model['categorytpl']; ?>" name="data[categorytpl]"><div class="show-tips">默认为form.html</div>
                         </td>
                     </tr>
                     <tr>
@@ -82,7 +82,7 @@ top.document.getElementById('position').innerHTML = '表单配置';
                     <tr>
                         <th>同一IP提交间隔：</th>
                         <td>
-                        <input type="text" class="input-text" size="10" value="<?php echo $model['setting']['form']['time']; ?>" name="setting[form][ip]"><div class="show-tips">单位分钟</div>
+                        <input type="text" class="form-control" size="10" value="<?php echo $model['setting']['form']['time']; ?>" name="setting[form][ip]"><div class="show-tips">单位分钟</div>
                         </td>
                     </tr>
                             <?php if (is_array($model['fields']['data'])) { foreach ($model['fields']['data'] as $t) { ?>
@@ -110,7 +110,7 @@ top.document.getElementById('position').innerHTML = '表单配置';
                     <tr>
                     <th>表单列表数据调用（供参考）：</th>
                     <td>
-                    <textarea style="width:90%;height:70px;overflow: hidden;color:#777777"><?php echo $list_code; ?></textarea>
+                    <textarea class="form-control" style="width:90%;height:70px;overflow: hidden;color:#777777"><?php echo $list_code; ?></textarea>
                     </td>
                     </tr>
 

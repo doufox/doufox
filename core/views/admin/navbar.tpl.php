@@ -13,6 +13,7 @@
                     <li><a href="<?php echo url('admin/category'); ?>">栏目</a></li>
                     <li><a href="<?php echo url('admin/block'); ?>">区块</a></li>
                     <li><a href="<?php echo url('admin/member'); ?>">会员</a></li>
+                    <li><a href="<?php echo url('admin/config'); ?>">设置</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">模型&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -25,17 +26,6 @@
                                     <li><a href="<?php echo $t['url'] ?>"><?php echo $t['name'] ?></a></li>
                                 <?php }
                             } ?>
-                            <li role="separator" class="divider"></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">设置&nbsp;<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="<?php echo url('admin/config/index', array('type' => 1)); ?>">系统设置</a></li>
-                            <li><a href="<?php echo url('admin/config/index', array('type' => 2)); ?>">水印设置</a></li>
-                            <li><a href="<?php echo url('admin/config/index', array('type' => 3)); ?>">会员配置</a></li>
-                            <li><a href="<?php echo url('admin/config/index', array('type' => 4)); ?>">URL设置</a></li>
-                            <li><a href="<?php echo url('admin/config/index', array('type' => 5)); ?>">微信配置</a></li>
                             <li role="separator" class="divider"></li>
                         </ul>
                     </li>

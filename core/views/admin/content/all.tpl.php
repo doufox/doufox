@@ -46,7 +46,7 @@
                         <input type="hidden" name="a" value="all"/>
                         <!-- <input type="hidden" name="name" value="<?php echo $name; ?>"/> -->
                         <input type="hidden" name="catid" value="<?php echo $catid; ?>"/>
-                        <input type="text" name="title" size="18" value="<?php echo $title; ?>" class="input-text"/>
+                        <input type="text" name="title" size="18" value="<?php echo $title; ?>" class="form-control"/>
                         <input type="submit" class="button" value="搜索标题"/>
                     </form>
                 </div>
@@ -97,7 +97,7 @@
                             <a href="javascript:admin_command.confirmurl('<?php echo url('admin/content/del/',array('catid'=>$t['catid'],'id'=>$t['id'])); ?>','确定删除 『 <?php echo $t['title']; ?> 』吗？ ')" >删除</a> 
                         </td>
                         <td align="left">
-                            <input type="text" name="order_<?php echo $t['id']; ?>" class="input-text" style="width:25px; height:15px;" value="<?php echo $t['listorder']; ?>">
+                            <input type="text" name="order_<?php echo $t['id']; ?>" style="width:25px; height:15px;" value="<?php echo $t['listorder']; ?>">
                         </td>
                     </tr>
                     <?php } } ?>

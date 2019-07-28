@@ -23,14 +23,13 @@
         </tr>
         <tr>
             <th><font color="red">*</font> 字段别名： </th>
-            <td><input class="input-text" type="text" name="data[name]" value="<?php echo $data['name']; ?>" size="20" /><div class="show-tips">例如：标题。</div></td>
+            <td><input class="form-control" type="text" name="data[name]" value="<?php echo $data['name']; ?>" size="20" /><div class="show-tips">例如：标题。</div></td>
         </tr>
         <tr>
             <th>是否显示：</th>
             <td>
-            <input type="radio" <?php if ($data['show']) { ?>checked<?php } ?> value="1" name="data[show]"> 显示
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="radio" <?php if (empty($data['show'])) { ?>checked<?php } ?> value="0" name="data[show]" > 隐藏
+                <label><input type="radio" <?php if ($data['show']) { ?>checked<?php } ?> value="1" name="data[show]">显示</label>
+                <label><input type="radio" <?php if (empty($data['show'])) { ?>checked<?php } ?> value="0" name="data[show]">隐藏</label>
             </td>
         </tr>
         <tr>

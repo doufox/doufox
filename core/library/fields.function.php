@@ -36,11 +36,11 @@ function form_input($setting = '')
     <tbody>
     <tr>
       <td width="100">长度 ：</td>
-      <td><input type="text" class="input-text" size="10" value="' . (isset($setting['size']) ? $setting['size'] : '150') . '" name="setting[size]"><font color="gray">px</font></td>
+      <td><input type="text" class="form-control" size="10" value="' . (isset($setting['size']) ? $setting['size'] : '150') . '" name="setting[size]"><font color="gray">px</font></td>
     </tr>
     <tr>
       <td>默认值 ：</td>
-      <td><input type="text" class="input-text" size="30" value="' . (isset($setting['default']) ? $setting['default'] : '') . '" name="setting[default]"></td>
+      <td><input type="text" class="form-control" size="30" value="' . (isset($setting['default']) ? $setting['default'] : '') . '" name="setting[default]"></td>
     </tr>
     </tbody>
     </table>';
@@ -53,19 +53,19 @@ function form_textarea($setting = '')
     <tbody>
     <tr>
       <td width="100">宽度 ：</td>
-      <td><input type="text" class="input-text" size="20" value="' . (isset($setting['width']) ? $setting['width'] : '400') . '" name="setting[width]">
+      <td><input type="text" class="form-control" size="20" value="' . (isset($setting['width']) ? $setting['width'] : '400') . '" name="setting[width]">
       <font color="gray">px</font>
       </td>
     </tr>
     <tr>
       <td>高度 ：</td>
-      <td><input type="text" class="input-text" size="20" value="' . (isset($setting['height']) ? $setting['height'] : '90') . '" name="setting[height]">
+      <td><input type="text" class="form-control" size="20" value="' . (isset($setting['height']) ? $setting['height'] : '90') . '" name="setting[height]">
       <font color="gray">px</font>
       </td>
     </tr>
     <tr>
       <td>默认值 ：</td>
-      <td><textarea name="setting[default]" rows="2" cols="30" class="text">' . (isset($setting['default']) ? $setting['default'] : '') . '</textarea></td>
+      <td><textarea class="form-control" name="setting[default]" rows="2" cols="30">' . (isset($setting['default']) ? $setting['default'] : '') . '</textarea></td>
     </tr>
     </tbody>
     </table>';
@@ -81,25 +81,26 @@ function form_editor($setting = '')
     <tbody>
     <tr>
       <td width="100">宽度 ：</td>
-      <td><input type="text" class="input-text" size="10" value="' . $w . '" name="setting[width]">
+      <td><input type="text" class="form-control" size="10" value="' . $w . '" name="setting[width]">
       <font color="gray">%</font>
       </td>
     </tr>
     <tr>
       <td>高度 ：</td>
-      <td><input type="text" class="input-text" size="10" value="' . $h . '" name="setting[height]">
+      <td><input type="text" class="form-control" size="10" value="' . $h . '" name="setting[height]">
       <font color="gray">px</font>
       </td>
     </tr>
     <tr>
       <td>类型 ：</td>
-      <td><input type="radio" value=1 name="setting[type]" ' . ($t == 1 ? 'checked' : '') . '> 完整模式&nbsp;&nbsp;&nbsp;&nbsp;
-      <input type="radio" value=0 name="setting[type]"' . ($t == 0 ? 'checked' : '') . '> 精简模式
+      <td>
+          <label><input type="radio" value=1 name="setting[type]" ' . ($t == 1 ? 'checked' : '') . '> 完整模式</label>
+          <label><input type="radio" value=0 name="setting[type]"' . ($t == 0 ? 'checked' : '') . '> 精简模式</label>
       </td>
     </tr>
     <tr>
       <td>默认值 ：</td>
-      <td><textarea name="setting[default]" rows="2" cols="30" class="text">' . (isset($setting['default']) ? $setting['default'] : '') . '</textarea></td>
+      <td><textarea class="form-control" name="setting[default]" rows="2" cols="30">' . (isset($setting['default']) ? $setting['default'] : '') . '</textarea></td>
     </tr>
     </tbody>
     </table>';
@@ -112,13 +113,13 @@ function form_select($setting = '')
     <tbody>
     <tr>
       <td width="170">选项列表 ：</td>
-      <td><textarea name="setting[content]" style="width:195px;height:100px;" class="text">' . (isset($setting['content']) ? $setting['content'] : '') . '</textarea>
+      <td><textarea class="form-control" name="setting[content]" style="width:195px;height:100px;">' . (isset($setting['content']) ? $setting['content'] : '') . '</textarea>
       <font color="gray">格式：选项名称1|选项值1 (回车换行)。</font>
       </td>
     </tr>
     <tr>
       <td>默认选中值 ：</td>
-      <td><input type="text" class="input-text" style="width:200px;" value="' . (isset($setting['default']) ? $setting['default'] : '') . '" name="setting[default]"></td>
+      <td><input type="text" class="form-control" style="width:200px;" value="' . (isset($setting['default']) ? $setting['default'] : '') . '" name="setting[default]"></td>
     </tr>
     </tbody>
     </table>';
@@ -136,13 +137,13 @@ function form_checkbox($setting = '')
     <tbody>
     <tr>
       <td width="170">选项列表 ：</td>
-      <td><textarea name="setting[content]" style="width:195px;height:100px;" class="text">' . (isset($setting['content']) ? $setting['content'] : '') . '</textarea>
+      <td><textarea class="form-control" name="setting[content]" style="width:195px;height:100px;">' . (isset($setting['content']) ? $setting['content'] : '') . '</textarea>
       <font color="gray">格式：选项名称1|选项值1 (回车换行)。</font>
       </td>
     </tr>
     <tr>
       <td>默认选中值 ：</td>
-      <td><input type="text" class="input-text" style="width:200px;" value="' . (isset($setting['default']) ? $setting['default'] : '') . '" name="setting[default]">
+      <td><input type="text" class="form-control" style="width:200px;" value="' . (isset($setting['default']) ? $setting['default'] : '') . '" name="setting[default]">
       <br><font color="gray">多个选中值以分号分隔“,”，格式：选中值1,选中值2。</font>
       </td>
     </tr>
@@ -157,19 +158,19 @@ function form_image($setting = '')
     <tbody>
     <tr>
       <td width="100">宽度 ：</td>
-      <td><input type="text" class="input-text" size="10" value="' . (isset($setting['width']) ? $setting['width'] : '200') . '" name="setting[width]">
+      <td><input type="text" class="form-control" size="10" value="' . (isset($setting['width']) ? $setting['width'] : '200') . '" name="setting[width]">
       <font color="gray">px</font>
       </td>
     </tr>
     <tr>
       <td>高度 ：</td>
-      <td><input type="text" class="input-text" size="10" value="' . (isset($setting['height']) ? $setting['height'] : '160') . '" name="setting[height]">
+      <td><input type="text" class="form-control" size="10" value="' . (isset($setting['height']) ? $setting['height'] : '160') . '" name="setting[height]">
       <font color="gray">px</font>
       </td>
     </tr>
     <tr>
       <td>大小 ：</td>
-      <td><input type="text" class="input-text" size="10" value="' . (isset($setting['size']) ? $setting['size'] : '2') . '" name="setting[size]">
+      <td><input type="text" class="form-control" size="10" value="' . (isset($setting['size']) ? $setting['size'] : '2') . '" name="setting[size]">
       <font color="gray">MB</font>
       </td>
     </tr>
@@ -184,13 +185,13 @@ function form_file($setting = '')
     <tbody>
     <tr>
       <td width="100">格式 ：</td>
-      <td><input type="text" class="input-text" size="50" value="' . (isset($setting['type']) ? $setting['type'] : '') . '" name="setting[type]">
+      <td><input type="text" class="form-control" size="50" value="' . (isset($setting['type']) ? $setting['type'] : '') . '" name="setting[type]">
       <font color="gray">多个格式以,号分开，如：zip,rar,tar</font>
       </td>
     </tr>
     <tr>
       <td>大小 ：</td>
-      <td><input type="text" class="input-text" size="10" value="' . (isset($setting['size']) ? $setting['size'] : '2') . '" name="setting[size]">
+      <td><input type="text" class="form-control" size="10" value="' . (isset($setting['size']) ? $setting['size'] : '2') . '" name="setting[size]">
       <font color="gray">MB</font>
       </td>
     </tr>
@@ -212,13 +213,13 @@ function form_date($setting = '')
     <tbody>
     <tr>
       <td width="100">宽度 ：</td>
-      <td><input type="text" class="input-text" size="7" value="' . $width . '" name="setting[width]">
+      <td><input type="text" class="form-control" size="7" value="' . $width . '" name="setting[width]">
       <font color="gray">px</font>
       </td>
     </tr>
     <tr>
       <td>格式 ：</td>
-      <td><input type="text" class="input-text" size="25" value="' . $type . '" name="setting[type]">
+      <td><input type="text" class="form-control" size="25" value="' . $type . '" name="setting[type]">
       <font color="gray">格式%Y-%m-%d %H:%M:%S表示2014-02-13 11:20:20。</font>
       </td>
     </tr>
@@ -233,7 +234,7 @@ function form_merge($setting = '')
     <tbody>
     <tr>
       <td width="150">组合字段 ：</td>
-      <td><input type="text" name="setting[content]" class="input-text" value="' . (isset($setting['content']) ? $setting['content'] : '') . '" size=50>
+      <td><input type="text" name="setting[content]" class="form-control" value="' . (isset($setting['content']) ? $setting['content'] : '') . '" size=50>
       </td>
     </tr>
     <tr>
@@ -251,7 +252,7 @@ function form_fields($setting = '')
     <tbody>
     <tr>
       <td width="100">多字段组合 ：</td>
-      <td><textarea name="setting[content]" style="width:444px;height:200px;" class="text">' . (isset($setting['content']) ? $setting['content'] : '') . '</textarea>
+      <td><textarea class="form-control" name="setting[content]" style="width:444px;height:200px;">' . (isset($setting['content']) ? $setting['content'] : '') . '</textarea>
       </td>
     </tr>
     <tr>
@@ -304,7 +305,7 @@ function content_input($name, $content = '', $setting = '')
 {
     $content = is_null($content[0]) ? get_content_value($setting['default']) : $content[0];
     $style = isset($setting['size']) ? " style='width:" . ($setting['size'] ? $setting['size'] : 150) . "px;'" : '';
-    return '<input type="text" value="' . $content . '" class="input-text" name="data[' . $name . ']" ' . $style . '>';
+    return '<input type="text" value="' . $content . '" class="form-control" name="data[' . $name . ']" ' . $style . '>';
 }
 
 function content_textarea($name, $content = '', $setting = '')
@@ -312,7 +313,7 @@ function content_textarea($name, $content = '', $setting = '')
     $content = is_null($content[0]) ? get_content_value($setting['default']) : $content[0];
     $style = isset($setting['width']) && $setting['width'] ? 'width:' . $setting['width'] . 'px;' : '';
     $style .= isset($setting['height']) && $setting['height'] ? 'height:' . $setting['height'] . 'px;' : '';
-    return '<textarea style="' . $style . '" name="data[' . $name . ']">' . $content . '</textarea>';
+    return '<textarea class="form-control" style="' . $style . '" name="data[' . $name . ']">' . $content . '</textarea>';
 }
 
 function content_editor($name, $content = '', $setting = '')
@@ -361,9 +362,11 @@ function content_editor($name, $content = '', $setting = '')
         });
         </script>";
     }
-    $str .= '<textarea id="' . $id . '" name="data[' . $name . ']" style="width:' . $w . '%;height:' . $h . 'px;visibility:hidden;">' . $content . '</textarea>';
+    $str .= '<textarea class="form-control" id="' . $id . '" name="data[' . $name . ']" style="width:' . $w . '%;height:' . $h . 'px;visibility:hidden;">' . $content . '</textarea>';
     if (!isset($setting['system']) && $name == 'content') {
-        $str .= '<div style="padding-top:3px;"><label><input type="checkbox" checked="" value="1" name="data[add_introduce]">自动获取 </label><input type="text" size="2" value="200" name="data[introcude_length]" class="input-text">字符描述<label><input type="checkbox" checked="" value="1" name="data[auto_thumb]">自动获取第一张图为缩略图</div>';
+        $str .= '<p><label><input type="checkbox" checked="" value="1" name="data[add_introduce]">自动生成描述</label>';
+        $str .= '<input type="text" size="10" value="200" name="data[introcude_length]" class="form-control">字符描述<p>';
+        $str .= '<p><label><input type="checkbox" checked="" value="1" name="data[auto_thumb]">自动获取第一张图为缩略图</label></p>';
     }
     return $str;
 }
@@ -372,7 +375,7 @@ function content_select($name, $content = '', $setting = '')
 {
     $content = is_null($content[0]) ? get_content_value($setting['default']) : $content[0];
     $select = explode(chr(13), $setting['content']);
-    $str = "<select id='" . $name . "' name='data[" . $name . "]'>";
+    $str = '<select class="form-control" id="' . $name . '" name="data[' . $name . ']">';
     foreach ($select as $t) {
         $n = $v = $selected = '';
         list($n, $v) = explode('|', $t);
@@ -393,7 +396,7 @@ function content_radio($name, $content = '', $setting = '')
         list($n, $v) = explode('|', $t);
         $v = is_null($v) ? trim($n) : trim($v);
         $selected = $v == $content ? ' checked' : '';
-        $str .= $n . '&nbsp;<input type="radio" name="data[' . $name . ']" value="' . $v . '" ' . $selected . '/>&nbsp;&nbsp;';
+        $str .= $n . '<input type="radio" name="data[' . $name . ']" value="' . $v . '" ' . $selected . '/>&nbsp;&nbsp;';
     }
     return $str;
 }
@@ -420,7 +423,7 @@ function content_image($name, $content = '', $setting = '')
     $size = (int) $setting['size'];
     $height = isset($setting['height']) ? $setting['height'] : '';
     $width = isset($setting['width']) ? $setting['width'] : '';
-    $str = '<span style="position: relative;"><input type="text" class="input-text" size="50" value="' . $content . '" name="data[' . $name . ']" id="' . $name . '" onmouseover="admin_command.preview_img(\'' . $name . '\')">
+    $str = '<span style="position: relative;"><input type="text" class="form-control" size="50" value="' . $content . '" name="data[' . $name . ']" id="' . $name . '" onmouseover="admin_command.preview_img(\'' . $name . '\')">
     <input type="button" class="button" onClick="admin_command.uploadImage(\'' . $name . '\',\'' . $width . '\',\'' . $height . '\',\'' . $size . '\')" value="上传图片"><div id="imgPreview' . $name . '"></div></span>';
     return $str;
 }
@@ -430,8 +433,8 @@ function content_file($name, $content = '', $setting = '')
     $content = $content[0];
     $type = base64_encode($setting['type']);
     $size = (int) $setting['size'];
-    return '<input type="text" class="input-text" size="50" value="' . $content . '" name="data[' . $name . ']" id="' . $name . '">
-    <input type="button"  class="button" onClick="admin_command.uploadFile(\'' . $name . '\',\'' . $type . '\',\'' . $size . '\')" value="上传文件">';
+    return '<input type="text" class="form-control" size="50" value="' . $content . '" name="data[' . $name . ']" id="' . $name . '">
+    <input type="button" class="button" onClick="admin_command.uploadFile(\'' . $name . '\',\'' . $type . '\',\'' . $size . '\')" value="上传文件">';
 }
 
 function content_files($name, $content = '', $setting = '')
@@ -439,7 +442,7 @@ function content_files($name, $content = '', $setting = '')
     $content = $content[0];
     $set = base64_encode($setting['type']) . '|' . (int) $setting['size'];
     $str = '';
-    $str .= '<input type="hidden" value="' . $name . '" name="listfiles[]">
+    $str .= '<input type="hidden" class="form-control" value="' . $name . '" name="listfiles[]">
         <fieldset class="blue pad-10">
         <legend>列表</legend>
         <div class="picList" id="list_' . $name . '_files"><ul id="' . $name . '-sort-items">';
@@ -451,8 +454,8 @@ function content_files($name, $content = '', $setting = '')
             foreach ($filepath as $id => $path) {
                 $alt = isset($filename[$id]) ? $filename[$id] : '';
                 $str .= '<li id="files_999' . $id . '">';
-                $str .= '<input type="text" class="input-text" style="width:310px;" value="' . $path . '" name="data[' . $name . '][file][]">';
-                $str .= '<input type="text" class="input-text" style="width:160px;" value="' . $alt . '" name="data[' . $name . '][alt][]">';
+                $str .= '<input type="text" class="form-control" style="width:310px;" value="' . $path . '" name="data[' . $name . '][file][]">';
+                $str .= '<input type="text" class="form-control" style="width:160px;" value="' . $alt . '" name="data[' . $name . '][alt][]">';
                 $str .= '<a href="javascript:admin_command.removediv(\'999' . $id . '\');">删除</a></li>';
             }
         }
@@ -469,7 +472,7 @@ function content_date($name, $content = '', $setting = '')
 {
     $c = $content[0];
     $type = isset($setting['type']) ? $setting['type'] : '%Y-%m-%d %H:%M:%S';
-    $width = isset($setting['width']) ? $setting['width'] : 150;
+    $width = isset($setting['width']) ? $setting['width'] : 180;
     $str = '';
     if (!defined('CMS_DATE_LD')) {
         $str .= '
@@ -481,8 +484,8 @@ function content_date($name, $content = '', $setting = '')
         define('CMS_DATE_LD', 1); // 防止重复加载JS
     }
     return $str . '
-    <input type="hidden" value="' . $c . '" name="data[' . $name . ']" id="date_' . $name . '">
-    <input type="text" readonly="" class="date input-text" style="width:' . $width . 'px;" value="' . ($c ? date(str_replace(array('%', 'M', 'S'), array('', 'i', 's'), $type), $c) : '') . '" id="' . $name . '" >
+    <input type="hidden" class="form-control" value="' . $c . '" name="data[' . $name . ']" id="date_' . $name . '">
+    <input type="text" readonly="" class="form-control" style="min-width:' . $width . 'px;" value="' . ($c ? date(str_replace(array('%', 'M', 'S'), array('', 'i', 's'), $type), $c) : '') . '" id="' . $name . '" >
     <script type="text/javascript">
         Calendar.setup({
         weekNumbers : true,

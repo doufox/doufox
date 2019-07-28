@@ -30,7 +30,7 @@
                                     <font color="red">*</font>&nbsp;<?php echo $model['content']['title']['name']; ?>：
                                 </th>
                                 <td>
-                                    <input type="text" class="form-control" size="80" id="title" value="<?php echo $data['title']; ?>" name="data[title]" onBlur="ajaxtitle()">
+                                    <input type="text" class="form-control" size="50" id="title" value="<?php echo $data['title']; ?>" name="data[title]" onBlur="ajaxtitle()">
                                     <span class="show-tips" id="title_text">标题</span>
                                 </td>
                             </tr>
