@@ -12,7 +12,7 @@
     <div class="page_content">
         <form method="post" action="" class="form-inline">
             <div class="panel panel-default">
-                <div class="panel-heading">我的信息</div>
+                <div class="panel-heading"><?php echo $page_title; ?></div>
                 <div class="panel-body">
                     <table width="100%" class="table_form">
                         <tr>

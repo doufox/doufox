@@ -108,7 +108,7 @@
                             <th>多字段组合：</th>
                             <td>
                                 <select name="merge" id="merge" class="form-control" onChange="loadmerge(this.value)">
-                                <?php if (!isset($data['merge']) || empty($data['merge'])) { ?><option value="">-</option><?php }  if (is_array($merge)) { $count=count($merge);foreach ($merge as $t) { ?>
+                                <?php if (!isset($data['merge']) || empty($data['merge'])) { ?><option value="">-</option><?php } if (is_array($merge)) { $count=count($merge);foreach ($merge as $t) { ?>
                                 <option value="<?php echo $t['fieldid']; ?>" <?php if ($t['fieldid']==$data['merge']) { ?>selected<?php } ?>><?php echo $t['name']; ?></option>
                                 <?php } } ?>
                                 </select>
@@ -136,7 +136,7 @@
                                 <select class="form-control" name="formtype" id="formtype" onChange="loadformtype(this.value)" <?php if ($data['fieldid']) { ?>disabled<?php } ?>>
                                     <option value="">--请选择字段类别--</option>
                                     <?php if (is_array($formtype)) { foreach ($formtype as $k=>$t) { ?>
-                                    <option value="<?php echo $k; ?>" <?php if ($k==$data['formtype']) { ?>selected<?php }  ?>><?php echo $t; ?></option>
+                                    <option value="<?php echo $k; ?>" <?php if ($k==$data['formtype']) { ?>selected<?php } ?>><?php echo $t; ?></option>
                                     <?php } } ?>
                                 </select>
                                 <div class="show-tips">表单的输入类型</div>
@@ -158,7 +158,7 @@
                         <tr>
                             <th><font color="red">*</font> 字段类型：</th>
                             <td>
-                            <?php if ($data['type']) { echo $data['type'];  } else { ?>
+                            <?php if ($data['type']) { echo $data['type']; } else { ?>
                             <select name="type" class="form-control" onChange="setlength()" id="type">
                                 <option value="">--请选择字段类型--</option>
                                 <option value="VARCHAR">字符类型(VARCHAR)</option>
@@ -173,20 +173,20 @@
                         </tr>
                         <tr>
                             <th><font color="red">*</font> 最大长度：</th>
-                            <td><?php if ($data['fieldid']) {  echo $data['length'];  } else { ?><input class="form-control" type="text" id="length" name="length" value="<?php echo $data['length']; ?>" size="30"/>
+                            <td><?php if ($data['fieldid']) { echo $data['length']; } else { ?><input class="form-control" type="text" id="length" name="length" value="<?php echo $data['length']; ?>" size="30"/>
                             <div class="show-tips">不能超过字段类型最大长度。</div><?php } ?></td>
                         </tr>
                         <tr>
                             <th>字段索引：</th>
                             <td>
-                            <?php if ($data['indexkey']=='INDEX') {  echo '普通索引';  } else if ($data['indexkey']=='UNIQUE') {  echo '唯一索引';  } else {  if ($data['fieldid']) {  echo '无索引';  } else { ?>
+                            <?php if ($data['indexkey']=='INDEX') { echo '普通索引'; } else if ($data['indexkey']=='UNIQUE') { echo '唯一索引'; } else { if ($data['fieldid']) { echo '无索引'; } else { ?>
                                 <select name="indexkey" class="form-control">
                                     <option value="">---</option>
                                     <option value="UNIQUE">唯一索引</option>
                                     <option value="INDEX">普通索引</option>
                                 </select>
                                 <div class="show-tips">不懂就留空吧。</div>
-                                <?php }  } ?>
+                                <?php } } ?>
                             </td>
                         </tr>
                         </tbody>
@@ -202,8 +202,8 @@
                         <tr>
                             <th>前台显示：</th>
                             <td>
-                                <input type="radio" <?php if (!isset($data['isshow']) || $data['isshow']==1) { ?>checked<?php } ?> value="1" name="isshow"> 显示&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="radio" <?php if (isset($data['isshow']) && $data['isshow']==0) { ?>checked<?php } ?> value="0" name="isshow"> 隐藏
+                                <label><input type="radio" <?php if (!isset($data['isshow']) || $data['isshow']==1) { ?>checked<?php } ?> value="1" name="isshow">显示</label>
+                                <label><input type="radio" <?php if (isset($data['isshow']) && $data['isshow']==0) { ?>checked<?php } ?> value="0" name="isshow">隐藏</label>
                                 <div class="show-tips">前台游客/会员发布时是否显示该字段。</div>
                             </td>
                         </tr>

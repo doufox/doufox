@@ -11,7 +11,7 @@
     </div>
     <div class="page_content">
         <div class="panel panel-default">
-            <div class="panel-heading">系统管理员</div>
+            <div class="panel-heading"><?php echo $page_title; ?></div>
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>

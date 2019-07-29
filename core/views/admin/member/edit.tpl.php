@@ -1,6 +1,6 @@
 <?php include $this->admin_tpl('header'); ?>
-
 <?php include $this->admin_tpl('navbar'); ?>
+
 <script type="text/javascript">
     function ajaxemail() {
         $('#email_text').html('');

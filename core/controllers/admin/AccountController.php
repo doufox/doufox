@@ -13,6 +13,7 @@ class AccountController extends Admin
     public function indexAction()
     {
         $list = $this->account->select();
+        $page_title = '系统账号管理';
         include $this->admin_tpl('account/list');
     }
 
@@ -39,6 +40,7 @@ class AccountController extends Admin
             $this->cacheAction();
             $this->show_message('添加成功', 1, url('admin/account'));
         }
+        $page_title = '添加账号';
         $cats = get_cache('category');
         include $this->admin_tpl('account/add');
     }
@@ -70,6 +72,7 @@ class AccountController extends Admin
             $this->cacheAction();
             $this->show_message('修改成功', 1);
         }
+        $page_title = '修改账号';
         include $this->admin_tpl('account/add');
     }
 
@@ -119,6 +122,7 @@ class AccountController extends Admin
             $this->show_message('修改成功', 1);
         }
         $data = $this->account->find($this->userid);
+        $page_title = '我的信息';
         include $this->admin_tpl('account/me');
     }
 }
