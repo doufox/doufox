@@ -14,23 +14,23 @@
             <table class="table table-bordered table-hover" width="100%">
                 <thead>
                     <tr>
-                        <th width="25" align="left">ID</th>
-                        <th align="left">区块名称</th>
-                        <th align="left">备注</th>
-                        <th width="300" align="left">模板调用代码</th>
-                        <th width="120" align="left">操作</th>
+                        <th width="50">ID</th>
+                        <th>区块名称</th>
+                        <th>备注</th>
+                        <th width="300">模板调用代码</th>
+                        <th width="120">操作</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (is_array($list)) { foreach ($list as $t) { ?>
-                    <tr height="25">
-                        <td align="left"><?php echo $t['id']; ?></td>
-                        <td align="left"><a href="<?php echo url('admin/block/edit',array('id'=>$t['id'])); ?>"><?php echo $t['name']; ?></a></td>
-                        <td align="left"><?php echo $t['remark']; ?></td>
-                        <td align="left">{block <?php echo $t['id']; ?>}</td>
-                        <td align="left">
-                            <a href="<?php echo url('admin/block/edit', array('id'=>$t['id'])); ?>">[编辑]</a>
-                            <a href="javascript:admin_command.confirmurl('<?php echo url('admin/block/del',array('id'=>$t['id']));?>','确定删除[<?php echo $t['name']; ?>]区块吗？')" >[删除]</a>
+                    <tr>
+                        <td><?php echo $t['id']; ?></td>
+                        <td><a href="<?php echo url('admin/block/edit',array('id'=>$t['id'])); ?>"><?php echo $t['name']; ?></a></td>
+                        <td><?php echo $t['remark']; ?></td>
+                        <td>{block <?php echo $t['id']; ?>}</td>
+                        <td>
+                            <a href="<?php echo url('admin/block/edit', array('id'=>$t['id'])); ?>">编辑</a>
+                            <a href="javascript:admin_command.confirmurl('<?php echo url('admin/block/del',array('id'=>$t['id']));?>','确定删除[<?php echo $t['name']; ?>]区块吗？')" >删除</a>
                         </td>
                     </tr>
                     <?php } } ?>

@@ -101,6 +101,7 @@ class FormController extends Admin
 
         $model = $this->model;
         $join = empty($this->join) ? 0 : 1;
+        $page_title = '表单管理: ' . $model['modelname'];
         include $this->admin_tpl('form/list');
     }
 
@@ -156,6 +157,7 @@ class FormController extends Admin
         $model = $this->model;
         $join_info = $this->join_info;
         $join = empty($this->join) ? 0 : 1;
+        $page_title = '表单配置: ' . $model['modelname'];
         include $this->admin_tpl('form/config');
     }
 
@@ -165,7 +167,6 @@ class FormController extends Admin
     public function editAction()
     {
         $id = (int) $this->get('id');
-
         if (empty($id)) {
             $this->show_message('表单内容不存在');
         }
@@ -209,6 +210,7 @@ class FormController extends Admin
 
         $join = empty($this->join) ? 0 : 1;
         $fields = $this->getFields($this->model['fields'], $data, $this->model['setting']['form']['field']);
+        $page_title = '表单信息: ' . $model['modelname'];
         include $this->admin_tpl('form/edit');
     }
 

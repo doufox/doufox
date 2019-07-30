@@ -29,11 +29,11 @@
             <span>模型类型：</span>
             <select class="form-control input-sm" style="max-width: 100px; display: inline-block;" onchange="select_cats(this);">
                 <?php foreach ($modelTypeName as $key => $value) { ?>
-                    <option value="<?php echo $key; ?>" <?php if ($typeid == $key) {echo 'selected disabled';} ?>><?php echo $value; ?></option>
+                    <option value="<?php echo $key; ?>" <?php if ($typeid == $key) {echo 'selected';} ?>><?php echo $value; ?></option>
                 <?php } ?>
             </select>
             <?php foreach ($modelTypeName as $key => $value) { ?>
-                <a class="btn btn-default btn-sm <?php if ($typeid == $key) {echo 'active disabled';} ?>" href="<?php echo url('admin/model/index', array('typeid' => $key)); ?>"><?php echo $value; ?></a>
+                <a class="btn btn-default btn-sm <?php if ($typeid == $key) {echo 'active';} ?>" href="<?php echo url('admin/model/index', array('typeid' => $key)); ?>"><?php echo $value; ?></a>
             <?php } ?>
             <a class="btn btn-default btn-sm" href="<?php echo url('admin/model/add', array('typeid' => $typeid)); ?>">添加<?php echo $modelname ? $modelname : '模型'; ?></a>
         </div>
