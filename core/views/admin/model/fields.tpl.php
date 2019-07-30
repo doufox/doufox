@@ -30,49 +30,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if ($typeid == 1) { ?>
-                            <tr>
-                                <td></td>
-                                <td><?php echo $content['title']['name']; ?></td>
-                                <td></td>
-                                <td>title</td>
-                                <td><?php echo $content['title']['show'] ? '显示' : '隐藏'; ?></td>
-                                <td>基础字段</td>
-                                <td>
-                                    <a href="<?php echo url('admin/model/ajaxedit/', array('modelid' => $modelid, 'name' => 'title')); ?>">编辑</a></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><?php echo $content['thumb']['name']; ?></td>
-                                <td> </td>
-                                <td>thumb</td>
-                                <td><?php echo $content['thumb']['show'] ? '显示' : '隐藏'; ?></td>
-                                <td>基础字段</td>
-                                <td>
-                                    <a href="<?php echo url('admin/model/ajaxedit/', array('modelid' => $modelid, 'name' => 'thumb')); ?>">编辑</a></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><?php echo $content['keywords']['name']; ?></td>
-                                <td> </td>
-                                <td>keywords</td>
-                                <td><?php $content['keywords']['show'] ? '显示' : '隐藏'; ?></td>
-                                <td>基础字段</td>
-                                <td>
-                                    <a href="<?php echo url('admin/model/ajaxedit/', array('modelid' => $modelid, 'name' => 'keywords')); ?>">编辑</a></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><?php echo $content['description']['name']; ?></td>
-                                <td></td>
-                                <td>description</td>
-                                <td><?php echo $content['description']['show'] ? '显示' : '隐藏'; ?></td>
-                                <td>基础字段</td>
-                                <td>
-                                    <a href="<?php echo url('admin/model/ajaxedit/', array('modelid' => $modelid, 'name' => 'description')); ?>">编辑</a></td>
-                            </tr>
-                        <?php }
-                        if (is_array($list)) {
+                        <?php if (is_array($baseFields)) {
+                            foreach ($baseFields as $k => $v) { ?>
+                                <tr>
+                                    <td></td>
+                                    <td><?php echo $v['name']; ?></td>
+                                    <td></td>
+                                    <td><?php echo $k; ?></td>
+                                    <td><?php echo $v['show'] ? '显示' : '隐藏'; ?></td>
+                                    <td>基础字段</td>
+                                    <td>
+                                        <a href="<?php echo url('admin/model/ajaxedit/', array('modelid' => $modelid, 'name' => $k)); ?>">编辑</a>
+                                    </td>
+                                </tr>
+                            <?php }
+                        } ?>
+                        <?php if (is_array($list)) {
                             foreach ($list as $t) { ?>
                                 <tr>
                                     <td>

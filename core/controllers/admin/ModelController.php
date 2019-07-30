@@ -200,14 +200,13 @@ class ModelController extends Admin
                     $field->update(array('listorder' => $value), 'fieldid=' . $id);
                 }
             }
-            $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/fields/', array('modelid' => $modelid, 'typeid' => $this->typeid)));
+            $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/fields', array('modelid' => $modelid, 'typeid' => $this->typeid)));
         }
         $setting = string2array($data['setting']);
+        $baseFields = $setting['default'];
         $typeid = $this->typeid;
         $modelTypeName = $this->modelTypeName;
         $list = $field->where('modelid=' . $modelid)->order('listorder ASC')->select();
-        $content = $setting['default'];
-
         include $this->admin_tpl('model/fields');
     }
 

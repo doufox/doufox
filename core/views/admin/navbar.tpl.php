@@ -37,9 +37,10 @@
                             <li><a href="<?php echo url('admin/attachment'); ?>">附件管理</a></li>
                             <li><a href="<?php echo url('admin/database'); ?>">数据库管理</a></li>
                             <li><a href="<?php echo url('admin/backup'); ?>">备份管理</a></li>
+                            <li><a href="<?php echo url('admin/cache'); ?>">缓存管理</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="<?php echo url('admin/createhtml/index'); ?>">静态页面管理</a>
-                            <li><a href="<?php echo url('admin/index/cache'); ?>">更新缓存</a></li>
+                            <li><a href="<?php echo url('admin/cache/update'); ?>">更新全站缓存</a></li>
                             <li><a href="<?php echo url('admin/content/updateurl'); ?>">更新内容URL</a></li>
                             <li role="separator" class="divider"></li>
                         </ul>

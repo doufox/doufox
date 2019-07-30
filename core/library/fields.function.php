@@ -443,7 +443,7 @@ function content_files($name, $content = '', $setting = '')
     $set = base64_encode($setting['type']) . '|' . (int) $setting['size'];
     $str = '';
     $str .= '<input type="hidden" class="form-control" value="' . $name . '" name="listfiles[]">
-        <fieldset class="blue pad-10">
+        <fieldset class="blue">
         <legend>列表</legend>
         <div class="picList" id="list_' . $name . '_files"><ul id="' . $name . '-sort-items">';
     if ($content) {

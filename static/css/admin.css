@@ -152,46 +152,6 @@ input.dialog {
     font-weight: 700;
 }
 
-address,
-cite,
-dfn,
-em,
-var {
-    font-style: normal;
-}
-
-code,
-kbd,
-pre,
-samp {
-    font-family: courier new, courier, monospace;
-}
-
-.white,
-.white a {
-    color: #fff
-}
-
-.blue,
-.blue a {
-    color: #004499
-}
-
-.gray4,
-a.gray4 {
-    color: #999
-}
-
-.red,
-.red a,
-a.red {
-    color: red;
-}
-
-.green {
-    color: #0E774A
-}
-
 /*通用样式*/
 .hidden {
     display: none;

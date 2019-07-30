@@ -180,8 +180,8 @@ CREATE TABLE IF NOT EXISTS `doufox_model` (
 INSERT INTO `doufox_model` (`modelid`, `typeid`, `modelname`, `tablename`, `categorytpl`, `listtpl`, `showtpl`, `searchtpl`, `joinid`, `setting`) VALUES
 (1, 1, '文章模型', 'content_article', 'category_article.html', 'list_article.html', 'show_article.html', 'search.html', 0, 'a:1:{s:7:"default";a:4:{s:5:"title";a:2:{s:4:"name";s:6:"标题";s:4:"show";s:1:"1";}s:8:"keywords";a:2:{s:4:"name";s:9:"关键字";s:4:"show";s:1:"1";}s:5:"thumb";a:2:{s:4:"name";s:9:"缩略图";s:4:"show";s:1:"1";}s:11:"description";a:2:{s:4:"name";s:6:"描述";s:4:"show";s:1:"1";}}}'),
 (2, 1, '产品模型', 'content_product', 'category_product.html', 'list_product.html', 'show_product.html', 'search.html', 0, 'a:1:{s:7:"default";a:4:{s:5:"title";a:2:{s:4:"name";s:6:"标题";s:4:"show";s:1:"1";}s:8:"keywords";a:2:{s:4:"name";s:9:"关键字";s:4:"show";s:1:"1";}s:5:"thumb";a:2:{s:4:"name";s:9:"缩略图";s:4:"show";s:1:"1";}s:11:"description";a:2:{s:4:"name";s:6:"描述";s:4:"show";s:1:"1";}}}'),
-(3, 3, '在线留言', 'form_gestbook', 'form.html', 'list_gestbook.html', 'show_gestbook.html', 'search.html', 0, ''),
-(4, 3, '文章评论', 'form_comment', 'form.html', 'list_comment.html', 'show_comment.html', 'search.html', 0, '');
+(3, 3, '在线留言', 'form_gestbook', 'form.html', 'list_gestbook.html', 'show_gestbook.html', 'search.html', 0, 'a:1:{s:7:"default";a:5:{s:8:"username";a:2:{s:4:"name";s:9:"用户名";s:4:"show";s:1:"0";}s:9:"listorder";a:2:{s:4:"name";s:12:"排序编号";s:4:"show";s:1:"0";}s:6:"status";a:2:{s:4:"name";s:6:"状态";s:4:"show";s:1:"0";}s:4:"time";a:2:{s:4:"name";s:12:"提交时间";s:4:"show";s:1:"0";}s:2:"ip";a:2:{s:4:"name";s:8:"IP地址";s:4:"show";s:1:"0";}}}'),
+(4, 3, '文章评论', 'form_comment', 'form.html', 'list_comment.html', 'show_comment.html', 'search.html', 0, 'a:1:{s:7:"default";a:5:{s:8:"username";a:2:{s:4:"name";s:9:"用户名";s:4:"show";s:1:"1";}s:9:"listorder";a:2:{s:4:"name";s:12:"排序编号";s:4:"show";s:1:"1";}s:6:"status";a:2:{s:4:"name";s:6:"状态";s:4:"show";s:1:"1";}s:4:"time";a:2:{s:4:"name";s:12:"提交时间";s:4:"show";s:1:"1";}s:2:"ip";a:2:{s:4:"name";s:8:"IP地址";s:4:"show";s:1:"1";}}}');
 
 DROP TABLE IF EXISTS `doufox_model_field`;
 CREATE TABLE IF NOT EXISTS `doufox_model_field` (

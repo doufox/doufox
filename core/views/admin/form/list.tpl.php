@@ -70,14 +70,11 @@ function setC() {
                     </tbody>
                 </table>
                 <div class="panel-body">
-                    <br/>
-                    <div class="pageleft">
-                        <button type="submit" class="btn btn-default btn-sm" value="删除" name="submit_del" onClick="$('#list_form').val('del');return confirm_del();">删除</button>
-                        <button type="submit" class="btn btn-default btn-sm" value="设置为审核" name="submit_status_1" onClick="$('#list_form').val('status_1')">设置为审核</button>
-                        <button type="submit" class="btn btn-default btn-sm" value="设置为未审核" name="submit_status_0" onClick="$('#list_form').val('status_0')">设置为未审核</button>
-                    </div>
-                    <?php echo $pagination; ?>
+                    <button type="submit" class="btn btn-default btn-sm" value="删除" name="submit_del" onClick="$('#list_form').val('del');return confirm_del();">删除</button>
+                    <button type="submit" class="btn btn-default btn-sm" value="设置为审核" name="submit_status_1" onClick="$('#list_form').val('status_1')">设置为审核</button>
+                    <button type="submit" class="btn btn-default btn-sm" value="设置为未审核" name="submit_status_0" onClick="$('#list_form').val('status_0')">设置为未审核</button>
                 </div>
+                <?php echo $pagination; ?>
             </div>
         </form>
     </div>

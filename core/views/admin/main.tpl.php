@@ -7,7 +7,7 @@ if (!file_exists(DATA_PATH . 'cache' . DS . "category.cache.php")) {
 
 <!-- <div id="home">
     <div id="shortcut">
-        <a href="<?php echo url('admin/index/cache'); ?>" title="更新缓存">更新缓存</a>
+        <a href="<?php echo url('admin/cache/update'); ?>" title="更新缓存">更新缓存</a>
         <a href="<?php echo HTTP_URL; ?>" title="网站主页" target="_blank">网站主页</a>
     </div>
     <label id="position">后台首页</label>
