@@ -171,7 +171,7 @@ function getfile($url)
 function image($url)
 {
     if (empty($url) || strlen($url) == 1) {
-        return HTTP_URL . 'upload/nopic.gif';
+        return HTTP_URL . 'static/img/nopic.gif';
     }
 
     if (substr($url, 0, 7) == 'http://') {
@@ -196,7 +196,7 @@ function thumb($img, $width = null, $height = null)
 {
     $config = core::load_config('config');
     if (empty($img) || strlen($img) == 3) {
-        return HTTP_URL . 'upload/nopic.gif';
+        return HTTP_URL . 'static/img/nopic.gif';
     }
 
     if (file_exists(ROOT_PATH . $img)) {
