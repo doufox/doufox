@@ -17,7 +17,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">模型&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?php echo url('admin/model'); ?>">内容模型</a></li>
+                            <li><a href="<?php echo url('admin/model', array('typeid' => 1)); ?>">内容模型</a></li>
                             <li><a href="<?php echo url('admin/model', array('typeid' => 2)); ?>">会员模型</a></li>
                             <li><a href="<?php echo url('admin/model', array('typeid' => 3)); ?>">表单模型</a></li>
                             <?php if (is_array($this->menu_model)) { ?>
@@ -38,6 +38,7 @@
                             <li><a href="<?php echo url('admin/database'); ?>">数据库管理</a></li>
                             <li><a href="<?php echo url('admin/backup'); ?>">备份管理</a></li>
                             <li><a href="<?php echo url('admin/cache'); ?>">缓存管理</a></li>
+                            <li><a href="<?php echo url('admin/session'); ?>">会话管理</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="<?php echo url('admin/createhtml/index'); ?>">静态页面管理</a>
                             <li><a href="<?php echo url('admin/cache/update'); ?>">更新全站缓存</a></li>
