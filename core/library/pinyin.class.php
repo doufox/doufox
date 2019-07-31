@@ -11,58 +11,11 @@ if (!defined('IN_CMS')) {
 class pinyin
 {
 
-    /**
-     * 汉字ASCII码库
-     *
-     * @var array
-     */
-    protected $lib;
+    protected $libs; // 汉字编码库
 
-    /**
-     * 构造函数
-     *
-     * @return void
-     */
     public function __construct()
     {
-
-    }
-
-    /**
-     * 将ASCII编码转化为字符串.
-     *
-     * @param integer $num
-     * @return string
-     */
-    protected function num2str($num)
-    {
-        if (!$this->lib) {
-            $this->parse_lib();
-        }
-
-        if ($num > 0 && $num < 160) {
-            return chr($num);
-        } elseif ($num < -20319 || $num > -10247) {
-            return '';
-        } else {
-            $total = sizeof($this->lib) - 1;
-            for ($i = $total; $i >= 0; $i--) {
-                if ($this->lib[$i][1] <= $num) {
-                    break;
-                }
-            }
-            return $this->lib[$i][0];
-        }
-    }
-
-    /**
-     * 返回汉字编码库
-     *
-     * @return array
-     */
-    protected function parse_lib()
-    {
-        return $this->lib = array(
+        $this->libs = array(
             array("a", -20319),
             array("ai", -20317),
             array("an", -20304),
@@ -464,6 +417,29 @@ class pinyin
     }
 
     /**
+     * 将ASCII编码转化为字符串.
+     *
+     * @param integer $num
+     * @return string
+     */
+    protected function num2str($num)
+    {
+        if ($num > 0 && $num < 160) {
+            return chr($num);
+        } elseif ($num < -20319 || $num > -10247) {
+            return '';
+        } else {
+            $total = sizeof($this->libs) - 1;
+            for ($i = $total; $i >= 0; $i--) {
+                if ($this->libs[$i][1] <= $num) {
+                    break;
+                }
+            }
+            return $this->libs[$i][0];
+        }
+    }
+
+    /**
      * 汉字转化并输出拼音
      *
      * @param string $str 所要转化拼音的汉字
@@ -472,12 +448,11 @@ class pinyin
      */
     public function output($str, $utf8 = true)
     {
-        // 参数分析
         if (!$str) {
             return false;
         }
 
-        // 编码转换.
+        // 编码转换
         $str = ($utf8 == true) ? iconv('utf-8', 'gbk', $str) : $str;
         $num = strlen($str);
         $pinyin = '';
@@ -493,17 +468,8 @@ class pinyin
         return ($utf8 == true) ? iconv('gbk', 'utf-8', $pinyin) : $pinyin;
     }
 
-    /**
-     * 析构函数
-     *
-     * @access public
-     * @return void
-     */
     public function __destruct()
     {
-        if (isset($this->lib)) {
-            unset($this->lib);
-        }
-
+        unset($this->libs);
     }
 }

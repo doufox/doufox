@@ -44,7 +44,9 @@
                                 <tbody id='_addall'>
                                     <tr>
                                         <th width="100"><font color="red">*</font>栏目名称：</th>
-                                        <td><input type="text" class="form-control" size="30" value="<?php echo $data['catname']; ?>" name="data[catname]" id="dir" onBlur="ajaxdir()"></td>
+                                        <td>
+                                            <input type="text" class="form-control" size="30" value="<?php echo $data['catname']; ?>" name="data[catname]" id="dir" onBlur="ajaxdir()">
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th><font color="red">*</font>栏目目录：</th>
@@ -206,18 +208,9 @@
     function ajaxdir() {
         var dir = $('#dir_text').val();
         if (dir == '') {
-            $.post("<?php echo url('api/index/pinyin', array('id' => rand())); ?>", { name:$("#dir").val() }, function(data){ $("#dir_text").val(data); });
-        }
-    }
-    function SwapTab(name,cls_show,cls_hide,cnt,cur){
-        for(i=1;i<=cnt;i++){
-            if(i==cur){
-                $('#div_'+name+'_'+i).show();
-                $('#tab_'+name+'_'+i).attr('class',cls_show);
-            }else{
-                $('#div_'+name+'_'+i).hide();
-                $('#tab_'+name+'_'+i).attr('class',cls_hide);
-            }
+            $.post("<?php echo url('api/index/pinyin'); ?>&_t=" + new Date().getTime(),
+            { name:$("#dir").val() },
+            function (data) { $("#dir_text").val(data); });
         }
     }
     var data = <?php echo $json_model; ?>;

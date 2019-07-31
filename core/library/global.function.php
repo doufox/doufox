@@ -131,8 +131,8 @@ function get_sysinfo()
 {
     $sys_info['os'] = PHP_OS;
     $sys_info['zlib'] = function_exists('gzclose'); //zlib
-    $sys_info['safe_mode'] = (boolean) ini_get('safe_mode'); //safe_mode = Off
-    $sys_info['safe_mode_gid'] = (boolean) ini_get('safe_mode_gid'); //safe_mode_gid = Off
+    $sys_info['safe_mode'] = (bool) ini_get('safe_mode'); //safe_mode = Off
+    $sys_info['safe_mode_gid'] = (bool) ini_get('safe_mode_gid'); //safe_mode_gid = Off
     $sys_info['timezone'] = function_exists("date_default_timezone_get") ? date_default_timezone_get() : '没有设置';
     $sys_info['socket'] = function_exists('fsockopen');
     $sys_info['web_server'] = strpos($_SERVER['SERVER_SOFTWARE'], 'PHP') === false ? $_SERVER['SERVER_SOFTWARE'] . 'PHP/' . phpversion() : $_SERVER['SERVER_SOFTWARE'];
