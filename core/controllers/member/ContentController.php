@@ -138,6 +138,7 @@ class ContentController extends Member
             $this->checkFields($fields, $data, 2);
             $data['username'] = $this->memberinfo['username'];
             $data['time'] = time();
+            $data['create_time'] = $data['time']; // 创建时间
             $data['status'] = $cats[$catid]['verify'];
             $data['modelid'] = (int) $modelid;
             $result = $this->content->set(0, $this->cmodel[$modelid]['tablename'], $data);

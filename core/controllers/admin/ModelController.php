@@ -75,33 +75,23 @@ class ModelController extends Admin
             if ($modelid = $this->_model->set(0, $data)) {
                 if ($this->typeid != 3) {
                     $join = $this->post('join');
-                    if (is_array($join) && $join) {
-                        foreach ($join as $id) {
-                            $this->_model->set($id, array('joinid' => $modelid));
-                        }
+                    if (is_array($join) && $join) foreach ($join as $id) {
+                        $this->_model->set($id, array('joinid' => $modelid));
                     }
                 }
-                $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/index/', array('typeid' => $this->typeid)));
+                $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/index', array('typeid' => $this->typeid)));
             } else {
                 $this->show_message('添加失败');
             }
         }
-        $fdata = get_cache('formmodel');
-        $jdata = array();
-        if ($fdata) {
-            foreach ($fdata as $t) {
-                if (!empty($t['joinid'])) {
-                    $jdata[] = $t['modelid'];
-                }
-            }
+        $formmodel = array();
+        $formmodel = get_cache('formmodel');
+        if ($formmodel) foreach ($formmodel as $k => $v) {
+            $formmodel[$k]['select_status'] = empty($v['joinid']) ? '' : 'disabled'; // 一个非表单模型可以对应绑定多个表单模型，表单模型已被关联时，则不能再被别的模型关联
         }
-
         $typeid = $this->typeid;
         $modeltype = $this->modelType;
         $modelTypeName = $this->modelTypeName;
-        $join = array();
-        $formmodel = $fdata;
-        $joindata = $jdata;
         $page_title = '添加' . $modelTypeName[$typeid]; // 格式：添加表单模型
         include $this->admin_tpl('model/add');
     }
@@ -131,35 +121,30 @@ class ModelController extends Admin
             if ($this->typeid != 3) {
                 $join = $this->post('join');
                 $this->_model->update(array('joinid' => 0), 'joinid=' . $modelid);
-                if (is_array($join) && $join) {
-                    foreach ($join as $id) {
-                        $this->_model->set($id, array('joinid' => $modelid));
-                    }
+                if (is_array($join) && $join) foreach ($join as $id) {
+                    $this->_model->set($id, array('joinid' => $modelid));
                 }
             }
             $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/index/', array('typeid' => $this->typeid)));
         }
         $modelid = (int) $this->get('modelid');
-        $fdata = get_cache('formmodel');
-        $jdata = $join = array();
+        $formmodel = array();
+        $formmodel = get_cache('formmodel');
         $data = $this->_model->find($modelid);
-        if ($fdata) {
-            foreach ($fdata as $t) {
-                if (!empty($t['joinid'])) {
-                    $jdata[] = $t['modelid'];
-                }
-
-                if ($t['joinid'] == $modelid) {
-                    $join[] = $t['modelid'];
-                }
-
+        // print_r($formmodel);
+        if ($formmodel) foreach ($formmodel as $k => $v) {
+            if (empty($v['joinid'])) {
+                $formmodel[$k]['select_status'] = ''; // 未被关联
+            } elseif ($v['joinid'] == $modelid) {
+                $formmodel[$k]['select_status'] = 'checked'; // 已被当前模型关联
+            } else {
+                $formmodel[$k]['select_status'] = 'disabled'; // 已被其他模型关联
             }
         }
+        // print_r($formmodel);
         $typeid = $this->typeid;
         $modeltype = $this->modelType;
         $modelTypeName = $this->modelTypeName;
-        $joindata = $jdata;
-        $formmodel = $fdata;
         $page_title = '编辑' . $modelTypeName[$typeid] . '[' . $data['modelname'] . ']'; // 格式：编辑表单模型[文章评论]
         include $this->admin_tpl('model/add');
     }

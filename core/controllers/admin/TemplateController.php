@@ -24,8 +24,13 @@ class TemplateController extends Admin
         $local = str_replace(ROOT_PATH, '', $filepath);
         $encode_local = str_replace(array('/', '\\'), '|', $local);
         $file_explan = $this->file_info['file_explan'];
+        // $cur_url = url('admin/template', array('dir' => urldecode(dirname($dir) . DS)));
+        if (urldecode(dirname($dir)) == '.') {
+            $top_url = url('admin/template');
+        } else {
+            $top_url = url('admin/template', array('dir' => urldecode(dirname($dir) . DS)));
+        }
         include $this->admin_tpl('template/list');
-
     }
 
     public function updatefilenameAction()

@@ -36,7 +36,7 @@ function setC() {
                         <tr>
                             <th width="20"><input name="deletec" id="deletec" type="checkbox" onClick="setC()"></th>
                             <th width="20">ID </th>
-                            <th width="50">状态 </th>
+                            <th width="80">状态 </th>
                             <?php if (is_array($model['setting']['form']['show'])) {foreach ($model['setting']['form']['show'] as $f) {?>
                             <th><?php echo $model['fields']['data'][$f]['name']; ?></th>
                             <?php }}if ($join) {?><th>关联id</th><?php }?>

@@ -230,6 +230,7 @@ class IndexController extends Controller
                 $data['catid'] = $catid;
                 $data['username'] = get_user_ip();
                 $data['time'] = time();
+                $data['create_time'] = $data['time']; // 创建时间
                 $data['status'] = 0;
                 $data['modelid'] = (int) $modelid;
                 if (empty($data['title'])) {

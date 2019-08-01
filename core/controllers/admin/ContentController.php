@@ -316,9 +316,10 @@ class ContentController extends Admin
             if ($this->category_cache[$data['catid']]['modelid'] != $modelid) {
                 $this->show_message('栏目模型对不上，请重新选择栏目');
             }
-            $this->checkFields($fields, $data, 1); //验证自定义字段
+            $this->checkFields($fields, $data, 1); // 验证自定义字段
             $data['username'] = $this->session->get('user_id');
-            $data['time'] = $data['time'] ? $data['time'] : time();
+            $data['create_time'] = time(); // 创建时间
+            $data['time'] = $data['time'] ? $data['time'] : $data['create_time']; // 更新时间
             $data['modelid'] = $modelid;
             $result = $this->content->set(0, $model[$modelid]['tablename'], $data);
             if (!is_numeric($result)) {

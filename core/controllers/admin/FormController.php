@@ -29,14 +29,15 @@ class FormController extends Admin
         $this->table = $this->model['tablename'];
         $this->form = core::load_model($this->table);
         $joinmodel = get_cache('joinmodel');
-        $this->join = isset($joinmodel[$this->model['joinid']]) ? $joinmodel[$this->model['joinid']] : null;
         $this->join_info = '独立表单';
+        $this->join = isset($joinmodel[$this->model['joinid']]) ? $joinmodel[$this->model['joinid']] : null;
         if ($this->join) {
-            $this->join_info = '已关联' . $this->join['modelname'];
+            $this->join_info = '已关联到: ' . $this->join['modelname'];
         }
-        $cid = $this->cid;
-        $modelid = $this->modelid;
-        $model = $this->model;
+        unset($joinmodel);
+        // $cid = $this->cid;
+        // $modelid = $this->modelid;
+        // $model = $this->model;
     }
 
     /**
@@ -180,7 +181,7 @@ class FormController extends Admin
 
             $this->checkFields($this->model['fields'], $data, 1);
             $data['cid'] = $cid;
-            //数组转化为字符
+            // 数组转化为字符
             foreach ($data as $i => $t) {
                 if (is_array($t)) {
                     $data[$i] = array2string($t);
@@ -200,7 +201,6 @@ class FormController extends Admin
         }
 
         $modelid = $this->modelid;
-
         $model = $this->model;
         $join_info = $this->join_info;
         $cid = $data['cid'];

@@ -206,11 +206,10 @@
 </div>
 <script type="text/javascript">
     function ajaxdir() {
-        var dir = $('#dir_text').val();
-        if (dir == '') {
-            $.post("<?php echo url('api/index/pinyin'); ?>&_t=" + new Date().getTime(),
-            { name:$("#dir").val() },
-            function (data) { $("#dir_text").val(data); });
+        var dir = $('#dir').val();
+        var dir_text = $('#dir_text').val();
+        if (dir_text == '' && dir != '') {
+            $.post("<?php echo url('api/index/pinyin'); ?>&_t=" + new Date().getTime(), { name: dir }, function (data) { $("#dir_text").val(data); });
         }
     }
     var data = <?php echo $json_model; ?>;

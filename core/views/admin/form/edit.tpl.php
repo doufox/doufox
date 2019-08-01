@@ -17,14 +17,6 @@
                             <th width="150">表单名称：</th>
                             <td><?php echo $model['modelname']; ?></td>
                         </tr>
-                        <?php if ($join) { ?>
-                            <tr>
-                                <th>当前表单<?php echo $join_info; ?>:</th>
-                                <td><a href="<?php echo url('index/show', array('id' => $cid)); ?>" target="_blank"><?php echo $ciddata['title']; ?></a>
-                                    <input type="hidden" value="<?php echo $cid; ?>" name="cid"></td>
-                            </tr>
-                        <?php }
-                        echo $fields; ?>
                         <tr>
                             <th>状态：</th>
                             <td>
@@ -32,6 +24,17 @@
                                 <label><input type="radio" <?php if (isset($data['status']) && $data['status'] == 0) { ?>checked<?php } ?> value="0" name="data[status]" onClick="$('#verify').hide()">未审核</label>
                             </td>
                         </tr>
+                        <tr>
+                            <th>关联内容：</th>
+                            <td>
+                                <?php echo $join_info; ?>
+                                <a href="<?php echo url('index/show', array('id' => $cid)); ?>" target="_blank"><?php echo $ciddata['title']; ?></a>
+                                <input type="hidden" value="<?php echo $cid; ?>" name="cid">
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <?php echo $fields; ?>
                     </tbody>
                 </table>
                 <hr />
