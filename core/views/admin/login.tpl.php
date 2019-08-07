@@ -24,20 +24,21 @@
         </div>
         <div class="panel-body">
             <form method="POST" action="">
-                <div class="input-group input-group-lg">
+                <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                     <input name="username" type="text" class="form-control" placeholder="账号" required autofocus maxlength="20">
                 </div>
-                <div class="input-group input-group-lg">
+                <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                     <input name="password" type="password" class="form-control" placeholder="密码" maxlength="20" autocomplete="off" required />
                 </div>
-                <div class="input-group input-group-lg">
+                <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
                     <input type="text" name="code" class="form-control captcha" placeholder="验证码" maxlength="4" autocomplete="off" />
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">
-                            <img id="checkcode" src="<?php echo url("api/access/checkcode", array("width" => 85, "height" => 26)); ?>" title="看不清楚？换一张" alt="验证码">
+                        <button class="btn btn-default" type="button" style="padding: 3px;">
+                            <img id="checkcode" src="<?php echo url("api/access/checkcode", array("width" => 85, "height" => 26)); ?>"
+                                style="width: 85px; height: 26px;" title="看不清楚？换一张" alt="验证码" />
                         </button>
                     </span>
                 </div>
