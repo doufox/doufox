@@ -25,7 +25,16 @@
 
 <div class="container">
     <div class="page_menu">
-        栏目
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="panel-title">栏目内容</span>
+                <div class="pull-right">
+                    <a class="btn btn-default btn-xs" href="#">折叠</a>
+                    <!-- <a class="btn btn-default btn-xs" href="#">展开</a> -->
+                </div>
+            </div>
+            <?php echo $nav_categorys; ?>
+        </div>
     </div>
     <div class="page_content">
         <form action="" method="post" class="form-inline">

@@ -115,7 +115,7 @@ class tree
     }
 
     /**
-     * 得到树型结构
+     * 基本树型级联结构
      * @param int ID，表示获得这个ID下的所有子级
      * @param string 生成树型结构的基本代码，例如："<option value=\$id \$selected>\$spacer\$name</option>"
      * @param int 被选中的ID，比如在做树型下拉框的时候需要用到
@@ -176,6 +176,7 @@ class tree
         }
         return $this->ret;
     }
+
     /**
      * @param integer $myid 要查询的ID
      * @param string $str 第一种HTML代码方式

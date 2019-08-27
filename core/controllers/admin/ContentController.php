@@ -149,7 +149,22 @@ class ContentController extends Admin
         $tree->icon = array(' ', '  |-', '  |-');
         $tree->nbsp = '&nbsp;&nbsp;&nbsp;';
         $categorys = array();
+        $nav_categorys = array(); // 内容管理左侧类型导航
         foreach ($cats as $cid => $r) {
+            // 组合左侧类型导航
+            if ($r['typeid'] == 1) { // 内容栏目
+                $r['icon_type'] = 'ico1';
+                $r['urla'] = '?s=admin&c=content&catid=' . $r['catid'];
+            } else if ($r['typeid'] == 2) { // 单页面
+                $r['icon_type'] = 'ico2';
+                $r['urla'] = '?s=admin&c=category&a=edit&catid=' . $r['catid'];
+            } else {
+                // 链接
+                $r['icon_type'] = 'ico3';
+                $r['urla'] = $r['http'];
+            }
+            $nav_categorys[$r['catid']] = $r;
+
             if ($modelid && $modelid != $r['modelid']) {
                 continue;
             }
@@ -158,9 +173,19 @@ class ContentController extends Admin
             $r['selected'] = $cid == $catid ? 'selected' : '';
             $categorys[$cid] = $r;
         }
-        $str = "<option value='\$catid' \$selected \$disabled>\$spacer \$catname</option>";
+        // 下拉选择
+        $str = "<option value='\$catid' \$selected \$disabled>\$spacer\$catname</option>";
         $tree->init($categorys);
         $category = $tree->get_tree(0, $str);
+
+        if (!empty($nav_categorys)) { // 组合左侧类型导航
+            $tree->init($nav_categorys);
+            $strs = "<span class='\$icon_type'><a href='\$urla'>\$catname</a></span>";
+            $strs2 = "<span class='folder'>\$catname</span>";
+            $nav_categorys = $tree->get_treeview(0, 'category_tree', $strs, $strs2, 0, 'nav nav-pills nav-stacked');
+        } else {
+            $categornav_categorysys = '没有分类请添加或刷新';
+        }
 
         include $this->admin_tpl('content/list');
     }
