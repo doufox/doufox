@@ -7,6 +7,7 @@ class Admin extends Controller
     protected $current_account;
     protected $current_account_name;
     protected $menu_model;
+    protected $current_nav;
 
     public function __construct()
     {
@@ -52,8 +53,17 @@ class Admin extends Controller
      */
     protected function init_common_data()
     {
+        // 当前激活导航菜单
+        $this->current_nav = core::get_controller_id();
+        if ($this->current_nav == 'form') {
+            $this->current_nav = 'model';
+        } elseif (in_array($this->current_nav, array('account', 'attachment', 'template', 'database', 'backup', 'cache'))) {
+            $this->current_nav = 'manage';
+        }
+        // 当前账号信息
         $this->current_account = $this->account->find($this->userid);
         $this->current_account_name = empty($this->current_account['realname']) ? $this->current_account['username'] : $this->current_account['realname'];
+        // 菜单-表单模型
         $this->menu_model = '';
         $form = get_cache('formmodel');
         if ($form) {

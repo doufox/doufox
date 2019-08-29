@@ -3,6 +3,11 @@
 class DatabaseController extends Admin
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /*
      * 数据备份
      */

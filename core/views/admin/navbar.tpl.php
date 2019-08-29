@@ -9,12 +9,22 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul id="menu" class="menu nav navbar-nav">
-                    <li><a href="<?php echo url('admin/content'); ?>">内容</a></li>
-                    <li><a href="<?php echo url('admin/category'); ?>">栏目</a></li>
-                    <li><a href="<?php echo url('admin/block'); ?>">区块</a></li>
-                    <li><a href="<?php echo url('admin/member'); ?>">会员</a></li>
-                    <li><a href="<?php echo url('admin/config'); ?>">设置</a></li>
-                    <li class="dropdown">
+                    <li <?php if ($this->current_nav == 'content') echo 'class="active"'; ?>>
+                        <a href="<?php echo url('admin/content'); ?>">内容</a>
+                    </li>
+                    <li <?php if ($this->current_nav == 'category') echo 'class="active"'; ?>>
+                        <a href="<?php echo url('admin/category'); ?>">栏目</a>
+                    </li>
+                    <li <?php if ($this->current_nav == 'block') echo 'class="active"'; ?>>
+                        <a href="<?php echo url('admin/block'); ?>">区块</a>
+                    </li>
+                    <li <?php if ($this->current_nav == 'member') echo 'class="active"'; ?>>
+                        <a href="<?php echo url('admin/member'); ?>">会员</a>
+                    </li>
+                    <li <?php if ($this->current_nav == 'config') echo 'class="active"'; ?>>
+                        <a href="<?php echo url('admin/config'); ?>">设置</a>
+                    </li>
+                    <li class="dropdown <?php if ($this->current_nav == 'model') echo 'active'; ?>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">模型&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo url('admin/model', array('typeid' => 1)); ?>">内容模型</a></li>
@@ -29,7 +39,7 @@
                             <li role="separator" class="divider"></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown <?php if ($this->current_nav == 'manage') echo 'active'; ?>">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">管理&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo url('admin/account'); ?>">账号管理</a></li>
