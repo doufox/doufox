@@ -149,19 +149,22 @@ class ContentController extends Admin
         $tree->icon = array(' ', '  |-', '  |-');
         $tree->nbsp = '&nbsp;&nbsp;&nbsp;';
         $categorys = array();
-        $nav_categorys = array(); // 内容管理左侧类型导航
+        $nav_categorys = array(); // 内容管理-栏目导航
         foreach ($cats as $cid => $r) {
             // 组合左侧类型导航
-            if ($r['typeid'] == 1) { // 内容栏目
+            if ($r['typeid'] == 1) {
+                // 内容栏目
                 $r['icon_type'] = 'ico1';
-                $r['urla'] = '?s=admin&c=content&catid=' . $r['catid'];
-            } else if ($r['typeid'] == 2) { // 单页面
+                $r['urla'] = url('admin/content/index', array('catid' => $r['catid']));
+            } else if ($r['typeid'] == 2) {
+                // 单页面
                 $r['icon_type'] = 'ico2';
-                $r['urla'] = '?s=admin&c=category&a=edit&catid=' . $r['catid'];
+                $r['urla'] = url('admin/category/edit', array('catid' => $r['catid']));
             } else {
                 // 链接
                 $r['icon_type'] = 'ico3';
-                $r['urla'] = $r['http'];
+                $r['urla'] = url('admin/category/edit', array('catid' => $r['catid']));
+                // $r['urlb'] = $r['http']; // 链接地址
             }
             $nav_categorys[$r['catid']] = $r;
 
@@ -180,9 +183,9 @@ class ContentController extends Admin
 
         if (!empty($nav_categorys)) { // 组合左侧类型导航
             $tree->init($nav_categorys);
-            $strs = "<span class='\$icon_type'><a href='\$urla'>\$catname</a></span>";
+            $strs = "<span class='\$icon_type'></span><a href='\$urla'>\$catname</a>";
             $strs2 = "<span class='folder'>\$catname</span>";
-            $nav_categorys = $tree->get_treeview(0, 'category_tree', $strs, $strs2, 0, 'nav nav-pills nav-stacked');
+            $nav_categorys = $tree->get_treeview(0, 'category_nav', $strs, $strs2, 0, 'filetree');
         } else {
             $categornav_categorysys = '没有分类请添加或刷新';
         }

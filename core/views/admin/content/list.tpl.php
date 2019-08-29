@@ -1,7 +1,18 @@
 <?php include $this->admin_tpl('header'); ?>
 <?php include $this->admin_tpl('navbar'); ?>
-
+<link type="text/css" rel="stylesheet" href="/static/jquery.treeview/jquery.treeview.css" />
+<script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/static/jquery.treeview/jquery.treeview.js"></script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        $("#category_nav").treeview({
+                control: ".category_tree_switch",
+                cookieId: "category_tree_nav",
+                toggle: function (x, y) {
+                    console.log(x, y);
+                }
+        });
+    });
     function setC() {
         if($("#deletec").prop('checked')==true) {
             $(".deletec").prop("checked",true);
@@ -27,10 +38,13 @@
     <div class="page_menu">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <span class="panel-title">栏目内容</span>
+                <span class="panel-title">栏目</span>
                 <div class="pull-right">
-                    <a class="btn btn-default btn-xs" href="#">折叠</a>
-                    <!-- <a class="btn btn-default btn-xs" href="#">展开</a> -->
+                    <div class="category_tree_switch">
+                        <a href="#" style="display: none;">收缩</a>
+                        <a href="#" style="display: none;">展开</a>
+                        <a href="#">展开/收缩</a>
+                    </div>
                 </div>
             </div>
             <?php echo $nav_categorys; ?>
@@ -54,7 +68,7 @@
                     <a class="btn btn-default btn-sm" href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>1)); ?>">正常(<?php echo $count[1]; ?>)</a>
                     <a class="btn btn-default btn-sm" href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>2)); ?>">头条(<?php echo $count[2]; ?>)</a>
                     <a class="btn btn-default btn-sm" href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>3)); ?>">推荐(<?php echo $count[3]; ?>)</a>
-                    <a class="btn btn-default btn-sm" href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>0)); ?>">未审核(<?php echo $count[0]; ?>)</a>
+                    <a class="btn btn-default btn-sm" href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>0)); ?>">草稿(<?php echo $count[0]; ?>)</a>
                     <a class="btn btn-default btn-sm" href="<?php echo url('admin/content/add',   array('catid'=>$catid, 'modelid'=>$modelid)); ?>">发布内容</a>
                 </div>
                 <table class="table table-bordered table-hover" width="100%">
@@ -116,7 +130,7 @@
                                 <button type="submit" class="btn btn-default" value="设为正常" name="submit_status_1" onClick="$('#list_form').val('status_1')">设为正常</button>
                                 <button type="submit" class="btn btn-default" value="设为头条" name="submit_status_2" onClick="$('#list_form').val('status_2')">设为头条</button>
                                 <button type="submit" class="btn btn-default" value="设为推荐" name="submit_status_3" onClick="$('#list_form').val('status_3')">设为推荐</button>
-                                <button type="submit" class="btn btn-default" value="设为未审" name="submit_status_0" onClick="$('#list_form').val('status_0')">设为未审</button>
+                                <button type="submit" class="btn btn-default" value="设为未审" name="submit_status_0" onClick="$('#list_form').val('status_0')">设为草稿</button>
                                 批量移动至 <select class="form-control" name="movecatid"><?php echo $category; ?></select>
                                 <button type="submit" class="btn btn-default" value="确定移动" name="submit_move" onClick="$('#list_form').val('move')">确定移动</button>
                                 <div class="pageright"><?php echo $pagination; ?></div>
