@@ -11,7 +11,12 @@
     </div>
     <div class="page_content">
         <div class="panel panel-default">
-            <div class="panel-heading"><?php echo $page_title; ?></div>
+            <div class="panel-heading">
+                <span class="panel-title"><?php echo $page_title; ?></span>
+                <div class="pull-right">
+                    <a class="btn btn-default btn-xs" href="<?php echo url('admin/account/add'); ?>">添加账号</a>
+                </div>
+            </div>
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>

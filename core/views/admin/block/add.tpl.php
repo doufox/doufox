@@ -11,7 +11,12 @@
     <div class="page_content">
         <form action="" method="post" class="form-inline">
             <div class="panel panel-default">
-                <div class="panel-heading"><?php echo $id ? '编辑' : '添加'; ?>区块</div>
+                <div class="panel-heading">
+                    <span class="panel-title"><?php echo $id ? '编辑' : '添加'; ?>区块</span>
+                    <div class="pull-right">
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/block'); ?>">区块列表</a>
+                    </div>
+                </div>
                 <div class="panel-body">
                     <input name="id" type="hidden" value="<?php echo $data['id']; ?>">
                     <table width="100%" class="table_form">

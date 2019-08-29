@@ -12,7 +12,13 @@
     <div class="page_content">
         <form method="post" action="" class="form-inline">
             <div class="panel panel-default">
-                <div class="panel-heading"><?php echo $page_title; ?></div>
+                <div class="panel-heading">
+                    <span class="panel-title"><?php echo $page_title; ?></span>
+                    <div class="pull-right">
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/account/add'); ?>">添加账号</a>
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/account'); ?>">账号列表</a>
+                    </div>
+                </div>
                 <div class="panel-body">
                     <table width="100%" class="table_form">
                         <tr>

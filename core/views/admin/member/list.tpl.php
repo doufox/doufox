@@ -20,7 +20,12 @@
     <div class="page_content">
         <form action="" method="post">
             <div class="panel panel-default">
-                <div class="panel-heading">会员列表</div>
+                <div class="panel-heading">
+                    <span class="panel-title">会员列表</span>
+                    <div class="pull-right">
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/member/add'); ?>">添加会员</a>
+                    </div>
+                </div>
                 <input name="form" id="list_form" type="hidden" value="">
                 <table class="table table-bordered table-hover" width="100%">
                     <thead>

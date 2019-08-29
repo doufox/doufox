@@ -9,7 +9,12 @@
     </div>
     <div class="page_content">
         <div class="panel panel-default">
-            <div class="panel-heading"><?php echo $catid ? '编辑' : '添加';?>栏目</div>
+            <div class="panel-heading">
+                <span class="panel-title"><?php echo $catid ? '编辑' : '添加';?>栏目</span>
+                <div class="pull-right">
+                    <a class="btn btn-default btn-xs" href="<?php echo url('admin/category'); ?>">栏目列表</a>
+                </div>
+            </div>
             <div class="panel-body">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#basic" aria-controls="basic" role="tab" data-toggle="tab">基本信息</a></li>

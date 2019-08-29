@@ -22,7 +22,12 @@
     <div class="page_content">
         <form method="post" action="" class="form-inline">
             <div class="panel panel-default">
-                <div class="panel-heading">添加会员</div>
+                <div class="panel-heading">
+                    <span class="panel-title">添加会员</span>
+                    <div class="pull-right">
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/member'); ?>">会员列表</a>
+                    </div>
+                </div>
                 <div class="panel-body">
                     <table width="100%" class="table_form">
                         <tbody>

@@ -11,7 +11,12 @@
     <div class="page_content">
         <form action="" method="post">
             <div class="panel panel-default">
-                <div class="panel-heading">栏目管理</div>
+                <div class="panel-heading">
+                    <span class="panel-title">栏目管理</span>
+                    <div class="pull-right">
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/category/add'); ?>">添加栏目</a>
+                    </div>
+                </div>
                 <table class="table table-bordered table-hover" width="100%">
                     <thead>
                         <tr>
