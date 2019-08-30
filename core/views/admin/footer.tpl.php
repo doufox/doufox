@@ -3,11 +3,11 @@
         <div class="navbar-inner navbar-content-center" style="padding-top:15px;">
             <ul class="navbar-left list-inline text-center text-muted credit">
                 <li>
-                    <span class="co">&copy; CopyRight <?php echo date('Y'); ?> <?php echo ucfirst(APP_NAME); ?> All Rights Reserved.&nbsp;</span>
+                    <span class="co">&copy; CopyRight <?php echo date('Y'); ?> <?php echo ucfirst(APP_NAME); ?> All Rights Reserved.</span>
                 </li>
             </ul>
-            <div class="legal navbar-right list-inline text-center">
-                <span class="co">&nbsp;Powered by <a href="https://crogram.com" target="_blank">Crogram</a>&nbsp;</span>
+            <div class="legal text-right list-inline">
+                <span class="co">Powered by <a href="https://crogram.com" target="_blank">Crogram</a></span>
             </div>
         </div>
     </div>

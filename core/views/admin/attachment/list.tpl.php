@@ -1,21 +1,30 @@
 <?php include $this->admin_tpl('header'); ?>
-
 <?php include $this->admin_tpl('navbar'); ?>
 
 <div class="container">
-    <div class="list-group page_menu">
-        <a class="list-group-item active" href="<?php echo url('admin/template/index'); ?>">模板管理</a>
-        <a class="list-group-item" href="<?php echo url('admin/template/add'); ?>">添加模板</a>
-        <a class="list-group-item" href="<?php echo url('admin/template/cache'); ?>">更新缓存</a>
+    <div class="panel panel-default page_menu">
+        <div class="panel-heading"><span class="panel-title">附件管理</span></div>
+        <div class="list-group">
+            <a class="list-group-item active" href="<?php echo url('admin/attachment/index'); ?>">附件列表</a>
+            <a class="list-group-item" href="<?php echo url('admin/attachment/add'); ?>">添加附件</a>
+            <a class="list-group-item" href="<?php echo url('admin/attachment/cache'); ?>">更新缓存</a>
+        </div>
     </div>
     <div class="page_content">
         <div class="panel panel-default">
-            <div class="panel-heading">附件管理</div>
+            <div class="panel-heading">
+                <span class="panel-title">附件列表</span>
+                <div class="pull-right">
+                    <a href="<?php echo url('admin/attachment/add'); ?>">添加附件</a>
+                </div>
+            </div>
             <table width="100%" class="table table-bordered table-condensed table-hover" id="imgPreview">
-                <tbody>
+                <thead>
                     <tr>
-                        <td align="left">当前目录：<?php echo $dir; ?></td>
+                        <th align="left">当前目录：<?php echo $dir; ?></th>
                     </tr>
+                </thead>
+                <tbody>
                     <?php if ($istop) { ?>
                         <tr>
                             <td align="left"><a href="<?php echo $pdir; ?>"><img src="/static/img/folder-closed.gif">上一层目录</a></td>

@@ -15,8 +15,8 @@ class AttachmentController extends Admin
         $this->dir = 'upload/';
     }
 
-    /**
-     * 目录浏览
+    /** 目录浏览
+     * 
      */
     public function indexAction()
     {
@@ -28,7 +28,6 @@ class AttachmentController extends Admin
                 if (!file_exists($this->dir)) {
                     mkdir($this->dir);
                 }
-
             }
         } elseif (!$this->session->get('user_id')) {
             $this->attMsg('游客不允许操作');
@@ -72,12 +71,59 @@ class AttachmentController extends Admin
         include $this->admin_tpl('attachment/list');
     }
 
-    /**
-     * 上传图片(单)
+
+    /** 上传图片(单)
+     * 页面
+     */
+    public function addAction()
+    {
+        if ($this->isPostForm()) {
+            $mark = $this->memberinfo ? false : true;
+            $w = $this->site_config['SITE_THUMB_WIDTH'];
+            $h = $this->site_config['SITE_THUMB_HEIGHT'];
+            $img = array('w' => $w, 'h' => $h, 't' => 0);
+            $size = (int) $this->post('size');
+            $data = $this->upload('file', array('jpeg', 'jpg', 'gif', 'png'), $size, $img, $mark, $this->post('admin'));
+            if ($data['result']) {
+                $row = array(
+                    'error' => 1,
+                    'msg' => $data['result'],
+                    'filename' => ''
+                );
+            } else {
+                $row = array(
+                    'error' => 0,
+                    'msg' => '图片上传成功',
+                    'filename' => $data['path'], //全路径
+                );
+            }
+            $data = $row;
+            $url = url('attachment/image', array('w' => $w, 'h' => $h, 'size' => $size, 'admin' => $this->post('admin')));
+            $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $size . 'MB';
+            include $this->admin_tpl('attachment/upload_result');
+        } else {
+            $w = (int) $this->get('w');
+            $h = (int) $this->get('h');
+            $s = (int) $this->get('size') ? (int) $this->get('size') : 2;
+            if ($w && empty($h)) {
+                $w = $this->site_config['SITE_THUMB_WIDTH'];
+                $h = $this->site_config['SITE_THUMB_HEIGHT'];
+            }
+            $admin = $this->getAdmin();
+            $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $s . 'MB';
+            $size = $s;
+            include $this->admin_tpl('attachment/add');
+        }
+    }
+
+
+
+    /** 上传图片(单)
+     * 
      */
     public function imageAction()
     {
-        if ($this->post('submit')) {
+        if ($this->isPostForm()) {
             $mark = $this->memberinfo ? false : true;
             $w = $this->site_config['SITE_THUMB_WIDTH'];
             $h = $this->site_config['SITE_THUMB_HEIGHT'];
@@ -114,12 +160,11 @@ class AttachmentController extends Admin
             $size = $s;
             $isimage = 1; //如果是图片上传，就显示高宽输入框
             include $this->admin_tpl('attachment/upload');
-
         }
     }
 
-    /**
-     * 多文件（图片）上传
+    /** 多文件（图片）上传
+     * 
      */
     public function filesAction()
     {
@@ -143,8 +188,8 @@ class AttachmentController extends Admin
         include $this->admin_tpl('attachment/swfupload');
     }
 
-    /**
-     * 上传文件(单)
+    /** 上传文件(单)
+     * 
      */
     public function fileAction()
     {
@@ -152,7 +197,7 @@ class AttachmentController extends Admin
         $type = base64_decode($type);
         $size = (int) $this->get('size');
         $this->view->assign('note', '文件格式' . $type . '，文件大小不超过' . $size . 'MB');
-        if ($this->post('submit')) {
+        if ($this->isPostForm()) {
             $data = $this->upload('file', explode(',', $type), $size, null, null, $this->post('admin'));
             if ($data['result']) {
                 $row = array(
@@ -173,7 +218,6 @@ class AttachmentController extends Admin
         } else {
             $admin = $this->getAdmin();
             include $this->admin_tpl('attachment/upload');
-
         }
     }
 
@@ -201,7 +245,6 @@ class AttachmentController extends Admin
             if (!$this->post('SWFUPLOADSESSID')) {
                 $this->attMsg('无权限', $stype);
             }
-
         }
         $upload->set($_FILES[$fields])
             ->set_limit_size(1024 * 1024 * $size) //限制2Mb
@@ -231,7 +274,7 @@ class AttachmentController extends Admin
      */
     public function ajaxswfuploadAction()
     {
-        if ($this->post('submit')) {
+        if ($this->isPostForm()) {
             $type = $this->post('type');
             $_type = explode(',', $type);
             if (empty($_type)) {
@@ -271,19 +314,23 @@ class AttachmentController extends Admin
         //检查目录
         $dir = $this->get('dir') ? $this->get('dir') : 'image';
         if (!isset($ext[$dir])) {
-            echo json_encode(array('error' => 1, 'message' => '上传目录(' . $dir . ')不正确'));exit;
+            echo json_encode(array('error' => 1, 'message' => '上传目录(' . $dir . ')不正确'));
+            exit;
         }
         $img = $dir == 'image' ? 1 : 0;
         $size = $img ? 2 : 100;
         //检查文件大小
         if (is_null($_FILES['imgFile']['size']) || $_FILES['imgFile']['size'] > $size * 1024 * 1024) {
-            echo json_encode(array('error' => 1, 'message' => '不能超过' . $size . 'MB'));exit;
+            echo json_encode(array('error' => 1, 'message' => '不能超过' . $size . 'MB'));
+            exit;
         }
         $data = $this->upload('imgFile', $ext[$dir], $size, $img, null, $this->getAdmin(), 'ke');
         if ($data['result']) {
-            echo json_encode(array('error' => 1, 'message' => $data['result']));exit;
+            echo json_encode(array('error' => 1, 'message' => $data['result']));
+            exit;
         } else {
-            echo json_encode(array('error' => 0, 'url' => $data['path']));exit;
+            echo json_encode(array('error' => 0, 'url' => $data['path']));
+            exit;
         }
     }
 
@@ -304,7 +351,6 @@ class AttachmentController extends Admin
                 if (!file_exists($root_path)) {
                     mkdir($root_path);
                 }
-
             }
         } elseif (!$this->session->get('user_id')) {
             //属于游客
@@ -357,7 +403,8 @@ class AttachmentController extends Admin
         if ($handle = opendir($current_path)) {
             $i = 0;
             while (false !== ($filename = readdir($handle))) {
-                if ($filename{0} == '.' || strpos($filename, '.thumb.') !== false) {
+                if ($filename{
+                    0} == '.' || strpos($filename, '.thumb.') !== false) {
                     continue;
                 }
 
@@ -444,11 +491,12 @@ class AttachmentController extends Admin
         if ($stype == 'swf') {
             exit('0,' . $msg);
         } elseif ($stype == 'ke') {
-            echo json_encode(array('error' => 1, 'message' => $msg));exit;
+            echo json_encode(array('error' => 1, 'message' => $msg));
+            exit;
         } elseif ($stype == 'ue') {
-            echo json_encode(array('state' => $msg));exit;
+            echo json_encode(array('state' => $msg));
+            exit;
         }
         exit("<div style='padding-top:40px;text-align:center;font-size:14px;'><font color=red>×</font>&nbsp;&nbsp;" . $msg . "</div>");
     }
-
 }

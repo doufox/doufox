@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 控制器基类
  */
@@ -125,12 +126,10 @@ abstract class Controller
             if (!isset($_POST[$var]) && empty($_POST[$var])) {
                 return false;
             }
-
         } else {
             if (!isset($_POST[$var])) {
                 return false;
             }
-
         }
         return true;
     }
@@ -438,7 +437,6 @@ abstract class Controller
             if ($modelid == $cat['modelid'] && $cat['typeid'] == 1 && $cat['child'] == 0) {
                 $data[$cat['catid']] = $cat;
             }
-
         }
         return $data;
     }
@@ -459,7 +457,6 @@ abstract class Controller
                 if ($t['joinid'] == $modelid) {
                     $return[] = $t;
                 }
-
             }
         }
         return $return;
@@ -518,5 +515,4 @@ abstract class Controller
     {
         return ADMIN_PATH . $file . '.tpl.php';
     }
-
 }

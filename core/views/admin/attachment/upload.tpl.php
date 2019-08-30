@@ -1,45 +1,27 @@
-<?php include $this->admin_tpl('header');?>
-<style> 
-.uploadlay {}
-#ui-upload-holder{ position:relative;width:60px;height:25px;border:1px solid silver; overflow:hidden;float: left;} 
-#ui-upload-input{ position:absolute;top:0px;right:0px;height:100%;cursor:pointer; opacity:0;filter:alpha(opacity:0);z-index:999;float:left;} 
-#ui-upload-txt{ position:absolute;top:0px;left:0px;width:100%;height:100%;line-height:25px;text-align:center;} 
-#ui-upload-button {position:relative;padding-left:10px;padding-top:1px;height:25px;overflow:hidden;float: left;}
-#ui-upload-filepath{ position:relative; border:1px solid silver; width:210px; height:25px; overflow:hidden; float:left;border-right:none;} 
-#ui-upload-filepathtxt{ position:absolute; top:0px;left:0px; width:100%;height:25px; border:0px; line-height:25px; } 
-.uploadlay{padding-left:25px;} 
-</style>
-<div class="subnav">
-    <div class="table-list">
-        <form method="post" action="" id="myform" name="myform" enctype="multipart/form-data">
-        <input name="filename" id="filename" type="hidden" value="<?php echo $fielname; ?>">
-        <input name="size" id="size" type="hidden" value="<?php echo $size; ?>">
-        <input name="admin" id="admin" type="hidden" value="<?php echo $admin; ?>">
-        <div class="pad-10">
-            <div class="col-tab">
+<?php include $this->admin_tpl('header'); ?>
 
-                <div class="uploadlay"> 
-                        <div id="ui-upload-filepath"> 
-                            <input type="text" id="ui-upload-filepathtxt" class="filepathtxt" disabled /> 
-                        </div> 
-                        <div id="ui-upload-holder"> 
-                            <div id="ui-upload-txt">浏览</div> 
-                            <input type="file" id="ui-upload-input" name="file" /> 
-                        </div>
-                        <div id="ui-upload-button"> 
-                            <input type="submit" class="button" value="点击上传" name="submit" align="absmiddle" <?php if ($isimage) {?>onClick="this.value='正在上传'"<?php } else { ?>onClick="uploading()"<?php };?> />
-                        </div>
-                    </div>
-                    <script> 
-                    document.getElementById("ui-upload-input").onchange=function(){ 
-                        document.getElementById("ui-upload-filepathtxt").value = this.value; 
-                    }
-                    </script>
-                <div class="show-tips"><?php echo $note; ?></div>
-            </div>
+<form method="post" action="" enctype="multipart/form-data">
+    <input type="hidden" name="filename" id="filename" value="<?php echo $fielname; ?>">
+    <input type="hidden" name="size" id="size" value="<?php echo $size; ?>">
+    <input type="hidden" name="admin" id="admin" value="<?php echo $admin; ?>">
+    <div class="input-group">
+        <input class="form-control" id="ui-display-file" type="text" placeholder="请选择文件..." readonly />
+        <input class="form-control" id="ui-input-file" type="file" name="file" style="display: none; width:0; height:0;" />
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-default" onclick="open_file_select();">选择文件</button>
+            <button type="submit" class="btn btn-default" name="submit" onclick="this.innerText='正在上传';">点击上传</button>
         </div>
-        </form>
     </div>
-</div>
+</form>
+
+<script type="text/javascript">
+    function open_file_select() {
+        document.getElementById("ui-input-file").dispatchEvent(new MouseEvent('click'));
+    }
+    document.getElementById("ui-input-file").onchange = function() {
+        document.getElementById("ui-display-file").value = this.value;
+    }
+</script>
+
 </body>
 </html>
