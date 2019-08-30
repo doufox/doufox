@@ -3,17 +3,20 @@
 <?php include $this->admin_tpl('navbar');?>
 
 <div class="container">
-    <div class="list-group page_menu">
-        <a class="list-group-item active" href="<?php echo url('admin/block'); ?>">全部区块</a>
-        <a class="list-group-item" href="<?php echo url('admin/block/add'); ?>">添加区块</a>
-        <a class="list-group-item" href="<?php echo url('admin/block/cache'); ?>">更新缓存</a>
+    <div class="panel panel-default page_menu">
+        <div class="panel-heading"><span class="panel-title">区块管理</span></div>
+        <div class="list-group">
+            <a class="list-group-item active" href="<?php echo url('admin/block'); ?>">全部区块</a>
+            <a class="list-group-item" href="<?php echo url('admin/block/add'); ?>">添加区块</a>
+            <a class="list-group-item" href="<?php echo url('admin/block/cache'); ?>">更新缓存</a>
+        </div>
     </div>
     <div class="page_content">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <span class="panel-title">区块管理</span>
                 <div class="pull-right">
-                    <a class="btn btn-default btn-xs" href="<?php echo url('admin/block/add'); ?>">添加区块</a>
+                    <a href="<?php echo url('admin/block/add'); ?>">添加区块</a>
                 </div>
             </div>
             <table class="table table-bordered table-hover" width="100%">

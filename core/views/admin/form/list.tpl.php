@@ -19,9 +19,14 @@ function setC() {
 }
 </script>
 <div class="container">
-    <div class="list-group page_menu">
-        <?php if (!$join) {?><a class="list-group-item" href="<?php echo url('index/form', array('modelid' => $modelid)); ?>" target="_blank">发布内容</a><?php };?>
-        <a class="list-group-item" href="<?php echo url('admin/form/config', array('modelid' => $modelid, 'cid' => $cid)); ?>">表单设置</a>
+    <div class="panel panel-default page_menu">
+        <div class="panel-heading">
+            <span class="panel-title">表单管理</span>
+        </div>
+        <div class="list-group">
+            <?php if (!$join) {?><a class="list-group-item" href="<?php echo url('index/form', array('modelid' => $modelid)); ?>" target="_blank">发布内容</a><?php };?>
+            <a class="list-group-item" href="<?php echo url('admin/form/config', array('modelid' => $modelid, 'cid' => $cid)); ?>">表单设置</a>
+        </div>
     </div>
     <div class="page_content">
         <form action="" method="post" name="myform">

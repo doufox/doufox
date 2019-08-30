@@ -3,10 +3,15 @@
 <?php include $this->admin_tpl('navbar'); ?>
 
 <div class="container">
-    <div class="list-group page_menu">
-        <a class="list-group-item" href="<?php echo url('admin/model/index', array('typeid' => $typeid)); ?>">模型管理</a>
-        <a class="list-group-item" href="<?php echo url('admin/model/fields', array('typeid' => $typeid, 'modelid' => $modelid)); ?>">字段管理</a>
-        <a class="list-group-item" href="<?php echo url('admin/model/addfield', array('typeid' => $typeid, 'modelid' => $modelid)); ?>">添加字段</a>
+    <div class="panel panel-default page_menu">
+        <div class="panel-heading">
+            <span class="panel-title"><?php echo $data['modelname']; ?></span>
+        </div>
+        <div class="list-group">
+            <a class="list-group-item" href="<?php echo url('admin/model/index', array('typeid' => $typeid)); ?>">模型管理</a>
+            <a class="list-group-item" href="<?php echo url('admin/model/fields', array('typeid' => $typeid, 'modelid' => $modelid)); ?>">字段管理</a>
+            <a class="list-group-item" href="<?php echo url('admin/model/addfield', array('typeid' => $typeid, 'modelid' => $modelid)); ?>">添加字段</a>
+        </div>
     </div>
     <div class="page_content">
         <form action="" method="post">

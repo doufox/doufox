@@ -2,10 +2,15 @@
 <?php include $this->admin_tpl('navbar');?>
 
 <div class="container">
-    <div class="list-group page_menu">
-        <a class="list-group-item" href="<?php echo url('admin/form/list', array('modelid' => $modelid, 'cid' => $cid)); ?>">信息管理</a>
-        <a class="list-group-item" href="<?php echo url('admin/form/config', array('modelid' => $modelid, 'cid' => $cid)); ?>">表单设置</a>
-        <?php if (!$join) {?><a class="list-group-item" href="<?php echo url('index/form', array('modelid' => $modelid)); ?>" target="_blank">发布内容</a><?php }; ?>
+    <div class="panel panel-default page_menu">
+        <div class="panel-heading">
+            <span class="panel-title">表单管理</span>
+        </div>
+        <div class="list-group">
+            <a class="list-group-item" href="<?php echo url('admin/form/list', array('modelid' => $modelid, 'cid' => $cid)); ?>">信息管理</a>
+            <a class="list-group-item" href="<?php echo url('admin/form/config', array('modelid' => $modelid, 'cid' => $cid)); ?>">表单设置</a>
+            <?php if (!$join) {?><a class="list-group-item" href="<?php echo url('index/form', array('modelid' => $modelid)); ?>" target="_blank">发布内容</a><?php }; ?>
+        </div>
     </div>
     <div class="page_content">
         <form method="post" action="" class="form-inline">

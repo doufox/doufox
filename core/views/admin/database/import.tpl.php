@@ -2,14 +2,24 @@
 <?php include $this->admin_tpl('navbar');?>
 
 <div class="container">
-    <div class="list-group page_menu">
-        <a class="list-group-item" href="<?php echo url('admin/database/index'); ?>">数据表</a>
-        <a class="list-group-item active" href="<?php echo url('admin/database/import'); ?>">备份列表</a>
+    <div class="panel panel-default page_menu">
+        <div class="panel-heading">
+            <span class="panel-title">数据库管理</span>
+        </div>
+        <div class="list-group">
+            <a class="list-group-item" href="<?php echo url('admin/database/index'); ?>">数据表</a>
+            <a class="list-group-item active" href="<?php echo url('admin/database/import'); ?>">备份列表</a>
+        </div>
     </div>
     <div class="page_content">
         <form action="" method="post">
             <div class="panel panel-default">
-                <div class="panel-heading">备份列表</div>
+                <div class="panel-heading">
+                    <span class="panel-title">备份列表</span>
+                    <div class="pull-right">
+                        <a href="<?php echo url('admin/database/index'); ?>">数据表</a>
+                    </div>
+                </div>
                 <table width="100%" class="table table-bordered table-hover">
                     <thead>
                         <tr>

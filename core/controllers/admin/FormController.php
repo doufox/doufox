@@ -102,7 +102,7 @@ class FormController extends Admin
 
         $model = $this->model;
         $join = empty($this->join) ? 0 : 1;
-        $page_title = '表单管理: ' . $model['modelname'];
+        $page_title = $model['modelname'];
         include $this->admin_tpl('form/list');
     }
 

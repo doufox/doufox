@@ -11,11 +11,16 @@
     }
 </script>
 <div class="container">
-    <div class="list-group page_menu">
-        <a class="list-group-item active" href="<?php echo url('admin/member/index'); ?>">会员管理</a>
-        <a class="list-group-item" href="<?php echo url('admin/member/add'); ?>">添加会员</a>
-        <a class="list-group-item" href="<?php echo url('member/register'); ?>" target="_blank">前台注册</a>
-        <a class="list-group-item" href="<?php echo url('admin/member/cache'); ?>">更新缓存</a>
+    <div class="panel panel-default page_menu">
+        <div class="panel-heading">
+            <span class="panel-title">会员管理</span>
+        </div>
+        <div class="list-group">
+            <a class="list-group-item active" href="<?php echo url('admin/member/index'); ?>">会员列表</a>
+            <a class="list-group-item" href="<?php echo url('admin/member/add'); ?>">添加会员</a>
+            <a class="list-group-item" href="<?php echo url('member/register'); ?>" target="_blank">前台注册</a>
+            <a class="list-group-item" href="<?php echo url('admin/member/cache'); ?>">更新缓存</a>
+        </div>
     </div>
     <div class="page_content">
         <form action="" method="post">
@@ -23,7 +28,7 @@
                 <div class="panel-heading">
                     <span class="panel-title">会员列表</span>
                     <div class="pull-right">
-                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/member/add'); ?>">添加会员</a>
+                        <a href="<?php echo url('admin/member/add'); ?>">添加会员</a>
                     </div>
                 </div>
                 <input name="form" id="list_form" type="hidden" value="">

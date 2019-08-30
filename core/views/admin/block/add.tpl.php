@@ -3,10 +3,13 @@
 <?php include $this->admin_tpl('navbar'); ?>
 
 <div class="container">
-    <div class="list-group page_menu">
-        <a class="list-group-item" href="<?php echo url('admin/block'); ?>">全部区块</a>
-        <a class="list-group-item" href="<?php echo url('admin/block/add'); ?>">添加区块</a>
-        <a class="list-group-item" href="<?php echo url('admin/block/cache'); ?>">更新缓存</a>
+    <div class="panel panel-default page_menu">
+        <div class="panel-heading"><span class="panel-title">区块管理</span></div>
+        <div class="list-group">
+            <a class="list-group-item" href="<?php echo url('admin/block'); ?>">全部区块</a>
+            <a class="list-group-item" href="<?php echo url('admin/block/add'); ?>">添加区块</a>
+            <a class="list-group-item" href="<?php echo url('admin/block/cache'); ?>">更新缓存</a>
+        </div>
     </div>
     <div class="page_content">
         <form action="" method="post" class="form-inline">
@@ -14,7 +17,7 @@
                 <div class="panel-heading">
                     <span class="panel-title"><?php echo $id ? '编辑' : '添加'; ?>区块</span>
                     <div class="pull-right">
-                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/block'); ?>">区块列表</a>
+                        <a href="<?php echo url('admin/block'); ?>">区块列表</a>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -44,7 +47,7 @@
                         <tr id="text_1" style="display:none">
                             <th>区块内容：</th>
                             <td>
-                                <textarea class="form-control" name="data[content_1]" id="data[content]" cols="91" rows="8"><?php echo $data['content']; ?></textarea>
+                                <textarea class="form-control" name="data[content_1]" id="data[content]" cols="60" rows="8"><?php echo $data['content']; ?></textarea>
                                 <p class="show-tips">区块内容支持HTML标签</p>
                             </td>
                         </tr>
