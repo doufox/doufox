@@ -3,10 +3,10 @@
 <?php include $this->admin_tpl('navbar'); ?>
 <script type="text/javascript">
     function setC() {
-        if($("#deletec").prop('checked')==true) {
-            $(".deletec").prop("checked",true);
+        if ($("#deletec").prop('checked') == true) {
+            $(".deletec").prop("checked", true);
         } else {
-            $(".deletec").prop("checked",false);
+            $(".deletec").prop("checked", false);
         }
     }
 </script>
@@ -35,35 +35,42 @@
                 <table class="table table-bordered table-hover" width="100%">
                     <thead>
                         <tr>
-                            <th width="25" align="left"><input name="deletec" id="deletec" type="checkbox" onclick="setC()"></th>
-                            <th width="40" align="left">ID </th>
-                            <th width="60" align="left">状态</th>
-                            <th align="left">登录账号</th>
-                            <th align="left">昵称</th>
-                            <th width="80" align="left">会员模型</th>
-                            <th width="160" align="left">注册时间</th>
-                            <th width="110" align="left">注册IP</th>
-                            <th width="100" align="left">操作</th>
+                            <th width="25"><input name="deletec" id="deletec" type="checkbox" onclick="setC()"></th>
+                            <th width="40">ID </th>
+                            <th width="60">状态</th>
+                            <th>登录账号</th>
+                            <th>昵称</th>
+                            <th width="80">会员模型</th>
+                            <th width="160">注册时间</th>
+                            <th width="110">注册IP</th>
+                            <th width="100">操作</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (is_array($list)) { foreach ($list as $t) { ?>
-                        <tr>
-                            <td ><input name="del_<?php echo $t['id']; ?>_<?php echo $t['modelid']; ?>" type="checkbox" class="deletec"></td>
-                            <td><?php echo $t['id']; ?></td>
-                            <td><?php if (!$t['status']) { ?><font color="#FF0000">未审核</font><?php } else { ?>已审核<?php } ?></td>
-                            <td><a href="<?php echo url('admin/member/edit',array('id'=>$t['id'])); ?>"><?php echo $t['username']; ?></a></td>
-                            <td><?php echo $t['nickname']; ?></a></td>
-                            <td><a href="<?php echo url('admin/member/index', array('modelid'=>$t['modelid'])); ?>"><?php echo $membermodel[$t['modelid']]['modelname']; ?></a></td>
-                            <td><?php echo date('Y-m-d H:i:s', $t['regdate']); ?></td>
-                            <td><?php echo $t['regip']; ?></td>
-                            <td>
-                                <a href="<?php echo url('admin/member/edit',array('id'=>$t['id'])); ?>">详细</a> | 
-                            <a href="javascript:admin_command.confirmurl('<?php echo url('admin/member/del/',array('modelid'=>$t['modelid'],'id'=>$t['id']));?>','确定删除会员 『 <?php echo $t['username']; ?> 』吗？ ')" >删除</a> 
-                            </td>
-                        </tr>
-                        <?php } } ?>
+                        <?php if (is_array($list)) {
+                            foreach ($list as $t) { ?>
+                                <tr>
+                                    <td><input name="del_<?php echo $t['id']; ?>_<?php echo $t['modelid']; ?>" type="checkbox" class="deletec"></td>
+                                    <td><?php echo $t['id']; ?></td>
+                                    <td><?php if (!$t['status']) { ?><font color="#FF0000">未审核</font><?php } else { ?>已审核<?php } ?></td>
+                                    <td><a href="<?php echo url('admin/member/edit', array('id' => $t['id'])); ?>"><?php echo $t['username']; ?></a></td>
+                                    <td><?php echo $t['nickname']; ?></a></td>
+                                    <td><a href="<?php echo url('admin/member/index', array('modelid' => $t['modelid'])); ?>"><?php echo $membermodel[$t['modelid']]['modelname']; ?></a></td>
+                                    <td><?php echo date('Y-m-d H:i:s', $t['regdate']); ?></td>
+                                    <td><?php echo $t['regip']; ?></td>
+                                    <td>
+                                        <a href="<?php echo url('admin/member/edit', array('id' => $t['id'])); ?>">详细</a>
+                                        <a href="#modal-member-delete" data-toggle="modal" name="删除会员" onclick="member_delete(this);" data-id="<?php echo $t['id']; ?>" data-name="<?php echo $t['username']; ?>">删除</a>
+                                    </td>
+                                </tr>
+                        <?php }
+                        } ?>
                     </tbody>
+                    <tfoot>
+                        <td colspan="9">
+                            <?php echo $pagination; ?>
+                        </td>
+                    </tfoot>
                 </table>
                 <div class="panel-body">
                     <?php echo $pagination; ?>
@@ -76,5 +83,39 @@
         </form>
     </div>
 </div>
+
+<!-- 会员删除提示 -->
+<div class="modal fade" id="modal-member-delete" tabindex="-1" role="dialog" aria-labelledby="aria-member-delete">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="aria-member-delete">系统提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>确定删除会员<span id="member-delete-name"></span>吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <a type="button" id="member-delete-url" class="btn btn-primary" href="#">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function member_delete(e) {
+        if (e && e.dataset && e.dataset.id && e.dataset.name) {
+            document.getElementById('member-delete-url').href = "<?php echo url('admin/member/del', array('modelid' => $t['modelid'], 'id' => '')); ?>" + e.dataset.id;
+            document.getElementById('member-delete-name').innerText = '"' + e.dataset.name + '"';
+        } else {
+            document.getElementById('member-delete-url').href = '';
+            document.getElementById('member-delete-name').innerText = '';
+        }
+    }
+    $('#modal-member-delete').on('hide.bs.modal', function() {
+        member_delete();
+    })
+</script>
 
 <?php include $this->admin_tpl('footer'); ?>
