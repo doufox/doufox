@@ -94,8 +94,8 @@ function form_editor($setting = '')
     <tr>
       <td>类型 ：</td>
       <td>
-          <label><input type="radio" value=1 name="setting[type]" ' . ($t == 1 ? 'checked' : '') . '> 完整模式</label>
-          <label><input type="radio" value=0 name="setting[type]"' . ($t == 0 ? 'checked' : '') . '> 精简模式</label>
+          <label class="label-group"><input type="radio" value=1 name="setting[type]" ' . ($t == 1 ? 'checked' : '') . '> 完整模式</label>
+          <label class="label-group"><input type="radio" value=0 name="setting[type]"' . ($t == 0 ? 'checked' : '') . '> 精简模式</label>
       </td>
     </tr>
     <tr>
@@ -364,9 +364,9 @@ function content_editor($name, $content = '', $setting = '')
     }
     $str .= '<textarea class="form-control" id="' . $id . '" name="data[' . $name . ']" style="width:' . $w . '%;height:' . $h . 'px;visibility:hidden;">' . $content . '</textarea>';
     if (!isset($setting['system']) && $name == 'content') {
-        $str .= '<p><label><input type="checkbox" checked="" value="1" name="data[add_introduce]">自动生成描述</label>';
+        $str .= '<p><label class="label-group"><input type="checkbox" checked="" value="1" name="data[add_introduce]">自动生成描述</label>';
         $str .= '<input type="text" size="10" value="200" name="data[introcude_length]" class="form-control">字符描述<p>';
-        $str .= '<p><label><input type="checkbox" checked="" value="1" name="data[auto_thumb]">自动获取第一张图为缩略图</label></p>';
+        $str .= '<p><label class="label-group"><input type="checkbox" checked="" value="1" name="data[auto_thumb]">自动获取第一张图为缩略图</label></p>';
     }
     return $str;
 }

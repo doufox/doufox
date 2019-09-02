@@ -34,8 +34,8 @@
                                     <tr>
                                         <th width="100">批量添加：</th>
                                         <td>
-                                            <label><input type="radio" value="0" name="addall" onclick='$("#addall").hide();$("#_addall").show();' checked>否</label>&nbsp;
-                                            <label><input type="radio" value="1" name="addall" onclick='$("#addall").show();$("#_addall").hide();'>是</label>
+                                            <label class="label-group"><input type="radio" value="0" name="addall" onclick='$("#addall").hide();$("#_addall").show();' checked>否</label>&nbsp;
+                                            <label class="label-group"><input type="radio" value="1" name="addall" onclick='$("#addall").show();$("#_addall").hide();'>是</label>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -74,16 +74,16 @@
                                     <tr>
                                         <th width="100"><font color="red">*</font>菜单中显示：</th>
                                         <td>
-                                            <label><input type="radio" <?php if (!isset($data['ismenu']) || $data['ismenu']==1) { ?>checked<?php } ?> value="1" name="data[ismenu]">显示</label>&nbsp;
-                                            <label><input type="radio" <?php if (isset($data['ismenu']) && $data['ismenu']==0) { ?>checked<?php } ?> value="0" name="data[ismenu]">隐藏</label>&nbsp;
+                                            <label class="label-group"><input type="radio" <?php if (!isset($data['ismenu']) || $data['ismenu']==1) { ?>checked<?php } ?> value="1" name="data[ismenu]">显示</label>&nbsp;
+                                            <label class="label-group"><input type="radio" <?php if (isset($data['ismenu']) && $data['ismenu']==0) { ?>checked<?php } ?> value="0" name="data[ismenu]">隐藏</label>&nbsp;
                                         </td>
                                     </tr>
                                     <tr>
                                         <th><font color="red">*</font>栏目类型：</th>
                                         <td>
-                                        <label><input type="radio" value="1" name="data[typeid]" <?php if ($data[typeid]==1) { ?>checked<?php } ?> onClick="settype(1)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>内部栏目</label>&nbsp;
-                                        <label><input type="radio" value="2" name="data[typeid]" <?php if ($data[typeid]==2) { ?>checked<?php } ?> onClick="settype(2)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>单网页</label>&nbsp;
-                                        <label><input type="radio" value="3" name="data[typeid]" <?php if ($data[typeid]==3) { ?>checked<?php } ?> onClick="settype(3)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>外部链接</label>&nbsp;
+                                        <label class="label-group"><input type="radio" value="1" name="data[typeid]" <?php if ($data[typeid]==1) { ?>checked<?php } ?> onClick="settype(1)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>内部栏目</label>&nbsp;
+                                        <label class="label-group"><input type="radio" value="2" name="data[typeid]" <?php if ($data[typeid]==2) { ?>checked<?php } ?> onClick="settype(2)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>单网页</label>&nbsp;
+                                        <label class="label-group"><input type="radio" value="3" name="data[typeid]" <?php if ($data[typeid]==3) { ?>checked<?php } ?> onClick="settype(3)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>外部链接</label>&nbsp;
                                         </td>
                                     </tr>
                                     <tr class="type_3" style="display:none;">
@@ -159,23 +159,23 @@
                                 <tr>
                                     <th width="100">查看权限：</th>
                                     <td>
-                                        <label><input name="data[islook]" type="radio" value="0"<?php if ($data['islook']==0) { ?> checked<?php } ?> >任何人可查看</label>&nbsp;
-                                        <label><input name="data[islook]" type="radio" value="1"<?php if ($data['islook']==1) { ?> checked<?php } ?> >会员可查看</label>&nbsp;
+                                        <label class="label-group"><input name="data[islook]" type="radio" value="0"<?php if ($data['islook']==0) { ?> checked<?php } ?> >任何人可查看</label>&nbsp;
+                                        <label class="label-group"><input name="data[islook]" type="radio" value="1"<?php if ($data['islook']==1) { ?> checked<?php } ?> >会员可查看</label>&nbsp;
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>投稿权限：</th>
                                     <td>
-                                        <label><input name="data[ispost]" type="radio" value="0"<?php if ($data['ispost']==0) { ?> checked<?php } ?> >禁止投稿</label>&nbsp;
-                                        <label><input name="data[ispost]" type="radio" value="1"<?php if ($data['ispost']==1) { ?> checked<?php } ?> >会员、游客可投稿</label>&nbsp;
-                                        <label><input name="data[ispost]" type="radio" value="2"<?php if ($data['ispost']==2) { ?> checked<?php } ?> >会员可投稿</label>&nbsp;
+                                        <label class="label-group"><input name="data[ispost]" type="radio" value="0"<?php if ($data['ispost']==0) { ?> checked<?php } ?> >禁止投稿</label>&nbsp;
+                                        <label class="label-group"><input name="data[ispost]" type="radio" value="1"<?php if ($data['ispost']==1) { ?> checked<?php } ?> >会员、游客可投稿</label>&nbsp;
+                                        <label class="label-group"><input name="data[ispost]" type="radio" value="2"<?php if ($data['ispost']==2) { ?> checked<?php } ?> >会员可投稿</label>&nbsp;
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>投稿审核：</th>
                                     <td>
-                                        <label><input name="data[verify]" type="radio" value="0"<?php if ($data['verify']==0 || !$data['verify']) { ?> checked<?php } ?> >需要审核</label>&nbsp;
-                                        <label><input name="data[verify]" type="radio" value="1"<?php if ($data['verify']==1) { ?> checked<?php } ?> >无需审核</label>&nbsp;
+                                        <label class="label-group"><input name="data[verify]" type="radio" value="0"<?php if ($data['verify']==0 || !$data['verify']) { ?> checked<?php } ?> >需要审核</label>&nbsp;
+                                        <label class="label-group"><input name="data[verify]" type="radio" value="1"<?php if ($data['verify']==1) { ?> checked<?php } ?> >无需审核</label>&nbsp;
                                     </td>
                                 </tr>
                                 <tr>

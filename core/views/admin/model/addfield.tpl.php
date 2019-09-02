@@ -207,8 +207,8 @@
                         <tr>
                             <th>前台显示：</th>
                             <td>
-                                <label><input type="radio" <?php if (!isset($data['isshow']) || $data['isshow']==1) { ?>checked<?php } ?> value="1" name="isshow">显示</label>
-                                <label><input type="radio" <?php if (isset($data['isshow']) && $data['isshow']==0) { ?>checked<?php } ?> value="0" name="isshow">隐藏</label>
+                                <label class="label-group"><input type="radio" <?php if (!isset($data['isshow']) || $data['isshow']==1) { ?>checked<?php } ?> value="1" name="isshow">显示</label>
+                                <label class="label-group"><input type="radio" <?php if (isset($data['isshow']) && $data['isshow']==0) { ?>checked<?php } ?> value="0" name="isshow">隐藏</label>
                                 <div class="show-tips">前台游客/会员发布时是否显示该字段。</div>
                             </td>
                         </tr>
@@ -217,8 +217,8 @@
                         <tr>
                             <th>是否必填：</th>
                             <td>
-                                <label><input <?php if ($data['formtype']=='merge') { ?>disabled<?php } ?> type="radio" <?php if (!isset($data['not_null']) || empty($data['not_null'])) { ?>checked<?php } ?> value="0" name="not_null" onclick="$('#pattern_data').hide();">选填</label>
-                                <label><input <?php if ($data['formtype']=='merge') { ?>disabled<?php } ?> type="radio" <?php if (isset($data['not_null']) && $data['not_null']) { ?>checked<?php } ?> value="1" name="not_null" onclick="$('#pattern_data').show();">必填</label>
+                                <label class="label-group"><input <?php if ($data['formtype']=='merge') { ?>disabled<?php } ?> type="radio" <?php if (!isset($data['not_null']) || empty($data['not_null'])) { ?>checked<?php } ?> value="0" name="not_null" onclick="$('#pattern_data').hide();">选填</label>
+                                <label class="label-group"><input <?php if ($data['formtype']=='merge') { ?>disabled<?php } ?> type="radio" <?php if (isset($data['not_null']) && $data['not_null']) { ?>checked<?php } ?> value="1" name="not_null" onclick="$('#pattern_data').show();">必填</label>
                             </td>
                         </tr>
                         </tbody>

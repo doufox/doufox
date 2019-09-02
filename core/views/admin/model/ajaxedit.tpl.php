@@ -27,8 +27,8 @@
                         <tr>
                             <th>是否显示：</th>
                             <td>
-                                <label><input type="radio" <?php if ($data['show']) { ?>checked<?php } ?> value="1" name="data[show]">显示</label>
-                                <label><input type="radio" <?php if (empty($data['show'])) { ?>checked<?php } ?> value="0" name="data[show]">隐藏</label>
+                                <label class="label-group"><input type="radio" <?php if ($data['show']) { ?>checked<?php } ?> value="1" name="data[show]">显示</label>
+                                <label class="label-group"><input type="radio" <?php if (empty($data['show'])) { ?>checked<?php } ?> value="0" name="data[show]">隐藏</label>
                             </td>
                         </tr>
                     </table>

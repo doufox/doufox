@@ -48,29 +48,29 @@
                                     <tr>
                                         <th>提交权限：</th>
                                         <td>
-                                            <label><input type="radio" <?php if (empty($model['setting']['form']['post'])) {?>checked<?php }?> value="0" name="setting[form][post]">游客</label>
-                                            <label><input type="radio" <?php if ($model['setting']['form']['post'] == 1) {?>checked<?php }?> value="1" name="setting[form][post]">会员</label>
+                                            <label class="label-group"><input type="radio" <?php if (empty($model['setting']['form']['post'])) {?>checked<?php }?> value="0" name="setting[form][post]">游客</label>
+                                            <label class="label-group"><input type="radio" <?php if ($model['setting']['form']['post'] == 1) {?>checked<?php }?> value="1" name="setting[form][post]">会员</label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>是否开启验证码：</th>
                                         <td>
-                                            <label><input type="radio" <?php if (empty($model['setting']['form']['code'])) {?>checked<?php }?> value="0" name="setting[form][code]">关闭</label>
-                                            <label><input type="radio" <?php if ($model['setting']['form']['code'] == 1) {?>checked<?php }?> value="1" name="setting[form][code]">打开</label>
+                                            <label class="label-group"><input type="radio" <?php if (empty($model['setting']['form']['code'])) {?>checked<?php }?> value="0" name="setting[form][code]">关闭</label>
+                                            <label class="label-group"><input type="radio" <?php if ($model['setting']['form']['code'] == 1) {?>checked<?php }?> value="1" name="setting[form][code]">打开</label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>是否审核：</th>
                                         <td>
-                                            <label><input type="radio" <?php if (empty($model['setting']['form']['check'])) {?>checked<?php }?> value="0" name="setting[form][check]">关闭</label>
-                                            <label><input type="radio" <?php if ($model['setting']['form']['check'] == 1) {?>checked<?php }?> value="1" name="setting[form][check]">打开</label>
+                                            <label class="label-group"><input type="radio" <?php if (empty($model['setting']['form']['check'])) {?>checked<?php }?> value="0" name="setting[form][check]">关闭</label>
+                                            <label class="label-group"><input type="radio" <?php if ($model['setting']['form']['check'] == 1) {?>checked<?php }?> value="1" name="setting[form][check]">打开</label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>是否在会员中心显示：</th>
                                         <td>
-                                            <label><input type="radio" <?php if (empty($model['setting']['form']['member'])) {?>checked<?php }?> value="0" name="setting[form][member]">关闭</label>
-                                            <label><input type="radio" <?php if ($model['setting']['form']['member'] == 1) {?>checked<?php }?> value="1" name="setting[form][member]">打开</label>
+                                            <label class="label-group"><input type="radio" <?php if (empty($model['setting']['form']['member'])) {?>checked<?php }?> value="0" name="setting[form][member]">关闭</label>
+                                            <label class="label-group"><input type="radio" <?php if ($model['setting']['form']['member'] == 1) {?>checked<?php }?> value="1" name="setting[form][member]">打开</label>
                                             <div class="show-tips">会员中心能查看到用户提交的内容</div>
                                         </td>
                                     </tr>
@@ -78,7 +78,7 @@
                                     <tr>
                                         <th>同一会员（游客）提交一次：</th>
                                         <td>
-                                            <label><input type="radio" <?php if ($model['setting']['form']['num'] == 1) {?>checked<?php }?> value="1" name="setting[form][num]">一次</label>
+                                            <label class="label-group"><input type="radio" <?php if ($model['setting']['form']['num'] == 1) {?>checked<?php }?> value="1" name="setting[form][num]">一次</label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -92,8 +92,8 @@
                                     <tr>
                                         <th>表单自定义字段：<?php echo $t['name']; ?>: </th>
                                         <td>
-                                            <label><input type="checkbox" value="<?php echo $t['field']; ?>" name="setting[form][show][]" <?php if (@in_array($t['field'], $model['setting']['form']['show'])) {?>checked<?php }?>>在后台管理列表显示</label>
-                                            <label><input type="checkbox" value="<?php echo $t['field']; ?>" name="setting[form][membershow][]" <?php if (@in_array($t['field'], $model['setting']['form']['membershow'])) {?>checked<?php }?>>在会员中心管理列表显示</label>
+                                            <label class="label-group"><input type="checkbox" value="<?php echo $t['field']; ?>" name="setting[form][show][]" <?php if (@in_array($t['field'], $model['setting']['form']['show'])) {?>checked<?php }?>>在后台管理列表显示</label>
+                                            <label class="label-group"><input type="checkbox" value="<?php echo $t['field']; ?>" name="setting[form][membershow][]" <?php if (@in_array($t['field'], $model['setting']['form']['membershow'])) {?>checked<?php }?>>在会员中心管理列表显示</label>
                                         </td>
                                     </tr>
                                     <?php }}?>

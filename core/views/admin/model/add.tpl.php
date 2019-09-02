@@ -51,7 +51,7 @@
                                     <th>表单模型关联：</th>
                                     <td>
                                         <?php foreach ($formmodel as $t) { ?>
-                                            <label><input type="checkbox" value="<?php echo $t['modelid']; ?>" name="join[]" <?php echo $t['select_status']; ?> /><?php echo $t['modelname']; ?></label>
+                                            <label class="label-group"><input type="checkbox" value="<?php echo $t['modelid']; ?>" name="join[]" <?php echo $t['select_status']; ?> /><?php echo $t['modelname']; ?></label>
                                         <?php } ?>
                                         <div class="show-tips">用于拓展内容（如评论，留言等）。</div>
                                     </td>

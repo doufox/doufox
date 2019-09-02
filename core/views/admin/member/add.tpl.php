@@ -73,9 +73,8 @@
                             <tr>
                                 <th>设置状态：</th>
                                 <td>
-                                    <label><input type="radio" <?php if (!isset($data['status']) || $data['status'] == 1) { ?>checked<?php } ?> value="1" name="data[status]"> 已审核</label>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <label><input type="radio" <?php if (isset($data['status']) && $data['status'] == 0) { ?>checked<?php } ?> value="0" name="data[status]"> 未审核</label>
+                                    <label class="label-group"><input type="radio" <?php if (!isset($data['status']) || $data['status'] == 1) { ?>checked<?php } ?> value="1" name="data[status]">已审核</label>
+                                    <label class="label-group"><input type="radio" <?php if (isset($data['status']) && $data['status'] == 0) { ?>checked<?php } ?> value="0" name="data[status]">未审核</label>
                                 </td>
                             </tr>
                             <?php if ($model) {

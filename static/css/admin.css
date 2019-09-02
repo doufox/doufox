@@ -100,25 +100,6 @@ textarea {
     border-bottom: 1px solid #eee;
 }
 
-#position {
-    margin-left: 15px;
-}
-
-#shortcut {
-    float: right;
-}
-
-#shortcut a {
-    display: block;
-    float: left;
-    padding-right: 5px;
-    padding-left: 5px;
-}
-
-#shortcut a:hover {
-    background-color: #eee;
-}
-
 .footer {
     height: 28px;
     width: 100%;
@@ -142,14 +123,6 @@ input.dialog {
     font-size: 0;
     line-height: 0;
     border: none
-}
-
-
-.font-fixh {
-    font-family: Georgia, Arial;
-    color: #f00;
-    font-size: 16px;
-    font-weight: 700;
 }
 
 /*通用样式*/
@@ -198,10 +171,6 @@ input.dialog {
     width: 75px
 }
 
-.line-x {
-    border-bottom: 1px solid #eee;
-}
-
 body fieldset {
     border: 1px solid #D8D8D8;
     padding: 10px;
@@ -238,42 +207,6 @@ body fieldset.blue legend {
     border-bottom: 1px solid #eee;
     padding-bottom: 5px;
     margin-bottom: 5px;
-}
-
-.col-tab ul.tabBut {
-    height: 27px;
-    position: relative;
-    bottom: -1px
-}
-
-.col-tab ul.tabBut li {
-    float: left;
-    height: 25px;
-    line-height: 26px;
-    margin-right: 5px;
-    border: 1px solid #d5dfe8;
-    font-weight: normal;
-    background: #F2F9FB;
-    padding: 0 8px;
-}
-
-.col-tab ul.tabBut li.on {
-    position: relative;
-    background: #fff;
-    border-bottom: 0;
-    height: 26px;
-    _height: 27px;
-    font-weight: 700;
-}
-
-.col-tab .content {
-    border: 1px solid #dce3ed;
-    _zoom: 1;
-}
-
-.col-tab .contentList {
-    border: 1px solid #dce3ed;
-    _zoom: 1;
 }
 
 .content-menu span {
@@ -327,53 +260,6 @@ body fieldset.blue legend {
     padding-left: 20px;
 }
 
-.line-box {
-    border: 1px solid #d5dfe8;
-}
-
-.table-list td,
-.table-list th {
-    padding-left: 10px;
-    font-weight: normal;
-}
-
-.table-list tr {
-    height: 26px;
-}
-
-.table-list thead {
-    border: 1px solid #d5dfe8;
-}
-
-.table-list thead th {
-    font-weight: normal;
-    background-color: #f3f9fa;
-}
-
-.table-list tbody td {
-    border-bottom: #eee 1px solid;
-    padding-top: 5px;
-    padding-bottom: 5px
-}
-
-.table-list tr:hover,
-.table-list table tbody tr:hover {
-    background: #f1f8ff
-}
-
-.table-list .input-text-c {
-    padding: 0;
-    height: 18px
-}
-
-.table-list tr.on,
-.table-list tr.on td,
-.table-list tr.on th,
-.table-list td.on,
-.table-list th.on {
-    background: #fdf9e5;
-}
-
 input.date {
     background: #fff url(../img/input_date.png) no-repeat right 3px;
     padding-right: 18px;
@@ -386,6 +272,7 @@ input.date {
 
 /* table_form */
 
+
 .table_form td {
     padding-left: 12px
 }
@@ -397,25 +284,29 @@ input.date {
     color: #777
 }
 
-.table_form label {
+table td .label-group {
+    margin-bottom: unset;
+}
+
+.label-group {
     margin-right: 5px;
     font-weight: normal;
 }
 
-.table_form label:hover {
+.label-group:hover {
     color: #00f;
 }
 
-.table_form label:hover input[type=radio],
-.table_form label:hover input[type=checkbox] {
+.label-group input[type=radio],
+.label-group input[type=checkbox] {
+    margin-right: 4px;
+}
+
+.label-group:hover input[type=radio],
+.label-group:hover input[type=checkbox] {
     outline-width: 1px;
     outline-style: dotted;
     outline-color: #00f;
-}
-
-.table_form label input[type=radio],
-.table_form label input[type=checkbox] {
-    margin-right: 5px;
 }
 
 .table_form td,
@@ -426,7 +317,6 @@ input.date {
 /* 表单验证 */
 .show-tips,
 .onFocus,
-.onError,
 .onCorrect,
 .onLoad {
     display: inline-block;
@@ -452,22 +342,6 @@ input.date {
     background-position: 3px -145px;
     border-color: #40B3FF;
     color: #959595
-}
-
-.onFocus2 {
-    background-position: 3px -147px;
-    border-color: #40B3FF;
-}
-
-.onError {
-    background-position: 3px -47px;
-    border-color: #40B3FF;
-    color: red
-}
-
-.onCorrect {
-    background-position: 3px -247px;
-    border-color: #40B3FF;
 }
 
 .display {

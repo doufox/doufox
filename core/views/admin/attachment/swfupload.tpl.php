@@ -44,7 +44,7 @@ $(document).ready(function(){
 </script>
 
 <div class="pad-10">
-    <div class="col-tab">
+    <div>
         <ul class="tabBut cu-li">
             <li onclick="SwapTab('swf','on','',2,1);" id="tab_swf_1"  class="on">上传附件</li>
             <li onclick="SwapTab('swf','on','',2,2);" id="tab_swf_2">目录浏览</li>

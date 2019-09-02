@@ -65,7 +65,7 @@
                             <li><a href="<?php echo url('admin/account/me'); ?>" title="帮助">帮助</a></li>
                             <li><a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="javascript:logout();" title="退出系统">退出系统</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#modal-logout" title="退出系统">退出系统</a></li>
                             <li role="separator" class="divider"></li>
                         </ul>
                     </li>

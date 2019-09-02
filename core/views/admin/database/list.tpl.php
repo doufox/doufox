@@ -24,21 +24,21 @@
                 <table width="100%" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th align="left" width="80">选择</th>
-                            <th align="left">表名</th>
-                            <th align="left">类型</th>
-                            <th align="left">编码</th>
-                            <th align="left">行数</th>
-                            <th align="left">使用空间</th>
-                            <th align="left">碎片</th>
-                            <th align="left" width="150">操作</th>
+                            <th width="80">选择</th>
+                            <th>表名</th>
+                            <th>类型</th>
+                            <th>编码</th>
+                            <th>行数</th>
+                            <th>使用空间</th>
+                            <th>碎片</th>
+                            <th width="150">操作</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($data as $v) { ?>
                             <tr>
                                 <td>
-                                    <label>
+                                    <label class="label-group">
                                         <input <?php if ($v['tables_sys']) {
                                                     echo 'class="selectform"';
                                                 } ?> type="checkbox" name="table[]" value="<?php echo $v['Name']; ?>" />
@@ -64,13 +64,16 @@
                             </tr>
                         <?php } ?>
                     </tbody>
-                </table>
-                <div class="panel-body">
                     <?php if (is_array($data)) { ?>
-                        <label><input name="selectform" class="select_tables" type="checkbox" onClick="selectTables()">&nbsp;选择系统表</label>&nbsp;&nbsp;
-                        <button type="submit" name="submit" class="btn btn-default" value="1">开始备份数据库</button>
+                    <tfoot>
+                        <td colspan="8">
+                            <label class="label-group"><input name="selectform" class="select_tables" type="checkbox" onClick="selectTables()">选择系统表</label>
+                            <button type="submit" name="submit" class="btn btn-default" value="1">开始备份数据库</button>
+                        </td>
+                    </tfoot>
                     <?php } ?>
-                </div>
+                </table>
+                <div class="panel-body"></div>
             </div>
         </form>
     </div>

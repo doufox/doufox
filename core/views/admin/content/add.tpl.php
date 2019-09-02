@@ -70,10 +70,10 @@
                         <tr>
                             <th>状态：</th>
                             <td>
-                                <label><input type="radio" <?php if (!isset($data['status']) || $data['status'] == 1) { ?>checked<?php } ?> value="1" name="data[status]">正常</label>
-                                <label><input type="radio" <?php if ($data['status'] == 2) { ?>checked<?php } ?> value="2" name="data[status]">头条</label>
-                                <label><input type="radio" <?php if ($data['status'] == 3) { ?>checked<?php } ?> value="3" name="data[status]">推荐</label>
-                                <label><input type="radio" <?php if (isset($data['status']) && $data['status'] == 0) { ?>checked<?php } ?> value="0" name="data[status]">未审核</label>
+                                <label class="label-group"><input type="radio" <?php if (!isset($data['status']) || $data['status'] == 1) { ?>checked<?php } ?> value="1" name="data[status]">正常</label>
+                                <label class="label-group"><input type="radio" <?php if ($data['status'] == 2) { ?>checked<?php } ?> value="2" name="data[status]">头条</label>
+                                <label class="label-group"><input type="radio" <?php if ($data['status'] == 3) { ?>checked<?php } ?> value="3" name="data[status]">推荐</label>
+                                <label class="label-group"><input type="radio" <?php if (isset($data['status']) && $data['status'] == 0) { ?>checked<?php } ?> value="0" name="data[status]">未审核</label>
                             </td>
                         </tr>
                         <tr>
