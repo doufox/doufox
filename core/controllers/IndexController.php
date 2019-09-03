@@ -24,7 +24,7 @@ class IndexController extends Controller
     /**
      * 栏目列表页
      */
-    public function listAction()
+    public function categoryAction()
     {
         $catid = (int) $this->get('catid');
         $catdir = $this->get('catdir');
@@ -47,7 +47,7 @@ class IndexController extends Controller
         $this->view->assign($cat);
         $this->view->assign(listSeo($cat, $page));
         if ($cat['typeid'] == 1) {
-            //内部栏目
+            // 内部栏目
             $this->view->assign(array(
                 'page' => $page,
                 'catid' => $catid,
@@ -55,10 +55,10 @@ class IndexController extends Controller
             ));
             $this->view->display($cat['child'] == 1 ? $cat['categorytpl'] : $cat['listtpl']);
         } elseif ($cat['typeid'] == 2) {
-            //单网页
+            // 单网页
             $this->view->display($cat['pagetpl']);
         } else {
-            //外部链接
+            // 外部链接
             header('Location: ' . $cat['url']);
         }
     }

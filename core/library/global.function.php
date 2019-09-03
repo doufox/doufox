@@ -529,7 +529,7 @@ function getCaturl($data, $page = 0)
     if ($page) {
         $params['page'] = $page;
     }
-    return url('index/list', $params);
+    return url('index/category', $params);
 }
 
 /**

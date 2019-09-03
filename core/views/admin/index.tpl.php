@@ -4,7 +4,19 @@
 
 <div class="container">
     <div class="page_menu">
-        侧边栏功能区
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="panel-title">快速导航</span>
+            </div>
+            <div class="list-group">
+                <a class="list-group-item" href="<?php echo url('admin/category/add'); ?>">添加栏目</a>
+                <a class="list-group-item" href="<?php echo url('admin/member/index'); ?>">会员列表</a>
+                <a class="list-group-item" href="<?php echo url('admin/member/add'); ?>">添加会员</a>
+                <a class="list-group-item" href="<?php echo url('admin/attachment'); ?>">查看附件</a>
+                <a class="list-group-item" href="<?php echo url('admin/backup'); ?>">备份管理</a>
+                <a class="list-group-item" href="<?php echo url('admin/cache'); ?>">更新缓存</a>
+            </div>
+        </div>
     </div>
     <div class="page_content">
         <div class="row">
