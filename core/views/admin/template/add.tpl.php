@@ -27,10 +27,19 @@
 </style>
 
 <div class="container">
-    <div class="list-group page_menu">
-        <a class="list-group-item" href="<?php echo url('admin/template/index'); ?>">模板管理</a>
-        <a class="list-group-item" href="<?php echo url('admin/template/add'); ?>">添加模板</a>
-        <a class="list-group-item" href="<?php echo url('admin/template/cache'); ?>">更新缓存</a>
+    <div class="page_menu">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="panel-title">模板管理</span>
+            </div>
+            <div class="list-group">
+                <a class="list-group-item active" href="<?php echo url('admin/template/index'); ?>">模板管理</a>
+                <a class="list-group-item" href="<?php echo url('admin/template/desktop'); ?>">桌面端模板</a>
+                <a class="list-group-item" href="<?php echo url('admin/template/mobile'); ?>">移动端模板</a>
+                <a class="list-group-item" href="<?php echo url('admin/template/add'); ?>">添加模板</a>
+                <a class="list-group-item" href="<?php echo url('admin/template/cache'); ?>">更新缓存</a>
+            </div>
+        </div>
     </div>
     <div class="page_content">
         <div class="panel panel-default">
