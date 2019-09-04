@@ -2,6 +2,7 @@
 
 class CacheController extends Admin
 {
+
     public function __construct()
     {
         parent::__construct();
@@ -9,6 +10,32 @@ class CacheController extends Admin
 
     public function indexAction()
     {
+        $file_list = core::load_class('file_list');
+        $dir = DATA_PATH . 'cache' . DS;
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777);
+        }
+        $data = $file_list->get_file_list($dir); // 扫描缓存数组目录
+        $list = array();
+        if ($data) {
+            foreach ($data as $path) {
+                if (!in_array($path, array('.', '..')) && is_file($dir . $path)) {
+                    $size = formatFileSize(filesize($dir . $path), 2);
+                    $ctime = date('Y-m-d H:i:s', filectime($dir . $path));
+                    $mtime = date('Y-m-d H:i:s', filemtime($dir . $path));
+                    $list[] = array(
+                        'path' => $path,
+                        'size' => $size,
+                        'ctime' => $ctime,
+                        'mtime' => $mtime,
+                        'name' => '缓存数据'
+                    );
+                    clearstatcache();
+                }
+            }
+        }
+        unset($data);
+        unset($file_list);
         include $this->admin_tpl('cache/list');
     }
 
@@ -40,6 +67,18 @@ class CacheController extends Admin
             }
         } else {
             include $this->admin_tpl('cache/update');
+        }
+    }
+
+    /** 删除缓存文件 */
+    public function deleteAction()
+    {
+        $dir = DATA_PATH . 'cache' . DS;
+        $path = urldecode($this->get('path'));
+        if (@unlink($dir . $path)) {
+            $this->show_message('删除成功', 1, url('admin/cache/index'));
+        } else {
+            $this->show_message('删除失败', 2, url('admin/cache/index'));
         }
     }
 
