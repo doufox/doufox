@@ -3,25 +3,23 @@
 class Api extends Controller
 {
 
+    protected $userid;
+
     public function __construct()
     {
         parent::__construct();
+        $this->userid = $this->session->get('user_id');
     }
 
     /**
      * 前台登陆检查
      */
-    protected function isLogin($return = 0)
+    public function is_admin_login($return = 0)
     {
-        if ($this->memberinfo) {
-            return false;
+        $userid = $this->session->get('user_id');
+        if (empty($this->userid)) {
+            $this->response(401, null, 'Unauthorized');
         }
-        if ($return) {
-            return true;
-        }
-
-        $back = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : url('member/index');
-        $this->redirect(url('member/login', array('back' => urlencode($back))));
     }
 
     protected function inlogged()
@@ -45,6 +43,7 @@ class Api extends Controller
             'msg' => $msg,
         );
         $raw = json_encode($raw);
-        echo $raw;
+        // echo $raw;
+        exit($raw);
     }
 }

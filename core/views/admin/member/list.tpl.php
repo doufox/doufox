@@ -35,15 +35,15 @@
                 <table class="table table-bordered table-hover" width="100%">
                     <thead>
                         <tr>
-                            <th width="25"><input name="deletec" id="deletec" type="checkbox" onclick="setC()"></th>
-                            <th width="40">ID </th>
-                            <th width="60">状态</th>
+                            <th><input name="deletec" id="deletec" type="checkbox" onclick="setC()"></th>
+                            <th>ID</th>
+                            <th>状态</th>
                             <th>登录账号</th>
                             <th>昵称</th>
-                            <th width="80">会员模型</th>
-                            <th width="160">注册时间</th>
-                            <th width="110">注册IP</th>
-                            <th width="100">操作</th>
+                            <th>会员模型</th>
+                            <th>注册时间</th>
+                            <th>注册IP</th>
+                            <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>

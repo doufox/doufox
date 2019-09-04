@@ -24,14 +24,14 @@
                 <table width="100%" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th width="80">选择</th>
+                            <th>选择</th>
                             <th>表名</th>
                             <th>类型</th>
                             <th>编码</th>
                             <th>行数</th>
                             <th>使用空间</th>
                             <th>碎片</th>
-                            <th width="150">操作</th>
+                            <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>

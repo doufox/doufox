@@ -39,15 +39,15 @@ function setC() {
                 <table class="table table-bordered table-hover" width="100%">
                     <thead>
                         <tr>
-                            <th width="20"><input name="deletec" id="deletec" type="checkbox" onClick="setC()"></th>
-                            <th width="20">ID </th>
-                            <th width="80">状态 </th>
+                            <th><input name="deletec" id="deletec" type="checkbox" onClick="setC()"></th>
+                            <th>ID</th>
+                            <th>状态</th>
                             <?php if (is_array($model['setting']['form']['show'])) {foreach ($model['setting']['form']['show'] as $f) {?>
                             <th><?php echo $model['fields']['data'][$f]['name']; ?></th>
                             <?php }}if ($join) {?><th>关联id</th><?php }?>
-                            <th width="100">发布人</th>
-                            <th width="150">更新时间</th>
-                            <th width="150">操作</th>
+                            <th>发布人</th>
+                            <th>更新时间</th>
+                            <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>

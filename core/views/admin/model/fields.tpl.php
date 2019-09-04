@@ -25,13 +25,13 @@
                 <table class="table table-bordered table-hover" width="100%">
                     <thead>
                         <tr>
-                            <th width="50" align="left">排序</th>
-                            <th width="90" align="left">字段别名</th>
-                            <th width="80" align="left">输入类型</th>
-                            <th align="left">字段名称</th>
-                            <th width="70" align="left">前台显示</th>
-                            <th width="80" align="left">是否必填</th>
-                            <th width="140" align="left">操作</th>
+                            <th>排序</th>
+                            <th>字段别名</th>
+                            <th>输入类型</th>
+                            <th>字段名称</th>
+                            <th>前台显示</th>
+                            <th>是否必填</th>
+                            <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>

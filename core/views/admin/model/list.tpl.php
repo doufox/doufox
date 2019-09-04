@@ -36,11 +36,11 @@
             <table class="table table-bordered table-hover" width="100%">
                 <thead>
                     <tr>
-                        <th align="left" width="40">ID</th>
-                        <th align="left">模型名称</th>
-                        <th align="left">模型类型</th>
-                        <th align="left">数据表名</th>
-                        <th align="left" width="200">操作</th>
+                        <th>ID</th>
+                        <th>模型名称</th>
+                        <th>模型类型</th>
+                        <th>数据表名</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>

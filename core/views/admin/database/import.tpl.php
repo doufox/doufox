@@ -24,13 +24,13 @@
                 <table width="100%" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th width="66">
+                            <th>
                                 <label class="label-group"><input name="selectform" class="select_backups" type="checkbox" onClick="selectBackup()">全选</label>
                             </th>
-                            <th width="160">备份时间</th>
+                            <th>备份时间</th>
                             <th>备份文件目录</th>
-                            <th width="150">文件大小</th>
-                            <th width="150">操作</th>
+                            <th>文件大小</th>
+                            <th>操作</th>
                         </tr>
                     </thead>
                     <?php if ($list) { ?>

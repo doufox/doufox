@@ -22,11 +22,11 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th width="30">ID</th>
+                        <th>ID</th>
                         <th>账号</th>
                         <th>姓名</th>
                         <th>角色</th>
-                        <th width="120">操作</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>

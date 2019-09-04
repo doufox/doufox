@@ -23,28 +23,30 @@
             <table class="table table-bordered table-hover" width="100%">
                 <thead>
                     <tr>
-                        <th width="60">排序</th>
-                        <th width="80">类型</th>
-                        <th>文件</th>
-                        <th width="100">大小</th>
-                        <th width="150">创建时间</th>
-                        <th width="150">更新时间</th>
-                        <th width="150">操作</th>
+                        <th>#</th>
+                        <th>类型</th>
+                        <th>路径</th>
+                        <th>大小</th>
+                        <th>创建时间</th>
+                        <th>更新时间</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($list as $v) { ?>
                         <tr>
-                            <td>1</td>
-                            <td>系统账号</td>
-                            <td><?php echo $v['path']; ?></td>
+                            <td><?php echo $v['index']; ?></td>
+                            <td><?php echo $v['desc']; ?></td>
+                            <td><?php echo $v['name']; ?></td>
                             <td><?php echo $v['size'] ?></td>
                             <td><?php echo $v['ctime']; ?></td>
                             <td><?php echo $v['mtime']; ?></td>
                             <td>
                                 <a href="javascript:showTableBackups(<?php echo $v['path'] ?>);">预览</a>
                                 <a href="javascript:void(0);">刷新</a>
+                                <?php if ($v['type'] == 'file') { ?>
                                 <a href="javascript:admin_command.confirmurl('<?php echo url("admin/cache/delete", array("path" => $v['path'])) ?>', '确定删除吗？');">删除</a>
+                                <?php } ?>
                             </td>
                         </tr>
                     <?php } ?>
