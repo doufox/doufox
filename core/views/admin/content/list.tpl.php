@@ -20,18 +20,6 @@
             $(".deletec").prop("checked",false);
         }
     }
-    function select_cats(e) {
-        window.location.href = "<?php echo url('admin/content/index'); ?>&catid=" + e.options[e.options.selectedIndex].value;
-    };
-    function showPreviewArticle (id) {
-        window.top.art.dialog({
-            title: '预览文章',
-            id: 'show',
-            iframe: '<?php echo url("admin/content/preview"); ?>&id=' + id,
-            width: '700px',
-            height: '400px'
-        });
-    }
 </script>
 
 <div class="container">
@@ -61,9 +49,6 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <span>栏目：</span>
-                    <select class="form-control input-sm" style="max-width: 100px; display: inline-block;" onchange="select_cats(this);"><?php echo $category; ?></select>
-                    <span>状态：</span>
                     <a class="btn btn-default btn-sm" href="<?php echo url('admin/content/index', array('catid'=>$catid)); ?>">全部</a>
                     <a class="btn btn-default btn-sm" href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>1)); ?>">正常(<?php echo $count[1]; ?>)</a>
                     <a class="btn btn-default btn-sm" href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>2)); ?>">头条(<?php echo $count[2]; ?>)</a>
@@ -111,11 +96,12 @@
                                 <?php if (is_array($join)) { foreach ($join as $j) { ?>
                                 <a href="<?php echo url('admin/form/list', array('cid'=>$t['id'], 'modelid'=>$j['modelid'])); ?>"><?php echo $j['modelname']; ?></a> 
                                 <?php } } ?>
-                                <?php if (!$t['status']) { ?><a href="javascript:void(0);" onclick="showPreviewArticle(<?php echo $t['id']?>)">预览</a> 
+                                <?php if (!$t['status']) { ?>
+                                    <a href="#modal-content-preview" data-toggle="modal" onclick="content_preview(<?php echo $t['id']?>)">预览</a>
                                 <?php } else { ?><a href="<?php echo $t[url]; ?>" target="_blank">查看</a> 
                                 <?php } ?>
                                 <a href="<?php echo url('admin/content/edit',array('id'=>$t['id'])); ?>" clz="1">编辑</a> 
-                                <a href="javascript:admin_command.confirmurl('<?php echo url('admin/content/del/',array('catid'=>$t['catid'],'id'=>$t['id'])); ?>','确定删除 『 <?php echo $t['title']; ?> 』吗？ ')" >删除</a> 
+                                <a href="#modal-content-delete" data-toggle="modal" name="删除" onclick="content_delete(this);" data-id="<?php echo $t['id']; ?>" data-name="<?php echo $t['title']; ?>">删除</a>
                             </td>
                             <td>
                                 <input type="text" name="order_<?php echo $t['id']; ?>" style="width:25px; height:15px;" value="<?php echo $t['listorder']; ?>">
@@ -142,5 +128,70 @@
         </form>
     </div>
 </div>
+
+<!-- 账号提示 -->
+<div class="modal fade" id="modal-content-delete" tabindex="-1" role="dialog" aria-labelledby="aria-content-delete">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="aria-content-delete">系统提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>确定删除<span id="content-delete-name"></span>吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <a type="button" id="content-delete-url" class="btn btn-primary" href="#">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 内容预览 -->
+<div class="modal fade" id="modal-content-preview" tabindex="-1" role="dialog" aria-labelledby="aria-content-preview">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="aria-content-preview">内容预览</h4>
+            </div>
+            <div class="modal-body">
+                <iframe id="content-preview-view" width="100%" frameborder="0" onload="setIframeHeight(this);"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function content_delete(e) {
+        if (e && e.dataset && e.dataset.id && e.dataset.name) {
+            document.getElementById('content-delete-url').href = "<?php echo url('admin/content/del', array('catid'=>$catid, 'id' => '')); ?>" + e.dataset.id;
+            document.getElementById('content-delete-name').innerText = '『' + e.dataset.name + '』';
+        } else {
+            document.getElementById('content-delete-url').href = '';
+            document.getElementById('content-delete-name').innerText = '';
+        }
+    }
+    $('#modal-content-delete').on('hide.bs.modal', function () {
+        content_delete();
+    })
+    function content_preview (x) {
+        if (x) {
+            document.getElementById('content-preview-view').src = "<?php echo url('admin/content/preview', array('id' => '')); ?>" + x;
+            // document.getElementById('content-preview-name').innerText = '"' + name + '"';
+        } else {
+            document.getElementById('content-preview-view').src = '';
+            document.getElementById('content-preview-view').height = '';
+            // document.getElementById('content-preview-name').innerText = '';
+        }
+    }
+    $('#modal-content-preview').on('hide.bs.modal', function () {
+        content_preview();
+    })
+</script>
 
 <?php include $this->admin_tpl('footer'); ?>

@@ -148,3 +148,16 @@ window.admin_command = {
         $('#' + obj + '-sort-items').append(c);
     }
 }
+
+/**
+ * 高度自适应
+ * @param {Object} iframe iframe 对象
+ */
+function setIframeHeight(iframe) {
+    if (iframe) {
+        var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+        if (iframeWin.document.body) {
+            iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+        }
+    }
+};
