@@ -42,21 +42,13 @@
                             <td><?php echo $v['ctime']; ?></td>
                             <td><?php echo $v['mtime']; ?></td>
                             <td>
-                                <a href="javascript:showTableBackups(<?php echo $v['path'] ?>);">预览</a>
-                                <a href="javascript:void(0);">刷新</a>
-                                <?php if ($v['type'] == 'file') { ?>
-                                <a href="javascript:admin_command.confirmurl('<?php echo url("admin/cache/delete", array("path" => $v['path'])) ?>', '确定删除吗？');">删除</a>
-                                <?php } ?>
+                                <a href="<?php echo $v['update']; ?>">刷新</a>
                             </td>
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
-            <div class="panel-body">
-                <!-- <button type="submit" class="btn btn-default" value="排序" name="submit" onClick="$('#load').show()">排序</button>
-                <span class="show-tips">排序方式为 “由小到大” 更改排序后请更新缓存</span> -->
-                <span id="load" style="display:none"><img src="/static/img/loading.gif"></span>
-            </div>
+            <div class="panel-body"></div>
         </div>
     </div>
 </div>

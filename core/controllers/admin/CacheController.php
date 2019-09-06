@@ -11,16 +11,46 @@ class CacheController extends Admin
     public function indexAction()
     {
         $caches_desc = array(
-            'account.cache.php' => '系统账号',
-            'block.cache.php' => '区块',
-            'category.cache.php' => '栏目',
-            'category_dir.cache.php' => '栏目',
-            'formmodel.cache.php' => '表单模型',
-            'joinmodel.cache.php' => '模型配置',
-            'membermodel.cache.php' => '会员',
-            'model.cache.php' => '模型',
-            'theme_desktop' => '桌面主题',
-            'theme_mobile' => '移动主题',
+            'account.cache.php' => array(
+                'controller' => 'account',
+                'title' => '系统账号'
+            ),
+            'block.cache.php' => array(
+                'controller' => 'block',
+                'title' => '区块'
+            ),
+            'category.cache.php' => array(
+                'controller' => 'category',
+                'title' => '栏目'
+            ),
+            'category_dir.cache.php' => array(
+                'controller' => 'category',
+                'title' => '栏目'
+            ),
+            'formmodel.cache.php' => array(
+                'controller' => 'form',
+                'title' => '表单模型'
+            ),
+            'joinmodel.cache.php' => array(
+                'controller' => 'model',
+                'title' => '模型配置'
+            ),
+            'membermodel.cache.php' => array(
+                'controller' => 'member',
+                'title' => '会员'
+            ),
+            'model.cache.php' => array(
+                'controller' => 'model',
+                'title' => '模型'
+            ),
+            'theme_desktop' => array(
+                'controller' => 'template',
+                'title' => '桌面主题'
+            ),
+            'theme_mobile' => array(
+                'controller' => 'template',
+                'title' => '移动主题'
+            ),
         );
         $file_list = core::load_class('file_list');
         $dir = DATA_PATH . 'cache' . DS;
@@ -29,41 +59,36 @@ class CacheController extends Admin
         }
         $data = $file_list->get_file_list($dir); // 扫描缓存数组目录
         $list = array();
-        $index = 0;
         if ($data) {
+            $index = 0;
             foreach ($data as $fname) {
                 $index++;
                 if (!in_array($fname, array('.', '..'))) {
+                    $line = array(
+                        'name' => $fname,
+                        'index' => $index,
+                        'size' => '',
+                        'type' => 'file',
+                        'desc' => $caches_desc[$fname]['title'],
+                        'controller' => $caches_desc[$fname]['controller'],
+                        'ctime' => date('Y-m-d H:i:s', filectime($dir . $fname)),
+                        'mtime' => date('Y-m-d H:i:s', filemtime($dir . $fname)),
+                        'update' => url('admin/' . $caches_desc[$fname]['controller'] . '/cache')
+                    );
                     if (is_file($dir . $fname)) {
-                        // $size = formatFileSize(filesize($dir . $fname), 2);
-                        // $ctime = date('Y-m-d H:i:s', filectime($dir . $fname));
-                        // $mtime = date('Y-m-d H:i:s', filemtime($dir . $fname));
-                        $list[] = array(
-                            'index' => $index,
-                            'name' => $fname,
-                            'size' => formatFileSize(filesize($dir . $fname), 2),
-                            'ctime' => date('Y-m-d H:i:s', filectime($dir . $fname)),
-                            'mtime' => date('Y-m-d H:i:s', filemtime($dir . $fname)),
-                            'type' => 'file',
-                            'desc' => $caches_desc[$fname],
-                        );
+                        $line['type'] = 'file';
+                        $line['size'] = formatFileSize(filesize($dir . $fname), 2);
                     } else if (is_dir($dir . $fname)) {
                         $size = 0;
                         $_dir = scandir($dir . $fname);
                         foreach ($_dir as $c) {
                             $size += filesize($dir . $fname . DS . $c);
                         }
-                        $list[] = array(
-                            'index' => $index,
-                            'name' => $fname,
-                            'size' => formatFileSize($size, 2),
-                            'ctime' => date('Y-m-d H:i:s', filectime($dir . $fname)),
-                            'mtime' => date('Y-m-d H:i:s', filemtime($dir . $fname)),
-                            'type' => 'directory',
-                            'desc' => $caches_desc[$fname],
-                        );
+                        $line['size'] = formatFileSize($size, 2);
+                        $line['type'] = 'directory';
                         unset($_dir);
                     }
+                    $list[] = $line;
                     clearstatcache();
                 }
             }

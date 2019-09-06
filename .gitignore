@@ -1,1 +1,4 @@
-database.ini*
+data/cache
+data/config/database.ini.php
+data/session
+data/models
