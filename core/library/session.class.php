@@ -4,8 +4,8 @@ if (!defined('IN_CMS')) {
 }
 
 /**
- * session class file
- * 处理session操作
+ * Session Class
+ * 处理 Session 操作
  */
 class Session
 {
