@@ -111,7 +111,7 @@ class DatabaseController extends Admin
     {
         $name = $this->get('name');
         $data = $this->content->execute("SHOW CREATE TABLE $name", false);
-        echo '<div class="subnav"><pre>' . $data['Create Table'] . '</pre></div>';
+        echo '<pre>' . $data['Create Table'] . '</pre>';
     }
 
     /*
@@ -129,7 +129,7 @@ class DatabaseController extends Admin
         echo 'table {border-collapse: collapse;border-spacing: 0;}';
         echo 'td {white-space: nowrap;padding: 5px;}';
         echo '</style>';
-        echo '<div class="subnav"><table border="1">';
+        echo '<table border="1">';
         foreach ($data as $v) {
             echo '<tr>';
             foreach ($v as $i) {
@@ -137,7 +137,7 @@ class DatabaseController extends Admin
             }
             echo '</tr>';
         }
-        echo '</table></div>';
+        echo '</table>';
     }
 
     /*
