@@ -48,7 +48,7 @@ class FormController extends Admin
         $cid = (int) $this->get('cid');
         $modelid = (int) $this->get('modelid');
 
-        if ($this->post('submit_del') && $this->post('form') == 'del') {
+        if ($this->post('form') == 'del') {
             foreach ($_POST as $var => $value) {
                 if (strpos($var, 'del_') !== false) {
                     $_id = (int) str_replace('del_', '', $var);

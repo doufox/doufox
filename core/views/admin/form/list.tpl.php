@@ -2,22 +2,28 @@
 <?php include $this->admin_tpl('navbar');?>
 
 <script type="text/javascript">
-function confirm_del() {
-    if (confirm('确定删除吗？')) {
-        document.myform.submit();
-        return true;
-    } else {
-        return false;
+    function setC() {
+        if($("#deletec").prop('checked')==true) {
+            $(".deletec").prop("checked",true);
+        } else {
+            $(".deletec").prop("checked",false);
+        }
     }
-}
-function setC() {
-    if($("#deletec").prop('checked')==true) {
-        $(".deletec").prop("checked",true);
-    } else {
-        $(".deletec").prop("checked",false);
+    function form_delete(url) {
+        if (url) {
+            $('#modal-alert').modal();
+            document.getElementById('modal-alert-url').href = url;
+            document.getElementById('modal-alert-body').innerText = '确定删除吗？';
+        }
     }
-}
+    function form_delete_muti() {
+        $('#list_form').val('del');
+        $('#modal-alert').modal();
+        document.getElementById('modal-alert-url').href = "javascript:document.myform.submit()";
+        document.getElementById('modal-alert-body').innerText = '确定删除吗？';
+    }
 </script>
+
 <div class="container">
     <div class="panel panel-default page_menu">
         <div class="panel-heading">
@@ -67,14 +73,14 @@ function setC() {
                         <td>
                             <a href="<?php echo url('admin/form/edit', array('id' => $t['id'], 'modelid' => $modelid, 'cid' => $cid)); ?>">查看</a>
                             <a href="<?php echo url('admin/form/edit', array('id' => $t['id'], 'modelid' => $modelid, 'cid' => $cid)); ?>">编辑</a>
-                            <a href="javascript:admin_command.confirmurl('<?php $del = url('admin/form/del', array('modelid' => $modelid, 'id' => $t['id'], 'cid' => $cid));?>','确定删除 吗？')">删除</a>
+                            <a href="javascript:form_delete('<?php echo url('admin/form/del', array('modelid' => $modelid, 'id' => $t['id'], 'cid' => $cid));?>')">删除</a>
                         </td>
                     </tr>
                     <?php }}?>
                     </tbody>
                 </table>
                 <div class="panel-body">
-                    <button type="submit" class="btn btn-default btn-sm" value="删除" name="submit_del" onClick="$('#list_form').val('del');return confirm_del();">删除</button>
+                    <button type="button" class="btn btn-default btn-sm" value="删除" onClick="form_delete_muti();">删除</button>
                     <button type="submit" class="btn btn-default btn-sm" value="设置为审核" name="submit_status_1" onClick="$('#list_form').val('status_1')">设置为审核</button>
                     <button type="submit" class="btn btn-default btn-sm" value="设置为未审核" name="submit_status_0" onClick="$('#list_form').val('status_0')">设置为未审核</button>
                 </div>
