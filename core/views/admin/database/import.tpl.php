@@ -132,7 +132,7 @@
             $('#modal-database-confirm').modal();
             document.getElementById('database-confirm-title').innerText = '系统提示';
             document.getElementById('database-confirm-body').innerText = '确定删除备份文件"' + path + '"吗？';
-            document.getElementById('database-confirm-url').href = '<?php echo url("admin/database", array("path" => "")); ?>' + path;
+            document.getElementById('database-confirm-url').href = '<?php echo url("admin/database/delbackedfile", array("path" => "")); ?>' + path;
         }
     }
     $('#modal-database-view').on('hide.bs.modal', function() {

@@ -53,7 +53,6 @@
         document.getElementById('leftMain').src = "<?php echo url('admin/content/category'); ?>";
     }
 </script>
-<script type="text/javascript" src="/static/js/admin.js"></script>
 
 </body>
 

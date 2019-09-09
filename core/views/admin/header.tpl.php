@@ -16,6 +16,7 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico" />
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/admin.js"></script>
     <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script>
 </head>
 

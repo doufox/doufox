@@ -43,7 +43,6 @@ class DatabaseController extends Admin
     public function importAction()
     {
         $file_list = core::load_class('file_list');
-
         $dir = DATA_PATH . 'bakup' . DS;
         $path = $this->get('path');
         if ($path && is_dir($dir . $path)) {
@@ -65,7 +64,8 @@ class DatabaseController extends Admin
             mkdir($dir, 0777);
         }
 
-        $data = $file_list->get_file_list($dir); //扫描备份目录
+        $data = $file_list->get_file_list($dir); // 扫描备份目录
+        unset($file_list);
         $list = array();
         if ($data) {
             foreach ($data as $path) {
@@ -82,6 +82,20 @@ class DatabaseController extends Admin
             }
         }
         include $this->admin_tpl('database/import');
+    }
+
+    /** 删除单个备份文件 */
+    public function delbackedfileAction()
+    {
+        $dir = DATA_PATH . 'bakup' . DS;
+        $path = $this->get('path');
+        if ($path && is_dir($dir . $path)) {
+            $file_list = core::load_class('file_list');
+            $file_list->delete_dir($dir . $path);
+            unset($file_list);
+            @rmdir($dir . $path);
+            $this->show_message('操作成功', 1, url('admin/database/import'));
+        }
     }
 
     /*
@@ -226,7 +240,7 @@ class DatabaseController extends Admin
                         $comma = "";
                         $tabledump .= "INSERT INTO `$tables[$i]` VALUES(";
                         for ($j = 0; $j < $numfields; $j++) {
-                            $tabledump .= $comma . "'" . mysql_escape_string($row[$name[$j]]) . "'";
+                            $tabledump .= $comma . "'" . mysql_real_escape_string($row[$name[$j]]) . "'";
                             $comma = ",";
                         }
                         $tabledump .= ");\n";
@@ -331,11 +345,9 @@ class DatabaseController extends Admin
                 if ($str1 != '#' && $str1 != '-') {
                     $ret[$num] .= $query;
                 }
-
             }
             $num++;
         }
         return ($ret);
     }
-
 }
