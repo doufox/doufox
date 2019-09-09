@@ -56,8 +56,8 @@
                                 <td><?php echo formatFileSize($v['Data_length'] + $v['Index_length']); ?></td>
                                 <td><?php echo formatFileSize($v['Data_free']); ?></td>
                                 <td>
-                                    <a href="#modal-database-view" data-toggle="modal" onclick="showTable('structure', '<?php echo $v['Name']; ?>')">结构</a>
-                                    <a href="#modal-database-view" data-toggle="modal" onclick="showTable('data', '<?php echo $v['Name']; ?>')">数据</a>
+                                    <a href="#" onclick="showTable('structure', '<?php echo $v['Name']; ?>')">结构</a>
+                                    <a href="#" onclick="showTable('data', '<?php echo $v['Name']; ?>')">数据</a>
                                     <a href="<?php echo url("admin/database/repair", array("name" => $v['Name'])); ?>">修复</a>
                                     <a href="<?php echo url("admin/database/optimize", array("name" => $v['Name'])); ?>">优化</a>
                                 </td>
@@ -98,8 +98,16 @@
 </div>
 
 <script type="text/javascript">
+    function selectTables() {
+        if ($('.select_tables').prop('checked')) {
+            $('.selectform').prop("checked", true);
+        } else {
+            $('.selectform').prop("checked", false);
+        }
+    }
     function showTable(type, table) {
         if (table) {
+            $('#modal-database-view').modal();
             if (type == 'structure') {
                 document.getElementById('database-view-title').innerText = '表"' + table + '"结构';
                 document.getElementById('database-view-body').src = "<?php echo url('admin/database/structure', array('name' => '')); ?>" + table;
