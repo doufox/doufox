@@ -32,28 +32,6 @@
     </div>
 </div>
 
-<script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    // window.onresize = function() {
-    //     var heights = document.documentElement.clientHeight;
-    //     document.getElementById('rightMain').height = heights - 90;
-    //     document.getElementById('leftMain').height = heights - 90;
-    // }
-    // window.onresize();
-
-    // function _open_url(id, url) {
-    //     var title = $("#M_" + id).find('a').html();
-    //     document.getElementById('position').innerHTML = title;
-    //     document.getElementById('rightMain').src = url;
-    //     $('.focused').removeClass("focused");
-    //     $('#M_' + id).addClass("focused");
-    // }
-
-    function refresh() {
-        document.getElementById('leftMain').src = "<?php echo url('admin/content/category'); ?>";
-    }
-</script>
-
 </body>
 
 </html>
