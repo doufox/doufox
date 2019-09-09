@@ -59,7 +59,7 @@
                                     <a href="javascript:cdisabled(<?php echo $t['modelid']; ?>, <?php echo $disable; ?>);"><?php if ($disable) { ?><font color=red><?php echo '启用'; ?></font><?php } else {
                                                                                                                                                                                                     echo '禁用 ';
                                                                                                                                                                                                 } ?></a>
-                                    <a href="javascript:admin_command.confirmurl('<?php echo url('admin/model/del', array('typeid' => $typeid, 'modelid' => $t['modelid'])); ?>','确定删除 『 <?php echo $t['modelname']; ?> 』吗？ ')">删除</a>
+                                    <a href="javascript:model_delete('<?php echo $t['modelid']; ?>', '<?php echo $t['modelname']; ?>')">删除</a>
                                 </td>
                             </tr>
                         <?php }
@@ -69,5 +69,38 @@
         </div>
     </div>
 </div>
+
+<!-- 删除提示 -->
+<div class="modal fade" id="modal-model-delete" tabindex="-1" role="dialog" aria-labelledby="aria-model-delete">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="aria-model-delete">系统提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>确定删除模型<span id="model-delete-name"></span>吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <a type="button" id="model-delete-url" class="btn btn-primary" href="#">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function model_delete(id, name) {
+        if (id && name) {
+            $('#modal-model-delete').modal();
+            document.getElementById('model-delete-url').href = '<?php echo url("admin/model/del", array("modelid" => "")); ?>' + id;
+            document.getElementById('model-delete-name').innerText = '"' + name + '"';
+        }
+    }
+    $('#modal-model-delete').on('hide.bs.modal', function() {
+        document.getElementById('model-delete-url').href = '';
+        document.getElementById('model-delete-name').innerText = '';
+    })
+</script>
 
 <?php include $this->admin_tpl('footer'); ?>

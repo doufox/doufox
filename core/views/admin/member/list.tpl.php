@@ -60,7 +60,7 @@
                                     <td><?php echo $t['regip']; ?></td>
                                     <td>
                                         <a href="<?php echo url('admin/member/edit', array('id' => $t['id'])); ?>">详细</a>
-                                        <a href="#modal-member-delete" data-toggle="modal" name="删除会员" onclick="member_delete(this);" data-id="<?php echo $t['id']; ?>" data-name="<?php echo $t['username']; ?>">删除</a>
+                                        <a href="#" name="删除会员" onclick="member_delete(this);" data-id="<?php echo $t['id']; ?>" data-name="<?php echo $t['username']; ?>">删除</a>
                                     </td>
                                 </tr>
                         <?php }
@@ -106,6 +106,7 @@
 <script type="text/javascript">
     function member_delete(e) {
         if (e && e.dataset && e.dataset.id && e.dataset.name) {
+            $('#modal-member-delete').modal();
             document.getElementById('member-delete-url').href = "<?php echo url('admin/member/del', array('modelid' => $t['modelid'], 'id' => '')); ?>" + e.dataset.id;
             document.getElementById('member-delete-name').innerText = '"' + e.dataset.name + '"';
         } else {
