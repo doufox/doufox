@@ -423,8 +423,17 @@ function content_image($name, $content = '', $setting = '')
     $size = (int) $setting['size'];
     $height = isset($setting['height']) ? $setting['height'] : '';
     $width = isset($setting['width']) ? $setting['width'] : '';
-    $str = '<span style="position: relative;"><input type="text" class="form-control" size="50" value="' . $content . '" name="data[' . $name . ']" id="' . $name . '" onmouseover="admin_command.preview_img(\'' . $name . '\')">
-    <input type="button" class="button" onClick="admin_command.uploadImage(\'' . $name . '\',\'' . $width . '\',\'' . $height . '\',\'' . $size . '\')" value="上传图片"><div id="imgPreview' . $name . '"></div></span>';
+    $str = '<div style="position: relative;">
+        <div class="input-group">
+            <input type="text" class="form-control" size="50" value="' . $content . '" name="data[' . $name . ']" id="' . $name . '" onmouseover="admin_command.preview_img(\'' . $name . '\')">
+            <input type="button" class="button" onClick="admin_command.uploadImage(\'' . $name . '\', \'' . $width . '\',\'' . $height . '\',\'' . $size . '\')" value="上传图片">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default" onClick="showImageUpload(\'' . $name . '\', \'upload\', \'' . $width . '\', \'' . $height . '\', \'' . $size . '\')">本地上传</button>
+                <button type="button" class="btn btn-default" onClick="showImageUpload(\'' . $name . '\', \'gallery\',\'' . $width . '\', \'' . $height . '\', \'' . $size . '\')">选择图库</button>
+            </div>
+        </div>
+        <div id="imgPreview' . $name . '"></div>
+    </div>';
     return $str;
 }
 

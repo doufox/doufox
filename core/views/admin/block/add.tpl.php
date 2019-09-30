@@ -58,7 +58,8 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" size="50" value="<?php echo $data[content]; ?>" name="data[content_2]" id="thumb" onmouseover="admin_command.preview_img('thumb')">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button" onClick="admin_command.uploadImage('thumb')">上传图片</button>
+                                                <button type="button" class="btn btn-default" onClick="showImageUpload('thumb')">本地上传</button>
+                                                <button type="button" class="btn btn-default" onClick="showImageUpload('thumb', 'gallery')">选择图库</button>
                                     </span>
                                 </div>
                                 <p class="show-tips">可直接输入图片地址</p>
@@ -76,18 +77,19 @@
                 </div>
             </div>
         </form>
-        <script type="text/javascript">
-            function select_type(id) {
-                $("#text_1").hide();
-                $("#text_2").hide();
-                $("#text_3").hide();
-                $("#text_" + id).show();
-            }
-            <?php if ($data['type']) { ?>
-                $("#text_<?php echo $data['type']; ?>").show();
-            <?php } ?>
-        </script>
     </div>
 </div>
+
+<script type="text/javascript">
+    function select_type(id) {
+        $("#text_1").hide();
+        $("#text_2").hide();
+        $("#text_3").hide();
+        $("#text_" + id).show();
+    }
+    <?php if ($data['type']) { ?>
+        $("#text_<?php echo $data['type']; ?>").show();
+    <?php } ?>
+</script>
 
 <?php include $this->admin_tpl('footer'); ?>
