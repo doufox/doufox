@@ -185,7 +185,8 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control" size="30" value="<?php echo $data['image']; ?>" name="data[image]" id="image" onmouseover="admin_command.preview_img('image')">
                                             <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" onClick="admin_command.uploadImage('image')">上传图片</button>
+                                                <button type="button" class="btn btn-default" onClick="showImageUpload()">本地上传</button>
+                                                <button type="button" class="btn btn-default" onClick="showImageUpload('gallery')">选择图库</button>
                                             </span>
                                         </div>
                                     </td>
@@ -212,6 +213,53 @@
         </div>
     </div>
 </div>
+
+<!-- 上传图片 -->
+<div class="modal fade" id="modal-image-upload-view" tabindex="-1" role="dialog" aria-labelledby="aria-modal-view">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-view-title">上传图片</h4>
+            </div>
+            <div class="modal-body">
+                <iframe id="modal-view-body" width="100%" frameborder="0" onload="setIframeHeight(this);"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="selectImage()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#modal-image-upload-view').on('hide.bs.modal', function() {
+        document.getElementById('modal-view-title').innerText = "";
+        document.getElementById('modal-view-body').src = '';
+        document.getElementById('modal-view-body').height = '';
+    });
+    function showImageUpload(type) {
+        $('#modal-image-upload-view').modal();
+        if (type && type == "gallery") {
+            document.getElementById('modal-view-title').innerText = "选择图片(未实现)";
+            document.getElementById('modal-view-body').src = "<?php echo url('admin/attachment/uploadimage', array('w' => '', 'h' => '', 'size' => '')); ?>";
+            return;
+        }
+        document.getElementById('modal-view-title').innerText = "上传图片";
+        document.getElementById('modal-view-body').src = "<?php echo url('admin/attachment/uploadimage', array('w' => '', 'h' => '', 'size' => '')); ?>";
+    }
+    function selectImage () {
+        var filename = document.getElementById('modal-view-body').contentWindow.document.getElementById('filename').value;
+        if (filename) {
+            $("#image").val(filename);
+            $('#modal-image-upload-view').modal('hide');
+        } else {
+            $('#modal-alert').modal();
+            document.getElementById('modal-alert-body').innerText = '您还没有上传';
+        }
+    }
+</script>
+
 <script type="text/javascript">
     function ajaxdir() {
         var dir = $('#dir').val();

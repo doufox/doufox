@@ -11,16 +11,16 @@
     }
     function form_delete(url) {
         if (url) {
-            $('#modal-alert').modal();
-            document.getElementById('modal-alert-url').href = url;
-            document.getElementById('modal-alert-body').innerText = '确定删除吗？';
+            $('#modal-confirm').modal();
+            document.getElementById('modal-confirm-url').href = url;
+            document.getElementById('modal-confirm-body').innerText = '确定删除吗？';
         }
     }
     function form_delete_muti() {
         $('#list_form').val('del');
-        $('#modal-alert').modal();
-        document.getElementById('modal-alert-url').href = "javascript:document.myform.submit()";
-        document.getElementById('modal-alert-body').innerText = '确定删除吗？';
+        $('#modal-confirm').modal();
+        document.getElementById('modal-confirm-url').href = "javascript:document.myform.submit()";
+        document.getElementById('modal-confirm-body').innerText = '确定删除吗？';
     }
 </script>
 

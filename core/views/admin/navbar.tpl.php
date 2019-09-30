@@ -62,10 +62,10 @@
                         <a href="javascript:void(0);" data-toggle="dropdown">您好，<?php echo $this->current_account_name; ?>&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo url('admin/account/me'); ?>">我的账号</a></li>
-                            <li><a href="<?php echo url('admin/account/me'); ?>" title="帮助">帮助</a></li>
+                            <li><a href="<?php echo url('admin/help'); ?>" title="帮助信息">帮助信息</a></li>
                             <li><a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#" data-toggle="modal" data-target="#modal-logout" title="退出系统">退出系统</a></li>
+                            <li><a href="#" id="btn-logout" data-toggle="modal" data-target="#modal-confirm" title="退出系统">退出系统</a></li>
                             <li role="separator" class="divider"></li>
                         </ul>
                     </li>

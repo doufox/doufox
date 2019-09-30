@@ -116,6 +116,50 @@ class AttachmentController extends Admin
         }
     }
 
+    /** 上传图片(单)
+     * 新
+     */
+    public function uploadimageAction()
+    {
+        if ($this->isPostForm()) {
+            $mark = $this->memberinfo ? false : true;
+            $w = $this->site_config['SITE_THUMB_WIDTH'];
+            $h = $this->site_config['SITE_THUMB_HEIGHT'];
+            $img = array('w' => $w, 'h' => $h, 't' => 0);
+            $size = (int) $this->post('size');
+            $data = $this->upload('file', array('jpeg', 'jpg', 'gif', 'png'), $size, $img, $mark, $this->post('admin'));
+            if ($data['result']) {
+                $row = array(
+                    'error' => 1,
+                    'msg' => $data['result'],
+                    'filename' => '',
+                );
+            } else {
+                $row = array(
+                    'error' => 0,
+                    'msg' => '图片上传成功，请单击“确定”按钮关闭对话框',
+                    'filename' => $data['path'], //全路径
+                );
+            }
+            $data = $row;
+            $url = url('attachment/image', array('w' => $w, 'h' => $h, 'size' => $size, 'admin' => $this->post('admin')));
+            $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $size . 'MB';
+            include $this->admin_tpl('attachment/upload_result');
+        } else {
+            $w = (int) $this->get('w');
+            $h = (int) $this->get('h');
+            $s = (int) $this->get('size') ? (int) $this->get('size') : 2;
+            if ($w && empty($h)) {
+                $w = $this->site_config['SITE_THUMB_WIDTH'];
+                $h = $this->site_config['SITE_THUMB_HEIGHT'];
+            }
+            $admin = $this->getAdmin();
+            $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $s . 'MB';
+            $size = $s;
+            $isimage = 1; //如果是图片上传，就显示高宽输入框
+            include $this->admin_tpl('attachment/uploadimage');
+        }
+    }
 
 
     /** 上传图片(单)
