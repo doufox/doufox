@@ -25,30 +25,36 @@ class CategoryController extends Admin
         $tree->nbsp = '&nbsp;&nbsp;&nbsp;';
         $categorys = array();
         $result = $this->category->order('listorder ASC')->select();
-        $types = array(1 => '', 2 => '<font color="blue">单网页</font>', 3 => '<font color="red">外部连接</font>');
+        // 栏目类型
+        $types = array(
+            1 => '',
+            2 => '<font color="blue">单页</font>',
+            3 => '<font color="red">链接</font>',
+            4 => '<font color="yellow">独立单页</font>',
+        );
         if (!empty($result)) {
             foreach ($result as $r) {
                 $r['modelname'] = @$models[$r['modelid']]['modelname']; // 读取模型
-                url('admin/category/del', array('catid' => $r['catid']));
                 $r['manage_edit'] = '<a href="' . url('admin/category/edit', array('catid' => $r['catid'])) . '">编辑</a>';
                 $r['manage_add'] = '<a href="' . url('admin/category/add', array('catid' => $r['catid'])) . '" >添加子栏目</a>';
-                $r['manage_del'] = '<a href="javascript:admin_command.confirmurl(\'' . url('admin/category/del', array('catid' => $r['catid'])) . '\',\'' . '确定删除 『 ' . $r['catname'] . ' 』栏目吗？ ' . '\')">删除</a>';
-                $r['typename'] = $types[$r['typeid']]; // 模型
-                $r['display'] = $r['ismenu'] ? '是' : '<font color="blue">否</font>';
+                $r['manage_del'] = '<a href="#" class="category-btn-delete" name="删除栏目" data-id="' . $r['catid'] . '" data-name="' . $r['catname'] . '">删除</a>';
+                $r['typename'] = $types[$r['typeid']]; // 栏目类型
+                $r['isdisplay'] = $r['ismenu'] ? '是' : '<font color="blue">否</font>';
                 $r['catname'] = "<a href='$r[url]' target='_blank'>" . $r['catname'] . "</a>";
                 $categorys[$r['catid']] = $r;
             }
         }
-        $str = "<tr>
-                    <td align='left'><input name='order_\$catid' type='text' size='1' value='\$listorder' class='input-text-c'></td>
-                    <td align='left'>\$catid</td>
-                    <td>\$spacer\$catname</td>
-                    <td align='left'>\$catdir</td>
-                    <td>\$typename\$modelname</td>
-                    <td>\$items</td>
-                    <td>\$display</td>
-                    <td>\$manage_edit \$manage_add \$manage_del</td>
-                </tr>";
+        $str = "
+        <tr>
+            <td><input name='order_\$catid' type='text' size='1' value='\$listorder' class='input-text-c'></td>
+            <td>\$catid</td>
+            <td>\$spacer\$catname</td>
+            <td>\$catdir</td>
+            <td>\$typename\$modelname</td>
+            <td>\$items</td>
+            <td>\$isdisplay</td>
+            <td>\$manage_edit \$manage_add \$manage_del</td>
+        </tr>";
         $tree->init($categorys);
         $categorys = $tree->get_tree(0, $str);
         include $this->admin_tpl('category/list');
@@ -65,26 +71,23 @@ class CategoryController extends Admin
                 if (empty($data['modelid'])) {
                     $this->show_message('请选择内容模型');
                 }
-
             } elseif ($data['typeid'] == 2) {
                 if (empty($data['content'])) {
                     $this->show_message('单网页内容不能为空');
                 }
-
             } elseif ($data['typeid'] == 3) {
                 if (empty($data['http'])) {
                     $this->show_message('没有输入外部连接地址');
                 }
-
             } else {
                 $this->show_message('请选择栏目类型');
             }
             if ($this->post('addall')) {
+                // 批量添加
                 $names = $this->post('names');
                 if (empty($names)) {
                     $this->show_message('请填写栏目名称');
                 }
-
                 $names = explode(chr(13), $names);
                 $y = $n = 0;
                 foreach ($names as $val) {
@@ -105,7 +108,6 @@ class CategoryController extends Admin
                     }
                 }
                 $html = '<script type="text/javascript">parent.document.getElementById("leftMain").src ="' . url("admin/content/category") . '";</script>';
-
                 $this->show_message($this->getCacheCode('category') . $html . '批量添加成功', 1, url('admin/category/index'));
             } else {
                 if (empty($data['catname'])) {
@@ -123,7 +125,7 @@ class CategoryController extends Admin
 
                 $data['catid'] = $result;
                 $this->category->url($result, getCaturl($data));
-                $html = '<script type="text/javascript">parent.document.getElementById("leftMain").src ="' . url("admin/content/category") . '";</script>';
+                // $html = '<script type="text/javascript">parent.document.getElementById("leftMain").src ="' . url("admin/content/category") . '";</script>';
                 $this->show_message($this->getCacheCode('category') . '添加成功' . $html, 1, url('admin/category/index'));
             }
         }

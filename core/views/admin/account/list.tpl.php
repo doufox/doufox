@@ -16,7 +16,7 @@
             <div class="panel-heading">
                 <span class="panel-title"><?php echo $page_title; ?></span>
                 <div class="pull-right">
-                    <a href="<?php echo url('admin/account/add'); ?>">添加账号</a>
+                    <a href="<?php echo url('admin/account/add'); ?>">添加</a>
                 </div>
             </div>
             <table class="table table-bordered table-hover">

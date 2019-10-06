@@ -284,12 +284,15 @@ input.date {
     color: #777
 }
 
+label+label {
+    margin-left: 5px;
+}
+
 table td .label-group {
     margin-bottom: unset;
 }
 
 .label-group {
-    margin-right: 5px;
     font-weight: normal;
 }
 

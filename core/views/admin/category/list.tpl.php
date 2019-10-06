@@ -16,7 +16,7 @@
                 <div class="panel-heading">
                     <span class="panel-title">栏目管理</span>
                     <div class="pull-right">
-                        <a href="<?php echo url('admin/category/add'); ?>">添加栏目</a>
+                        <a href="<?php echo url('admin/category/add'); ?>">添加</a>
                     </div>
                 </div>
                 <table class="table table-bordered table-hover" width="100%">
@@ -45,5 +45,17 @@
         </form>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(".category-btn-delete").click(function (e) {
+        e.preventDefault();
+        var t = e.target;
+        if (t && t.dataset && t.dataset.id && t.dataset.name) {
+            document.getElementById("modal-confirm-url").href = "<?php echo url('admin/category/del', array('catid' => '')); ?>" + t.dataset.id;
+            document.getElementById("modal-confirm-body").innerText = '确定删除『' + t.dataset.name + '』栏目吗？';
+            $("#modal-confirm").modal();
+        }
+    })
+</script>
 
 <?php include $this->admin_tpl('footer');?>

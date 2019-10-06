@@ -18,7 +18,7 @@
                 <div class="panel-heading">
                     <span class="panel-title"><?php echo $page_title;?></span>
                     <div class="pull-right">
-                        <a href="<?php echo url('admin/form/list', array('modelid' => $modelid, 'cid' => $cid)); ?>">返回列表</a>
+                        <a href="<?php echo url('admin/form/list', array('modelid' => $modelid, 'cid' => $cid)); ?>">列表</a>
                     </div>
                 </div>
                 <div class="panel-body">

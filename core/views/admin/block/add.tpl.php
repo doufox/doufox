@@ -17,7 +17,8 @@
                 <div class="panel-heading">
                     <span class="panel-title"><?php echo $id ? '编辑' : '添加'; ?>区块</span>
                     <div class="pull-right">
-                        <a href="<?php echo url('admin/block'); ?>">区块列表</a>
+                        <a href="<?php echo url('admin/block'); ?>">列表</a>
+                        <a href="<?php echo url('admin/block/add'); ?>">添加</a>
                     </div>
                 </div>
                 <div class="panel-body">

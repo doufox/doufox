@@ -28,7 +28,7 @@
                 <div class="panel-heading">
                     <span class="panel-title">会员列表</span>
                     <div class="pull-right">
-                        <a href="<?php echo url('admin/member/add'); ?>">添加会员</a>
+                        <a href="<?php echo url('admin/member/add'); ?>">添加</a>
                     </div>
                 </div>
                 <input name="form" id="list_form" type="hidden" value="">
@@ -84,39 +84,14 @@
     </div>
 </div>
 
-<!-- 会员删除提示 -->
-<div class="modal fade" id="modal-member-delete" tabindex="-1" role="dialog" aria-labelledby="aria-member-delete">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="aria-member-delete">系统提示</h4>
-            </div>
-            <div class="modal-body">
-                <p>确定删除会员<span id="member-delete-name"></span>吗？</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <a type="button" id="member-delete-url" class="btn btn-primary" href="#">确定</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script type="text/javascript">
     function member_delete(e) {
+        e.preventDefault();
         if (e && e.dataset && e.dataset.id && e.dataset.name) {
-            $('#modal-member-delete').modal();
-            document.getElementById('member-delete-url').href = "<?php echo url('admin/member/del', array('modelid' => $t['modelid'], 'id' => '')); ?>" + e.dataset.id;
-            document.getElementById('member-delete-name').innerText = '"' + e.dataset.name + '"';
-        } else {
-            document.getElementById('member-delete-url').href = '';
-            document.getElementById('member-delete-name').innerText = '';
+            document.getElementById('modal-confirm-url').href = "<?php echo url('admin/member/del', array('modelid' => $t['modelid'], 'id' => '')); ?>" + e.dataset.id;
+            document.getElementById('modal-confirm-body').innerText = '确定删除会员"' + e.dataset.name + '"吗？';
         }
     }
-    $('#modal-member-delete').on('hide.bs.modal', function() {
-        member_delete();
-    })
 </script>
 
 <?php include $this->admin_tpl('footer'); ?>
