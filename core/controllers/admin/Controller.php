@@ -62,7 +62,7 @@ class Admin extends Controller
         }
         // 当前账号信息
         $this->current_account = $this->account->find($this->userid);
-        $this->current_account_name = empty($this->current_account['realname']) ? $this->current_account['username'] : $this->current_account['realname'];
+        $this->current_account['name'] = empty($this->current_account['realname']) ? $this->current_account['username'] : $this->current_account['realname'];
         // 菜单-表单模型
         $this->menu_model = '';
         $form = get_cache('formmodel');

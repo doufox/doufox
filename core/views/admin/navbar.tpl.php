@@ -59,7 +59,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="account dropdown">
-                        <a href="javascript:void(0);" data-toggle="dropdown">您好，<?php echo $this->current_account_name; ?>&nbsp;<span class="caret"></span></a>
+                        <a href="javascript:void(0);" data-toggle="dropdown">您好，<?php echo $this->current_account['name']; ?>&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo url('admin/account/me'); ?>">我的账号</a></li>
                             <li><a href="<?php echo url('admin/help'); ?>" title="帮助信息">帮助信息</a></li>
