@@ -14,7 +14,23 @@
     <meta name="robots" content="none, nofollow, noarchive, nocache">
     <meta name="referrer" content="never" />
     <link type="text/css" href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="/static/css/login.css" />
+    <style type="text/css">
+        .login {
+            width: 100%;
+            max-width: 330px;
+            margin: 16% auto 0 auto;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .text-muted {
+            font-size: 12px;
+            text-transform: capitalize;
+        }
+    </style>
 </head>
 
 <body>
