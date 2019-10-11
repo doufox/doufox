@@ -110,6 +110,8 @@
     }
 </script>
 
+<?php doHookAction('admin_footer'); ?>
+
 </body>
 
 </html>

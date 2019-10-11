@@ -1,6 +1,6 @@
 <?php include $this->admin_tpl('header');?>
 
-<div class="subnav">
+<div>
     <div class="table-list">
         <table width="100%" cellspacing="0" id="imgPreview">
         <tbody>

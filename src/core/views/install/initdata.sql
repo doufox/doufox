@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS `doufox_account` (
   `auth` TEXT NOT NULL,
   `list_size` smallint(5) NOT NULL,
   `left_width` smallint(5) NOT NULL DEFAULT '150',
+  `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`userid`),
   KEY `username` (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -56,6 +58,8 @@ CREATE TABLE IF NOT EXISTS `doufox_category` (
   `searchtpl` VARCHAR(30) NOT NULL,
   `pagetpl` VARCHAR(50) NOT NULL,
   `pagesize` smallint(5) NOT NULL,
+  `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`catid`),
   KEY `listorder` (`listorder`,`child`),
   KEY `ismenu` (`ismenu`),
@@ -113,9 +117,9 @@ CREATE TABLE IF NOT EXISTS `doufox_form_comment` (
   `username` char(20) NOT NULL,
   `listorder` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `status` tinyint(2) UNSIGNED NOT NULL DEFAULT '1',
+  `ip` char(20) DEFAULT NULL,
   `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
   `time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
-  `ip` char(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `listorder` (`listorder`),
   KEY `status` (`status`),
@@ -165,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `doufox_member` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `doufox_model`;
-CREATE TABLE IF NOT EXISTS `doufox_model` (
+CREATE TABLE IF NOT EXISTS `doufox_model`(
   `modelid` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `typeid` tinyint(3) NOT NULL,
   `modelname` char(30) NOT NULL,
@@ -176,6 +180,8 @@ CREATE TABLE IF NOT EXISTS `doufox_model` (
   `searchtpl` VARCHAR(30) NOT NULL,
   `joinid` smallint(5) DEFAULT NULL,
   `setting` TEXT,
+  `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`modelid`),
   KEY `typeid` (`typeid`),
   KEY `joinid` (`joinid`)
@@ -188,7 +194,7 @@ INSERT INTO `doufox_model` (`modelid`, `typeid`, `modelname`, `tablename`, `cate
 (4, 3, '文章评论', 'form_comment', 'form.html', 'list_comment.html', 'show_comment.html', 'search.html', 0, 'a:1:{s:7:"default";a:5:{s:8:"username";a:2:{s:4:"name";s:9:"用户名";s:4:"show";s:1:"1";}s:9:"listorder";a:2:{s:4:"name";s:12:"排序编号";s:4:"show";s:1:"1";}s:6:"status";a:2:{s:4:"name";s:6:"状态";s:4:"show";s:1:"1";}s:4:"time";a:2:{s:4:"name";s:12:"提交时间";s:4:"show";s:1:"1";}s:2:"ip";a:2:{s:4:"name";s:8:"IP地址";s:4:"show";s:1:"1";}}}');
 
 DROP TABLE IF EXISTS `doufox_model_field`;
-CREATE TABLE IF NOT EXISTS `doufox_model_field` (
+CREATE TABLE IF NOT EXISTS `doufox_model_field`(
   `fieldid` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `modelid` smallint(5) UNSIGNED NOT NULL DEFAULT '0',
   `field` VARCHAR(20) NOT NULL,
@@ -217,3 +223,22 @@ INSERT INTO `doufox_model_field` (`fieldid`, `modelid`, `field`, `name`, `type`,
 (8, 3, 'yourphoneno', '联系电话', '', '', '', 1, '', 1, '/^[0-9.-]+$/', '请填入您的联系电话，方便我们联系您', 'input', 'array (\n  ''size'' => ''150'',\n  ''default'' => '''',\n)', 0, 0),
 (7, 3, 'messagecontent', '留言内容', 'TEXT', '50000', '', 1, '', 1, '', '', 'textarea', 'array (\n  ''width'' => ''400'',\n  ''height'' => ''90'',\n  ''default'' => ''留下您的手机号码，我们会尽快回复您！'',\n)', 0, 0),
 (9, 1, 'tag', '标签', '', '', '', 1, '', 0, '', '', 'input', 'array (\n  ''size'' => ''150'',\n  ''default'' => '''',\n)', 0, 0);
+
+DROP TABLE IF EXISTS `doufox_plugin`;
+CREATE TABLE IF NOT EXISTS `doufox_plugin`(
+    `id` SMALLINT(8) NOT NULL AUTO_INCREMENT,
+    `official` TINYINT(1) NOT NULL COMMENT '官方提供',
+    `name` VARCHAR(50) NOT NULL '插件名称',
+    `version` VARCHAR(100) NOT NULL '插件版本',
+    `url` VARCHAR(255) NOT NULL '插件地址',
+    `description` MEDIUMTEXT NOT NULL '插件描述',
+    `author` VARCHAR(255) NOT NULL '作者',
+    `author_url` VARCHAR(255) NOT NULL '作者地址',
+    `status` TINYINT(1) NOT NULL COMMENT '状态',
+    `setting` TEXT COMMENT '配置',
+    `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
+    `time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
+    PRIMARY KEY(`id`)
+) ENGINE = MyISAM DEFAULT CHARSET = utf8;
+
+INSERT INTO `doufox_plugin` (`official`, `name`, `version`, `url`, `description`, `author`, `author_url`, `status`) VALUES (1, '温馨提示', '1.1', 'https://doufox.com', '内置插件，它会在你管理主页面显示一句温馨的小提示。', 'doufox', 'https://doufox.com', 1);

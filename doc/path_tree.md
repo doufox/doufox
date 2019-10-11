@@ -6,6 +6,6 @@
 |- src 项目源码
    |- core 系统核心代码
    |- data 数据存放位置
-   |- plugins 插件目录
+   |- plugin 插件目录
    |- static  静态文件
 ```
