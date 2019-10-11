@@ -1,14 +1,10 @@
 <?php
 
-/**
- * 系统入口文件
- */
+// 系统入口文件
 define('IN_CMS', true);
 error_reporting(E_ALL ^ E_NOTICE);
 
-/**
- * 系统常量配置
- */
+// 系统常量配置
 date_default_timezone_set('Asia/Shanghai'); // 系统时区设置
 define('APP_START_TIME', isset($_SERVER['REQUSET_TIME']) ? $_SERVER['REQUSET_TIME'] : microtime(true)); // 设置程序开始执行时间
 define('HTTP_REFERER', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''); // 来源
@@ -16,27 +12,30 @@ define('HTTP_HOST', $_SERVER['HTTP_HOST']); // host
 define('HTTP_PRE', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') ? 'https://' : 'http://'); // http协议
 define('HTTP_URL', HTTP_PRE . HTTP_HOST . DS); // 当前网站的完整域名
 define('COOKIE_PRE', 'df_'); // Cookie 前缀, 同一个域名下安装多套系统时, 请修改Cookie前缀
-
-define('CORE_DIR', 'core'); // 核心模块文件夹
-define('DATA_DIR', 'data'); // 数据模块文件夹
-define('MODEL_DIR', 'models'); // 数据模型文件夹
-define('VIEW_DIR', 'views'); // 视图模板文件夹
+// 文件夹
+define('CORE_DIR', 'core');     // 核心模块文件夹
+define('DATA_DIR', 'data');     // 数据模块文件夹
+define('MODEL_DIR', 'models');  // 数据模型文件夹
+define('VIEW_DIR', 'views');    // 视图模板文件夹
 define('CTRL_DIR', 'controllers'); // 控制器文件夹
-define('STATIC_DIR', 'static'); // 静态资源文件夹
-
-define('CORE_PATH', dirname(__FILE__) . DS); // 核心模块路径
-define('DATA_PATH', ROOT_PATH . DATA_DIR . DS); // 数据模块路径
+define('STATIC_DIR', 'static');    // 静态文件夹
+define('PLUGIN_DIR', 'plugin');   // 插件文件夹
+// 目录
+define('CORE_PATH', dirname(__FILE__) . DS);      // 核心模块路径
+define('DATA_PATH', ROOT_PATH . DATA_DIR . DS);   // 数据模块路径
 define('MODEL_PATH', CORE_PATH . MODEL_DIR . DS); // 数据模型路径
-define('VIEW_PATH', CORE_PATH . VIEW_DIR . DS); // 视图模板路径
-define('CTRL_PATH', CORE_PATH . CTRL_DIR . DS); // 控制器路径
-define('STATIC_PATH', ROOT_PATH . STATIC_DIR . DS); // 静态资源路径
-define('ADMIN_PATH', VIEW_PATH . 'admin' . DS); // 管理模块路径
-define('INSTALL_PATH', VIEW_PATH . 'install' . DS); // 安装模块路径
-define('THEME_PATH_D', DATA_PATH . 'theme' . DS); // 桌面端模板路径
+define('VIEW_PATH', CORE_PATH . VIEW_DIR . DS);   // 视图模板路径
+define('CTRL_PATH', CORE_PATH . CTRL_DIR . DS);          // 控制器路径
+define('STATIC_PATH', ROOT_PATH . STATIC_DIR . DS);      // 静态资源路径
+define('ADMIN_PATH', VIEW_PATH . 'admin' . DS);          // 管理模块路径
+define('INSTALL_PATH', VIEW_PATH . 'install' . DS);      // 安装模块路径
+define('THEME_PATH_D', DATA_PATH . 'theme' . DS);        // 桌面端模板路径
 define('THEME_PATH_M', DATA_PATH . 'theme_mobile' . DS); // 移动端模板路径
+define('PLUGIN_PATH', ROOT_PATH . PLUGIN_DIR . DS);    // 插件路径
 
-core::load_file(CORE_PATH . 'info.php');
 core::load_file(CORE_PATH . 'library' . DS . 'global.function.php'); // 加载全局函数
+core::load_file(CORE_PATH . 'info.php');
+core::load_file(CORE_PATH . 'plugin.php');
 core::load_class('Model', '', 0);
 
 /**
@@ -100,11 +99,11 @@ abstract class core
                     exit('Controller does not exist.');
                 }
                 if (is_file(CTRL_PATH . $namespace . DS . 'Controller.php')) {
-                    self::load_file(CTRL_PATH . $namespace . DS . 'Controller.php');
+                    include_once(CTRL_PATH . $namespace . DS . 'Controller.php');
                 }
-                self::load_file($controller_file);
+                include_once($controller_file);
             } elseif (is_file(CTRL_PATH . $controller . '.php')) {
-                self::load_file(CTRL_PATH . $controller . '.php');
+                include_once(CTRL_PATH . $controller . '.php');
             } else {
                 exit('Controller does not exist.');
             }
@@ -135,6 +134,7 @@ abstract class core
             define('THEME_DIR', is_dir(THEME_PATH_D . SITE_THEME) ? SITE_THEME : 'default');
         }
     }
+
     /**
      * 静态加载文件(相当于PHP函数require_once)
      */
@@ -240,5 +240,4 @@ abstract class core
     {
         return self::$action;
     }
-
 }

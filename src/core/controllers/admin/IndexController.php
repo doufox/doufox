@@ -26,6 +26,11 @@ class IndexController extends Admin
         $sysinfo['mysqlv'] = $pars['mysql'];
         $sysinfo['domain'] = $pars['domain'];
         include $this->admin_tpl('index');
+
+        // 缓存
+        if (!file_exists(DATA_PATH . 'cache' . DS . "category.cache.php")) {
+            echo '<script type="text/javascript">location.href="' . url('admin/cache/update') . '";</script>';
+        }
     }
 
     /**

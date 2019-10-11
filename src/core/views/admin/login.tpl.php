@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 
 <head>
@@ -15,29 +15,30 @@
     <meta name="referrer" content="never" />
     <link type="text/css" href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <style type="text/css">
-        .login {
-            width: 100%;
+        .panel {
             max-width: 330px;
             margin: 16% auto 0 auto;
-            text-align: center;
         }
 
         .input-group {
             margin-bottom: 20px;
         }
 
-        .text-muted {
+        .panel-footer {
             font-size: 12px;
             text-transform: capitalize;
+        }
+
+        #checkcode {
+            width: 85px;
+            height: 26px;
         }
     </style>
 </head>
 
 <body>
-    <div class="panel panel-default login">
-        <div class="panel-heading">
-            <span class="panel-title">管理员登陆</span>
-        </div>
+    <div class="panel panel-default text-center">
+        <div class="panel-heading">管理员登陆</div>
         <div class="panel-body">
             <form method="POST" action="">
                 <div class="input-group">
@@ -53,20 +54,22 @@
                     <input type="text" name="code" class="form-control captcha" placeholder="验证码" maxlength="4" autocomplete="off" />
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button" style="padding: 3px;">
-                            <img id="checkcode" src="<?php echo url("api/access/checkcode", array("width" => 85, "height" => 26)); ?>"
-                                style="width: 85px; height: 26px;" title="看不清楚？换一张" alt="验证码" />
+                            <img id="checkcode" src="" title="看不清楚？换一张" alt="验证码" />
                         </button>
                     </span>
                 </div>
-                <button name="submit" type="submit" class="btn btn-lg btn-primary btn-block">登录</button>
+                <button name="submit" type="submit" class="btn btn-primary btn-block">登录</button>
             </form>
-            <hr />
-            <p class="text-muted">Copyright &copy; <?php echo date('Y'); ?> Crogram, Inc. All Rights Reserved.</p>
         </div>
+        <div class="panel-footer">Copyright &copy; <?php echo date('Y'); ?> Crogram, Inc. All Rights Reserved.</div>
         <script type="text/javascript">
-            document.getElementById("checkcode").onclick = function() {
-                document.getElementById("checkcode").src = '<?php echo url("api/access/checkcode", array("width" => 85, "height" => 26)); ?>&' + Math.random();
-            }
+            (function() {
+                function checkcode_init() {
+                    document.getElementById("checkcode").src = '<?php echo url("api/access/checkcode", array("width" => 85, "height" => 26)); ?>&' + Math.random();
+                }
+                checkcode_init();
+                document.getElementById("checkcode").onclick = checkcode_init;
+            })();
         </script>
 </body>
 

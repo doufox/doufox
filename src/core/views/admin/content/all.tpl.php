@@ -18,7 +18,7 @@
                 }
             }
         </script>
-        <div class="subnav">
+        <div>
             <div class="content-menu">
                 <div class="left">
                     <a href="<?php echo url('admin/content/all', array('catid'=>$catid, )); ?>" class="on">全部内容</a>
@@ -65,7 +65,7 @@
                             <th align="left" width="40">排序</th>
                         </tr>
                     </thead>
-                    <tbody  class="line-box">
+                    <tbody>
                     <?php if (is_array($list)) { foreach ($list as $t) { ?>
                     <tr height="25">
                         <td align="left"><input name="del_<?php echo $t['id'].'_'.$t['catid']; ?>" type="checkbox" class="deletec"></td>

@@ -195,14 +195,6 @@ body fieldset.blue legend {
     border: none
 }
 
-.subnav {
-    padding: 10px
-}
-
-.subnav h2 {
-    margin-bottom: 6px
-}
-
 .content-menu {
     border-bottom: 1px solid #eee;
     padding-bottom: 5px;

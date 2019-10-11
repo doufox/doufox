@@ -1,4 +1,15 @@
-src/data/cache
-src/data/config/database.ini.php
-src/data/session
-src/data/models
+# 相关程序生成的文件
+/src/data/cache
+/src/data/config/database.ini.php
+/src/data/session
+/src/data/models
+
+# 开发工具文件
+.project
+.settings
+.buildpath
+.cache
+.idea
+.netbeans
+.DS_Store
+.vscode

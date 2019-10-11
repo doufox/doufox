@@ -902,3 +902,66 @@ function mkdirs($dir)
         mkdir($dir);
     }
 }
+
+/** 挂载插件函数到预留的钩子上
+ * 该函数在插件中调用
+ *
+ * @param string $hook admin_head | body_admin_head | body_admin_footer | admin_footer
+ * @param string $actionFunc
+ * @return boolearn
+ */
+function addHookAction($hook, $actionFunc)
+{
+    global $globalHooks;
+    if (!@in_array($actionFunc, $globalHooks[$hook])) {
+        $globalHooks[$hook][] = $actionFunc;
+    }
+    // print_r('<br>addHookAction<br>');
+    // print_r($globalHooks);
+    // print_r('-'. $hook);
+    // print_r('<br>addHookAction<br>');
+    return true;
+}
+
+/** 执行挂在钩子上的函数
+ * ,支持多参数 eg:doAction('post_comment', $author, $email, $url, $comment);
+ *
+ * @param string $hook
+ */
+function doHookAction($hook)
+{
+    global $globalHooks;
+    $args = array_slice(func_get_args(), 1);
+    if (isset($globalHooks[$hook])) {
+        foreach ($globalHooks[$hook] as $function) {
+            $string = call_user_func_array($function, $args);
+            // print_r('string-start<br>');
+            // print_r($string);
+            // print_r('string-end<br>');
+        }
+    }
+    // print_r('<br>doHookAction<br>');
+    // print_r($globalHooks);
+    // print_r('-'. $hook);
+    // print_r('<br>doHookAction<br>');
+}
+
+/**
+ * 检查插件
+ */
+function checkPlugin($plugin)
+{
+    if (is_string($plugin) && preg_match("/^[\w\-\/]+\.php$/", $plugin) && file_exists(PLUGIN_PATH . $plugin)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * 转换状态为文字
+ */
+function status_label($status, $is = "是", $not = "否")
+{
+    return (bool) $status ? $is : $not;
+}

@@ -2,6 +2,8 @@
 
 <?php include $this->admin_tpl('navbar');?>
 
+<?php doHookAction('admin_index_header'); ?>
+
 <div class="container">
     <div class="page_menu">
         <div class="panel panel-default">

@@ -42,9 +42,11 @@
                     <li class="dropdown <?php if ($this->current_nav == 'manage') echo 'active'; ?>">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">管理&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <li><a href="<?php echo url('admin/plugin'); ?>">插件管理</a></li>
                             <li><a href="<?php echo url('admin/account'); ?>">账号管理</a></li>
                             <li><a href="<?php echo url('admin/template'); ?>">模板管理</a></li>
                             <li><a href="<?php echo url('admin/attachment'); ?>">附件管理</a></li>
+                            <li role="separator" class="divider"></li>
                             <li><a href="<?php echo url('admin/database'); ?>">数据库管理</a></li>
                             <li><a href="<?php echo url('admin/backup'); ?>">备份管理</a></li>
                             <li><a href="<?php echo url('admin/cache'); ?>">缓存管理</a></li>
