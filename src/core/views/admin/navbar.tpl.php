@@ -76,3 +76,4 @@
         </div>
     </nav>
 </div>
+<?php doHookAction('admin_top'); echo PHP_EOL; ?>

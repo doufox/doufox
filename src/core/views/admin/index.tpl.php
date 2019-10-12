@@ -1,9 +1,6 @@
-<?php include $this->admin_view('header');?>
-
-<?php include $this->admin_view('navbar');?>
-
-<?php doHookAction('admin_index_header'); ?>
-
+<?php include $this->admin_view('header'); echo PHP_EOL; ?>
+<?php include $this->admin_view('navbar'); echo PHP_EOL; ?>
+<?php doHookAction('admin_index_top'); echo PHP_EOL; ?>
 <div class="container">
     <div class="page_menu">
         <div class="panel panel-default">
@@ -21,6 +18,7 @@
         </div>
     </div>
     <div class="page_content">
+        <?php doHookAction('admin_index_content_top'); echo PHP_EOL; ?>
         <div class="row">
             <div class="col-md-6 col-sm-6">
                 <div class="panel panel-default">
@@ -49,7 +47,9 @@
                 </div>
             </div>
         </div>
+        <?php doHookAction('admin_index_content_bottom'); echo PHP_EOL; ?>
     </div>
 </div>
 
-<?php include $this->admin_view('footer');?>
+<?php doHookAction('admin_index_bottom'); echo PHP_EOL; ?>
+<?php include $this->admin_view('footer'); echo PHP_EOL; ?>
