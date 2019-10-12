@@ -94,7 +94,7 @@ class CacheController extends Admin
             }
         }
         unset($caches_desc, $data, $file_list);
-        include $this->admin_tpl('cache/list');
+        include $this->admin_view('cache/list');
     }
 
     /** 更新全部缓存
@@ -124,7 +124,7 @@ class CacheController extends Admin
                 echo '<script type="text/javascript">window.parent.updateSuccess();</script>';
             }
         } else {
-            include $this->admin_tpl('cache/update');
+            include $this->admin_view('cache/update');
         }
     }
 

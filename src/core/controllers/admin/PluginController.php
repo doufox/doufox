@@ -14,12 +14,12 @@ class PluginController extends Admin
     public function indexAction()
     {
         $list = $this->plugin->findAll('id, official, name, version, url, description, author, author_url, status');
-        include $this->admin_tpl('plugin/list');
+        include $this->admin_view('plugin/list');
     }
 
     public function addAction()
     {
-        include $this->admin_tpl('plugin/add');
+        include $this->admin_view('plugin/add');
     }
 
     public function settingAction()
@@ -41,7 +41,7 @@ class PluginController extends Admin
             $this->plugin->update($data, 'id=' . $id);
             $this->show_message($this->getCacheCode('plugin') . '编辑成功', 1, url('admin/plugin'));
         }
-        include $this->admin_tpl('plugin/setting');
+        include $this->admin_view('plugin/setting');
     }
 
     public function delAction($id = 0, $all = 0)

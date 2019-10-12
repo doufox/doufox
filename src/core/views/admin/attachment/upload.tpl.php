@@ -1,4 +1,4 @@
-<?php include $this->admin_tpl('header'); ?>
+<?php include $this->admin_view('header'); ?>
 
 <form method="post" action="" enctype="multipart/form-data">
     <input type="hidden" name="filename" id="filename" value="<?php echo $fielname; ?>">

@@ -57,7 +57,7 @@ class CategoryController extends Admin
         </tr>";
         $tree->init($categorys);
         $categorys = $tree->get_tree(0, $str);
-        include $this->admin_tpl('category/list');
+        include $this->admin_view('category/list');
     }
 
     /**
@@ -151,7 +151,7 @@ class CategoryController extends Admin
         $tree->init($category_select);
         $category_select = $tree->get_tree_category(0, $str, '2', $catid);
 
-        include $this->admin_tpl('category/add');
+        include $this->admin_view('category/add');
     }
 
     /**
@@ -205,7 +205,7 @@ class CategoryController extends Admin
         $str = "<option value='\$catid' \$selected>\$spacer \$catname</option>";
         $tree->init($category_select);
         $category_select = $tree->get_tree_category(0, $str, '2', $data['parentid']);
-        include $this->admin_tpl('category/add');
+        include $this->admin_view('category/add');
     }
 
     /**

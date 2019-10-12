@@ -35,7 +35,7 @@ class ModelController extends Admin
         $modelTypeName = $this->modelTypeName;
         $modelname = $modelTypeName[$typeid];
         $list = $this->_model->where('typeid=' . $typeid)->select();
-        include $this->admin_tpl('model/list');
+        include $this->admin_view('model/list');
     }
 
     public function addAction()
@@ -93,7 +93,7 @@ class ModelController extends Admin
         $modeltype = $this->modelType;
         $modelTypeName = $this->modelTypeName;
         $page_title = '添加' . $modelTypeName[$typeid]; // 格式：添加表单模型
-        include $this->admin_tpl('model/add');
+        include $this->admin_view('model/add');
     }
 
     public function editAction()
@@ -146,7 +146,7 @@ class ModelController extends Admin
         $modeltype = $this->modelType;
         $modelTypeName = $this->modelTypeName;
         $page_title = '编辑' . $modelTypeName[$typeid] . '[' . $data['modelname'] . ']'; // 格式：编辑表单模型[文章评论]
-        include $this->admin_tpl('model/add');
+        include $this->admin_view('model/add');
     }
 
     public function delAction()
@@ -192,7 +192,7 @@ class ModelController extends Admin
         $typeid = $this->typeid;
         $modelTypeName = $this->modelTypeName;
         $list = $field->where('modelid=' . $modelid)->order('listorder ASC')->select();
-        include $this->admin_tpl('model/fields');
+        include $this->admin_view('model/fields');
     }
 
     /**
@@ -274,7 +274,7 @@ class ModelController extends Admin
         $modeltype = $this->modelType;
         $typename = $this->modelTypeName;
         $merge = $field->where('modelid=' . $modelid)->where('formtype=?', 'fields')->select();
-        include $this->admin_tpl('model/addfield');
+        include $this->admin_view('model/addfield');
     }
 
     /**
@@ -334,7 +334,7 @@ class ModelController extends Admin
         $typename = $this->modelTypeName;
         $merge = $field->where('modelid=' . $modelid)->where('formtype=?', 'fields')->select();
 
-        include $this->admin_tpl('model/addfield');
+        include $this->admin_view('model/addfield');
     }
 
     /**
@@ -367,7 +367,7 @@ class ModelController extends Admin
         $name = $data['modelname'];
         $data = $field;
 
-        include $this->admin_tpl('model/ajaxedit');
+        include $this->admin_view('model/ajaxedit');
     }
 
     /**

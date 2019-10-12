@@ -249,7 +249,7 @@ abstract class Controller
     public function show_message($msg, $status = 2, $url = HTTP_REFERER, $time = 2000)
     {
 
-        include $this->admin_tpl('msg');
+        include $this->admin_view('msg');
         exit;
     }
 
@@ -506,12 +506,10 @@ abstract class Controller
         return $data;
     }
 
-    /**
-     * 加载后台模板
+    /** 加载后台视图模板
      * @param string $file 文件名
-     * @param string $m 模型名
      */
-    protected function admin_tpl($file)
+    protected function admin_view($file)
     {
         return ADMIN_PATH . $file . '.tpl.php';
     }

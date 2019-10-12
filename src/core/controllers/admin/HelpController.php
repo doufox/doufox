@@ -10,6 +10,6 @@ class HelpController extends Admin
 
     public function indexAction()
     {
-        include $this->admin_tpl('help');
+        include $this->admin_view('help');
     }
 }

@@ -1,5 +1,5 @@
-<?php include $this->admin_tpl('header'); ?>
-<?php include $this->admin_tpl('navbar'); ?>
+<?php include $this->admin_view('header'); ?>
+<?php include $this->admin_view('navbar'); ?>
 <link type="text/css" rel="stylesheet" href="/static/jquery.treeview/jquery.treeview.css" />
 <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="/static/jquery.treeview/jquery.treeview.js"></script>
@@ -194,4 +194,4 @@
     })
 </script>
 
-<?php include $this->admin_tpl('footer'); ?>
+<?php include $this->admin_view('footer'); ?>

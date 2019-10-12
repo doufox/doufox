@@ -1,5 +1,5 @@
-<?php include $this->admin_tpl('header');?>
-<?php include $this->admin_tpl('navbar'); ?>
+<?php include $this->admin_view('header');?>
+<?php include $this->admin_view('navbar'); ?>
 
 <script type="text/javascript">
     // window.top.document.getElementById('position').innerHTML = '添加字段';
@@ -261,4 +261,4 @@
     </div>
 </div>
 
-<?php include $this->admin_tpl('footer'); ?>
+<?php include $this->admin_view('footer'); ?>
