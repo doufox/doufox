@@ -6,6 +6,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 // 系统常量
 date_default_timezone_set('Asia/Shanghai'); // 系统时区设置
+define('DS', DIRECTORY_SEPARATOR);
 define('APP_START_TIME', isset($_SERVER['REQUSET_TIME']) ? $_SERVER['REQUSET_TIME'] : microtime(true)); // 设置程序开始执行时间
 define('HTTP_REFERER', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''); // 来源
 define('HTTP_HOST', $_SERVER['HTTP_HOST']); // host
@@ -23,7 +24,6 @@ define('STATIC_DIR', 'static'); // 静态文件夹
 define('PLUGIN_DIR', 'plugin'); // 插件文件夹
 
 // 路径
-define('DS', DIRECTORY_SEPARATOR);
 define('CORE_PATH', dirname(__FILE__) . DS); // 核心模块路径
 define('DATA_PATH', ROOT_PATH . DATA_DIR . DS); // 数据模块路径
 define('MODEL_PATH', CORE_PATH . MODEL_DIR . DS); // 数据模型路径

@@ -108,7 +108,7 @@ function appExecutionTime()
 }
 
 /**
- * Get Client IP Address
+ * 获取访客 IP 地址
  */
 function get_user_ip()
 {
@@ -818,50 +818,37 @@ function delete_cache($cache_file)
  */
 function is_mobile()
 {
-    if (isset($_SERVER['HTTP_VIA'])) {
-        return stristr($_SERVER['HTTP_VIA'], 'wap') ? true : false;
+    // 判断是否有HTTP_X_WAP_PROFILE，有则一定是移动设备。
+    if (isset($_SERVER['HTTP_X_WAP_PROFILE'])) {
+        return true;
     }
 
+    // 判断HTTP_VIA信息是否含有wap信息，有则一定是移动设备。
+    if (isset($_SERVER['HTTP_VIA']) && stristr($_SERVER['HTTP_VIA'], 'wap')) {
+        return true;
+    }
+
+    // 判断是否有HTTP_USER_AGENT信息是否是手机发送的客户端标志，有则一定是移动设备。
     if (isset($_SERVER['HTTP_USER_AGENT'])) {
-        $client = array(
-            'nokia',
-            'sony',
-            'ericsson',
-            'mot',
-            'samsung',
-            'htc',
-            'sgh',
-            'lg',
-            'sharp',
-            'sie-',
-            'philips',
-            'panasonic',
-            'alcatel',
-            'lenovo',
-            'iphone',
-            'blackberry',
-            'meizu',
-            'android',
-            'netfront',
-            'symbian',
-            'ucweb',
-            'windowsce',
-            'palm',
-            'operamini',
-            'operamobi',
-            'openwave',
-            'nexusone',
-            'cldc',
-            'midp',
-            'wap',
-            'mobile',
+        $clientkeys = array(
+            'nokia', 'sony', 'ericsson', 'mot', 'htc', 'huawei', 'lg',
+            'samsung', 'sgh', 'sharp', 'sie-', 'philips', 'palm',
+            'panasonic', 'alcatel', 'lenovo', 'iphone', 'ipod', 'blackberry',
+            'meizu', 'android', 'netfront', 'symbian', 'ucweb', 'windowsce',
+            'operamini', 'operamobi', 'openwave', 'nexusone', 'cldc', 'midp',
+            'wap', 'mobile',
         );
-        if (preg_match("/(" . implode('|', $client) . ")/i", strtolower($_SERVER['HTTP_USER_AGENT']))) {
+        if (preg_match("/(" . implode('|', $clientkeys) . ")/i", strtolower($_SERVER['HTTP_USER_AGENT']))) {
             return true;
         }
     }
+
+    // 判断HTTP_ACCEPT信息
+    // 如果只支持wml并且不支持html那一定是移动设备
+    // 如果支持wml和html但是wml在html之前则是移动设备
     if (isset($_SERVER['HTTP_ACCEPT'])) {
-        if ((strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') !== false) && (strpos($_SERVER['HTTP_ACCEPT'], 'text/html') === false || (strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') < strpos($_SERVER['HTTP_ACCEPT'], 'text/html')))) {
+        $ha = $_SERVER['HTTP_ACCEPT'];
+        if ((strpos($ha, 'vnd.wap.wml') !== false) && (strpos($ha, 'text/html') === false || (strpos($ha, 'vnd.wap.wml') < strpos($ha, 'text/html')))) {
             return true;
         }
     }
