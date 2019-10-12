@@ -1,4 +1,4 @@
-<?php include $this->install_tpl("header");?>
+<?php include $this->install_view("header");?>
 
 <script type="text/javascript">
     function $(ID) {return document.getElementById(ID);}
@@ -168,4 +168,4 @@
     </form>
 </div>
 
-<?php include $this->install_tpl("footer");?>
+<?php include $this->install_view("footer");?>

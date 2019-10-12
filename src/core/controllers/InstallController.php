@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 系统安装模块
  */
@@ -11,7 +12,7 @@ class InstallController
         $this->status = 'default';
         if (file_exists(DATA_PATH . 'installed')) {
             $this->status = 'success';
-            include $this->install_tpl('installed');
+            include $this->install_view('installed');
             exit();
         }
         if (!is_writable(DATA_PATH)) {
@@ -24,7 +25,7 @@ class InstallController
         $step = trim($_REQUEST['step']) ? trim($_REQUEST['step']) : 1;
         switch ($step) {
             case '1': // 安装许可协议
-                include $this->install_tpl('1');
+                include $this->install_view('1');
                 break;
             case '2': // 环境检测 填写配置信息
                 if (PHP_VERSION < '5.2.0') {
@@ -54,11 +55,11 @@ class InstallController
                 if (!is_writable(ROOT_PATH . 'upload')) {
                     $error = '系统目录upload没有写入权限, 无法进行安装！';
                 }
-                include $this->install_tpl('2');
+                include $this->install_view('2');
                 break;
             case '3': // 安装
                 function dexit($msg)
-            {
+                {
                     echo '<script>alert("' . $msg . '");window.history.back();</script>';
                     exit;
                 }
@@ -90,12 +91,12 @@ class InstallController
 
                 // 保存数据库配置文件
                 $content = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) exit();" . PHP_EOL . PHP_EOL . "return array(" . PHP_EOL . PHP_EOL;
-                $content .= "	'host'     => '" . $tdb_host . "', " . PHP_EOL;
-                $content .= "	'username' => '" . $tdb_user . "', " . PHP_EOL;
-                $content .= "	'password' => '" . $tdb_pass . "', " . PHP_EOL;
-                $content .= "	'dbname'   => '" . $tdb_name . "', " . PHP_EOL;
-                $content .= "	'prefix'   => '" . $ttb_pre . "', " . PHP_EOL;
-                $content .= "	'charset'  => 'utf8', " . PHP_EOL;
+                $content .= "    'host'     => '" . $tdb_host . "', " . PHP_EOL;
+                $content .= "    'username' => '" . $tdb_user . "', " . PHP_EOL;
+                $content .= "    'password' => '" . $tdb_pass . "', " . PHP_EOL;
+                $content .= "    'dbname'   => '" . $tdb_name . "', " . PHP_EOL;
+                $content .= "    'prefix'   => '" . $ttb_pre . "', " . PHP_EOL;
+                $content .= "    'charset'  => 'utf8', " . PHP_EOL;
                 $content .= PHP_EOL . ");";
                 if (!file_put_contents(DATA_PATH . 'config' . DS . 'database.ini.php', $content)) {
                     dexit('数据库配置文件保存失败, 请检查文件权限！');
@@ -117,7 +118,7 @@ class InstallController
                 // 超级管理员默认帐号密码
                 $sql = preg_replace("/\s*'admin'\s*,\s*'c3284d0f94606de1fd2af172aba15bf3'/", " '" . $username . "', '" . md5(md5($password)) . "'", $sql);
                 $this->installsql($sql);
-                include $this->install_tpl('3');
+                include $this->install_view('3');
                 break;
             case 'db_test': // 测试连接
                 $tdb_host = $_POST['tdb_host'];
@@ -185,7 +186,7 @@ class InstallController
      * 加载安装模板
      * @param string $file_name 文件名
      */
-    protected function install_tpl($file_name)
+    protected function install_view($file_name)
     {
         return INSTALL_PATH . $file_name . '.tpl.php';
     }
