@@ -1,11 +1,8 @@
-<!doctype html>
-<html>
-<head>
+<!doctype html><html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>提示信息</title>
 <link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon" />
 <style type="text/css">
-<!--
 html,body{width: 100%;height: 100%;}
 body, h1, p, a, img{margin:0;padding:0;}
 body{text-align:center;font-size: 12px;line-height: 1.5;font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";}
@@ -25,10 +22,7 @@ p{font-size:12px; line-height:150%;padding:10px;line-height:18px;}
 .c_red{color:#FF0000;}
 #success a{color: #237E29;}
 #error a{color: #f30;}
--->
-</style>
-</head>
-<body class="table">
+</style></head><body class="table">
 <div class="table-cell">
 <div class="msg-container" <?php if ($status == 1) {?>id="success"<?php } else {?>id="error"<?php }?>>
 <div class="content">
@@ -40,12 +34,7 @@ p{font-size:12px; line-height:150%;padding:10px;line-height:18px;}
 <?php } elseif ($url == 'back') {?>
 <script type="text/javascript">setTimeout(function(){history.back();}, <?php echo $time; ?>);</script>
 <?php } else {?>
-<a href="<?=$url?>">如果您的浏览器没有自动跳转，请点击这里</a>
-<script type="text/javascript">setTimeout("location.href='<?=$url?>';", <?php echo $time; ?>);</script>
+<a href="<?php echo $url; ?>">如果您的浏览器没有自动跳转，请点击这里</a>
+<script type="text/javascript">setTimeout("location.href='<?php echo $url; ?>';", <?php echo $time; ?>);</script>
 <?php }?>
-</p>
-</div>
-</div>
-</div>
-</body>
-</html>
+</p></div></div></div></body></html>

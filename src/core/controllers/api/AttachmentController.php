@@ -69,7 +69,7 @@ class AttachmentController extends Controller
         $pdir = url('attachment/album', array('dir' => str_replace(basename($dir), '', $dir), 'iframe' => $iframe, 'admin' => $admin));
         $dir = $this->dir . $dir;
         $istop = $dir ? 1 : 0;
-        include $this->admin_tpl('attachment/album');
+        include $this->admin_view('attachment/album');
     }
 
     /**
@@ -100,7 +100,7 @@ class AttachmentController extends Controller
             $data = $row;
             $url = url('attachment/image', array('w' => $w, 'h' => $h, 'size' => $size, 'admin' => $this->post('admin')));
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $size . 'MB';
-            include $this->admin_tpl('attachment/upload_result');
+            include $this->admin_view('attachment/upload_result');
         } else {
             $w = (int) $this->get('w');
             $h = (int) $this->get('h');
@@ -113,7 +113,7 @@ class AttachmentController extends Controller
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $s . 'MB';
             $size = $s;
             $isimage = 1; //如果是图片上传，就显示高宽输入框
-            include $this->admin_tpl('attachment/upload');
+            include $this->admin_view('attachment/upload');
 
         }
     }
@@ -140,7 +140,7 @@ class AttachmentController extends Controller
 
         $admin = $this->getAdmin();
         $sessionid = '1';
-        include $this->admin_tpl('attachment/swfupload');
+        include $this->admin_view('attachment/swfupload');
     }
 
     /**
@@ -169,10 +169,10 @@ class AttachmentController extends Controller
             }
             $data = $row;
             $url = url('attachment/file', array('size' => $size, 'type' => $this->get('type'), 'admin' => $this->post('admin')));
-            include $this->admin_tpl('attachment/upload_result');
+            include $this->admin_view('attachment/upload_result');
         } else {
             $admin = $this->getAdmin();
-            include $this->admin_tpl('attachment/upload');
+            include $this->admin_view('attachment/upload');
 
         }
     }

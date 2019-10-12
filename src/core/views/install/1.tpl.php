@@ -1,4 +1,4 @@
-<?php include $this->install_tpl("header");?>
+<?php include $this->install_view("header");?>
 
 <div class="panel-body">
     <p class="lead text-center">使用说明</p>
@@ -13,4 +13,4 @@
     </div>
 </div>
 
-<?php include $this->install_tpl("footer");?>
+<?php include $this->install_view("footer");?>

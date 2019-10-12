@@ -10,7 +10,7 @@ class BackupController extends Admin
 
     public function indexAction()
     {
-        include $this->admin_tpl('backup');
+        include $this->admin_view('backup');
     }
 
 }

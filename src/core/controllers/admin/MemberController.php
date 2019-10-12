@@ -56,7 +56,7 @@ class MemberController extends Admin
         $pagination = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
 
         $membermodel = $this->membermodel;
-        include $this->admin_tpl('member/list');
+        include $this->admin_view('member/list');
     }
 
     /*
@@ -79,7 +79,7 @@ class MemberController extends Admin
             $this->show_message('添加成功', 1, url('admin/member'));
         }
         $membermodel = $this->membermodel;
-        include $this->admin_tpl('member/add');
+        include $this->admin_view('member/add');
     }
 
     /*
@@ -128,7 +128,7 @@ class MemberController extends Admin
         $count[2] = $this->member->count('member', null, 'status=0');
         $model = $model;
         $info = $_data;
-        include $this->admin_tpl('member/edit');
+        include $this->admin_view('member/edit');
     }
 
     /**

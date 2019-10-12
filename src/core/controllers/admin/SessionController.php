@@ -34,6 +34,6 @@ class SessionController extends Admin
             }
         }
         unset($data, $file_list);
-        include $this->admin_tpl('session/list');
+        include $this->admin_view('session/list');
     }
 }

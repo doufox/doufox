@@ -1,4 +1,4 @@
-<?php include $this->admin_tpl('header');?>
+<?php include $this->admin_view('header');?>
 
 <link href="/static/swfupload/swfupload.css" rel="stylesheet" type="text/css" />
 <script language="javascript">

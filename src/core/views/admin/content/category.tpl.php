@@ -1,4 +1,4 @@
-<?php include $this->admin_tpl('header');?>
+<?php include $this->admin_view('header');?>
 
 <link rel="stylesheet" type="text/css" href="/static/jquery.treeview/jquery.treeview.css" />
 <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>

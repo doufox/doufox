@@ -50,7 +50,7 @@ class LoginController extends Admin
                 $this->show_message('账户或密码不正确，您还可以尝试' . $error . '次', 2, url('admin/login', array('url' => $this->get('url'))));
             }
         }
-        include $this->admin_tpl('login');
+        include $this->admin_view('login');
     }
 
     public function logoutAction()

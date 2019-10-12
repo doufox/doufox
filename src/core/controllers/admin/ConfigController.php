@@ -97,7 +97,7 @@ class ConfigController extends Admin
         // $data['ADMIN_PASS'] = '';
         $data['WEIXIN_MP_URL'] = HTTP_PRE . HTTP_HOST . url('api/weixin/index');
 
-        include $this->admin_tpl('config');
+        include $this->admin_view('config');
     }
 
     /**

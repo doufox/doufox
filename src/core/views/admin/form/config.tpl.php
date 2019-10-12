@@ -1,5 +1,5 @@
-<?php include $this->admin_tpl('header');?>
-<?php include $this->admin_tpl('navbar');?>
+<?php include $this->admin_view('header');?>
+<?php include $this->admin_view('navbar');?>
 
 <div class="container">
     <div class="panel panel-default page_menu">
@@ -125,4 +125,4 @@
     </div>
 </div>
 
-<?php include $this->admin_tpl('footer');?>
+<?php include $this->admin_view('footer');?>

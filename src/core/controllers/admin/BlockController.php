@@ -17,7 +17,7 @@ class BlockController extends Admin
     {
         $type = $this->type;
         $list = $this->block->findAll('id, type, name, remark');
-        include $this->admin_tpl('block/list');
+        include $this->admin_view('block/list');
     }
 
     public function addAction()
@@ -38,7 +38,7 @@ class BlockController extends Admin
         }
         $type = $this->type;
         $data['type'] = 3; //设置默认类型
-        include $this->admin_tpl('block/add');
+        include $this->admin_view('block/add');
     }
 
     public function editAction()
@@ -65,7 +65,7 @@ class BlockController extends Admin
             $this->show_message($this->getCacheCode('block') . '编辑成功', 1, url('admin/block'));
         }
         $type = $this->type;
-        include $this->admin_tpl('block/add');
+        include $this->admin_view('block/add');
     }
 
     public function delAction($id = 0, $all = 0)

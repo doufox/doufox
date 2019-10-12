@@ -1,4 +1,4 @@
-<?php include $this->admin_tpl('header');?>
+<?php include $this->admin_view('header');?>
 
 <div>
     <div class="table-list">

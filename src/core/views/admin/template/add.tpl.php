@@ -1,6 +1,6 @@
-<?php include $this->admin_tpl('header'); ?>
+<?php include $this->admin_view('header'); ?>
 
-<?php include $this->admin_tpl('navbar'); ?>
+<?php include $this->admin_view('navbar'); ?>
 
 <style type="text/css">
     #codeTextarea {
@@ -139,4 +139,4 @@
     createTextAreaWithLines('codeTextarea');
 </script>
 
-<?php include $this->admin_tpl('footer'); ?>
+<?php include $this->admin_view('footer'); ?>

@@ -68,7 +68,7 @@ class AttachmentController extends Admin
         $pdir = url('admin/attachment/index', array('dir' => str_replace(basename($dir), '', $dir), 'iframe' => $iframe, 'admin' => $admin));
         $dir = $this->dir . $dir;
         $istop = $dir ? 1 : 0;
-        include $this->admin_tpl('attachment/list');
+        include $this->admin_view('attachment/list');
     }
 
 
@@ -100,7 +100,7 @@ class AttachmentController extends Admin
             $data = $row;
             $url = url('attachment/image', array('w' => $w, 'h' => $h, 'size' => $size, 'admin' => $this->post('admin')));
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $size . 'MB';
-            include $this->admin_tpl('attachment/upload_result');
+            include $this->admin_view('attachment/upload_result');
         } else {
             $w = (int) $this->get('w');
             $h = (int) $this->get('h');
@@ -112,7 +112,7 @@ class AttachmentController extends Admin
             $admin = $this->getAdmin();
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $s . 'MB';
             $size = $s;
-            include $this->admin_tpl('attachment/add');
+            include $this->admin_view('attachment/add');
         }
     }
 
@@ -144,7 +144,7 @@ class AttachmentController extends Admin
             $data = $row;
             $url = url('attachment/image', array('w' => $w, 'h' => $h, 'size' => $size, 'admin' => $this->post('admin')));
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $size . 'MB';
-            include $this->admin_tpl('attachment/upload_result');
+            include $this->admin_view('attachment/upload_result');
         } else {
             $w = (int) $this->get('w');
             $h = (int) $this->get('h');
@@ -157,7 +157,7 @@ class AttachmentController extends Admin
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $s . 'MB';
             $size = $s;
             $isimage = 1; //如果是图片上传，就显示高宽输入框
-            include $this->admin_tpl('attachment/uploadimage');
+            include $this->admin_view('attachment/uploadimage');
         }
     }
 
@@ -190,7 +190,7 @@ class AttachmentController extends Admin
             $data = $row;
             $url = url('attachment/image', array('w' => $w, 'h' => $h, 'size' => $size, 'admin' => $this->post('admin')));
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $size . 'MB';
-            include $this->admin_tpl('attachment/upload_result');
+            include $this->admin_view('attachment/upload_result');
         } else {
             $w = (int) $this->get('w');
             $h = (int) $this->get('h');
@@ -203,7 +203,7 @@ class AttachmentController extends Admin
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $s . 'MB';
             $size = $s;
             $isimage = 1; //如果是图片上传，就显示高宽输入框
-            include $this->admin_tpl('attachment/upload');
+            include $this->admin_view('attachment/upload');
         }
     }
 
@@ -229,7 +229,7 @@ class AttachmentController extends Admin
 
         $admin = $this->getAdmin();
         $sessionid = '1';
-        include $this->admin_tpl('attachment/swfupload');
+        include $this->admin_view('attachment/swfupload');
     }
 
     /** 上传文件(单)
@@ -258,10 +258,10 @@ class AttachmentController extends Admin
             }
             $data = $row;
             $url = url('attachment/file', array('size' => $size, 'type' => $this->get('type'), 'admin' => $this->post('admin')));
-            include $this->admin_tpl('attachment/upload_result');
+            include $this->admin_view('attachment/upload_result');
         } else {
             $admin = $this->getAdmin();
-            include $this->admin_tpl('attachment/upload');
+            include $this->admin_view('attachment/upload');
         }
     }
 
