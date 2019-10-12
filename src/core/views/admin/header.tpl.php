@@ -19,8 +19,7 @@
     <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/static/js/admin.js"></script>
     <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script>
-    <?php doHookAction('admin_head'); ?>
-
+    <?php doHookAction('admin_head'); echo PHP_EOL; ?>
 </head>
 
 <body>

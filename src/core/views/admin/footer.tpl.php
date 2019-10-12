@@ -109,9 +109,6 @@
         }
     }
 </script>
-
-<?php doHookAction('admin_footer'); ?>
-
+<?php doHookAction('admin_footer'); echo PHP_EOL; ?>
 </body>
-
 </html>

@@ -1,9 +1,9 @@
 <?php
 /*
     Plugin Name: 小贴士
-    Version: 1.1
+    Version: 1.0
     Plugin URL: https://doufox.com
-    Description: 这是世界上第一个doufox插件，它会在你的管理页面送上一句温馨的小提示。
+    Description: 内置插件，它会在你管理主页面显示一句温馨的小提示。
     Author: doufox
     Author URL: https://doufox.com
 */
@@ -28,8 +28,9 @@ function tips()
     );
     $i = mt_rand(0, count($array_tips) - 1);
     $tip = $array_tips[$i];
-    echo '<div class="container"><div class="alert alert-info" role="alert" id="plugin_admin_tips">' . $tip . '</div></div>';
+    echo '<div class="alert alert-info" role="alert" id="plugin_admin_tips">' . $tip . '</div>';
 }
 
-addHookAction('admin_head', 'tips_css'); // head 头部插入 CSS 样式
-addHookAction('admin_index_header', 'tips'); // 管理主界面顶部插入内容
+// 管理主页面显示
+addHookAction('admin_index_top', 'tips_css'); // head 头部插入 CSS 样式
+addHookAction('admin_index_content_top', 'tips');
