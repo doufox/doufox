@@ -66,7 +66,7 @@ $(document).ready(function(){
             </ul>
             </fieldset>
         </div>
-       <div class="contentList pad-10 hidden" id="div_swf_2" style="display: none;">
+       <div class="contentList pad-10" id="div_swf_2" style="display: none;">
             <ul class="attachment-list">
             <iframe width="100%" scrolling="auto" height="330" frameborder="false" id="album_dir" allowtransparency="true" style="overflow-x:hidden;border:none" src="<?php echo url('attachment/album', array('admin'=>$admin)); ?>" name="album-dir"></iframe>   
             </ul>

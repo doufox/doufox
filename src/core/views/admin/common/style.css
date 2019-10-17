@@ -64,13 +64,6 @@ textarea {
     margin-top: 5px;
 }
 
-.page_menu .left-head span a.refresh {
-    width: 16px;
-    height: 16px;
-    font-size: 16px;
-    background: url(../img/bg.gif) no-repeat -89px -569px;
-}
-
 .page_menu .left-head span a.refresh:hover {
     background-position: -109px -569px;
 }
@@ -152,25 +145,6 @@ input.dialog {
     background-color: #e8eff6
 }
 
-.picBut {
-    background: url(../img/picBnt.png) no-repeat 0 -28px;
-    color: #fff;
-    float: left;
-    text-align: center;
-    font-weight: 700;
-    height: 28px;
-    line-height: 26px;
-    *line-height: 30px;
-    margin-right: 10px;
-    width: 75px
-}
-
-.picBut a {
-    color: #fff;
-    text-decoration: none;
-    width: 75px
-}
-
 body fieldset {
     border: 1px solid #D8D8D8;
     padding: 10px;
@@ -229,7 +203,7 @@ body fieldset.blue legend {
 }
 
 #imgPreview td.on a {
-    background: url(../swfupload/images/msg_bg.png) no-repeat scroll right -250px transparent;
+    background: url(/static/swfupload/images/msg_bg.png) no-repeat scroll right -250px transparent;
     display: -moz-inline-stack;
     height: 16px;
     line-height: 16px;
@@ -238,22 +212,22 @@ body fieldset.blue legend {
 }
 
 .ico1 {
-    background: url(../img/file.gif) no-repeat;
+    background: url(/static/img/file.gif) no-repeat;
     padding-left: 20px;
 }
 
 .ico2 {
-    background: url(../img/gear_disable.png) no-repeat;
+    background: url(/static/img/gear_disable.png) no-repeat;
     padding-left: 20px;
 }
 
 .ico3 {
-    background: url(../img/link.gif) no-repeat;
+    background: url(/static/img/link.gif) no-repeat;
     padding-left: 20px;
 }
 
 input.date {
-    background: #fff url(../img/input_date.png) no-repeat right 3px;
+    background: #fff url(/static/img/input_date.png) no-repeat right 3px;
     padding-right: 18px;
     font-size: 12px;
 }
@@ -276,7 +250,9 @@ input.date {
     color: #777
 }
 
-label+label {
+input+input,
+label+label,
+input+button {
     margin-left: 5px;
 }
 
@@ -319,7 +295,7 @@ table td .label-group {
     zoom: 1;
     *display: inline;
     vertical-align: middle;
-    background: url(../swfupload/images/msg_bg.png) no-repeat;
+    background: url(/static/swfupload/images/msg_bg.png) no-repeat;
     color: #444;
     line-height: 18px;
     padding: 2px 10px 2px 23px;

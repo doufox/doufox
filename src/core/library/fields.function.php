@@ -364,7 +364,7 @@ function content_editor($name, $content = '', $setting = '')
     }
     $str .= '<textarea class="form-control" id="' . $id . '" name="data[' . $name . ']" style="width:' . $w . '%;height:' . $h . 'px;visibility:hidden;">' . $content . '</textarea>';
     if (!isset($setting['system']) && $name == 'content') {
-        $str .= '<p><label class="label-group"><input type="checkbox" checked="" value="1" name="data[add_introduce]">自动生成描述</label>';
+        $str .= '<br /><p><label class="label-group"><input type="checkbox" checked="" value="1" name="data[add_introduce]">自动生成描述</label>';
         $str .= '<input type="text" size="10" value="200" name="data[introcude_length]" class="form-control">字符描述<p>';
         $str .= '<p><label class="label-group"><input type="checkbox" checked="" value="1" name="data[auto_thumb]">自动获取第一张图为缩略图</label></p>';
     }
@@ -440,19 +440,21 @@ function content_file($name, $content = '', $setting = '')
     $content = $content[0];
     $type = base64_encode($setting['type']);
     $size = (int) $setting['size'];
-    return '<input type="text" class="form-control" size="50" value="' . $content . '" name="data[' . $name . ']" id="' . $name . '">
-    <input type="button" class="button" onClick="admin_command.uploadFile(\'' . $name . '\',\'' . $type . '\',\'' . $size . '\')" value="上传文件">';
+    return '<div class="input-group">
+        <input type="text" class="form-control" size="50" value="' . $content . '" name="data[' . $name . ']" id="' . $name . '" placeholder="文件地址">
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-default" onClick="admin.showFileUpload(\'' . $name . '\', \'upload\', \'' . $type . '\',\'' . $size . '\')">上传文件</button>
+            <button type="button" class="btn btn-default" onClick="admin.showFileUpload(\'' . $name . '\', \'select\', \'' . $type . '\',\'' . $size . '\')">选择文件</button>
+        </div>
+    </div>';
 }
 
 function content_files($name, $content = '', $setting = '')
 {
     $content = $content[0];
     $set = base64_encode($setting['type']) . '|' . (int) $setting['size'];
-    $str = '';
-    $str .= '<input type="hidden" class="form-control" value="' . $name . '" name="listfiles[]">
-        <fieldset class="blue">
-        <legend>列表</legend>
-        <div class="picList" id="list_' . $name . '_files"><ul id="' . $name . '-sort-items">';
+    $str = '<input type="hidden" class="form-control" value="' . $name . '" name="listfiles[]">
+        <div id="list_' . $name . '_files"><div id="' . $name . '-sort-items">';
     if ($content) {
         $content = string2array($content);
         $filepath = $content['file'];
@@ -460,18 +462,19 @@ function content_files($name, $content = '', $setting = '')
         if (is_array($filepath) && !empty($filepath)) {
             foreach ($filepath as $id => $path) {
                 $alt = isset($filename[$id]) ? $filename[$id] : '';
-                $str .= '<li id="files_999' . $id . '">';
-                $str .= '<input type="text" class="form-control" style="width:310px;" value="' . $path . '" name="data[' . $name . '][file][]">';
-                $str .= '<input type="text" class="form-control" style="width:160px;" value="' . $alt . '" name="data[' . $name . '][alt][]">';
-                $str .= '<a href="javascript:admin_command.removediv(\'999' . $id . '\');">删除</a></li>';
+                $str .= '<p id="files_999' . $id . '">';
+                $str .= '<input type="text" class="form-control" style="width: 100px;" value="' . $alt . '" name="data[' . $name . '][alt][]" placeholder="图片说明">';
+                $str .= '<input type="text" class="form-control" style="width: 300px;" value="' . $path . '" name="data[' . $name . '][file][]" placeholder="图片地址">';
+                $str .= '<button type="button" class="btn btn-default" onclick="admin.removeDIV(\'999' . $id . '\');">删除</button></p>';
             }
         }
     }
-    $str .= '</ul></fieldset>
-        <div class="bk10"></div>
-        <div class="picBut cu"><a href="javascript:;" onClick="admin_command.add_null_file(\'' . $name . '\')">添加地址</a></div>
-        <div class="picBut cu"><a href="javascript:;" onClick="admin_command.uploadFiles(\'' . $name . '\',\'' . $set . '\')">批量上传</a></div>
-        <div class="show-tips">前者表示文件地址，后者表示文件名称</div><script>$("#' . $name . '-sort-items").sortable();</script>';
+    $str .= '</div>
+        <p>
+            <button type="button" class="btn btn-default" onclick="admin.addNullFileLine(\'' . $name . '\')">添加地址</button>
+            <button type="button" class="btn btn-default" onclick="admin.showFilesUpload(\'' . $name . '\',\'' . $set . '\')">批量上传</button>
+        </p>
+        <script>$("#' . $name . '-sort-items").sortable();</script>';
     return $str;
 }
 
