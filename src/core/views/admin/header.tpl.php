@@ -12,13 +12,11 @@
     <meta name="referrer" content="never" />
     <title>内容管理系统</title>
     <link type="text/css" href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link type="text/css" href="/static/css/admin.css" rel="stylesheet" />
+    <style><?php include $this->admin_view('common/style');?></style>
     <link rel="icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico" />
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
     <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/static/js/admin.js"></script>
-    <script type="text/javascript" src="/static/js/dialog.js?skin=green"></script>
     <?php doHookAction('admin_head'); echo PHP_EOL; ?>
 </head>
 
