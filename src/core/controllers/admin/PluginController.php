@@ -3,23 +3,15 @@
 class PluginController extends Admin
 {
 
-    private $plugin;
-
     public function __construct()
     {
         parent::__construct();
-        $this->plugin = core::load_model('plugin');
     }
 
     public function indexAction()
     {
-        $list = $this->plugin->findAll('id, official, name, version, url, description, author, author_url, status');
+        $list = $this->plugin->findAll('id, official, plugin, name, version, url, description, author, author_url, status');
         include $this->admin_view('plugin/list');
-    }
-
-    public function addAction()
-    {
-        include $this->admin_view('plugin/add');
     }
 
     public function settingAction()
@@ -44,14 +36,54 @@ class PluginController extends Admin
         include $this->admin_view('plugin/setting');
     }
 
-    public function delAction($id = 0, $all = 0)
+    public function reloadAction($plugin="")
     {
-        $id = $id ? $id : (int) $this->get('id');
-        $all = $all ? $all : $this->get('all');
-        $this->plugin->delete('id=' . $id);
-        $all or $this->show_message($this->getCacheCode('plugin') . '删除成功', 1, url('admin/plugin/index'));
+        // $plugin = $plugin ? $plugin : (int) $this->get('plugin');
+        $plugin_files = $this->getPluginFiles();
+        print_r($plugin_files);
+        foreach ($plugin_files as $pluginFile) {
+            $pluginData = $this->getPluginData($pluginFile);
+            print_r($pluginData);
+            if (empty($pluginData['Name'])) {
+                continue;
+            }
+            $this->plugin->insert($pluginData);
+        }
+        // if (!empty($id)) {
+        //     $this->plugin->delete('id=' . $id);
+        //     $this->show_message($this->getCacheCode('plugin') . '删除成功', 1, url('admin/plugin/index'));
+        // }
     }
 
+    public function delAction($id = 0)
+    {
+        $id = $id ? $id : (int) $this->get('id');
+        if (!empty($id)) {
+            $this->plugin->delete('id=' . $id);
+            $this->show_message($this->getCacheCode('plugin') . '删除成功', 1, url('admin/plugin/index'));
+        }
+        $this->show_message('参数缺失', 1, url('admin/plugin/index'));
+    }
+
+    public function openAction($id = 0)
+    {
+        $id = $id ? $id : (int) $this->get('id');
+        if (!empty($id)) {
+            $this->plugin->update(array('status' => 1), 'id=' . $id);
+            $this->show_message($this->getCacheCode('plugin') . '启用成功', 1, url('admin/plugin/index'));
+        }
+        $this->show_message('参数缺失', 1, url('admin/plugin/index'));
+    }
+
+    public function closeAction($id = 0)
+    {
+        $id = $id ? $id : (int) $this->get('id');
+        if (!empty($id)) {
+            $this->plugin->update(array('status' => 0), 'id=' . $id);
+            $this->show_message($this->getCacheCode('plugin') . '关闭成功', 1, url('admin/plugin/index'));
+        }
+        $this->show_message('参数缺失', 1, url('admin/plugin/index'));
+    }
     public function cacheAction($show = 0)
     {
         $list = $this->plugin->findAll();

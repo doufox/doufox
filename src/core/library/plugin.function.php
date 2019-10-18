@@ -18,3 +18,8 @@ if ($active_plugin && is_array($active_plugin)) {
         }
     }
 }
+
+// $active_plugin = array(
+//     'tips',
+//     'helloworld'
+// );
