@@ -36,23 +36,46 @@ class PluginController extends Admin
         include $this->admin_view('plugin/setting');
     }
 
-    public function reloadAction($plugin="")
+    public function testAction()
     {
-        // $plugin = $plugin ? $plugin : (int) $this->get('plugin');
-        $plugin_files = $this->getPluginFiles();
-        print_r($plugin_files);
-        foreach ($plugin_files as $pluginFile) {
-            $pluginData = $this->getPluginData($pluginFile);
-            print_r($pluginData);
-            if (empty($pluginData['Name'])) {
+
+        $plugin = get_cache('plugin');
+        print_r($plugin);
+        // $a  = array(
+        //     'name' => 'Hello World',
+        //     'plugin' => 'helloworld',
+        //     'version' => '1.0',
+        //     'description' => '内置插件，它会在你每个管理页面显示一句"Hello World !"。',
+        //     'url' => 'https://doufox.com',
+        //     'author' => 'doufox',
+        //     'author_url' => 'https://doufox.com'
+        // );
+        // $this->plugin->insert($a);
+    }
+
+    public function reloadAction()
+    {
+        $f = getPluginFiles();
+        $num = 0;
+        foreach ($f as $i) {
+            $pd = getPluginData($i);
+            // print_r($pd);
+            if (empty($pd['name']) || empty($pd['plugin'])) {
+                // 不是插件
                 continue;
             }
-            $this->plugin->insert($pluginData);
+            if ($this->plugin->getOne('plugin=?', $pd['plugin'])) {
+                // 已存在数据库
+                continue;
+            }
+            $num++;
+            $this->plugin->insert($pd);
         }
-        // if (!empty($id)) {
-        //     $this->plugin->delete('id=' . $id);
-        //     $this->show_message($this->getCacheCode('plugin') . '删除成功', 1, url('admin/plugin/index'));
-        // }
+        unset($f);
+        if ($num) {
+            $this->show_message($this->getCacheCode('plugin') . '更新成功', 1, url('admin/plugin/index'));
+        }
+        $this->show_message($this->getCacheCode('plugin') . '操作结束', 1, url('admin/plugin/index'));
     }
 
     public function delAction($id = 0)
@@ -84,6 +107,7 @@ class PluginController extends Admin
         }
         $this->show_message('参数缺失', 1, url('admin/plugin/index'));
     }
+
     public function cacheAction($show = 0)
     {
         $list = $this->plugin->findAll();

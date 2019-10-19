@@ -1,11 +1,11 @@
 <?php
 /*
-    Plugin Name: Hello World
-    Version: 1.0
-    Plugin URL: https://doufox.com
-    Description: 内置插件，它会在你每个管理页面显示一句"Hello World !"。
-    Author: doufox
-    Author URL: https://doufox.com
+Name: Hello World
+Version: 1.0
+URL: https://doufox.com
+Description: 内置插件，它会在你每个管理页面显示一句"Hello World !"。
+Author: doufox
+Author URL: https://doufox.com
 */
 
 

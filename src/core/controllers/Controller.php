@@ -32,14 +32,11 @@ abstract class Controller
     protected $plugin;
     protected $plugin_cache;
 
-    protected $globalHooks = array();
-
     /**
      * 用于初始化本类的运行环境,或对基本变量进行赋值
      */
     public function __construct()
     {
-
         if (get_magic_quotes_runtime()) {
             set_magic_quotes_runtime(0);
         }
@@ -53,20 +50,28 @@ abstract class Controller
         if (!file_exists(DATA_PATH . 'installed')) {
             Controller::redirect(url('install/index'));
         }
+
         $this->view = core::load_class('view');
         $this->cookie = core::load_class('cookie');
         $this->session = core::load_class('session');
         $this->site_config = core::load_config('config');
         $this->category = core::load_model('category');
         $this->content = core::load_model('content');
+        $this->account = core::load_model('account');
+        $this->plugin = core::load_model('plugin');
         $this->category_cache = get_cache('category');
         $this->category_dir_cache = get_cache('category_dir');
-
-        $this->account = core::load_model('account');
         $this->account_cache = get_cache('account');
-
-        $this->plugin = core::load_model('plugin');
         $this->plugin_cache = get_cache('plugin');
+
+        if ($this->plugin_cache && is_array($this->plugin_cache)) {
+            foreach ($this->plugin_cache as $i) {
+                $p = $i['plugin'] . DS . $i['plugin'] . '.php';
+                if (true === checkPlugin($p) && (bool) ($i['status']) === true) {
+                    core::load_file(PLUGIN_PATH . $p);
+                }
+            }
+        }
 
         // $userid = session::get('user_id');
         // if ($account_cache) {
@@ -81,6 +86,7 @@ abstract class Controller
             $this->membermodel = get_cache('membermodel');
             $this->memberinfo = $this->getMember();
         }
+
         $this->view->assign(array(
             'site_generator' => APP_NAME,
             'site_url' => HTTP_URL,
@@ -520,79 +526,5 @@ abstract class Controller
     protected function admin_view($file)
     {
         return ADMIN_PATH . $file . '.tpl.php';
-    }
-
-    /**
-     * 获取所有插件目录里的插件列表
-     * 仅识别 插件目录/插件/插件.php 目录结构的插件
-     * @return array
-     */
-    function getPluginFiles()
-    {
-        $plugin_list = array();
-        $plugin_dir = @dir(PLUGIN_PATH);
-        if ($plugin_dir) {
-            while (($file = $plugin_dir->read()) !== false) {
-                if (preg_match('|^\.+$|', $file)) {
-                    continue;
-                }
-                $dir = PLUGIN_PATH . $file;
-                if (is_dir($dir)) {
-                    $sub_dir = @dir($dir);
-                    if ($sub_dir) {
-                        while (($subFile = $sub_dir->read()) !== false) {
-                            if (preg_match('|^\.+$|', $subFile)) {
-                                continue;
-                            }
-                            if ($subFile == $file . '.php') {
-                                // $plugin_list[] = "$file/$subFile";
-                                $plugin_list[] = $file;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        sort($plugin_list);
-        // print_r($plugin_list);
-        return $plugin_list;
-    }
-
-    /**
-     * 获取插件信息
-     *
-     * @param string $plugin 插件目录
-     * @return array
-     */
-    function getPluginData($plugin)
-    {
-        $file_path = PLUGIN_PATH . $plugin . DS . $plugin . '.php';
-        if (!file_exists($file_path)) {
-            return array();
-        }
-        $data = implode('', file($file_path));
-        preg_match("/Name:(.*)/i", $data, $name);
-        preg_match("/Version:(.*)/i", $data, $version);
-        preg_match("/URL:(.*)/i", $data, $url);
-        preg_match("/Description:(.*)/i", $data, $description);
-        preg_match("/Author:(.*)/i", $data, $author_name);
-        preg_match("/Author URL:(.*)/i", $data, $author_url);
-
-        $name = isset($name[1]) ? strip_tags(trim($name[1])) : '';
-        $version = isset($version[1]) ? strip_tags(trim($version[1])) : '';
-        $description = isset($description[1]) ? strip_tags(trim($description[1])) : '';
-        $url = isset($url[1]) ? strip_tags(trim($url[1])) : '';
-        $author = isset($author_name[1]) ? strip_tags(trim($author_name[1])) : '';
-        $author_url = isset($author_url[1]) ? strip_tags(trim($author_url[1])) : '';
-        unset($data);
-        return array(
-            'name' => $name,
-            'plugin' => $plugin,
-            'version' => $version,
-            'description' => $description,
-            'url' => $url,
-            'author' => $author,
-            'author_url' => $author_url
-        );
     }
 }
