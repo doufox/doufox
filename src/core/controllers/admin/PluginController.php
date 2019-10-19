@@ -3,23 +3,15 @@
 class PluginController extends Admin
 {
 
-    private $plugin;
-
     public function __construct()
     {
         parent::__construct();
-        $this->plugin = core::load_model('plugin');
     }
 
     public function indexAction()
     {
-        $list = $this->plugin->findAll('id, official, name, version, url, description, author, author_url, status');
+        $list = $this->plugin->findAll('id, official, plugin, name, version, url, description, author, author_url, status');
         include $this->admin_view('plugin/list');
-    }
-
-    public function addAction()
-    {
-        include $this->admin_view('plugin/add');
     }
 
     public function settingAction()
@@ -44,12 +36,76 @@ class PluginController extends Admin
         include $this->admin_view('plugin/setting');
     }
 
-    public function delAction($id = 0, $all = 0)
+    public function testAction()
+    {
+
+        $plugin = get_cache('plugin');
+        print_r($plugin);
+        // $a  = array(
+        //     'name' => 'Hello World',
+        //     'plugin' => 'helloworld',
+        //     'version' => '1.0',
+        //     'description' => '内置插件，它会在你每个管理页面显示一句"Hello World !"。',
+        //     'url' => 'https://doufox.com',
+        //     'author' => 'doufox',
+        //     'author_url' => 'https://doufox.com'
+        // );
+        // $this->plugin->insert($a);
+    }
+
+    public function reloadAction()
+    {
+        $f = getPluginFiles();
+        $num = 0;
+        foreach ($f as $i) {
+            $pd = getPluginData($i);
+            // print_r($pd);
+            if (empty($pd['name']) || empty($pd['plugin'])) {
+                // 不是插件
+                continue;
+            }
+            if ($this->plugin->getOne('plugin=?', $pd['plugin'])) {
+                // 已存在数据库
+                continue;
+            }
+            $num++;
+            $this->plugin->insert($pd);
+        }
+        unset($f);
+        if ($num) {
+            $this->show_message($this->getCacheCode('plugin') . '更新成功', 1, url('admin/plugin/index'));
+        }
+        $this->show_message($this->getCacheCode('plugin') . '操作结束', 1, url('admin/plugin/index'));
+    }
+
+    public function delAction($id = 0)
     {
         $id = $id ? $id : (int) $this->get('id');
-        $all = $all ? $all : $this->get('all');
-        $this->plugin->delete('id=' . $id);
-        $all or $this->show_message($this->getCacheCode('plugin') . '删除成功', 1, url('admin/plugin/index'));
+        if (!empty($id)) {
+            $this->plugin->delete('id=' . $id);
+            $this->show_message($this->getCacheCode('plugin') . '删除成功', 1, url('admin/plugin/index'));
+        }
+        $this->show_message('参数缺失', 1, url('admin/plugin/index'));
+    }
+
+    public function openAction($id = 0)
+    {
+        $id = $id ? $id : (int) $this->get('id');
+        if (!empty($id)) {
+            $this->plugin->update(array('status' => 1), 'id=' . $id);
+            $this->show_message($this->getCacheCode('plugin') . '启用成功', 1, url('admin/plugin/index'));
+        }
+        $this->show_message('参数缺失', 1, url('admin/plugin/index'));
+    }
+
+    public function closeAction($id = 0)
+    {
+        $id = $id ? $id : (int) $this->get('id');
+        if (!empty($id)) {
+            $this->plugin->update(array('status' => 0), 'id=' . $id);
+            $this->show_message($this->getCacheCode('plugin') . '关闭成功', 1, url('admin/plugin/index'));
+        }
+        $this->show_message('参数缺失', 1, url('admin/plugin/index'));
     }
 
     public function cacheAction($show = 0)

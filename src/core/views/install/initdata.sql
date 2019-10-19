@@ -228,6 +228,7 @@ DROP TABLE IF EXISTS `doufox_plugin`;
 CREATE TABLE IF NOT EXISTS `doufox_plugin`(
     `id` SMALLINT(8) NOT NULL AUTO_INCREMENT,
     `official` TINYINT(1) NOT NULL COMMENT '官方提供',
+    `plugin` VARCHAR(50) NOT NULL '插件文件夹',
     `name` VARCHAR(50) NOT NULL '插件名称',
     `version` VARCHAR(100) NOT NULL '插件版本',
     `url` VARCHAR(255) NOT NULL '插件地址',
@@ -241,4 +242,4 @@ CREATE TABLE IF NOT EXISTS `doufox_plugin`(
     PRIMARY KEY(`id`)
 ) ENGINE = MyISAM DEFAULT CHARSET = utf8;
 
-INSERT INTO `doufox_plugin` (`official`, `name`, `version`, `url`, `description`, `author`, `author_url`, `status`) VALUES (1, '温馨提示', '1.1', 'https://doufox.com', '内置插件，它会在你管理主页面显示一句温馨的小提示。', 'doufox', 'https://doufox.com', 1);
+INSERT INTO `doufox_plugin` (`official`, `plugin`, `name`, `version`, `url`, `description`, `author`, `author_url`, `status`) VALUES (1, 'tips', '温馨提示', '1.1', 'https://doufox.com', '内置插件，它会在你管理主页面显示一句温馨的小提示。', 'doufox', 'https://doufox.com', 1);

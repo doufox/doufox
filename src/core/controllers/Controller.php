@@ -29,12 +29,14 @@ abstract class Controller
     protected $view;
     protected $_options = array();
 
+    protected $plugin;
+    protected $plugin_cache;
+
     /**
      * 用于初始化本类的运行环境,或对基本变量进行赋值
      */
     public function __construct()
     {
-
         if (get_magic_quotes_runtime()) {
             set_magic_quotes_runtime(0);
         }
@@ -48,17 +50,28 @@ abstract class Controller
         if (!file_exists(DATA_PATH . 'installed')) {
             Controller::redirect(url('install/index'));
         }
+
         $this->view = core::load_class('view');
         $this->cookie = core::load_class('cookie');
         $this->session = core::load_class('session');
         $this->site_config = core::load_config('config');
         $this->category = core::load_model('category');
         $this->content = core::load_model('content');
+        $this->account = core::load_model('account');
+        $this->plugin = core::load_model('plugin');
         $this->category_cache = get_cache('category');
         $this->category_dir_cache = get_cache('category_dir');
-
-        $this->account = core::load_model('account');
         $this->account_cache = get_cache('account');
+        $this->plugin_cache = get_cache('plugin');
+
+        if ($this->plugin_cache && is_array($this->plugin_cache)) {
+            foreach ($this->plugin_cache as $i) {
+                $p = $i['plugin'] . DS . $i['plugin'] . '.php';
+                if (true === checkPlugin($p) && (bool) ($i['status']) === true) {
+                    core::load_file(PLUGIN_PATH . $p);
+                }
+            }
+        }
 
         // $userid = session::get('user_id');
         // if ($account_cache) {
@@ -73,6 +86,7 @@ abstract class Controller
             $this->membermodel = get_cache('membermodel');
             $this->memberinfo = $this->getMember();
         }
+
         $this->view->assign(array(
             'site_generator' => APP_NAME,
             'site_url' => HTTP_URL,

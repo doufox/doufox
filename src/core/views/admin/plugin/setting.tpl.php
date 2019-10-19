@@ -28,6 +28,10 @@
                             <td><?php echo $data['name']; ?></td>
                         </tr>
                         <tr>
+                            <th>目录</th>
+                            <td><?php echo $data['plugin']; ?></td>
+                        </tr>
+                        <tr>
                             <th>版本</th>
                             <td><?php echo $data['version']; ?></td>
                         </tr>

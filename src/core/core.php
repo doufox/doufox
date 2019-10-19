@@ -38,7 +38,6 @@ define('PLUGIN_PATH', ROOT_PATH . PLUGIN_DIR . DS); // 插件路径
 
 core::load_file(CORE_PATH . 'info.php'); // 系统基本信息
 core::load_file(CORE_PATH . 'library' . DS . 'global.function.php'); // 全局函数
-core::load_file(CORE_PATH . 'library' . DS . 'plugin.function.php'); // 插件工具
 core::load_class('Model', '', 0);
 
 /**

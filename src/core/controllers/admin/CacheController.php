@@ -51,6 +51,10 @@ class CacheController extends Admin
                 'controller' => 'template',
                 'title' => '移动主题'
             ),
+            'plugin.cache.php' => array(
+                'controller' => 'plugin',
+                'title' => '插件'
+            ),
         );
         $file_list = core::load_class('file_list');
         $dir = DATA_PATH . 'cache' . DS;
@@ -103,11 +107,12 @@ class CacheController extends Admin
     public function updateAction()
     {
         $caches = array(
-            0 => array('账号', 'account', 'cache'),
-            1 => array('模型', 'model', 'cache'),
-            2 => array('栏目', 'category', 'cache'),
-            3 => array('区块', 'block', 'cache'),
-            4 => array('模板', 'template', 'cache'),
+            array('账号', 'account', 'cache'),
+            array('模型', 'model', 'cache'),
+            array('栏目', 'category', 'cache'),
+            array('区块', 'block', 'cache'),
+            array('模板', 'template', 'cache'),
+            array('插件', 'plugin', 'cache')
         );
         if ($this->get('show')) {
             $id = $_GET['id'] ? intval($_GET['id']) : 0;
