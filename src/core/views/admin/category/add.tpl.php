@@ -73,10 +73,11 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th width="100"><font color="red">*</font>菜单中显示：</th>
+                                        <th width="100"><font color="red">*</font>菜单导航：</th>
                                         <td>
                                             <label class="label-group"><input type="radio" <?php if (!isset($data['ismenu']) || $data['ismenu']==0) { ?>checked<?php } ?> value="0" name="data[ismenu]">隐藏</label>
                                             <label class="label-group"><input type="radio" <?php if (isset($data['ismenu']) && $data['ismenu']==1) { ?>checked<?php } ?> value="1" name="data[ismenu]">显示</label>
+                                            <div class="show-tips">作为菜单显示在导航栏</div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -111,28 +112,31 @@
                                     </tr>
 
                                     <tr>
-                                        <th>栏目展示模板：</th>
-                                        <td id="category_template">
+                                        <th>栏目模板：</th>
+                                        <td>
                                             <input type="text" class="form-control" size="30" value="<?php echo $data['categorytpl']; ?>" name="data[categorytpl]" id="categorytpl">
-                                            <div class="show-tips">当有下级栏目时有效</div>
+                                            <div class="show-tips">栏目内容及子栏目列表展示页模板，当有下级栏目时有效</div>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>内容列表模板：</th>
-                                        <td id="list_template">
-                                        <input type="text" class="form-control" size="30" value="<?php echo $data['listtpl']; ?>" name="data[listtpl]" id="listtpl"> 列表显示数量：<input type="text" class="form-control" size="5" value="<?php echo $data['pagesize']; ?>" name="data[pagesize]">
+                                        <th>列表模板：</th>
+                                        <td>
+                                            <input type="text" class="form-control" size="30" value="<?php echo $data['listtpl']; ?>" name="data[listtpl]" id="listtpl">
+                                            <div class="show-tips">栏目中内容列表展示页模板</div>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>内容展示模板：</th>
-                                        <td id="list_template">
+                                        <th>内容模板：</th>
+                                        <td>
                                             <input type="text" class="form-control" size="30" value="<?php echo $data['showtpl']; ?>" name="data[showtpl]" id="showtpl">
+                                            <div class="show-tips">栏目中内容页展示页模板</div>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>搜索展示模板：</th>
+                                        <th>搜索模板：</th>
                                         <td>
                                             <input type="text" class="form-control" size="30" value="<?php echo $data['searchtpl']; ?>" name="data[searchtpl]" id="searchtpl">
+                                            <div class="show-tips">搜索结果列表展示页模板</div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -187,6 +191,20 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <th>打开位置：</th>
+                                    <td>
+                                        <label class="label-group"><input name="data[isnewtab]" type="radio" value="0"<?php if ($data['isnewtab']==0 || !$data['isnewtab']) { ?> checked<?php } ?> >当前窗口</label>
+                                        <label class="label-group"><input name="data[isnewtab]" type="radio" value="1"<?php if ($data['isnewtab']==1) { ?> checked<?php } ?> >新窗口</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>内容数目：</th>
+                                    <td>
+                                        <input type="text" class="form-control" size="5" value="<?php echo $data['pagesize']; ?>" name="data[pagesize]">
+                                        <div class="show-tips">栏目列表页每页展示的内容数目</div>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <th>栏目图片：</th>
                                     <td>
                                         <div id="imgPreviewimage"></div>
@@ -200,7 +218,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th >SEO标题：</th>
+                                    <th>SEO标题：</th>
                                     <td><input type="text" maxlength="60" size="60" value="<?php echo $data['seo_title']; ?>"   name="data[seo_title]" class="form-control"></td>
                                 </tr>
                                 <tr>

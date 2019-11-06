@@ -32,15 +32,15 @@ class ContentController extends Api
         if (!empty($catlist)) {
             foreach ($catlist as $r) {
                 if ($r['typeid'] == 1) {
-                    $r['icon_type'] = 'ico1';
-                    $r['urla'] = '?s=admin&c=content&catid=' . $r['catid'];
+                    $r['icon_type'] = 'glyphicon glyphicon-list-alt'; // 栏目
                 } else if ($r['typeid'] == 2) {
-                    $r['icon_type'] = 'ico2';
-                    $r['urla'] = '?s=admin&c=category&a=edit&catid=' . $r['catid'];
+                    $r['icon_type'] = 'glyphicon glyphicon-file'; // 内置页面
+                } else if ($r['typeid'] == 3) {
+                    $r['icon_type'] = 'glyphicon glyphicon-link'; // 链接
                 } else {
-                    $r['icon_type'] = 'ico3';
-                    $r['urla'] = $r['http'];
+                    $r['icon_type'] = 'glyphicon glyphicon-book'; // 独立页面
                 }
+                $r['urla'] = url('admin/content/index', array('catid' => $r['catid']));
                 $categorys[$r['catid']] = $r;
             }
         }

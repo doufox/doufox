@@ -72,13 +72,17 @@ class CategoryController extends Admin
                     $this->show_message('请选择内容模型');
                 }
             } elseif ($data['typeid'] == 2) {
-                if (empty($data['content'])) {
-                    $this->show_message('单网页内容不能为空');
-                }
+                // if (empty($data['content'])) {
+                //     $this->show_message('单网页内容不能为空');
+                // }
             } elseif ($data['typeid'] == 3) {
                 if (empty($data['http'])) {
                     $this->show_message('没有输入外部连接地址');
                 }
+            }  elseif ($data['typeid'] == 4) {
+                // if (empty($data['content'])) {
+                //     $this->show_message('独立网页内容不能为空');
+                // }
             } else {
                 $this->show_message('请选择栏目类型');
             }
@@ -93,8 +97,8 @@ class CategoryController extends Admin
                 foreach ($names as $val) {
                     list($catname, $catdir) = explode('|', $val);
                     $catdir = $catdir ? $catdir : word2pinyin($catname);
-                    if ($data['typeid'] != 3 && $this->category->check_catdir(0, $catdir)) {
-                        $catdir .= rand(0, 9);
+                    if ($this->category->check_catdir(0, $catdir)) {
+                        $catdir .= rand(0, 9); // 相同目录的添加随机数防止重复
                     }
 
                     $data['catname'] = $catname;
@@ -107,14 +111,14 @@ class CategoryController extends Admin
                         $y++;
                     }
                 }
-                $html = '<script type="text/javascript">parent.document.getElementById("leftMain").src ="' . url("admin/content/category") . '";</script>';
-                $this->show_message($this->getCacheCode('category') . $html . '批量添加成功', 1, url('admin/category/index'));
+                // $html = '<script type="text/javascript">parent.document.getElementById("leftMain").src ="' . url("admin/content/category") . '";</script>';
+                $this->show_message($this->getCacheCode('category') . '批量添加成功', 1, url('admin/category/index'));
             } else {
                 if (empty($data['catname'])) {
                     $this->show_message('请填写栏目名称');
                 }
 
-                if ($data['typeid'] != 3 && $this->category->check_catdir(0, $data['catdir'])) {
+                if ($this->category->check_catdir(0, $data['catdir'])) {
                     $this->show_message('栏目路径为空或者已经存在');
                 }
 
@@ -125,8 +129,7 @@ class CategoryController extends Admin
 
                 $data['catid'] = $result;
                 $this->category->url($result, getCaturl($data));
-                // $html = '<script type="text/javascript">parent.document.getElementById("leftMain").src ="' . url("admin/content/category") . '";</script>';
-                $this->show_message($this->getCacheCode('category') . '添加成功' . $html, 1, url('admin/category/index'));
+                $this->show_message($this->getCacheCode('category') . '添加成功', 1, url('admin/category/index'));
             }
         }
         $model = get_cache('model');
@@ -174,7 +177,7 @@ class CategoryController extends Admin
             if (empty($data['catname'])) {
                 $this->show_message('请填写栏目名称');
             }
-            if ($data['typeid'] != 3 && $this->category->check_catdir($catid, $data['catdir'])) {
+            if ($this->category->check_catdir($catid, $data['catdir'])) {
                 $this->show_message('栏目路径为空或者已经存在');
             }
             $data['typeid'] = $this->post('typeid');
@@ -198,7 +201,6 @@ class CategoryController extends Admin
 
         if (!empty($catdata)) {
             foreach ($catdata as $r) {
-
                 $category_select[$r['catid']] = $r;
             }
         }
