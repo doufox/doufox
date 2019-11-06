@@ -53,21 +53,21 @@
                             <tr>
                                 <th>登陆账号：</th>
                                 <td>
-                                    <input class="form-control" type="text" size="20" value="" name="data[username]" maxlength="20" />
+                                    <input class="form-control" type="text" size="20" name="data[username]" maxlength="20" />
                                 </td>
                             </tr>
                             <tr>
                                 <th>会员昵称：</th>
-                                <td><input class="form-control" type="text" size="50" value="" name="data[nickname]" maxlength="50"></td>
+                                <td><input class="form-control" type="text" size="50" name="data[nickname]" maxlength="50"></td>
                             </tr>
                             <tr>
                                 <th>登陆密码：</th>
-                                <td><input class="form-control" type="text" size="50" value="" name="data[password]"></td>
+                                <td><input class="form-control" type="text" size="50" name="data[password]"></td>
                             </tr>
                             <tr>
                                 <th>电子邮箱：</th>
                                 <td>
-                                    <input class="form-control" type="text" size="50" id="email" value="" name="data[email]" onBlur="ajaxemail()">
+                                    <input class="form-control" type="text" size="50" id="email" name="data[email]" onBlur="ajaxemail()">
                                     <span class="show-tips" id="email_text"></span>
                                 </td>
                             </tr>

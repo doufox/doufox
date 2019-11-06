@@ -73,7 +73,7 @@ class AccountController extends Admin
             $this->show_message('修改成功', 1);
         }
         $page_title = '修改账号';
-        include $this->admin_view('account/add');
+        include $this->admin_view('account/edit');
     }
 
     public function delAction()
