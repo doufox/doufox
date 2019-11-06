@@ -644,7 +644,7 @@ class ContentController extends Admin
             $str = "<option value='\$catid' \$selected \$disabled>\$spacer \$catname</option>";
             $tree->init($categorys);
             $category = $tree->get_tree(0, $str);
-            include $this->admin_view('content/url');
+            include $this->admin_view('content/updateurl');
         }
     }
 
