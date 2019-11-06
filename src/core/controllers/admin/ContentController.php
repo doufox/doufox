@@ -189,11 +189,14 @@ class ContentController extends Admin
         }
         $typeid = $cats[$catid]['typeid'];
         if ($typeid == 2) {
-            include $this->admin_view('content/list'); // 页面内容
+            $data = $cats[$catid];
+            include $this->admin_view('content/page'); // 页面内容
         } elseif ($typeid == 3) {
+            $data = $cats[$catid];
             include $this->admin_view('content/link'); // 链接内容
         } elseif ($typeid == 4) {
-            include $this->admin_view('content/spage'); // 独立页面内容
+            $data = $cats[$catid];
+            include $this->admin_view('content/single'); // 独立页面内容
         }  else {
             include $this->admin_view('content/list'); // 栏目内容列表
         }

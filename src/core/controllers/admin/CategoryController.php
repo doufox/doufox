@@ -30,7 +30,7 @@ class CategoryController extends Admin
             1 => '',
             2 => '<font color="blue">单页</font>',
             3 => '<font color="red">链接</font>',
-            4 => '<font color="yellow">独立单页</font>',
+            4 => '<font color="green">独立单页</font>',
         );
         if (!empty($result)) {
             foreach ($result as $r) {
@@ -41,6 +41,7 @@ class CategoryController extends Admin
                 $r['typename'] = $types[$r['typeid']]; // 栏目类型
                 $r['isdisplay'] = $r['ismenu'] ? '是' : '<font color="blue">否</font>';
                 $r['catname'] = "<a href='$r[url]' target='_blank'>" . $r['catname'] . "</a>";
+                $r['manage_content'] = '<a href="' . url('admin/content/index', array('catid' => $r['catid'])) . '" >' . $r['items'] . '</a>';
                 $categorys[$r['catid']] = $r;
             }
         }
@@ -51,7 +52,7 @@ class CategoryController extends Admin
             <td>\$spacer\$catname</td>
             <td>\$catdir</td>
             <td>\$typename\$modelname</td>
-            <td>\$items</td>
+            <td>\$manage_content</td>
             <td>\$isdisplay</td>
             <td>\$manage_edit \$manage_add \$manage_del</td>
         </tr>";
