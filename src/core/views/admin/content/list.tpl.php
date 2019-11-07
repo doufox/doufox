@@ -43,9 +43,10 @@
             <input name="form" id="list_form" type="hidden" value="order">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="panel-title">内容管理</span>
+                    <span class="panel-title">内容管理（栏目：<?php echo $cats[$catid]['catname']; ?>）</span>
                     <div class="pull-right">
-                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/content/add', array('catid'=>$catid, 'modelid'=>$modelid)); ?>">添加</a>
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/content/add', array('catid'=>$catid, 'modelid'=>$modelid)); ?>">添加内容</a>
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/category/edit', array('catid'=>$catid)); ?>">栏目设置</a>
                     </div>
                 </div>
                 <div class="panel-body">

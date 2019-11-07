@@ -48,28 +48,8 @@ textarea {
     /* background: #4d5e70 bottom; */
 }
 
-.page_menu .left-head {
-    clear: both;
-    height: 29px;
-    line-height: 30px;
-    text-align: center;
-    background-color: #f3f9fa;
-    border-bottom: 1px solid #eee;
-}
-
-.page_menu .left-head span {
-    padding-right: 12px;
-    height: 16px;
-    float: right;
-    margin-top: 5px;
-}
-
-.page_menu .left-head span a.refresh:hover {
-    background-position: -109px -569px;
-}
-
-#browser {
-    overflow: auto;
+.page_menu .treeview li .glyphicon {
+    padding-right: 4px;
 }
 
 .page_content {
@@ -119,9 +99,6 @@ input.dialog {
 }
 
 /*通用样式*/
-.hidden {
-    display: none;
-}
 
 .pad-10 {
     padding: 10px;
@@ -211,21 +188,6 @@ body fieldset.blue legend {
     vertical-align: middle;
 }
 
-.ico1 {
-    background: url(/static/img/file.gif) no-repeat;
-    padding-left: 20px;
-}
-
-.ico2 {
-    background: url(/static/img/gear_disable.png) no-repeat;
-    padding-left: 20px;
-}
-
-.ico3 {
-    background: url(/static/img/link.gif) no-repeat;
-    padding-left: 20px;
-}
-
 input.date {
     background: #fff url(/static/img/input_date.png) no-repeat right 3px;
     padding-right: 18px;
@@ -237,8 +199,6 @@ input.date {
 }
 
 /* table_form */
-
-
 .table_form td {
     padding-left: 12px
 }

@@ -23,11 +23,11 @@
                     <thead>
                         <tr>
                             <th align="left" width="48">排序</th>
-                            <th align="left" width="58">栏目ID</th>
-                            <th align="left">栏目名称</th>
-                            <th align="left" width="100">栏目目录</th>
+                            <th align="left" width="58">ID</th>
+                            <th align="left">名称</th>
+                            <th align="left" width="100">路径</th>
                             <th align="left" width="80">类型</th>
-                            <th align="left" width="80">内容数量</th>
+                            <th align="left" width="80">内容</th>
                             <th align="left" width="50">显示</th>
                             <th align="left" width="150">操作</th>
                         </tr>

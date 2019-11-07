@@ -1,22 +1,51 @@
 <?php include $this->admin_view('header');?>
 <?php include $this->admin_view('navbar');?>
 
+<link type="text/css" rel="stylesheet" href="/static/jquery.treeview/jquery.treeview.css" />
+<script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/static/jquery.treeview/jquery.treeview.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#category_nav").treeview({
+                control: ".category_tree_switch",
+                cookieId: "category_tree_nav",
+                toggle: function (x, y) {
+                    console.log(x, y);
+                }
+        });
+    });
+    function setC() {
+        if($("#deletec").prop('checked')==true) {
+            $(".deletec").prop("checked",true);
+        } else {
+            $(".deletec").prop("checked",false);
+        }
+    }
+</script>
+
 <div class="container">
-    <div class="panel panel-default page_menu">
-        <div class="panel-heading"><span class="panel-title">栏目管理</span></div>
-        <div class="list-group">
-            <a class="list-group-item" href="<?php echo url('admin/category'); ?>">全部栏目</a>
-            <a class="list-group-item" href="<?php echo url('admin/category/add'); ?>">添加栏目</a>
-            <a class="list-group-item" href="<?php echo url('admin/category/cache'); ?>">更新缓存</a>
+    <div class="page_menu">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="panel-title">栏目</span>
+                <div class="pull-right">
+                    <div class="category_tree_switch">
+                        <a href="#" style="display: none;">收缩</a>
+                        <a href="#" style="display: none;">展开</a>
+                        <a href="#">展开/收缩</a>
+                    </div>
+                </div>
+            </div>
+            <?php echo $nav_categorys; ?>
         </div>
     </div>
+
     <div class="page_content">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <span class="panel-title"><?php echo $catid ? '编辑' : '添加';?>栏目</span>
+                <span class="panel-title">内容管理（单页面：<?php echo $cats[$catid]['catname']; ?>）</span>
                 <div class="pull-right">
-                    <a href="<?php echo url('admin/category'); ?>">列表</a>
-                    <a href="<?php echo url('admin/category/add'); ?>">添加</a>
+                    <a class="btn btn-default btn-xs" href="<?php echo url('admin/category/edit', array('catid'=>$catid)); ?>">栏目设置</a>
                 </div>
             </div>
             <div class="panel-body">
@@ -73,11 +102,10 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th width="100"><font color="red">*</font>菜单导航：</th>
+                                        <th width="100"><font color="red">*</font>菜单中显示：</th>
                                         <td>
                                             <label class="label-group"><input type="radio" <?php if (!isset($data['ismenu']) || $data['ismenu']==0) { ?>checked<?php } ?> value="0" name="data[ismenu]">隐藏</label>
                                             <label class="label-group"><input type="radio" <?php if (isset($data['ismenu']) && $data['ismenu']==1) { ?>checked<?php } ?> value="1" name="data[ismenu]">显示</label>
-                                            <div class="show-tips">作为菜单显示在导航栏</div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -92,76 +120,6 @@
                                     <tr class="type_3" style="display:none;">
                                         <th><font color="red">*</font>链接地址：</th>
                                         <td><input type="text" class="form-control" size="50" value="<?php echo $data['http']; ?>" name="data[http]"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <table width="100%" class="type_1 table_form"  style="display:none;">
-                                <tbody>
-                                    <tr>
-                                        <th width="100"><font color="red">*</font>内容模型：</th>
-                                        <td>
-                                            <select class="form-control" onChange="change_tpl(this.value)" id="modelid" name="data[modelid]" <?php if ($catid && !$add) { ?>disabled<?php } ?>>
-                                                <option value="">==选择内容模型==</option>
-                                                <?php if (is_array($model)) { foreach ($model as $t) { ?>
-                                                <option value="<?php echo $t['modelid']; ?>" <?php if ($t['modelid']==$data['modelid']) { ?>selected<?php } ?>><?php echo $t['modelname']; ?></option>
-                                                <?php } } ?>
-                                            </select>
-                                            <div class="show-tips">只有内部栏目才能选择内容模型</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th>栏目模板：</th>
-                                        <td>
-                                            <input type="text" class="form-control" size="30" value="<?php echo $data['categorytpl']; ?>" name="data[categorytpl]" id="categorytpl">
-                                            <div class="show-tips">栏目内容及子栏目列表展示页模板，当有下级栏目时有效</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>列表模板：</th>
-                                        <td>
-                                            <input type="text" class="form-control" size="30" value="<?php echo $data['listtpl']; ?>" name="data[listtpl]" id="listtpl">
-                                            <div class="show-tips">栏目中内容列表展示页模板</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>内容模板：</th>
-                                        <td>
-                                            <input type="text" class="form-control" size="30" value="<?php echo $data['showtpl']; ?>" name="data[showtpl]" id="showtpl">
-                                            <div class="show-tips">栏目中内容页展示页模板</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>搜索模板：</th>
-                                        <td>
-                                            <input type="text" class="form-control" size="30" value="<?php echo $data['searchtpl']; ?>" name="data[searchtpl]" id="searchtpl">
-                                            <div class="show-tips">搜索结果列表展示页模板</div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <table width="100%" class="type_2 table_form" style="display:none;">
-                                <tbody>
-                                    <tr>
-                                        <th width="100">单页模板：</th>
-                                        <td id="show_template">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" size="30" value="<?php echo $data['pagetpl']; ?>" name="data[pagetpl]" id="pagetpl">
-                                                <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-default" onClick="showImageUpload('image', 'gallery')">选择模板(开发中)</button>
-                                                </span>
-                                            </div>
-                                            
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th><font color="red">*</font>单页面内容：</th>
-                                        <td>
-                                        <?php echo content_editor('content', array(0=>$data['content']), array('system'=>1)); ?>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -191,20 +149,6 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>打开位置：</th>
-                                    <td>
-                                        <label class="label-group"><input name="data[isnewtab]" type="radio" value="0"<?php if ($data['isnewtab']==0 || !$data['isnewtab']) { ?> checked<?php } ?> >当前窗口</label>
-                                        <label class="label-group"><input name="data[isnewtab]" type="radio" value="1"<?php if ($data['isnewtab']==1) { ?> checked<?php } ?> >新窗口</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>内容数目：</th>
-                                    <td>
-                                        <input type="text" class="form-control" size="5" value="<?php echo $data['pagesize']; ?>" name="data[pagesize]">
-                                        <div class="show-tips">栏目列表页每页展示的内容数目</div>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <th>栏目图片：</th>
                                     <td>
                                         <div id="imgPreviewimage"></div>
@@ -218,7 +162,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>SEO标题：</th>
+                                    <th >SEO标题：</th>
                                     <td><input type="text" maxlength="60" size="60" value="<?php echo $data['seo_title']; ?>"   name="data[seo_title]" class="form-control"></td>
                                 </tr>
                                 <tr>

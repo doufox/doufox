@@ -5,85 +5,87 @@ class ContentController extends Admin
 
     public function indexAction()
     {
-        if ($this->post('submit') && $this->post('form') == 'search') {
-            $username = $this->post('username');
-            $catid = (int) $this->post('catid');
-            $stype = $this->post('stype');
-        } elseif ($this->post('submit_order') && $this->post('form') == 'order') {
-            foreach ($_POST as $var => $value) {
-                if (strpos($var, 'order_') !== false) {
-                    $id = (int) str_replace('order_', '', $var);
-                    $this->content->update(array('listorder' => $value), 'id=' . $id);
-                }
-            }
-            $this->show_message('修改成功', 1);
-        } elseif ($this->post('submit_del') && $this->post('form') == 'del') {
-            foreach ($_POST as $var => $value) {
-                if (strpos($var, 'del_') !== false) {
-                    $ids = str_replace('del_', '', $var);
-                    list($_id, $_catid) = explode('_', $ids);
-                    $this->delAction($_id, $_catid, 1);
-                }
-            }
-            $this->show_message('删除成功', 1);
-        } elseif ($this->post('submit_status_1') && $this->post('form') == 'status_1') {
-            foreach ($_POST as $var => $value) {
-                if (strpos($var, 'del_') !== false) {
-                    $ids = str_replace('del_', '', $var);
-                    list($_id, $_catid) = explode('_', $ids);
-                    $this->content->update(array('status' => 1), 'id=' . (int) $_id);
-                }
-            }
-            $this->show_message('设置成功', 1, '', 500);
-        } elseif ($this->post('submit_status_2') && $this->post('form') == 'status_2') {
-            foreach ($_POST as $var => $value) {
-                if (strpos($var, 'del_') !== false) {
-                    $ids = str_replace('del_', '', $var);
-                    list($_id, $_catid) = explode('_', $ids);
-                    $this->content->update(array('status' => 2), 'id=' . (int) $_id);
-                }
-            }
-            $this->show_message('设置成功', 1);
-        } elseif ($this->post('submit_status_3') && $this->post('form') == 'status_3') {
-            foreach ($_POST as $var => $value) {
-                if (strpos($var, 'del_') !== false) {
-                    $ids = str_replace('del_', '', $var);
-                    list($_id, $_catid) = explode('_', $ids);
-                    $this->content->update(array('status' => 3), 'id=' . (int) $_id);
-                }
-            }
-            $this->show_message('设置成功', 1);
-        } elseif ($this->post('submit_status_0') && $this->post('form') == 'status_0') {
-            foreach ($_POST as $var => $value) {
-                if (strpos($var, 'del_') !== false) {
-                    $ids = str_replace('del_', '', $var);
-                    list($_id, $_catid) = explode('_', $ids);
-                    $this->content->update(array('status' => 0), 'id=' . (int) $_id);
-                }
-            }
-            $this->show_message('设置成功', 1);
-        } elseif ($this->post('submit_move') && $this->post('form') == 'move') {
-            $mcatid = (int) $this->post('movecatid');
-            if (empty($mcatid)) {
-                $this->show_message('请选择目标栏目！');
-            }
-
-            $mcat = $this->category_cache[$mcatid];
-            $mtable = core::load_model($mcat['tablename']);
-            foreach ($_POST as $var => $value) {
-                if (strpos($var, 'del_') !== false) {
-                    $ids = str_replace('del_', '', $var);
-                    list($_id, $_catid) = explode('_', $ids);
-                    $cat = $this->category_cache[$_catid];
-                    if ($cat['modelid'] == $mcat['modelid']) {
-                        $this->content->update(array('catid' => $mcatid), 'id=' . (int) $_id);
-                        $mtable->update(array('catid' => $mcatid), 'id=' . (int) $_id);
+        // print_r($_SERVER['REQUEST_METHOD'] == 'POST');
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->post('submit') && $this->post('form') == 'search') {
+                $username = $this->post('username');
+                $catid = (int) $this->post('catid');
+                $stype = $this->post('stype');
+            } elseif ($this->post('submit_order') && $this->post('form') == 'order') {
+                foreach ($_POST as $var => $value) {
+                    if (strpos($var, 'order_') !== false) {
+                        $id = (int) str_replace('order_', '', $var);
+                        $this->content->update(array('listorder' => $value), 'id=' . $id);
                     }
                 }
-            }
-            $this->show_message('移动成功', 1);
-        }
+                $this->show_message('修改成功', 1);
+            } elseif ($this->post('submit_del') && $this->post('form') == 'del') {
+                foreach ($_POST as $var => $value) {
+                    if (strpos($var, 'del_') !== false) {
+                        $ids = str_replace('del_', '', $var);
+                        list($_id, $_catid) = explode('_', $ids);
+                        $this->delAction($_id, $_catid, 1);
+                    }
+                }
+                $this->show_message('删除成功', 1);
+            } elseif ($this->post('submit_status_1') && $this->post('form') == 'status_1') {
+                foreach ($_POST as $var => $value) {
+                    if (strpos($var, 'del_') !== false) {
+                        $ids = str_replace('del_', '', $var);
+                        list($_id, $_catid) = explode('_', $ids);
+                        $this->content->update(array('status' => 1), 'id=' . (int) $_id);
+                    }
+                }
+                $this->show_message('设置成功', 1, '', 500);
+            } elseif ($this->post('submit_status_2') && $this->post('form') == 'status_2') {
+                foreach ($_POST as $var => $value) {
+                    if (strpos($var, 'del_') !== false) {
+                        $ids = str_replace('del_', '', $var);
+                        list($_id, $_catid) = explode('_', $ids);
+                        $this->content->update(array('status' => 2), 'id=' . (int) $_id);
+                    }
+                }
+                $this->show_message('设置成功', 1);
+            } elseif ($this->post('submit_status_3') && $this->post('form') == 'status_3') {
+                foreach ($_POST as $var => $value) {
+                    if (strpos($var, 'del_') !== false) {
+                        $ids = str_replace('del_', '', $var);
+                        list($_id, $_catid) = explode('_', $ids);
+                        $this->content->update(array('status' => 3), 'id=' . (int) $_id);
+                    }
+                }
+                $this->show_message('设置成功', 1);
+            } elseif ($this->post('submit_status_0') && $this->post('form') == 'status_0') {
+                foreach ($_POST as $var => $value) {
+                    if (strpos($var, 'del_') !== false) {
+                        $ids = str_replace('del_', '', $var);
+                        list($_id, $_catid) = explode('_', $ids);
+                        $this->content->update(array('status' => 0), 'id=' . (int) $_id);
+                    }
+                }
+                $this->show_message('设置成功', 1);
+            } elseif ($this->post('submit_move') && $this->post('form') == 'move') {
+                $mcatid = (int) $this->post('movecatid');
+                if (empty($mcatid)) {
+                    $this->show_message('请选择目标栏目！');
+                }
 
+                $mcat = $this->category_cache[$mcatid];
+                $mtable = core::load_model($mcat['tablename']);
+                foreach ($_POST as $var => $value) {
+                    if (strpos($var, 'del_') !== false) {
+                        $ids = str_replace('del_', '', $var);
+                        list($_id, $_catid) = explode('_', $ids);
+                        $cat = $this->category_cache[$_catid];
+                        if ($cat['modelid'] == $mcat['modelid']) {
+                            $this->content->update(array('catid' => $mcatid), 'id=' . (int) $_id);
+                            $mtable->update(array('catid' => $mcatid), 'id=' . (int) $_id);
+                        }
+                    }
+                }
+                $this->show_message('移动成功', 1);
+            }
+        }
         $catid = (int) $this->get('catid');
         $status = $this->get('status');
         $username = $this->get('username');
@@ -93,7 +95,7 @@ class ContentController extends Admin
         $pagination->loadconfig();
 
         $cats = $this->category_cache; // 读取栏目缓存
-        // print_r($cats);
+        // print_r(json_encode($cats));
         // return;
         if (empty($catid) || (int) $catid < 1) {
             // 取第一个栏目 ID
@@ -103,7 +105,6 @@ class ContentController extends Admin
                 $this->show_message('缺少栏目id参数');
             }
         }
-        $modelid = $cats[$catid]['modelid'];
 
         $where = 'catid=' . $catid;
         if ($status == 1) {
@@ -126,6 +127,7 @@ class ContentController extends Admin
         $count[2] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=2');
         $count[3] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=3');
 
+        $modelid = $cats[$catid]['modelid'];
         $pagesize = 15;
         $urlparam = array();
         $urlparam['catid'] = $catid;
@@ -153,19 +155,15 @@ class ContentController extends Admin
         foreach ($cats as $cid => $r) {
             // 组合左侧类型导航
             if ($r['typeid'] == 1) {
-                // 内容栏目
-                $r['icon_type'] = 'ico1';
-                $r['urla'] = url('admin/content/index', array('catid' => $r['catid']));
+                $r['icon_type'] = 'glyphicon glyphicon-list-alt'; // 栏目
             } else if ($r['typeid'] == 2) {
-                // 单页面
-                $r['icon_type'] = 'ico2';
-                $r['urla'] = url('admin/category/edit', array('catid' => $r['catid']));
+                $r['icon_type'] = 'glyphicon glyphicon-file'; // 内置页面
+            } else if ($r['typeid'] == 3) {
+                $r['icon_type'] = 'glyphicon glyphicon-link'; // 链接
             } else {
-                // 链接
-                $r['icon_type'] = 'ico3';
-                $r['urla'] = url('admin/category/edit', array('catid' => $r['catid']));
-                // $r['urlb'] = $r['http']; // 链接地址
+                $r['icon_type'] = 'glyphicon glyphicon-book'; // 独立页面
             }
+            $r['urla'] = url('admin/content/index', array('catid' => $r['catid']));
             $nav_categorys[$r['catid']] = $r;
 
             if ($modelid && $modelid != $r['modelid']) {
@@ -189,8 +187,19 @@ class ContentController extends Admin
         } else {
             $categornav_categorysys = '没有分类请添加或刷新';
         }
-
-        include $this->admin_view('content/list');
+        $typeid = $cats[$catid]['typeid'];
+        if ($typeid == 2) {
+            $data = $cats[$catid];
+            include $this->admin_view('content/page'); // 页面内容
+        } elseif ($typeid == 3) {
+            $data = $cats[$catid];
+            include $this->admin_view('content/link'); // 链接内容
+        } elseif ($typeid == 4) {
+            $data = $cats[$catid];
+            include $this->admin_view('content/single'); // 独立页面内容
+        }  else {
+            include $this->admin_view('content/list'); // 栏目内容列表
+        }
     }
 
     /**
@@ -296,15 +305,15 @@ class ContentController extends Admin
         if (!empty($catlist)) {
             foreach ($catlist as $r) {
                 if ($r['typeid'] == 1) {
-                    $r['icon_type'] = 'ico1';
-                    $r['urla'] = '?s=admin&c=content&catid=' . $r['catid'];
+                    $r['icon_type'] = 'glyphicon glyphicon-list-alt'; // 栏目
                 } else if ($r['typeid'] == 2) {
-                    $r['icon_type'] = 'ico2';
-                    $r['urla'] = '?s=admin&c=category&a=edit&catid=' . $r['catid'];
+                    $r['icon_type'] = 'glyphicon glyphicon-file'; // 内置页面
+                } else if ($r['typeid'] == 3) {
+                    $r['icon_type'] = 'glyphicon glyphicon-link'; // 链接
                 } else {
-                    $r['icon_type'] = 'ico3';
-                    $r['urla'] = $r['http'];
+                    $r['icon_type'] = 'glyphicon glyphicon-book'; // 独立页面
                 }
+                $r['urla'] = url('admin/content/index', array('catid' => $r['catid']));
                 $categorys[$r['catid']] = $r;
             }
         }
@@ -644,7 +653,7 @@ class ContentController extends Admin
             $str = "<option value='\$catid' \$selected \$disabled>\$spacer \$catname</option>";
             $tree->init($categorys);
             $category = $tree->get_tree(0, $str);
-            include $this->admin_view('content/url');
+            include $this->admin_view('content/updateurl');
         }
     }
 
