@@ -30,8 +30,8 @@
                 <div class="panel-heading">
                     <span class="panel-title">编辑会员</span>
                     <div class="pull-right">
-                        <a href="<?php echo url('admin/member'); ?>">列表</a>
-                        <a href="<?php echo url('admin/member/add'); ?>">添加</a>
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/member'); ?>">列表</a>
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/member/add'); ?>">添加</a>
                     </div>
                 </div>
                 <div class="panel-body">

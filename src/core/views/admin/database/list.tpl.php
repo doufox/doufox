@@ -17,7 +17,7 @@
                 <div class="panel-heading">
                     <span class="panel-title">数据表</span>
                     <div class="pull-right">
-                        <a href="<?php echo url('admin/database/import'); ?>">备份列表</a>
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/database/import'); ?>">备份列表</a>
                     </div>
                 </div>
                 <input name="list_form" id="list_form" type="hidden" value="">

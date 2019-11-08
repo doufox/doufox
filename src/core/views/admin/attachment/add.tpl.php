@@ -15,7 +15,7 @@
             <div class="panel-heading">
                 <span class="panel-title">上传附件</span>
                 <div class="pull-right">
-                    <a href="<?php echo url('admin/attachment/index'); ?>">附件列表</a>
+                    <a class="btn btn-default btn-xs" href="<?php echo url('admin/attachment/index'); ?>">附件列表</a>
                 </div>
             </div>
             <div class="panel-body">
