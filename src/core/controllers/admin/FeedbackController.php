@@ -1,6 +1,6 @@
 <?php
 
-class HelpController extends Admin
+class FeedbackController extends Admin
 {
 
     public function __construct()
@@ -10,6 +10,6 @@ class HelpController extends Admin
 
     public function indexAction()
     {
-        include $this->admin_view('help');
+        include $this->admin_view('feedback/help');
     }
 }
