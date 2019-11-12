@@ -77,7 +77,9 @@
                                         <img id="checkcode" src="" title="看不清楚？换一张" alt="验证码" />
                                     </button>
                                 </span>
-                            </div><?php }?>
+                            </div>
+                            <?php }?>
+
                             <div class="form-group">
                                 <a href="#" title="正在开发中">手机验证码登录</a>
                             </div>
@@ -88,6 +90,7 @@
             </div>
         </div>
     </div>
+    <?php if ($isneedcode) {?>
     <script type="text/javascript">
         (function() {
             function checkcode_init() {
@@ -97,6 +100,8 @@
             document.getElementById("checkcode").onclick = checkcode_init;
         })();
     </script>
+    <?php }?>
+
 </body>
 
 </html>
