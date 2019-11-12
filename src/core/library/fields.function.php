@@ -325,7 +325,7 @@ function content_editor($name, $content = '', $setting = '')
     $type = isset($setting['type']) && $setting['type'] ? 1 : (!isset($setting['type']) ? 1 : 0);
     $str = '';
     $page = !isset($setting['system']) && $name == 'content' ? ", '|', 'pagebreak'" : '';
-    $source = strpos($_SERVER['QUERY_STRING'], 's=admin') === false || strpos($_SERVER['QUERY_STRING'], 's=admin') === false ? '' : "'source', '|',";
+    $source = strpos($_SERVER['QUERY_STRING'], 's=admin') === false || strpos($_SERVER['QUERY_STRING'], 's=admin') === false ? '' : "'source',";
     if (!defined('CMS_EDITOR_LD')) {
         $str .= '<script type="text/javascript" src="/static/kindeditor/kindeditor.js"></script>';
         define('CMS_EDITOR_LD', 1); // 防止重复加载JS
@@ -337,7 +337,7 @@ function content_editor($name, $content = '', $setting = '')
                 allowFileManager : true,
                 resizeType : 0,
                 items : [
-                    " . $source . "  'preview', 'code', 'paste',
+                    'fullscreen', " . $source . " '|', 'preview', 'code', 'paste',
                     'plainpaste', 'wordpaste', '|', 'image',
                     'flash', 'media', 'table', 'hr',  'baidumap',  'link', 'unlink' , '|', 'justifyleft', 'justifycenter', 'justifyright',
                     'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
@@ -355,7 +355,7 @@ function content_editor($name, $content = '', $setting = '')
                 allowImageUpload : false,
                 resizeType : 0 ,
                 items : [
-                    " . $source . " 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    'fullscreen', " . $source . " '|', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
                     'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', '|', 'image', 'link' , 'clearhtml'
                 ]
             });

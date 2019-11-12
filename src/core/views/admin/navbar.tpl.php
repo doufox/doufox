@@ -43,16 +43,16 @@
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">管理&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo url('admin/plugin'); ?>">插件管理</a></li>
-                            <li><a href="<?php echo url('admin/account'); ?>">账号管理</a></li>
-                            <li><a href="<?php echo url('admin/template'); ?>">模板管理</a></li>
+                            <li><a href="<?php echo url('admin/account'); ?>">后台账号</a></li>
+                            <li><a href="<?php echo url('admin/template'); ?>">模板主题</a></li>
                             <li><a href="<?php echo url('admin/attachment'); ?>">附件管理</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="<?php echo url('admin/database'); ?>">数据库管理</a></li>
+                            <li><a href="<?php echo url('admin/database'); ?>">数据库</a></li>
                             <li><a href="<?php echo url('admin/backup'); ?>">备份管理</a></li>
-                            <li><a href="<?php echo url('admin/cache'); ?>">缓存管理</a></li>
-                            <li><a href="<?php echo url('admin/session'); ?>">会话管理</a></li>
+                            <li><a href="<?php echo url('admin/cache'); ?>">缓存文件</a></li>
+                            <li><a href="<?php echo url('admin/session'); ?>">用户会话</a></li>
+                            <li><a href="<?php echo url('admin/html'); ?>">网页静态化</a>
                             <li role="separator" class="divider"></li>
-                            <li><a href="<?php echo url('admin/createhtml/index'); ?>">静态页面管理</a>
                             <li><a href="<?php echo url('admin/cache/update'); ?>">更新全站缓存</a></li>
                             <li><a href="<?php echo url('admin/content/updateurl'); ?>">更新内容URL</a></li>
                             <li role="separator" class="divider"></li>
@@ -64,10 +64,12 @@
                         <a href="javascript:void(0);" data-toggle="dropdown">您好，<?php echo $this->current_account['name']; ?>&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo url('admin/account/me'); ?>">我的账号</a></li>
-                            <li><a href="<?php echo url('admin/help'); ?>" title="帮助信息">帮助信息</a></li>
-                            <li><a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a></li>
+                            <li><a href="<?php echo url('admin/feedback'); ?>" title="帮助信息">帮助信息</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#" id="btn-logout" data-toggle="modal" data-target="#modal-confirm" title="退出系统">退出系统</a></li>
+                            <li><a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a></li>
+                            <li><a href="<?php echo url('member/index'); ?>" title="用户中心" target="_blank">用户中心</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#" id="btn-logout" data-toggle="modal" data-target="#modal-confirm" title="退出系统后台">退出系统后台</a></li>
                             <li role="separator" class="divider"></li>
                         </ul>
                     </li>

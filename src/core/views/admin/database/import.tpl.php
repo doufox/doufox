@@ -17,7 +17,7 @@
                 <div class="panel-heading">
                     <span class="panel-title">备份列表</span>
                     <div class="pull-right">
-                        <a href="<?php echo url('admin/database/index'); ?>">数据表</a>
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/database/index'); ?>">数据表</a>
                     </div>
                 </div>
                 <div class="panel-body">备份目录：/data/bakup/</div>

@@ -53,7 +53,7 @@
                 <div>URL:<?php print_r($data['url']);?></div>
                 <div>菜单栏显示:<?php print_r($data['ismenu']);?></div>
                 <div>自定义路径:<?php print_r($data['catdir']);?></div>
-                <div>新窗口打开:<?php print_r($data['isnewtab']);?></div>
+                <div>打开方式:<?php print_r($data['isnewtab']);?></div>
                 <table width="100%" class="table_form">
                     <tbody>
                         <tr>
@@ -87,7 +87,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th width="100"><font color="red">*</font>新窗口打开：</th>
+                            <th width="100"><font color="red">*</font>打开方式：</th>
                             <td>
                                 <label class="label-group"><input type="radio" <?php if (!isset($data['isnewtab']) || $data['isnewtab']==0) { ?>checked<?php } ?> value="0" name="data[isnewtab]">当前窗口</label>
                                 <label class="label-group"><input type="radio" <?php if (isset($data['isnewtab']) && $data['isnewtab']==1) { ?>checked<?php } ?> value="1" name="data[isnewtab]">新窗口</label>
@@ -95,6 +95,9 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <hr />
+                <button type="submit" class="btn btn-default" value="提交" name="submit">提交</button>
             </div>
         </div>
     </div>

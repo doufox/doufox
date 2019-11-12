@@ -16,8 +16,8 @@
             <div class="panel-heading">
                 <span class="panel-title"><?php echo $page_title; ?></span>
                 <div class="pull-right">
-                    <a href="<?php echo url('admin/account'); ?>">列表</a>
-                    <a href="<?php echo url('admin/account/add'); ?>">添加</a>
+                    <a class="btn btn-default btn-xs" href="<?php echo url('admin/account'); ?>">列表</a>
+                    <a class="btn btn-default btn-xs" href="<?php echo url('admin/account/add'); ?>">添加</a>
                 </div>
             </div>
             <div class="panel-body">
@@ -162,14 +162,14 @@
                                     </tr>
                                     <tr>
                                         <td align="left">
-                                            <label class="label-group"><input name="auth[createhtml-index]" id="c_createhtml" type="checkbox" onClick="selectInput('createhtml')" <?php if ($auth['createhtml-index']) echo 'checked'; ?> />生成静态</label>
+                                            <label class="label-group"><input name="auth[html-index]" id="c_html" type="checkbox" onClick="selectInput('html')" <?php if ($auth['html-index']) echo 'checked'; ?> />生成静态</label>
                                         </td>
                                         <td align="left">
-                                            <label class="label-group"><input class="c_createhtml" name="auth[createhtml-category]" type="checkbox" <?php if ($auth['createhtml-category']) echo 'checked'; ?> />生成栏目</label>
-                                            <label class="label-group"><input class="c_createhtml" name="auth[createhtml-one_cat]" type="checkbox" <?php if ($auth['createhtml-one_cat']) echo 'checked'; ?> />生成栏目附加</label>
-                                            <label class="label-group"><input class="c_createhtml" name="auth[createhtml-all_cat]" type="checkbox" <?php if ($auth['createhtml-all_cat']) echo 'checked'; ?> />生成栏目附加</label>
-                                            <label class="label-group"><input class="c_createhtml" name="auth[createhtml-show]" type="checkbox" <?php if ($auth['createhtml-show']) echo 'checked'; ?> />生成内容页</label>
-                                            <label class="label-group"><input class="c_createhtml" name="auth[createhtml-all_show]" type="checkbox" <?php if ($auth['createhtml-all_show']) echo 'checked'; ?> />生成内容页附加</label>
+                                            <label class="label-group"><input class="c_html" name="auth[html-category]" type="checkbox" <?php if ($auth['html-category']) echo 'checked'; ?> />生成栏目</label>
+                                            <label class="label-group"><input class="c_html" name="auth[html-one_cat]" type="checkbox" <?php if ($auth['html-one_cat']) echo 'checked'; ?> />生成栏目附加</label>
+                                            <label class="label-group"><input class="c_html" name="auth[html-all_cat]" type="checkbox" <?php if ($auth['html-all_cat']) echo 'checked'; ?> />生成栏目附加</label>
+                                            <label class="label-group"><input class="c_html" name="auth[html-show]" type="checkbox" <?php if ($auth['html-show']) echo 'checked'; ?> />生成内容页</label>
+                                            <label class="label-group"><input class="c_html" name="auth[html-all_show]" type="checkbox" <?php if ($auth['html-all_show']) echo 'checked'; ?> />生成内容页附加</label>
                                         </td>
                                     </tr>
 

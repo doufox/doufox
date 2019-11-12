@@ -16,7 +16,7 @@
             <div class="panel-heading">
                 <span class="panel-title">缓存列表</span>
                 <div class="pull-right">
-                    <a href="<?php echo url('admin/cache/update'); ?>">刷新全站缓存</a>
+                    <a class="btn btn-default btn-xs" href="<?php echo url('admin/cache/update'); ?>">刷新全站缓存</a>
                 </div>
             </div>
             <div class="panel-body">缓存目录：/data/cache/</div>

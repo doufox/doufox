@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `doufox_category` (
   `items` mediumint(8) UNSIGNED NOT NULL DEFAULT '0',
   `listorder` SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0',
   `ismenu` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
-  `isnewtab` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '新窗口打开',
+  `isnewtab` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '打开方式',
   `ispost` SMALLINT(2) NOT NULL,
   `verify` SMALLINT(2) NOT NULL DEFAULT '0',
   `islook` SMALLINT(2) NOT NULL,

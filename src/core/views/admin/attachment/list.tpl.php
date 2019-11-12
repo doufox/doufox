@@ -15,7 +15,7 @@
             <div class="panel-heading">
                 <span class="panel-title">附件列表</span>
                 <div class="pull-right">
-                    <a href="<?php echo url('admin/attachment/add'); ?>">添加附件</a>
+                    <a class="btn btn-default btn-xs" href="<?php echo url('admin/attachment/add'); ?>">添加附件</a>
                 </div>
             </div>
             <table width="100%" class="table table-bordered table-condensed table-hover" id="imgPreview">

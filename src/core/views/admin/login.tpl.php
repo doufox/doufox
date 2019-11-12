@@ -62,12 +62,12 @@
                         <form method="POST" action="">
                             <div class="form-group">
                                 <label for="username" class="control-label">账号</label>
-                                <input name="username" type="text" class="form-control" placeholder="输入登录账号" required autofocus maxlength="20" autocomplete="off">
+                                <input name="username" id="username" type="text" class="form-control" placeholder="输入登录账号" required autofocus maxlength="20" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="control-label">密码</label>
                                 <span class="pull-right"><a href="#" title="正在开发中">忘记密码</a></span>
-                                <input name="password" type="password" class="form-control" placeholder="输入登录密码" maxlength="20" autocomplete="off" required />
+                                <input name="password" id="password" type="password" class="form-control" placeholder="输入登录密码" maxlength="20" autocomplete="off" required />
                             </div>
                             <div class="input-group">
                                 <input type="text" name="code" class="form-control captcha" placeholder="右侧验证码" maxlength="4" autocomplete="off" />

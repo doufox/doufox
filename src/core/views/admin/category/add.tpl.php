@@ -15,8 +15,8 @@
             <div class="panel-heading">
                 <span class="panel-title"><?php echo $catid ? '编辑' : '添加';?>栏目</span>
                 <div class="pull-right">
-                    <a href="<?php echo url('admin/category'); ?>">列表</a>
-                    <a href="<?php echo url('admin/category/add'); ?>">添加</a>
+                    <a class="btn btn-default btn-xs" href="<?php echo url('admin/category'); ?>">列表</a>
+                    <a class="btn btn-default btn-xs" href="<?php echo url('admin/category/add'); ?>">添加</a>
                 </div>
             </div>
             <div class="panel-body">

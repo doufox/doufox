@@ -16,8 +16,8 @@
                 <div class="panel-heading">
                     <span class="panel-title">插件配置</span>
                     <div class="pull-right">
-                        <a href="<?php echo url('admin/plugin/reload'); ?>">重载</a>
-                        <a href="<?php echo url('admin/plugin'); ?>">列表</a>
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/plugin/reload'); ?>">重载</a>
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/plugin'); ?>">列表</a>
                     </div>
                 </div>
                 <div class="panel-body">

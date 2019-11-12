@@ -16,7 +16,7 @@
             <div class="panel-heading">
                 <span class="panel-title">插件管理</span>
                 <div class="pull-right">
-                    <a href="<?php echo url('admin/plugin/reload'); ?>">重载</a>
+                    <a class="btn btn-default btn-xs" href="<?php echo url('admin/plugin/reload'); ?>">重载</a>
                 </div>
             </div>
             <table class="table table-bordered table-hover" width="100%">

@@ -1,6 +1,6 @@
 <?php
 
-class CreatehtmlController extends Admin
+class HtmlController extends Admin
 {
 
     private $tree;
@@ -8,9 +8,9 @@ class CreatehtmlController extends Admin
     public function __construct()
     {
         parent::__construct();
-        if ($this->site_config['DIY_URL'] != 2) {
-            $this->show_message('请开启系统生成静态功能', 2, url('admin/config', array('type' => 5)));
-        }
+        // if ($this->site_config['DIY_URL'] != 2) {
+        //     $this->show_message('请开启系统生成静态功能', 2, url('admin/config', array('type' => 5)));
+        // }
 
         $this->tree = core::load_class('tree');
     }
