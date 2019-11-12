@@ -35,6 +35,7 @@
             <div class="panel-heading"><span class="panel-title">系统设置</span></div>
             <div class="list-group">
                 <a class="list-group-item active" href="<?php echo url('admin/config'); ?>">基础设置</a>
+                <a class="list-group-item" href="<?php echo url('admin/config/security'); ?>">安全设置</a>
             </div>
         </div>
     </div>

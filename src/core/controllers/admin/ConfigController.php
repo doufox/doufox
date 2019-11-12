@@ -5,15 +5,13 @@
  */
 class ConfigController extends Admin
 {
+    // 配置变量说明
+    private $configTips;
+
     public function __construct()
     {
         parent::__construct();
-    }
-
-    public function indexAction()
-    {
-        // 变量注释
-        $configTips = array(
+        $this->configTips = array(
             'SITE_THEME' => '桌面端主题样式, 默认default',
             'SITE_THEME_MOBILE' => '移动端主题样式, 默认default',
             'SITE_MOBILE' => '移动端主题样式, 默认关闭',
@@ -46,47 +44,33 @@ class ConfigController extends Admin
             'WEIXIN_MP_URL' => '接收来自微信服务器的请求,必须以http://或https://开头',
             'WEIXIN_MP_TOKEN' => '微信服务器的验证token,必须为英文或数字，长度为3-32字符',
             'WEIXIN_MP_AESKEY' => 'EncodingAESKey,消息加密密钥由43位字符组成',
+            'ADMIN_LOGINCODE' => '后台登录需要输入验证码',
+            'ADMIN_LOGINPATH' => '后台登录路径默认admin',
         );
+    }
+
+    /**
+     * 系统基本配置
+     */
+    public function indexAction()
+    {
+        $data = $this->site_config;
+        $configTips = $this->configTips;
         if ($this->isPostForm()) {
             $configdata = $this->post('data');
             $configdata['RAND_CODE'] = md5(microtime());
-
-            // $admin = core::load_config('admin'); // 管理员配置
-            // 本地管理员账号
-            // $postadmin = $this->post('admin');
-            // if(empty($postadmin['ADMIN_PASS']) ) {
-            //     $postadmin['ADMIN_PASS'] =$admin['ADMIN_PASS'];
-            // } else {
-            //     $postadmin['ADMIN_PASS'] = md5(md5($postadmin['ADMIN_PASS']));
-            // }
-            // $admin_content = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) exit();" . PHP_EOL . "return array(" . PHP_EOL;
-            // $adminsystem = array();
-            // foreach ($postadmin as $var=>$val) {
-            //     if (!in_array($var, $adminsystem)) {
-            //         $value    = $val == 'false' || $val == 'true' ? $val : "'" . $val . "'";
-            //         $admin_content .= "    '" . strtoupper($var) . "'" . $this->setspace($var) . " => " . $value . ", " . PHP_EOL;
-            //     }
-            // }
-            // $admin_content .= PHP_EOL . ");";
-            // file_put_contents(DATA_PATH . 'config' . DS . 'admin.ini.php', $admin_content);
-
-            $content = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) exit();" . PHP_EOL . "return array(" . PHP_EOL;
-            $system = array();
-
-            $content .= PHP_EOL . "    /* Site Config */" . PHP_EOL;
-            foreach ($configdata as $var => $val) {
-                if (!in_array($var, $system)) {
-                    $value = $val == 'false' || $val == 'true' ? $val : "'" . $val . "'";
-                    $content .= "    '" . strtoupper($var) . "'" . $this->setspace($var) . " => " . $value . ", // " . $configTips[$var] . PHP_EOL;
-                }
+            $configdata['WEIXIN_MP_URL'] = HTTP_PRE . HTTP_HOST . url('api/weixin/index');
+            $configdata = array_merge($data, $configdata);
+            $content = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) {" . PHP_EOL . "    exit();" . PHP_EOL . "}" . PHP_EOL . PHP_EOL . "return array(" . PHP_EOL;
+            foreach ($configdata as $k => $v) {
+                $value = $v == 'false' || $v == 'true' ? $v : "'" . $v . "'";
+                $content .= "    '" . strtoupper($k) . "'" . $this->setspace($k) . " => " . $value . ", // " . $configTips[$k] . PHP_EOL;
             }
             $content .= PHP_EOL . ");";
 
             file_put_contents(DATA_PATH . 'config' . DS . 'config.ini.php', $content);
-            $this->show_message('修改成功', 1, url('admin/config/index', array('type' => $this->get('type'))));
+            $this->show_message('修改成功', 1, url('admin/config/index'));
         }
-
-        $data = core::load_config('config'); // 应用程序配置文件
         $file_list = core::load_class('file_list');
         $arr_d = $file_list->get_file_list(THEME_PATH_D);
         $arr_m = $file_list->get_file_list(THEME_PATH_M);
@@ -94,10 +78,66 @@ class ConfigController extends Admin
         $theme_mobile = array_diff($arr_m, array('index.html'));
         $membermodel = $this->membermodel; // 会员模型
 
-        // $data['ADMIN_PASS'] = '';
-        $data['WEIXIN_MP_URL'] = HTTP_PRE . HTTP_HOST . url('api/weixin/index');
+        include $this->admin_view('config/index');
+    }
+    /**
+     * 本地管理员帐号
+     * 已废弃，暂不用
+     */
+    public function localadminAction()
+    {
+        // 获取管理员配置
+        $admin = core::load_config('admin');
+        if ($this->isPostForm()) {
+            $configdata = $this->post('data');
+            $configdata['RAND_CODE'] = md5(microtime());
 
+            // 本地管理员账号
+            $postadmin = $this->post('admin');
+            if (empty($postadmin['ADMIN_PASS'])) {
+                $postadmin['ADMIN_PASS'] = $admin['ADMIN_PASS'];
+            } else {
+                $postadmin['ADMIN_PASS'] = md5(md5($postadmin['ADMIN_PASS']));
+            }
+            $admin_content = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) exit();" . PHP_EOL . "return array(" . PHP_EOL;
+            $adminsystem = array();
+            foreach ($postadmin as $k => $val) {
+                if (!in_array($k, $adminsystem)) {
+                    $value = $val == 'false' || $val == 'true' ? $val : "'" . $val . "'";
+                    $admin_content .= "    '" . strtoupper($k) . "'" . $this->setspace($k) . " => " . $value . ", " . PHP_EOL;
+                }
+            }
+            $admin_content .= PHP_EOL . ");";
+            file_put_contents(DATA_PATH . 'config' . DS . 'admin.ini.php', $admin_content);
+            $this->show_message('修改成功', 1, url('admin/config/admin'));
+        }
         include $this->admin_view('config');
+    }
+
+    /**
+     * 安全设置
+     */
+    public function securityAction()
+    {
+        // 获取当前配置信息
+        $data = $this->site_config;
+        $configTips = $this->configTips;
+        if ($this->isPostForm()) {
+            $postdata = $this->post('data');
+            $postdata['RAND_CODE'] = md5(microtime());
+            $postdata['ADMIN_LOGINPATH'] = $postdata['ADMIN_LOGINPATH'] ? $postdata['ADMIN_LOGINPATH'] : 'admin';
+            $postdata = array_merge($data, $postdata);
+            $content = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) {" . PHP_EOL . "    exit();" . PHP_EOL . "}" . PHP_EOL . PHP_EOL . "return array(" . PHP_EOL;
+            foreach ($postdata as $k => $v) {
+                $value = $v == 'false' || $v == 'true' ? $v : "'" . $v . "'";
+                $content .= "    '" . strtoupper($k) . "'" . $this->setspace($k) . " => " . $value . ", // " . $configTips[$k] . PHP_EOL;
+            }
+            $content .= PHP_EOL . ");";
+            file_put_contents(DATA_PATH . 'config' . DS . 'config.ini.php', $content);
+            $this->show_message('修改成功', 1, url('admin/config/security'));
+        }
+
+        include $this->admin_view('config/security');
     }
 
     /**

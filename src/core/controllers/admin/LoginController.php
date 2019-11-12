@@ -10,18 +10,14 @@ class LoginController extends Admin
 
     public function indexAction()
     {
-        $url = isset($_GET['url']) && $_GET['url'] ? urldecode($this->get('url')) : url('admin');
+        $isneedcode = $this->site_config['ADMIN_LOGINCODE'];
         if ($this->isPostForm()) {
-            if (!$this->checkCode($this->post('code'))) {
+            if (isset($isneedcode) && $isneedcode && !$this->checkCode($this->post('code'))) {
                 $this->show_message('验证码不正确', 2, url('admin/login'));
             }
 
             if ($this->cookie->get('admin_login')) {
                 $this->show_message('密码错误次数过多，请15分钟后重新登录');
-            }
-
-            if (isset($this->site['SITE_ADMIN_CODE']) && $this->site['SITE_ADMIN_CODE'] && !$this->checkCode($this->post('code'))) {
-                $this->adminMsg(lang('code'), url('admin/login'));
             }
 
             $username = $this->post('username');
@@ -33,7 +29,7 @@ class LoginController extends Admin
                     session::delete('admin_login_error_num');
                 }
                 $name = $admin['realname'] ? $admin['realname'] : $username;
-                $this->show_message('欢迎您！' . $name . ' 登录成功', 1, $url);
+                $this->show_message('欢迎您！' . $name . ' 登录成功', 1, url('admin'));
             } else {
                 if ($this->session->get('admin_login_error_num')) {
                     $error = (int) $this->session->get('admin_login_error_num') - 1;
@@ -47,9 +43,10 @@ class LoginController extends Admin
                     $error = 10;
                     $this->session->set('admin_login_error_num', 10);
                 }
-                $this->show_message('账户或密码不正确，您还可以尝试' . $error . '次', 2, url('admin/login', array('url' => $this->get('url'))));
+                $this->show_message('账户或密码不正确，您还可以尝试' . $error . '次', 2, url('admin/login'));
             }
         }
+
         include $this->admin_view('login');
     }
 

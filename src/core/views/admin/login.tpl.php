@@ -15,15 +15,19 @@
     <meta name="referrer" content="never" />
     <link type="text/css" href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <style type="text/css">
+        html {
+            width: 100%;
+            height: 100%;
+        }
         body {
             background-color: #f3f3f3;
+            display: table;
+            height: 100%;
+            width: 100%;
         }
-        .header {
-            margin: 16% 0 30px;
-        }
-        .text-muted {
-            font-size: 16px;
-            color: #999;
+        .container {
+            display: table-cell;
+            vertical-align: middle;
         }
         .panel {
             max-width: 600px;
@@ -48,13 +52,10 @@
 
 <body>
     <div class="container">
-        <div class="header text-center">
-            <h1>DouFox</h1>
-            <p class="text-muted">网站内容管理系统</p>
-        </div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <span>管理员登陆</span>
+                <span class="pull-right">DouFox 网站管理系统</span>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -62,21 +63,23 @@
                         <form method="POST" action="">
                             <div class="form-group">
                                 <label for="username" class="control-label">账号</label>
-                                <input name="username" id="username" type="text" class="form-control" placeholder="输入登录账号" required autofocus maxlength="20" autocomplete="off">
+                                <input name="username" id="username" type="text" class="form-control" placeholder="输入账号" required autofocus maxlength="20" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="control-label">密码</label>
                                 <span class="pull-right"><a href="#" title="正在开发中">忘记密码</a></span>
-                                <input name="password" id="password" type="password" class="form-control" placeholder="输入登录密码" maxlength="20" autocomplete="off" required />
-                            </div>
+                                <input name="password" id="password" type="password" class="form-control" placeholder="输入密码" maxlength="20" autocomplete="off" required />
+                            </div><?php if ($isneedcode) {?>
                             <div class="input-group">
-                                <input type="text" name="code" class="form-control captcha" placeholder="右侧验证码" maxlength="4" autocomplete="off" />
+                                <input type="text" name="code" class="form-control captcha" placeholder="验证码" maxlength="4" autocomplete="off" />
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="button" style="padding: 3px;">
                                         <img id="checkcode" src="" title="看不清楚？换一张" alt="验证码" />
                                     </button>
                                 </span>
                             </div>
+                            <?php }?>
+
                             <div class="form-group">
                                 <a href="#" title="正在开发中">手机验证码登录</a>
                             </div>
@@ -87,6 +90,7 @@
             </div>
         </div>
     </div>
+    <?php if ($isneedcode) {?>
     <script type="text/javascript">
         (function() {
             function checkcode_init() {
@@ -96,6 +100,8 @@
             document.getElementById("checkcode").onclick = checkcode_init;
         })();
     </script>
+    <?php }?>
+
 </body>
 
 </html>
