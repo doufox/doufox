@@ -1,8 +1,9 @@
 <?php
-if (!defined('IN_CMS')) exit();
-return array(
+if (!defined('IN_CMS')) {
+    exit();
+}
 
-    /* Site Config */
+return array(
     'SITE_NAME'               => 'DouFox', // 网站名称
     'SITE_THEME'              => 'default', // 桌面端主题样式, 默认default
     'SITE_THEME_MOBILE'       => 'default', // 移动端主题样式, 默认default
@@ -35,5 +36,6 @@ return array(
     'WEIXIN_MP_TOKEN'         => '', // 微信服务器的验证token,必须为英文或数字，长度为3-32字符
     'WEIXIN_MP_AESKEY'        => '', // EncodingAESKey,消息加密密钥由43位字符组成
     'RAND_CODE'               => '1284adb94da485e70f8c3064da8232d9', // 随机代码
-
+    'ADMIN_LOGINCODE'         => '0', // 后台登录需要输入验证码
+    'ADMIN_LOGINPATH'         => 'admin' // 后台登录路径默认admin
 );

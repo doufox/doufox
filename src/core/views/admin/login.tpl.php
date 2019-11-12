@@ -69,7 +69,7 @@
                                 <label for="password" class="control-label">密码</label>
                                 <span class="pull-right"><a href="#" title="正在开发中">忘记密码</a></span>
                                 <input name="password" id="password" type="password" class="form-control" placeholder="输入密码" maxlength="20" autocomplete="off" required />
-                            </div>
+                            </div><?php if ($isneedcode) {?>
                             <div class="input-group">
                                 <input type="text" name="code" class="form-control captcha" placeholder="验证码" maxlength="4" autocomplete="off" />
                                 <span class="input-group-btn">
@@ -77,7 +77,7 @@
                                         <img id="checkcode" src="" title="看不清楚？换一张" alt="验证码" />
                                     </button>
                                 </span>
-                            </div>
+                            </div><?php }?>
                             <div class="form-group">
                                 <a href="#" title="正在开发中">手机验证码登录</a>
                             </div>
