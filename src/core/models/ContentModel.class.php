@@ -101,8 +101,8 @@ class ContentModel extends Model
         }
 
         $ext = substr(strrchr(trim($data['thumb']), '.'), 1);
-        $config = core::load_config('config');
-        $thumb = $data['thumb'] . '.thumb.' . $config['SITE_THUMB_WIDTH'] . 'x' . $config['SITE_THUMB_HEIGHT'] . '.' . $ext;
+        $site_config = core::get_site_config();
+        $thumb = $data['thumb'] . '.thumb.' . $site_config['SITE_THUMB_WIDTH'] . 'x' . $site_config['SITE_THUMB_HEIGHT'] . '.' . $ext;
         if (file_exists(ROOT_PATH . $thumb)) {
             @unlink(ROOT_PATH . $thumb);
         }

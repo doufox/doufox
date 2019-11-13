@@ -51,10 +51,10 @@ abstract class Controller
             Controller::redirect(url('install/index'));
         }
 
+        $this->site_config = core::get_site_config();
         $this->view = core::load_class('view');
         $this->cookie = core::load_class('cookie');
         $this->session = core::load_class('session');
-        $this->site_config = core::load_config('config');
         $this->category = core::load_model('category');
         $this->content = core::load_model('content');
         $this->account = core::load_model('account');

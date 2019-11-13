@@ -13,6 +13,7 @@ class router
     private $path_info;
     private $search_array;
     private $search_string;
+    private $admin_login_path;
 
     public function __construct()
     {
@@ -20,6 +21,8 @@ class router
         $this->search_string = isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] ? $_SERVER['QUERY_STRING'] : $_SERVER['REQUEST_URI'];
         parse_str($this->search_string, $this->search_array);
         $_GET = array_merge($_GET, $this->search_array);
+        $this->admin_login_path = core::get_site_config('ADMIN_LOGINPATH');
+        // print_r($this->admin_login_path);
     }
 
     public function get()
@@ -70,9 +73,9 @@ class router
                 }
             }
         } else {
-            $namespace  = trim((isset($this->search_array['s']) && $this->search_array['s']) ? $this->search_array['s'] : '');
-            $controller = trim((isset($this->search_array['c']) && $this->search_array['c']) ? $this->search_array['c'] : 'Index');
-            $action     = trim((isset($this->search_array['a']) && $this->search_array['a']) ? $this->search_array['a'] : 'index');
+            $namespace  = trim(!empty($this->search_array['s']) ? $this->search_array['s'] : '');
+            $controller = trim(!empty($this->search_array['c']) ? $this->search_array['c'] : 'Index');
+            $action     = trim(!empty($this->search_array['a']) ? $this->search_array['a'] : 'index');
         }
         // return $this->router =  array(
         //     'GET' => array_merge($_GET, $this->search_array),
@@ -88,6 +91,14 @@ class router
 
     private function inNameSpace($path)
     {
+        if (!empty($this->admin_login_path) && $this->admin_login_path != 'admin') {
+            // 自定义后台路径
+            if ($path == $this->admin_login_path) {
+                return true;
+            } else if ($path == 'admin') {
+                return false;
+            }
+        }
         if (is_dir(CTRL_PATH . $path)) {
             return true;
         }

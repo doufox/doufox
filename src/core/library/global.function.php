@@ -86,7 +86,7 @@ function url($route, $params = null)
         }
         $url .= '&' . implode('&', $params_url);
     }
-    $config = core::load_config('config');
+    $config = core::get_site_config();
     if (!$config['DIY_URL'] && !$config['HIDE_ENTRY_FILE']) {
         $url = ENTRY_FILE . $url;
     }
@@ -194,7 +194,7 @@ function image($url)
  */
 function thumb($img, $width = null, $height = null)
 {
-    $config = core::load_config('config');
+    $config = core::get_site_config();
     if (empty($img) || strlen($img) == 3) {
         return HTTP_URL . 'static/img/nopic.gif';
     }
@@ -472,7 +472,7 @@ function getParentName($catid, $prefix, $sort = 1)
  */
 function getUrl($data, $page = 0)
 {
-    $config = core::load_config('config');
+    $config = core::get_site_config();
     $cats = get_cache('category');
     $cat = $cats[$data['catid']];
     unset($cats);
@@ -504,7 +504,7 @@ function getCaturl($data, $page = 0)
         unset($cats);
     }
     // $catid = is_numeric($data) ? $data : $data['catid'];
-    $config = core::load_config('config');
+    $config = core::get_site_config();
     if ($data['typeid'] == 3) {
         unset($config);
         return $data['http'];
@@ -541,7 +541,7 @@ function getCaturl($data, $page = 0)
  */
 function listSeo($cat, $page = 1, $kw = null)
 {
-    $config = core::load_config('config');
+    $config = core::get_site_config();
 
     $seo_title = $seo_keywords = $seo_description = '';
     if ($kw) {
