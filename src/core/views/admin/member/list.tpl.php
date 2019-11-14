@@ -59,8 +59,8 @@
                                     <td><?php echo date('Y-m-d H:i:s', $t['regdate']); ?></td>
                                     <td><?php echo $t['regip']; ?></td>
                                     <td>
-                                        <a href="<?php echo url('admin/member/edit', array('id' => $t['id'])); ?>">详细</a>
-                                        <a href="#" name="删除会员" onclick="member_delete(this);" data-id="<?php echo $t['id']; ?>" data-name="<?php echo $t['username']; ?>">删除</a>
+                                        <a href="<?php echo url('admin/member/edit', array('id' => $t['id'])); ?>">详情</a>
+                                        <a href="#modal-confirm" data-toggle="modal" name="删除会员" onclick="member_delete(this);" data-id="<?php echo $t['id']; ?>" data-name="<?php echo $t['username']; ?>">删除</a>
                                     </td>
                                 </tr>
                         <?php }
@@ -86,7 +86,6 @@
 
 <script type="text/javascript">
     function member_delete(e) {
-        e.preventDefault();
         if (e && e.dataset && e.dataset.id && e.dataset.name) {
             document.getElementById('modal-confirm-url').href = "<?php echo url('admin/member/del', array('modelid' => $t['modelid'], 'id' => '')); ?>" + e.dataset.id;
             document.getElementById('modal-confirm-body').innerText = '确定删除会员"' + e.dataset.name + '"吗？';

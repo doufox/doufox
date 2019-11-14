@@ -102,7 +102,7 @@
                                 <?php } else { ?><a href="<?php echo $t[url]; ?>" target="_blank">查看</a> 
                                 <?php } ?>
                                 <a href="<?php echo url('admin/content/edit',array('id'=>$t['id'])); ?>" clz="1">编辑</a> 
-                                <a href="#modal-content-delete" data-toggle="modal" name="删除" onclick="content_delete(this);" data-id="<?php echo $t['id']; ?>" data-name="<?php echo $t['title']; ?>">删除</a>
+                                <a href="#modal-confirm" data-toggle="modal" name="删除" onclick="content_delete(this);" data-id="<?php echo $t['id']; ?>" data-name="<?php echo $t['title']; ?>">删除</a>
                             </td>
                             <td>
                                 <input type="text" name="order_<?php echo $t['id']; ?>" style="width:25px; height:15px;" value="<?php echo $t['listorder']; ?>">
@@ -130,25 +130,6 @@
     </div>
 </div>
 
-<!-- 账号提示 -->
-<div class="modal fade" id="modal-content-delete" tabindex="-1" role="dialog" aria-labelledby="aria-content-delete">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="aria-content-delete">系统提示</h4>
-            </div>
-            <div class="modal-body">
-                <p>确定删除<span id="content-delete-name"></span>吗？</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <a type="button" id="content-delete-url" class="btn btn-primary" href="#">确定</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- 内容预览 -->
 <div class="modal fade" id="modal-content-preview" tabindex="-1" role="dialog" aria-labelledby="aria-content-preview">
     <div class="modal-dialog" role="document">
@@ -170,16 +151,10 @@
 <script type="text/javascript">
     function content_delete(e) {
         if (e && e.dataset && e.dataset.id && e.dataset.name) {
-            document.getElementById('content-delete-url').href = "<?php echo url('admin/content/del', array('catid'=>$catid, 'id' => '')); ?>" + e.dataset.id;
-            document.getElementById('content-delete-name').innerText = '『' + e.dataset.name + '』';
-        } else {
-            document.getElementById('content-delete-url').href = '';
-            document.getElementById('content-delete-name').innerText = '';
+            document.getElementById('modal-confirm-url').href = "<?php echo url('admin/content/del', array('catid'=>$catid, 'id' => '')); ?>" + e.dataset.id;
+            document.getElementById('modal-confirm-body').innerText = '确定删除『' + e.dataset.name + '』吗？';
         }
     }
-    $('#modal-content-delete').on('hide.bs.modal', function () {
-        content_delete();
-    })
     function content_preview (x) {
         if (x) {
             document.getElementById('content-preview-view').src = "<?php echo url('admin/content/preview', array('id' => '')); ?>" + x;
