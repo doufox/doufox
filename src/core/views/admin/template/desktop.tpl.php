@@ -42,7 +42,7 @@
                             foreach ($list as $v) :
                                 $filename = basename($v);
                                 if (is_dir($v))
-                                    echo '<tr><td align="left"><img src="/static/img/folder-closed.gif" /> <a href="?s=admin&c=template&dir=' . urldecode($dir . $filename . DS) . '">' . $filename . '</a></td><td align="left"><input type="text" class="form-control input-sm" name="file_explan[' . $encode_local . '][' . $filename . ']" value="' . (isset($file_explan[$encode_local][$filename]) ? $file_explan[$encode_local][$filename] : "") . '"></td><td></td> </tr>';
+                                    echo '<tr><td align="left"><img src="/static/img/folder-closed.gif" /> <a href="' . url('admin/template', array('dir' => urldecode($dir . $filename . DS))) . '">' . $filename . '</a></td><td align="left"><input type="text" class="form-control input-sm" name="file_explan[' . $encode_local . '][' . $filename . ']" value="' . (isset($file_explan[$encode_local][$filename]) ? $file_explan[$encode_local][$filename] : "") . '"></td><td></td> </tr>';
                             endforeach;
                             foreach ($list as $v) :
                                 $filename = basename($v);
@@ -50,7 +50,7 @@
                                     echo '<tr><td align="left"><img src="/static/img/file.gif" /> ' . $filename . '</td><td align="left"><input type="text" class="form-control input-sm" name="file_explan[' . $encode_local . '][' . $filename . ']" value="' . (isset($file_explan[$encode_local][$filename]) ? $file_explan[$encode_local][$filename] : "") . '"></td>';
                                     $ext = strtolower(trim(substr(strrchr($filename, '.'), 1, 10)));
                                     if (in_array($ext, array('html', 'css', 'js')))
-                                        echo '<td> <a href="?s=admin&c=template&a=edit&dir=' . urldecode($dir) . '&file=' . urldecode($filename) . '">编辑</a> </td></tr>';
+                                        echo '<td><a href="' . url('admin/template/edit', array('dir' => urldecode($dir), 'file' => urldecode($filename))) . '">编辑</a></td></tr>';
                                     else
                                         echo '<td></td></tr>';
                                 }

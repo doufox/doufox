@@ -103,7 +103,7 @@
     function ajaxtitle() {
         $('#title_text').html('');
         admin_command.get_kw(); //读取关键字
-        $.post('<?php echo HTTP_URL . DS . ENTRY_FILE; ?>?s=admin&c=content&a=ajaxtitle&id=' + Math.random(), {
+        $.post('<?php echo url('admin/content/ajaxtitle'); ?>&id=' + Math.random(), {
             title: $('#title').val(),
             id: <?php echo $data[id] ? $data[id] : 0; ?>
         }, function(data) {

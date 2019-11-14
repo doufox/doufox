@@ -122,9 +122,9 @@ class CacheController extends Admin
             $id++;
 
             if (!empty($cache)) {
-                echo '<script type="text/javascript">window.parent.frames["hidden"].location="index.php?s=admin&c=' . $c . '&a=cache";</script>';
+                echo '<script type="text/javascript">window.parent.frames["hidden"].location="' . url('admin', array('c' => $c, 'a' => 'cache')) . '";</script>';
                 echo '<script type="text/javascript">window.parent.updateTips("<p>' . $cache[0] . '缓存更新成功</p>");</script>';
-                $this->show_message($msg, 1, url('admin/cache/update', array('show' => 1, 'id' => $id)), 100);
+                $this->show_message('', 1, url('admin/cache/update', array('show' => 1, 'id' => $id)), 100);
             } else {
                 echo '<script type="text/javascript">window.parent.updateSuccess();</script>';
             }

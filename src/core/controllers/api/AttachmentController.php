@@ -429,7 +429,7 @@ class AttachmentController extends Controller
      */
     private function getAdmin()
     {
-        if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] && stripos($_SERVER['HTTP_REFERER'], 's=admin') !== false) {
+        if (core::get_namespace_id() == 'admin') {
             return 1;
         }
         return 0;

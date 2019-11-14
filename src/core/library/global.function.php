@@ -50,6 +50,9 @@ function gethttp($url)
 
 /**
  * 组装URL
+ * @param string $route 路径，例如：admin/content/edit
+ * @param array|null $params 参数，例如：array('id' => 11)
+ * @return string 返回可访问的URL路径，例如：index.php?s=admin&c=content&a=edit&id=11
  */
 function url($route, $params = null)
 {
@@ -60,9 +63,15 @@ function url($route, $params = null)
     $arr = explode('/', $route);
     $arr = array_diff($arr, array(''));
     // $count = count($arr);
+    $config = core::get_site_config();
     $url = '';
     if (is_dir(CTRL_PATH . $arr[0])) {
-        $url .= '?s=' . strtolower($arr[0]);
+        if (!empty($config['ADMIN_LOGINPATH']) && $arr[0] == 'admin') {
+            // 拼接为自定义路径
+            $url .= '?s=' . strtolower($config['ADMIN_LOGINPATH']);
+        } else {
+            $url .= '?s=' . strtolower($arr[0]);
+        }
         if (isset($arr[1]) && $arr[1]) {
             $url .= '&c=' . strtolower($arr[1]);
             if (isset($arr[2]) && $arr[2] && $arr[2] != 'index') {
@@ -86,7 +95,6 @@ function url($route, $params = null)
         }
         $url .= '&' . implode('&', $params_url);
     }
-    $config = core::get_site_config();
     if (!$config['DIY_URL'] && !$config['HIDE_ENTRY_FILE']) {
         $url = ENTRY_FILE . $url;
     }

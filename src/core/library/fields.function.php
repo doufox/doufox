@@ -325,7 +325,7 @@ function content_editor($name, $content = '', $setting = '')
     $type = isset($setting['type']) && $setting['type'] ? 1 : (!isset($setting['type']) ? 1 : 0);
     $str = '';
     $page = !isset($setting['system']) && $name == 'content' ? ", '|', 'pagebreak'" : '';
-    $source = strpos($_SERVER['QUERY_STRING'], 's=admin') === false || strpos($_SERVER['QUERY_STRING'], 's=admin') === false ? '' : "'source',";
+    $source = core::get_namespace_id() != 'admin' ? '' : "'source',";
     if (!defined('CMS_EDITOR_LD')) {
         $str .= '<script type="text/javascript" src="/static/kindeditor/kindeditor.js"></script>';
         define('CMS_EDITOR_LD', 1); // 防止重复加载JS

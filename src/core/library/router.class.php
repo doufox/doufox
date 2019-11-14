@@ -13,7 +13,7 @@ class router
     private $path_info;
     private $search_array;
     private $search_string;
-    private $admin_login_path;
+    private $admin_ns;
 
     public function __construct()
     {
@@ -21,8 +21,7 @@ class router
         $this->search_string = isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] ? $_SERVER['QUERY_STRING'] : $_SERVER['REQUEST_URI'];
         parse_str($this->search_string, $this->search_array);
         $_GET = array_merge($_GET, $this->search_array);
-        $this->admin_login_path = core::get_site_config('ADMIN_LOGINPATH');
-        // print_r($this->admin_login_path);
+        $this->admin_ns = core::get_site_config('ADMIN_LOGINPATH');
     }
 
     public function get()
@@ -77,12 +76,14 @@ class router
             $controller = trim(!empty($this->search_array['c']) ? $this->search_array['c'] : 'Index');
             $action     = trim(!empty($this->search_array['a']) ? $this->search_array['a'] : 'index');
         }
-        // return $this->router =  array(
-        //     'GET' => array_merge($_GET, $this->search_array),
-        //     'namespace' => strtolower($namespace),
-        //     'controller' => ucfirst(strtolower($controller)),
-        //     'action' => strtolower($action)
-        // );
+        if (!empty($this->admin_ns) && $this->admin_ns != 'admin') {
+            if ($namespace == 'admin') {
+                $namespace = '';
+            } else if ($namespace == $this->admin_ns) {
+                // 自定义后台路径
+                $namespace = 'admin';
+            }
+        }
         $this->router['namespace'] = strtolower($namespace);
         $this->router['controller'] = ucfirst(strtolower($controller));
         $this->router['action'] = strtolower($action);
@@ -91,13 +92,9 @@ class router
 
     private function inNameSpace($path)
     {
-        if (!empty($this->admin_login_path) && $this->admin_login_path != 'admin') {
-            // 自定义后台路径
-            if ($path == $this->admin_login_path) {
-                return true;
-            } else if ($path == 'admin') {
-                return false;
-            }
+        if (!empty($this->admin_ns) && $path == $this->admin_ns) {
+            // 属于自定义后台路径返回true
+            return true;
         }
         if (is_dir(CTRL_PATH . $path)) {
             return true;
