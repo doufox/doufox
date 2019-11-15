@@ -53,7 +53,7 @@ class TemplateController extends Admin
         $filepath = $this->dir . $dir . $filename;
         $local = str_replace(ROOT_PATH, '', $filepath);
         if (!is_file($filepath)) {
-            $this->show_message($dir . $filename . '该文件不存在', 2, '?s=admin&c=template&dir=' . $dir);
+            $this->show_message($dir . $filename . '该文件不存在', 2, url('admin/template', array('dir' => $dir)));
         }
 
         if ($this->isPostForm()) {
@@ -74,15 +74,15 @@ class TemplateController extends Admin
         if ($this->isPostForm()) {
             $filename = $this->post('file_name');
             if (file_exists($filepath . $filename)) {
-                $this->show_message('该文件已经存在', '?s=admin&c=template&dir=' . $dir, 2);
+                $this->show_message('该文件已经存在', 2, url('admin/template', array('dir' => $dir)));
             }
             $ext = strtolower(trim(substr(strrchr($filename, '.'), 1, 10)));
             if (!in_array($ext, array('html', 'css', 'js'))) {
-                $this->show_message('文件名后缀不对', 2, '?s=admin&c=template&dir=' . $dir);
+                $this->show_message('文件名后缀不对', 2, url('admin/template', array('dir' => $dir)));
             }
 
             file_put_contents($filepath . $filename, stripslashes($_POST['file_content']), LOCK_EX);
-            $this->show_message('提交成功', 1, '?s=admin&c=template&dir=' . $dir);
+            $this->show_message('提交成功', 1, url('admin/template', array('dir' => $dir)));
         }
         include $this->admin_view('template/add');
     }
@@ -97,7 +97,7 @@ class TemplateController extends Admin
         //        if (@unlink($filepath))
         //        $this->show_message('删除成功',1);
         //        else
-        //        $this->show_message('删除失败',2, '?s=admin&c=template&dir='.$dir );
+        //        $this->show_message('删除失败',2, url('admin/template', array('dir' => $dir)));
     }
 
     // 还未实现

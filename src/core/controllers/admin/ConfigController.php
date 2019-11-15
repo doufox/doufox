@@ -80,6 +80,7 @@ class ConfigController extends Admin
 
         include $this->admin_view('config/index');
     }
+
     /**
      * 本地管理员帐号
      * 已废弃，暂不用

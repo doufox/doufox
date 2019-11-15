@@ -64,7 +64,7 @@ class IndexController extends Controller
     }
 
     /**
-     * 内容详细页
+     * 内容详情页
      */
     public function showAction()
     {

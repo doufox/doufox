@@ -41,7 +41,7 @@ core::load_file(CORE_PATH . 'library' . DS . 'global.function.php'); // 全局�
 core::load_class('Model', '', 0);
 
 /**
- * 系统核心APP
+ * 系统核心
  */
 abstract class core
 {
@@ -52,35 +52,19 @@ abstract class core
     public static $router;
 
     /**
-     * run application
+     * 加载应用
      */
-    public static function run()
+    public static function load()
     {
         self::$config = self::load_config('config');
         self::$router = self::load_class('router');
-        // $_GET    = $request['_GET'];
         $request = self::$router->get();
 
         self::$namespace = $request['namespace'];
         self::$controller = $request['controller'];
         self::$action = $request['action'];
-        // self::load_router();
         self::load_theme();
         self::load_app();
-    }
-
-    /**
-     * parse request to router
-     */
-    private static function load_router()
-    {
-        self::$router = core::load_class('router');
-        $request = self::$router->get();
-        $_GET = $request['GET'];
-        self::$namespace = $request['namespace'];
-        self::$controller = $request['controller'];
-        self::$action = $request['action'];
-        return true;
     }
 
     /**
@@ -163,6 +147,7 @@ abstract class core
      * @param string $file 配置文件
      * @param string $key  要获取的配置荐
      * @param string $default  默认配置。当获取配置项目失败时该值发生作用。
+     * @return mixed
      */
     public static function load_config($file)
     {
@@ -220,7 +205,21 @@ abstract class core
     }
 
     /**
+     * 获取当前运行配置信息
+     * @param string $key
+     * @return array
+     */
+    public static function get_site_config($key = '')
+    {
+        if (isset($key) && isset(self::$config[$key])) {
+            return self::$config[$key];
+        }
+        return self::$config;
+    }
+
+    /**
      * 获取当前运行的namespace名称
+     * @return string
      */
     public static function get_namespace_id()
     {
@@ -229,6 +228,7 @@ abstract class core
 
     /**
      * 获取当前运行的controller名称
+     * @return string
      */
     public static function get_controller_id()
     {
@@ -237,6 +237,7 @@ abstract class core
 
     /**
      * 获取当前运行的action名称
+     * @return string
      */
     public static function get_action_id()
     {
