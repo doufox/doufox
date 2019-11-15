@@ -1,4 +1,4 @@
-{template header.html}
+{template member/header.html}
 <script type="text/javascript">
     function usernameFocus() {
         document.getElementById("username_prompt").innerHTML = "请输入登录账号";
@@ -115,8 +115,6 @@
         alert("已退出");
     }
 </script>
-
-{template member/member_nav.html}
 
 <form class="form form-horizontal" method="post" action="" name="myform" id="myform">
 {if count($member_model)>1}
