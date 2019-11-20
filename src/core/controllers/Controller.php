@@ -92,7 +92,7 @@ abstract class Controller
             'site_url' => HTTP_URL,
             'site_name' => $this->site_config['SITE_NAME'],
             'site_slogan' => $this->site_config['SITE_SLOGAN'],
-            'site_template' => HTTP_URL . basename(THEME_PATH_D) . '/',
+            'site_template' => HTTP_URL . basename(THEME_DIR) . '/',
             'cats' => $this->category_cache,
             'member_model' => $this->membermodel,
             'member' => $this->memberinfo,

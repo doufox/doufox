@@ -43,13 +43,9 @@ class CacheController extends Admin
                 'controller' => 'model',
                 'title' => '模型'
             ),
-            'theme_desktop' => array(
+            'theme' => array(
                 'controller' => 'template',
-                'title' => '桌面主题'
-            ),
-            'theme_mobile' => array(
-                'controller' => 'template',
-                'title' => '移动主题'
+                'title' => '主题'
             ),
             'plugin.cache.php' => array(
                 'controller' => 'plugin',

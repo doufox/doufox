@@ -22,6 +22,7 @@ define('VIEW_DIR', 'views'); // 视图模板文件夹
 define('CTRL_DIR', 'controllers'); // 控制器文件夹
 define('STATIC_DIR', 'static'); // 静态文件夹
 define('PLUGIN_DIR', 'plugin'); // 插件文件夹
+define('THEME_DIR', 'theme'); // 主题模板文件夹
 
 // 路径
 define('CORE_PATH', dirname(__FILE__) . DS); // 核心模块路径
@@ -32,8 +33,7 @@ define('CTRL_PATH', CORE_PATH . CTRL_DIR . DS); // 控制器路径
 define('STATIC_PATH', ROOT_PATH . STATIC_DIR . DS); // 静态资源路径
 define('ADMIN_PATH', VIEW_PATH . 'admin' . DS); // 管理模块路径
 define('INSTALL_PATH', VIEW_PATH . 'install' . DS); // 安装模块路径
-define('THEME_PATH_D', DATA_PATH . 'theme' . DS); // 桌面端模板路径
-define('THEME_PATH_M', DATA_PATH . 'theme_mobile' . DS); // 移动端模板路径
+define('THEME_PATH', ROOT_PATH . THEME_DIR . DS); // 主题模板路径
 define('PLUGIN_PATH', ROOT_PATH . PLUGIN_DIR . DS); // 插件路径
 
 core::load_file(CORE_PATH . 'info.php'); // 系统基本信息
@@ -108,16 +108,11 @@ abstract class core
      */
     public static function load_theme()
     {
-        define('SITE_THEME', self::$config['SITE_THEME']);
-        define('SITE_THEME_MOBILE', self::$config['SITE_THEME_MOBILE']);
-        if (self::$config['SITE_MOBILE'] == true && is_mobile()) {
-            define('THEME_TYPE', 'theme_mobile'); // 当前加载的主题类型
-            define('THEME_CURRENT', THEME_PATH_M);
-            define('THEME_DIR', is_dir(THEME_PATH_M . SITE_THEME_MOBILE) ? SITE_THEME_MOBILE : 'default');
+        if (is_mobile() && !empty(self::$config['SITE_MOBILE']) && is_dir(THEME_PATH . self::$config['SITE_MOBILE'])) {
+            // 设置了移动端主题并且是移动端访问
+            define('SITE_THEME', self::$config['SITE_MOBILE']);
         } else {
-            define('THEME_TYPE', 'theme_desktop'); // 当前加载的主题类型
-            define('THEME_CURRENT', THEME_PATH_D);
-            define('THEME_DIR', is_dir(THEME_PATH_D . SITE_THEME) ? SITE_THEME : 'default');
+            define('SITE_THEME', is_dir(THEME_PATH . self::$config['SITE_THEME']) ? self::$config['SITE_THEME'] : 'default');
         }
     }
 

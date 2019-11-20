@@ -13,7 +13,7 @@ function att_show(serverData,file)
 	if(ext == 1) {
 		var img = '<a href="javascript:;" onclick="javascript:att_cancel(this,'+id+',\'upload\')" class="on"><div class="icon"></div><img src="'+src+'" width="80" imgid="'+id+'" path="'+src+'" title="'+filename+'"/></a>';
 	} else {
-		var img = '<a href="javascript:;" onclick="javascript:att_cancel(this,'+id+',\'upload\')" class="on"><div class="icon"></div><img src="'+viewpath+'ext/'+ext+'.png" width="80" imgid="'+id+'" path="'+src+'" title="'+filename+'"/></a>';
+		var img = '<a href="javascript:;" onclick="javascript:att_cancel(this,'+id+',\'upload\')" class="on"><div class="icon"></div><img src="/static/img/ext/'+ext+'.png" width="80" imgid="'+id+'" path="'+src+'" title="'+filename+'"/></a>';
 	}
 	
 	$('#fsUploadProgress').append('<li><div id="attachment_'+id+'" class="img-wrap"></div></li>');
