@@ -13,7 +13,7 @@ class ConfigController extends Admin
         parent::__construct();
         $this->configTips = array(
             'SITE_THEME' => '桌面端主题样式, 默认default',
-            'SITE_THEME_MOBILE' => '移动端主题样式, 默认default',
+            'SITE_THEME_MOBILE' => '移动端主题样式, 默认mobile',
             'SITE_MOBILE' => '移动端主题样式, 默认关闭',
             'SITE_NAME' => '网站名称',
             'SITE_SLOGAN' => '网站头部标语',
