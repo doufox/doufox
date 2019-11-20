@@ -6,8 +6,7 @@ if (!defined('IN_CMS')) {
 return array(
     'SITE_NAME'               => 'DouFox', // 网站名称
     'SITE_THEME'              => 'default', // 桌面端主题样式, 默认default
-    'SITE_THEME_MOBILE'       => 'default', // 移动端主题样式, 默认default
-    'SITE_MOBILE'             => true, // 移动端主题样式, 默认关闭
+    'SITE_MOBILE'             => 'mobile', // 移动端主题样式, 默认mobile
     'SITE_TITLE'              => '首页标题', // 网站首页SEO标题
     'SITE_SLOGAN'             => '头部标语', // 网站头部标语
     'SITE_KEYWORDS'           => '关键字', // 网站SEO关键字

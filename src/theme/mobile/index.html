@@ -12,8 +12,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="format-detection" content="telephone=no">
-  <link href="/theme/css/style.css" rel="stylesheet" type="text/css">
-  <link href="/theme/css/index.css" rel="stylesheet" type="text/css">
+  <link href="/theme/mobile/css/style.css" rel="stylesheet" type="text/css">
+  <link href="/theme/mobile/css/index.css" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 </head>
 
@@ -28,7 +28,7 @@
       {list catid=4 order=time num=5}
       <li>
         <a class="pic" href="{$vdata['url']}">
-          <img src="/theme/images/sm.jpg" />
+          <img src="/theme/mobile/images/sm.jpg" />
         </a>
         <a class="tit" href="{$vdata['url']}">{function.strcut($vdata[title],34,'')}</a>
       </li>
@@ -40,13 +40,13 @@
   <div class="index-card">
     {nav  }
     <div class="card-item">
-      <a href="{$vdata['url']}"><img src="/theme/images/icon01.gif" /></a>
+      <a href="{$vdata['url']}"><img src="/theme/mobile/images/icon01.gif" /></a>
       <a class="title" href="{$vdata['url']}">{$vdata['catname']}</a>
     </div>
     {/nav}
     <br class="clear" />
   </div>
-  <script type="text/javascript" src="/theme/js/slide.js"></script>
+  <script type="text/javascript" src="/theme/mobile/js/slide.js"></script>
 
   <script type="text/javascript">
     window.onload = TouchSlide({

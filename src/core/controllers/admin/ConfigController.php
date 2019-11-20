@@ -13,8 +13,7 @@ class ConfigController extends Admin
         parent::__construct();
         $this->configTips = array(
             'SITE_THEME' => '桌面端主题样式, 默认default',
-            'SITE_THEME_MOBILE' => '移动端主题样式, 默认mobile',
-            'SITE_MOBILE' => '移动端主题样式, 默认关闭',
+            'SITE_MOBILE' => '移动端主题样式, 默认mobile',
             'SITE_NAME' => '网站名称',
             'SITE_SLOGAN' => '网站头部标语',
             'SITE_TITLE' => '网站首页SEO标题',
@@ -72,12 +71,12 @@ class ConfigController extends Admin
             $this->show_message('修改成功', 1, url('admin/config/index'));
         }
         $file_list = core::load_class('file_list');
-        $arr_d = $file_list->get_file_list(THEME_PATH_D);
-        $arr_m = $file_list->get_file_list(THEME_PATH_M);
-        $theme = array_diff($arr_d, array('index.html'));
-        $theme_mobile = array_diff($arr_m, array('index.html'));
-        $membermodel = $this->membermodel; // 会员模型
-
+        $arr = $file_list->get_file_list(THEME_PATH);
+        // 主题文件夹列表
+        $theme = array_diff($arr, array('index.html'));
+        // 会员模型列表
+        $membermodel = $this->membermodel;
+        unset($arr, $file_list);
         include $this->admin_view('config/index');
     }
 

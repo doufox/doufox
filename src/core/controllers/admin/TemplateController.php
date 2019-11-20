@@ -9,7 +9,7 @@ class TemplateController extends Admin
     public function __construct()
     {
         parent::__construct();
-        $this->dir = THEME_PATH_D . SITE_THEME . DS;
+        $this->dir = THEME_PATH . SITE_THEME . DS;
         if (file_exists($this->dir . 'config.php')) {
             $this->file_info = include $this->dir . 'config.php';
         }
@@ -119,51 +119,17 @@ class TemplateController extends Admin
 
     public function cacheAction($show = 0)
     {
-        // $file_list = core::load_class('file_list');
-        // $list_desktop = $file_list->get_file_list(THEME_PATH_D);
-        // $list_mobile = $file_list->get_file_list(THEME_PATH_M);
-        // foreach ($list_desktop as $file_path) {
-        //     $dir = DATA_PATH . 'cache' . DS . 'theme_desktop'. DS . $file_path . DS;
-        //     $file_list->delete_dir($dir);
-        //     if (!file_exists($dir)) {
-        //         mkdir($dir, 0777, true);
-        //     }
-        // }
-        // foreach ($list_mobile as $file_path) {
-        //     $dir = DATA_PATH . 'cache' . DS . 'theme_mobile'. DS . $file_path . DS;
-        //     $file_list->delete_dir($dir);
-        //     if (!file_exists($dir)) {
-        //         mkdir($dir, 0777, true);
-        //     }
-        // }
-        $this->cacheDesktopAction();
-        $this->cacheMobileAction();
+        $file_list = core::load_class('file_list');
+        $list = $file_list->get_file_list(THEME_PATH);
+        // $list = array_diff($list, array('index.html'));
+        foreach ($list as $file_path) {
+            $dir = DATA_PATH . 'cache' . DS . 'theme' . DS . $file_path . DS;
+            $file_list->delete_dir($dir);
+            if (!file_exists($dir)) {
+                mkdir($dir, 0777, true);
+            }
+        }
+        unset($file_list);
         $show or $this->show_message('缓存更新成功', 1, url('admin/template/index'));
-    }
-
-    public function cacheDesktopAction()
-    {
-        $file_list = core::load_class('file_list');
-        $list_desktop = $file_list->get_file_list(THEME_PATH_D);
-        foreach ($list_desktop as $file_path) {
-            $dir = DATA_PATH . 'cache' . DS . 'theme_desktop' . DS . $file_path . DS;
-            $file_list->delete_dir($dir);
-            if (!file_exists($dir)) {
-                mkdir($dir, 0777, true);
-            }
-        }
-    }
-
-    public function cacheMobileAction()
-    {
-        $file_list = core::load_class('file_list');
-        $list_mobile = $file_list->get_file_list(THEME_PATH_M);
-        foreach ($list_mobile as $file_path) {
-            $dir = DATA_PATH . 'cache' . DS . 'theme_mobile' . DS . $file_path . DS;
-            $file_list->delete_dir($dir);
-            if (!file_exists($dir)) {
-                mkdir($dir, 0777, true);
-            }
-        }
     }
 }

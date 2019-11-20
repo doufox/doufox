@@ -15,7 +15,7 @@ class ThemeController
         $path = explode('?', $_SERVER['REQUEST_URI']);
         $file = $path[0];
         $file = strtr($file, array('/theme' => ''));
-        $file_real_path = THEME_CURRENT . THEME_DIR . $file;
+        $file_real_path = THEME_PATH . $file;
         if (!file_exists($file_real_path) || !is_file($file_real_path)) {
             header("HTTP/1.0 404 Not Found");
             header('Refresh: 10; url=' . HTTP_PRE. HTTP_HOST);
