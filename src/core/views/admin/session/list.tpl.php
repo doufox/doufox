@@ -16,12 +16,11 @@
                     <span>会话总数：<?php echo $idx; ?></span>
                 </div>
             </div>
-            <div class="panel-body">存储位置：/data/session</div>
             <table class="table table-bordered table-hover" width="100%">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>文件名</th>
+                        <th>文件(存储位置：/data/session)</th>
                         <th>大小</th>
                         <th>创建时间</th>
                         <th>更新时间</th>

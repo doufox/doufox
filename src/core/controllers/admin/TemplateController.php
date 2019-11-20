@@ -9,14 +9,29 @@ class TemplateController extends Admin
     public function __construct()
     {
         parent::__construct();
-        $this->dir = THEME_PATH . SITE_THEME . DS;
-        if (file_exists($this->dir . 'config.php')) {
-            $this->file_info = include $this->dir . 'config.php';
-        }
     }
 
     public function indexAction()
     {
+        $file_list = core::load_class('file_list');
+        $path_list = $file_list->get_file_list(THEME_PATH);
+        $list = array();
+        foreach ($path_list as $x) {
+            $list[] = array(
+                'path' => $x,
+                'image' => THEME_DIR . DS . $x . DS . 'preview.png',
+            );
+        }
+        unset($file_list, $path_list);
+        include $this->admin_view('template/list');
+    }
+
+    public function itemAction()
+    {
+        $this->dir = THEME_PATH . SITE_THEME . DS;
+        if (file_exists($this->dir . 'config.php')) {
+            $this->file_info = include $this->dir . 'config.php';
+        }
         $dir = $this->get('dir') ? urldecode($this->get('dir')) : '';
         $dir = str_replace(DS . DS, DS, $dir);
         $filepath = $this->dir . $dir;
@@ -30,11 +45,15 @@ class TemplateController extends Admin
         } else {
             $top_url = url('admin/template', array('dir' => urldecode(dirname($dir) . DS)));
         }
-        include $this->admin_view('template/list');
+        include $this->admin_view('template/item');
     }
 
     public function updatefilenameAction()
     {
+        $this->dir = THEME_PATH . SITE_THEME . DS;
+        if (file_exists($this->dir . 'config.php')) {
+            $this->file_info = include $this->dir . 'config.php';
+        }
         $file_explan = $this->post('file_explan') ? $this->post('file_explan') : '';
         if (!isset($this->file_info['file_explan'])) {
             $this->file_info['file_explan'] = array();

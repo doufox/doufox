@@ -20,7 +20,6 @@
                         <a class="btn btn-default btn-xs" href="<?php echo url('admin/database/index'); ?>">数据表</a>
                     </div>
                 </div>
-                <div class="panel-body">备份目录：/data/bakup/</div>
                 <table width="100%" class="table table-bordered table-hover">
                     <thead>
                         <tr>
@@ -28,7 +27,7 @@
                                 <label class="label-group"><input name="selectform" class="select_backups" type="checkbox" onClick="selectBackup()">全选</label>
                             </th>
                             <th>备份时间</th>
-                            <th>备份文件目录</th>
+                            <th>备份目录</th>
                             <th>文件大小</th>
                             <th>操作</th>
                         </tr>
@@ -52,11 +51,6 @@
                                 </tr>
                             <?php } ?>
                         </tbody>
-                        <tfoot>
-                            <td colspan="5">
-                                <button type="submit" name="submit" class="btn btn-default" value="1">批量删除</button>
-                            </td>
-                        </tfoot>
                     <?php } else { ?>
                         <tbody>
                             <tr>
@@ -65,6 +59,7 @@
                         </tbody>
                     <?php } ?>
                 </table>
+                <div class="panel-body"><button type="submit" name="submit" class="btn btn-default" value="1">批量删除</button></div>
             </div>
         </form>
     </div>

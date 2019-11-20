@@ -26,6 +26,7 @@
             width: 100%;
         }
         .container {
+            width: 100%;
             display: table-cell;
             vertical-align: middle;
         }
@@ -63,7 +64,7 @@
                         <form method="POST" action="">
                             <div class="form-group">
                                 <label for="username" class="control-label">账号</label>
-                                <input name="username" id="username" type="text" class="form-control" placeholder="输入账号" required autofocus maxlength="20" autocomplete="off">
+                                <input name="username" id="username" type="text" class="form-control" placeholder="输入账号" required maxlength="20" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="control-label">密码</label>
