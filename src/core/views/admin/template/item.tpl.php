@@ -26,6 +26,11 @@
                 </div>
                 <div class="panel-body">
                     <p>
+                        <select class="form-control" style="width: 100px;">
+                            <?php foreach ($theme_list as $v) { ?>
+                                <option <?php echo $v == $item ? 'selected' : ''; ?>><?php echo $v; ?></option>
+                            <?php } ?>
+                        </select>
                         <?php if ($dir != '') { ?>
                             <a class="btn btn-default" href="<?php echo $top_url; ?>">返回上一级</a>
                         <?php } ?>

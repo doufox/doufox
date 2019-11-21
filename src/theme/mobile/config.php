@@ -1,7 +1,7 @@
 <?php return array (
   'file_explan' => 
   array (
-    'theme|mobile|default|' => 
+    'theme|mobile|' => 
     array (
       'images' => '图片目录',
       'member' => '会员中心模板',

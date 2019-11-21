@@ -28,7 +28,16 @@ class TemplateController extends Admin
 
     public function itemAction()
     {
-        $this->dir = THEME_PATH . SITE_THEME . DS;
+        $file_list = core::load_class('file_list');
+        $theme_list = $file_list->get_file_list(THEME_PATH);
+        $item = $this->get('item');
+        if (!empty($item)) {
+            if (!in_array($item, $theme_list)) {
+                $item = SITE_THEME;
+            }
+        }
+        unset($file_list);
+        $this->dir = THEME_PATH . $item . DS;
         if (file_exists($this->dir . 'config.php')) {
             $this->file_info = include $this->dir . 'config.php';
         }
