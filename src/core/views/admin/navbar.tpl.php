@@ -69,10 +69,9 @@
                             <li><a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a></li>
                             <li><a href="<?php echo url('member/index'); ?>" title="用户中心" target="_blank">用户中心</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#" id="btn-logout" data-toggle="modal" data-target="#modal-confirm" title="退出系统后台">退出系统后台</a></li>
-                            <li role="separator" class="divider"></li>
                         </ul>
                     </li>
+                    <li><a href="#" id="btn-logout" data-toggle="modal" data-target="#modal-confirm" title="退出系统后台">退出</a></li>
                 </ul>
             </div>
         </div>
