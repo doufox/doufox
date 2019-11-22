@@ -21,6 +21,9 @@
                     <li <?php if ($this->current_nav == 'member') echo 'class="active"'; ?>>
                         <a href="<?php echo url('admin/member'); ?>">会员</a>
                     </li>
+                    <li <?php if ($this->current_nav == 'plugin') echo 'class="active"'; ?>>
+                        <a href="<?php echo url('admin/plugin'); ?>">插件</a>
+                    </li>
                     <li <?php if ($this->current_nav == 'config') echo 'class="active"'; ?>>
                         <a href="<?php echo url('admin/config'); ?>">设置</a>
                     </li>
@@ -42,7 +45,6 @@
                     <li class="dropdown <?php if ($this->current_nav == 'manage') echo 'active'; ?>">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">管理&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?php echo url('admin/plugin'); ?>">插件管理</a></li>
                             <li><a href="<?php echo url('admin/account'); ?>">后台账号</a></li>
                             <li><a href="<?php echo url('admin/template'); ?>">模板主题</a></li>
                             <li><a href="<?php echo url('admin/attachment'); ?>">附件管理</a></li>

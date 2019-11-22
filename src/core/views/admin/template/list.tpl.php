@@ -36,6 +36,7 @@
                                         <p>模板描述</p>
                                         <p>
                                             <a href="<?php echo url('admin/template/item', array('item' => $v['path'])); ?>" class="btn btn-primary btn-sm" role="button">详情</a>
+                                            <a href="<?php echo url('admin/template/item', array('item' => $v['path'])); ?>" class="btn btn-primary btn-sm" role="button">详情</a>
                                             <a href="<?php echo url('index', array('template' => $v['path'])); ?>" class="btn btn-default btn-sm" role="button">预览</a>
                                             <a href="#" class="btn btn-danger btn-sm" role="button">删除</a>
                                         </p>
