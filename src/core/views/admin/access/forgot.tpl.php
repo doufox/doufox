@@ -55,7 +55,7 @@
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <span>管理员登陆</span>
+                <span>重置密码，开发中</span>
                 <span class="pull-right">DouFox 网站管理系统</span>
             </div>
             <div class="panel-body">
@@ -64,13 +64,16 @@
                         <form method="POST" action="">
                             <div class="form-group">
                                 <label for="username" class="control-label">账号</label>
-                                <input name="username" id="username" type="text" class="form-control" placeholder="输入账号" required maxlength="20" autocomplete="off">
+                                <input name="username" id="username" type="text" class="form-control" placeholder="输入登录账号" required maxlength="20" autocomplete="off">
                             </div>
                             <div class="form-group">
-                                <label for="password" class="control-label">密码</label>
-                                <span class="pull-right"><a href="#" title="正在开发中">忘记密码</a></span>
-                                <input name="password" id="password" type="password" class="form-control" placeholder="输入密码" maxlength="20" autocomplete="off" required />
-                            </div><?php if ($isneedcode) {?>
+                                <label for="email" class="control-label">注册邮箱</label>
+                                <input name="email" id="email" type="email" class="form-control" placeholder="输入注册邮箱" autocomplete="off" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="control-label">手机号</label>
+                                <input name="phone" id="phone" type="text" class="form-control" placeholder="11 位手机号" maxlength="11" autocomplete="off" required />
+                            </div>
                             <div class="input-group">
                                 <input type="text" name="code" class="form-control captcha" placeholder="验证码" maxlength="4" autocomplete="off" />
                                 <span class="input-group-btn">
@@ -79,19 +82,17 @@
                                     </button>
                                 </span>
                             </div>
-                            <?php }?>
 
                             <div class="form-group">
-                                <a href="#" title="正在开发中">手机验证码登录</a>
+                                <a href="<?php echo url('admin/login/index');?>">已有账号登录</a>
                             </div>
-                            <button name="submit" type="submit" class="btn btn-primary btn-block">登录</button>
+                            <button name="submit" type="submit" class="btn btn-primary btn-block">提交</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <?php if ($isneedcode) {?>
     <script type="text/javascript">
         (function() {
             function checkcode_init() {
@@ -101,7 +102,6 @@
             document.getElementById("checkcode").onclick = checkcode_init;
         })();
     </script>
-    <?php }?>
 
 </body>
 

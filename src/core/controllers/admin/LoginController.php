@@ -47,7 +47,25 @@ class LoginController extends Admin
             }
         }
 
-        include $this->admin_view('login');
+        include $this->admin_view('access/login');
+    }
+
+    public function forgotAction()
+    {
+        // if ($this->session->get('user_id')) {
+        //     $this->session->delete('user_id');
+        // }
+        // $this->show_message('已经退出登录', 1, url('admin/login'));
+        include $this->admin_view('access/forgot');
+    }
+
+    public function pswdresetAction()
+    {
+        // if ($this->session->get('user_id')) {
+        //     $this->session->delete('user_id');
+        // }
+        // $this->show_message('已经退出登录', 1, url('admin/login'));
+        include $this->admin_view('access/resetpswd');
     }
 
     public function logoutAction()
