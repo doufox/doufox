@@ -146,7 +146,7 @@ class MemberController extends Admin
             $this->show_message('会员不存在');
         }
 
-        $modelist = $this->member->from('model')->where('typeid=1')->select();
+        $modelist = $this->member->from('contentmodel')->where('typeid=1')->select();
 
         // 删除会员
         $this->member->delete('id=' . $id);

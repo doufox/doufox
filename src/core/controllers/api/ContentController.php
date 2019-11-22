@@ -63,7 +63,7 @@ class ContentController extends Api
     {
         $catid = (int) $this->get('catid');
         $modelid = (int) $this->get('modelid');
-        $model = get_cache('model');
+        $model = get_cache('contentmodel');
         if (!isset($model[$modelid])) {
             $this->show_message('模型不存在');
         }
@@ -135,7 +135,7 @@ class ContentController extends Api
 
         $catid = $data['catid'];
         $modelid = $data['modelid'];
-        $model = get_cache('model');
+        $model = get_cache('contentmodel');
         if (!isset($model[$modelid])) {
             $this->show_message('模型不存在');
         }
@@ -204,7 +204,7 @@ class ContentController extends Api
         $catid = $catid ? $catid : (int) $this->get('catid');
         $all = $all ? $all : $this->get('all');
         $back = HTTP_REFERER;
-        $model = get_cache('model');
+        $model = get_cache('contentmodel');
 
         $this->content->del($id, $catid);
         $all or $this->show_message('操作成功', 1, $back);

@@ -281,7 +281,7 @@ class view
             // show optional fields
             $model = null;
             if ($table == $db->prefix . 'content') {
-                $models = get_cache('model');
+                $models = get_cache('contentmodel');
                 if (isset($fields['catid']) && $fields['catid'] && isset($cat) && $cat) {
                     $model = $models[$cat['modelid']];
                 } elseif (isset($fields['modelid']) && $fields['modelid']) {

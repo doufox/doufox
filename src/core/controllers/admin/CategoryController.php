@@ -19,7 +19,8 @@ class CategoryController extends Admin
             }
         }
 
-        $models = get_cache('model');
+        $content_models = get_cache('contentmodel');
+        $page_models = get_cache('pagemodel');
         $tree = core::load_class('tree');
         $tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
         $tree->nbsp = '&nbsp;&nbsp;&nbsp;';
@@ -27,18 +28,23 @@ class CategoryController extends Admin
         $result = $this->category->order('listorder ASC')->select();
         // 栏目类型
         $types = array(
-            1 => '',
-            2 => '<font color="blue">单页</font>',
-            3 => '<font color="red">链接</font>',
-            4 => '<font color="green">独立单页</font>',
+            1 => '', // 内容模型
+            2 => '', // 单页模型
+            3 => '<font color="red">链接类型</font>',
+            4 => '<font color="green">自定义网页</font>',
         );
         if (!empty($result)) {
             foreach ($result as $r) {
-                $r['modelname'] = @$models[$r['modelid']]['modelname']; // 读取模型
+                $r['typename'] = $types[$r['typeid']]; // 栏目类型
+                if ($r['typeid'] == 1) {
+                    $r['typename'] = @$content_models[$r['modelid']]['modelname']; // 读取模型
+                } else if ($r['typeid'] == 2) {
+                    $r['typename'] = @$page_models[$r['modelid']]['modelname']; // 读取模型
+                }
+
                 $r['manage_edit'] = '<a href="' . url('admin/category/edit', array('catid' => $r['catid'])) . '">编辑</a>';
                 $r['manage_add'] = '<a href="' . url('admin/category/add', array('catid' => $r['catid'])) . '" >添加子栏目</a>';
                 $r['manage_del'] = '<a href="#" class="category-btn-delete" name="删除栏目" data-id="' . $r['catid'] . '" data-name="' . $r['catname'] . '">删除</a>';
-                $r['typename'] = $types[$r['typeid']]; // 栏目类型
                 $r['isdisplay'] = $r['ismenu'] ? '是' : '<font color="blue">否</font>';
                 $r['catname'] = "<a href='$r[url]' target='_blank'>" . $r['catname'] . "</a>";
                 $r['manage_content'] = '<a href="' . url('admin/content/index', array('catid' => $r['catid'])) . '" >' . $r['items'] . '</a>';
@@ -51,7 +57,7 @@ class CategoryController extends Admin
             <td>\$catid</td>
             <td>\$spacer\$catname</td>
             <td>\$catdir</td>
-            <td>\$typename\$modelname</td>
+            <td>\$typename</td>
             <td>\$manage_content</td>
             <td>\$isdisplay</td>
             <td>\$manage_edit \$manage_add \$manage_del</td>
@@ -133,10 +139,11 @@ class CategoryController extends Admin
                 $this->show_message($this->getCacheCode('category') . '添加成功', 1, url('admin/category/index'));
             }
         }
-        $model = get_cache('model');
+        $content_model = get_cache('contentmodel');
+        $page_model = get_cache('pagemodel');
         $catdata = $this->category->order('listorder ASC')->select();
         $catid = (int) $this->get('catid');
-        $json_m = json_encode($model);
+        $json_m = json_encode($content_model + $page_model);
 
         $json_model = $json_m ? $json_m : '""';
         $add = 1;
@@ -190,9 +197,10 @@ class CategoryController extends Admin
                 $this->show_message('操作失败');
             }
         }
-        $model = get_cache('model');
+        $content_model = get_cache('contentmodel');
+        $page_model = get_cache('pagemodel');
         $catdata = $this->category->order('listorder ASC')->select();
-        $json_m = json_encode($model);
+        $json_m = json_encode($content_model + $page_model);
 
         $json_model = $json_m ? $json_m : '""';
         $tree = core::load_class('tree');
@@ -235,13 +243,13 @@ class CategoryController extends Admin
     public function cacheAction($show = 0)
     {
         $this->category->repair(); // 递归修复栏目数据
-        $model = get_cache('model');
+        $model = get_cache('contentmodel');
         $data = $this->category->order('listorder ASC')->select();
         $category = $category_dir = array();
         foreach ($data as $t) {
             $catid = $t['catid'];
             $category[$catid] = $t;
-            if ($t['typeid'] == 1) {
+            if ($t['typeid'] == 1 || $t['typeid'] == 4) {
                 $category[$catid]['tablename'] = $tablename = $model[$t['modelid']]['tablename'];
                 $category[$catid]['modelname'] = $model[$t['modelid']]['modelname'];
             }

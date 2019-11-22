@@ -7,6 +7,7 @@ class ModelController extends Admin
     protected $modelType; // 模型类型
     protected $typeid;
     protected $modelTypeName;
+    protected $modelCacheName;
 
     public function __construct()
     {
@@ -15,15 +16,24 @@ class ModelController extends Admin
             1 => 'content', // 内容模型表
             2 => 'member',  // 会员模型表
             3 => 'form',    // 表单模型表
+            4 => 'page',    // 单页模型表
         );
         $this->modelTypeName = array(
             1 => '内容模型',
             2 => '会员模型',
             3 => '表单模型',
+            4 => '单页模型',
         );
         $this->typeid = $this->get('typeid') ? $this->get('typeid') : 1;
         if (!isset($this->modelType[$this->typeid])) {
             $this->show_message('模型类型不存在');
+        }
+        if ($this->typeid == 1) {
+            $this->modelCacheName = 'contentmodel';
+        } else if ($this->typeid == 2 || $this->typeid == 3) {
+            $this->modelCacheName = $this->modelType[$this->typeid] . 'model';
+        } else if ($this->typeid == 4) {
+            $this->modelCacheName = 'pagemodel';
         }
         $this->_model = core::load_model('model');
     }
@@ -58,6 +68,7 @@ class ModelController extends Admin
             $list = $this->post('listtpl') ? $this->post('listtpl') : 'list_' . $tablename . '.html';
             $show = $this->post('showtpl') ? $this->post('showtpl') : 'show_' . $tablename . '.html';
             $search = $this->post('searchtpl') ? $this->post('searchtpl') : 'search_' . $tablename . '.html';
+            $pagetpl = $this->post('pagetpl') ? $this->post('pagetpl') : 'page.html';
             $tablename = $this->modelType[$this->typeid] . '_' . $tablename;
             if ($this->_model->is_table_exists($tablename)) {
                 $this->show_message('数据表名已经存在');
@@ -70,6 +81,7 @@ class ModelController extends Admin
                 'listtpl' => $list,
                 'showtpl' => $show,
                 'searchtpl' => $search,
+                'pagetpl' => $pagetpl,
                 'typeid' => $this->typeid,
             );
             if ($modelid = $this->_model->set(0, $data)) {
@@ -79,7 +91,7 @@ class ModelController extends Admin
                         $this->_model->set($id, array('joinid' => $modelid));
                     }
                 }
-                $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/index', array('typeid' => $this->typeid)));
+                $this->show_message($this->getCacheCode($this->modelCacheName) . '操作成功', 1, url('admin/model/index', array('typeid' => $this->typeid)));
             } else {
                 $this->show_message('添加失败');
             }
@@ -105,17 +117,19 @@ class ModelController extends Admin
                 $this->show_message('该模型不存在！');
             }
 
-            $category = $this->post('categorytpl');
-            $list = $this->post('listtpl');
-            $show = $this->post('showtpl');
-            $search = $this->post('searchtpl');
+            // $categorytpl = $this->post('categorytpl');
+            // $listtpl = $this->post('listtpl');
+            // $showtpl = $this->post('showtpl');
+            // $searchtpl = $this->post('searchtpl');
+            // $pagetpl = $this->post('pagetpl');
             $update = array(
-                'listtpl' => $list,
-                'showtpl' => $show,
                 'joinid' => $this->post('joinid'),
+                'listtpl' => $this->post('listtpl'),
+                'showtpl' => $this->post('showtpl'),
                 'modelname' => $this->post('modelname'),
-                'categorytpl' => $category,
-                'searchtpl' => $search,
+                'categorytpl' => $this->post('categorytpl'),
+                'searchtpl' => $this->post('searchtpl'),
+                'pagetpl' => $this->post('pagetpl'),
             );
             $this->_model->set($modelid, $update);
             if ($this->typeid != 3) {
@@ -125,7 +139,7 @@ class ModelController extends Admin
                     $this->_model->set($id, array('joinid' => $modelid));
                 }
             }
-            $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/index/', array('typeid' => $this->typeid)));
+            $this->show_message($this->getCacheCode($this->modelCacheName) . '操作成功', 1, url('admin/model/index/', array('typeid' => $this->typeid)));
         }
         $modelid = (int) $this->get('modelid');
         $formmodel = array();
@@ -158,11 +172,10 @@ class ModelController extends Admin
         }
 
         $this->_model->del($data);
-        $name = $this->typeid == 1 ? 'model' : $this->modelType[$this->typeid] . 'model';
-        $data = get_cache($name);
+        $data = get_cache($this->modelCacheName);
         unset($data[$mid]);
-        set_cache($name, $data);
-        $this->show_message($this->getCacheCode('model') . '删除成功', 1, url('admin/model/index/', array('typeid' => $this->typeid)));
+        set_cache($this->modelCacheName, $data);
+        $this->show_message($this->getCacheCode($this->modelCacheName) . '删除成功', 1, url('admin/model/index/', array('typeid' => $this->typeid)));
     }
 
     /**
@@ -185,7 +198,7 @@ class ModelController extends Admin
                     $field->update(array('listorder' => $value), 'fieldid=' . $id);
                 }
             }
-            $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/fields', array('modelid' => $modelid, 'typeid' => $this->typeid)));
+            $this->show_message($this->getCacheCode($this->modelCacheName) . '操作成功', 1, url('admin/model/fields', array('modelid' => $modelid, 'typeid' => $this->typeid)));
         }
         $setting = string2array($data['setting']);
         $baseFields = $setting['default'];
@@ -262,7 +275,7 @@ class ModelController extends Admin
             );
             //添加字段入库
             if ($field->set(0, $data)) {
-                $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/fields/', array('modelid' => $modelid, 'typeid' => $this->typeid)), 3, 1, 1);
+                $this->show_message($this->getCacheCode($this->modelCacheName) . '操作成功', 1, url('admin/model/fields/', array('modelid' => $modelid, 'typeid' => $this->typeid)), 3, 1, 1);
             } else {
                 $this->show_message('添加失败');
             }
@@ -321,7 +334,7 @@ class ModelController extends Admin
             );
             //字段入库
             if ($field->set($fieldid, $data)) {
-                $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/fields/', array('typeid' => $this->typeid, 'modelid' => $modelid)));
+                $this->show_message($this->getCacheCode($this->modelCacheName) . '操作成功', 1, url('admin/model/fields/', array('typeid' => $this->typeid, 'modelid' => $modelid)));
             } else {
                 $this->show_message('修改失败');
             }
@@ -358,7 +371,7 @@ class ModelController extends Admin
         if ($this->isPostForm()) {
             $setting['default'][$name] = $this->post('data');
             $this->_model->update(array('setting' => array2string($setting)), 'modelid=' . $modelid);
-            $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/fields/', array('typeid' => $this->typeid, 'modelid' => $modelid)));
+            $this->show_message($this->getCacheCode($this->modelCacheName) . '操作成功', 1, url('admin/model/fields/', array('typeid' => $this->typeid, 'modelid' => $modelid)));
         }
 
         $typeid = $this->typeid;
@@ -402,7 +415,7 @@ class ModelController extends Admin
 
         $disable = $data['disabled'] == 1 ? 0 : 1;
         $field->update(array('disabled' => $disable), 'fieldid=' . $fieldid);
-        $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/fields/', array('typeid' => $this->typeid, 'modelid' => $data['modelid'])));
+        $this->show_message($this->getCacheCode($this->modelCacheName) . '操作成功', 1, url('admin/model/fields/', array('typeid' => $this->typeid, 'modelid' => $data['modelid'])));
     }
 
     /**
@@ -422,7 +435,7 @@ class ModelController extends Admin
         }
 
         if ($field->del($data)) {
-            $this->show_message($this->getCacheCode('model') . '删除成功', 1, url('admin/model/fields/', array('typeid' => $this->typeid, 'modelid' => $data['modelid'])));
+            $this->show_message($this->getCacheCode($this->modelCacheName) . '删除成功', 1, url('admin/model/fields/', array('typeid' => $this->typeid, 'modelid' => $data['modelid'])));
         } else {
             $this->show_message('删除失败');
         }
@@ -497,11 +510,10 @@ class ModelController extends Admin
                 $data[$id]['setting'] = $setting;
                 $data[$id]['content'] = $setting['default'];
             }
-            //保存到缓存文件中
-            $name = $typeid == 1 ? 'model' : $c . 'model';
-            set_cache($name, $data);
+            // 保存到缓存文件中
+            set_cache($c . 'model', $data);
         }
-        //缓存关联表单被关联的模型
+        // 缓存关联表单被关联的模型
         $join = array();
         $data = $this->_model->where('typeid=3')->select();
         if ($data) {
@@ -529,7 +541,7 @@ class ModelController extends Admin
         $setting = string2array($data['setting']);
         $setting['disable'] = $setting['disable'] == 1 ? 0 : 1;
         $this->_model->update(array('setting' => array2string($setting)), 'modelid=' . $modelid);
-        $this->show_message($this->getCacheCode('model') . '操作成功', 1, url('admin/model/index', array('typeid' => $this->typeid)));
+        $this->show_message($this->getCacheCode($this->modelCacheName) . '操作成功', 1, url('admin/model/index', array('typeid' => $this->typeid)));
     }
 
 }

@@ -34,7 +34,7 @@ class IndexController extends Api
             $this->response(401, null, '内容正在审核中不能查看！');
             exit();
         }
-        $model = get_cache('model');
+        $model = get_cache('contentmodel');
         if (!isset($model[$data['modelid']]) || empty($model[$data['modelid']])) {
             $this->response(401, null, '内容模型不存在！');
             exit();

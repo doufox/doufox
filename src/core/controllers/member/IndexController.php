@@ -18,7 +18,7 @@ class IndexController extends Member
         }
         // 判断审核
         $this->form = $this->getFormMember();
-        $this->cmodel = get_cache('model');
+        $this->cmodel = get_cache('contentmodel');
         $contents = $this->nav = array();
         if ($this->cmodel) {
             foreach ($this->cmodel as $t) {
@@ -43,7 +43,7 @@ class IndexController extends Member
     {
         $this->view->assign(array(
             'member_index' => 1,
-            'model' => get_cache('model'),
+            'model' => $this->cmodel,
             'form' => $this->getFormMember(),
             'site_keywords' => $this->site_config['SITE_KEYWORDS'],
             'site_description' => $this->site_config['SITE_DESCRIPTION'],

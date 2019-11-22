@@ -10,6 +10,7 @@
                     <a class="list-group-item <?php if ($typeid == $key) {echo 'active';} ?>" href="<?php echo url('admin/model/index', array('typeid' => $key)); ?>"><?php echo $value; ?></a>
                 <?php } ?>
                 <a class="list-group-item" href="<?php echo url('admin/model/add', array('typeid' => $typeid)); ?>">添加<?php echo $modelname ? $modelname : '模型'; ?></a>
+                <a class="list-group-item" href="<?php echo url('admin/model/cache'); ?>">更新缓存</a>
             </div>
         </div>
     </div>

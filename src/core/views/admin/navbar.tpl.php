@@ -33,6 +33,7 @@
                             <li><a href="<?php echo url('admin/model', array('typeid' => 1)); ?>">内容模型</a></li>
                             <li><a href="<?php echo url('admin/model', array('typeid' => 2)); ?>">会员模型</a></li>
                             <li><a href="<?php echo url('admin/model', array('typeid' => 3)); ?>">表单模型</a></li>
+                            <li><a href="<?php echo url('admin/model', array('typeid' => 4)); ?>">单页模型</a></li>
                             <?php if (is_array($this->menu_model)) { ?>
                                 <li role="separator" class="divider"></li>
                                 <?php foreach ($this->menu_model as $t) { ?>
