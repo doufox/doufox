@@ -55,7 +55,7 @@ class IndexController extends Controller
             ));
             $this->view->display($cat['child'] == 1 ? $cat['categorytpl'] : $cat['listtpl']);
         } elseif ($cat['typeid'] == 2) {
-            // 单网页
+            // 内部单页
             $this->view->display($cat['pagetpl']);
         } else {
             // 外部链接
@@ -72,7 +72,7 @@ class IndexController extends Controller
         $page = $page ? $page : 1;
         $id = (int) $this->get('id');
         $data = $this->content->find($id);
-        $model = get_cache('model');
+        $model = get_cache('contentmodel');
         if (empty($data)) {
             header('HTTP/1.1 404 Not Found');
             $this->show_message('不存在此内容！');
@@ -206,7 +206,7 @@ class IndexController extends Controller
             }
 
             $modelid = $this->category_cache[$catid]['modelid'];
-            $model = get_cache('model');
+            $model = get_cache('contentmodel');
             if (!isset($model[$modelid])) {
                 $this->show_message('模型不存在');
             }

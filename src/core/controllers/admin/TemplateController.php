@@ -9,14 +9,38 @@ class TemplateController extends Admin
     public function __construct()
     {
         parent::__construct();
-        $this->dir = THEME_PATH_D . SITE_THEME . DS;
-        if (file_exists($this->dir . 'config.php')) {
-            $this->file_info = include $this->dir . 'config.php';
-        }
     }
 
     public function indexAction()
     {
+        $file_list = core::load_class('file_list');
+        $path_list = $file_list->get_file_list(THEME_PATH);
+        $list = array();
+        foreach ($path_list as $x) {
+            $list[] = array(
+                'path' => $x,
+                'image' => THEME_DIR . DS . $x . DS . 'preview.png',
+            );
+        }
+        unset($file_list, $path_list);
+        include $this->admin_view('template/list');
+    }
+
+    public function itemAction()
+    {
+        $file_list = core::load_class('file_list');
+        $theme_list = $file_list->get_file_list(THEME_PATH);
+        $item = $this->get('item');
+        if (!empty($item)) {
+            if (!in_array($item, $theme_list)) {
+                $item = SITE_THEME;
+            }
+        }
+        unset($file_list);
+        $this->dir = THEME_PATH . $item . DS;
+        if (file_exists($this->dir . 'config.php')) {
+            $this->file_info = include $this->dir . 'config.php';
+        }
         $dir = $this->get('dir') ? urldecode($this->get('dir')) : '';
         $dir = str_replace(DS . DS, DS, $dir);
         $filepath = $this->dir . $dir;
@@ -30,11 +54,15 @@ class TemplateController extends Admin
         } else {
             $top_url = url('admin/template', array('dir' => urldecode(dirname($dir) . DS)));
         }
-        include $this->admin_view('template/list');
+        include $this->admin_view('template/item');
     }
 
     public function updatefilenameAction()
     {
+        $this->dir = THEME_PATH . SITE_THEME . DS;
+        if (file_exists($this->dir . 'config.php')) {
+            $this->file_info = include $this->dir . 'config.php';
+        }
         $file_explan = $this->post('file_explan') ? $this->post('file_explan') : '';
         if (!isset($this->file_info['file_explan'])) {
             $this->file_info['file_explan'] = array();
@@ -119,51 +147,17 @@ class TemplateController extends Admin
 
     public function cacheAction($show = 0)
     {
-        // $file_list = core::load_class('file_list');
-        // $list_desktop = $file_list->get_file_list(THEME_PATH_D);
-        // $list_mobile = $file_list->get_file_list(THEME_PATH_M);
-        // foreach ($list_desktop as $file_path) {
-        //     $dir = DATA_PATH . 'cache' . DS . 'theme_desktop'. DS . $file_path . DS;
-        //     $file_list->delete_dir($dir);
-        //     if (!file_exists($dir)) {
-        //         mkdir($dir, 0777, true);
-        //     }
-        // }
-        // foreach ($list_mobile as $file_path) {
-        //     $dir = DATA_PATH . 'cache' . DS . 'theme_mobile'. DS . $file_path . DS;
-        //     $file_list->delete_dir($dir);
-        //     if (!file_exists($dir)) {
-        //         mkdir($dir, 0777, true);
-        //     }
-        // }
-        $this->cacheDesktopAction();
-        $this->cacheMobileAction();
+        $file_list = core::load_class('file_list');
+        $list = $file_list->get_file_list(THEME_PATH);
+        // $list = array_diff($list, array('index.html'));
+        foreach ($list as $file_path) {
+            $dir = DATA_PATH . 'cache' . DS . 'theme' . DS . $file_path . DS;
+            $file_list->delete_dir($dir);
+            if (!file_exists($dir)) {
+                mkdir($dir, 0777, true);
+            }
+        }
+        unset($file_list);
         $show or $this->show_message('缓存更新成功', 1, url('admin/template/index'));
-    }
-
-    public function cacheDesktopAction()
-    {
-        $file_list = core::load_class('file_list');
-        $list_desktop = $file_list->get_file_list(THEME_PATH_D);
-        foreach ($list_desktop as $file_path) {
-            $dir = DATA_PATH . 'cache' . DS . 'theme_desktop' . DS . $file_path . DS;
-            $file_list->delete_dir($dir);
-            if (!file_exists($dir)) {
-                mkdir($dir, 0777, true);
-            }
-        }
-    }
-
-    public function cacheMobileAction()
-    {
-        $file_list = core::load_class('file_list');
-        $list_mobile = $file_list->get_file_list(THEME_PATH_M);
-        foreach ($list_mobile as $file_path) {
-            $dir = DATA_PATH . 'cache' . DS . 'theme_mobile' . DS . $file_path . DS;
-            $file_list->delete_dir($dir);
-            if (!file_exists($dir)) {
-                mkdir($dir, 0777, true);
-            }
-        }
     }
 }

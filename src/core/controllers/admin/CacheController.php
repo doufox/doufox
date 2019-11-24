@@ -25,7 +25,7 @@ class CacheController extends Admin
             ),
             'category_dir.cache.php' => array(
                 'controller' => 'category',
-                'title' => '栏目'
+                'title' => '栏目目录'
             ),
             'formmodel.cache.php' => array(
                 'controller' => 'form',
@@ -37,19 +37,19 @@ class CacheController extends Admin
             ),
             'membermodel.cache.php' => array(
                 'controller' => 'member',
-                'title' => '会员'
+                'title' => '会员模型'
             ),
-            'model.cache.php' => array(
+            'contentmodel.cache.php' => array(
                 'controller' => 'model',
-                'title' => '模型'
+                'title' => '内容模型'
             ),
-            'theme_desktop' => array(
-                'controller' => 'template',
-                'title' => '桌面主题'
+            'pagemodel.cache.php' => array(
+                'controller' => 'model',
+                'title' => '单页模型'
             ),
-            'theme_mobile' => array(
+            'theme' => array(
                 'controller' => 'template',
-                'title' => '移动主题'
+                'title' => '主题'
             ),
             'plugin.cache.php' => array(
                 'controller' => 'plugin',

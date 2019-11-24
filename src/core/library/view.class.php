@@ -14,15 +14,12 @@ class view
     public $compile_dir;
     public $_options = array();
     public $theme;
-    public $viewpath;
 
     public function __construct()
     {
-        $this->view_dir = THEME_CURRENT;
-        $this->viewpath = basename(THEME_CURRENT) . DS;
-        $this->_options['viewpath'] = $this->viewpath;
+        $this->view_dir = THEME_PATH;
         // 编译主题模板生成的文件路径
-        $this->compile_dir = DATA_PATH . 'cache' . DS . THEME_TYPE . DS;
+        $this->compile_dir = DATA_PATH . 'cache' . DS . 'theme' . DS;
     }
 
     /**
@@ -87,7 +84,7 @@ class view
      */
     protected function parse_file_name($file_name = null)
     {
-        return THEME_DIR . DS . $file_name;
+        return SITE_THEME . DS . $file_name;
     }
 
     /**
@@ -284,7 +281,7 @@ class view
             // show optional fields
             $model = null;
             if ($table == $db->prefix . 'content') {
-                $models = get_cache('model');
+                $models = get_cache('contentmodel');
                 if (isset($fields['catid']) && $fields['catid'] && isset($cat) && $cat) {
                     $model = $models[$cat['modelid']];
                 } elseif (isset($fields['modelid']) && $fields['modelid']) {

@@ -376,7 +376,7 @@ class HtmlController extends Admin
             'member' => $this->member_info,
             'site_url' => HTTP_URL,
             'site_name' => $this->site_config['SITE_NAME'],
-            'site_template' => HTTP_URL . basename(THEME_PATH_D) . '/',
+            'site_template' => HTTP_URL . THEME_DIR . '/' . SITE_THEME . '/',
         ));
         $this->view->display($category['showtpl']);
 

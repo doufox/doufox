@@ -1,7 +1,7 @@
 <?php return array (
   'file_explan' => 
   array (
-    'data|theme|default|' => 
+    'theme|default|' => 
     array (
       'css' => '样式',
       'img' => '图片',
@@ -31,11 +31,11 @@
       'show_product.html' => '产品内容展示模板',
       'sidebar.html' => '内页左侧模板',
     ),
-    'data|theme|default|css|' => 
+    'theme|default|css|' => 
     array (
       'style.css' => '公共样式',
     ),
-    'data|theme|default|member|' => 
+    'theme|default|member|' => 
     array (
       'content_add.html' => '添加内容',
       'content_list.html' => '内容列表',

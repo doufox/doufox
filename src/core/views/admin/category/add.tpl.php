@@ -84,7 +84,7 @@
                                         <th><font color="red">*</font>栏目类型：</th>
                                         <td>
                                             <label class="label-group"><input type="radio" value="1" name="data[typeid]" <?php if ($data[typeid]==1) { ?>checked<?php } ?> onClick="settype(1)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>内部栏目</label>
-                                            <label class="label-group"><input type="radio" value="2" name="data[typeid]" <?php if ($data[typeid]==2) { ?>checked<?php } ?> onClick="settype(2)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>单页</label>
+                                            <label class="label-group"><input type="radio" value="2" name="data[typeid]" <?php if ($data[typeid]==2) { ?>checked<?php } ?> onClick="settype(2)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>内部单页</label>
                                             <label class="label-group"><input type="radio" value="3" name="data[typeid]" <?php if ($data[typeid]==3) { ?>checked<?php } ?> onClick="settype(3)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>链接</label>
                                             <label class="label-group"><input type="radio" value="4" name="data[typeid]" <?php if ($data[typeid]==4) { ?>checked<?php } ?> onClick="settype(4)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>独立单页(开发中)</label>
                                         </td>
@@ -103,7 +103,7 @@
                                         <td>
                                             <select class="form-control" onChange="change_tpl(this.value)" id="modelid" name="data[modelid]" <?php if ($catid && !$add) { ?>disabled<?php } ?>>
                                                 <option value="">==选择内容模型==</option>
-                                                <?php if (is_array($model)) { foreach ($model as $t) { ?>
+                                                <?php if (is_array($content_model)) { foreach ($content_model as $t) { ?>
                                                 <option value="<?php echo $t['modelid']; ?>" <?php if ($t['modelid']==$data['modelid']) { ?>selected<?php } ?>><?php echo $t['modelname']; ?></option>
                                                 <?php } } ?>
                                             </select>
@@ -145,18 +145,23 @@
                             <table width="100%" class="type_2 table_form" style="display:none;">
                                 <tbody>
                                     <tr>
-                                        <th width="100">单页模板：</th>
-                                        <td id="show_template">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" size="30" value="<?php echo $data['pagetpl']; ?>" name="data[pagetpl]" id="pagetpl">
-                                                <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-default" onClick="showImageUpload('image', 'gallery')">选择模板(开发中)</button>
-                                                </span>
-                                            </div>
-                                            
+                                        <th width="100"><font color="red">*</font>页面模型：</th>
+                                        <td>
+                                            <select class="form-control" onChange="change_tpl(this.value)" name="data[modelid]" <?php if ($catid && !$add) { ?>disabled<?php } ?>>
+                                                <option value="">==选择页面模型==</option>
+                                                <?php if (is_array($page_model)) { foreach ($page_model as $t) { ?>
+                                                <option value="<?php echo $t['modelid']; ?>" <?php if ($t['modelid']==$data['modelid']) { ?>selected<?php } ?>><?php echo $t['modelname']; ?></option>
+                                                <?php } } ?>
+                                            </select>
+                                            <div class="show-tips">只有内部单页才能选择内容模型</div>
                                         </td>
                                     </tr>
-
+                                    <tr>
+                                        <th width="100">单页模板：</th>
+                                        <td id="show_template">
+                                            <input type="text" class="form-control" size="30" value="<?php echo $data['pagetpl']; ?>" name="data[pagetpl]" id="pagetpl">
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <th><font color="red">*</font>单页面内容：</th>
                                         <td>
@@ -268,11 +273,13 @@
             $("#listtpl").val(data[mid]['listtpl']);
             $("#showtpl").val(data[mid]['showtpl']);
             $("#searchtpl").val(data[mid]['searchtpl']);
+            $("#pagetpl").val(data[mid]['pagetpl']);
         } else {
             $("#categorytpl").val("");
             $("#listtpl").val("");
             $("#showtpl").val("");
             $("#searchtpl").val("");
+            $("#pagetpl").val("");
         }
     }
     settype(<?php echo $data[typeid]; ?>);

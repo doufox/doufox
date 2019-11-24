@@ -21,6 +21,9 @@
                     <li <?php if ($this->current_nav == 'member') echo 'class="active"'; ?>>
                         <a href="<?php echo url('admin/member'); ?>">会员</a>
                     </li>
+                    <li <?php if ($this->current_nav == 'plugin') echo 'class="active"'; ?>>
+                        <a href="<?php echo url('admin/plugin'); ?>">插件</a>
+                    </li>
                     <li <?php if ($this->current_nav == 'config') echo 'class="active"'; ?>>
                         <a href="<?php echo url('admin/config'); ?>">设置</a>
                     </li>
@@ -30,6 +33,7 @@
                             <li><a href="<?php echo url('admin/model', array('typeid' => 1)); ?>">内容模型</a></li>
                             <li><a href="<?php echo url('admin/model', array('typeid' => 2)); ?>">会员模型</a></li>
                             <li><a href="<?php echo url('admin/model', array('typeid' => 3)); ?>">表单模型</a></li>
+                            <li><a href="<?php echo url('admin/model', array('typeid' => 4)); ?>">单页模型</a></li>
                             <?php if (is_array($this->menu_model)) { ?>
                                 <li role="separator" class="divider"></li>
                                 <?php foreach ($this->menu_model as $t) { ?>
@@ -42,7 +46,6 @@
                     <li class="dropdown <?php if ($this->current_nav == 'manage') echo 'active'; ?>">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">管理&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?php echo url('admin/plugin'); ?>">插件管理</a></li>
                             <li><a href="<?php echo url('admin/account'); ?>">后台账号</a></li>
                             <li><a href="<?php echo url('admin/template'); ?>">模板主题</a></li>
                             <li><a href="<?php echo url('admin/attachment'); ?>">附件管理</a></li>
@@ -69,10 +72,9 @@
                             <li><a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a></li>
                             <li><a href="<?php echo url('member/index'); ?>" title="用户中心" target="_blank">用户中心</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#" id="btn-logout" data-toggle="modal" data-target="#modal-confirm" title="退出系统后台">退出系统后台</a></li>
-                            <li role="separator" class="divider"></li>
                         </ul>
                     </li>
+                    <li><a href="#" id="btn-logout" data-toggle="modal" data-target="#modal-confirm" title="退出系统后台">退出</a></li>
                 </ul>
             </div>
         </div>

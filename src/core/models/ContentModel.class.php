@@ -108,7 +108,7 @@ class ContentModel extends Model
         }
 
         // 删除关联表单数据
-        $mods = get_cache('model');
+        $mods = get_cache('contentmodel');
         $mod = $mods[$data['modelid']];
         if ($mod['joinid']) {
             $form = get_cache('formmodel');

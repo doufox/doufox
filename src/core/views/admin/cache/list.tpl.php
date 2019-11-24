@@ -19,7 +19,6 @@
                     <a class="btn btn-default btn-xs" href="<?php echo url('admin/cache/update'); ?>">刷新全站缓存</a>
                 </div>
             </div>
-            <div class="panel-body">缓存目录：/data/cache/</div>
             <table class="table table-bordered table-hover" width="100%">
                 <thead>
                     <tr>
@@ -27,7 +26,7 @@
                         <th>类型</th>
                         <th>路径</th>
                         <th>大小</th>
-                        <th>创建时间</th>
+                        <th>生成时间</th>
                         <th>更新时间</th>
                         <th>操作</th>
                     </tr>
@@ -37,7 +36,7 @@
                         <tr>
                             <td><?php echo $v['index']; ?></td>
                             <td><?php echo $v['desc']; ?></td>
-                            <td><?php echo $v['name']; ?></td>
+                            <td>/data/cache/<?php echo $v['name']; ?></td>
                             <td><?php echo $v['size'] ?></td>
                             <td><?php echo $v['ctime']; ?></td>
                             <td><?php echo $v['mtime']; ?></td>
@@ -48,7 +47,7 @@
                     <?php } ?>
                 </tbody>
             </table>
-            <div class="panel-body"></div>
+            <div class="panel-body">缓存目录：/data/cache/</div>
         </div>
     </div>
 </div>

@@ -10,6 +10,7 @@
                     <a class="list-group-item <?php if ($typeid == $key) {echo 'active';} ?>" href="<?php echo url('admin/model/index', array('typeid' => $key)); ?>"><?php echo $value; ?></a>
                 <?php } ?>
                 <a class="list-group-item" href="<?php echo url('admin/model/add', array('typeid' => $typeid)); ?>">添加<?php echo $modelname ? $modelname : '模型'; ?></a>
+                <a class="list-group-item" href="<?php echo url('admin/model/cache'); ?>">更新缓存</a>
             </div>
         </div>
     </div>
@@ -56,7 +57,7 @@
                                         <div class="show-tips">用于拓展内容（如评论，留言等）。</div>
                                     </td>
                                 </tr>
-                            <?php } ?>
+                            <?php } if ($typeid != 4) { ?>
                             <tr>
                                 <th>栏目展示模板：</th>
                                 <td><input class="form-control" type="text" name="categorytpl" value="<?php echo $data['categorytpl']; ?>" size="30" />
@@ -82,6 +83,15 @@
                                     <div class="show-tips">例如：search_news.html。</div>
                                 </td>
                             </tr>
+                            <?php } if ($typeid == 4) { ?>
+                                <tr>
+                                    <th>搜索展示模板：</th>
+                                    <td>
+                                        <input class="form-control" type="text" name="pagetpl" value="<?php echo $data['pagetpl']; ?>" size="30" />
+                                        <div class="show-tips">例如：page.html。</div>
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                     <hr />
