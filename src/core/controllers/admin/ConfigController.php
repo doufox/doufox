@@ -37,7 +37,7 @@ class ConfigController extends Admin
             'SHOW_URL' => '内容页url',
             'SHOW_PAGE_URL' => '内容分页url',
             'HIDE_ENTRY_FILE' => '隐藏入口文件需要服务器配置默认文件，如index.php。当服务器配置的默认文件与程序入口文件一致时，设置才生效',
-            'URL_LIST_TYPE' => '栏目参数形式，ID形式：catid=123，目录形式：catdir=catdir',
+            'URL_LIST_TYPE' => '栏目参数形式，ID形式：catid=123，目录形式：catpath=catpath',
             'RAND_CODE' => '随机代码',
             'WEIXIN_MP_OPENED' => '微信公众号开关',
             'WEIXIN_MP_URL' => '接收来自微信服务器的请求,必须以http://或https://开头',

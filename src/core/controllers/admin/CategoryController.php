@@ -56,7 +56,7 @@ class CategoryController extends Admin
             <td><input name='order_\$catid' type='text' size='1' value='\$listorder' class='input-text-c'></td>
             <td>\$catid</td>
             <td>\$spacer\$catname</td>
-            <td>\$catdir</td>
+            <td>\$catpath</td>
             <td>\$typename</td>
             <td>\$manage_content</td>
             <td>\$isdisplay</td>
@@ -102,14 +102,14 @@ class CategoryController extends Admin
                 $names = explode(chr(13), $names);
                 $y = $n = 0;
                 foreach ($names as $val) {
-                    list($catname, $catdir) = explode('|', $val);
-                    $catdir = $catdir ? $catdir : word2pinyin($catname);
-                    if ($this->category->check_catdir(0, $catdir)) {
-                        $catdir .= rand(0, 9); // 相同目录的添加随机数防止重复
+                    list($catname, $catpath) = explode('|', $val);
+                    $catpath = $catpath ? $catpath : word2pinyin($catname);
+                    if ($this->category->check_catpath(0, $catpath)) {
+                        $catpath .= rand(0, 9); // 相同目录的添加随机数防止重复
                     }
 
                     $data['catname'] = $catname;
-                    $data['catdir'] = $catdir;
+                    $data['catpath'] = $catpath;
                     $catid = $this->category->set(0, $data);
                     if (!is_numeric($catid)) {
                         $n++;
@@ -125,7 +125,7 @@ class CategoryController extends Admin
                     $this->show_message('请填写栏目名称');
                 }
 
-                if ($this->category->check_catdir(0, $data['catdir'])) {
+                if ($this->category->check_catpath(0, $data['catpath'])) {
                     $this->show_message('栏目路径为空或者已经存在');
                 }
 
@@ -185,7 +185,7 @@ class CategoryController extends Admin
             if (empty($data['catname'])) {
                 $this->show_message('请填写栏目名称');
             }
-            if ($this->category->check_catdir($catid, $data['catdir'])) {
+            if ($this->category->check_catpath($catid, $data['catpath'])) {
                 $this->show_message('栏目路径为空或者已经存在');
             }
             $data['typeid'] = $this->post('typeid');
@@ -277,7 +277,7 @@ class CategoryController extends Admin
         foreach ($data as $t) {
             $category[$t['catid']]['url'] = $url = getCaturl($t);
             $this->category->update(array('url' => $url), 'catid=' . $t['catid']);
-            $category_dir[$t['catdir']] = $t['catid'];
+            $category_dir[$t['catpath']] = $t['catid'];
             if ($t['child'] == 0) {
                 $category[$t['catid']]['arrmodelid'][] = $t['modelid'];
             } else {

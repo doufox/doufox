@@ -59,7 +59,7 @@
                                     </tr>
                                     <tr>
                                         <th><font color="red">*</font>栏目目录：</th>
-                                        <td><input type="text" class="form-control" size="30" value="<?php echo $data['catdir']; ?>" name="data[catdir]" id="dir_text"></td>
+                                        <td><input type="text" class="form-control" size="30" value="<?php echo $data['catpath']; ?>" name="data[catpath]" id="dir_text"></td>
                                     </tr>
                                 </tbody>
                                 <tbody>

@@ -29,7 +29,7 @@ return array(
     'SHOW_URL'                => '{dir}/{id}.html', // 内容页url
     'SHOW_PAGE_URL'           => '{dir}/{id}_{page}.html', // 内容分页url
     'HIDE_ENTRY_FILE'         => false, // 当入口文件为服务器设置的默认索引文件（如index.php）时，设置才会生效
-    'URL_LIST_TYPE'           => false, // 栏目参数形式，ID形式：catid=123，目录形式：catdir=catdir
+    'URL_LIST_TYPE'           => false, // 栏目参数形式，ID形式：catid=123，目录形式：catpath=catpath
     'WEIXIN_MP_OPENED'        => false, // 微信公众号开关
     'WEIXIN_MP_URL'           => '', // 接收来自微信服务器的请求,必须以http://或https://开头
     'WEIXIN_MP_TOKEN'         => '', // 微信服务器的验证token,必须为英文或数字，长度为3-32字符

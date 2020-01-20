@@ -27,11 +27,11 @@ class IndexController extends Controller
     public function categoryAction()
     {
         $catid = (int) $this->get('catid');
-        $catdir = $this->get('catdir');
+        $catpath = $this->get('catpath');
         $page = (int) $this->get('page');
         $page = $page ? $page : 1;
-        if ($catdir && empty($catid)) {
-            $catid = $this->category_dir_cache[$catdir];
+        if ($catpath && empty($catid)) {
+            $catid = $this->category_dir_cache[$catpath];
         }
 
         $cat = $this->category_cache[$catid];

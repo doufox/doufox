@@ -138,16 +138,16 @@ class CategoryModel extends Model
     /**
      * 验证栏目路径是否存在
      * @param int $catid
-     * @param string $catdir
+     * @param string $catpath
      * @return boolean
      */
-    public function check_catdir($catid = 0, $catdir)
+    public function check_catpath($catid = 0, $catpath)
     {
-        if (empty($catdir)) {
+        if (empty($catpath)) {
             return true;
         }
 
-        $this->where('catdir=?', $catdir);
+        $this->where('catpath=?', $catpath);
         if ($catid) {
             $this->where('catid<>?', $catid);
         }
