@@ -513,7 +513,8 @@ function getCaturl($data, $page = 0)
     }
     // $catid = is_numeric($data) ? $data : $data['catid'];
     $config = core::get_site_config();
-    if ($data['typeid'] == 3) {
+    if ($data['typeid'] == 3 && $data['redirect'] == 1) {
+        // 直接跳转时使用填写的链接地址，否则使用内部栏目地址
         unset($config);
         return $data['http'];
     }

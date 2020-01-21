@@ -11,8 +11,8 @@
                 <a class="list-group-item" href="<?php echo url('admin/config/url'); ?>">URL设置</a>
                 <a class="list-group-item" href="<?php echo url('admin/config/watermark'); ?>">图片水印</a>
                 <a class="list-group-item" href="<?php echo url('admin/config/weixin'); ?>">微信设置</a>
-                <a class="list-group-item active" href="<?php echo url('admin/config/security'); ?>">安全设置</a>
-                <a class="list-group-item" href="<?php echo url('admin/config/database'); ?>">数据库</a>
+                <a class="list-group-item" href="<?php echo url('admin/config/security'); ?>">安全设置</a>
+                <a class="list-group-item active" href="<?php echo url('admin/config/database'); ?>">数据库</a>
             </div>
         </div>
     </div>
@@ -20,23 +20,36 @@
         <form method="post" action="" class="form-inline">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="panel-title">安全设置</span>
+                    <span class="panel-title">数据库设置</span>
                 </div>
                 <table width="100%" class="table_form table table-bordered">
                     <tr>
-                        <th width="100">后台路径：</th>
-                        <td>
-                            <input class="form-control" type="text" name="data[ADMIN_LOGINPATH]" value="<?php echo $data['ADMIN_LOGINPATH']; ?>" size="30" />
-                            <div class="show-tips"><?php echo $configTips['ADMIN_LOGINPATH']; ?></div>
-                        </td>
+                        <th>类型：</th>
+                        <td>MySQL</td>
                     </tr>
                     <tr>
-                        <th>验证码：</th>
-                        <td>
-                            <label class="label-group"><input name="data[ADMIN_LOGINCODE]" type="radio" value="1" <?php if ($data['ADMIN_LOGINCODE'] == 1) { ?>checked<?php } ?>>打开</label>
-                            <label class="label-group"><input name="data[ADMIN_LOGINCODE]" type="radio" value="0" <?php if ($data['ADMIN_LOGINCODE'] == 0) { ?>checked<?php } ?>>关闭</label>
-                            <div class="show-tips"><?php echo $configTips['ADMIN_LOGINCODE']; ?></div>
-                        </td>
+                        <th width="100">服务器：</th>
+                        <td>aaaaa</td>
+                    </tr>
+                    <tr>
+                        <th width="100">数据库名：</th>
+                        <td>aaaaa</td>
+                    </tr>
+                    <tr>
+                        <th>库名前缀：</th>
+                        <td>doufox_</td>
+                    </tr>
+                    <tr>
+                        <th>字符集：</th>
+                        <td>utf8</td>
+                    </tr>
+                    <tr>
+                        <th width="100">用户名：</th>
+                        <td>aaa</td>
+                    </tr>
+                    <tr>
+                        <th>密码：</th>
+                        <td>***********</td>
                     </tr>
                 </table>
                 <div class="panel-body">

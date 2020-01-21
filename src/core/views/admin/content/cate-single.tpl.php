@@ -111,10 +111,10 @@
                                     <tr>
                                         <th><font color="red">*</font>栏目类型：</th>
                                         <td>
-                                            <label class="label-group"><input type="radio" value="1" name="data[typeid]" <?php if ($data[typeid]==1) { ?>checked<?php } ?> onClick="settype(1)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>内部栏目</label>
-                                            <label class="label-group"><input type="radio" value="2" name="data[typeid]" <?php if ($data[typeid]==2) { ?>checked<?php } ?> onClick="settype(2)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>单页</label>
-                                            <label class="label-group"><input type="radio" value="3" name="data[typeid]" <?php if ($data[typeid]==3) { ?>checked<?php } ?> onClick="settype(3)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>链接</label>
-                                            <label class="label-group"><input type="radio" value="4" name="data[typeid]" <?php if ($data[typeid]==4) { ?>checked<?php } ?> onClick="settype(4)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>独立单页(开发中)</label>
+                                            <label class="label-group"><input type="radio" value="1" name="data[typeid]" <?php if ($data['typeid']==1) { ?>checked<?php } ?> onClick="settype(1)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>内部栏目</label>
+                                            <label class="label-group"><input type="radio" value="2" name="data[typeid]" <?php if ($data['typeid']==2) { ?>checked<?php } ?> onClick="settype(2)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>内部页面</label>
+                                            <label class="label-group"><input type="radio" value="3" name="data[typeid]" <?php if ($data['typeid']==3) { ?>checked<?php } ?> onClick="settype(3)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>外部链接</label>
+                                            <label class="label-group"><input type="radio" value="4" name="data[typeid]" <?php if ($data['typeid']==4) { ?>checked<?php } ?> onClick="settype(4)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>独立单页(开发中)</label>
                                         </td>
                                     </tr>
                                     <tr class="type_3" style="display:none;">

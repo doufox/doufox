@@ -83,20 +83,28 @@
                                     <tr>
                                         <th><font color="red">*</font>栏目类型：</th>
                                         <td>
-                                            <label class="label-group"><input type="radio" value="1" name="data[typeid]" <?php if ($data[typeid]==1) { ?>checked<?php } ?> onClick="settype(1)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>内部栏目</label>
-                                            <label class="label-group"><input type="radio" value="2" name="data[typeid]" <?php if ($data[typeid]==2) { ?>checked<?php } ?> onClick="settype(2)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>内部单页</label>
-                                            <label class="label-group"><input type="radio" value="3" name="data[typeid]" <?php if ($data[typeid]==3) { ?>checked<?php } ?> onClick="settype(3)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>链接</label>
-                                            <label class="label-group"><input type="radio" value="4" name="data[typeid]" <?php if ($data[typeid]==4) { ?>checked<?php } ?> onClick="settype(4)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>独立单页(开发中)</label>
+                                            <label class="label-group"><input type="radio" value="1" name="data[typeid]" <?php if ($data['typeid']==1) { ?>checked<?php } ?> onClick="settype(1)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>内部栏目</label>
+                                            <label class="label-group"><input type="radio" value="2" name="data[typeid]" <?php if ($data['typeid']==2) { ?>checked<?php } ?> onClick="settype(2)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>内部单页</label>
+                                            <label class="label-group"><input type="radio" value="3" name="data[typeid]" <?php if ($data['typeid']==3) { ?>checked<?php } ?> onClick="settype(3)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>外部链接</label>
+                                            <label class="label-group"><input type="radio" value="4" name="data[typeid]" <?php if ($data['typeid']==4) { ?>checked<?php } ?> onClick="settype(4)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>独立单页(开发中)</label>
                                         </td>
                                     </tr>
                                     <tr class="type_3" style="display:none;">
                                         <th><font color="red">*</font>链接地址：</th>
                                         <td><input type="text" class="form-control" size="50" value="<?php echo $data['http']; ?>" name="data[http]"></td>
                                     </tr>
+                                    <tr class="type_3" style="display:none;">
+                                        <th><font color="red">*</font>跳转方式：</th>
+                                        <td>
+                                            <label class="label-group"><input type="radio" <?php if (!isset($data['redirect']) || $data['redirect']==0) { ?>checked<?php } ?> value="0" name="data[redirect]">跳转页确认</label>
+                                            <label class="label-group"><input type="radio" <?php if (isset($data['redirect']) && $data['redirect']==1) { ?>checked<?php } ?> value="1" name="data[redirect]">直接跳转</label>
+                                            <div class="show-tips">在【跳转确认页面】进行URL跳转</div>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
 
-                            <table width="100%" class="type_1 table_form"  style="display:none;">
+                            <table width="100%" class="type_1 table_form" style="display:none;">
                                 <tbody>
                                     <tr>
                                         <th width="100"><font color="red">*</font>内容模型：</th>

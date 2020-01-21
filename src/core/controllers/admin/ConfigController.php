@@ -187,6 +187,23 @@ class ConfigController extends Admin
     }
 
     /**
+     * 数据库设置
+     */
+    public function databaseAction()
+    {
+        // 获取当前配置信息
+        $data = $this->site_config;
+        $configTips = $this->configTips;
+        if ($this->isPostForm()) {
+            // $postdata = $this->post('data');
+            // $this->save_config($postdata);
+            $this->show_message('功能未实现！', 1, url('admin/config/database'));
+        }
+
+        include $this->admin_view('config/database');
+    }
+
+    /**
      * 保存配置
      */
     private function save_config($postdata)
