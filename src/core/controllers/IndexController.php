@@ -57,9 +57,20 @@ class IndexController extends Controller
         } elseif ($cat['typeid'] == 2) {
             // 内部单页
             $this->view->display($cat['pagetpl']);
-        } else {
+        } elseif ($cat['typeid'] == 3) {
             // 外部链接
-            header('Location: ' . $cat['url']);
+            if ($cat['redirect'] == 1) {
+                // 直接跳转
+                header('Location: ' . $cat['url']);
+            } else {
+                // 打开页面跳转确认页
+                $this->view->display('redirect.html');
+            }
+        } else {
+            // 独立页面
+            // print_r($cat);
+            $this->view->display_html($cat['catpath'], $cat['content']);
+            // $this->view->display_html('<div>single page</div><h1>{$site_name} <small>{$catname}</small></h1>');
         }
     }
 
