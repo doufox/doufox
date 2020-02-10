@@ -37,7 +37,7 @@
                 <table width="100%" class="table_form table table-bordered">
                     <tbody>
                         <tr>
-                            <th>URL入口文件：</th>
+                            <th>入口文件</th>
                             <td>
                                 <label class="label-group"><input name="data[HIDE_ENTRY_FILE]" type="radio" value="false" <?php if (!$data['HIDE_ENTRY_FILE']) { ?>checked<?php } ?>>显示</label>
                                 <label class="label-group"><input name="data[HIDE_ENTRY_FILE]" type="radio" value="true" <?php if ($data['HIDE_ENTRY_FILE']) { ?>checked<?php } ?>>隐藏</label>
@@ -45,7 +45,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th width="150">URL显示模式：</th>
+                            <th width="150">显示模式</th>
                             <td>
                                 <label class="label-group"><input name="data[DIY_URL]" type="radio" value="0" <?php if (!$data['DIY_URL']) { ?>checked<?php } ?> onClick="set_url_type();">普通模式</label>
                                 <label class="label-group"><input name="data[DIY_URL]" type="radio" value="1" <?php if ($data['DIY_URL'] == 1) { ?>checked<?php } ?> onClick="set_url_type('diy');">伪静态</label>
@@ -64,37 +64,38 @@
                     </tbody>
                     <tbody class="url-type-diy" style="display:<?php if (!$data['DIY_URL']) { ?>none<?php } ?>">
                         <tr>
-                            <th width="150">栏目URL格式：</th>
+                            <th width="150">栏目页</th>
                             <td>
                                 <input class="form-control" type="text" name="data[LIST_URL]" value="<?php echo $data['LIST_URL']; ?>" size="40" />
-                                <div class="show-tips">参数说明：&nbsp;{dir} 表示栏目目录 ，{id} 表示栏目ID ，{page}表示分页参数</div>
+                                <div class="show-tips">可以使用{catpath}和{catid}组合</div>
                             </td>
                         </tr>
                         <tr>
-                            <th>栏目URL格式(带分页)：</th>
+                            <th>栏目页-分页</th>
                             <td>
                                 <input class="form-control" type="text" name="data[LIST_PAGE_URL]" value="<?php echo $data['LIST_PAGE_URL']; ?>" size="40" />
-                                <div class="show-tips">参数说明：&nbsp;{dir} 表示栏目目录 ，{id} 表示栏目ID ，{page}表示分页参数</div>
+                                <div class="show-tips">可以使用{catpath}、{catid}和{page}组合</div>
                             </td>
                         </tr>
                         <tr>
-                            <th>内容展示页：</th>
+                            <th>内容展示页</th>
                             <td>
                                 <input class="form-control" type="text" name="data[SHOW_URL]" value="<?php echo $data['SHOW_URL']; ?>" size="40" />
-                                <div class="show-tips">参数说明：&nbsp;{dir} 表示栏目目录 ，{id} 表示内容ID ，{page}表示分页参数 备注：&nbsp;{id}必须存在</div>
+                                <div class="show-tips">{id}必须存在，可以使用{catpath}和{id}组合</div>
                             </td>
                         </tr>
                         <tr>
-                            <th>内容展示页(带分页)：</th>
+                            <th>内容展示页-带分页</th>
                             <td>
                                 <input class="form-control" type="text" name="data[SHOW_PAGE_URL]" value="<?php echo $data['SHOW_PAGE_URL']; ?>" size="40" />
-                                <div class="show-tips">参数说明：&nbsp;{dir} 表示栏目目录 ，{id} 表示内容ID ，{page}表示分页参数 备注：&nbsp;{id}必须存在</div>
+                                <div class="show-tips">{id}必须存在，可以使用{catpath}、{id}和{page}组合</div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="panel-body">
                     <button type="submit" name="submit" class="btn btn-default">提交</button>
+                    <div class="show-tips">参数说明：&nbsp;{catpath} 表示栏目目录 ，{catid} 表示栏目ID ，{id} 表示内容ID，{page}表示分页参数</div>
                 </div>
             </div>
         </form>

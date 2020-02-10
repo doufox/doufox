@@ -30,8 +30,8 @@ class CategoryController extends Admin
         $types = array(
             1 => '', // 内容模型
             2 => '', // 单页模型
-            3 => '<font color="red">链接类型</font>',
-            4 => '<font color="green">自定义网页</font>',
+            3 => '<font color="blue">外部链接</font>',
+            4 => '<font color="green">独立单页</font>',
         );
         if (!empty($result)) {
             foreach ($result as $r) {

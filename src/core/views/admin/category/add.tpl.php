@@ -86,7 +86,7 @@
                                             <label class="label-group"><input type="radio" value="1" name="data[typeid]" <?php if ($data['typeid']==1) { ?>checked<?php } ?> onClick="settype(1)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>内部栏目</label>
                                             <label class="label-group"><input type="radio" value="2" name="data[typeid]" <?php if ($data['typeid']==2) { ?>checked<?php } ?> onClick="settype(2)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>内部单页</label>
                                             <label class="label-group"><input type="radio" value="3" name="data[typeid]" <?php if ($data['typeid']==3) { ?>checked<?php } ?> onClick="settype(3)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>外部链接</label>
-                                            <label class="label-group"><input type="radio" value="4" name="data[typeid]" <?php if ($data['typeid']==4) { ?>checked<?php } ?> onClick="settype(4)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>独立单页(开发中)</label>
+                                            <label class="label-group"><input type="radio" value="4" name="data[typeid]" <?php if ($data['typeid']==4) { ?>checked<?php } ?> onClick="settype(4)" <?php if ($catid && !$add) { ?>disabled<?php } ?>>独立单页</label>
                                         </td>
                                     </tr>
                                     <tr class="type_3" style="display:none;">
@@ -153,15 +153,15 @@
                             <table width="100%" class="type_2 table_form" style="display:none;">
                                 <tbody>
                                     <tr>
-                                        <th width="100"><font color="red">*</font>页面模型：</th>
+                                        <th width="100"><font color="red">*</font>单页模型：</th>
                                         <td>
                                             <select class="form-control" onChange="change_tpl(this.value)" name="data[modelid]" <?php if ($catid && !$add) { ?>disabled<?php } ?>>
-                                                <option value="">==选择页面模型==</option>
+                                                <option value="">==选择单页模型==</option>
                                                 <?php if (is_array($page_model)) { foreach ($page_model as $t) { ?>
                                                 <option value="<?php echo $t['modelid']; ?>" <?php if ($t['modelid']==$data['modelid']) { ?>selected<?php } ?>><?php echo $t['modelname']; ?></option>
                                                 <?php } } ?>
                                             </select>
-                                            <div class="show-tips">只有内部单页才能选择内容模型</div>
+                                            <div class="show-tips">只有内部单页才能选择单页模型</div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -171,9 +171,9 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th><font color="red">*</font>单页面内容：</th>
+                                        <th><font color="red">*</font>单页内容：</th>
                                         <td>
-                                        <?php echo content_editor('content', array(0=>$data['content']), array('system'=>1)); ?>
+                                            <?php echo content_editor('content', array(0=>$data['content']), array('system'=>1)); ?>
                                         </td>
                                     </tr>
                                 </tbody>

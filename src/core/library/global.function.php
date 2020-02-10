@@ -485,7 +485,7 @@ function getUrl($data, $page = 0)
     $cat = $cats[$data['catid']];
     unset($cats);
     if ($config['DIY_URL'] && $config['SHOW_URL']) {
-        $data['dir'] = $cat['catpath'];
+        $data['catpath'] = $cat['catpath'];
         $data['page'] = $page;
         $url = !is_numeric($page) || $page > 1 ? preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['SHOW_PAGE_URL']) : preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['SHOW_URL']);
         $url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(safe_replace('\\2'))", $url);
@@ -521,8 +521,8 @@ function getCaturl($data, $page = 0)
 
     if ($config['DIY_URL'] && $config['LIST_URL']) {
         // 禁止默认的动态参数URL，使用自定义URL
-        $data['id'] = $data['catid'];
-        $data['dir'] = $data['catpath'];
+        // $data['catid'] = $data['catid'];
+        // $data['catpath'] = $data['catpath'];
         $data['page'] = $page;
         $url = !is_numeric($page) || $page > 1 ? preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['LIST_PAGE_URL']) : preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['LIST_URL']);
         $url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(safe_replace('\\2'))", $url);
