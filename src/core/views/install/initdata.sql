@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS `doufox_account` (
   KEY `username` (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `doufox_account` (`userid`, `username`, `password`, `roleid`, `realname`, `auth`, `list_size`, `left_width`) VALUES (1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 1, '超级管理员', '', 10, 150);
+INSERT INTO `doufox_account` (`userid`, `username`, `password`, `roleid`, `realname`, `auth`, `list_size`, `left_width`) VALUES
+(1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 1, '超级管理员', '', 10, 150);
 
 DROP TABLE IF EXISTS `doufox_block`;
 CREATE TABLE IF NOT EXISTS `doufox_block` (
@@ -194,7 +195,7 @@ INSERT INTO `doufox_model` (`modelid`, `typeid`, `modelname`, `tablename`, `cate
 (1, 1, '文章模型', 'content_article', 'category_article.html', 'list_article.html', 'show_article.html', 'search.html', 'page.html', 0, 'a:1:{s:7:"default";a:4:{s:5:"title";a:2:{s:4:"name";s:6:"标题";s:4:"show";s:1:"1";}s:8:"keywords";a:2:{s:4:"name";s:9:"关键字";s:4:"show";s:1:"1";}s:5:"thumb";a:2:{s:4:"name";s:9:"缩略图";s:4:"show";s:1:"1";}s:11:"description";a:2:{s:4:"name";s:6:"描述";s:4:"show";s:1:"1";}}}'),
 (2, 1, '产品模型', 'content_product', 'category_product.html', 'list_product.html', 'show_product.html', 'search.html', 'page.html', 0, 'a:1:{s:7:"default";a:4:{s:5:"title";a:2:{s:4:"name";s:6:"标题";s:4:"show";s:1:"1";}s:8:"keywords";a:2:{s:4:"name";s:9:"关键字";s:4:"show";s:1:"1";}s:5:"thumb";a:2:{s:4:"name";s:9:"缩略图";s:4:"show";s:1:"1";}s:11:"description";a:2:{s:4:"name";s:6:"描述";s:4:"show";s:1:"1";}}}'),
 (3, 3, '在线留言', 'form_gestbook', 'form.html', 'list_gestbook.html', 'show_gestbook.html', 'search.html', 'page.html', 0, 'a:1:{s:7:"default";a:5:{s:8:"username";a:2:{s:4:"name";s:9:"用户名";s:4:"show";s:1:"0";}s:9:"listorder";a:2:{s:4:"name";s:12:"排序编号";s:4:"show";s:1:"0";}s:6:"status";a:2:{s:4:"name";s:6:"状态";s:4:"show";s:1:"0";}s:4:"time";a:2:{s:4:"name";s:12:"提交时间";s:4:"show";s:1:"0";}s:2:"ip";a:2:{s:4:"name";s:8:"IP地址";s:4:"show";s:1:"0";}}}'),
-(4, 3, '文章评论', 'form_comment', 'form.html', 'list_comment.html', 'show_comment.html', 'search.html', 'page.html', 0, 'a:1:{s:7:"default";a:5:{s:8:"username";a:2:{s:4:"name";s:9:"用户名";s:4:"show";s:1:"1";}s:9:"listorder";a:2:{s:4:"name";s:12:"排序编号";s:4:"show";s:1:"1";}s:6:"status";a:2:{s:4:"name";s:6:"状态";s:4:"show";s:1:"1";}s:4:"time";a:2:{s:4:"name";s:12:"提交时间";s:4:"show";s:1:"1";}s:2:"ip";a:2:{s:4:"name";s:8:"IP地址";s:4:"show";s:1:"1";}}}');
+(4, 3, '文章评论', 'form_comment', 'form.html', 'list_comment.html', 'show_comment.html', 'search.html', 'page.html', 0, 'a:1:{s:7:"default";a:5:{s:8:"username";a:2:{s:4:"name";s:9:"用户名";s:4:"show";s:1:"1";}s:9:"listorder";a:2:{s:4:"name";s:12:"排序编号";s:4:"show";s:1:"1";}s:6:"status";a:2:{s:4:"name";s:6:"状态";s:4:"show";s:1:"1";}s:4:"time";a:2:{s:4:"name";s:12:"提交时间";s:4:"show";s:1:"1";}s:2:"ip";a:2:{s:4:"name";s:8:"IP地址";s:4:"show";s:1:"1";}}}'),
 (5, 4, '单页模型', 'page_normal', '', '', '', '', 'page.html', 0, '');
 
 DROP TABLE IF EXISTS `doufox_model_field`;
@@ -232,13 +233,13 @@ DROP TABLE IF EXISTS `doufox_plugin`;
 CREATE TABLE IF NOT EXISTS `doufox_plugin`(
     `id` SMALLINT(8) NOT NULL AUTO_INCREMENT,
     `official` TINYINT(1) NOT NULL COMMENT '官方提供',
-    `plugin` VARCHAR(50) NOT NULL '插件文件夹',
-    `name` VARCHAR(50) NOT NULL '插件名称',
-    `version` VARCHAR(100) NOT NULL '插件版本',
-    `url` VARCHAR(255) NOT NULL '插件地址',
-    `description` MEDIUMTEXT NOT NULL '插件描述',
-    `author` VARCHAR(255) NOT NULL '作者',
-    `author_url` VARCHAR(255) NOT NULL '作者地址',
+    `plugin` VARCHAR(50) NOT NULL COMMENT '插件文件夹',
+    `name` VARCHAR(50) NOT NULL COMMENT '插件名称',
+    `version` VARCHAR(100) NOT NULL COMMENT '插件版本',
+    `url` VARCHAR(255) NOT NULL COMMENT '插件地址',
+    `description` MEDIUMTEXT NOT NULL COMMENT '插件描述',
+    `author` VARCHAR(255) NOT NULL COMMENT '作者',
+    `author_url` VARCHAR(255) NOT NULL COMMENT '作者地址',
     `status` TINYINT(1) NOT NULL COMMENT '状态',
     `setting` TEXT COMMENT '配置',
     `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
@@ -246,5 +247,6 @@ CREATE TABLE IF NOT EXISTS `doufox_plugin`(
     PRIMARY KEY(`id`)
 ) ENGINE = MyISAM DEFAULT CHARSET = utf8;
 
-INSERT INTO `doufox_plugin` (`official`, `plugin`, `name`, `version`, `url`, `description`, `author`, `author_url`, `status`) VALUES (1, 'tips', '温馨提示', '1.0', 'https://doufox.com', '内置插件，它会在你管理主页面显示一句温馨的小提示。', 'doufox', 'https://doufox.com', 1);
-INSERT INTO `doufox_plugin` (`official`, `plugin`, `name`, `version`, `url`, `description`, `author`, `author_url`, `status`) VALUES (1, 'helloworld', 'Hello World', '1.0', 'https://doufox.com', '内置插件，它会在你每个管理页面显示一句"Hello World !"。', 'doufox', 'https://doufox.com', 1);
+INSERT INTO `doufox_plugin` (`official`, `plugin`, `name`, `version`, `url`, `description`, `author`, `author_url`, `status`) VALUES
+(1, 'tips', '温馨提示', '1.0', 'https://doufox.com', '内置插件，它会在你管理主页面显示一句温馨的小提示。', 'doufox', 'https://doufox.com', 1),
+(1, 'helloworld', 'Hello World', '1.0', 'https://doufox.com', '内置插件，它会在你每个管理页面显示一句"Hello World !"。', 'doufox', 'https://doufox.com', 1);
