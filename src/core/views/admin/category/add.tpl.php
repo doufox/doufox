@@ -155,10 +155,10 @@
                                     <tr>
                                         <th width="100"><font color="red">*</font>单页模型：</th>
                                         <td>
-                                            <select class="form-control" onChange="change_tpl(this.value)" name="data[modelid]" <?php if ($catid && !$add) { ?>disabled<?php } ?>>
-                                                <option value="">==选择单页模型==</option>
+                                            <select class="form-control" onChange="change_tpl(this.value)" name="data[pagetpl]" <?php if ($catid && !$add) { ?>disabled<?php } ?>>
+                                                <option value="">==选择单页模板==</option>
                                                 <?php if (is_array($page_model)) { foreach ($page_model as $t) { ?>
-                                                <option value="<?php echo $t['modelid']; ?>" <?php if ($t['modelid']==$data['modelid']) { ?>selected<?php } ?>><?php echo $t['modelname']; ?></option>
+                                                <option value="<?php echo $t['pagetpl']; ?>" <?php if ($t['pagetpl']==$data['pagetpl']) { ?>selected<?php } ?>><?php echo $t['modelname']; ?></option>
                                                 <?php } } ?>
                                             </select>
                                             <div class="show-tips">只有内部单页才能选择单页模型</div>

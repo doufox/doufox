@@ -17,50 +17,46 @@
         </div>
     </div>
     <div class="page_content">
-        <form method="post" action="" class="form-inline">
+        <form method="post" action="" class="form-horizontal">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="panel-title">基本设置</span>
                 </div>
-                <table width="100%" class="table_form table table-bordered">
-                    <tr>
-                        <th width="100">网站名称：</th>
-                        <td>
-                            <input class="form-control" type="text" name="data[SITE_NAME]" value="<?php echo $data['SITE_NAME']; ?>" size="30" />
-                            <div class="show-tips"><?php echo $configTips['SITE_NAME']; ?></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>网站头部标语：</th>
-                        <td><input class="form-control" type="text" name="data[SITE_SLOGAN]" value="<?php echo $data['SITE_SLOGAN']; ?>" size="50" />
-                            <div class="show-tips"><?php echo $configTips['SITE_SLOGAN']; ?></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>首页标题：</th>
-                        <td>
-                            <input class="form-control" type="text" name="data[SITE_TITLE]" value="<?php echo $data['SITE_TITLE']; ?>" size="50" />
-                            <div class="show-tips"><?php echo $configTips['SITE_TITLE']; ?></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>关键字：</th>
-                        <td class="y-bg">
-                            <input class="form-control" type="text" name="data[SITE_KEYWORDS]" value="<?php echo $data['SITE_KEYWORDS']; ?>" size="50" />
-                            <div class="show-tips"><?php echo $configTips['SITE_KEYWORDS']; ?></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>网站描述：</th>
-                        <td>
-                            <textarea class="form-control" name="data[SITE_DESCRIPTION]" rows="3" cols="55"><?php echo $data['SITE_DESCRIPTION']; ?></textarea>
-                            <div class="show-tips"><?php echo $configTips['SITE_DESCRIPTION']; ?></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>桌面端主题：</th>
-                        <td>
-                            <select class="form-control" name="data[SITE_THEME]">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="SITE_NAME" class="col-sm-3 col-md-2 control-label">网站名称</label>
+                        <div class="col-sm-9 col-md-10">
+                            <input id="SITE_NAME" class="form-control" type="text" size="30" placeholder="网站名称" name="data[SITE_NAME]" value="<?php echo $data['SITE_NAME']; ?>" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="SITE_SLOGAN" class="col-sm-3 col-md-2 control-label">网站头部标语</label>
+                        <div class="col-sm-9 col-md-10">
+                            <input id="SITE_SLOGAN" class="form-control" type="text" size="50" placeholder="网站头部标语" name="data[SITE_SLOGAN]" value="<?php echo $data['SITE_SLOGAN']; ?>" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="SITE_TITLE" class="col-sm-3 col-md-2 control-label">首页标题</label>
+                        <div class="col-sm-9 col-md-10">
+                            <input id="SITE_TITLE" class="form-control" type="text" size="50" placeholder="网站首页SEO标题" name="data[SITE_TITLE]" value="<?php echo $data['SITE_TITLE']; ?>" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="SITE_KEYWORDS" class="col-sm-3 col-md-2 control-label">关键字</label>
+                        <div class="col-sm-9 col-md-10">
+                            <input id="SITE_KEYWORDS" class="form-control" type="text" size="50" placeholder="网站SEO关键字" name="data[SITE_KEYWORDS]" value="<?php echo $data['SITE_KEYWORDS']; ?>" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="SITE_DESCRIPTION" class="col-sm-3 col-md-2 control-label">网站描述</label>
+                        <div class="col-sm-9 col-md-10">
+                            <textarea id="SITE_DESCRIPTION" class="form-control" rows="3" cols="55" placeholder="网站SEO描述信息" name="data[SITE_DESCRIPTION]"><?php echo $data['SITE_DESCRIPTION']; ?></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="SITE_THEME" class="col-sm-3 col-md-2 control-label">桌面端主题</label>
+                        <div class="col-sm-9 col-md-10">
+                            <select id="SITE_THEME" class="form-control" name="data[SITE_THEME]">
                                 <?php if (is_array($theme)) {
                                     foreach ($theme as $t) {
                                         if (is_dir(THEME_PATH . $t)) { ?>
@@ -69,13 +65,12 @@
                                     }
                                 } ?>
                             </select>
-                            <div class="show-tips"><?php echo $configTips['SITE_THEME']; ?></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>移动端主题：</th>
-                        <td>
-                            <select class="form-control" name="data[SITE_MOBILE]">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="SITE_MOBILE" class="col-sm-3 col-md-2 control-label">移动端主题</label>
+                        <div class="col-sm-9 col-md-10">
+                            <select id="SITE_MOBILE" class="form-control" name="data[SITE_MOBILE]">
                                 <?php if (is_array($theme)) {
                                     foreach ($theme as $t) {
                                         if (is_dir(THEME_PATH . $t)) { ?>
@@ -84,11 +79,10 @@
                                     }
                                 } ?>
                             </select>
-                            <div class="show-tips"><?php echo $configTips['SITE_MOBILE']; ?></div>
-                        </td>
-                    </tr>
-                </table>
-                <div class="panel-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
                     <button type="submit" name="submit" class="btn btn-default">提交</button>
                 </div>
             </div>

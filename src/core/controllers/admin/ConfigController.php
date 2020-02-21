@@ -5,8 +5,6 @@
  */
 class ConfigController extends Admin
 {
-    // 配置变量说明
-    private $configTips;
 
     public function __construct()
     {
@@ -59,7 +57,7 @@ class ConfigController extends Admin
             $this->show_message('修改成功', 1, url('admin/config/index'));
         }
         $data = $this->site_config;
-        $configTips = $this->configTips;
+
         $file_list = core::load_class('file_list');
         $arr = $file_list->get_file_list(THEME_PATH);
         // 主题文件夹列表
@@ -79,7 +77,7 @@ class ConfigController extends Admin
             $this->show_message('修改成功', 1, url('admin/config/member'));
         }
         $data = $this->site_config;
-        $configTips = $this->configTips;
+
         // 会员模型列表
         $membermodel = $this->membermodel;
         include $this->admin_view('config/member');
@@ -131,7 +129,7 @@ class ConfigController extends Admin
         }
         // 获取当前配置信息
         $data = $this->site_config;
-        $configTips = $this->configTips;
+
         include $this->admin_view('config/url');
     }
 
@@ -147,7 +145,7 @@ class ConfigController extends Admin
         }
         // 获取当前配置信息
         $data = $this->site_config;
-        $configTips = $this->configTips;
+
         include $this->admin_view('config/watermark');
     }
 
@@ -164,7 +162,7 @@ class ConfigController extends Admin
         }
         // 获取当前配置信息
         $data = $this->site_config;
-        $configTips = $this->configTips;
+
         include $this->admin_view('config/weixin');
     }
 
@@ -175,7 +173,7 @@ class ConfigController extends Admin
     {
         // 获取当前配置信息
         $data = $this->site_config;
-        $configTips = $this->configTips;
+
         if ($this->isPostForm()) {
             $postdata = $this->post('data');
             $postdata['ADMIN_LOGINPATH'] = $postdata['ADMIN_LOGINPATH'] ? $postdata['ADMIN_LOGINPATH'] : 'admin';
@@ -193,7 +191,7 @@ class ConfigController extends Admin
     {
         // 获取当前配置信息
         $data = $this->site_config;
-        $configTips = $this->configTips;
+
         if ($this->isPostForm()) {
             // $postdata = $this->post('data');
             // $this->save_config($postdata);
