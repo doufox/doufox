@@ -3,7 +3,7 @@
         <div class="navbar-inner navbar-content-center" style="padding-top:15px;">
             <ul class="navbar-left list-inline text-center text-muted credit">
                 <li>
-                    <span class="co">&copy; CopyRight <?php echo date("Y"); ?> <?php echo ucfirst(APP_NAME); ?> All Rights Reserved.</span>
+                    <span class="co">&copy; CopyRight <?php echo date("Y"); ?> <a href="<?php echo APP_SITE;?>" target="_blank"><?php echo ucfirst(APP_NAME); ?></a> All Rights Reserved.</span>
                 </li>
             </ul>
             <div class="legal text-right list-inline">
