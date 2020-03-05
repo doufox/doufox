@@ -452,7 +452,7 @@ class view
     /**
      * 显示视图文件
      */
-    public function display($file_name = null)
+    public function display($file_name = null, $view_content = null)
     {
         if (!empty($this->_options)) {
             extract($this->_options, EXTR_PREFIX_SAME, 'data');
@@ -466,6 +466,28 @@ class view
             $this->create_compile_file($compile_file, $view_content);
         }
         include $compile_file;
+    }
+
+    /**
+     * 显示视图文件
+     */
+    public function display_html($file_name = null, $view_content = null)
+    {
+        // if (!empty($this->_options)) {
+        //     extract($this->_options, EXTR_PREFIX_SAME, 'data');
+        //     $this->_options = array();
+        // }
+        $view_file = DATA_PATH . DS . 'cache' . DS . 'page_' . $file_name . '.cache.php';
+        // $this->create_compile_file($view_file, $view_content);
+        // $compile_file = $this->get_compile_file($file_name);
+        // if ($this->is_compile($view_file, $compile_file)) {
+        //     $this->create_compile_file($view_file, $view_content);
+        // }
+        // $compile_file = $this->handle_view_file($view_content);
+        $view_content = $this->handle_view_file($view_content); // 网页编译后的源码
+        $this->create_compile_file($view_file, $view_content);
+        include $view_file;
+        // return 
     }
 
     /**

@@ -268,7 +268,7 @@ class HtmlController extends Admin
         } else {
             $url = preg_replace('#{([a-z_0-9]+)}#e', "\$cat[\\1]", $this->site_config['LIST_URL']);
         }
-        $url = $cat['catdir'] . DS . $url;
+        $url = $cat['catpath'] . DS . $url;
         if (substr($url, -5) != '.html') {
             mkdirs(ROOT_PATH . $url);
             $htmlfile = ROOT_PATH . $url . DS . 'index.html';
@@ -295,7 +295,7 @@ class HtmlController extends Admin
     protected function create_show_html($content, $page = 0)
     {
         //获取url
-        $content['catdir'] = $this->category_cache[$content['catid']]['catdir'];
+        $content['catpath'] = $this->category_cache[$content['catid']]['catpath'];
         $content['page'] = $page;
         if (!empty($page)) {
             $url = preg_replace('#{([a-z_0-9]+)}#e', '\$content[\\1]', $this->site_config['SHOW_PAGE_URL']);
@@ -319,8 +319,8 @@ class HtmlController extends Admin
         $content_add = $db->find($id);
         $content_add = $this->handle_fields($this->content_model[$content['modelid']]['fields'], $content_add);
         $content = $content_add ? array_merge($content, $content_add) : $content;
-        if (strpos($content_add['content'], '[XiaoCms-page]') !== false) {
-            $pdata = array_filter(explode('[XiaoCms-page]', $content_add['content']));
+        if (strpos($content_add['content'], '{-page-}') !== false) {
+            $pdata = array_filter(explode('{-page-}', $content_add['content']));
             $pagenumber = count($pdata);
             $content['content'] = $pdata[$content['page'] - 1];
             $pageurl = $this->view->get_show_url($content, 1);

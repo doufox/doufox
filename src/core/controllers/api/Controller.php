@@ -34,12 +34,12 @@ class Api extends Controller
     /**
      * API Response
      */
-    public function response($code = 400, $data = array(), $msg = 'error')
+    public function response($code = 400, $data = NULL, $msg = 'error')
     {
         header('Content-Type:application/json');
         $raw = array(
             'code' => $code,
-            'data' => isset($data) ? $data : new ArrayObject(),
+            'data' => isset($data) && !empty($data) ? $data : new stdClass(),
             'msg' => $msg,
         );
         $raw = json_encode($raw);

@@ -52,7 +52,7 @@
                 <div><?php print_r($data);?></div>
                 <div>URL:<?php print_r($data['url']);?></div>
                 <div>菜单栏显示:<?php print_r($data['ismenu']);?></div>
-                <div>自定义路径:<?php print_r($data['catdir']);?></div>
+                <div>自定义路径:<?php print_r($data['catpath']);?></div>
                 <div>打开方式:<?php print_r($data['isnewtab']);?></div>
                 <table width="100%" class="table_form">
                     <tbody>
@@ -68,7 +68,7 @@
                         </tr>
                         <tr>
                             <th><font color="red">*</font>栏目目录：</th>
-                            <td><input type="text" class="form-control" size="30" value="<?php echo $data['catdir']; ?>" name="data[catdir]" id="dir_text"></td>
+                            <td><input type="text" class="form-control" size="30" value="<?php echo $data['catpath']; ?>" name="data[catpath]" id="dir_text"></td>
                         </tr>
                         <tr>
                             <th width="100"><font color="red">*</font>上级栏目：</th>

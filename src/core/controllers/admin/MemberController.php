@@ -97,8 +97,10 @@ class MemberController extends Admin
         if (empty($model)) {
             $this->show_message('会员模型不存在');
         }
-
         $info = core::load_model($model['tablename']);
+        if (empty($info)) {
+            $this->show_message('模型文件不存在');
+        }
         $_data = $info->find($id);
         if ($this->isPostForm()) {
             $data = $this->post('data');
@@ -150,7 +152,7 @@ class MemberController extends Admin
 
         // 删除会员
         $this->member->delete('id=' . $id);
-        // 删除模型数据
+        // 删除会员模型数据
         $table = $this->membermodel[$data['modelid']]['tablename'];
         if ($table) {
             $model = core::load_model($table);

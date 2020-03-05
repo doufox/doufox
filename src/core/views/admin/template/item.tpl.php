@@ -1,5 +1,4 @@
 <?php include $this->admin_view('header'); ?>
-
 <?php include $this->admin_view('navbar'); ?>
 
 <div class="container">

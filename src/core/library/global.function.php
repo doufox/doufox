@@ -485,7 +485,7 @@ function getUrl($data, $page = 0)
     $cat = $cats[$data['catid']];
     unset($cats);
     if ($config['DIY_URL'] && $config['SHOW_URL']) {
-        $data['dir'] = $cat['catdir'];
+        $data['catpath'] = $cat['catpath'];
         $data['page'] = $page;
         $url = !is_numeric($page) || $page > 1 ? preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['SHOW_PAGE_URL']) : preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['SHOW_URL']);
         $url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(safe_replace('\\2'))", $url);
@@ -513,15 +513,16 @@ function getCaturl($data, $page = 0)
     }
     // $catid = is_numeric($data) ? $data : $data['catid'];
     $config = core::get_site_config();
-    if ($data['typeid'] == 3) {
+    if ($data['typeid'] == 3 && $data['redirect'] == 1) {
+        // 直接跳转时使用填写的链接地址，否则使用内部栏目地址
         unset($config);
         return $data['http'];
     }
 
     if ($config['DIY_URL'] && $config['LIST_URL']) {
         // 禁止默认的动态参数URL，使用自定义URL
-        $data['id'] = $data['catid'];
-        $data['dir'] = $data['catdir'];
+        // $data['catid'] = $data['catid'];
+        // $data['catpath'] = $data['catpath'];
         $data['page'] = $page;
         $url = !is_numeric($page) || $page > 1 ? preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['LIST_PAGE_URL']) : preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['LIST_URL']);
         $url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(safe_replace('\\2'))", $url);
@@ -529,7 +530,7 @@ function getCaturl($data, $page = 0)
         return HTTP_URL . $url;
     }
     if ($config['URL_LIST_TYPE']) {
-        $params = array('catdir' => $data['catdir']);
+        $params = array('catpath' => $data['catpath']);
     } else {
         $params = array('catid' => $data['catid']);
     }
