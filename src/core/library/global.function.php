@@ -328,7 +328,7 @@ function clearhtml($str)
  * @param $symbol 栏目间隔符
  * @return NULL|string
  */
-function position($catid, $symbol = ' > ', $link_class = 'btn btn-link')
+function breadcrumb($catid, $symbol = ' > ', $link_class = '')
 {
     $cats = get_cache('category');
     $catids = catposids($catid, '', $cats);
@@ -349,7 +349,7 @@ function position($catid, $symbol = ' > ', $link_class = 'btn btn-link')
     $str = '';
     foreach ($ids as $cid) {
         $cat = $cats[$cid];
-        $str .= "<a" . $link_class . " href=\"" . $cat['url'] . "\" title=\"" . $cat['catname'] . "\">" . $cat['catname'] . "</a>";
+        $str .= '<li><a' . $link_class . ' href="' . $cat['url'] . '" title="' . $cat['catname'] . '">' . $cat['catname'] . '</a></li>';
         if ($catid != $cid) {
             $str .= $symbol;
         }
