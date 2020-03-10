@@ -1,4 +1,5 @@
-{template member/header.html}
+{template header.html}
+
 <script type="text/javascript">
     function reload_code() {
         document.getElementById('code').src = '{function.url("api/access/checkcode", array("width"=>80, "height"=>28))}&' + Math.random();

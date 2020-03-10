@@ -1,0 +1,11 @@
+
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{$site_url}">首页</a></li>
+        {if $catid}
+            {function.breadcrumb($catid, '')}
+        {else}
+            {$page_position}
+        {/if}
+    </ol>
+</div>

@@ -1,21 +1,24 @@
 
-    <div class="footer">
-        <div class="container">
-            <div class="text-muted pull-left">
-                <p>
+<div class="footer-sticky"></div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <p class="text-muted">
                     <span>&copy;&nbsp;CopyRight {function.date('Y')}&nbsp;{function.ucfirst(APP_NAME)} All Rights Reserved.</span>
-                    <span>Powered by <a href="https://crogram.com" target="_blank">Crogram</a>.</span>
                     <span>={$app_execution_time}=</span>
                 </p>
             </div>
-            <div class="text-muted pull-right">
-                <a href="http://www.beian.miit.gov.cn" target="_blank">豫ICP备14006598号</a>
+            <div class="col-md-6 col-sm-6">
+                <p class="pull-right">
+                    <span><a href="http://www.beian.miit.gov.cn" target="_blank">豫ICP备14006598号</a></span>
+                    <span>Powered by <a href="https://crogram.com/">Crogram</a></span>
+                </p>
             </div>
         </div>
     </div>
-</div>
-<script src="static/js/jquery.min.js"></script>
-<script src="static/bootstrap/js/bootstrap.min.js"></script>
+</footer>
+
 {function.doHookAction('view_footer')}
 
 </body>
