@@ -1,17 +1,14 @@
-<footer class="footer navbar navbar-default navbar-fixed-bottom">
+<div class="footer-sticky"></div>
+<div class="footer">
     <div class="container">
-        <div class="navbar-inner navbar-content-center" style="padding-top:15px;">
-            <ul class="navbar-left list-inline text-center text-muted credit">
-                <li>
-                    <span class="co">&copy; CopyRight <?php echo date("Y"); ?> <a href="<?php echo APP_SITE;?>" target="_blank"><?php echo ucfirst(APP_NAME); ?></a> All Rights Reserved.</span>
-                </li>
-            </ul>
-            <div class="legal text-right list-inline">
-                <span class="co">Powered by <a href="https://crogram.com" target="_blank">Crogram</a></span>
-            </div>
-        </div>
+        <footer class="navbar navbar-default">
+                <p class="navbar-text">
+                    <span>&copy; CopyRight <?php echo date("Y"); ?> <a href="<?php echo APP_SITE;?>" target="_blank"><?php echo ucfirst(APP_NAME); ?></a> All Rights Reserved.</span>
+                </p>
+                <p class="navbar-text pull-right">Powered by <a href="https://crogram.com" target="_blank">Crogram</a></p>
+        </footer>
     </div>
-</footer>
+</div>
 
 <!-- 确认提示 -->
 <div class="modal fade" id="modal-confirm" tabindex="-1" role="dialog" aria-labelledby="modal-confirm" style="display: none;">
