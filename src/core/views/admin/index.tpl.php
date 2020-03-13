@@ -2,7 +2,8 @@
 <?php include $this->admin_view('navbar'); echo PHP_EOL; ?>
 <?php doHookAction('admin_index_top'); echo PHP_EOL; ?>
 <div class="container">
-    <div class="page_menu">
+    <div class="row">
+    <div class="col-sm-3 col-md-3 col-lg-2 page_menu">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <span class="panel-title">快速导航</span>
@@ -17,7 +18,7 @@
             </div>
         </div>
     </div>
-    <div class="page_content">
+    <div class="col-sm-9 col-md-9 col-lg-10 page_content">
         <?php doHookAction('admin_index_content_top'); echo PHP_EOL; ?>
         <div class="row">
             <div class="col-md-6 col-sm-6">
@@ -48,6 +49,7 @@
             </div>
         </div>
         <?php doHookAction('admin_index_content_bottom'); echo PHP_EOL; ?>
+    </div>
     </div>
 </div>
 

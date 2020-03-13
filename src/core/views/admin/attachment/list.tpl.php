@@ -2,50 +2,52 @@
 <?php include $this->admin_view('navbar'); ?>
 
 <div class="container">
-    <div class="panel panel-default page_menu">
-        <div class="panel-heading"><span class="panel-title">附件管理</span></div>
-        <div class="list-group">
-            <a class="list-group-item active" href="<?php echo url('admin/attachment/index'); ?>">附件列表</a>
-            <a class="list-group-item" href="<?php echo url('admin/attachment/add'); ?>">添加附件</a>
-            <a class="list-group-item" href="<?php echo url('admin/attachment/cache'); ?>">更新缓存</a>
-        </div>
-    </div>
-    <div class="page_content">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <span class="panel-title">附件列表</span>
-                <div class="pull-right">
-                    <a class="btn btn-default btn-xs" href="<?php echo url('admin/attachment/add'); ?>">添加附件</a>
-                </div>
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-2 page_menu">
+            <div class="panel-heading"><span class="panel-title">附件管理</span></div>
+            <div class="list-group">
+                <a class="list-group-item active" href="<?php echo url('admin/attachment/index'); ?>">附件列表</a>
+                <a class="list-group-item" href="<?php echo url('admin/attachment/add'); ?>">添加附件</a>
+                <a class="list-group-item" href="<?php echo url('admin/attachment/cache'); ?>">更新缓存</a>
             </div>
-            <table width="100%" class="table table-bordered table-condensed table-hover" id="imgPreview">
-                <thead>
-                    <tr>
-                        <th align="left">当前目录：<?php echo $dir; ?></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if ($istop) { ?>
+        </div>
+        <div class="col-sm-9 col-md-9 col-lg-10 page_content">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="panel-title">附件列表</span>
+                    <div class="pull-right">
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/attachment/add'); ?>">添加附件</a>
+                    </div>
+                </div>
+                <table width="100%" class="table table-bordered table-condensed table-hover" id="imgPreview">
+                    <thead>
                         <tr>
-                            <td align="left"><a href="<?php echo $pdir; ?>"><img src="/static/img/folder-closed.gif">上一层目录</a></td>
+                            <th align="left">当前目录：<?php echo $dir; ?></th>
                         </tr>
-                    <?php }
-                    if (is_array($list)) {
-                        foreach ($list as $k => $t) { ?>
+                    </thead>
+                    <tbody>
+                        <?php if ($istop) { ?>
                             <tr>
-                                <td align="left" onclick="<?php if (!$t['url']) { ?>album_cancel(this)<?php } ?>">
-                                    <img src="/static/img/ext/<?php echo $t[ico]; ?>">
-                                    &nbsp;<a href="<?php if ($t['url']) {
-                                                        echo $t['url'];
-                                                    } else { ?>javascript:;<?php } ?> " rel="<?php echo $dir;
-                                                                                                        echo $t['name']; ?>" title="<?php echo $t['name']; ?>"><?php echo $t['name']; ?></a>
-                                </td>
+                                <td align="left"><a href="<?php echo $pdir; ?>"><img src="/static/img/folder-closed.gif">上一层目录</a></td>
                             </tr>
                         <?php }
-                    } ?>
-                </tbody>
-            </table>
-            <div class="panel-body">
+                        if (is_array($list)) {
+                            foreach ($list as $k => $t) { ?>
+                                <tr>
+                                    <td align="left" onclick="<?php if (!$t['url']) { ?>album_cancel(this)<?php } ?>">
+                                        <img src="/static/img/ext/<?php echo $t[ico]; ?>">
+                                        &nbsp;<a href="<?php if ($t['url']) {
+                                                            echo $t['url'];
+                                                        } else { ?>javascript:;<?php } ?> " rel="<?php echo $dir;
+                                                                                                            echo $t['name']; ?>" title="<?php echo $t['name']; ?>"><?php echo $t['name']; ?></a>
+                                    </td>
+                                </tr>
+                            <?php }
+                        } ?>
+                    </tbody>
+                </table>
+                <div class="panel-body">
+                </div>
             </div>
         </div>
     </div>

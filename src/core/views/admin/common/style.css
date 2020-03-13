@@ -33,7 +33,7 @@ textarea {
     overflow-x: hidden;
     clear: both;
     min-width: 100%; */
-    min-height: 500px;
+    /* min-height: 500px; */
 }
 
 #home {
