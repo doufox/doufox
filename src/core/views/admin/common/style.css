@@ -1,6 +1,10 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
     padding-top: 20px;
-    padding-bottom: 60px;
 }
 
 body,
@@ -8,44 +12,14 @@ html,
 input,
 textarea {
     font-size: 13px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
-/* header nav */
-
-.nav>li>a {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.header {
-    height: 30px;
-    color: #fff;
-    background-color: #70a1ce;
-}
-
-.header .title {
-    width: 150px;
-    height: 30px;
-    float: left;
-    line-height: 30px;
-    text-align: center;
-    font-size: 1.2em;
-    margin: 0;
-    padding: 0;
-}
-
-.header .title a {
-    color: #fff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .page_menu {
-    margin-left: 0px;
+    /* margin-left: 0px;
     position: absolute;
     box-sizing: border-box;
-    width: 150px;
-    /* height: 100%; */
-    /* background: #4d5e70 bottom; */
+    width: 150px; */
 }
 
 .page_menu .treeview li .glyphicon {
@@ -53,14 +27,13 @@ textarea {
 }
 
 .page_content {
-    /* margin-left: 160px; */
-    float: left;
+    /* float: left;
     padding-left: 160px;
     overflow-y: overlay;
     overflow-x: hidden;
     clear: both;
-    min-width: 100%;
-    min-height: 500px;
+    min-width: 100%; */
+    /* min-height: 500px; */
 }
 
 #home {
@@ -73,13 +46,14 @@ textarea {
     border-bottom: 1px solid #eee;
 }
 
+.footer-sticky {
+    height: 70px;
+}
+
 .footer {
-    height: 28px;
+    position: absolute;
+    bottom: 0;
     width: 100%;
-    border-top: 1px solid #eee;
-    background-color: #f7f7f7;
-    text-align: center;
-    line-height: 22px;
 }
 
 pre {

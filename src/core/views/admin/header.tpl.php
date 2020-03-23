@@ -17,7 +17,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico" />
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
     <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
-    <?php doHookAction('admin_head'); echo PHP_EOL; ?>
+    <?php doHookAction('admin_head'); ?>
+
 </head>
 
 <body>

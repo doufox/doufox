@@ -27,55 +27,57 @@
 </style>
 
 <div class="container">
-    <div class="page_menu">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <span class="panel-title">模板管理</span>
-            </div>
-            <div class="list-group">
-                <a class="list-group-item" href="<?php echo url('admin/template/index'); ?>">模板管理</a>
-                <a class="list-group-item active" href="<?php echo url('admin/template/add'); ?>">添加模板</a>
-                <a class="list-group-item" href="<?php echo url('admin/template/cache'); ?>">更新缓存</a>
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-2 page_menu">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="panel-title">模板管理</span>
+                </div>
+                <div class="list-group">
+                    <a class="list-group-item" href="<?php echo url('admin/template/index'); ?>">模板管理</a>
+                    <a class="list-group-item active" href="<?php echo url('admin/template/add'); ?>">添加模板</a>
+                    <a class="list-group-item" href="<?php echo url('admin/template/cache'); ?>">更新缓存</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="page_content">
-        <div class="panel panel-default">
-            <div class="panel-heading"><?php echo $filename ? '编辑' : '添加' ?>模板</div>
-            <?php if (!is_writable($filepath)) { ?>
+        <div class="col-sm-9 col-md-9 col-lg-10 page_content">
+            <div class="panel panel-default">
+                <div class="panel-heading"><?php echo $filename ? '编辑' : '添加' ?>模板</div>
+                <?php if (!is_writable($filepath)) { ?>
+                    <div class="panel-body">
+                        <b style="color:red"><?php echo $filepath . '不可写'; ?></b>
+                    </div>
+                <?php } ?>
                 <div class="panel-body">
-                    <b style="color:red"><?php echo $filepath . '不可写'; ?></b>
-                </div>
-            <?php } ?>
-            <div class="panel-body">
-                <form method="post" action="" class="form-inline">
-                    <?php if ($this->get('a') == 'edit') { ?>
-                        <p>
-                            <a class="btn btn-default" href="<?php echo $top_url; ?>">返回上一级</a>
-                            <a class="btn btn-default">当前位置：<?php echo $local ?></a>
-                        </p>
-                    <?php } else { ?>
-                        <a class="btn btn-default" href="<?php echo url('admin/template'); ?>">返回</a>
-                        <div class="input-group">
-                            <span class="input-group-addon"><?php echo $local; ?></span>
-                            <input type="text" class="form-control" size="20" value="" name="file_name" placeholder="文件名" />
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">文件类型 <span class="caret"></span></button>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="#">HTML</a></li>
-                                    <li><a href="#">CSS</a></li>
-                                    <li><a href="#">JS</a></li>
-                                    <li role="separator" class="divider"></li>
-                                </ul>
+                    <form method="post" action="" class="form-inline">
+                        <?php if ($this->get('a') == 'edit') { ?>
+                            <p>
+                                <a class="btn btn-default" href="<?php echo $top_url; ?>">返回上一级</a>
+                                <a class="btn btn-default">当前位置：<?php echo $local ?></a>
+                            </p>
+                        <?php } else { ?>
+                            <a class="btn btn-default" href="<?php echo url('admin/template'); ?>">返回</a>
+                            <div class="input-group">
+                                <span class="input-group-addon"><?php echo $local; ?></span>
+                                <input type="text" class="form-control" size="20" value="" name="file_name" placeholder="文件名" />
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">文件类型 <span class="caret"></span></button>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#">HTML</a></li>
+                                        <li><a href="#">CSS</a></li>
+                                        <li><a href="#">JS</a></li>
+                                        <li role="separator" class="divider"></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <span class="show-tips">只支持后缀为.html、.js、.css。</span>
-                    <?php } ?>
-                    <hr />
-                    <textarea name="file_content" id="codeTextarea"><?php echo $filecontent; ?></textarea>
-                    <hr />
-                    <button type="submit" class="btn btn-default" value="提交" name="submit">提交</button>
-                </form>
+                            <span class="show-tips">只支持后缀为.html、.js、.css。</span>
+                        <?php } ?>
+                        <hr />
+                        <textarea name="file_content" id="codeTextarea"><?php echo $filecontent; ?></textarea>
+                        <hr />
+                        <button type="submit" class="btn btn-default" value="提交" name="submit">提交</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

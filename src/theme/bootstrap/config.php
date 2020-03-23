@@ -14,7 +14,7 @@
       'category_download.html' => '下载栏目模板',
       'category_product.html' => '产品栏目模板',
       'config.php' => '模板备注文件',
-      'crumbs.html' => '导航栏',
+      'breadcrumb.html' => '导航栏',
       'footer.html' => '通用底部模板',
       'form.html' => '表单模板',
       'header.html' => '通用头部模板',

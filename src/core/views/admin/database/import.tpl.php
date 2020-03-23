@@ -2,66 +2,70 @@
 <?php include $this->admin_view('navbar'); ?>
 
 <div class="container">
-    <div class="panel panel-default page_menu">
-        <div class="panel-heading">
-            <span class="panel-title">数据库管理</span>
-        </div>
-        <div class="list-group">
-            <a class="list-group-item" href="<?php echo url('admin/database/index'); ?>">数据表</a>
-            <a class="list-group-item active" href="<?php echo url('admin/database/import'); ?>">备份列表</a>
-        </div>
-    </div>
-    <div class="page_content">
-        <form action="" method="post">
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-2 page_menu">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="panel-title">备份列表</span>
-                    <div class="pull-right">
-                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/database/index'); ?>">数据表</a>
-                    </div>
+                    <span class="panel-title">数据库管理</span>
                 </div>
-                <table width="100%" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>
-                                <label class="label-group"><input name="selectform" class="select_backups" type="checkbox" onClick="selectBackup()">全选</label>
-                            </th>
-                            <th>备份时间</th>
-                            <th>备份目录</th>
-                            <th>文件大小</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <?php if ($list) { ?>
-                        <tbody>
-                            <?php foreach ($list as $v) { ?>
-                                <tr>
-                                    <td>
-                                        <label class="label-group"><input class="selectform" type="checkbox" name="paths[]" value="<?php echo $v['path'] ?>" />选择</label>
-                                    </td>
-                                    <td><?php echo date('Y-m-d H:i:s', $v['path']) ?></td>
-                                    <td><?php echo $v['sqldir'] ?></td>
-                                    <td><?php echo $v['size'] ?></td>
-                                    <td>
-                                        <a href="#" onclick="showTableBackups(<?php echo $v['path'] ?>);">预览</a>
-                                        <a href="javascript:void(0);">下载</a>
-                                        <a href="#" onclick="resetTable(<?php echo $v['path'] ?>);">恢复</a>
-                                        <a href="#" onclick="deleteTable(<?php echo $v['path'] ?>);">删除</a>
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    <?php } else { ?>
-                        <tbody>
-                            <tr>
-                                <td colspan="5">没有备份文件</td>
-                            </tr>
-                        </tbody>
-                    <?php } ?>
-                </table>
-                <div class="panel-body"><button type="submit" name="submit" class="btn btn-default" value="1">批量删除</button></div>
+                <div class="list-group">
+                    <a class="list-group-item" href="<?php echo url('admin/database/index'); ?>">数据表</a>
+                    <a class="list-group-item active" href="<?php echo url('admin/database/import'); ?>">备份列表</a>
+                </div>
             </div>
-        </form>
+        </div>
+        <div class="col-sm-9 col-md-9 col-lg-10 page_content">
+            <form action="" method="post">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="panel-title">备份列表</span>
+                        <div class="pull-right">
+                            <a class="btn btn-default btn-xs" href="<?php echo url('admin/database/index'); ?>">数据表</a>
+                        </div>
+                    </div>
+                    <table width="100%" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label class="label-group"><input name="selectform" class="select_backups" type="checkbox" onClick="selectBackup()">全选</label>
+                                </th>
+                                <th>备份时间</th>
+                                <th>备份目录</th>
+                                <th>文件大小</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <?php if ($list) { ?>
+                            <tbody>
+                                <?php foreach ($list as $v) { ?>
+                                    <tr>
+                                        <td>
+                                            <label class="label-group"><input class="selectform" type="checkbox" name="paths[]" value="<?php echo $v['path'] ?>" />选择</label>
+                                        </td>
+                                        <td><?php echo date('Y-m-d H:i:s', $v['path']) ?></td>
+                                        <td><?php echo $v['sqldir'] ?></td>
+                                        <td><?php echo $v['size'] ?></td>
+                                        <td>
+                                            <a href="#" onclick="showTableBackups(<?php echo $v['path'] ?>);">预览</a>
+                                            <a href="javascript:void(0);">下载</a>
+                                            <a href="#" onclick="resetTable(<?php echo $v['path'] ?>);">恢复</a>
+                                            <a href="#" onclick="deleteTable(<?php echo $v['path'] ?>);">删除</a>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        <?php } else { ?>
+                            <tbody>
+                                <tr>
+                                    <td colspan="5">没有备份文件</td>
+                                </tr>
+                            </tbody>
+                        <?php } ?>
+                    </table>
+                    <div class="panel-body"><button type="submit" name="submit" class="btn btn-default" value="1">批量删除</button></div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
