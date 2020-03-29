@@ -4,11 +4,15 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-3 col-md-3 col-lg-2 page_menu">
-            <div class="panel-heading"><span class="panel-title">附件管理</span></div>
-            <div class="list-group">
-                <a class="list-group-item active" href="<?php echo url('admin/attachment/index'); ?>">附件列表</a>
-                <a class="list-group-item" href="<?php echo url('admin/attachment/add'); ?>">添加附件</a>
-                <a class="list-group-item" href="<?php echo url('admin/attachment/cache'); ?>">更新缓存</a>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="panel-title">附件管理</span>
+                </div>
+                <div class="list-group">
+                    <a class="list-group-item active" href="<?php echo url('admin/attachment/index'); ?>">附件列表</a>
+                    <a class="list-group-item" href="<?php echo url('admin/attachment/add'); ?>">添加附件</a>
+                    <a class="list-group-item" href="<?php echo url('admin/attachment/cache'); ?>">更新缓存</a>
+                </div>
             </div>
         </div>
         <div class="col-sm-9 col-md-9 col-lg-10 page_content">
