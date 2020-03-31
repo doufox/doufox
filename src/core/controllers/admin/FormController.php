@@ -130,9 +130,9 @@ class FormController extends Admin
                 'setting' => array2string($cfg),
                 'categorytpl' => $data['categorytpl'],
             );
-            $model = core::load_model('contentmodel');
+            $model = core::load_model('model');
             $model->update($set, 'modelid=' . $this->modelid);
-            $this->show_message($this->getCacheCode('contentmodel') . '操作成功', 1);
+            $this->show_message($this->getCacheCode('model') . '操作成功', 1);
         }
         $count[1] = $this->content->count($this->table, null, 'status=1');
         $count[0] = $this->content->count($this->table, null, 'status=0');
