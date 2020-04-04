@@ -2,6 +2,8 @@
 
 <?php include $this->admin_view('navbar'); ?>
 
+<?php include $this->admin_view('common/msg');?>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-3 col-md-3 col-lg-2 page_menu">
