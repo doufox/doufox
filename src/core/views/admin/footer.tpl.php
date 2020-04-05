@@ -90,15 +90,6 @@
                     document.getElementById(id).onmouseout = null;
                 }
             }
-        },
-        get_kw: function () {
-            $.post(this.sitepath + '?s=api&a=ajaxkw&id=' + Math.random(), {
-                data: $('#title').val()
-            }, function (res) {
-                if (res && res.data && $('#keywords').val() == '') {
-                    $('#keywords').val(res.data);
-                }
-            });
         }
     }
 

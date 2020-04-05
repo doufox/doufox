@@ -1,5 +1,6 @@
 <?php include $this->admin_view('header');?>
 <?php include $this->admin_view('navbar');?>
+<?php include $this->admin_view('common/msg');?>
 
 <script type="text/javascript">
     function setC() {

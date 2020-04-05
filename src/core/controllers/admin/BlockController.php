@@ -5,6 +5,7 @@ class BlockController extends Admin
 
     private $block;
     private $type;
+    private $msg_result;
 
     public function __construct()
     {
@@ -15,9 +16,7 @@ class BlockController extends Admin
 
     public function indexAction()
     {
-        $type = $this->type;
-        $list = $this->block->findAll('id, type, name, remark');
-        include $this->admin_view('block/list');
+        $this->load_list();
     }
 
     public function addAction()
@@ -25,55 +24,71 @@ class BlockController extends Admin
         if ($this->isPostForm()) {
             $data = $this->post('data');
             if (empty($data['type'])) {
-                $this->show_message('编辑类型不能为空');
+                $this->msg_result = '类型不能为空，请重新选择';
+                $this->load_add($data);
             }
-
+            if (empty($data['name'])) {
+                $this->msg_result = '名称不能为空，请重新填写';
+                $this->load_add($data);
+            }
             $data['content'] = $data['content_' . $data['type']];
-            if (empty($data['name']) || empty($data['content'])) {
-                $this->show_message('名称或者内容不能为空');
+            if (empty($data['content'])) {
+                $this->msg_result = '内容不能为空，请重新填写';
+                $this->load_add($data);
             }
 
             $this->block->insert($data);
-            $this->show_message($this->getCacheCode('block') . '添加成功', 1, url('admin/block'));
+            $this->msg_result = '添加成功';
+            $this->cacheAction();
+            $this->load_list();
+        } else {
+            $this->load_add();
         }
-        $type = $this->type;
-        $data['type'] = 3; //设置默认类型
-        include $this->admin_view('block/add');
     }
 
-    public function editAction()
+    public function editAction($id = 0)
     {
-        $id = (int) $this->get('id');
+        $id = $id ? $id : (int) $this->get('id');
         $data = $this->block->find($id);
         if (empty($data)) {
-            $this->show_message('区块不存在');
+            $this->msg_result = '区块不存在';
+            $this->load_list();
         }
 
         if ($this->isPostForm()) {
             unset($data);
             $data = $this->post('data');
             if (empty($data['type'])) {
-                $this->show_message('类型不能为空');
+                $this->msg_result = '类型不能为空，请重新选择';
+                $this->load_edit($id);
+            }
+            if (empty($data['name'])) {
+                $this->msg_result = '名称不能为空，请重新填写';
+                $this->load_edit($id);
             }
 
             $data['content'] = $data['content_' . $data['type']];
-            if (empty($data['name']) || empty($data['content'])) {
-                $this->show_message('名称或者内容不能为空');
+            if (empty($data['content'])) {
+                $this->msg_result = '内容不能为空，请重新填写';
+                $this->load_edit($id);
             }
 
             $this->block->update($data, 'id=' . $id);
-            $this->show_message($this->getCacheCode('block') . '编辑成功', 1, url('admin/block'));
+            $this->cacheAction();
+            $this->msg_result = '编辑成功';
+            $this->load_edit($id);
         }
         $type = $this->type;
         include $this->admin_view('block/add');
     }
 
-    public function delAction($id = 0, $all = 0)
+    public function delAction($id = 0)
     {
         $id = $id ? $id : (int) $this->get('id');
-        $all = $all ? $all : $this->get('all');
         $this->block->delete('id=' . $id);
-        $all or $this->show_message($this->getCacheCode('block') . '删除成功', 1, url('admin/block/index'));
+        $this->cacheAction();
+        $this->msg_result = '删除成功';
+        $this->load_list();
     }
 
     public function cacheAction($show = 0)
@@ -84,7 +99,38 @@ class BlockController extends Admin
             $data[$t['id']] = $t;
         }
         set_cache('block', $data);
-        $show or $this->show_message('缓存更新成功', 1);
+        if ($show) $this->show_message('缓存更新成功', 1);
+    }
+
+    private function load_list()
+    {
+        $type = $this->type;
+        $msg = $this->msg_result;
+        $list = $this->block->findAll('id, type, name, remark');
+        include $this->admin_view('block/list');
+        exit;
+    }
+
+    private function load_add($data = null)
+    {
+        $type = $this->type;
+        $msg = $this->msg_result;
+        $data['type'] = $data['type'] ? $data['type'] : 1; // 设置默认类型
+        include $this->admin_view('block/add');
+        exit;
+    }
+
+    private function load_edit($id = 0)
+    {
+        $data = $this->block->find($id);
+        if (empty($data)) {
+            $this->msg_result = '区块不存在';
+            $this->load_list();
+        }
+        $msg = $this->msg_result;
+        $type = $this->type;
+        include $this->admin_view('block/add');
+        exit;
     }
 
 }

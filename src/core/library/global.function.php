@@ -4,29 +4,6 @@ if (!defined('IN_CMS')) {
 }
 
 /**
- * 提取关键字
- */
-function getKw($data)
-{
-    $data = gethttp('http://keyword.discuz.com/related_kw.html?ics=utf-8&ocs=utf-8&title=' . rawurlencode($data) . '&content=' . rawurlencode($data));
-    if ($data) {
-        $parser = xml_parser_create();
-        $kws = array();
-        xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
-        xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);
-        xml_parse_into_struct($parser, $data, $values, $index);
-        xml_parser_free($parser);
-        foreach ($values as $valuearray) {
-            $kw = trim($valuearray['value']);
-            if ($valuearray['tag'] == 'kw' || $valuearray['tag'] == 'ekw') {
-                $kws[] = $kw;
-            }
-        }
-        return implode(',', $kws);
-    }
-}
-
-/**
  * 调用远程数据
  */
 function gethttp($url)

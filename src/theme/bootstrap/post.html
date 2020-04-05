@@ -31,7 +31,7 @@
     {if $model['content']['title']['show']}
             <div>
                 <div><font color="red">*</font>&nbsp;{$model['content']['title']['name']}：</div>
-                <div><input type="text" class="input-text" size="50" id="title" value="{$data['title']}" name="data[title]" onBlur="admin_command.get_kw()"></div>
+                <div><input type="text" class="input-text" size="50" id="title" value="{$data['title']}" name="data[title]"></div>
                 <div class="show-tips" id="title_text"></div>
             </div>
     {/if}

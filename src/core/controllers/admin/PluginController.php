@@ -3,6 +3,8 @@
 class PluginController extends Admin
 {
 
+    private $msg_result;
+
     public function __construct()
     {
         parent::__construct();
@@ -10,8 +12,7 @@ class PluginController extends Admin
 
     public function indexAction()
     {
-        $list = $this->plugin->findAll('id, official, plugin, name, version, url, description, author, author_url, status');
-        include $this->admin_view('plugin/list');
+        $this->load_list();
     }
 
     public function settingAction()
@@ -83,9 +84,12 @@ class PluginController extends Admin
         $id = $id ? $id : (int) $this->get('id');
         if (!empty($id)) {
             $this->plugin->delete('id=' . $id);
-            $this->show_message($this->getCacheCode('plugin') . '删除成功', 1, url('admin/plugin/index'));
+            $this->msg_result = '删除成功';
+            $this->cacheAction();
+            $this->load_list();
         }
-        $this->show_message('参数缺失', 1, url('admin/plugin/index'));
+        $this->msg_result = '参数缺失，未做任何操作';
+        $this->load_list();
     }
 
     public function openAction($id = 0)
@@ -93,9 +97,12 @@ class PluginController extends Admin
         $id = $id ? $id : (int) $this->get('id');
         if (!empty($id)) {
             $this->plugin->update(array('status' => 1), 'id=' . $id);
-            $this->show_message($this->getCacheCode('plugin') . '启用成功', 1, url('admin/plugin/index'));
+            $this->msg_result = '启用成功';
+            $this->cacheAction();
+            $this->load_list();
         }
-        $this->show_message('参数缺失', 1, url('admin/plugin/index'));
+        $this->msg_result = '参数缺失，未做任何操作';
+        $this->load_list();
     }
 
     public function closeAction($id = 0)
@@ -103,9 +110,12 @@ class PluginController extends Admin
         $id = $id ? $id : (int) $this->get('id');
         if (!empty($id)) {
             $this->plugin->update(array('status' => 0), 'id=' . $id);
-            $this->show_message($this->getCacheCode('plugin') . '关闭成功', 1, url('admin/plugin/index'));
+            $this->msg_result = '关闭成功';
+            $this->cacheAction();
+            $this->load_list();
         }
-        $this->show_message('参数缺失', 1, url('admin/plugin/index'));
+        $this->msg_result = '参数缺失，未做任何操作';
+        $this->load_list();
     }
 
     public function cacheAction($show = 0)
@@ -118,7 +128,15 @@ class PluginController extends Admin
             }
         }
         set_cache('plugin', $data);
-        $show or $this->show_message('缓存更新成功', 1);
+        if ($show) $this->show_message('缓存更新成功', 1);
+    }
+
+    private function load_list()
+    {
+        $msg = $this->msg_result;
+        $list = $this->plugin->findAll('id, official, plugin, name, version, url, description, author, author_url, status');
+        include $this->admin_view('plugin/list');
+        exit;
     }
 
     /**

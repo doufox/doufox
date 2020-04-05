@@ -1,5 +1,6 @@
 <?php include $this->admin_view('header'); ?>
 <?php include $this->admin_view('navbar'); ?>
+<?php include $this->admin_view('common/msg');?>
 
 <div class="container">
     <div class="row">
@@ -27,8 +28,8 @@
                         <div class="form-group">
                             <label class="col-sm-3 col-md-2 control-label">微信公众号：</label>
                             <div class="col-sm-9 col-md-10">
-                                <label class="label-group"><input name="data[WEIXIN_MP_OPENED]" type="radio" value="true" <?php if ($data['WEIXIN_MP_OPENED'] == 1) { ?>checked<?php } ?>>打开</label>
-                                <label class="label-group"><input name="data[WEIXIN_MP_OPENED]" type="radio" value="false" <?php if ($data['WEIXIN_MP_OPENED'] == 0) { ?>checked<?php } ?>>关闭</label>
+                                <label class="label-group"><input name="data[WEIXIN_MP_OPENED]" type="radio" value="1" <?php if ($data['WEIXIN_MP_OPENED'] == 1) { ?>checked<?php } ?>>打开</label>
+                                <label class="label-group"><input name="data[WEIXIN_MP_OPENED]" type="radio" value="0" <?php if ($data['WEIXIN_MP_OPENED'] == 0) { ?>checked<?php } ?>>关闭</label>
                             </div>
                         </div>
                         <div class="form-group">
