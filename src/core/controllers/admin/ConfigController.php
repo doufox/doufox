@@ -5,6 +5,7 @@
  */
 class ConfigController extends Admin
 {
+    private $msg_result;
 
     public function __construct()
     {
@@ -52,17 +53,22 @@ class ConfigController extends Admin
     public function indexAction()
     {
         if ($this->isPostForm()) {
-            $configdata = $this->post('data');
-            $this->save_config($configdata);
-            $this->show_message('修改成功', 1, url('admin/config/index'));
+            $post_data = $this->post('data');
+            $this->save_config($post_data);
+            $this->msg_result = '修改成功';
         }
         $data = $this->site_config;
+        if ($post_data) {
+            $data = array_merge($data, $post_data);
+            unset($post_data);
+        }
 
         $file_list = core::load_class('file_list');
         $arr = $file_list->get_file_list(THEME_PATH);
         // 主题文件夹列表
         $theme = array_diff($arr, array('index.html'));
         unset($arr, $file_list);
+        $msg = $this->msg_result;
         include $this->admin_view('config/index');
     }
 
@@ -72,14 +78,18 @@ class ConfigController extends Admin
     public function memberAction()
     {
         if ($this->isPostForm()) {
-            $data = $this->post('data');
-            $this->save_config($data);
-            $this->show_message('修改成功', 1, url('admin/config/member'));
+            $post_data = $this->post('data');
+            $this->save_config($post_data);
+            $this->msg_result = '修改成功';
         }
         $data = $this->site_config;
-
+        if ($post_data) {
+            $data = array_merge($data, $post_data);
+            unset($post_data);
+        }
         // 会员模型列表
         $membermodel = $this->membermodel;
+        $msg = $this->msg_result;
         include $this->admin_view('config/member');
     }
 
@@ -123,13 +133,17 @@ class ConfigController extends Admin
     public function urlAction()
     {
         if ($this->isPostForm()) {
-            $postdata = $this->post('data');
-            $this->save_config($postdata);
-            $this->show_message('修改成功', 1, url('admin/config/url'));
+            $post_data = $this->post('data');
+            $this->save_config($post_data);
+            $this->msg_result = '修改成功';
         }
         // 获取当前配置信息
         $data = $this->site_config;
-
+        if ($post_data) {
+            $data = array_merge($data, $post_data);
+            unset($post_data);
+        }
+        $msg = $this->msg_result;
         include $this->admin_view('config/url');
     }
 
@@ -139,13 +153,17 @@ class ConfigController extends Admin
     public function watermarkAction()
     {
         if ($this->isPostForm()) {
-            $postdata = $this->post('data');
-            $this->save_config($postdata);
-            $this->show_message('修改成功', 1, url('admin/config/watermark'));
+            $post_data = $this->post('data');
+            $this->save_config($post_data);
+            $this->msg_result = '修改成功';
         }
         // 获取当前配置信息
         $data = $this->site_config;
-
+        if ($post_data) {
+            $data = array_merge($data, $post_data);
+            unset($post_data);
+        }
+        $msg = $this->msg_result;
         include $this->admin_view('config/watermark');
     }
 
@@ -155,14 +173,18 @@ class ConfigController extends Admin
     public function weixinAction()
     {
         if ($this->isPostForm()) {
-            $postdata = $this->post('data');
-            $postdata['WEIXIN_MP_URL'] = HTTP_PRE . HTTP_HOST . url('api/weixin/index');
-            $this->save_config($postdata);
-            $this->show_message('修改成功', 1, url('admin/config/weixin'));
+            $post_data = $this->post('data');
+            $post_data['WEIXIN_MP_URL'] = HTTP_PRE . HTTP_HOST . url('api/weixin/index');
+            $this->save_config($post_data);
+            $this->msg_result = '修改成功';
         }
         // 获取当前配置信息
         $data = $this->site_config;
-
+        if ($post_data) {
+            $data = array_merge($data, $post_data);
+            unset($post_data);
+        }
+        $msg = $this->msg_result;
         include $this->admin_view('config/weixin');
     }
 
@@ -171,16 +193,20 @@ class ConfigController extends Admin
      */
     public function securityAction()
     {
-        // 获取当前配置信息
-        $data = $this->site_config;
 
         if ($this->isPostForm()) {
-            $postdata = $this->post('data');
-            $postdata['ADMIN_LOGINPATH'] = $postdata['ADMIN_LOGINPATH'] ? $postdata['ADMIN_LOGINPATH'] : 'admin';
-            $this->save_config($postdata);
-            $this->show_message('修改成功', 1, url('admin/config/security'));
+            $post_data = $this->post('data');
+            $post_data['ADMIN_LOGINPATH'] = $post_data['ADMIN_LOGINPATH'] ? $post_data['ADMIN_LOGINPATH'] : 'admin';
+            $this->save_config($post_data);
+            $this->msg_result = '修改成功';
         }
-
+        // 获取当前配置信息
+        $data = $this->site_config;
+        if ($post_data) {
+            $data = array_merge($data, $post_data);
+            unset($post_data);
+        }
+        $msg = $this->msg_result;
         include $this->admin_view('config/security');
     }
 
@@ -189,15 +215,18 @@ class ConfigController extends Admin
      */
     public function databaseAction()
     {
+        if ($this->isPostForm()) {
+            $postdata = $this->post('data');
+            // $this->save_config($postdata);
+            $this->msg_result = '功能未实现！';
+        }
         // 获取当前配置信息
         $data = $this->site_config;
-
-        if ($this->isPostForm()) {
-            // $postdata = $this->post('data');
-            // $this->save_config($postdata);
-            $this->show_message('功能未实现！', 1, url('admin/config/database'));
+        if ($post_data) {
+            $data = array_merge($data, $post_data);
+            unset($post_data);
         }
-
+        $msg = $this->msg_result;
         include $this->admin_view('config/database');
     }
 

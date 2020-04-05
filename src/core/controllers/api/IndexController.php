@@ -81,20 +81,6 @@ class IndexController extends Api
     }
 
     /**
-     * 获取关键字
-     */
-    public function ajaxkwAction()
-    {
-        $data = $this->post('data');
-        if (empty($data)) {
-            $this->response(200, $data, 'success');
-            exit();
-        }
-        $this->response(200, getKw($data), 'success');
-        // echo getKw($data);
-    }
-
-    /**
      * 移动客户端模板Ajax数据调用
      */
     public function mobiledataAction()

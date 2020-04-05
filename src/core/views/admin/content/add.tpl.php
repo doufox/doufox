@@ -1,5 +1,6 @@
 <?php include $this->admin_view('header'); ?>
 <?php include $this->admin_view('navbar'); ?>
+<?php include $this->admin_view('common/msg');?>
 
 <div class="container">
     <div class="panel panel-default">
@@ -102,7 +103,6 @@
 <script type="text/javascript">
     function ajaxtitle() {
         $('#title_text').html('');
-        admin_command.get_kw(); //读取关键字
         $.post('<?php echo url('admin/content/ajaxtitle'); ?>&id=' + Math.random(), {
             title: $('#title').val(),
             id: <?php echo $data[id] ? $data[id] : 0; ?>
