@@ -251,6 +251,7 @@ INSERT INTO `doufox_plugin` (`official`, `plugin`, `name`, `version`, `url`, `de
 (1, 'tips', '温馨提示', '1.0', 'https://doufox.com', '内置插件，它会在你管理主页面显示一句温馨的小提示。', 'doufox', 'https://doufox.com', 1),
 (1, 'helloworld', 'Hello World', '1.0', 'https://doufox.com', '内置插件，它会在你每个管理页面显示一句"Hello World !"。', 'doufox', 'https://doufox.com', 1);
 
+DROP TABLE IF EXISTS `doufox_attachment`;
 CREATE TABLE `doufox_attachment` (
     `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
     `contentid` int(10) unsigned NOT NULL DEFAULT '0',
