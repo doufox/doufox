@@ -4,6 +4,7 @@ class AttachmentController extends Admin
 {
 
     protected $dir;
+    protected $attachment;
 
     public function __construct()
     {
@@ -11,14 +12,31 @@ class AttachmentController extends Admin
         if (core::get_action_id() != 'ajaxswfupload' && !$this->session->get('user_id') && !$this->cookie->get('member_id')) {
             $this->attMsg('无权限操作，请登录。');
         }
-
+        $this->attachment = core::load_model('attachment');
         $this->dir = 'upload/';
+    }
+
+    /** 附件列表
+     * 数据库数据，开发中，需要将原有文件和文章关联起来
+     */
+    public function indexAction()
+    {
+        $this->load_index();
+    }
+
+    private function load_index()
+    {
+        $type = $this->type;
+        $msg = $this->msg_result;
+        $list = $this->attachment->findAll('id, filesize, filename, filepath, mimetype, create_time');
+        include $this->admin_view('attachment/index');
+        exit;
     }
 
     /** 目录浏览
      * 
      */
-    public function indexAction()
+    public function listAction()
     {
         $admin = $this->get('admin');
         if (empty($admin) && $this->memberinfo) {
