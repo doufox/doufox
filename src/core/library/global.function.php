@@ -769,7 +769,7 @@ function set_cache($cache_file, $value)
  * 获取缓存
  *
  * @param string $key
- * @return string
+ * @return mixed
  */
 function get_cache($cache_file)
 {
