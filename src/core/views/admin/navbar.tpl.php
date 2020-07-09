@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">

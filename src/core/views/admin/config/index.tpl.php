@@ -83,6 +83,12 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="ICP_FILING_NUMBER" class="col-sm-3 col-md-2 control-label">ICP备案号</label>
+                            <div class="col-sm-9 col-md-10">
+                                <input id="ICP_FILING_NUMBER" class="form-control" type="text" size="30" placeholder="ICP备案号" name="data[ICP_FILING_NUMBER]" value="<?php echo $data['ICP_FILING_NUMBER']; ?>" />
+                            </div>
+                        </div>
                     </div>
                     <div class="panel-footer">
                         <button type="submit" name="submit" class="btn btn-default">提交</button>

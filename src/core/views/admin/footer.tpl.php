@@ -1,6 +1,6 @@
 <div class="footer-sticky"></div>
 <div class="footer">
-    <div class="container">
+    <div class="container-fluid">
         <footer class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-text">

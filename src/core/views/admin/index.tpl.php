@@ -1,7 +1,7 @@
 <?php include $this->admin_view('header'); echo PHP_EOL; ?>
 <?php include $this->admin_view('navbar'); echo PHP_EOL; ?>
 <?php doHookAction('admin_index_top'); echo PHP_EOL; ?>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
     <div class="col-sm-3 col-md-3 col-lg-2 page_menu">
         <div class="panel panel-default">
