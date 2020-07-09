@@ -2,7 +2,7 @@
 <?php include $this->admin_view('navbar'); ?>
 <?php include $this->admin_view('common/msg');?>
 
-<div class="container">
+<div class="container-fluid">
     <form action="" method="post" target="result" class="form-inline">
         <div class="panel panel-default">
             <div class="panel-heading">更新内容URL</div>

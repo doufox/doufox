@@ -84,7 +84,7 @@
 <?php } ?>
 </script>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-3 col-lg-2 page_menu">
             <div class="panel panel-default">

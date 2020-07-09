@@ -2,7 +2,7 @@
 <?php include $this->admin_view('navbar'); ?>
 <?php include $this->admin_view('common/msg');?>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-3 col-lg-2 page_menu">
             <div class="panel panel-default">
@@ -12,6 +12,7 @@
                     <a class="list-group-item" href="<?php echo url('admin/config/member'); ?>">会员设置</a>
                     <a class="list-group-item" href="<?php echo url('admin/config/url'); ?>">URL设置</a>
                     <a class="list-group-item" href="<?php echo url('admin/config/watermark'); ?>">图片水印</a>
+                    <a class="list-group-item" href="<?php echo url('admin/config/attachment'); ?>">附件</a>
                     <a class="list-group-item" href="<?php echo url('admin/config/weixin'); ?>">微信设置</a>
                     <a class="list-group-item" href="<?php echo url('admin/config/security'); ?>">安全设置</a>
                     <a class="list-group-item" href="<?php echo url('admin/config/database'); ?>">数据库</a>

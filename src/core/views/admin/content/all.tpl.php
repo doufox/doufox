@@ -2,7 +2,7 @@
 <?php include $this->admin_view('navbar');?>
 <?php include $this->admin_view('common/msg');?>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-3 col-lg-2 page_menu">
             <iframe name="leftMain" id="leftMain" frameborder="false" scrolling="auto" height="auto" allowtransparency="true" src="<?php echo url('admin/content/category'); ?>"

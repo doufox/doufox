@@ -2,7 +2,7 @@
 <?php include $this->admin_view('navbar'); ?>
 <?php include $this->admin_view('common/msg'); ?>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-3 col-lg-2 page_menu">
             <div class="panel panel-default">
@@ -47,7 +47,7 @@
                         <tr>
                             <td><?php echo $t['id']; ?></td>
                             <td><?php echo $t['mimetype']; ?></td>
-                            <td onclick="<?php if (!$t['filepath']) { ?>album_cancel(this)<?php } ?>">
+                            <td>
                                 <a href="<?php echo $t['filepath']; ?>" target="_blank" title="新窗口打开" rel="<?php echo $t['filepath']; ?>"><?php echo $t['filename']; ?></a>
                             </td>
                             <td><?php echo date('Y-m-d H:i:s', $t['create_time']); ?></td>
