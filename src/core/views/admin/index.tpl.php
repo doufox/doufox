@@ -7,7 +7,7 @@ doHookAction('admin_index_top');
 <div class="container-fluid">
     <div class="row">
     <div class="col-sm-3 col-md-3 col-lg-2 page_menu">
-        <div class="panel panel-default">
+        <div class="panel panel-info">
             <div class="panel-heading">
                 <span class="panel-title">快速导航</span>
             </div>
