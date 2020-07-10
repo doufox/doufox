@@ -1,6 +1,6 @@
 <?php include $this->admin_view('header'); ?>
 <?php include $this->admin_view('navbar'); ?>
-<?php include $this->admin_view('common/msg');?>
+<?php include $this->admin_view('common/msg'); ?>
 
 <div class="container-fluid">
     <div class="row">
@@ -24,31 +24,41 @@
                         <a class="btn btn-default btn-xs" href="<?php echo url('admin/attachment/add'); ?>">添加附件</a>
                     </div>
                 </div>
-                <table width="100%" class="table table-bordered table-condensed table-hover" id="imgPreview">
+                <div class="panel-body">
+                    <a class="btn btn-default btn-sm" href="<?php echo url('admin/attachment/index'); ?>">全部</a>
+                    <a class="btn btn-default btn-sm" href="<?php echo url('admin/attachment/index', array('status'=>3)); ?>">已删除(<?php echo $count[3]; ?>)</a>
+                    <a class="btn btn-default btn-sm" href="<?php echo url('admin/attachment/index', array('status'=>0)); ?>">孤立文件(<?php echo $count[0]; ?>)</a>
+                    <a class="btn btn-default btn-sm" href="<?php echo url('admin/attachment/build'); ?>">扫描文件(<?php echo $count[0]; ?>)</a>
+                    <a class="btn btn-default btn-sm" href="<?php echo url('admin/attachment/add'); ?>">本地上传</a>
+                </div>
+                <table class="table table-bordered table-condensed table-hover" id="imgPreview">
                     <thead>
                         <tr>
-                            <th align="left">当前目录：<?php echo $dir; ?></th>
+                            <th>ID</th>
+                            <th>文件类型</th>
+                            <th>文件名</th>
+                            <th>上传时间</th>
+                            <th>文件大小</th>
+                            <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if ($istop) { ?>
-                            <tr>
-                                <td align="left"><a href="<?php echo $pdir; ?>"><img src="/static/img/folder-closed.gif">上一层目录</a></td>
-                            </tr>
-                        <?php }
-                        if (is_array($list)) {
-                            foreach ($list as $k => $t) { ?>
-                                <tr>
-                                    <td align="left" onclick="<?php if (!$t['url']) { ?>album_cancel(this)<?php } ?>">
-                                        <img src="/static/img/ext/<?php echo $t[ico]; ?>">
-                                        &nbsp;<a href="<?php if ($t['url']) {
-                                                            echo $t['url'];
-                                                        } else { ?>javascript:;<?php } ?> " rel="<?php echo $dir;
-                                                                                                            echo $t['name']; ?>" title="<?php echo $t['name']; ?>"><?php echo $t['name']; ?></a>
-                                    </td>
-                                </tr>
-                            <?php }
-                        } ?>
+                    <?php if (is_array($list)) { foreach ($list as $k => $t) { ?>
+                        <tr>
+                            <td><?php echo $t['id']; ?></td>
+                            <td><?php echo $t['mimetype']; ?></td>
+                            <td>
+                                <a href="<?php echo $t['filepath']; ?>" target="_blank" title="新窗口打开" rel="<?php echo $t['filepath']; ?>"><?php echo $t['filename']; ?></a>
+                            </td>
+                            <td><?php echo date('Y-m-d H:i:s', $t['create_time']); ?></td>
+                            <td><?php echo formatFileSize($t['filesize']); ?></td>
+                            <td>
+                                <a href="<?php echo url("admin/attachment/view", array("id" => $t['id'])); ?>">详情</a>
+                                <a href="<?php echo url('admin/attachment/edit', array('id' => $t['id'])); ?>">编辑</a>
+                                <a href="#modal-attachment-delete" data-toggle="modal" name="删除账号" onclick="account_delete(this);" data-id="<?php echo $t['userid']; ?>" data-name="<?php echo $t['username']; ?>">删除</a>
+                            </td>
+                        </tr>
+                    <?php } } ?>
                     </tbody>
                 </table>
                 <div class="panel-body">

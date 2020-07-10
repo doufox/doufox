@@ -37,6 +37,9 @@ abstract class Controller
      */
     public function __construct()
     {
+        if (!file_exists(DATA_PATH . 'installed')) {
+            $this->redirect(url('install/index'));
+        }
         if (get_magic_quotes_runtime()) {
             set_magic_quotes_runtime(0);
         }
@@ -46,9 +49,6 @@ abstract class Controller
             !isset($_POST) or $_POST = $this->add_slashes($_POST);
             !isset($_GET) or $_GET = $this->add_slashes($_GET);
             !isset($_SESSION) or $_SESSION = $this->add_slashes($_SESSION);
-        }
-        if (!file_exists(DATA_PATH . 'installed')) {
-            Controller::redirect(url('install/index'));
         }
 
         $this->site_config = core::get_site_config();
@@ -176,7 +176,7 @@ abstract class Controller
      * @param string $url 所要跳转的URL
      * @return void
      */
-    public function redirect($url)
+    public static function redirect($url)
     {
         // 参数分析
         if (!$url) {

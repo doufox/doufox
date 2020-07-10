@@ -2,7 +2,7 @@
 <?php include $this->admin_view('navbar'); ?>
 <?php include $this->admin_view('common/msg');?>
 
-<div class="container">
+<div class="container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
             <span class="panel-title">添加内容</span>

@@ -139,6 +139,7 @@ class IndexController extends Controller
     public function searchAction()
     {
         $kw = $this->get('kw');
+        $catid = $this->get('catid');
         $kw = urldecode($kw);
         if (!$kw) {
             $this->show_message('请输入关键字');

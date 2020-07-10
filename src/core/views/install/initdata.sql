@@ -245,8 +245,25 @@ CREATE TABLE IF NOT EXISTS `doufox_plugin`(
     `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
     `time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
     PRIMARY KEY(`id`)
-) ENGINE = MyISAM DEFAULT CHARSET = utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO `doufox_plugin` (`official`, `plugin`, `name`, `version`, `url`, `description`, `author`, `author_url`, `status`) VALUES
 (1, 'tips', '温馨提示', '1.0', 'https://doufox.com', '内置插件，它会在你管理主页面显示一句温馨的小提示。', 'doufox', 'https://doufox.com', 1),
 (1, 'helloworld', 'Hello World', '1.0', 'https://doufox.com', '内置插件，它会在你每个管理页面显示一句"Hello World !"。', 'doufox', 'https://doufox.com', 1);
+
+DROP TABLE IF EXISTS `doufox_attachment`;
+CREATE TABLE `doufox_attachment` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `contentid` int(10) unsigned NOT NULL DEFAULT '0',
+    `filename` varchar(255) NOT NULL DEFAULT '',
+    `filesize` int(10) NOT NULL DEFAULT '0',
+    `filepath` varchar(255) NOT NULL DEFAULT '',
+    `width` int(10) NOT NULL DEFAULT '0',
+    `height` int(10) NOT NULL DEFAULT '0',
+    `mimetype` varchar(40) NOT NULL DEFAULT '',
+    `thumfor` int(10) NOT NULL DEFAULT '0',
+    `create_time` bigint(20) NOT NULL DEFAULT '0',
+    `update_time` bigint(20) NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`),
+    KEY `contentid` (`contentid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

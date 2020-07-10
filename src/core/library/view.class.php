@@ -114,6 +114,8 @@ class view
             '#{template\s+(.+?)\s*}#is',
             '#{block\s+([0-9]+)}#i',
 
+            '#{attachment\s+([0-9]+)}#i',
+
             '#{nav\s+(.+?)\s?}#i',
             '#{\/nav}#i',
 
@@ -141,6 +143,8 @@ class view
         $replace_array = array(
             "<?php include \$this->_include('\\1'); echo PHP_EOL; ?>",
             "<?php \$this->block(\\1);?>",
+
+            "<?php \$this->attachment(\\1);?>",
 
             "<?php \$return = \$this->_category(\"\\1\");  if (is_array(\$return)) { foreach (\$return as \$key=>\$vdata) { \$arrchilds = @explode(',', \$vdata['arrchilds']);    \$current = in_array(\$catid, \$arrchilds);?>",
             "<?php } } ?>",

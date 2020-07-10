@@ -1,10 +1,13 @@
-<?php include $this->admin_view('header'); echo PHP_EOL; ?>
-<?php include $this->admin_view('navbar'); echo PHP_EOL; ?>
-<?php doHookAction('admin_index_top'); echo PHP_EOL; ?>
-<div class="container">
+<?php
+include $this->admin_view('header');
+include $this->admin_view('navbar');
+doHookAction('admin_index_top');
+?>
+
+<div class="container-fluid">
     <div class="row">
     <div class="col-sm-3 col-md-3 col-lg-2 page_menu">
-        <div class="panel panel-default">
+        <div class="panel panel-info">
             <div class="panel-heading">
                 <span class="panel-title">快速导航</span>
             </div>
@@ -53,5 +56,7 @@
     </div>
 </div>
 
-<?php doHookAction('admin_index_bottom'); echo PHP_EOL; ?>
-<?php include $this->admin_view('footer'); echo PHP_EOL; ?>
+<?php
+doHookAction('admin_index_bottom');
+include $this->admin_view('footer');
+?>
