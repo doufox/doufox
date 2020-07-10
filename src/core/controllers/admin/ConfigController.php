@@ -45,6 +45,8 @@ class ConfigController extends Admin
             'WEIXIN_MP_AESKEY' => 'EncodingAESKey,消息加密密钥由43位字符组成',
             'ADMIN_LOGINCODE' => '后台登录需要输入验证码',
             'ADMIN_LOGINPATH' => '后台登录路径默认admin',
+            'ICP_FILING_NUMBER' => '网站ICP备案号',
+            'STORAGE_TYPE' => '附件存储形式'
         );
     }
 
@@ -59,7 +61,7 @@ class ConfigController extends Admin
             $this->msg_result = '修改成功';
         }
         $data = $this->site_config;
-        if ($post_data) {
+        if (isset($post_data)) {
             $data = array_merge($data, $post_data);
             unset($post_data);
         }
@@ -84,7 +86,7 @@ class ConfigController extends Admin
             $this->msg_result = '修改成功';
         }
         $data = $this->site_config;
-        if ($post_data) {
+        if (isset($post_data)) {
             $data = array_merge($data, $post_data);
             unset($post_data);
         }
@@ -140,7 +142,7 @@ class ConfigController extends Admin
         }
         // 获取当前配置信息
         $data = $this->site_config;
-        if ($post_data) {
+        if (isset($post_data)) {
             $data = array_merge($data, $post_data);
             unset($post_data);
         }
@@ -160,7 +162,7 @@ class ConfigController extends Admin
         }
         // 获取当前配置信息
         $data = $this->site_config;
-        if ($post_data) {
+        if (isset($post_data)) {
             $data = array_merge($data, $post_data);
             unset($post_data);
         }
@@ -181,7 +183,7 @@ class ConfigController extends Admin
         }
         // 获取当前配置信息
         $data = $this->site_config;
-        if ($post_data) {
+        if (isset($post_data)) {
             $data = array_merge($data, $post_data);
             unset($post_data);
         }
@@ -203,12 +205,32 @@ class ConfigController extends Admin
         }
         // 获取当前配置信息
         $data = $this->site_config;
-        if ($post_data) {
+        if (isset($post_data)) {
             $data = array_merge($data, $post_data);
             unset($post_data);
         }
         $msg = $this->msg_result;
         include $this->admin_view('config/security');
+    }
+
+    /**
+     * 附件设置
+     */
+    public function attachmentAction()
+    {
+        if ($this->isPostForm()) {
+            $post_data = $this->post('data');
+            $this->save_config($post_data);
+            $this->msg_result = '修改成功';
+        }
+        // 获取当前配置信息
+        $data = $this->site_config;
+        if (isset($post_data)) {
+            $data = array_merge($data, $post_data);
+            unset($post_data);
+        }
+        $msg = $this->msg_result;
+        include $this->admin_view('config/attachment');
     }
 
     /**
@@ -223,7 +245,7 @@ class ConfigController extends Admin
         }
         // 获取当前配置信息
         $data = $this->site_config;
-        if ($post_data) {
+        if (isset($post_data)) {
             $data = array_merge($data, $post_data);
             unset($post_data);
         }
