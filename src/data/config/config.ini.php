@@ -37,5 +37,7 @@ return array(
     'WEIXIN_MP_AESKEY'        => '', // EncodingAESKey,消息加密密钥由43位字符组成
     'RAND_CODE'               => '1284adb94da485e70f8c3064da8232d9', // 随机代码
     'ADMIN_LOGINCODE'         => '0', // 后台登录需要输入验证码
-    'ADMIN_LOGINPATH'         => 'admin' // 后台登录路径默认admin
+    'ADMIN_LOGINPATH'         => 'admin', // 后台登录路径默认admin
+    'ICP_FILING_NUMBER'       => '沪ICP备12345678号', // 网站ICP备案号
+    'STORAGE_TYPE'            => '0' // 附件存储形式
 );

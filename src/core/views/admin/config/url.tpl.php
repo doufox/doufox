@@ -43,7 +43,7 @@
                             <tr>
                                 <th>显示模式</th>
                                 <td>
-                                    <label class="label-group"><input name="data[DIY_URL]" type="radio" value="0" <?php if (!$data['DIY_URL']) { ?>checked<?php } ?> onClick="set_url_type();">普通模式</label>
+                                    <label class="label-group"><input name="data[DIY_URL]" type="radio" value="0" <?php if (empty($data['DIY_URL'])) { ?>checked<?php } ?> onClick="set_url_type();">普通模式</label>
                                     <label class="label-group"><input name="data[DIY_URL]" type="radio" value="1" <?php if ($data['DIY_URL'] == 1) { ?>checked<?php } ?> onClick="set_url_type('diy');">伪静态</label>
                                     <label class="label-group"><input name="data[DIY_URL]" type="radio" value="2" <?php if ($data['DIY_URL'] == 2) { ?>checked<?php } ?> onClick="set_url_type('diy');">静态</label>
                                 </td>
@@ -52,7 +52,7 @@
                                 <tr>
                                     <th>入口文件</th>
                                     <td>
-                                        <label class="label-group"><input name="data[HIDE_ENTRY_FILE]" type="radio" value="false" <?php if (!$data['HIDE_ENTRY_FILE']) { ?>checked<?php } ?>>显示</label>
+                                        <label class="label-group"><input name="data[HIDE_ENTRY_FILE]" type="radio" value="false" <?php if (empty($data['HIDE_ENTRY_FILE'])) { ?>checked<?php } ?>>显示</label>
                                         <label class="label-group"><input name="data[HIDE_ENTRY_FILE]" type="radio" value="true" <?php if ($data['HIDE_ENTRY_FILE']) { ?>checked<?php } ?>>隐藏</label>
                                     </td>
                                 </tr>
@@ -60,12 +60,12 @@
                                     <th>栏目参数格式</th>
                                     <td>
                                         
-                                        <label class="label-group"><input name="data[URL_LIST_TYPE]" type="radio" value="false" <?php if (!$data['URL_LIST_TYPE']) { ?>checked<?php } ?>>栏目ID</label>
+                                        <label class="label-group"><input name="data[URL_LIST_TYPE]" type="radio" value="false" <?php if (empty($data['URL_LIST_TYPE'])) { ?>checked<?php } ?>>栏目ID</label>
                                         <label class="label-group"><input name="data[URL_LIST_TYPE]" type="radio" value="true" <?php if ($data['URL_LIST_TYPE']) { ?>checked<?php } ?>>栏目目录</label>
                                     </td>
                                 </tr>
                             </tbody>
-                            <tbody class="url-type-diy" style="display:<?php if (!$data['DIY_URL']) { ?>none<?php } ?>">
+                            <tbody class="url-type-diy" style="display:<?php if (empty($data['DIY_URL'])) { ?>none<?php } ?>">
                                 <tr>
                                     <th>栏目页</th>
                                     <td>
@@ -110,7 +110,7 @@
                             <p class="url-type-default" style="display:<?php if ($data['DIY_URL']) { ?>none<?php } ?>">
                                 栏目参数形式，ID形式：catid=123，目录形式：catpath=catpath
                             </p>
-                            <p class="url-type-diy" style="display:<?php if (!$data['DIY_URL']) { ?>none<?php } ?>">伪静态需要服务器支持并配置相关规则文件。</p>
+                            <p class="url-type-diy" style="display:<?php if (empty($data['DIY_URL'])) { ?>none<?php } ?>">伪静态需要服务器支持并配置相关规则文件。</p>
                         </div>
                     </div>
                     <div class="panel-footer">

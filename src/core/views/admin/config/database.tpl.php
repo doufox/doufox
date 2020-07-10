@@ -12,7 +12,7 @@
                     <a class="list-group-item" href="<?php echo url('admin/config/member'); ?>">会员设置</a>
                     <a class="list-group-item" href="<?php echo url('admin/config/url'); ?>">URL设置</a>
                     <a class="list-group-item" href="<?php echo url('admin/config/watermark'); ?>">图片水印</a>
-                    <a class="list-group-item" href="<?php echo url('admin/config/attachment'); ?>">附件</a>
+                    <a class="list-group-item" href="<?php echo url('admin/config/attachment'); ?>">附件设置</a>
                     <a class="list-group-item" href="<?php echo url('admin/config/weixin'); ?>">微信公众号</a>
                     <a class="list-group-item" href="<?php echo url('admin/config/security'); ?>">安全设置</a>
                     <a class="list-group-item active" href="<?php echo url('admin/config/database'); ?>">数据库</a>
@@ -23,7 +23,7 @@
             <form method="post" action="" class="form-horizontal">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <span class="panel-title">数据库设置</span>
+                        <span class="panel-title">数据库设置(开发中)</span>
                     </div>
                     <div class="panel-body">
                         <table class="table_form">
