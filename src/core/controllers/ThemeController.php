@@ -1,4 +1,7 @@
 <?php
+if (!defined('IN_CMS')) {
+    exit();
+}
 
 /**
  * 主题文件加载

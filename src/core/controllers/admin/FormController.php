@@ -1,4 +1,7 @@
 <?php
+if (!defined('IN_CMS')) {
+    exit();
+}
 
 class FormController extends Admin
 {

@@ -1,4 +1,7 @@
 <?php
+if (!defined('IN_CMS')) {
+    exit();
+}
 
 /**
  * 系统安装模块

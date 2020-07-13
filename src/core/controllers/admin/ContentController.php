@@ -1,4 +1,7 @@
 <?php
+if (!defined('IN_CMS')) {
+    exit();
+}
 
 class ContentController extends Admin
 {
