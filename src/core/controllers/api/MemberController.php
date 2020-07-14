@@ -36,17 +36,22 @@ class MemberController extends Api
         }
 
         $total = $this->member->count('member', null, $where);
-        $totalpage = ceil($total / $pagesize);
-        if ($page > $totalpage) {
-            $this->response(403, null, '页码超出范围');
+        if (empty($total)) {
+            $totalpage = 0;
+            $list = array();
+        } else {
+            $totalpage = ceil($total / $pagesize);
+            if ($page > $totalpage) {
+                $this->response(403, null, '页码超出范围');
+            }
+            $select = $this->member->page_limit($page, $pagesize)->order(array('status ASC', 'id DESC'));
+            if ($modelid) {
+                $select->where('modelid=' . $modelid);
+            }
+            $list = $select->from('member', 'id,nickname,avatar,status,credits,regdate')->select();
+            // $list = $select->select(); // avatar,credits,email,id,modelid,nickname,password,regdate,regip,salt,status,username
         }
 
-        $select = $this->member->page_limit($page, $pagesize)->order(array('status ASC', 'id DESC'));
-        if ($modelid) {
-            $select->where('modelid=' . $modelid);
-        }
-        $list = $select->from('member', 'id,nickname,avatar,status,credits,regdate')->select();
-        // $list = $select->select(); // avatar,credits,email,id,modelid,nickname,password,regdate,regip,salt,status,username
         $data = array(
             'list' => $list,
             'page' => $page,
