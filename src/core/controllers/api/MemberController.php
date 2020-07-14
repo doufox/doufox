@@ -25,7 +25,7 @@ class MemberController extends Api
         if ($page < 1) {
             $this->response(403, null, '页码不能小于1');
         }
-        $pagesize = (int) $this->get('pagesize', 10); // 分页大小
+        $pagesize = (int) $this->get('pagesize', 15); // 分页大小
         if ($pagesize < 1) {
             $this->response(403, null, '分页大小不能小于1');
         }
