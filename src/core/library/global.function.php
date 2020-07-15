@@ -842,6 +842,17 @@ function is_mobile()
 }
 
 /**
+ * 判断客户端是否是微信
+ */
+function is_weixin()
+{
+    if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+        return true;
+    }
+    return false;
+}
+
+/**
  * 判断是否https
  */
 function is_https()
