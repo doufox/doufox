@@ -81,11 +81,9 @@ abstract class Controller
         // }
 
         // 载入会员系统缓存
-        if (is_dir(CTRL_PATH . 'member')) {
-            $this->member = core::load_model('member');
-            $this->membermodel = get_cache('membermodel');
-            $this->memberinfo = $this->getMember();
-        }
+        $this->member = core::load_model('member');
+        $this->membermodel = get_cache('membermodel');
+        $this->memberinfo = $this->getMember();
 
         $this->view->assign(array(
             'site_generator' => APP_NAME,
@@ -102,10 +100,13 @@ abstract class Controller
 
     /**
      * 获取并分析$_GET数组某参数值
+     * @param string $key 参数
+     * @param string $value 默认值
+     * @return null|string|int
      */
-    public static function get($string)
+    public static function get($key, $value = null)
     {
-        $name = isset($_GET[$string]) ? $_GET[$string] : null;
+        $name = isset($_GET[$key]) ? $_GET[$key] : $value;
         if (!is_array($name)) {
             return htmlspecialchars(trim($name));
         }

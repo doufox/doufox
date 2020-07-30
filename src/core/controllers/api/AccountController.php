@@ -1,4 +1,8 @@
 <?php
+if (!defined('IN_CMS')) {
+    exit();
+}
+
 /**
  * 后台账号管理
  */

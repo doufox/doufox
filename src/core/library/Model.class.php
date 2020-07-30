@@ -667,7 +667,7 @@ abstract class Model
         }
 
         $data = $select->select(false);
-        return $data['total_num'];
+        return (int) $data['total_num'];
     }
 
     /**
