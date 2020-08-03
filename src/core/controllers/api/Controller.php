@@ -39,6 +39,7 @@ class Api extends Controller
      */
     public function response($code = 400, $data = NULL, $msg = 'error')
     {
+        header('Access-Control-Allow-Origin: *');
         header('Content-Type:application/json');
         $raw = array(
             'code' => $code,
