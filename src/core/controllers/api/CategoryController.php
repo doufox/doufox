@@ -26,9 +26,9 @@ class CategoryController extends Api
      */
     public function listAction()
     {
-        $list = $this->category_cache; // 读取文件缓存
+        // $list = $this->category_cache; // 读取文件缓存
         // 读取数据库后台不会根据排序显示
-        // $list = $this->category->findAll('catid,typeid,parentid,child,http,catname');
+        $list = $this->category->findAll('catid,typeid,catpath,catname');
         $this->response(200, $list, 'success');
     }
 }
