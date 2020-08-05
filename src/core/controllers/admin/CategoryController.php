@@ -285,7 +285,7 @@ class CategoryController extends Admin
                 $category[$t['catid']]['arrmodelid'][] = $t['modelid'];
             } else {
                 $category[$t['catid']]['arrmodelid'] = array();
-                $ids = _catposids($t['catid'], null, $category);
+                $ids = _catposids($t['catid'], NULL, $category);
                 $ids = explode(',', $ids);
                 foreach ($ids as $id) {
                     if ($id && $id != $t['catid']) {

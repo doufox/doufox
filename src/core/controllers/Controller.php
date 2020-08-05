@@ -102,25 +102,25 @@ abstract class Controller
      * 获取并分析$_GET数组某参数值
      * @param string $key 参数
      * @param string $value 默认值
-     * @return null|string|int
+     * @return NULL|string|int
      */
-    public static function get($key, $value = null)
+    public static function get($key, $value = NULL)
     {
         $name = isset($_GET[$key]) ? $_GET[$key] : $value;
         if (!is_array($name)) {
             return htmlspecialchars(trim($name));
         }
-        return null;
+        return NULL;
     }
 
     /**
      * 获取并分析$_POST数组某参数值
      */
-    public static function post($string, $a = 0)
+    public static function post($string = NULL, $a = 0)
     {
-        $name = $a ? $string : (isset($_POST[$string]) ? $_POST[$string] : null);
+        $name = $a ? $string : (isset($_POST[$string]) ? $_POST[$string] : NULL);
         if (is_null($name)) {
-            return null;
+            $name = $_POST;
         }
 
         if (!is_array($name)) {
@@ -133,7 +133,7 @@ abstract class Controller
     }
 
     /**
-     * 验证表单是否POST提交
+     * 是否表单POST提交
      */
     public static function isPostForm($var = 'submit', $emp = 0)
     {
@@ -332,7 +332,7 @@ abstract class Controller
                 $data_fields .= '<tr>';
                 $data_fields .= '<th>' . $t['name'] . '：</th><td>';
                 $data_fields .= '<div class="fields-list" id="list_' . $t['field'] . '_fields"><ul id="' . $t['field'] . '-sort-items">';
-                $merge_string = null;
+                $merge_string = NULL;
                 $contentdata = empty($data[$t['field']]) ? array(0 => array()) : string2array($data[$t['field']]);
                 $setting = string2array($t['setting']);
                 $string = $setting['content'];
@@ -351,7 +351,7 @@ abstract class Controller
                             }
 
                             if (empty($merge_string) && function_exists($func)) {
-                                eval("\$o_str = " . $func . "(" . $field . ", null, " . $value['setting'] . ");");
+                                eval("\$o_str = " . $func . "(" . $field . ", NULL, " . $value['setting'] . ");");
                             }
 
                             $regex_array[] = '{' . $field . '}';
@@ -462,11 +462,11 @@ abstract class Controller
     protected function getModelJoin($modelid)
     {
         if (empty($modelid)) {
-            return null;
+            return NULL;
         }
 
         $data = get_cache('formmodel');
-        $return = null;
+        $return = NULL;
         if ($data) {
             foreach ($data as $t) {
                 if ($t['joinid'] == $modelid) {
@@ -484,7 +484,7 @@ abstract class Controller
     {
         $data = get_cache('formmodel');
         $join = get_cache('joinmodel');
-        $return = null;
+        $return = NULL;
         if ($data) {
             foreach ($data as $id => $t) {
                 if (isset($t['setting']['form']['member']) && $t['setting']['form']['member']) {

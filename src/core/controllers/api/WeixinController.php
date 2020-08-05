@@ -3,7 +3,7 @@ if (!defined('IN_CMS')) {
     exit();
 }
 
-class WeixinController extends Api
+class WeixinController extends API
 {
 
     public function __construct()
@@ -13,11 +13,10 @@ class WeixinController extends Api
 
     public function indexAction()
     {
-        $this->valid();
-        // $this->response(401, null, 'Weixin Api');
+        $this->response(401, NULL, 'Weixin API');
     }
 
-    public function valid()
+    public function validAction()
     {
         $echoStr = $_GET['echostr'];
 

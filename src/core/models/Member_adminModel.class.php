@@ -3,7 +3,7 @@ if (!defined('IN_CMS')) {
     exit();
 }
 
-class MemberModel extends Model
+class Member_adminModel extends Model
 {
 
     public function get_primary_key()

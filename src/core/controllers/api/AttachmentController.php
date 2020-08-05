@@ -3,7 +3,7 @@ if (!defined('IN_CMS')) {
     exit();
 }
 
-class AttachmentController extends Controller
+class AttachmentController extends API
 {
 
     protected $dir;
@@ -156,7 +156,7 @@ class AttachmentController extends Controller
         $size = (int) $this->get('size');
         $this->view->assign('note', '文件格式' . $type . '，文件大小不超过' . $size . 'MB');
         if ($this->isPostForm()) {
-            $data = $this->upload('file', explode(',', $type), $size, null, null, $this->post('admin'));
+            $data = $this->upload('file', explode(',', $type), $size, NULL, NULL, $this->post('admin'));
             if ($data['result']) {
                 $row = array(
                     'error' => 1,
@@ -191,7 +191,7 @@ class AttachmentController extends Controller
      * @param  $stype  上传方式  swf或者ke
      * @return Array   返回数组
      */
-    private function upload($fields, $type, $size, $img = null, $mark = true, $admin = 0, $stype = null)
+    private function upload($fields, $type, $size, $img = NULL, $mark = true, $admin = 0, $stype = NULL)
     {
         $path = $this->dir;
         $upload = core::load_class('file_upload');
@@ -246,7 +246,7 @@ class AttachmentController extends Controller
                 exit('0,' . '文件大小参数错误');
             }
 
-            $data = $this->upload('Filedata', $_type, $size, null, null, $this->post('admin'), 'swf');
+            $data = $this->upload('Filedata', $_type, $size, NULL, NULL, $this->post('admin'), 'swf');
             if ($data['result']) {
                 exit('0,' . $data['result']);
             }
@@ -282,7 +282,7 @@ class AttachmentController extends Controller
         if (is_null($_FILES['imgFile']['size']) || $_FILES['imgFile']['size'] > $size * 1024 * 1024) {
             echo json_encode(array('error' => 1, 'message' => '不能超过' . $size . 'MB'));exit;
         }
-        $data = $this->upload('imgFile', $ext[$dir], $size, $img, null, $this->getAdmin(), 'ke');
+        $data = $this->upload('imgFile', $ext[$dir], $size, $img, NULL, $this->getAdmin(), 'ke');
         if ($data['result']) {
             echo json_encode(array('error' => 1, 'message' => $data['result']));exit;
         } else {
@@ -441,7 +441,7 @@ class AttachmentController extends Controller
     /**
      * 消息提示
      */
-    private function attMsg($msg, $stype = null)
+    private function attMsg($msg, $stype = NULL)
     {
         if ($stype == 'swf') {
             exit('0,' . $msg);

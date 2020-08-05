@@ -3,7 +3,7 @@ if (!defined('IN_CMS')) {
     exit();
 }
 
-class ContentController extends Api
+class ContentController extends API
 {
 
     public function __construct()
@@ -13,50 +13,17 @@ class ContentController extends Api
 
     public function indexAction()
     {
+        $id = (int) $this->get('id');
+        if ($id) {
+            // 指定栏目
+            $this->get_content($id);
+        }
         $data = array(
-            'site_title' => $this->site_config['SITE_TITLE'],
-            'site_keywords' => $this->site_config['SITE_KEYWORDS'],
-            'site_description' => $this->site_config['SITE_DESCRIPTION'],
+            'title' => $this->site_config['SITE_TITLE'],
+            'keywords' => $this->site_config['SITE_KEYWORDS'],
+            'description' => $this->site_config['SITE_DESCRIPTION'],
         );
-        $this->response(200, $data, 'success');
-    }
-
-    /**
-     * 显示栏目菜单列表
-     */
-    public function categoryAction()
-    {
-        $catlist = $this->category_cache; // 读取文件缓存
-
-        // 读取数据库后台不会根据排序显示
-        // $catlist =  $this->category->findAll('catid,typeid,parentid,child,http,catname');
-        $tree = core::load_class('tree');
-        $categorys = array();
-        if (!empty($catlist)) {
-            foreach ($catlist as $r) {
-                if ($r['typeid'] == 1) {
-                    $r['icon_type'] = 'glyphicon glyphicon-list-alt'; // 栏目
-                } else if ($r['typeid'] == 2) {
-                    $r['icon_type'] = 'glyphicon glyphicon-file'; // 内置页面
-                } else if ($r['typeid'] == 3) {
-                    $r['icon_type'] = 'glyphicon glyphicon-link'; // 链接
-                } else {
-                    $r['icon_type'] = 'glyphicon glyphicon-book'; // 独立页面
-                }
-                $r['urla'] = url('admin/content/index', array('catid' => $r['catid']));
-                $categorys[$r['catid']] = $r;
-            }
-        }
-        if (!empty($categorys)) {
-            // $tree->init($categorys);
-            // $strs = "<span class='\$icon_type'><a href='\$urla' target='right' onclick='open_list(this)'>\$catname</a></span>";
-            // $strs2 = "<span class='folder'>\$catname</span>";
-            // $categorys = $tree->get_treeview(0,'category_tree',$strs,$strs2);
-            $this->response(200, $catlist, '11success');
-        } else {
-            $categorys = '没有分类请添加或刷新';
-            $this->response(200, array(), 'success');
-        }
+        $this->response(400, $data, 'Success');
     }
 
     /**
@@ -64,30 +31,34 @@ class ContentController extends Api
      */
     public function addAction()
     {
-        $catid = (int) $this->get('catid');
-        $modelid = (int) $this->get('modelid');
-        $model = get_cache('contentmodel');
-        if (!isset($model[$modelid])) {
-            $this->show_message('模型不存在');
+        if (!$this->inlogged()) {
+            $this->response(401, NULL, 'Unauthorized');
         }
-
-        $fields = $model[$modelid]['fields'];
-        if ($this->isPostForm()) {
-            $data = $this->post('data');
-            if (empty($data['catid'])) {
-                $this->show_message('请选择发布栏目');
+        if ($this->is_post()) {
+            $data = $this->post();
+            $catid = (int) $this->post('catid');
+            $modelid = (int) $this->post('modelid');
+            if (empty($catid)) {
+                $this->response(400, $data, 'Need Key `catid`');
             }
-
+            if (empty($modelid)) {
+                $this->response(400, $data, 'Need Key `modelid`');
+            }
+            $model = get_cache('contentmodel');
+            if (!isset($model[$modelid])) {
+                $this->response(404, $data, 'Not Found contentmodel');
+            }
             if (empty($data['title'])) {
-                $this->show_message('标题没有填写');
+                $this->response(404, $data, 'Need Key `title`');
             }
+            $fields = $model[$modelid]['fields'];
 
             if ($this->category_cache[$data['catid']]['modelid'] != $modelid) {
                 $this->show_message('栏目模型对不上，请重新选择栏目');
             }
 
-            $this->checkFields($fields, $data, 1); //验证自定义字段
-
+            $this->checkFields($fields, $data, 1); // 验证自定义字段
+            
             $data['username'] = $this->session->get('user_id');
             $data['time'] = $data['time'] ? $data['time'] : time();
             $data['modelid'] = $modelid;
@@ -100,29 +71,10 @@ class ContentController extends Api
             $this->content->url($result, getUrl($data));
             $msg = '<a href="' . url('admin/content/add', array('catid' => $data['catid'], 'modelid' => $modelid)) . '" style="font-size:14px;">继续添加</a>&nbsp;&nbsp;<a href="' . url('admin/content/index', array('modelid' => $modelid, 'catid' => $catid)) . '" style="font-size:14px;">返回列表</a>';
             $this->show_message('添加成功, 您可以继续操作' . '<div style="padding-top:10px;">' . $msg . '</div>', 1, 0, 5);
+            $this->response(200, $data, 'Success');
+        } else {
+            $this->response(405, NULL, 'Method Not Allowed');
         }
-        $data_fields = $this->getFields($fields, $data);
-        $data = array('catid' => $this->get('catid'));
-        $model = $model[$modelid];
-
-        $tree = core::load_class('tree');
-        $tree->icon = array(' ', '  ', '  ');
-        $tree->nbsp = '&nbsp;';
-        $categorys = array();
-        foreach ($this->category_cache as $cid => $r) {
-            if ($modelid && $modelid != $r['modelid']) {
-                continue;
-            }
-
-            $r['disabled'] = $r['child'] ? 'disabled' : '';
-            $r['selected'] = $cid == $catid ? 'selected' : '';
-            $categorys[$cid] = $r;
-        }
-        $str = "<option value='\$catid' \$selected \$disabled>\$spacer \$catname</option>";
-        $tree->init($categorys);
-        $category = $tree->get_tree(0, $str);
-
-        include $this->admin_view('content/add');
     }
 
     /**
@@ -130,17 +82,23 @@ class ContentController extends Api
      */
     public function editAction()
     {
+        if (!$this->inlogged()) {
+            $this->response(401, NULL, 'Unauthorized');
+        }
         $id = (int) $this->get('id');
+        if (empty($id)) {
+            $this->response(404, NULL, 'Need Key `id`');
+        }
         $data = $this->content->find($id);
         if (empty($data)) {
-            $this->show_message('内容不存在');
+            $this->response(404, NULL, 'Not Found');
         }
 
         $catid = $data['catid'];
         $modelid = $data['modelid'];
         $model = get_cache('contentmodel');
         if (!isset($model[$modelid])) {
-            $this->show_message('模型不存在');
+            $this->response(404, NULL, 'contentmodel not found');
         }
 
         $fields = $model[$modelid]['fields'];
@@ -203,6 +161,9 @@ class ContentController extends Api
      */
     public function delAction($id = 0, $catid = 0, $all = 0)
     {
+        if (!$this->inlogged()) {
+            $this->response(401, NULL, 'Unauthorized');
+        }
         $id = $id ? $id : (int) $this->get('id');
         $catid = $catid ? $catid : (int) $this->get('catid');
         $all = $all ? $all : $this->get('all');
@@ -240,7 +201,7 @@ class ContentController extends Api
     {
         if ($this->isPostForm()) {
             $catids = $this->post('catids');
-            $cats = null;
+            $cats = NULL;
             if ($catids && !in_array(0, $catids)) {
                 $cats = @implode(',', $catids);
             } else {
@@ -248,7 +209,6 @@ class ContentController extends Api
                     if ($c['typeid'] == 1) {
                         $cats[$c['catid']] = $c['catid'];
                     }
-
                 }
                 $cats = @implode(',', $cats);
             }
@@ -274,7 +234,7 @@ class ContentController extends Api
             $catids = $this->get('catids');
             $cats = @explode(',', $catids);
             $catid = $this->get('catid') ? $this->get('catid') : $cats[0];
-            $cat = isset($this->category_cache[$catid]) ? $this->category_cache[$catid] : null;
+            $cat = isset($this->category_cache[$catid]) ? $this->category_cache[$catid] : NULL;
             if (!$cat) {
                 echo '<style type="text/css">div, a { color: #777777;}</style>
                 <div style="font-size:12px;padding-top:0px;">
@@ -360,17 +320,73 @@ class ContentController extends Api
     {
         $id = (int) $this->get('id');
         if (empty($id)) {
-            $this->response(400, null, 'content id required');
-            exit();
+            $this->response(400, NULL, 'Need Key `id`');
         }
         $data = $this->content->find($id, 'hits');
         if (empty($data)) {
-            $this->response(404, null, 'Not found');
-            exit();
+            $this->response(404, NULL, 'Not found');
         }
         $count = $data['hits'] + 1;
         $this->content->update(array('hits' => 'hits+1'), 'id=' . $id);
         $this->response(200, array('hits' => $count), 'success');
     }
 
+    /**
+     * 内容展示
+     */
+    private function get_content($id)
+    {
+        $page = (int) $this->get('page');
+        $page = $page ? $page : 1;
+        $id = $id ? $id : (int) $this->get('id');
+        if (!isset($id)) {
+            $this->response(403, NULL, 'Need Key `id`');
+        }
+        $data = $this->content->find($id);
+        if (empty($data)) {
+            $this->response(404, NULL, 'Not Found');
+        }
+        if (!$data['status']) {
+            $this->response(401, NULL, 'Under review');
+        }
+        $model = get_cache('contentmodel');
+        if (!isset($model[$data['modelid']]) || empty($model[$data['modelid']])) {
+            $this->response(401, NULL, 'model Not Found');
+        }
+        $catid = $data['catid'];
+        $cat = $this->category_cache[$catid];
+        if ($cat['islook'] && !$this->getMember) {
+            $this->response(401, NULL, '当前栏目游客不允许查看！');
+        }
+
+        $table = core::load_model($cat['tablename']);
+        $_data = $table->find($id);
+        $data = array_merge($data, $_data); // 合并主表和附表
+        $data = $this->getFieldData($model[$cat['modelid']], $data);
+        if (isset($data['content']) && strpos($data['content'], '{-page-}') !== false) {
+            $content = explode('{-page-}', $data['content']);
+            $pageid = count($content) >= $page ? ($page - 1) : (count($content) - 1);
+            $data['content'] = $content[$pageid];
+            $page_id = 1;
+            $pagination = array();
+            foreach ($content as $t) {
+                $pagination[$page_id] = getUrl($data, $page_id);
+                $page_id++;
+            }
+            $this->view->assign('content_page', $pagination);
+        }
+        $prev = $this->content->getOne("`catid`=$catid AND `id`<$id AND `status`!=0 ORDER BY `id` DESC", NULL, 'title, id');
+        $next = $this->content->getOne("`catid`=$catid AND `id`>$id AND `status`!=0", NULL, 'title, id');
+        $seo = showSeo($data, $page);
+        $tmp = array(
+            'seo' => $seo,
+            'prev' => $prev,
+            'page' => $page,
+            'next' => $next,
+            'pageurl' => getUrl($data, $page),
+            'pagination' => $pagination,
+        );
+        $tmp = array_merge($tmp, $data);
+        $this->response(200, $tmp, 'success');
+    }
 }

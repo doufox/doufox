@@ -97,7 +97,6 @@ class CategoryModel extends Model
             if ($typeid ? $typeid == $data['typeid'] : true) {
                 $str .= $catid . ',';
             }
-
         }
         return $str;
     }
@@ -195,5 +194,4 @@ class CategoryModel extends Model
         }
         return $arrchildid;
     }
-
 }

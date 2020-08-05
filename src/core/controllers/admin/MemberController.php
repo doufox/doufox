@@ -40,7 +40,7 @@ class MemberController extends Admin
             $where .= ' and modelid=' . $modelid;
         }
 
-        $total = $this->member->count('member', null, $where);
+        $total = $this->member->count('member', NULL, $where);
         $pagesize = 15; // 分页数量
         $urlparam = array();
         if ($modelid) {
@@ -128,9 +128,9 @@ class MemberController extends Admin
         $fields = $this->membermodel[$data['modelid']]['fields'];
         $data_fields = $this->getFields($fields, $_data);
         $count = array();
-        $count[0] = $this->member->count('member', null, '1');
-        $count[1] = $this->member->count('member', null, 'status=1');
-        $count[2] = $this->member->count('member', null, 'status=0');
+        $count[0] = $this->member->count('member', NULL, '1');
+        $count[1] = $this->member->count('member', NULL, 'status=1');
+        $count[2] = $this->member->count('member', NULL, 'status=0');
         $model = $model;
         $info = $_data;
         include $this->admin_view('member/edit');

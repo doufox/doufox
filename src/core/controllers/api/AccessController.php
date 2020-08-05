@@ -3,7 +3,7 @@ if (!defined('IN_CMS')) {
     exit();
 }
 
-class AccessController extends Api
+class AccessController extends API
 {
     private $memberdata;
     private $form;
