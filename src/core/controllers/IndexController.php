@@ -82,8 +82,6 @@ class IndexController extends Controller
      */
     public function showAction()
     {
-        $page = (int) $this->get('page');
-        $page = $page ? $page : 1;
         $id = (int) $this->get('id');
         $data = $this->content->find($id);
         $model = get_cache('contentmodel');
@@ -91,10 +89,6 @@ class IndexController extends Controller
             header('HTTP/1.1 404 Not Found');
             $this->show_message('不存在此内容！');
         }
-        if (!$data['status']) {
-            $this->show_message('此内容正在审核中不能查看！');
-        }
-
         if (!isset($model[$data['modelid']]) || empty($model[$data['modelid']])) {
             $this->show_message('此内容模型不存在');
         }
@@ -105,6 +99,18 @@ class IndexController extends Controller
             $this->show_message('当前栏目游客不允许查看');
         }
 
+        if (!$data['status']) {
+            if ($cat['msgtpl']) {
+                $this->view->display($cat['msgtpl']);
+            } else {
+                $this->show_public('msg');
+                exit();
+                // $this->show_message('此内容正在审核中不能查看！');
+            }
+        }
+
+        $page = (int) $this->get('page');
+        $page = $page ? $page : 1;
         $table = core::load_model($cat['tablename']);
         $_data = $table->find($id);
         $data = array_merge($data, $_data); //合并主表和附表
@@ -454,4 +460,19 @@ class IndexController extends Controller
         ));
         $this->view->display('sitemap.html');
     }
+
+    // /**
+    //  * 提示信息页面跳转
+    //  * msg    消息内容
+    //  * status 返回结果状态  1=成功 2=错误 默认错误
+    //  * url    返回跳转地址 默认为来源
+    //  * time   等待时间 ，默认为2秒
+    //  */
+    // public function show_message($msg, $status = 2, $url = HTTP_REFERER, $time = 2000)
+    // {
+
+    //     include $this->public_view('msg');
+    //     exit;
+    // }
+
 }

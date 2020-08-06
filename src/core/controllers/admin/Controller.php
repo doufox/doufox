@@ -21,6 +21,20 @@ class Admin extends Controller
         define('IN_ADMIN', true);
     }
 
+    /**
+     * 后台页面，提示信息页面跳转
+     * msg    消息内容
+     * status 返回结果状态  1=成功 2=错误 默认错误
+     * url    返回跳转地址 默认为来源
+     * time   等待时间 ，默认为2秒
+     */
+    public function show_message($msg, $status = 2, $url = HTTP_REFERER, $time = 2000)
+    {
+
+        include $this->admin_view('msg');
+        exit;
+    }
+
     /** 后台登陆检查
      * 
      */

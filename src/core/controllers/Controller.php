@@ -193,6 +193,33 @@ abstract class Controller
     }
 
     /**
+     * 公共页面，显示前台页面，内置页面
+     */
+    public function show_public($page)
+    {
+
+        $site_title = $this->site_config['SITE_TITLE'];
+        $site_keywords = $this->site_config['SITE_KEYWORDS'];
+        $site_description = $this->site_config['SITE_DESCRIPTION'];
+        include $this->public_view($page);
+        exit;
+    }
+
+    /**
+     * 公共页面，提示信息页面跳转
+     * msg    消息内容
+     * status 返回结果状态  1=成功 2=错误 默认错误
+     * url    返回跳转地址 默认为来源
+     * time   等待时间 ，默认为2秒
+     */
+    public function show_message($msg, $status = 2, $url = HTTP_REFERER, $time = 2000)
+    {
+
+        include $this->public_view('msg');
+        exit;
+    }
+
+    /**
      * stripslashes
      */
     protected static function strip_slashes($string)
@@ -252,20 +279,6 @@ abstract class Controller
             }
         }
         return false;
-    }
-
-    /**
-     * 提示信息页面跳转
-     * msg    消息内容
-     * status 返回结果状态  1=成功 2=错误 默认错误
-     * url    返回跳转地址 默认为来源
-     * time   等待时间 ，默认为2秒
-     */
-    public function show_message($msg, $status = 2, $url = HTTP_REFERER, $time = 2000)
-    {
-
-        include $this->admin_view('msg');
-        exit;
     }
 
     /**
@@ -527,5 +540,13 @@ abstract class Controller
     protected function admin_view($file)
     {
         return ADMIN_PATH . $file . '.tpl.php';
+    }
+
+    /** 加载前台视图模板，内置默认模板
+     * @param string $file 文件名
+     */
+    protected function public_view($file)
+    {
+        return PUBLIC_PATH . $file . '.tpl.php';
     }
 }
