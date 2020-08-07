@@ -34,7 +34,7 @@ function gethttp($url)
 function url($route, $params = null)
 {
     if (!$route) {
-        return false;
+        return Controller::get_base_url();
     }
 
     $arr = explode('/', $route);

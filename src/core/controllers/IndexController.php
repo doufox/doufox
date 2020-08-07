@@ -103,9 +103,7 @@ class IndexController extends Controller
             if ($cat['msgtpl']) {
                 $this->view->display($cat['msgtpl']);
             } else {
-                $this->show_public('msg');
-                exit();
-                // $this->show_message('此内容正在审核中不能查看！');
+                $this->show_message('此内容正在审核中不能查看！');
             }
         }
 
@@ -470,7 +468,6 @@ class IndexController extends Controller
     //  */
     // public function show_message($msg, $status = 2, $url = HTTP_REFERER, $time = 2000)
     // {
-
     //     include $this->public_view('msg');
     //     exit;
     // }
