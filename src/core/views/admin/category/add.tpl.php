@@ -128,29 +128,36 @@
                                         <tr>
                                             <th>栏目模板：</th>
                                             <td>
-                                                <input type="text" class="form-control" size="30" value="<?php echo $data['categorytpl']; ?>" name="data[categorytpl]" id="categorytpl">
+                                                <input type="text" class="form-control" size="30" value="<?php echo $data['categorytpl']; ?>" name="data[categorytpl]" id="categorytpl" maxlength="50" />
                                                 <div class="show-tips">栏目内容及子栏目列表展示页模板，当有下级栏目时有效</div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>列表模板：</th>
                                             <td>
-                                                <input type="text" class="form-control" size="30" value="<?php echo $data['listtpl']; ?>" name="data[listtpl]" id="listtpl">
+                                                <input type="text" class="form-control" size="30" value="<?php echo $data['listtpl']; ?>" name="data[listtpl]" id="listtpl" maxlength="50" />
                                                 <div class="show-tips">栏目中内容列表展示页模板</div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>内容模板：</th>
                                             <td>
-                                                <input type="text" class="form-control" size="30" value="<?php echo $data['showtpl']; ?>" name="data[showtpl]" id="showtpl">
+                                                <input type="text" class="form-control" size="30" value="<?php echo $data['showtpl']; ?>" name="data[showtpl]" id="showtpl" maxlength="50" />
                                                 <div class="show-tips">栏目中内容页展示页模板</div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>搜索模板：</th>
                                             <td>
-                                                <input type="text" class="form-control" size="30" value="<?php echo $data['searchtpl']; ?>" name="data[searchtpl]" id="searchtpl">
+                                                <input type="text" class="form-control" size="30" value="<?php echo $data['searchtpl']; ?>" name="data[searchtpl]" id="searchtpl" maxlength="50" />
                                                 <div class="show-tips">搜索结果列表展示页模板</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>消息模板：</th>
+                                            <td>
+                                                <input type="text" class="form-control" size="30" value="<?php echo $data['msgtpl']; ?>" name="data[msgtpl]" id="msgtpl" maxlength="50" />
+                                                <div class="show-tips">内容不能展示时的消息页面</div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -289,15 +296,17 @@
             $("#showtpl").val(data[mid]['showtpl']);
             $("#searchtpl").val(data[mid]['searchtpl']);
             $("#pagetpl").val(data[mid]['pagetpl']);
+            $("#msgtpl").val(data[mid]['msgtpl']);
         } else {
             $("#categorytpl").val("");
             $("#listtpl").val("");
             $("#showtpl").val("");
             $("#searchtpl").val("");
             $("#pagetpl").val("");
+            $("#msgtpl").val("");
         }
     }
-    settype(<?php echo $data[typeid]; ?>);
+    settype(<?php echo $data['typeid']; ?>);
 </script>
 
 <?php include $this->admin_view('footer'); ?>
