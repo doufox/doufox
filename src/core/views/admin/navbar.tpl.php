@@ -47,6 +47,7 @@
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">管理&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo url('admin/account'); ?>">后台账号</a></li>
+                            <li><a href="<?php echo url('admin/file'); ?>">文件管理</a></li>
                             <li><a href="<?php echo url('admin/template'); ?>">模板主题</a></li>
                             <li><a href="<?php echo url('admin/attachment'); ?>">附件管理</a></li>
                             <li role="separator" class="divider"></li>

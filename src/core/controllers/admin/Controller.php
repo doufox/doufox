@@ -74,7 +74,7 @@ class Admin extends Controller
         $this->current_nav = core::get_controller_id();
         if ($this->current_nav == 'form') {
             $this->current_nav = 'model';
-        } elseif (in_array($this->current_nav, array('account', 'attachment', 'template', 'database', 'backup', 'cache'))) {
+        } elseif (in_array($this->current_nav, array('account', 'attachment', 'template', 'database', 'backup', 'cache', 'file'))) {
             $this->current_nav = 'manage';
         }
         // 当前账号信息
