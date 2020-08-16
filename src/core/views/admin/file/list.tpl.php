@@ -61,7 +61,7 @@
                             <td>06.08.20 13:12</td>
                             <td><a title="Change Permissions" href="?p=&amp;chmod=core">0755</a> </td>
                             <td>?:?</td>
-                            <td class="inline-actions"> <a title="Delete" href="?p=&amp;del=core"
+                            <td> <a title="Delete" href="?p=&amp;del=core"
                                     onclick="return confirm('Delete Folder?\n \n ( core )');"> <i class="fa fa-trash-o"
                                         aria-hidden="true"></i></a>
                                 <a title="Rename" href="#" onclick="rename('', 'core');return false;"><i class="fa fa-pencil-square-o"
