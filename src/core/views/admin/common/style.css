@@ -74,11 +74,6 @@ input.dialog {
 
 /*通用样式*/
 
-.pad-10 {
-    padding: 10px;
-    overflow: hidden
-}
-
 .img-wrap {
     border: 1px solid #eee;
     text-align: center;
@@ -133,6 +128,16 @@ body fieldset.blue legend {
 
 .content-menu .options {
     float: right;
+}
+
+.table-noborder {
+    border: 0;
+}
+
+.table-noborder th,
+.table-noborder td,
+.table-noborder>tbody>tr>td {
+    border: 0;
 }
 
 /*分页*/
@@ -247,8 +252,4 @@ table td .label-group {
     background-position: 3px -145px;
     border-color: #40B3FF;
     color: #959595
-}
-
-.display {
-    display: none
 }
