@@ -41,8 +41,8 @@
                             <td><?php echo $t['remark']; ?></td>
                             <td>{block <?php echo $t['id']; ?>}</td>
                             <td>
-                                <a href="<?php echo url('admin/block/edit', array('id'=>$t['id'])); ?>">编辑</a>
-                                <a href="#modal-confirm" data-toggle="modal" name="删除区块" onclick="block_delete(this);" data-id="<?php echo $t['id']; ?>" data-name="<?php echo $t['name']; ?>">删除</a>
+                                <a href="<?php echo url('admin/block/edit', array('id'=>$t['id'])); ?>" title="编辑"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                <a href="#modal-confirm" title="删除" data-toggle="modal" name="删除区块" onclick="block_delete(this);" data-id="<?php echo $t['id']; ?>" data-name="<?php echo $t['name']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                         <?php } } ?>

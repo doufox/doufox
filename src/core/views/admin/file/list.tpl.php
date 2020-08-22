@@ -1,6 +1,6 @@
-<?php include $this->admin_view('header');?>
-<?php include $this->admin_view('navbar');?>
-<?php include $this->admin_view('common/msg');?>
+<?php include $this->admin_view('header'); ?>
+<?php include $this->admin_view('navbar'); ?>
+<?php include $this->admin_view('common/msg'); ?>
 
 <div class="container-fluid">
     <div class="row">
@@ -39,39 +39,42 @@
                     </thead>
                     <tbody>
                         <?php if ($istop) { ?>
-                        <tr>
-                            <td></td>
-                            <td colspan="6"><a href="<?php echo $pdir; ?>"><img src="/static/img/folder-closed.gif">上一层目录</a></td>
-                        </tr>
-                        <?php } foreach ($list as $k => $t) { ?>
-                        <tr role="row">
-                            <td class="custom-checkbox-td sorting_1">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="3399" name="file[]" value="core">
-                                    <label class="custom-control-label" for="3399"></label>
-                                </div>
-                            </td>
-                            <td class="filename">
-                                <img src="/static/img/ext/<?php echo $t['ico']; ?>">&nbsp;
-                                <a href="<?php if ($t['url']) { echo $t['url']; } else { ?>javascript:;<?php } ?> " 
-                                    rel="<?php echo $dir; echo $t['name']; ?>"
-                                    title="<?php echo $t['name']; ?>"><?php echo $t['name']; ?></a>
-                            </td>
-                            <td>Folder </td>
-                            <td>06.08.20 13:12</td>
-                            <td><a title="Change Permissions" href="?p=&amp;chmod=core">0755</a> </td>
-                            <td>?:?</td>
-                            <td> <a title="Delete" href="?p=&amp;del=core"
-                                    onclick="return confirm('Delete Folder?\n \n ( core )');"> <i class="fa fa-trash-o"
-                                        aria-hidden="true"></i></a>
-                                <a title="Rename" href="#" onclick="rename('', 'core');return false;"><i class="fa fa-pencil-square-o"
-                                        aria-hidden="true"></i></a>
-                                <a title="Copy to..." href="?p=&amp;copy=core"><i class="fa fa-files-o" aria-hidden="true"></i></a>
-                                <a title="Direct link" href="https://doufox.com/core/" target="_blank"><i class="fa fa-link"
-                                        aria-hidden="true"></i></a>
-                            </td>
-                        </tr>
-                    <?php } ?>
+                            <tr>
+                                <td></td>
+                                <td colspan="6">
+                                    <a href="<?php echo $pdir; ?>"><i class="fa fa-arrow-up" aria-hidden="true"></i> 上一层目录</a>
+                                </td>
+                            </tr>
+                        <?php }
+                        foreach ($list as $k => $t) { ?>
+                            <tr role="row">
+                                <td class="custom-checkbox-td sorting_1">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="3399" name="file[]" value="core">
+                                        <label class="custom-control-label" for="3399"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <i class="<?php echo $t['ico']; ?>"></i>&nbsp;
+                                    <a href="<?php echo $t['url']; ?>" title="<?php echo $t['name']; ?>"><?php echo $t['name']; ?></a>
+                                </td>
+                                <td>
+                                    <?php if ($t['is_dir']) { ?>
+                                        <span>文件夹</span>
+                                    <?php } else { ?>
+                                        <span title="<?php echo $t['filesize_raw']; ?>"><?php echo $t['filesize']; ?></span>
+                                    <?php } ?>
+                                </td>
+                                <td>06.08.20 13:12</td>
+                                <td><a title="Change Permissions" href="?p=&amp;chmod=core">0755</a> </td>
+                                <td>?:?</td>
+                                <td> <a title="Delete" href="?p=&amp;del=core" onclick="return confirm('Delete Folder?\n \n ( core )');"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    <a title="Rename" href="#" onclick="rename('', 'core');return false;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <a title="Copy to..." href="?p=&amp;copy=core"><i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                    <a title="Direct link" href="https://doufox.com/core/" target="_blank"><i class="fa fa-link" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                     <tfoot>
                         <tr>
@@ -87,9 +90,24 @@
                         </tr>
                     </tfoot>
                 </table>
+                <div>
+                    <ul class="list-inline footer-action">
+                        <li class="list-inline-item"><button class="btn btn-small btn-primary" onclick="select_all();"><i class="fa fa-check-square"></i></button></li>
+                        <li class="list-inline-item"><a href="#/unselect-all" class="btn btn-small btn-outline-primary btn-2" onclick="unselect_all();return false;"><i class="fa fa-window-close"></i> Unselect all </a></li>
+                        <li class="list-inline-item"><a href="#/invert-all" class="btn btn-small btn-outline-primary btn-2" onclick="invert_all();return false;"><i class="fa fa-th-list"></i> Invert Selection </a></li>
+                        <li class="list-inline-item"><input type="submit" class="hidden" name="delete" id="a-delete" value="Delete" onclick="return confirm('Delete selected files and folders?')">
+                            <a href="javascript:document.getElementById('a-delete').click();" class="btn btn-small btn-outline-primary btn-2"><i class="fa fa-trash"></i> Delete </a></li>
+                        <li class="list-inline-item"><input type="submit" class="hidden" name="zip" id="a-zip" value="zip" onclick="return confirm('Create archive?')">
+                            <a href="javascript:document.getElementById('a-zip').click();" class="btn btn-small btn-outline-primary btn-2"><i class="fa fa-file-archive-o"></i> Zip </a></li>
+                        <li class="list-inline-item"><input type="submit" class="hidden" name="tar" id="a-tar" value="tar" onclick="return confirm('Create archive?')">
+                            <a href="javascript:document.getElementById('a-tar').click();" class="btn btn-small btn-outline-primary btn-2"><i class="fa fa-file-archive-o"></i> Tar </a></li>
+                        <li class="list-inline-item"><input type="submit" class="hidden" name="copy" id="a-copy" value="Copy">
+                            <a href="javascript:document.getElementById('a-copy').click();" class="btn btn-small btn-outline-primary btn-2"><i class="fa fa-files-o"></i> Copy </a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<?php include $this->admin_view('footer');?>
+<?php include $this->admin_view('footer'); ?>

@@ -64,21 +64,35 @@ class FileController extends Admin
         $list = array();
         if ($data) {
             foreach ($data as $name) {
-                $path = $dir . $name . '/';
-                $isdir = is_dir($this->root_path . $path);
-                if ($isdir) {
-                    $ico = 'dir.gif';
+                $path = $dir . $name;
+                $path_raw = $this->root_path . $path;
+                $is_dir = is_dir($path_raw);
+                $is_link = is_link($path_raw);
+                if ($is_link) {
+                    $ico = 'fa fa-link';
+                } else if ($is_dir) {
+                    $ico = 'fa fa-folder';
+                    $path = $dir . $name . '/';
+                    $path_raw = $this->root_path . $path . '/';
                 } else {
                     $path = $dir . $name;
-                    $ico = $this->get_file_icon_class($name);
+                    $path_raw = $this->root_path . $path;
+                    $ico = $this->get_icon_class($path);
+                    $filesize_raw = $this->get_size($path_raw);
+                    $filesize = $this->get_filesize($filesize_raw);
                 }
+
                 $list[] = array(
                     'name' => $name,
                     'dir' => $path,
-                    'path' => $this->root_path . $path,
+                    'path' => $path,
+                    'path_raw' => $path_raw,
                     'ico' => $ico,
-                    'isdir' => $isdir,
-                    'url' => $isdir ? url('admin/file/list', array('dir' => $path)) : url('admin/file/view', array('file' => $path)),
+                    'is_dir' => $is_dir,
+                    'is_link' => $is_link,
+                    'filesize_raw' => $filesize_raw + ' bytes',
+                    'filesize' => $filesize,
+                    'url' => $is_dir ? url('admin/file/list', array('dir' => $path)) : url('admin/file/view', array('file' => $path)),
                 );
             }
         }
@@ -249,7 +263,8 @@ class FileController extends Admin
     /**
      * 文件删除
      */
-    public function delAction() {
+    public function delAction()
+    {
 
         $filename = $this->get('file') ? $this->get('file') : '';
         $filename = str_replace(array('..\\', '../', './', '.\\'), '', trim($filename));
@@ -281,7 +296,7 @@ class FileController extends Admin
      * @param string $path
      * @return string
      */
-    private function get_file_icon_class($path)
+    private function get_icon_class($path)
     {
         // get extension
         $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
@@ -301,7 +316,7 @@ class FileController extends Admin
             case 'tif':
             case 'tiff':
             case 'svg':
-                $img = 'jpg.gif';
+                $img = 'fa fa-picture-o';
                 break;
             case 'passwd':
             case 'ftpquota':
@@ -321,46 +336,44 @@ class FileController extends Admin
             case 'map':
             case 'lock':
             case 'dtd':
-                $img = 'php.gif';
+            case 'htaccess':
+                $img = 'fa fa-file-code-o';
                 break;
             case 'txt':
             case 'ini':
             case 'conf':
             case 'log':
-            case 'htaccess':
-                $img = 'txt.gif';
+                $img = 'fa fa-file-text-o';
                 break;
             case 'css':
             case 'less':
             case 'sass':
             case 'scss':
-                $img = 'css.gif';
+                $img = 'fa fa-css3';
                 break;
             case 'zip':
-            case 'gz':
-                $img = 'zip.gif';
-                break;
             case 'rar':
+            case 'gz':
             case 'tar':
             case '7z':
-                $img = 'rar.gif';
+                $img = 'fa fa-file-archive-o';
                 break;
             case 'php':
             case 'php4':
             case 'php5':
             case 'phps':
             case 'phtml':
-                $img = 'php.gif';
+                $img = 'fa fa-code';
                 break;
             case 'htm':
             case 'html':
             case 'shtml':
             case 'xhtml':
-                $img = 'html.gif';
+                $img = 'fa fa-html5';
                 break;
             case 'xml':
             case 'xsl':
-                $img = 'xml.gif';
+                $img = 'fa fa-file-excel-o';
                 break;
             case 'wav':
             case 'mp3':
@@ -374,13 +387,13 @@ class FileController extends Admin
             case 'flac':
             case 'ac3':
             case 'tds':
-                $img = 'wav.gif';
+                $img = 'fa fa-music';
                 break;
             case 'm3u':
             case 'm3u8':
             case 'pls':
             case 'cue':
-                $img = 'wav.gif';
+                $img = 'fa fa-headphones';
                 break;
             case 'avi':
             case 'mpg':
@@ -396,19 +409,19 @@ class FileController extends Admin
             case '3gp':
             case 'asf':
             case 'wmv':
-                $img = 'mpeg.gif';
+                $img = 'fa fa-file-video-o';
                 break;
             case 'eml':
             case 'msg':
-                $img = 'txt.gif';
+                $img = 'fa fa-envelope-o';
                 break;
             case 'xls':
             case 'xlsx':
             case 'ods':
-                $img = 'xls.gif';
+                $img = 'fa fa-file-excel-o';
                 break;
             case 'csv':
-                $img = 'csv.gif';
+                $img = 'fa fa-file-text-o';
                 break;
             case 'bak':
                 $img = 'fa fa-clipboard';
@@ -416,7 +429,7 @@ class FileController extends Admin
             case 'doc':
             case 'docx':
             case 'odt':
-                $img = 'doc.gif';
+                $img = 'fa fa-file-word-o';
                 break;
             case 'ppt':
             case 'pptx':
@@ -432,24 +445,24 @@ class FileController extends Admin
                 $img = 'fa fa-font';
                 break;
             case 'pdf':
-                $img = 'pdf.gif';
+                $img = 'fa fa-file-pdf-o';
                 break;
             case 'psd':
             case 'ai':
             case 'eps':
             case 'fla':
             case 'swf':
-                $img = 'psd.gif';
+                $img = 'fa fa-file-image-o';
                 break;
             case 'exe':
             case 'msi':
-                $img = 'exe.gif';
+                $img = 'fa fa-file-o';
                 break;
             case 'bat':
                 $img = 'fa fa-terminal';
                 break;
             default:
-                $img = 'blank.gif';
+                $img = 'fa fa-info-circle';
         }
 
         return $img;
@@ -479,13 +492,62 @@ class FileController extends Admin
         }
     }
 
+    /**
+     * @param $file
+     * Recover all file sizes larger than > 2GB.
+     * Works on php 32bits and 64bits and supports linux
+     * @return int|string
+     */
+    public function get_size($file)
+    {
+        static $iswin;
+        static $isdarwin;
+        if (!isset($iswin)) {
+            $iswin = (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN');
+        }
+        if (!isset($isdarwin)) {
+            $isdarwin = (strtoupper(substr(PHP_OS, 0)) == "DARWIN");
+        }
+
+        static $exec_works;
+        if (!isset($exec_works)) {
+            $exec_works = (function_exists('exec') && !ini_get('safe_mode') && @exec('echo EXEC') == 'EXEC');
+        }
+
+        // try a shell command
+        if ($exec_works) {
+            $arg = escapeshellarg($file);
+            $cmd = ($iswin) ? "for %F in (\"$file\") do @echo %~zF" : ($isdarwin ? "stat -f%z $arg" : "stat -c%s $arg");
+            @exec($cmd, $output);
+            if (is_array($output) && ctype_digit($size = trim(implode("\n", $output)))) {
+                return $size;
+            }
+        }
+
+        // try the Windows COM interface
+        if ($iswin && class_exists("COM")) {
+            try {
+                $fsobj = new COM('Scripting.FileSystemObject');
+                $f = $fsobj->GetFile(realpath($file));
+                $size = $f->Size;
+            } catch (Exception $e) {
+                $size = null;
+            }
+            if (ctype_digit($size)) {
+                return $size;
+            }
+        }
+
+        // if all else fails
+        return filesize($file);
+    }
 
     /**
      * Get nice filesize
      * @param int $size
      * @return string
      */
-    function get_filesize($size)
+    public function get_filesize($size)
     {
         $size = (float) $size;
         $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
