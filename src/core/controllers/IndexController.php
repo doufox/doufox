@@ -111,7 +111,7 @@ class IndexController extends Controller
         $page = $page ? $page : 1;
         $table = core::load_model($cat['tablename']);
         $_data = $table->find($id);
-        $data = array_merge($data, $_data); //合并主表和附表
+        $data = array_merge($data, $_data); // 合并主表和附表
         $data = $this->getFieldData($model[$cat['modelid']], $data);
         if (isset($data['content']) && strpos($data['content'], '{-page-}') !== false) {
             $content = explode('{-page-}', $data['content']);
@@ -128,13 +128,19 @@ class IndexController extends Controller
         $prev_page = $this->content->getOne("`catid`=$catid AND `id`<$id AND `status`!=0 ORDER BY `id` DESC", null, 'title,url');
         $next_page = $this->content->getOne("`catid`=$catid AND `id`>$id AND `status`!=0", null, 'title,url');
         $seo = showSeo($data, $page);
+        // 更新点击量
+        $data['hits'] = $data['hits'] + 1;
+        $this->content->update(array('hits' => 'hits+1'), 'id=' . $id);
+        // 组合视图模板数据
         $this->view->assign(array(
             'cat' => $cat,
+            'hits' => $data['hits'],
             'page' => $page,
             'prev_page' => $prev_page,
             'next_page' => $next_page,
             'pageurl' => urlencode(getUrl($data, '{page}')),
         ));
+
         $this->view->assign($data);
         $this->view->assign($seo);
         $this->view->display($cat['showtpl']);

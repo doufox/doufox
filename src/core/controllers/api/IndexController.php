@@ -141,71 +141,26 @@ class IndexController extends API
     }
 
     /**
-     * 更新浏览数
+     * 浏览量
+     * 使用方法：url('api/index/hits',array('id'=>123))
      */
     public function hitsAction()
     {
         $id = (int) $this->get('id');
         if (empty($id)) {
-            exit('document.write(\'0\');');
+            $this->response(404, NULL, '缺失参数：id ！');
         }
 
         $data = $this->content->find($id, 'hits');
         if (empty($data)) {
-            exit('document.write(\'0\');');
+            $this->response(404, NULL, '内容不存在！');
         }
-
-        $hits = $data['hits'] + 1;
-        $this->content->update(array('hits' => 'hits+1'), 'id=' . $id);
-        echo "document.write('$hits');";
-    }
-
-    /**
-     * 更新浏览统计,测试用
-     */
-    public function countAction()
-    {
-        header('Content-Type:application/json');
-        $id = (int) $this->get('id');
-        if (empty($id)) {
-            $raw = array(
-                'code' => 200,
-                'data' => array(
-                    'hits' => 0,
-                ),
-                'message' => 'success',
-            );
-            $raw = json_encode($raw);
-            exit($raw);
-        }
-        $data = $this->content->find($id, 'hits');
-        if (empty($data)) {
-            $raw = array(
-                'code' => 200,
-                'data' => array(
-                    'hits' => 0,
-                ),
-                'message' => 'success',
-            );
-            $raw = json_encode($raw);
-            exit($raw);
-        }
-        $count = $data['hits'] + 1;
-        $this->content->update(array('hits' => 'hits+1'), 'id=' . $id);
-        $raw = array(
-            'code' => 200,
-            'data' => array(
-                'hits' => $count,
-            ),
-            'message' => 'success',
-        );
-        $raw = json_encode($raw);
-
-        echo $raw;
+        $this->response(200, $data, 'success');
     }
 
     /**
      * 生成拼音
+     * 使用方法：url('api/index/pinyin',array('name'=>'中文拼音'))
      */
     public function pinyinAction()
     {

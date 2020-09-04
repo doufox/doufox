@@ -8,7 +8,7 @@
         <div class="article-meta">
             <span>发布时间：{function.date("Y-m-d H:i:s", $create_time)}</span>
             <span>最后更新：{function.date("Y-m-d H:i:s", $time)}&nbsp;</span>
-            <span>阅读量：<script type="text/javascript" src="{function.url('api/index/hits',array('id'=>$id))}"></script>次&nbsp;</span>
+            <span>点击量：{$hits}次&nbsp;</span>
             <span>{if $originalurl}&nbsp;<a href="{$originalurl}" target="_blank">原文链接</a></span>{/if}
         </div>
         <div class="article-content">{$content}</div>
