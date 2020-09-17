@@ -62,18 +62,34 @@ class FileController extends Admin
         $file_list = core::load_class('file_list');
         $data = $file_list->get_file_list($this->root_path . $dir);
         $list = array();
+        $calc_folder = false;
         if ($data) {
             foreach ($data as $name) {
                 $path = $dir . $name;
                 $path_raw = $this->root_path . $path;
                 $is_dir = is_dir($path_raw);
                 $is_link = is_link($path_raw);
+                $modif_raw = filemtime($path_raw);
+                $modif = date('Y-m-d H:i:s', $modif_raw);
+
+                $perms = substr(decoct(fileperms($path_raw)), -4);
+                if (function_exists('posix_getpwuid') && function_exists('posix_getgrgid')) {
+                    $owner = posix_getpwuid(fileowner($path_raw));
+                    $group = posix_getgrgid(filegroup($path_raw));
+                } else {
+                    $owner = array('name' => '?');
+                    $group = array('name' => '?');
+                }
                 if ($is_link) {
                     $ico = 'fa fa-link';
                 } else if ($is_dir) {
                     $ico = 'fa fa-folder';
                     $path = $dir . $name . '/';
                     $path_raw = $this->root_path . $path . '/';
+                    if ($calc_folder) {
+                        $filesize_raw = $this->get_foldersize($path_raw);
+                        $filesize = $this->get_filesize($filesize_raw);
+                    }
                 } else {
                     $path = $dir . $name;
                     $path_raw = $this->root_path . $path;
@@ -81,7 +97,7 @@ class FileController extends Admin
                     $filesize_raw = $this->get_size($path_raw);
                     $filesize = $this->get_filesize($filesize_raw);
                 }
-
+                $furl = $is_dir ? url('admin/file/list', array('dir' => $path)) : url('admin/file/view', array('file' => $path));
                 $list[] = array(
                     'name' => $name,
                     'dir' => $path,
@@ -92,7 +108,12 @@ class FileController extends Admin
                     'is_link' => $is_link,
                     'filesize_raw' => $filesize_raw + ' bytes',
                     'filesize' => $filesize,
-                    'url' => $is_dir ? url('admin/file/list', array('dir' => $path)) : url('admin/file/view', array('file' => $path)),
+                    'modif_raw' => $modif_raw,
+                    'modif' => $modif,
+                    'url' => $furl,
+                    'owner' => $owner,
+                    'group' => $group,
+                    'perms' => $perms,
                 );
             }
         }
@@ -125,7 +146,7 @@ class FileController extends Admin
 
         $file_url = $this->get_base_url() . $this->convert_filename($file);
         $download_url = url('admin/file/download', array('file' => $filename));
-        // $file_path = $path . '/' . $file;
+        // $file_path = $path_raw;
 
         $ext = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));
         $mime_type = $this->get_mime_type($file_path);
@@ -555,6 +576,27 @@ class FileController extends Admin
         return sprintf('%s %s', round($size / pow(1024, $power), 2), $units[$power]);
     }
 
+    /**
+     * Get director total size
+     * @param string $directory
+     * @return int
+     */
+    function get_foldersize($directory)
+    {
+        // Slower output
+        $size = 0;
+        $count = 0;
+        $dirCount = 0;
+        foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory)) as $file)
+            if ($file->isFile()) {
+                $size += $file->getSize();
+                $count++;
+            } else if ($file->isDir()) {
+                $dirCount++;
+            }
+        // return [$size, $count, $dirCount];
+        return $size;
+    }
     /**
      * 图片文件扩展类型
      * @return array

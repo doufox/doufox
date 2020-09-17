@@ -29,12 +29,12 @@
                             <th style="width: 37.2px;" class="custom-checkbox-header" rowspan="1" colspan="1">
                                 <input type="checkbox" class="custom-control-input" onclick="checkbox_toggle()">
                             </th>
-                            <th>Name</th>
-                            <th>Size</th>
-                            <th>Modified</th>
-                            <th>Perms</th>
-                            <th>Owner</th>
-                            <th>Actions</th>
+                            <th>名称</th>
+                            <th>大小</th>
+                            <th>修改时间</th>
+                            <th>权限</th>
+                            <th>用户组</th>
+                            <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,19 +59,20 @@
                                     <a href="<?php echo $t['url']; ?>" title="<?php echo $t['name']; ?>"><?php echo $t['name']; ?></a>
                                 </td>
                                 <td>
-                                    <?php if ($t['is_dir']) { ?>
+                                    <?php if ($t['is_dir'] && !$calc_folder) { ?>
                                         <span>文件夹</span>
                                     <?php } else { ?>
                                         <span title="<?php echo $t['filesize_raw']; ?>"><?php echo $t['filesize']; ?></span>
                                     <?php } ?>
                                 </td>
-                                <td>06.08.20 13:12</td>
-                                <td><a title="Change Permissions" href="?p=&amp;chmod=core">0755</a> </td>
-                                <td>?:?</td>
-                                <td> <a title="Delete" href="?p=&amp;del=core" onclick="return confirm('Delete Folder?\n \n ( core )');"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                    <a title="Rename" href="#" onclick="rename('', 'core');return false;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                    <a title="Copy to..." href="?p=&amp;copy=core"><i class="fa fa-files-o" aria-hidden="true"></i></a>
-                                    <a title="Direct link" href="https://doufox.com/core/" target="_blank"><i class="fa fa-link" aria-hidden="true"></i></a>
+                                <td title="<?php echo $t['modif_raw']; ?>"><?php echo $t['modif']; ?></td>
+                                <td><?php echo $t['perms']; ?></td>
+                                <td><?php echo $t['owner']['name'] , ':' . $t['group']['name'] ?></td>
+                                <td>
+                                    <a title="Delete" href="?p=del=core" onclick="return confirm('Delete Folder?\n \n ( core )');"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    <a title="重命名" href="#" onclick="rename('', 'core');return false;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <a title="复制到" href="?p=copy=core"><i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                    <a title="Direct link" href="<?php echo $t['url']; ?>" target="_blank"><i class="fa fa-link" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         <?php } ?>
