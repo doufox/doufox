@@ -21,6 +21,20 @@ class Admin extends Controller
         define('IN_ADMIN', true);
     }
 
+    /**
+     * 后台页面，提示信息页面跳转
+     * msg    消息内容
+     * status 返回结果状态  1=成功 2=错误 默认错误
+     * url    返回跳转地址 默认为来源
+     * time   等待时间 ，默认为2秒
+     */
+    public function show_message($msg, $status = 2, $url = HTTP_REFERER, $time = 2000)
+    {
+
+        include $this->admin_view('msg');
+        exit;
+    }
+
     /** 后台登陆检查
      * 
      */
@@ -60,7 +74,7 @@ class Admin extends Controller
         $this->current_nav = core::get_controller_id();
         if ($this->current_nav == 'form') {
             $this->current_nav = 'model';
-        } elseif (in_array($this->current_nav, array('account', 'attachment', 'template', 'database', 'backup', 'cache'))) {
+        } elseif (in_array($this->current_nav, array('account', 'attachment', 'template', 'database', 'backup', 'cache', 'file'))) {
             $this->current_nav = 'manage';
         }
         // 当前账号信息

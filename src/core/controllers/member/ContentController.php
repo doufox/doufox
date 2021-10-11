@@ -64,7 +64,7 @@ class ContentController extends Member
         $pagination = core::load_class('pagination');
         $pagination->loadconfig();
         $where = 'username="' . $this->memberinfo['username'] . '" AND modelid=' . $modelid;
-        $total = $this->content->count('content', null, $where);
+        $total = $this->content->count('content', NULL, $where);
         $pagesize = 10; //分页列表
         $data = $this->content->page_limit($page, $pagesize)->order(array('`status` DESC,time DESC'))->where($where)->select();
         $pagination = $pagination->total($total)->url(url('member/content', array('modelid' => $modelid, 'page' => '{page}')))->num($pagesize)->page($page)->output();

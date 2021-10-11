@@ -3,7 +3,7 @@ if (!defined('IN_CMS')) {
     exit();
 }
 
-class MemberController extends Api
+class MemberController extends API
 {
 
     public function __construct()
@@ -23,11 +23,11 @@ class MemberController extends Api
     {
         $page = (int) $this->get('page', 1); // 当前页
         if ($page < 1) {
-            $this->response(403, null, '页码不能小于1');
+            $this->response(403, NULL, '页码不能小于1');
         }
         $pagesize = (int) $this->get('pagesize', 15); // 分页大小
         if ($pagesize < 1) {
-            $this->response(403, null, '分页大小不能小于1');
+            $this->response(403, NULL, '分页大小不能小于1');
         }
         $modelid = (int) $this->get('modelid');
         $where = '1';
@@ -35,14 +35,14 @@ class MemberController extends Api
             $where .= ' and modelid=' . $modelid;
         }
 
-        $total = $this->member->count('member', null, $where);
+        $total = $this->member->count('member', NULL, $where);
         if (empty($total)) {
             $totalpage = 0;
             $list = array();
         } else {
             $totalpage = ceil($total / $pagesize);
             if ($page > $totalpage) {
-                $this->response(403, null, '页码超出范围');
+                $this->response(403, NULL, '页码超出范围');
             }
             $select = $this->member->page_limit($page, $pagesize)->order(array('status ASC', 'id DESC'));
             if ($modelid) {

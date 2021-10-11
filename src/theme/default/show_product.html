@@ -8,7 +8,7 @@
       <div class="page bg">
         {template crumbs.html}
         <h2 class="article-title">{$title}</h2>
-        <div class="article-meta">时间：{function.date("Y-m-d H:i:s", $time)} 点击：<script type="text/javascript" src="{function.url('api/index/hits',array('id'=>$id))}"></script>次</div>
+        <div class="article-meta">时间：{function.date("Y-m-d H:i:s", $time)} <span>点击量：{$hits}次&nbsp;</span></div>
         <div class="article-content">{$content}</div>
         <!--文章内容分页 begin-->
         {if $content_page}

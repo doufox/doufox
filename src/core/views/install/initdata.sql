@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `doufox_category` (
   `ismenu` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' COMMENT '作为菜单显示在导航栏',
   `isnewtab` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '打开方式0当前页打开1新窗口打开',
   `redirect` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '0确认页跳转1直接跳转',
-  `ispost` SMALLINT(2) NOT NULL,
+  `ispost` SMALLINT(2) NOT NULL COMMENT '是否可投稿',
   `verify` SMALLINT(2) NOT NULL DEFAULT '0',
   `islook` SMALLINT(2) NOT NULL,
   `categorytpl` VARCHAR(50) NOT NULL COMMENT '内部栏目模板',
@@ -60,7 +60,8 @@ CREATE TABLE IF NOT EXISTS `doufox_category` (
   `showtpl` VARCHAR(50) NOT NULL COMMENT '文章模板',
   `searchtpl` VARCHAR(50) NOT NULL COMMENT '搜索页模板',
   `pagetpl` VARCHAR(50) NOT NULL COMMENT '内部页面模板',
-  `pagesize` SMALLINT(5) NOT NULL,
+  `msgtpl` VARCHAR(50) NOT NULL COMMENT '消息页面模板',
+  `pagesize` SMALLINT(5) NOT NULL COMMENT '默认列表尺寸',
   `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
   `time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`catid`),
@@ -182,6 +183,7 @@ CREATE TABLE IF NOT EXISTS `doufox_model`(
   `showtpl` VARCHAR(50) NOT NULL,
   `searchtpl` VARCHAR(50) NOT NULL,
   `pagetpl` VARCHAR(50) NOT NULL,
+  `msgtpl` VARCHAR(50) NOT NULL,
   `joinid` SMALLINT(5) DEFAULT NULL,
   `setting` TEXT,
   `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
@@ -191,12 +193,12 @@ CREATE TABLE IF NOT EXISTS `doufox_model`(
   KEY `joinid` (`joinid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `doufox_model` (`modelid`, `typeid`, `modelname`, `tablename`, `categorytpl`, `listtpl`, `showtpl`, `searchtpl`, `pagetpl`, `joinid`, `setting`) VALUES
-(1, 1, '文章模型', 'content_article', 'category_article.html', 'list_article.html', 'show_article.html', 'search.html', 'page.html', 0, 'a:1:{s:7:"default";a:4:{s:5:"title";a:2:{s:4:"name";s:6:"标题";s:4:"show";s:1:"1";}s:8:"keywords";a:2:{s:4:"name";s:9:"关键字";s:4:"show";s:1:"1";}s:5:"thumb";a:2:{s:4:"name";s:9:"缩略图";s:4:"show";s:1:"1";}s:11:"description";a:2:{s:4:"name";s:6:"描述";s:4:"show";s:1:"1";}}}'),
-(2, 1, '产品模型', 'content_product', 'category_product.html', 'list_product.html', 'show_product.html', 'search.html', 'page.html', 0, 'a:1:{s:7:"default";a:4:{s:5:"title";a:2:{s:4:"name";s:6:"标题";s:4:"show";s:1:"1";}s:8:"keywords";a:2:{s:4:"name";s:9:"关键字";s:4:"show";s:1:"1";}s:5:"thumb";a:2:{s:4:"name";s:9:"缩略图";s:4:"show";s:1:"1";}s:11:"description";a:2:{s:4:"name";s:6:"描述";s:4:"show";s:1:"1";}}}'),
-(3, 3, '在线留言', 'form_gestbook', 'form.html', 'list_gestbook.html', 'show_gestbook.html', 'search.html', 'page.html', 0, 'a:1:{s:7:"default";a:5:{s:8:"username";a:2:{s:4:"name";s:9:"用户名";s:4:"show";s:1:"0";}s:9:"listorder";a:2:{s:4:"name";s:12:"排序编号";s:4:"show";s:1:"0";}s:6:"status";a:2:{s:4:"name";s:6:"状态";s:4:"show";s:1:"0";}s:4:"time";a:2:{s:4:"name";s:12:"提交时间";s:4:"show";s:1:"0";}s:2:"ip";a:2:{s:4:"name";s:8:"IP地址";s:4:"show";s:1:"0";}}}'),
-(4, 3, '文章评论', 'form_comment', 'form.html', 'list_comment.html', 'show_comment.html', 'search.html', 'page.html', 0, 'a:1:{s:7:"default";a:5:{s:8:"username";a:2:{s:4:"name";s:9:"用户名";s:4:"show";s:1:"1";}s:9:"listorder";a:2:{s:4:"name";s:12:"排序编号";s:4:"show";s:1:"1";}s:6:"status";a:2:{s:4:"name";s:6:"状态";s:4:"show";s:1:"1";}s:4:"time";a:2:{s:4:"name";s:12:"提交时间";s:4:"show";s:1:"1";}s:2:"ip";a:2:{s:4:"name";s:8:"IP地址";s:4:"show";s:1:"1";}}}'),
-(5, 4, '单页模型', 'page_normal', '', '', '', '', 'page.html', 0, '');
+INSERT INTO `doufox_model` (`modelid`, `typeid`, `modelname`, `tablename`, `categorytpl`, `listtpl`, `showtpl`, `searchtpl`, `pagetpl`, `msgtpl`, `joinid`, `setting`) VALUES
+(1, 1, '文章内容', 'content_article', 'category_article.html', 'list_article.html', 'show_article.html', 'search.html', 'page.html', 'msg.html', 0, 'a:1:{s:7:"default";a:4:{s:5:"title";a:2:{s:4:"name";s:6:"标题";s:4:"show";s:1:"1";}s:8:"keywords";a:2:{s:4:"name";s:9:"关键字";s:4:"show";s:1:"1";}s:5:"thumb";a:2:{s:4:"name";s:9:"缩略图";s:4:"show";s:1:"1";}s:11:"description";a:2:{s:4:"name";s:6:"描述";s:4:"show";s:1:"1";}}}'),
+(2, 1, '产品内容', 'content_product', 'category_product.html', 'list_product.html', 'show_product.html', 'search.html', 'page.html', 'msg.html', 0, 'a:1:{s:7:"default";a:4:{s:5:"title";a:2:{s:4:"name";s:6:"标题";s:4:"show";s:1:"1";}s:8:"keywords";a:2:{s:4:"name";s:9:"关键字";s:4:"show";s:1:"1";}s:5:"thumb";a:2:{s:4:"name";s:9:"缩略图";s:4:"show";s:1:"1";}s:11:"description";a:2:{s:4:"name";s:6:"描述";s:4:"show";s:1:"1";}}}'),
+(3, 3, '在线留言', 'form_gestbook', 'form.html', 'list_gestbook.html', 'show_gestbook.html', 'search.html', 'page.html', 'msg.html', 0, 'a:1:{s:7:"default";a:5:{s:8:"username";a:2:{s:4:"name";s:9:"用户名";s:4:"show";s:1:"0";}s:9:"listorder";a:2:{s:4:"name";s:12:"排序编号";s:4:"show";s:1:"0";}s:6:"status";a:2:{s:4:"name";s:6:"状态";s:4:"show";s:1:"0";}s:4:"time";a:2:{s:4:"name";s:12:"提交时间";s:4:"show";s:1:"0";}s:2:"ip";a:2:{s:4:"name";s:8:"IP地址";s:4:"show";s:1:"0";}}}'),
+(4, 3, '文章评论', 'form_comment', 'form.html', 'list_comment.html', 'show_comment.html', 'search.html', 'page.html', 'msg.html', 0, 'a:1:{s:7:"default";a:5:{s:8:"username";a:2:{s:4:"name";s:9:"用户名";s:4:"show";s:1:"1";}s:9:"listorder";a:2:{s:4:"name";s:12:"排序编号";s:4:"show";s:1:"1";}s:6:"status";a:2:{s:4:"name";s:6:"状态";s:4:"show";s:1:"1";}s:4:"time";a:2:{s:4:"name";s:12:"提交时间";s:4:"show";s:1:"1";}s:2:"ip";a:2:{s:4:"name";s:8:"IP地址";s:4:"show";s:1:"1";}}}'),
+(5, 4, '单页模型', 'page_normal', '', '', '', '', 'page.html', 'msg.html', 0, '');
 
 DROP TABLE IF EXISTS `doufox_model_field`;
 CREATE TABLE IF NOT EXISTS `doufox_model_field`(

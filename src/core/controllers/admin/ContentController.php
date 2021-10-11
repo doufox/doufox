@@ -123,12 +123,12 @@ class ContentController extends Admin
             $where .= " AND username='" . $username . "'";
         }
 
-        $total = $this->content->count('content', null, $where);
+        $total = $this->content->count('content', NULL, $where);
         $count = array();
-        $count[0] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=0');
-        $count[1] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=1');
-        $count[2] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=2');
-        $count[3] = $this->content->count('content', null, 'catid=' . $catid . ' AND status=3');
+        $count[0] = $this->content->count('content', NULL, 'catid=' . $catid . ' AND status=0');
+        $count[1] = $this->content->count('content', NULL, 'catid=' . $catid . ' AND status=1');
+        $count[2] = $this->content->count('content', NULL, 'catid=' . $catid . ' AND status=2');
+        $count[3] = $this->content->count('content', NULL, 'catid=' . $catid . ' AND status=3');
 
         $modelid = $cats[$catid]['modelid'];
         $pagesize = 15;
@@ -228,10 +228,10 @@ class ContentController extends Admin
         //     // $this->content->where("`title` LIKE  ?", '%' . $title . '%');
         // }
         $statusNum = array(
-            0 => $this->content->count('content', null, $where . " AND status='0'"),
-            1 => $this->content->count('content', null, $where . " AND status='1'"),
-            2 => $this->content->count('content', null, $where . " AND status='2'"),
-            3 => $this->content->count('content', null, $where . " AND status='3'"),
+            0 => $this->content->count('content', NULL, $where . " AND status='0'"),
+            1 => $this->content->count('content', NULL, $where . " AND status='1'"),
+            2 => $this->content->count('content', NULL, $where . " AND status='2'"),
+            3 => $this->content->count('content', NULL, $where . " AND status='3'"),
         );
         echo '<br/>where条件1' . $where . " AND status='0'" . PHP_EOL;
         $where = array();
@@ -269,7 +269,7 @@ class ContentController extends Admin
         }
         $urlparam['page'] = '{page}';
         $url = url('admin/content/all', $urlparam);
-        $total = $this->content->count('content', null, $where);
+        $total = $this->content->count('content', NULL, $where);
         echo '<br/>分页，总数' . $total . PHP_EOL;
         // 列表
         // $list = $this->content->page_limit($page, $pagesize)->where($where)->order(array('listorder DESC', 'time DESC'))->select();
@@ -543,7 +543,7 @@ class ContentController extends Admin
     {
         if ($this->isPostForm()) {
             $catids = $this->post('catids');
-            $cats = null;
+            $cats = NULL;
             if ($catids && !in_array(0, $catids)) {
                 $cats = @implode(',', $catids);
             } else {
@@ -579,7 +579,7 @@ class ContentController extends Admin
             $catids = $this->get('catids');
             $cats = @explode(',', $catids);
             $catid = $this->get('catid') ? $this->get('catid') : $cats[0];
-            $cat = isset($this->category_cache[$catid]) ? $this->category_cache[$catid] : null;
+            $cat = isset($this->category_cache[$catid]) ? $this->category_cache[$catid] : NULL;
             if (!$cat) {
                 echo '
                 <style type="text/css">body{margin:0;overflow: hidden;}div, a { color: #777777;}</style>

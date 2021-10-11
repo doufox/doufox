@@ -3,7 +3,7 @@ if (!defined('IN_CMS')) {
     exit();
 }
 
-class Api extends Controller
+class API extends Controller
 {
 
     protected $userid;
@@ -21,10 +21,13 @@ class Api extends Controller
     {
         $userid = $this->session->get('user_id');
         if (empty($this->userid)) {
-            $this->response(401, null, 'Unauthorized');
+            $this->response(401, NULL, 'Unauthorized');
         }
     }
 
+    /**
+     * 是否已登陆
+     */
     protected function inlogged()
     {
         if ($this->memberinfo) {
@@ -35,14 +38,33 @@ class Api extends Controller
     }
 
     /**
+     * 是否POST请求类型
+     */
+    public static function is_post()
+    {
+        return $_SERVER['REQUEST_METHOD'] == 'POST';
+    }
+
+    /**
+     * 是否GET请求类型
+     */
+    public static function is_get()
+    {
+        return $_SERVER['REQUEST_METHOD'] == 'GET';
+    }
+
+    /**
      * API Response
      */
-    public function response($code = 400, $data = NULL, $msg = 'error')
+    public function response($code = 400, $data = NULL, $msg = 'Error')
     {
-        header('Content-Type:application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        // header("Access-Control-Allow-Headers: DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization");
+        header("Content-Type: application/json");
         $raw = array(
             'code' => $code,
-            'data' => isset($data) && !empty($data) ? $data : new stdClass(),
+            'data' => isset($data) && !empty($data) ? $data : NULL,
             'msg' => $msg,
         );
         $raw = json_encode($raw);

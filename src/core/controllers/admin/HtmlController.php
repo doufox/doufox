@@ -215,12 +215,12 @@ class HtmlController extends Admin
         $time = isset($time) ? $time : (int) $this->get('time');
         $page = $this->get('page') ? $this->get('page') : 1;
         if ($time) {
-            $this->show_skip(null, $page, $time);
+            $this->show_skip(NULL, $page, $time);
         } else if ($catid) {
             $cats = $this->category_cache[$catid]['allchildids'];
             $this->show_skip($cats, $page, $time);
         } else {
-            $this->show_skip(null, $page, null);
+            $this->show_skip(NULL, $page, NULL);
         }
     }
 

@@ -32,7 +32,6 @@ class ContentModel extends Model
             if (is_array($t)) {
                 $data[$i] = array2string($t);
             }
-
         }
         // 描述截取
         if (empty($data['description']) && isset($data['content'])) {
@@ -119,7 +118,6 @@ class ContentModel extends Model
             if ($join) {
                 $this->query('delete from ' . $this->prefix . $join['tablename'] . ' where cid=' . $id);
             }
-
         }
     }
 
@@ -130,5 +128,4 @@ class ContentModel extends Model
     {
         $this->update(array('url' => $url), 'id=' . $id);
     }
-
 }

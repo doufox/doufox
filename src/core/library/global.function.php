@@ -34,7 +34,7 @@ function gethttp($url)
 function url($route, $params = null)
 {
     if (!$route) {
-        return false;
+        return Controller::get_base_url();
     }
 
     $arr = explode('/', $route);
@@ -837,6 +837,17 @@ function is_mobile()
         if ((strpos($ha, 'vnd.wap.wml') !== false) && (strpos($ha, 'text/html') === false || (strpos($ha, 'vnd.wap.wml') < strpos($ha, 'text/html')))) {
             return true;
         }
+    }
+    return false;
+}
+
+/**
+ * 判断客户端是否是微信
+ */
+function is_weixin()
+{
+    if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+        return true;
     }
     return false;
 }

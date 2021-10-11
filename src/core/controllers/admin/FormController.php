@@ -33,7 +33,7 @@ class FormController extends Admin
         $this->form = core::load_model($this->table);
         $joinmodel = get_cache('joinmodel');
         $this->join_info = '独立表单';
-        $this->join = isset($joinmodel[$this->model['joinid']]) ? $joinmodel[$this->model['joinid']] : null;
+        $this->join = isset($joinmodel[$this->model['joinid']]) ? $joinmodel[$this->model['joinid']] : NULL;
         if ($this->join) {
             $this->join_info = '已关联到: ' . $this->join['modelname'];
         }
@@ -137,9 +137,9 @@ class FormController extends Admin
             $model->update($set, 'modelid=' . $this->modelid);
             $this->show_message($this->getCacheCode('model') . '操作成功', 1);
         }
-        $count[1] = $this->content->count($this->table, null, 'status=1');
-        $count[0] = $this->content->count($this->table, null, 'status=0');
-        $count[3] = $this->content->count($this->table, null, 'status=3');
+        $count[1] = $this->content->count($this->table, NULL, 'status=1');
+        $count[0] = $this->content->count($this->table, NULL, 'status=0');
+        $count[3] = $this->content->count($this->table, NULL, 'status=3');
 
         $form_url = HTTP_URL . ENTRY_FILE . '?c=index&a=form&modelid=' . $this->model['modelid'];
 

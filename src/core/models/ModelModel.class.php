@@ -51,7 +51,7 @@ class ModelModel extends Model
         $this->query('DROP TABLE IF EXISTS `' . $table . '`');
         $this->delete('modelid=' . $data['modelid']);
         $this->del_model($data['tablename']);
-        $this->query('DELETE FROM `' . $this->prefix . 'model_field` where modelid=' . $data['modelid']);
+        $this->query("DELETE FROM `" . $this->prefix . "model_field` where modelid=" . $data['modelid']);
     }
 
     // 创建模型
@@ -59,7 +59,13 @@ class ModelModel extends Model
     {
         $table = ucfirst($table);
 
+        if (!defined('IN_CMS')) {
+            exit();
+        }
         $content = "<?php" . PHP_EOL . PHP_EOL .
+            "if (!defined('IN_CMS')) {" . PHP_EOL .
+            "    exit();" . PHP_EOL .
+            "}" . PHP_EOL .
             "class " . $table . "Model extends Model {" . PHP_EOL . PHP_EOL .
             "    public function get_primary_key() {" . PHP_EOL .
             "        return \$this->primary_key = 'id';" . PHP_EOL .
@@ -78,6 +84,8 @@ class ModelModel extends Model
         $table = ucfirst($table);
 
         $file = MODEL_PATH . $table . 'Model.class.php';
-        if (file_exists($file)) {@unlink($file);}
+        if (file_exists($file)) {
+            @unlink($file);
+        }
     }
 }

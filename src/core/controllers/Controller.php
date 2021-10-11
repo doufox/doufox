@@ -102,25 +102,25 @@ abstract class Controller
      * 获取并分析$_GET数组某参数值
      * @param string $key 参数
      * @param string $value 默认值
-     * @return null|string|int
+     * @return NULL|string|int
      */
-    public static function get($key, $value = null)
+    public static function get($key, $value = NULL)
     {
         $name = isset($_GET[$key]) ? $_GET[$key] : $value;
         if (!is_array($name)) {
             return htmlspecialchars(trim($name));
         }
-        return null;
+        return NULL;
     }
 
     /**
      * 获取并分析$_POST数组某参数值
      */
-    public static function post($string, $a = 0)
+    public static function post($string = NULL, $a = 0)
     {
-        $name = $a ? $string : (isset($_POST[$string]) ? $_POST[$string] : null);
+        $name = $a ? $string : (isset($_POST[$string]) ? $_POST[$string] : NULL);
         if (is_null($name)) {
-            return null;
+            $name = $_POST;
         }
 
         if (!is_array($name)) {
@@ -133,7 +133,7 @@ abstract class Controller
     }
 
     /**
-     * 验证表单是否POST提交
+     * 是否表单POST提交
      */
     public static function isPostForm($var = 'submit', $emp = 0)
     {
@@ -190,6 +190,33 @@ abstract class Controller
             echo '<script type="text/javascript">location.href="' . $url . '";</script>';
         }
         exit();
+    }
+
+    /**
+     * 公共页面，显示前台页面，内置页面
+     */
+    public function show_public($page)
+    {
+
+        $site_title = $this->site_config['SITE_TITLE'];
+        $site_keywords = $this->site_config['SITE_KEYWORDS'];
+        $site_description = $this->site_config['SITE_DESCRIPTION'];
+        include $this->public_view($page);
+        exit;
+    }
+
+    /**
+     * 公共页面，提示信息页面跳转
+     * msg    消息内容
+     * status 返回结果状态  1=成功 2=错误 默认错误
+     * url    返回跳转地址 默认为来源
+     * time   等待时间 ，默认为2秒
+     */
+    public function show_message($msg, $status = 2, $url = HTTP_REFERER, $time = 2000)
+    {
+
+        include $this->public_view('msg');
+        exit;
     }
 
     /**
@@ -252,20 +279,6 @@ abstract class Controller
             }
         }
         return false;
-    }
-
-    /**
-     * 提示信息页面跳转
-     * msg    消息内容
-     * status 返回结果状态  1=成功 2=错误 默认错误
-     * url    返回跳转地址 默认为来源
-     * time   等待时间 ，默认为2秒
-     */
-    public function show_message($msg, $status = 2, $url = HTTP_REFERER, $time = 2000)
-    {
-
-        include $this->admin_view('msg');
-        exit;
     }
 
     /**
@@ -332,7 +345,7 @@ abstract class Controller
                 $data_fields .= '<tr>';
                 $data_fields .= '<th>' . $t['name'] . '：</th><td>';
                 $data_fields .= '<div class="fields-list" id="list_' . $t['field'] . '_fields"><ul id="' . $t['field'] . '-sort-items">';
-                $merge_string = null;
+                $merge_string = NULL;
                 $contentdata = empty($data[$t['field']]) ? array(0 => array()) : string2array($data[$t['field']]);
                 $setting = string2array($t['setting']);
                 $string = $setting['content'];
@@ -351,7 +364,7 @@ abstract class Controller
                             }
 
                             if (empty($merge_string) && function_exists($func)) {
-                                eval("\$o_str = " . $func . "(" . $field . ", null, " . $value['setting'] . ");");
+                                eval("\$o_str = " . $func . "(" . $field . ", NULL, " . $value['setting'] . ");");
                             }
 
                             $regex_array[] = '{' . $field . '}';
@@ -462,11 +475,11 @@ abstract class Controller
     protected function getModelJoin($modelid)
     {
         if (empty($modelid)) {
-            return null;
+            return NULL;
         }
 
         $data = get_cache('formmodel');
-        $return = null;
+        $return = NULL;
         if ($data) {
             foreach ($data as $t) {
                 if ($t['joinid'] == $modelid) {
@@ -484,7 +497,7 @@ abstract class Controller
     {
         $data = get_cache('formmodel');
         $join = get_cache('joinmodel');
-        $return = null;
+        $return = NULL;
         if ($data) {
             foreach ($data as $id => $t) {
                 if (isset($t['setting']['form']['member']) && $t['setting']['form']['member']) {
@@ -527,5 +540,13 @@ abstract class Controller
     protected function admin_view($file)
     {
         return ADMIN_PATH . $file . '.tpl.php';
+    }
+
+    /** 加载前台视图模板，内置默认模板
+     * @param string $file 文件名
+     */
+    protected function public_view($file)
+    {
+        return PUBLIC_PATH . $file . '.tpl.php';
     }
 }

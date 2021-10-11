@@ -72,6 +72,7 @@ class ModelController extends Admin
             $show = $this->post('showtpl') ? $this->post('showtpl') : 'show_' . $tablename . '.html';
             $search = $this->post('searchtpl') ? $this->post('searchtpl') : 'search_' . $tablename . '.html';
             $pagetpl = $this->post('pagetpl') ? $this->post('pagetpl') : 'page.html';
+            $msgtpl = $this->post('msgtpl') ? $this->post('msgtpl') : '';
             $tablename = $this->modelType[$this->typeid] . '_' . $tablename;
             if ($this->_model->is_table_exists($tablename)) {
                 $this->show_message('数据表名已经存在');
@@ -85,6 +86,7 @@ class ModelController extends Admin
                 'showtpl' => $show,
                 'searchtpl' => $search,
                 'pagetpl' => $pagetpl,
+                'msgtpl' => $msgtpl,
                 'typeid' => $this->typeid,
             );
             if ($modelid = $this->_model->set(0, $data)) {

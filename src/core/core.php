@@ -31,7 +31,8 @@ define('MODEL_PATH', CORE_PATH . MODEL_DIR . DS); // 数据模型路径
 define('VIEW_PATH', CORE_PATH . VIEW_DIR . DS); // 视图模板路径
 define('CTRL_PATH', CORE_PATH . CTRL_DIR . DS); // 控制器路径
 define('STATIC_PATH', ROOT_PATH . STATIC_DIR . DS); // 静态资源路径
-define('ADMIN_PATH', VIEW_PATH . 'admin' . DS); // 管理模块路径
+define('ADMIN_PATH', VIEW_PATH . 'admin' . DS); // 后台管理视图模块路径
+define('PUBLIC_PATH', VIEW_PATH . 'public' . DS); // 站点前台视图模板路径
 define('INSTALL_PATH', VIEW_PATH . 'install' . DS); // 安装模块路径
 define('THEME_PATH', ROOT_PATH . THEME_DIR . DS); // 主题模板路径
 define('PLUGIN_PATH', ROOT_PATH . PLUGIN_DIR . DS); // 插件路径

@@ -32,7 +32,13 @@ class LoginController extends Admin
                     session::delete('admin_login_error_num');
                 }
                 $name = $admin['realname'] ? $admin['realname'] : $username;
-                $this->show_message('欢迎您！' . $name . ' 登录成功', 1, url('admin'));
+                $back_url = $this->get('url');
+                if ($back_url) {
+                    $this->redirect(urldecode($back_url));
+                } else {
+                    $this->redirect(url('admin'));
+                }
+                // $this->show_message('欢迎您！' . $name . ' 登录成功', 1, url('admin'));
             } else {
                 if ($this->session->get('admin_login_error_num')) {
                     $error = (int) $this->session->get('admin_login_error_num') - 1;

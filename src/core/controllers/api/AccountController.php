@@ -6,7 +6,7 @@ if (!defined('IN_CMS')) {
 /**
  * 后台账号管理
  */
-class AccountController extends Api
+class AccountController extends API
 {
 
     public function __construct()
@@ -31,23 +31,23 @@ class AccountController extends Api
         if ($this->isPostForm()) {
             $data = $this->post('data');
             if (!$data['username']) {
-                $this->response(400, null, '用户名不能为空');
+                $this->response(400, NULL, '用户名不能为空');
             }
 
             if (strlen($data['password']) < 6) {
-                $this->response(400, null, '密码最少6位数');
+                $this->response(400, NULL, '密码最少6位数');
             }
 
             $data['password'] = md5(md5($data['password']));
             if ($this->account->getOne('username=?', $data['username'])) {
-                $this->response(400, null, '已存在相同的用户名');
+                $this->response(400, NULL, '已存在相同的用户名');
             }
 
             $auth = $this->post('auth');
             $data['auth'] = array2string($auth);
             $this->account->insert($data);
             $this->cacheAction();
-            $this->response(200, null, '添加成功');
+            $this->response(200, NULL, '添加成功');
         } else {
             $this->response();
         }
@@ -61,7 +61,7 @@ class AccountController extends Api
         $cats = get_cache('category');
 
         if (empty($data)) {
-            $this->response(404, null, 'Not Found');
+            $this->response(404, NULL, 'Not Found');
         }
 
         if ($this->isPostForm()) {
@@ -78,7 +78,7 @@ class AccountController extends Api
             $data['auth'] = array2string($auth);
             $this->account->update($data, 'userid=?', $userid);
             $this->cacheAction();
-            $this->response(200, null, 'OK');
+            $this->response(200, NULL, 'OK');
         } else {
             $this->response();
         }
@@ -88,19 +88,19 @@ class AccountController extends Api
     {
         $userid = (int) $this->get('userid');
         if (empty($userid)) {
-            $this->response(400, null, 'Need userid');
+            $this->response(400, NULL, 'Need userid');
         }
         if ($this->userid == $userid) {
-            $this->response(406, null, 'Can Not Delete Yourself');
+            $this->response(406, NULL, 'Can Not Delete Yourself');
         }
         $data = $this->account->find($userid);
         if (empty($data)) {
-            $this->response(404, null, 'Not Found');
+            $this->response(404, NULL, 'Not Found');
         }
 
         $this->account->delete('userid=?', $userid);
         $this->cacheAction();
-        $this->response(200, null, 'OK');
+        $this->response(200, NULL, 'OK');
     }
 
     /**
@@ -122,7 +122,7 @@ class AccountController extends Api
             $data = $this->post('data');
             if (!empty($data['password'])) {
                 if (strlen($data['password']) < 6) {
-                    $this->response(400, null, '密码最少6位数');
+                    $this->response(400, NULL, '密码最少6位数');
                 }
                 $data['password'] = md5(md5($data['password']));
             } else {
@@ -130,7 +130,7 @@ class AccountController extends Api
             }
             $this->account->update($data, 'userid=?', $this->userid);
             $this->cacheAction();
-            $this->response(200, null, 'OK');
+            $this->response(200, NULL, 'OK');
         }
         $data = $this->account->find($this->userid);
         $this->response(200, $data, 'OK');

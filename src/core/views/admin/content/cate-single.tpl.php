@@ -195,7 +195,6 @@
             $.post("<?php echo url('api/index/pinyin'); ?>&_t=" + new Date().getTime(), { name: dir }, function (data) { $("#dir_text").val(data); });
         }
     }
-    var data = <?php echo $json_model; ?>;
     function settype(id) {
         $(".type_1").hide();
         $(".type_2").hide();
@@ -209,20 +208,7 @@
             }
         }
     }
-    function change_tpl(mid) {
-        if (mid) {
-            $("#categorytpl").val(data[mid]['categorytpl']);
-            $("#listtpl").val(data[mid]['listtpl']);
-            $("#showtpl").val(data[mid]['showtpl']);
-            $("#searchtpl").val(data[mid]['searchtpl']);
-        } else {
-            $("#categorytpl").val("");
-            $("#listtpl").val("");
-            $("#showtpl").val("");
-            $("#searchtpl").val("");
-        }
-    }
-    settype(<?php echo $data[typeid]; ?>);
+    settype(<?php echo $data['typeid']; ?>);
 </script>
 
 <?php include $this->admin_view('footer'); ?>

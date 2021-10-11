@@ -34,7 +34,8 @@ class router
             $URI = array();
             $URI = explode('/', $this->path_info);
             // 如果function为空 则默认访问index
-            if (count($URI) == 1) {
+            $path_count = count($URI);
+            if ($path_count == 1) {
                 if ($this->inNameSpace($URI[0])) {
                     $namespace = $URI[0];
                 } else if ($this->isController('', $URI[0])) {
@@ -42,7 +43,7 @@ class router
                 } else {
                     $action = $URI[0];
                 }
-            } else if (count($URI) == 2) {
+            } else if ($path_count == 2) {
                 if ($this->inNameSpace($URI[0])) {
                     $namespace = $URI[0];
                     if ($this->isController($URI[0] . DS, $URI[1])) {
@@ -53,7 +54,7 @@ class router
                 } else if ($this->isController('', $URI[0])) {
                     $controller = $URI[0];
                 }
-            } else if (count($URI) > 2) {
+            } else if ($path_count > 2) {
                 if ($this->inNameSpace($URI[0])) {
                     $namespace = $URI[0];
                     if ($this->isController($URI[0] . DS, $URI[1])) {

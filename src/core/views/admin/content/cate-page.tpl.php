@@ -201,28 +201,8 @@
         $(".type_2").hide();
         $(".type_3").hide();
         $(".type_"+id).show();
-        if (id ==2) {
-            var page = $("#pagetpl").val();
-            if (page) {}
-            else {
-                $("#pagetpl").val("page.html")
-            }
-        }
     }
-    function change_tpl(mid) {
-        if (mid) {
-            $("#categorytpl").val(data[mid]['categorytpl']);
-            $("#listtpl").val(data[mid]['listtpl']);
-            $("#showtpl").val(data[mid]['showtpl']);
-            $("#searchtpl").val(data[mid]['searchtpl']);
-        } else {
-            $("#categorytpl").val("");
-            $("#listtpl").val("");
-            $("#showtpl").val("");
-            $("#searchtpl").val("");
-        }
-    }
-    settype(<?php echo $data[typeid]; ?>);
+    settype(<?php echo $data['typeid']; ?>);
 </script>
 
 <?php include $this->admin_view('footer'); ?>
