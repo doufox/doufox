@@ -3,6 +3,8 @@
 /src/data/config/database.ini.php
 /src/data/session
 /src/data/models
+# 测试
+test
 
 # 开发工具文件
 .project
