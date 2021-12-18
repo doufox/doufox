@@ -319,7 +319,7 @@ function content_textarea($name, $content = '', $setting = '')
 function content_editor($name, $content = '', $setting = '')
 {
     $content = is_null($content[0]) ? get_content_value($setting['default']) : $content[0];
-    $w = isset($setting['width']) && $setting['width'] ? $setting['width'] : '98';
+    $w = isset($setting['width']) && $setting['width'] ? $setting['width'] : '100';
     $h = isset($setting['height']) && $setting['height'] ? $setting['height'] : '400';
     $id = $name;
     $type = isset($setting['type']) && $setting['type'] ? 1 : (!isset($setting['type']) ? 1 : 0);

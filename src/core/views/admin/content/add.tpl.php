@@ -65,7 +65,7 @@
                         if ($model['content']['description']['show']) { ?>
                             <tr>
                                 <th><?php echo $model['content']['description']['name']; ?>：</th>
-                                <td><textarea class="form-control" style="width:490px;height:44px;" maxlength="255" id="description" name="data[description]"><?php echo $data['description']; ?></textarea></td>
+                                <td><textarea class="form-control" style="width:100%;" rows="4" maxlength="255" id="description" name="data[description]"><?php echo $data['description']; ?></textarea></td>
                             </tr>
                         <?php }
                         echo $data_fields; ?>
@@ -87,7 +87,7 @@
                         <tr>
                             <th>阅读数：</th>
                             <td>
-                                <input type="text" class="form-control" size = "5" value="<?php echo $data['hits']; ?>" name="data[hits]">
+                                <input type="text" class="form-control" size="5" value="<?php echo $data['hits']; ?>" name="data[hits]">
                             </td>
                         </tr>
                     </tbody>
@@ -103,7 +103,7 @@
 <script type="text/javascript">
     function ajaxtitle() {
         $('#title_text').html('');
-        $.post('<?php echo url('admin/content/ajaxtitle'); ?>&id=' + Math.random(), {
+        $.post('<?php echo url('admin/content/ajaxtitle'); ?>&t=' + Math.random(), {
             title: $('#title').val(),
             id: <?php echo $data[id] ? $data[id] : 0; ?>
         }, function(data) {
