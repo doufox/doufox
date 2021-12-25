@@ -2,6 +2,8 @@
 
 DouFox 是一款基于 PHP 和 MySQL 的功能强大的 CMS 建站系统。
 
+官网：[doufox.com](https://doufox.com)
+
 ## 安装
 
 1. 将 src 文件夹下的所有文件上传到服务器站点目录。
