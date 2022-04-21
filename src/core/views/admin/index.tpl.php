@@ -48,6 +48,7 @@ doHookAction('admin_index_top');
                         <p>联系邮箱: <a href="mailto:service@doufox.com">service@doufox.com</a></p>
                         <p>官方网站: <a href="<?php echo APP_SITE; ?>" target="_blank"><?php echo APP_SITE;?></a></p>
                         <p>问题反馈: <a href="<?php echo url('admin/feedback'); ?>">点击这里</a></p>
+                        <p>源码查阅: <a href="https://github.com/doufox/doufox" target="_blank">GitHub</a>,<a href="https://gitee.com/doufox/doufox" target="_blank">Gitee</a></p>
                     </div>
                 </div>
             </div>
