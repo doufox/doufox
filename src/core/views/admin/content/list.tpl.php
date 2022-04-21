@@ -68,7 +68,7 @@
                                 <th>标题</th>
                                 <th width="80">栏目</th>
                                 <th width="80">发布人</th>
-                                <th width="150">最后更新时间</th>
+                                <th width="160">最后更新时间</th>
                                 <th>操作</th>
                                 <th width="50">排序</th>
                             </tr>

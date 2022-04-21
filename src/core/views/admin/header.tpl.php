@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="robots" content="none, nofollow, noarchive, nocache">
     <meta name="referrer" content="never" />
-    <title>内容管理系统</title>
+    <title><?php echo ucfirst(APP_NAME); ?> 网站内容管理系统</title>
     <link type="text/css" href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <style><?php include $this->admin_view('common/style');?></style>
     <link rel="icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico" />

@@ -131,7 +131,7 @@ class file_upload
     protected function parse_mimetype()
     {
         if (!in_array($this->fileext(), $this->limit_type)) {
-            return '你上传的文件格式不正确';
+            return '您上传的文件格式不正确';
         }
         return false;
     }

@@ -3,7 +3,7 @@
 Name: 小贴士
 Version: 1.0
 URL: https://doufox.com
-Description: 内置插件，它会在你管理主页面显示一句温馨的小提示。
+Description: 内置插件，它会在您管理主页面显示一句温馨的小提示。
 Author: doufox
 Author URL: https://doufox.com
 */

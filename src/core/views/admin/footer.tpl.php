@@ -3,12 +3,12 @@
     <div class="container-fluid">
         <footer class="navbar navbar-default">
             <div class="container-fluid">
-                <div class="navbar-text">
-                    <span>&copy; Copyright</span>
+                <div class="navbar-text">Powered by <a href="<?php echo APP_SITE;?>" target="_blank"><?php echo ucfirst(APP_NAME); ?></a></div>
+                <div class="navbar-text pull-right hidden-xs">
+                    <span>Copyright &copy; </span>
                     <span class="hidden-xs"><?php echo date("Y"); ?></span>
-                    <span><a href="<?php echo APP_SITE;?>" target="_blank"><?php echo ucfirst(APP_NAME); ?></a> All Rights Reserved.</span>
+                    <span><a href="https://crogram.com/" target="_blank">Crogram</a> All Rights Reserved.</span>
                 </div>
-                <div class="navbar-text pull-right hidden-xs">Powered by <a href="https://crogram.com" target="_blank">Crogram</a></div>
             </container-fluid>
         </footer>
     </div>

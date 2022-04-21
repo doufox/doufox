@@ -120,7 +120,7 @@ function get_sysinfo()
     $sys_info['safe_mode_gid'] = (bool) ini_get('safe_mode_gid'); //safe_mode_gid = Off
     $sys_info['timezone'] = function_exists("date_default_timezone_get") ? date_default_timezone_get() : '没有设置';
     $sys_info['socket'] = function_exists('fsockopen');
-    $sys_info['web_server'] = strpos($_SERVER['SERVER_SOFTWARE'], 'PHP') === false ? $_SERVER['SERVER_SOFTWARE'] . 'PHP/' . phpversion() : $_SERVER['SERVER_SOFTWARE'];
+    $sys_info['web_server'] = strpos($_SERVER['SERVER_SOFTWARE'], 'PHP') === false ? $_SERVER['SERVER_SOFTWARE'] . ' PHP/' . phpversion() : $_SERVER['SERVER_SOFTWARE'];
     $sys_info['phpv'] = phpversion();
     $sys_info['fileupload'] = @ini_get('file_uploads') ? ini_get('upload_max_filesize') : 'unknown';
     return $sys_info;

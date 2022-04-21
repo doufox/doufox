@@ -49,7 +49,7 @@ class PluginController extends Admin
         //     'name' => 'Hello World',
         //     'plugin' => 'helloworld',
         //     'version' => '1.0',
-        //     'description' => '内置插件，它会在你每个管理页面显示一句"Hello World !"。',
+        //     'description' => '内置插件，它会在您每个管理页面显示一句"Hello World !"。',
         //     'url' => 'https://doufox.com',
         //     'author' => 'doufox',
         //     'author_url' => 'https://doufox.com'

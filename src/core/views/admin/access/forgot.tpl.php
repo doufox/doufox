@@ -8,7 +8,7 @@
     <meta name="force-rendering" content="webkit" />
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>网站内容管理系统 - DouFox</title>
+    <title>重置密码 - <?php echo ucfirst(APP_NAME); ?></title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico">
     <meta name="robots" content="none, nofollow, noarchive, nocache">
@@ -56,7 +56,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <span>重置密码，开发中</span>
-                <span class="pull-right">DouFox 网站管理系统</span>
+                <span class="pull-right"><?php echo ucfirst(APP_NAME); ?> 网站内容管理系统</span>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -90,6 +90,10 @@
                         </form>
                     </div>
                 </div>
+            </div>
+            <div class="panel-footer text-center">
+                <span>Copyright &copy; <?php echo date("Y"); ?></span>
+                <span><a href="<?php echo APP_SITE;?>" target="_blank"><?php echo ucfirst(APP_NAME); ?></a> All Rights Reserved.</span>
             </div>
         </div>
     </div>

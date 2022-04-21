@@ -62,7 +62,7 @@
                                 <th align="left">标题</th>
                                 <th align="left" width="80">栏目</th>
                                 <th align="left" width="80">发布人</th>
-                                <th align="left" width="150">最后更新时间</th>
+                                <th align="left" width="160">最后更新时间</th>
                                 <th align="left" width="200">操作</th>
                                 <th align="left" width="40">排序</th>
                             </tr>
