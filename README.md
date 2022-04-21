@@ -1,6 +1,6 @@
-# DouFox 网站内容管理系统
+# Doufox 网站内容管理系统
 
-DouFox 是一款基于 PHP 和 MySQL 的功能强大的 CMS 建站系统。
+Doufox 是一款基于 PHP 和 MySQL 的功能强大的 CMS 建站系统。
 
 官网：[doufox.com](https://doufox.com)
 

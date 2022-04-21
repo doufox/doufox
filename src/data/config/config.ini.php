@@ -4,7 +4,7 @@ if (!defined('IN_CMS')) {
 }
 
 return array(
-    'SITE_NAME'               => 'DouFox', // 网站名称
+    'SITE_NAME'               => 'Doufox', // 网站名称
     'SITE_THEME'              => 'default', // 桌面端主题样式, 默认default
     'SITE_MOBILE'             => 'mobile', // 移动端主题样式, 默认mobile
     'SITE_TITLE'              => '首页标题', // 网站首页SEO标题
