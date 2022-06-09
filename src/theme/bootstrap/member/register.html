@@ -1,4 +1,5 @@
-{template member/header.html}
+{template header.html}
+
 <script type="text/javascript">
     function usernameFocus() {
         document.getElementById("username_prompt").innerHTML = "请输入登录账号";
@@ -116,57 +117,58 @@
     }
 </script>
 
-<form class="form form-horizontal" method="post" action="" name="myform" id="myform">
-{if count($member_model)>1}
-会员模型：<select name="data[modelid]">
-{loop $member_model $t}
-        <option value="{$t['modelid']}" {if $member_default_modelid==$t['modelid']}selected{/if}>{$t['modelname']}</option>
-{/loop}
-    </select>
-{/if}
-    <div class="form-group form-inline">
-        <label class="control-label col-sm-2" for="inputUsername"><font color="red">*</font>登录账号</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="text" name="data[username]" autocomplete="off" placeholder="登陆账号" id="inputUsername" onfocus="usernameFocus()" onblur="usernameBlur()" />
-            <span id="username_prompt" class="tips_info"></span>
+<div class="container">
+    <form class="form form-horizontal" method="post" action="" name="myform" id="myform">
+    {if count($member_model)>1}
+    会员模型：<select name="data[modelid]">
+    {loop $member_model $t}
+            <option value="{$t['modelid']}" {if $member_default_modelid==$t['modelid']}selected{/if}>{$t['modelname']}</option>
+    {/loop}
+        </select>
+    {/if}
+        <div class="form-group form-inline">
+            <label class="control-label col-sm-2" for="inputUsername"><font color="red">*</font>登录账号</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" name="data[username]" autocomplete="off" placeholder="登陆账号" id="inputUsername" onfocus="usernameFocus()" onblur="usernameBlur()" />
+                <span id="username_prompt" class="tips_info"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group form-inline">
-        <label class="control-label col-sm-2" for="inputPwd"><font color="red">*</font>登录密码</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="text" name="data[password]" autocomplete="off" placeholder="登录密码" id="inputPwd" onfocus="pwdFocus()" onblur="pwdBlur()" />
-            <span id="pwd_prompt" class="tips_info"></span>
+        <div class="form-group form-inline">
+            <label class="control-label col-sm-2" for="inputPwd"><font color="red">*</font>登录密码</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" name="data[password]" autocomplete="off" placeholder="登录密码" id="inputPwd" onfocus="pwdFocus()" onblur="pwdBlur()" />
+                <span id="pwd_prompt" class="tips_info"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group form-inline">
-        <label class="control-label col-sm-2" for="inputRepwd"><font color="red">*</font>确认密码</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="text" name="data[password2]" autocomplete="off" placeholder="确认密码" id="inputRepwd" onfocus="repwdFocus()" onblur="repwdBlur()" />
-            <span id="repwd_prompt" class="tips_info"></span>
+        <div class="form-group form-inline">
+            <label class="control-label col-sm-2" for="inputRepwd"><font color="red">*</font>确认密码</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" name="data[password2]" autocomplete="off" placeholder="确认密码" id="inputRepwd" onfocus="repwdFocus()" onblur="repwdBlur()" />
+                <span id="repwd_prompt" class="tips_info"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group form-inline">
-        <label class="control-label col-sm-2" for="inputEmail">邮箱地址</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="email" name="data[email]" autocomplete="off" placeholder="确认密码" id="inputEmail" onfocus="emailFocus()" onblur="emailBlur()" />
-            <span id="email_prompt" class="tips_info"></span>
+        <div class="form-group form-inline">
+            <label class="control-label col-sm-2" for="inputEmail">邮箱地址</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="email" name="data[email]" autocomplete="off" placeholder="邮箱地址" id="inputEmail" onfocus="emailFocus()" onblur="emailBlur()" />
+                <span id="email_prompt" class="tips_info"></span>
+            </div>
         </div>
-    </div>
-{if $config['MEMBER_REGCODE']}
-    <div class="form-group form-inline">
-        <label class="control-label col-sm-2" for="code"><font color="red">*</font>注册验证</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="text" name="code" autocomplete="off" placeholder="输入验证码" style="width:100px" />
-            <img id="code" title="看不清楚？换一张" align="absmiddle" onclick="reload_code();" src="{function.url('api/access/checkcode', array('width'=>80, 'height'=>28))}"  style="cursor:pointer; margin-top:-3px;" />
+        {if $member_logincode}<div class="form-group form-inline">
+            <label class="control-label col-sm-2" for="code"><font color="red">*</font>注册验证</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" name="code" autocomplete="off" placeholder="输入验证码" style="width:100px" />
+                <img id="code" title="看不清楚？换一张" align="absmiddle" onclick="reload_code();" src="{function.url('api/access/checkcode', array('width'=>80, 'height'=>28))}"  style="cursor:pointer; margin-top:-3px;" />
+            </div>
+        </div>{/if}
+
+        <div class="form-group form-inline">
+            <label class="control-label col-sm-2">&nbsp;</label>
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-default" name="submit">提交注册</button>
+            </div>
         </div>
-    </div>
-{/if}
-    <div class="form-group form-inline">
-        <label class="control-label col-sm-2">&nbsp;</label>
-        <div class="col-sm-10">
-            <button type="submit" class="btn btn-default" name="submit">提交注册</button>
-        </div>
-    </div>
-</form>
+    </form>
+</div>
 
 {template footer.html}

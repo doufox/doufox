@@ -41,7 +41,6 @@ class RegisterController extends Member
             $this->show_message('注册成功', 1, url('member/index'));
         }
         $this->view->assign(array(
-            'config' => $this->site_config,
             'membermodel' => $this->membermodel,
             'site_title' => '会员注册 - ' . $this->site_config['SITE_NAME'],
             'page_title' => '会员注册',
@@ -50,6 +49,7 @@ class RegisterController extends Member
             'site_keywords' => $this->site_config['SITE_KEYWORDS'],
             'site_description' => $this->site_config['SITE_DESCRIPTION'],
             'member_default_modelid' => $this->site_config['MEMBER_MODELID'],
+            'member_logincode' => $this->site_config['MEMBER_LOGINCODE'],
         ));
         $this->view->display('member/register.html');
     }

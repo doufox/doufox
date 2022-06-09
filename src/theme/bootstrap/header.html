@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 
 <head>
     <meta charset="utf-8"/>
@@ -16,18 +16,9 @@
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/theme/bootstrap/css/style.css" type="text/css"/>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico">
-    <script async src="static/js/jquery.min.js"></script>
-    <script async src="static/bootstrap/js/bootstrap.min.js"></script>
+
     {function.doHookAction('view_head')}
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?a2c1b56bc33845872bf7f59c7f3f6cce";
-            var s = document.getElementsByTagName("script")[0]; 
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
+
 </head>
 
 <body>
@@ -69,8 +60,7 @@
             <ul class="nav navbar-nav">
                 {nav num=6}<li{if $current} class="active"{/if}><a href="{$vdata['url']}">{$vdata['catname']}</a></li>{/nav}
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-            {if $member}
+            <ul class="nav navbar-nav navbar-right">{if $member}
                 <li class="account dropdown">
                     <a href="javascript:void(0);" data-toggle="dropdown">您好 {$member['username']}&nbsp;<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -80,12 +70,10 @@
                         <li><a href="{function.url('member/login/out')}">退出</a></li>
                         <li role="separator" class="divider"></li>
                     </ul>
-                </li>
-            {else}
+                </li>{else}
                 <li><a href="{function.url('member/login')}">登录</a></li>
-                <li><a href="{function.url('member/register')}">注册</a></li>
-            {/if}
-                <li><a href="https://github.com/doufox/doufox/" target="_blank">源码</a></li>
+                <li><a href="{function.url('member/register')}">注册</a></li>{/if}
+
             </ul>
         </div>
     </nav>

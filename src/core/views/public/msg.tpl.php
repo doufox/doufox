@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 
 <head>
     <meta charset="utf-8" />
@@ -82,7 +82,7 @@
         <div class="container">
             <p class="text-muted text-right">
                 <a class="pull-left" href="<?php echo url(''); ?>"><?php echo $this->site_config['SITE_NAME']; ?></a>
-                <span>Powered by <a href="<?php echo APP_SITE; ?>" target="_blank"><?php echo ucfirst(APP_NAME); ?></a></span>
+                <span>Powered by <a href="<?php echo APP_SITE; ?>" target="_blank"><?php echo APP_NAME; ?></a></span>
             </p>
         </div>
     </footer>

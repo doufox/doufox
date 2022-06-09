@@ -5,7 +5,7 @@
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
                     <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo url('admin'); ?>"><?php echo ucfirst(APP_NAME); ?></a>
+                <a class="navbar-brand" href="<?php echo url('admin'); ?>"><?php echo APP_NAME; ?></a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul id="menu" class="menu nav navbar-nav">

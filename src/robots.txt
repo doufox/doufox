@@ -1,7 +1,8 @@
 User-agent: *
-Disallow: /admin/
 Disallow: /core/
 Disallow: /data/
+Disallow: /plugin/
+Disallow: /theme/
 Disallow: /upload/
 Disallow: /index.php?s=member*
 Disallow: /index.php?s=api*

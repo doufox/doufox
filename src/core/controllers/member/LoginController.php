@@ -47,10 +47,10 @@ class LoginController extends Member
         }
         $backurl = $this->get('back') ? $this->get('back') : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : url('member/index'));
         $this->view->assign(array(
-            'config' => $this->site_config,
             'site_title' => '会员登录 - ' . $this->site_config['SITE_NAME'],
             'site_keywords' => $this->site_config['SITE_KEYWORDS'],
             'site_description' => $this->site_config['SITE_DESCRIPTION'],
+            'member_logincode' => $this->site_config['MEMBER_LOGINCODE'],
             'page_title' => '会员登录',
             'page_url' => url('member/login'),
             'page_position' => "<a href=\"" . url('member/login') . "\" title=\"会员登录\">会员登录</a>",

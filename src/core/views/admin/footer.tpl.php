@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <footer class="navbar navbar-default">
             <div class="container-fluid">
-                <div class="navbar-text">Powered by <a href="<?php echo APP_SITE;?>" target="_blank"><?php echo ucfirst(APP_NAME); ?></a></div>
+                <div class="navbar-text">Powered by <a href="<?php echo APP_SITE;?>" target="_blank"><?php echo APP_NAME; ?></a></div>
                 <div class="navbar-text pull-right hidden-xs">
                     <span>Copyright &copy; </span>
                     <span class="hidden-xs"><?php echo date("Y"); ?></span>

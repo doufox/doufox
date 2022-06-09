@@ -262,7 +262,7 @@ class DatabaseController extends Admin
         }
         $bakfile_path = $dir . DS . $time . DS;
         if (trim($tabledump)) {
-            $tabledump = "# name: " . APP_NAME . " db bakup file\n# version: " . APP_VERSION . " \n# time: " . date('Y-m-d H:i:s') . "\n# ------------------------\n\n\n" . $tabledump;
+            $tabledump = "# name: " . strtolower(APP_NAME) . " db bakup file\n# version: " . APP_VERSION . " \n# time: " . date('Y-m-d H:i:s') . "\n# ------------------------\n\n\n" . $tabledump;
             $tableid = $i;
             $filename = 'tables_' . date('Ymd') . '_' . $random . '_' . $fileid . '.sql';
             $altid = $fileid;

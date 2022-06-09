@@ -1,40 +1,43 @@
 {template member/header.html}
 
-<div class="row">
-    <div class="col-sm-3 col-md-3 col-xs-4">
-        {template member/sidebar.html}
-    </div>
-    <div class="col-sm-9 col-md-9 col-xs-8">
-        <form action="" method="post">
-            <table class="table table-bordered">
-                <tbody>
-                    <tr>
-                        <th width="100">会员类型：</th>
-                        <td>{$member_model[$member['modelid']]['modelname']}</td>
-                    </tr>
-                    <tr>
-                        <th>会员账号：</th>
-                        <td>{$member['username']}</td>
-                    </tr>
-                    <tr>
-                        <th>会员积分：</th>
-                        <td>{$member['credits']}</td>
-                    </tr>
-                    <tr>
-                        <th>注册邮箱：</th>
-                        <td>{$member['email']}</td>
-                    </tr>
-                    <tr>
-                    {$data_fields}
-                    <tr>
-                        <th style="border:none">&nbsp;</th>
-                        <td style="border:none">
-                            <button type="submit" class="btn btn-default" name="submit">保存</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-xs-4">
+            {template member/sidebar.html}
+        </div>
+        <div class="col-sm-9 col-md-9 col-xs-8">
+            <form action="" method="post">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th width="100">会员类型：</th>
+                            <td>{$member_model[$member['modelid']]['modelname']}</td>
+                        </tr>
+                        <tr>
+                            <th>会员账号：</th>
+                            <td>{$member['username']}</td>
+                        </tr>
+                        <tr>
+                            <th>会员积分：</th>
+                            <td>{$member['credits']}</td>
+                        </tr>
+                        <tr>
+                            <th>注册邮箱：</th>
+                            <td>{$member['email']}</td>
+                        </tr>
+                        <tr>
+                        {$data_fields}
+                        <tr>
+                            <th style="border:none">&nbsp;</th>
+                            <td style="border:none">
+                                <button type="submit" class="btn btn-default" name="submit">保存</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
     </div>
 </div>
+
 {template footer.html}

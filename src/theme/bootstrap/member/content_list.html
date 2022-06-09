@@ -1,42 +1,45 @@
 {template member/header.html}
 
-<div class="row">
-    <div class="col-sm-3 col-md-3 col-xs-3">
-        {template member/sidebar.html}
-    </div>
-    <div class="col-sm-8 col-md-8 col-xs-8">
-        <table class="datatable" border="0" cellpadding="0" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <td>标题</td>
-                    <td width="80">栏目</td>
-                    <td width="130">更新时间</td>
-                    <td width="50">操作</td>
-                </tr>
-            </thead>
-            <tbody>
-                {loop $list $t}
-                <tr>
-                    <td><a href="{$t['url']}" target="_blank">
-                    {if $t['status']==0}<font color="#FF0000">[未审]</font>
-                    {else if $t['status']==2}<font color="#0000FF">[头条]</font>{/if}
-                    {$t['title']}</a></td>
-                    <td><a href="{$cats[$t['catid']]['url']}" target="_blank">{$cats[$t['catid']]['catname']}</a></td>
-                    <td>{function.date("Y-m-d H:i:s", $t['time'])}</td>
-                    <td><a href="{function.url('member/content/edit/', array('id'=>$t['id']))}">修改</a>&nbsp;</td>
-                </tr>
-                {/loop}
-            </tbody>
-        </table>
-        <form action="" method="post">
-            <div class="datatablepage">
-                <select name="catid">
-                    {$category}
-                    </select>
-                <input type="submit" class="button" value="发布文档" name="submit">
-            </div>
-        </form>
-        {$pagination}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-xs-3">
+            {template member/sidebar.html}
+        </div>
+        <div class="col-sm-8 col-md-8 col-xs-8">
+            <table class="datatable" border="0" cellpadding="0" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <td>标题</td>
+                        <td width="80">栏目</td>
+                        <td width="130">更新时间</td>
+                        <td width="50">操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {loop $list $t}
+                    <tr>
+                        <td><a href="{$t['url']}" target="_blank">
+                        {if $t['status']==0}<font color="#FF0000">[未审]</font>
+                        {else if $t['status']==2}<font color="#0000FF">[头条]</font>{/if}
+                        {$t['title']}</a></td>
+                        <td><a href="{$cats[$t['catid']]['url']}" target="_blank">{$cats[$t['catid']]['catname']}</a></td>
+                        <td>{function.date("Y-m-d H:i:s", $t['time'])}</td>
+                        <td><a href="{function.url('member/content/edit/', array('id'=>$t['id']))}">修改</a>&nbsp;</td>
+                    </tr>
+                    {/loop}
+                </tbody>
+            </table>
+            <form action="" method="post">
+                <div class="datatablepage">
+                    <select name="catid">
+                        {$category}
+                        </select>
+                    <input type="submit" class="button" value="发布文档" name="submit">
+                </div>
+            </form>
+            {$pagination}
+        </div>
     </div>
 </div>
+
 {template footer.html}

@@ -18,7 +18,6 @@ return array(
     'SITE_WATERMARK_POS'      => '5', // 水印位置
     'SITE_THUMB_WIDTH'        => '200', // 内容缩略图默认宽度
     'SITE_THUMB_HEIGHT'       => '200', // 内容缩略图默认高度
-    'ICP_FILING_NUMBER'       => '', // ICP备案号
     'MEMBER_MODELID'          => '0', // 默认会员模型
     'MEMBER_REGISTER'         => '1', // 新会员注册
     'MEMBER_STATUS'           => '1', // 新会员审核

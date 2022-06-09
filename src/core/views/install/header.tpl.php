@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 
 <head>
     <meta charset="utf-8" />
@@ -10,9 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="robots" content="none, nofollow, noarchive, nocache">
     <meta name="referrer" content="never" />
-    <title>系统安装向导 - <?php echo ucfirst(APP_NAME); ?> 网站内容管理系统</title>
+    <title>系统安装向导 - <?php echo APP_NAME; ?> 网站内容管理系统</title>
     <meta name="keywords" content="安装向导"/>
-    <meta name="description" content="<?php echo ucfirst(APP_NAME); ?> 网站内容管理系统 - 安装向导"/>
+    <meta name="description" content="<?php echo APP_NAME; ?> 网站内容管理系统 - 安装向导"/>
     <link rel="icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico"/>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css" />

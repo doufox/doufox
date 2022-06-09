@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-heading"><span class="panel-title">导航</span></div>
     <div class="list-group">
-        <a class="list-group-item" href="{function.url('member/index/edit')}">会员资料</a>
+        <a class="list-group-item" href="{function.url('member/index/edit')}">修改资料</a>
         <a class="list-group-item" href="{function.url('member/index/password')}">修改密码</a>
         <a class="list-group-item" href="{function.url('member/content/')}">内容管理</a>
         {loop $contents $n=>$t}<a class="list-group-item{if $n && $form['tablename']==$n} class=\"active\"{/if}" href="{$t['url']}">{$t['name']}</a>{/loop}
