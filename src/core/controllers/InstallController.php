@@ -15,7 +15,7 @@ class InstallController
         $this->status = 'default';
         if (file_exists(DATA_PATH . 'installed')) {
             $this->status = 'success';
-            include $this->install_view('installed');
+            include $this->views('install/installed');
             exit();
         }
         if (!is_writable(DATA_PATH)) {
@@ -28,7 +28,7 @@ class InstallController
         $step = trim($_REQUEST['step']) ? trim($_REQUEST['step']) : 1;
         switch ($step) {
             case '1': // 安装许可协议
-                include $this->install_view('1');
+                include $this->views('install/1');
                 break;
             case '2': // 环境检测 填写配置信息
                 if (PHP_VERSION < '5.2.0') {
@@ -58,7 +58,7 @@ class InstallController
                 if (!is_writable(ROOT_PATH . 'upload')) {
                     $error = '系统目录upload没有写入权限, 无法进行安装！';
                 }
-                include $this->install_view('2');
+                include $this->views('install/2');
                 break;
             case '3': // 安装
                 function dexit($msg)
@@ -115,13 +115,13 @@ class InstallController
                 // }
 
                 // 导入表结构
-                $sql = file_get_contents(INSTALL_PATH . 'initdata.sql');
+                $sql = file_get_contents(VIEW_PATH . 'install/initdata.sql');
                 // 表前缀处理
                 $sql = str_replace('doufox_', $ttb_pre, $sql);
                 // 超级管理员默认帐号密码
                 $sql = preg_replace("/\s*'admin'\s*,\s*'c3284d0f94606de1fd2af172aba15bf3'/", " '" . $username . "', '" . md5(md5($password)) . "'", $sql);
                 $this->installsql($sql);
-                include $this->install_view('3');
+                include $this->views('install/3');
                 break;
             case 'db_test': // 测试连接
                 $tdb_host = $_POST['tdb_host'];
@@ -185,12 +185,11 @@ class InstallController
         file_put_contents(DATA_PATH . 'installed', time());
     }
 
-    /**
-     * 加载安装模板
-     * @param string $file_name 文件名
+    /** 加载视图模板文件，系统内置默认模板
+     * @param string $file 文件名 如 admin/login、install/footer
      */
-    protected function install_view($file_name)
+    protected function views($file)
     {
-        return INSTALL_PATH . $file_name . '.tpl.php';
+        return VIEW_PATH . $file . '.tpl.php';
     }
 }

@@ -16,9 +16,9 @@ class Admin extends Controller
     {
         parent::__construct();
         $this->is_admin_login();
+        define('IN_ADMIN', true);
         core::load_file(CORE_PATH . 'library' . DS . 'fields.function.php');
         $this->init_common_data();
-        define('IN_ADMIN', true);
     }
 
     /**
@@ -30,8 +30,7 @@ class Admin extends Controller
      */
     public function show_message($msg, $status = 2, $url = HTTP_REFERER, $time = 2000)
     {
-
-        include $this->admin_view('msg');
+        include $this->views('admin/msg');
         exit;
     }
 
@@ -52,8 +51,8 @@ class Admin extends Controller
             return false;
         }
 
-        if ($this->session->get('user_id')) {
-            $this->userid = $this->session->get('user_id');
+        if ($this->session->get('member_id')) {
+            $this->userid = $this->session->get('member_id');
             if ($this->userid) {
                 return false;
             }
@@ -78,8 +77,8 @@ class Admin extends Controller
             $this->current_nav = 'manage';
         }
         // 当前账号信息
-        $this->current_account = $this->account->find($this->userid);
-        $this->current_account['name'] = empty($this->current_account['realname']) ? $this->current_account['username'] : $this->current_account['realname'];
+        // $this->current_account = $this->account->find($this->userid);
+        $this->current_account['name'] = empty($this->memberinfo['realname']) ? $this->memberinfo['nickname'] : $this->memberinfo['realname'];
         // 菜单-表单模型
         $this->menu_model = '';
         $form = get_cache('formmodel');

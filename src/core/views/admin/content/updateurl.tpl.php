@@ -1,6 +1,6 @@
-<?php include $this->admin_view('header'); ?>
-<?php include $this->admin_view('navbar'); ?>
-<?php include $this->admin_view('common/msg');?>
+<?php include $this->views('admin/header'); ?>
+<?php include $this->views('admin/navbar'); ?>
+<?php include $this->views('admin/common/msg');?>
 
 <div class="container-fluid">
     <form action="" method="post" target="result" class="form-inline">
@@ -36,4 +36,4 @@
     </form>
 </div>
 
-<?php include $this->admin_view('footer'); ?>
+<?php include $this->views('admin/footer'); ?>

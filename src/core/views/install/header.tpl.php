@@ -21,12 +21,27 @@
             max-width: 460px;
             margin: 100px auto auto;
         }
+
         /* .tip { padding-top: 10px; }
         .tip input { margin: 0 5px 3px 0; } */
-        .status { padding-left: 10px; color: #093 }
-        .status-err { color: #F00 }
+        .status {
+            padding-left: 10px;
+            color: #093
+        }
+
+        .status-err {
+            color: #F00
+        }
+
         /* .u-btn-sm { padding: 0 10px; height: 22px; line-height: 22px; } */
-        .install-status { margin-left:auto; margin-right:auto; line-height:35px; font-size:12px; text-align:center; color:#F00}
+        .install-status {
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 35px;
+            font-size: 12px;
+            text-align: center;
+            color: #F00
+        }
 
         .panel-footer {
             padding: 10px;
@@ -34,10 +49,11 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <div class="panel panel-<?php echo $this->status;?>">
-        <div class="panel-heading">
-            <span class="panel-title">系统安装向导</span>
-        </div>
+    <div class="container">
+        <div class="panel panel-<?php echo $this->status; ?>">
+            <div class="panel-heading">
+                <span class="panel-title">系统安装向导</span>
+            </div>

@@ -23,7 +23,7 @@ class HtmlController extends Admin
      */
     public function indexAction()
     {
-        include $this->admin_view('html/index');
+        include $this->views('admin/html/index');
     }
 
     /**
@@ -70,7 +70,7 @@ class HtmlController extends Admin
         $str = "<option value='\$catid' \$selected>\$spacer \$catname</option>";
         $tree->init($category_select);
         $category_select = $tree->get_tree_category(0, $str, '2', $catid);
-        include $this->admin_view('html/create_html');
+        include $this->views('admin/html/create_html');
     }
 
     /**
@@ -198,7 +198,7 @@ class HtmlController extends Admin
         $str = "<option value='\$catid' \$selected>\$spacer \$catname</option>";
         $tree->init($category_select);
         $category_select = $tree->get_tree_category(0, $str, '2', $catid);
-        include $this->admin_view('html/create_html');
+        include $this->views('admin/html/create_html');
     }
 
     /**

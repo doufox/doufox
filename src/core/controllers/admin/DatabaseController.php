@@ -36,7 +36,7 @@ class DatabaseController extends Admin
             $this->export_database($size, $action, $fileid, $random, $tableid, $startfrom);
         } else {
             $data = $this->getTables();
-            include $this->admin_view('database/list');
+            include $this->views('admin/database/list');
         }
     }
 
@@ -84,7 +84,7 @@ class DatabaseController extends Admin
                 }
             }
         }
-        include $this->admin_view('database/import');
+        include $this->views('admin/database/import');
     }
 
     /** 删除单个备份文件 */
@@ -167,7 +167,7 @@ class DatabaseController extends Admin
         if ($db_file) {
             $data = $db_file;
         }
-        include $this->admin_view('database/view');
+        include $this->views('admin/database/view');
     }
 
     /*

@@ -274,7 +274,7 @@ function verify_email($str)
 }
 
 /**
- * 检查会员名是否符合规定
+ * 检查用户名是否符合规定
  */
 function verify_username($username)
 {

@@ -40,7 +40,7 @@ class CacheController extends Admin
             ),
             'membermodel.cache.php' => array(
                 'controller' => 'member',
-                'title' => '会员模型'
+                'title' => '用户模型'
             ),
             'contentmodel.cache.php' => array(
                 'controller' => 'model',
@@ -101,7 +101,7 @@ class CacheController extends Admin
             }
         }
         unset($caches_desc, $data, $file_list);
-        include $this->admin_view('cache/list');
+        include $this->views('admin/cache/list');
     }
 
     /** 更新全部缓存
@@ -132,7 +132,7 @@ class CacheController extends Admin
                 echo '<script type="text/javascript">window.parent.updateSuccess();</script>';
             }
         } else {
-            include $this->admin_view('cache/update');
+            include $this->views('admin/cache/update');
         }
     }
 

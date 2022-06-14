@@ -26,7 +26,7 @@ class TemplateController extends Admin
             );
         }
         unset($file_list, $path_list);
-        include $this->admin_view('template/list');
+        include $this->views('admin/template/list');
     }
 
     public function itemAction()
@@ -57,7 +57,7 @@ class TemplateController extends Admin
         } else {
             $top_url = url('admin/template', array('dir' => urldecode(dirname($dir) . DS)));
         }
-        include $this->admin_view('template/item');
+        include $this->views('admin/template/item');
     }
 
     public function updatefilenameAction()
@@ -92,7 +92,7 @@ class TemplateController extends Admin
             $this->show_message('提交成功', 1);
         }
         $filecontent = htmlspecialchars(file_get_contents($filepath));
-        include $this->admin_view('template/add');
+        include $this->views('admin/template/add');
     }
 
     public function addAction()
@@ -115,7 +115,7 @@ class TemplateController extends Admin
             file_put_contents($filepath . $filename, stripslashes($_POST['file_content']), LOCK_EX);
             $this->show_message('提交成功', 1, url('admin/template', array('dir' => $dir)));
         }
-        include $this->admin_view('template/add');
+        include $this->views('admin/template/add');
     }
 
     public function delAction()

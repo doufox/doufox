@@ -109,7 +109,7 @@ class CategoryController extends API
         //     <td>\$isdisplay</td>
         //     <td>\$manage_edit \$manage_add \$manage_del</td>
         // </tr>";
-        // include $this->admin_view('category/list');
+        // include $this->views('admin/category/list');
 
     }
 }

@@ -1,6 +1,6 @@
-<?php include $this->admin_view('header'); ?>
-<?php include $this->admin_view('navbar'); ?>
-<?php include $this->admin_view('common/msg');?>
+<?php include $this->views('admin/header'); ?>
+<?php include $this->views('admin/navbar'); ?>
+<?php include $this->views('admin/common/msg');?>
 
 <div class="container-fluid">
     <div class="row">
@@ -68,7 +68,7 @@
                                 </table>
                             </div>
                             <div role="tabpanel" id="auth" class="tab-pane">
-                                <div class="show-tips">模型管理包含了内容、会员、表单、自定义、等模型设置</div>
+                                <div class="show-tips">模型管理包含了内容、用户、表单、自定义、等模型设置</div>
                                 <table width="100%" class="table_form">
                                     <tbody>
                                         <tr>
@@ -139,7 +139,7 @@
                                         </tr>
                                         <tr>
                                             <td align="left">
-                                                <label class="label-group"><input name="auth[member-index]" id="c_member" type="checkbox" onClick="selectInput('member')" />会员管理</label>
+                                                <label class="label-group"><input name="auth[member-index]" id="c_member" type="checkbox" onClick="selectInput('member')" />用户管理</label>
                                             </td>
                                             <td align="left">
                                                 <label class="label-group"><input class="c_member" name="auth[member-edit]" type="checkbox" />编辑</label>
@@ -226,4 +226,4 @@
     }
 </script>
 
-<?php include $this->admin_view('footer'); ?>
+<?php include $this->views('admin/footer'); ?>

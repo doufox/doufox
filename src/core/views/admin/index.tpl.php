@@ -1,6 +1,6 @@
 <?php
-include $this->admin_view('header');
-include $this->admin_view('navbar');
+include $this->views('admin/header');
+include $this->views('admin/navbar');
 doHookAction('admin_index_top');
 ?>
 
@@ -13,8 +13,8 @@ doHookAction('admin_index_top');
             </div>
             <div class="list-group">
                 <a class="list-group-item" href="<?php echo url('admin/category/add'); ?>">添加栏目</a>
-                <a class="list-group-item" href="<?php echo url('admin/member/index'); ?>">会员列表</a>
-                <a class="list-group-item" href="<?php echo url('admin/member/add'); ?>">添加会员</a>
+                <a class="list-group-item" href="<?php echo url('admin/member/index'); ?>">用户列表</a>
+                <a class="list-group-item" href="<?php echo url('admin/member/add'); ?>">添加用户</a>
                 <a class="list-group-item" href="<?php echo url('admin/attachment'); ?>">查看附件</a>
                 <a class="list-group-item" href="<?php echo url('admin/backup'); ?>">备份管理</a>
                 <a class="list-group-item" href="<?php echo url('admin/cache'); ?>">更新缓存</a>
@@ -60,5 +60,5 @@ doHookAction('admin_index_top');
 
 <?php
 doHookAction('admin_index_bottom');
-include $this->admin_view('footer');
+include $this->views('admin/footer');
 ?>

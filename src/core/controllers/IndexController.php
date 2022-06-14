@@ -43,8 +43,20 @@ class IndexController extends Controller
             $this->show_message('当前栏目不存在');
         }
 
-        if ($cat['islook'] && !$this->getMember) {
-            $this->show_message('当前栏目游客不允许查看');
+        if ($cat['islook'] && !$this->is_logged()) {
+            if ($cat['msgtpl']) {
+                $this->view->assign(array(
+                    'msg' => '当前栏目游客不允许查看',
+                    'status' => 2,
+                    'url' => HTTP_REFERER,
+                    'time' => 2000,
+                    'site_title' => '当前栏目游客不允许查看 - ' . $this->site_config['SITE_TITLE'],
+                ));
+                $this->view->display($cat['msgtpl']);
+                exit();
+            } else {
+                $this->show_message('当前栏目游客不允许查看');
+            }
         }
 
         $this->view->assign($cat);
@@ -90,18 +102,39 @@ class IndexController extends Controller
             $this->show_message('不存在此内容！');
         }
         if (!isset($model[$data['modelid']]) || empty($model[$data['modelid']])) {
+            header('HTTP/1.1 404 Not Found');
             $this->show_message('此内容模型不存在');
         }
 
         $catid = $data['catid'];
         $cat = $this->category_cache[$catid];
-        if ($cat['islook'] && !$this->getMember) {
-            $this->show_message('当前栏目游客不允许查看');
+        if ($cat['islook'] && !$this->is_logged()) {
+            if ($cat['msgtpl']) {
+                $this->view->assign(array(
+                    'msg' => '当前栏目游客不允许查看',
+                    'status' => 2,
+                    'url' => HTTP_REFERER,
+                    'time' => 2000,
+                    'site_title' => '当前栏目游客不允许查看 - ' . $this->site_config['SITE_TITLE'],
+                ));
+                $this->view->display($cat['msgtpl']);
+                exit();
+            } else {
+                $this->show_message('当前栏目游客不允许查看');
+            }
         }
 
         if (!$data['status']) {
             if ($cat['msgtpl']) {
+                $this->view->assign(array(
+                    'msg' => '此内容正在审核中不能查看！',
+                    'status' => 2,
+                    'url' => HTTP_REFERER,
+                    'time' => 2000,
+                    'site_title' => '此内容正在审核中不能查看！ - ' . $this->site_config['SITE_TITLE'],
+                ));
                 $this->view->display($cat['msgtpl']);
+                exit();
             } else {
                 $this->show_message('此内容正在审核中不能查看！');
             }
@@ -286,7 +319,7 @@ class IndexController extends Controller
             'site_description' => $this->site_config['SITE_DESCRIPTION'],
             'page_title' => '在线投稿',
             'page_url' => url('index/post'),
-            'page_position' => "<a href=\"" . url('index/post') . "\" title=\"在线投稿\">在线投稿</a>",
+            'page_position' => '<a href="' . url('index/post') . '" title="在线投稿">在线投稿</a>',
         ));
         $this->view->display('post.html');
     }
@@ -333,7 +366,7 @@ class IndexController extends Controller
 
         }
         if ($this->isPostForm()) {
-            //会员投稿权限验证
+            // 用户投稿权限验证
             if ($model['setting']['form']['code'] && !$this->checkCode($this->post('code'))) {
                 $this->show_message('验证码不正确');
             }
@@ -390,7 +423,7 @@ class IndexController extends Controller
     }
 
     /*
-     * 表单提交同一会员（游客）提交一次
+     * 表单提交同一用户（游客）提交一次
      */
     private function check_num($joindata, $cid)
     {
@@ -460,22 +493,22 @@ class IndexController extends Controller
             'site_description' => $this->site_config['SITE_DESCRIPTION'],
             'page_title' => '网站地图',
             'page_url' => url('index/sitemap'),
-            'page_position' => "<a href=\"" . url('index/sitemap') . "\" title=\"网站地图\">网站地图</a>",
+            'page_position' => '<a href="' . url('index/sitemap') . '" title="网站地图">网站地图</a>',
         ));
         $this->view->display('sitemap.html');
     }
 
-    // /**
-    //  * 提示信息页面跳转
-    //  * msg    消息内容
-    //  * status 返回结果状态  1=成功 2=错误 默认错误
-    //  * url    返回跳转地址 默认为来源
-    //  * time   等待时间 ，默认为2秒
-    //  */
-    // public function show_message($msg, $status = 2, $url = HTTP_REFERER, $time = 2000)
-    // {
-    //     include $this->public_view('msg');
-    //     exit;
-    // }
+    /**
+     * 提示信息页面跳转
+     * msg    消息内容
+     * status 返回结果状态  1=成功 2=错误 默认错误
+     * url    返回跳转地址 默认为来源
+     * time   等待时间 ，默认为2秒
+     */
+    public function show_message($msg, $status = 2, $url = HTTP_REFERER, $time = 2000)
+    {
+        include $this->views('public/msg');
+        exit;
+    }
 
 }

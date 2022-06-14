@@ -28,7 +28,7 @@ class IndexController extends Admin
         // $client_url = 'https://doufox.com/client.php?'.$data.'&verify='.$verify; // 反馈到官方网站
         $sysinfo['mysqlv'] = $pars['mysql'];
         $sysinfo['domain'] = $pars['domain'];
-        include $this->admin_view('index');
+        include $this->views('admin/index');
 
         // 缓存
         if (!file_exists(DATA_PATH . 'cache' . DS . "category.cache.php")) {
@@ -58,7 +58,7 @@ class IndexController extends Admin
 
         $sysinfo['mysqlv'] = $pars['mysql'];
         $sysinfo['domain'] = $pars['domain'];
-        include $this->admin_view('main');
+        include $this->views('admin/main');
     }
 
     /**

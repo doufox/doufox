@@ -128,7 +128,7 @@ class IndexController extends API
     }
 
     /**
-     * 会员登录信息JS调用
+     * 用户登录信息JS调用
      */
     public function userAction()
     {

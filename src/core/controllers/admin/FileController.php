@@ -33,7 +33,7 @@ class FileController extends Admin
         // $num_files = 3;
         // $num_folders = 5;
         // $all_files_size = 0;
-        // include $this->admin_view('file/list');
+        // include $this->views('admin/file/list');
         $this->listAction();
     }
 
@@ -46,12 +46,12 @@ class FileController extends Admin
         // if (empty($admin) && $this->memberinfo) {
         //     $id = $this->memberinfo['id'];
         //     if ($id) {
-        //         $this->root_path .= 'member/' . $id . '/'; //会员附件目录
+        //         $this->root_path .= 'member/' . $id . '/'; // 用户附件目录
         //         if (!file_exists($this->root_path)) {
         //             mkdir($this->root_path);
         //         }
         //     }
-        // } elseif (!$this->session->get('user_id')) {
+        // } elseif (!$this->is_logged()) {
         //     $this->attMsg('游客不允许操作');
         // }
         $dir = $this->get('dir') ? $this->get('dir') : '';
@@ -73,13 +73,6 @@ class FileController extends Admin
                 $modif = date('Y-m-d H:i:s', $modif_raw);
 
                 $perms = substr(decoct(fileperms($path_raw)), -4);
-                if (function_exists('posix_getpwuid') && function_exists('posix_getgrgid')) {
-                    $owner = posix_getpwuid(fileowner($path_raw));
-                    $group = posix_getgrgid(filegroup($path_raw));
-                } else {
-                    $owner = array('name' => '?');
-                    $group = array('name' => '?');
-                }
                 if ($is_link) {
                     $ico = 'fa fa-link';
                 } else if ($is_dir) {
@@ -111,8 +104,6 @@ class FileController extends Admin
                     'modif_raw' => $modif_raw,
                     'modif' => $modif,
                     'url' => $furl,
-                    'owner' => $owner,
-                    'group' => $group,
                     'perms' => $perms,
                 );
             }
@@ -120,7 +111,7 @@ class FileController extends Admin
         $pdir = url('admin/file/list', array('dir' => str_replace(basename($dir), '', $dir)));
         $dir = $this->root_path . $dir;
         $istop = $dir ? 1 : 0;
-        include $this->admin_view('file/list');
+        include $this->views('admin/file/list');
     }
 
     /** 文件预览
@@ -231,7 +222,7 @@ class FileController extends Admin
                 if (empty($ext) || in_array(strtolower($file), $this->get_text_names()) || preg_match('#\.min\.(css|js)$#i', $file)) {
                     $hljs_class = 'nohighlight';
                 }
-                $content = '<pre class="with-hljs"><code class="' . $hljs_class . '">' . $this->encode_html($content) . '</code></pre>';
+                $content = '<pre class="pre-hljs"><code class="' . $hljs_class . '">' . $this->encode_html($content) . '</code></pre>';
             } elseif (in_array($ext, array('php', 'php4', 'php5', 'phtml', 'phps'))) {
                 // php highlight
                 $content = highlight_string($content, true);
@@ -240,7 +231,7 @@ class FileController extends Admin
             }
             // echo $content;
         }
-        include $this->admin_view('file/view');
+        include $this->views('admin/file/view');
     }
 
     /**
@@ -263,6 +254,26 @@ class FileController extends Admin
     }
 
     /**
+     * 上传
+     */
+    public function uploadAction()
+    {
+        include $this->views('admin/file/upload');
+        // $filename = $this->get('file') ? $this->get('file') : '';
+        // $filename = str_replace(array('..\\', '../', './', '.\\'), '', trim($filename));
+        // $file = substr($filename, 0, 1) == '/' ? substr($filename, 1) : $filename;
+        // $file = str_replace(array('\\', '//'), '/', $file);
+        // $file_path = $this->root_path . $file;
+
+        // if ($filename != '' && $file_path != '' && is_file($file_path)) {
+        //     $content = file_get_contents($file_path);
+        //     include $this->views('admin/file/edit');
+        // } else {
+        //     $this->show_message('文件不存在');
+        // }
+    }
+
+    /**
      * 文本编辑
      */
     public function editAction()
@@ -275,7 +286,7 @@ class FileController extends Admin
 
         if ($filename != '' && $file_path != '' && is_file($file_path)) {
             $content = file_get_contents($file_path);
-            include $this->admin_view('file/edit');
+            include $this->views('admin/file/edit');
         } else {
             $this->show_message('文件不存在');
         }

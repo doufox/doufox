@@ -1,6 +1,6 @@
-<?php include $this->admin_view('header'); ?>
-<?php include $this->admin_view('navbar'); ?>
-<?php include $this->admin_view('common/msg'); ?>
+<?php include $this->views('admin/header'); ?>
+<?php include $this->views('admin/navbar'); ?>
+<?php include $this->views('admin/common/msg'); ?>
 
 <div class="container-fluid">
     <div class="row">
@@ -11,7 +11,7 @@
                 </div>
                 <div class="list-group">
                     <a class="list-group-item active" href="<?php echo url('admin/file/index'); ?>">文件列表</a>
-                    <a class="list-group-item" href="<?php echo url('admin/file/index'); ?>">文件上传</a>
+                    <a class="list-group-item" href="<?php echo url('admin/file/upload', array('dir' => $dir)); ?>">文件上传</a>
                 </div>
             </div>
         </div>
@@ -20,6 +20,7 @@
                 <div class="panel-heading">
                     <span class="panel-title">文件管理(当前目录：<?php echo $dir; ?>)</span>
                     <div class="pull-right">
+                        <a class="btn btn-default btn-xs" href="<?php echo url('admin/file/upload', array('dir' => $dir)); ?>">上传</a>
                         <button class="btn btn-default btn-xs">新建</button>
                     </div>
                 </div>
@@ -33,7 +34,6 @@
                             <th>大小</th>
                             <th>修改时间</th>
                             <th>权限</th>
-                            <th>用户组</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -67,7 +67,6 @@
                                 </td>
                                 <td title="<?php echo $t['modif_raw']; ?>"><?php echo $t['modif']; ?></td>
                                 <td><?php echo $t['perms']; ?></td>
-                                <td><?php echo $t['owner']['name'] , ':' . $t['group']['name'] ?></td>
                                 <td>
                                     <a title="Delete" href="?p=del=core" onclick="return confirm('Delete Folder?\n \n ( core )');"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                     <a title="重命名" href="#" onclick="rename('', 'core');return false;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
@@ -111,4 +110,4 @@
     </div>
 </div>
 
-<?php include $this->admin_view('footer'); ?>
+<?php include $this->views('admin/footer'); ?>

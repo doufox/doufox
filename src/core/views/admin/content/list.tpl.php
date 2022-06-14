@@ -1,6 +1,6 @@
-<?php include $this->admin_view('header'); ?>
-<?php include $this->admin_view('navbar'); ?>
-<?php include $this->admin_view('common/msg');?>
+<?php include $this->views('admin/header'); ?>
+<?php include $this->views('admin/navbar'); ?>
+<?php include $this->views('admin/common/msg');?>
 
 <link type="text/css" rel="stylesheet" href="/static/jquery.treeview/jquery.treeview.css" />
 <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
@@ -54,10 +54,10 @@
                     </div>
                     <div class="panel-body">
                         <a class="btn btn-default btn-sm" href="<?php echo url('admin/content/index', array('catid'=>$catid)); ?>">全部</a>
-                        <a class="btn btn-default btn-sm" href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>1)); ?>">正常(<?php echo $count[1]; ?>)</a>
-                        <a class="btn btn-default btn-sm" href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>2)); ?>">头条(<?php echo $count[2]; ?>)</a>
-                        <a class="btn btn-default btn-sm" href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>3)); ?>">推荐(<?php echo $count[3]; ?>)</a>
-                        <a class="btn btn-default btn-sm" href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>0)); ?>">草稿(<?php echo $count[0]; ?>)</a>
+                        <a class="btn btn-default btn-sm <?php if ($status == 1) echo 'btn-success'; ?>" href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>1)); ?>">正常(<?php echo $count[1]; ?>)</a>
+                        <a class="btn btn-default btn-sm <?php if ($status == 2) echo 'btn-success'; ?>" href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>2)); ?>">头条(<?php echo $count[2]; ?>)</a>
+                        <a class="btn btn-default btn-sm <?php if ($status == 3) echo 'btn-success'; ?>" href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>3)); ?>">推荐(<?php echo $count[3]; ?>)</a>
+                        <a class="btn btn-default btn-sm <?php if ($status == 0) echo 'btn-success'; ?>" href="<?php echo url('admin/content/index', array('catid'=>$catid, 'status'=>0)); ?>">草稿(<?php echo $count[0]; ?>)</a>
                         <a class="btn btn-default btn-sm" href="<?php echo url('admin/content/add',   array('catid'=>$catid, 'modelid'=>$modelid)); ?>">发布内容</a>
                     </div>
                     <table class="table table-bordered table-hover" width="100%">
@@ -102,7 +102,7 @@
                                     <?php } } ?>
                                     <?php if (!$t['status']) { ?>
                                         <a href="#modal-content-preview" data-toggle="modal" onclick="content_preview(<?php echo $t['id']?>)">预览</a>
-                                    <?php } else { ?><a href="<?php echo $t[url]; ?>" target="_blank">查看</a> 
+                                    <?php } else { ?><a href="<?php echo $t['url']; ?>" target="_blank">查看</a> 
                                     <?php } ?>
                                     <a href="<?php echo url('admin/content/edit',array('id'=>$t['id'])); ?>" clz="1">编辑</a> 
                                     <a href="#modal-confirm" data-toggle="modal" name="删除" onclick="content_delete(this);" data-id="<?php echo $t['id']; ?>" data-name="<?php echo $t['title']; ?>">删除</a>
@@ -115,14 +115,14 @@
                             <tr height="25">
                                 <td colspan="8">
                                 <div class="pageleft">
-                                    <button type="submit" class="btn btn-default" value="排序" name="submit_order" onClick="$('#list_form').val('order')">排序</button>
-                                    <button type="submit" class="btn btn-default" value="删除" name="submit_del" onClick="$('#list_form').val('del');return confirm_del();">删除</button>
-                                    <button type="submit" class="btn btn-default" value="设为正常" name="submit_status_1" onClick="$('#list_form').val('status_1')">设为正常</button>
-                                    <button type="submit" class="btn btn-default" value="设为头条" name="submit_status_2" onClick="$('#list_form').val('status_2')">设为头条</button>
-                                    <button type="submit" class="btn btn-default" value="设为推荐" name="submit_status_3" onClick="$('#list_form').val('status_3')">设为推荐</button>
-                                    <button type="submit" class="btn btn-default" value="设为未审" name="submit_status_0" onClick="$('#list_form').val('status_0')">设为草稿</button>
-                                    批量移动至 <select class="form-control" name="movecatid"><?php echo $category; ?></select>
-                                    <button type="submit" class="btn btn-default" value="确定移动" name="submit_move" onClick="$('#list_form').val('move')">确定移动</button>
+                                    <button type="submit" class="btn btn-default btn-sm" value="排序" name="submit_order" onClick="$('#list_form').val('order')">排序</button>
+                                    <button type="submit" class="btn btn-default btn-sm" value="删除" name="submit_del" onClick="$('#list_form').val('del');return confirm_del();">删除</button>
+                                    <button type="submit" class="btn btn-default btn-sm" value="设为正常" name="submit_status_1" onClick="$('#list_form').val('status_1')">设为正常</button>
+                                    <button type="submit" class="btn btn-default btn-sm" value="设为头条" name="submit_status_2" onClick="$('#list_form').val('status_2')">设为头条</button>
+                                    <button type="submit" class="btn btn-default btn-sm" value="设为推荐" name="submit_status_3" onClick="$('#list_form').val('status_3')">设为推荐</button>
+                                    <button type="submit" class="btn btn-default btn-sm" value="设为未审" name="submit_status_0" onClick="$('#list_form').val('status_0')">设为草稿</button>
+                                    批量移动至 <select class="form-control form-small" name="movecatid"><?php echo $category; ?></select>
+                                    <button type="submit" class="btn btn-default  btn-sm" value="确定移动" name="submit_move" onClick="$('#list_form').val('move')">确定移动</button>
                                     
                                 </td>
                             </tr>
@@ -175,4 +175,4 @@
     })
 </script>
 
-<?php include $this->admin_view('footer'); ?>
+<?php include $this->views('admin/footer'); ?>

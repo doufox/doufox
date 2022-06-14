@@ -1,4 +1,4 @@
-<?php include $this->install_view("header");?>
+<?php include $this->views("install/header");?>
 
 <div class="panel-body">
     <p class="lead text-center">使用说明</p>
@@ -13,4 +13,4 @@
     </div>
 </div>
 
-<?php include $this->install_view("footer");?>
+<?php include $this->views("install/footer");?>

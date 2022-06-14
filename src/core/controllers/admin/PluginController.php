@@ -37,7 +37,7 @@ class PluginController extends Admin
             $this->plugin->update($data, 'id=' . $id);
             $this->show_message($this->getCacheCode('plugin') . '编辑成功', 1, url('admin/plugin'));
         }
-        include $this->admin_view('plugin/setting');
+        include $this->views('admin/plugin/setting');
     }
 
     public function testAction()
@@ -138,7 +138,7 @@ class PluginController extends Admin
     {
         $msg = $this->msg_result;
         $list = $this->plugin->findAll('id, official, plugin, name, version, url, description, author, author_url, status');
-        include $this->admin_view('plugin/list');
+        include $this->views('admin/plugin/list');
         exit;
     }
 

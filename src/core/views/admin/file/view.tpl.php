@@ -1,6 +1,34 @@
-<?php include $this->admin_view('header');?>
-<?php include $this->admin_view('navbar');?>
-<?php include $this->admin_view('common/msg');?>
+<?php
+
+function view_admin_file_head_for_text() {
+    echo '
+    <!-- view_admin_file_head_for_text start -->
+    <style>
+    .pre-hljs { display: block; border: 1px dashed #ccc; }
+    .pre-hljs code { white-space: pre;font: 13px/16px Consolas, "Courier New", Courier, monospace; }</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/vs.min.css">
+    <!-- view_admin_file_head_for_text end -->
+    ';
+}
+
+function view_admin_file_footer_for_text() {
+    echo '
+    <!-- view_admin_file_footer_for_text start -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <!-- view_admin_file_footer_for_text end -->
+    ';
+}
+
+if ($is_text) {
+    addHookAction('admin_head', 'view_admin_file_head_for_text');
+    addHookAction('admin_footer', 'view_admin_file_footer_for_text');
+}
+
+include_once $this->tpl_view('admin/header');
+include_once $this->tpl_view('admin/navbar');
+include_once $this->tpl_view('admin/common/msg');
+?>
 
 <div class="container-fluid">
     <div class="row">
@@ -89,15 +117,15 @@
                         </tbody>
                     </table>
                     <p>
-                        <button type="button" class="btn btn-default" onclick="javascript:window.history.back();">返回</button>
+                        <button type="button" class="btn btn-default btn-xs" onclick="javascript:window.history.back();">返回</button>
                         <?php if ($is_text) { ?>
-                        <a href="<?php echo url('admin/file/edit', array('file' => $filename)); ?>" class="btn btn-default">编辑</a>
-                        <a href="<?php echo url('admin/file/edit', array('file' => $filename)); ?>" class="btn btn-default">编辑器编辑</a>
+                        <a href="<?php echo url('admin/file/edit', array('file' => $filename)); ?>" class="btn btn-default btn-xs">编辑</a>
+                        <a href="<?php echo url('admin/file/edit', array('file' => $filename)); ?>" class="btn btn-default btn-xs">编辑器编辑</a>
                         <?php } if ($is_zip) { ?>
-                        <a href="<?php echo url('admin/file/unzip', array('file' => $filename)); ?>" class="btn btn-default">解压</a>
-                        <a href="<?php echo url('admin/file/unzip', array('file' => $filename, 'tofolder' => 1)); ?>" class="btn btn-default">解压到</a>
+                        <a href="<?php echo url('admin/file/unzip', array('file' => $filename)); ?>" class="btn btn-default btn-xs">解压</a>
+                        <a href="<?php echo url('admin/file/unzip', array('file' => $filename, 'tofolder' => 1)); ?>" class="btn btn-default btn-xs">解压到</a>
                         <?php } ?>
-                        <a href="<?php echo url('admin/file/download', array('file' => $filename)); ?>" class="btn btn-default">下载</a>
+                        <a href="<?php echo url('admin/file/download', array('file' => $filename)); ?>" class="btn btn-default btn-xs">下载</a>
                     </p>
                     <?php if ($is_zip) { ?>
                     <p>压缩包内文件列表：</p>
@@ -113,20 +141,20 @@
                     } ?>
                 </div>
                 <div class="panel-footer">
-                    <button type="button" class="btn btn-default" onclick="javascript:window.history.back();">返回</button>
+                    <button type="button" class="btn btn-default btn-xs" onclick="javascript:window.history.back();">返回</button>
                 <?php if ($is_text) { ?>
-                    <button type="button" class="btn btn-default">编辑</button>
-                    <button type="button" class="btn btn-default">编辑器编辑</button>
+                    <button type="button" class="btn btn-default btn-xs">编辑</button>
+                    <button type="button" class="btn btn-default btn-xs">编辑器编辑</button>
                 <?php } if ($is_zip) { ?>
-                    <button type="button" class="btn btn-default">解压</button>
+                    <button type="button" class="btn btn-default btn-xs">解压</button>
                 <?php } ?>
-                    <button type="button" class="btn btn-default">压缩</button>
-                    <button type="button" class="btn btn-default">删除</button>
-                    <a href="<?php echo $download_url; ?>" class="btn btn-default">下载</a>
+                    <button type="button" class="btn btn-default btn-xs">压缩</button>
+                    <button type="button" class="btn btn-default btn-xs">删除</button>
+                    <a href="<?php echo $download_url; ?>" class="btn btn-default btn-xs">下载</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<?php include $this->admin_view('footer');?>
+<?php include_once $this->tpl_view('admin/footer');?>

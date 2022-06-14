@@ -12,7 +12,7 @@ class AttachmentController extends Admin
     public function __construct()
     {
         parent::__construct();
-        if (core::get_action_id() != 'ajaxswfupload' && !$this->session->get('user_id') && !$this->cookie->get('member_id')) {
+        if (!$this->is_admin()) {
             $this->attMsg('无权限操作，请登录。');
         }
         $this->attachment = core::load_model('attachment');
@@ -32,7 +32,7 @@ class AttachmentController extends Admin
         $type = $this->type;
         $msg = $this->msg_result;
         $list = $this->attachment->findAll('id, filesize, filename, filepath, mimetype, create_time');
-        include $this->admin_view('attachment/index');
+        include $this->views('admin/attachment/index');
         exit;
     }
 
@@ -45,12 +45,12 @@ class AttachmentController extends Admin
         if (empty($admin) && $this->memberinfo) {
             $id = $this->memberinfo['id'];
             if ($id) {
-                $this->dir .= 'member/' . $id . '/'; //会员附件目录
+                $this->dir .= 'member/' . $id . '/'; // 用户附件目录
                 if (!file_exists($this->dir)) {
                     mkdir($this->dir);
                 }
             }
-        } elseif (!$this->session->get('user_id')) {
+        } elseif (!$this->is_logged()) {
             $this->attMsg('游客不允许操作');
         }
         $iframe = $this->get('iframe') ? 1 : 0;
@@ -89,7 +89,7 @@ class AttachmentController extends Admin
         $pdir = url('admin/attachment/index', array('dir' => str_replace(basename($dir), '', $dir), 'iframe' => $iframe, 'admin' => $admin));
         $dir = $this->dir . $dir;
         $istop = $dir ? 1 : 0;
-        include $this->admin_view('attachment/list');
+        include $this->views('admin/attachment/list');
     }
 
 
@@ -121,7 +121,7 @@ class AttachmentController extends Admin
             $data = $row;
             $url = url('attachment/image', array('w' => $w, 'h' => $h, 'size' => $size, 'admin' => $this->post('admin')));
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $size . 'MB';
-            include $this->admin_view('attachment/upload_result');
+            include $this->views('admin/attachment/upload_result');
         } else {
             $w = (int) $this->get('w');
             $h = (int) $this->get('h');
@@ -133,7 +133,7 @@ class AttachmentController extends Admin
             $admin = $this->getAdmin();
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $s . 'MB';
             $size = $s;
-            include $this->admin_view('attachment/add');
+            include $this->views('admin/attachment/add');
         }
     }
 
@@ -165,7 +165,7 @@ class AttachmentController extends Admin
             $data = $row;
             $url = url('attachment/image', array('w' => $w, 'h' => $h, 'size' => $size, 'admin' => $this->post('admin')));
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $size . 'MB';
-            include $this->admin_view('attachment/upload_result');
+            include $this->views('admin/attachment/upload_result');
         } else {
             $w = (int) $this->get('w');
             $h = (int) $this->get('h');
@@ -178,7 +178,7 @@ class AttachmentController extends Admin
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $s . 'MB';
             $size = $s;
             $isimage = 1; //如果是图片上传，就显示高宽输入框
-            include $this->admin_view('attachment/uploadimage');
+            include $this->views('admin/attachment/uploadimage');
         }
     }
 
@@ -211,7 +211,7 @@ class AttachmentController extends Admin
             $data = $row;
             $url = url('attachment/image', array('w' => $w, 'h' => $h, 'size' => $size, 'admin' => $this->post('admin')));
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $size . 'MB';
-            include $this->admin_view('attachment/upload_result');
+            include $this->views('admin/attachment/upload_result');
         } else {
             $w = (int) $this->get('w');
             $h = (int) $this->get('h');
@@ -224,7 +224,7 @@ class AttachmentController extends Admin
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $s . 'MB';
             $size = $s;
             $isimage = 1; //如果是图片上传，就显示高宽输入框
-            include $this->admin_view('attachment/upload');
+            include $this->views('admin/attachment/upload');
         }
     }
 
@@ -250,7 +250,7 @@ class AttachmentController extends Admin
 
         $admin = $this->getAdmin();
         $sessionid = '1';
-        include $this->admin_view('attachment/swfupload');
+        include $this->views('admin/attachment/swfupload');
     }
 
     /** 上传文件(单)
@@ -279,10 +279,10 @@ class AttachmentController extends Admin
             }
             $data = $row;
             $url = url('attachment/file', array('size' => $size, 'type' => $this->get('type'), 'admin' => $this->post('admin')));
-            include $this->admin_view('attachment/upload_result');
+            include $this->views('admin/attachment/upload_result');
         } else {
             $admin = $this->getAdmin();
-            include $this->admin_view('attachment/upload');
+            include $this->views('admin/attachment/upload');
         }
     }
 
@@ -302,11 +302,11 @@ class AttachmentController extends Admin
         $path = $this->dir;
         $upload = core::load_class('file_upload');
         if (empty($admin) && $this->memberinfo) {
-            $uid = $this->memberinfo['id']; //会员附件归类
+            $uid = $this->memberinfo['id']; // 用户附件归类
             if ($uid) {
                 $path .= 'member/' . $uid . '/';
             }
-        } elseif (!$this->session->get('user_id')) {
+        } elseif (!$this->is_logged()) {
             if (!$this->post('SWFUPLOADSESSID')) {
                 $this->attMsg('无权限', $stype);
             }
@@ -410,14 +410,14 @@ class AttachmentController extends Admin
         $admin = $this->getAdmin();
         if (empty($admin) && $this->memberinfo) {
             $id = $this->memberinfo['id'];
-            if ($id) { //会员附件目录
+            if ($id) { // 用户附件目录
                 $root_path .= 'member/' . $id . '/';
                 $root_url .= 'member/' . $id . '/';
                 if (!file_exists($root_path)) {
                     mkdir($root_path);
                 }
             }
-        } elseif (!$this->session->get('user_id')) {
+        } elseif (!$this->is_logged()) {
             //属于游客
             exit;
         }

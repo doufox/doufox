@@ -1,4 +1,4 @@
-<?php include $this->install_view("header");?>
+<?php include $this->views("install/header");?>
 
 <script type="text/javascript">
     function $(ID) {return document.getElementById(ID);}
@@ -168,4 +168,4 @@
     </form>
 </div>
 
-<?php include $this->install_view("footer");?>
+<?php include $this->views("install/footer");?>

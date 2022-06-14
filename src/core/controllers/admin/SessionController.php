@@ -37,6 +37,6 @@ class SessionController extends Admin
             }
         }
         unset($data, $file_list);
-        include $this->admin_view('session/list');
+        include $this->views('admin/session/list');
     }
 }

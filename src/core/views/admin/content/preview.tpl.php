@@ -1,4 +1,4 @@
-<?php include $this->admin_view('header');?>
+<?php include $this->views('admin/header');?>
 
 <table width="100%" class="table_form">
     <tbody>

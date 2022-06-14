@@ -12,7 +12,7 @@
     <meta name="referrer" content="never" />
     <title><?php echo APP_NAME; ?> 网站内容管理系统</title>
     <link type="text/css" href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <style><?php include $this->admin_view('common/style');?></style>
+    <style><?php include $this->views('admin/common/style');?></style>
     <link rel="icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico" />
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>

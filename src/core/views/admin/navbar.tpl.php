@@ -19,7 +19,7 @@
                         <a href="<?php echo url('admin/block'); ?>">区块</a>
                     </li>
                     <li <?php if ($this->current_nav == 'member') echo 'class="active"'; ?>>
-                        <a href="<?php echo url('admin/member'); ?>">会员</a>
+                        <a href="<?php echo url('admin/member'); ?>">用户</a>
                     </li>
                     <li <?php if ($this->current_nav == 'plugin') echo 'class="active"'; ?>>
                         <a href="<?php echo url('admin/plugin'); ?>">插件</a>
@@ -31,7 +31,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">模型&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo url('admin/model', array('typeid' => 1)); ?>">内容模型</a></li>
-                            <li><a href="<?php echo url('admin/model', array('typeid' => 2)); ?>">会员模型</a></li>
+                            <li><a href="<?php echo url('admin/model', array('typeid' => 2)); ?>">用户模型</a></li>
                             <li><a href="<?php echo url('admin/model', array('typeid' => 3)); ?>">表单模型</a></li>
                             <li><a href="<?php echo url('admin/model', array('typeid' => 4)); ?>">单页模型</a></li>
                             <?php if (is_array($this->menu_model)) { ?>
@@ -40,7 +40,6 @@
                                     <li><a href="<?php echo $t['url'] ?>"><?php echo $t['name'] ?></a></li>
                                 <?php }
                             } ?>
-                            <li role="separator" class="divider"></li>
                         </ul>
                     </li>
                     <li class="dropdown <?php if ($this->current_nav == 'manage') echo 'active'; ?>">
@@ -59,20 +58,18 @@
                             <li role="separator" class="divider"></li>
                             <li><a href="<?php echo url('admin/cache/update'); ?>">更新全站缓存</a></li>
                             <li><a href="<?php echo url('admin/content/updateurl'); ?>">更新内容URL</a></li>
-                            <li role="separator" class="divider"></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="account dropdown">
-                        <a href="javascript:void(0);" data-toggle="dropdown">您好，<?php echo $this->current_account['name']; ?>&nbsp;<span class="caret"></span></a>
+                        <a href="javascript:void(0);" data-toggle="dropdown">您好，<?php echo $this->memberinfo['nickname']; ?>&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo url('admin/account/me'); ?>">我的账号</a></li>
                             <li><a href="<?php echo url('admin/feedback'); ?>" title="帮助信息">帮助信息</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="<?php echo HTTP_URL; ?>" title="网站首页" target="_blank">网站首页</a></li>
                             <li><a href="<?php echo url('member/index'); ?>" title="用户中心" target="_blank">用户中心</a></li>
-                            <li role="separator" class="divider"></li>
                         </ul>
                     </li>
                     <li><a href="#" id="btn-logout" data-toggle="modal" data-target="#modal-confirm" title="退出系统后台">退出</a></li>

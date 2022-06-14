@@ -1,6 +1,6 @@
-<?php include $this->admin_view('header'); ?>
-<?php include $this->admin_view('navbar'); ?>
-<?php include $this->admin_view('common/msg');?>
+<?php include $this->views('admin/header'); ?>
+<?php include $this->views('admin/navbar'); ?>
+<?php include $this->views('admin/common/msg');?>
 
 <div class="container-fluid">
     <div class="row">
@@ -46,7 +46,7 @@
                                         <td></td>
                                         <td><?php echo $k; ?></td>
                                         <td><?php echo $v['show'] ? '显示' : '隐藏'; ?></td>
-                                        <td>基础字段</td>
+                                        <td>内置字段</td>
                                         <td>
                                             <a href="<?php echo url('admin/model/ajaxedit/', array('modelid' => $modelid, 'name' => $k)); ?>">编辑</a>
                                         </td>
@@ -90,14 +90,16 @@
                                             ?>
                                         </td>
                                         <td><?php echo $t['field']; ?></td>
-                                        <td><?php if ($t['isshow']) echo '显示';
-                                            else echo '隐藏'; ?></td>
-                                        <td><?php if ($t['not_null']) echo '必填';
-                                            else echo '选填'; ?></td>
+                                        <td><?php echo $t['isshow'] ? '显示' : '隐藏'; ?></td>
+                                        <td><?php echo $t['not_null']? '必填' : '选填'; ?></td>
                                         <td>
                                             <a href="<?php echo url('admin/model/editfield', array('typeid' => $typeid, 'fieldid' => $t['fieldid'])); ?>">[编辑]</a>
-                                            <a href="<?php echo url('admin/model/disable', array('typeid' => $typeid, 'fieldid' => $t['fieldid'])); ?>"><?php if ($t['disabled'] == 1) { ?><font color="#FF0000">[启用]</font><?php } else { echo '[禁用]'; } ?></a>
-                                            <?php if ($t['field'] == 'content') { ?><a href="javascript:;" style="color:#ACA899">[删除]</a> <?php } else { ?><a href="javascript:admin_command.confirmurl('<?php echo url('admin/model/delfield', array('typeid' => $typeid, 'fieldid' => $t['fieldid'])); ?>','一旦删除字段，将会把 【<?php echo $t['name']; ?>】字段的数据全部删除，确定删除 <?php echo $t['name']; ?> 吗？ ')">[删除]</a> <?php } ?>
+                                            <?php if (in_array($t['field'], array('content', 'roleid', 'auth'))) { ?>
+                                                <a href="javascript:;" style="color:#ACA899">[不可禁用、删除]</a>
+                                            <?php } else { ?>
+                                                <a href="<?php echo url('admin/model/disable', array('typeid' => $typeid, 'fieldid' => $t['fieldid'])); ?>"><?php if ($t['disabled'] == 1) { ?><font color="#FF0000">[启用]</font><?php } else { echo '[禁用]'; } ?></a>
+                                                <a href="javascript:admin_command.confirmurl('<?php echo url('admin/model/delfield', array('typeid' => $typeid, 'fieldid' => $t['fieldid'])); ?>','一旦删除字段，将会把 【<?php echo $t['name']; ?>】字段的数据全部删除，确定删除 <?php echo $t['name']; ?> 吗？ ')">[删除]</a>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                 <?php }
@@ -113,4 +115,4 @@
 </div>
 </div>
 
-<?php include $this->admin_view('footer'); ?>
+<?php include $this->views('admin/footer'); ?>

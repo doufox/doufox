@@ -17,7 +17,7 @@ class AccessController extends API
 
     public function indexAction()
     {
-        if ($this->inlogged()) {
+        if ($this->is_logged()) {
             $data = array(
                 'profile' => url('member/index/edit'),
                 'content' => url('member/content'),

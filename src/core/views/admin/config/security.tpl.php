@@ -1,6 +1,6 @@
-<?php include $this->admin_view('header'); ?>
-<?php include $this->admin_view('navbar'); ?>
-<?php include $this->admin_view('common/msg');?>
+<?php include $this->views('admin/header'); ?>
+<?php include $this->views('admin/navbar'); ?>
+<?php include $this->views('admin/common/msg');?>
 
 <div class="container-fluid">
     <div class="row">
@@ -9,7 +9,7 @@
                 <div class="panel-heading"><span class="panel-title">系统设置</span></div>
                 <div class="list-group">
                     <a class="list-group-item" href="<?php echo url('admin/config'); ?>">基本设置</a>
-                    <a class="list-group-item" href="<?php echo url('admin/config/member'); ?>">会员设置</a>
+                    <a class="list-group-item" href="<?php echo url('admin/config/member'); ?>">用户设置</a>
                     <a class="list-group-item" href="<?php echo url('admin/config/url'); ?>">URL设置</a>
                     <a class="list-group-item" href="<?php echo url('admin/config/watermark'); ?>">图片水印</a>
                     <a class="list-group-item" href="<?php echo url('admin/config/attachment'); ?>">附件设置</a>
@@ -51,4 +51,4 @@
     </div>
 </div>
 
-<?php include $this->admin_view('footer'); ?>
+<?php include $this->views('admin/footer'); ?>

@@ -82,7 +82,7 @@ class BlockController extends Admin
             $this->load_edit($id);
         }
         $type = $this->type;
-        include $this->admin_view('block/add');
+        include $this->views('admin/block/add');
     }
 
     public function delAction($id = 0)
@@ -110,7 +110,7 @@ class BlockController extends Admin
         $type = $this->type;
         $msg = $this->msg_result;
         $list = $this->block->findAll('id, type, name, remark');
-        include $this->admin_view('block/list');
+        include $this->views('admin/block/list');
         exit;
     }
 
@@ -119,7 +119,7 @@ class BlockController extends Admin
         $type = $this->type;
         $msg = $this->msg_result;
         $data['type'] = $data['type'] ? $data['type'] : 1; // 设置默认类型
-        include $this->admin_view('block/add');
+        include $this->views('admin/block/add');
         exit;
     }
 
@@ -132,7 +132,7 @@ class BlockController extends Admin
         }
         $msg = $this->msg_result;
         $type = $this->type;
-        include $this->admin_view('block/add');
+        include $this->views('admin/block/add');
         exit;
     }
 

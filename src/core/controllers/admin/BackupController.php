@@ -13,7 +13,7 @@ class BackupController extends Admin
 
     public function indexAction()
     {
-        include $this->admin_view('backup');
+        include $this->views('admin/backup');
     }
 
 }

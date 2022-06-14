@@ -193,15 +193,15 @@ class ContentController extends Admin
         $typeid = $cats[$catid]['typeid'];
         if ($typeid == 2) {
             $data = $cats[$catid];
-            include $this->admin_view('content/cate-page'); // 页面内容
+            include $this->views('admin/content/cate-page'); // 页面内容
         } elseif ($typeid == 3) {
             $data = $cats[$catid];
-            include $this->admin_view('content/cate-link'); // 链接内容
+            include $this->views('admin/content/cate-link'); // 链接内容
         } elseif ($typeid == 4) {
             $data = $cats[$catid];
-            include $this->admin_view('content/cate-single'); // 独立页面内容
+            include $this->views('admin/content/cate-single'); // 独立页面内容
         }  else {
-            include $this->admin_view('content/list'); // 栏目内容列表
+            include $this->views('admin/content/list'); // 栏目内容列表
         }
     }
 
@@ -291,7 +291,7 @@ class ContentController extends Admin
         }
         $tree->init($categorys);
         $category = $tree->get_tree(0, "<option value='\$catid' \$selected \$disabled>\$spacer \$catname</option>");
-        include $this->admin_view('content/all');
+        include $this->views('admin/content/all');
     }
 
     /**
@@ -329,7 +329,7 @@ class ContentController extends Admin
         } else {
             $categorys = '没有分类请添加或刷新';
         }
-        include $this->admin_view('content/category');
+        include $this->views('admin/content/category');
     }
 
     /**
@@ -357,7 +357,7 @@ class ContentController extends Admin
                 $this->show_message('栏目模型对不上，请重新选择栏目');
             }
             $this->checkFields($fields, $data, 1); // 验证自定义字段
-            $data['username'] = $this->session->get('user_id');
+            $data['username'] = $this->memberinfo['username'];
             $data['create_time'] = time(); // 创建时间
             $data['time'] = $data['time'] ? $data['time'] : $data['create_time']; // 更新时间
             $data['modelid'] = $modelid;
@@ -391,7 +391,7 @@ class ContentController extends Admin
         $tree->init($categorys);
         $category = $tree->get_tree(0, $str);
 
-        include $this->admin_view('content/add');
+        include $this->views('admin/content/add');
     }
 
     /**
@@ -464,7 +464,7 @@ class ContentController extends Admin
         $tree->init($categorys);
         $category = $tree->get_tree(0, $str);
 
-        include $this->admin_view('content/add');
+        include $this->views('admin/content/add');
     }
 
     /**
@@ -498,7 +498,7 @@ class ContentController extends Admin
         $fields = $model[$modelid]['fields'];
         $data_fields = $this->getFields($fields, $data);
         $model = $model[$modelid];
-        include $this->admin_view('content/preview');
+        include $this->views('admin/content/preview');
     }
 
     /**
@@ -656,7 +656,7 @@ class ContentController extends Admin
             $str = "<option value='\$catid' \$selected \$disabled>\$spacer \$catname</option>";
             $tree->init($categorys);
             $category = $tree->get_tree(0, $str);
-            include $this->admin_view('content/updateurl');
+            include $this->views('admin/content/updateurl');
         }
     }
 

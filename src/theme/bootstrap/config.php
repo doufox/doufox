@@ -5,7 +5,7 @@
     array (
       'css' => '样式',
       'img' => '图片',
-      'member' => '会员中心模板',
+      'member' => '用户中心模板',
       'banner.html' => '横幅图片模板',
       'bookmark_category.html' => '书签栏目模板',
       'bookmark_list.html' => '书签列表模板',
