@@ -25,9 +25,9 @@ if ($is_text) {
     addHookAction('admin_footer', 'view_admin_file_footer_for_text');
 }
 
-include_once $this->tpl_view('admin/header');
-include_once $this->tpl_view('admin/navbar');
-include_once $this->tpl_view('admin/common/msg');
+include_once $this->views('admin/header');
+include_once $this->views('admin/navbar');
+include_once $this->views('admin/common/msg');
 ?>
 
 <div class="container-fluid">
@@ -157,4 +157,4 @@ include_once $this->tpl_view('admin/common/msg');
     </div>
 </div>
 
-<?php include_once $this->tpl_view('admin/footer');?>
+<?php include_once $this->views('admin/footer');?>

@@ -319,6 +319,8 @@ class AttachmentController extends Admin
         if (in_array($ext, array('jpg', 'jpeg', 'bmp', 'png', 'gif'))) {
             $dir = 'image';
             $upload->set_image($img['w'], $img['h'], $img['t']);
+        } elseif (in_array($ext, array('mp4', 'flv', 'mp3', 'wav', 'wma', 'wmv', 'mid', 'avi', 'mpg', 'asf', 'rm', 'rmvb'))) {
+            $dir = 'media';
         } else {
             $dir = 'file';
         }
@@ -373,7 +375,7 @@ class AttachmentController extends Admin
         $ext = array(
             'image' => array('gif', 'jpg', 'jpeg', 'png', 'bmp'),
             'flash' => array('swf', 'flv'),
-            'media' => array('swf', 'flv', 'mp3', 'wav', 'wma', 'wmv', 'mid', 'avi', 'mpg', 'asf', 'rm', 'rmvb'),
+            'media' => array('mp4', 'flv', 'mp3', 'wav', 'wma', 'wmv', 'mid', 'avi', 'mpg', 'asf', 'rm', 'rmvb'),
             'file' => array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'htm', 'html', 'txt', 'zip', 'rar', 'gz', 'bz2'),
         );
         //检查目录
@@ -384,7 +386,7 @@ class AttachmentController extends Admin
         }
         $img = $dir == 'image' ? 1 : 0;
         $size = $img ? 2 : 100;
-        //检查文件大小
+        // 检查文件大小
         if (is_null($_FILES['imgFile']['size']) || $_FILES['imgFile']['size'] > $size * 1024 * 1024) {
             echo json_encode(array('error' => 1, 'message' => '不能超过' . $size . 'MB'));
             exit;
@@ -424,7 +426,20 @@ class AttachmentController extends Admin
         //图片扩展名
         $ext_arr = array('gif', 'jpg', 'jpeg', 'png', 'bmp');
         //目录名
-        $dir_name = $this->get('dir') == 'image' ? 'image' : 'file';
+        if (in_array($ext, array('jpg', 'jpeg', 'bmp', 'png', 'gif'))) {
+            $dir = 'image';
+        } elseif (in_array($ext, array('mp4', 'flv', 'mp3', 'wav', 'wma', 'wmv', 'mid', 'avi', 'mpg', 'asf', 'rm', 'rmvb'))) {
+            $dir = 'media';
+        } else {
+            $dir = 'file';
+        }
+        $dir_name = 'image';
+        if (in_array($this->get('dir'), array('image', 'media', 'file'))) {
+            $dir_name = $this->get('dir');
+        } else {
+            $dir_name = 'file';
+        }
+
         if ($dir_name !== '') {
             $root_path .= $dir_name . "/";
             $root_url .= $dir_name . "/";

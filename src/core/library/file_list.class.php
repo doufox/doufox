@@ -62,9 +62,10 @@ class file_list
      * 获取目录内文件
      *
      * @param string $dir_name 所要读取内容的目录名
+     * @param string $filter 需要过滤的目录/文件
      * @return string
      */
-    public static function get_file_list($dir_name)
+    public static function get_file_list($dir_name, $filter=array())
     {
         $dir = self::parse_dir($dir_name);
         if (!$dir) {
@@ -73,10 +74,16 @@ class file_list
 
         $handle = opendir($dir);
         $files = array();
+        $filter = array_merge(array('.', '..', '.cvs', '.svn'), $filter);
+
         while (false !== ($file = readdir($handle))) {
-            if ($file == '.' || $file == '..' || $file == '.cvs' || $file == '.svn') {
+            // filter some files
+            if (in_array($file, $filter)) {
                 continue;
             }
+            // if ($file == '.' || $file == '..' || $file == '.cvs' || $file == '.svn') {
+            //     continue;
+            // }
 
             $id = filectime($dir . $file);
             $id && !isset($files[$id]) ? $files[$id] = $file : $files[] = $file;

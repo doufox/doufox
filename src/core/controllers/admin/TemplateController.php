@@ -7,7 +7,6 @@ class TemplateController extends Admin
 {
 
     private $dir;
-    private $file_info;
 
     public function __construct()
     {
@@ -16,41 +15,48 @@ class TemplateController extends Admin
 
     public function indexAction()
     {
-        $file_list = core::load_class('file_list');
-        $path_list = $file_list->get_file_list(THEME_PATH);
+        // list all theme dir
+        $class_file_list = core::load_class('file_list');
+        $theme_list = $class_file_list->get_file_list(ROOT_PATH . 'theme', array('.DS_Store', 'index.html'));
         $list = array();
-        foreach ($path_list as $x) {
+        foreach ($theme_list as $x) {
             $list[] = array(
-                'path' => $x,
-                'image' => THEME_DIR . DS . $x . DS . 'preview.png',
+                'theme' => $x,
+                'image' => HTTP_URL. "theme/$x/preview.png",
             );
         }
-        unset($file_list, $path_list);
+        unset($class_file_list, $theme_list);
         include $this->views('admin/template/list');
     }
 
     public function itemAction()
     {
-        $file_list = core::load_class('file_list');
-        $theme_list = $file_list->get_file_list(THEME_PATH);
-        $item = $this->get('item');
-        if (!empty($item)) {
-            if (!in_array($item, $theme_list)) {
-                $item = SITE_THEME;
+        $class_file_list = core::load_class('file_list');
+        $theme_list = $class_file_list->get_file_list(ROOT_PATH . 'theme', array('.DS_Store', 'index.html'));
+        unset($class_file_list);
+        $theme = $this->get('theme');
+        if (!empty($theme)) {
+            if (!in_array($theme, $theme_list)) {
+                // When not provided, reset to default theme
+                $theme = SITE_THEME;
             }
         }
-        unset($file_list);
-        $this->dir = THEME_PATH . $item . DS;
-        if (file_exists($this->dir . 'config.php')) {
-            $this->file_info = include $this->dir . 'config.php';
+
+        $theme_path = ROOT_PATH . 'theme' . DS . $theme . DS;
+        // read config file
+        if (file_exists($theme_path . 'config.php')) {
+            $info = include $theme_path . 'config.php';
         }
+
         $dir = $this->get('dir') ? urldecode($this->get('dir')) : '';
         $dir = str_replace(DS . DS, DS, $dir);
-        $filepath = $this->dir . $dir;
+        $filepath = $theme_path . $dir;
         $list = glob($filepath . '*');
-        $local = str_replace(ROOT_PATH, '', $filepath);
-        $encode_local = str_replace(array('/', '\\'), '|', $local);
-        $file_explan = $this->file_info['file_explan'];
+
+        $cur_path = 'theme' . DS . $theme . DS . $dir;
+        // $cur_path = str_replace(ROOT_PATH, '', $filepath);
+        $encode_local = str_replace(array('/', '\\'), '|', $cur_path);
+        $file_explan = $info['file_explan'];
         // $cur_url = url('admin/template', array('dir' => urldecode(dirname($dir) . DS)));
         if (urldecode(dirname($dir)) == '.') {
             $top_url = url('admin/template');
@@ -64,25 +70,27 @@ class TemplateController extends Admin
     {
         $this->dir = THEME_PATH . SITE_THEME . DS;
         if (file_exists($this->dir . 'config.php')) {
-            $this->file_info = include $this->dir . 'config.php';
+            $info = include $this->dir . 'config.php';
         }
         $file_explan = $this->post('file_explan') ? $this->post('file_explan') : '';
-        if (!isset($this->file_info['file_explan'])) {
-            $this->file_info['file_explan'] = array();
+        if (!isset($info['file_explan'])) {
+            $info['file_explan'] = array();
         }
 
-        $this->file_info['file_explan'] = array_merge($this->file_info['file_explan'], $file_explan);
-        @file_put_contents($this->dir . 'config.php', '<?php return ' . var_export($this->file_info, true) . ';?>');
+        $info['file_explan'] = array_merge($info['file_explan'], $file_explan);
+        @file_put_contents($this->dir . 'config.php', '<?php return ' . var_export($info, true) . ';?>');
         $this->show_message('提交成功', 1);
     }
 
     public function editAction()
     {
+        $theme = $this->get('theme');
+        $filename = urldecode($this->get('file'));
+        // $theme_path = THEME_PATH . $theme . DS;
         $dir = $this->get('dir') ? urldecode($this->get('dir')) : '';
         $dir = str_replace(DS . DS, DS, $dir);
-        $filename = urldecode($this->get('file'));
-        $filepath = $this->dir . $dir . $filename;
-        $local = str_replace(ROOT_PATH, '', $filepath);
+        $cur_path = $theme . DS . $dir . $filename;
+        $filepath = THEME_PATH . $cur_path;
         if (!is_file($filepath)) {
             $this->show_message($dir . $filename . '该文件不存在', 2, url('admin/template', array('dir' => $dir)));
         }
@@ -90,6 +98,11 @@ class TemplateController extends Admin
         if ($this->isPostForm()) {
             file_put_contents($filepath, stripslashes($_POST['file_content']), LOCK_EX);
             $this->show_message('提交成功', 1);
+        }
+        if (urldecode(dirname(DS . $dir)) == '.') {
+            $top_url = url('admin/template');
+        } else {
+            $top_url = url('admin/template', array('dir' => urldecode(dirname($dir) . DS)));
         }
         $filecontent = htmlspecialchars(file_get_contents($filepath));
         include $this->views('admin/template/add');
