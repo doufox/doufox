@@ -22,8 +22,8 @@
                     <div class="panel-heading">
                         <span class="panel-title">模板管理</span>
                         <div class="pull-right">
-                            <a class="btn btn-default btn-xs" href="<?php echo url('admin/template/index'); ?>">列表</a>
                             <a class="btn btn-default btn-xs" href="<?php echo url('admin/template/add'); ?>">添加</a>
+                            <a class="btn btn-default btn-xs" href="<?php echo url('admin/template/index'); ?>">列表</a>
                         </div>
                     </div>
                     <div class="panel-body">

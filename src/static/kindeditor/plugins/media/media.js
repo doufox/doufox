@@ -14,7 +14,7 @@ KindEditor.plugin('media', function(K) {
 		formatUploadUrl = K.undef(self.formatUploadUrl, true),
 		extraParams = K.undef(self.extraFileUploadParams, {}),
 		filePostName = K.undef(self.filePostName, 'imgFile'),
-		uploadJson = K.undef(self.uploadJson, admin_command.sitepath + '?c=attachment&a=kindeditor_upload');
+		uploadJson = K.undef(self.uploadJson, self.basePath + 'php/upload_json.php');
 	self.plugin.media = {
 		edit : function() {
 			var html = [
@@ -40,7 +40,7 @@ KindEditor.plugin('media', function(K) {
 				'</div>',
 				//autostart
 				'<div class="ke-dialog-row">',
-				'<label for="keAutostart" style="width:60px;">' + lang.autostart + '</label>',
+				'<label for="keAutostart">' + lang.autostart + '</label>',
 				'<input type="checkbox" id="keAutostart" name="autostart" value="" /> ',
 				'</div>',
 				'</div>'
@@ -162,6 +162,8 @@ KindEditor.plugin('media', function(K) {
 		},
 		'delete' : function() {
 			self.plugin.getSelectedMedia().remove();
+			// [IE] 删除图片后立即点击图片按钮出错
+			self.addBookmark();
 		}
 	};
 	self.clickToolbar(name, self.plugin.media.edit);
