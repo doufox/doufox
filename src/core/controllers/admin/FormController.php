@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -141,7 +141,7 @@ class FormController extends Admin
         $count[0] = $this->content->count($this->table, NULL, 'status=0');
         $count[3] = $this->content->count($this->table, NULL, 'status=3');
 
-        $form_url = HTTP_URL . ENTRY_FILE . '?c=index&a=form&modelid=' . $this->model['modelid'];
+        $form_url = HTTP_URL . '/' . ENTRY_FILE . '?c=index&a=form&modelid=' . $this->model['modelid'];
 
         $list_code = '
 {list table=' . $this->model['tablename'] . '   num=10}
@@ -153,7 +153,7 @@ class FormController extends Admin
 表单字段信息 例如：id：{$vdata[\'id\']}
 {/list}';
 
-            $form_url = HTTP_URL . ENTRY_FILE . '?c=form&a=post&modelid=' . $this->model['modelid'] . '&cid=$id ($id是被关联内容的id变量)';
+            $form_url = HTTP_URL . '/' . ENTRY_FILE . '?c=form&a=post&modelid=' . $this->model['modelid'] . '&cid=$id ($id是被关联内容的id变量)';
         }
 
         $cid = $this->cid;

@@ -1,41 +1,36 @@
 <?php
 
 // 系统入口文件
-define('IN_CMS', true);
+define('IN_CRONLITE', true);
 error_reporting(E_ALL ^ E_NOTICE);
 
 // 系统常量
 date_default_timezone_set('Asia/Shanghai'); // 系统时区设置
-define('DS', DIRECTORY_SEPARATOR);
 define('APP_START_TIME', isset($_SERVER['REQUSET_TIME']) ? $_SERVER['REQUSET_TIME'] : microtime(true)); // 设置程序开始执行时间
 define('HTTP_REFERER', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''); // 来源
 define('HTTP_HOST', $_SERVER['HTTP_HOST']); // host
 define('HTTP_PRE', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') ? 'https://' : 'http://'); // http协议
-define('HTTP_URL', HTTP_PRE . HTTP_HOST . DS); // 当前网站的完整域名
+define('HTTP_URL', HTTP_PRE . HTTP_HOST); // 当前网站的完整域名
 define('COOKIE_PRE', 'dou_'); // Cookie 前缀, 同一个域名下安装多套系统时, 请修改Cookie前缀
 
 // 文件夹
 define('CORE_DIR', 'core'); // 核心模块文件夹
 define('DATA_DIR', 'data'); // 数据模块文件夹
-define('MODEL_DIR', 'models'); // 数据模型文件夹
-define('VIEW_DIR', 'views'); // 视图模板文件夹
-define('CTRL_DIR', 'controllers'); // 控制器文件夹
-define('STATIC_DIR', 'static'); // 静态文件夹
 define('PLUGIN_DIR', 'plugin'); // 插件文件夹
 define('THEME_DIR', 'theme'); // 主题模板文件夹
 
 // 路径
-define('CORE_PATH', dirname(__FILE__) . DS); // 核心模块路径
-define('DATA_PATH', ROOT_PATH . DATA_DIR . DS); // 数据模块路径
-define('MODEL_PATH', CORE_PATH . MODEL_DIR . DS); // 数据模型路径
-define('VIEW_PATH', CORE_PATH . VIEW_DIR . DS); // 视图模板路径
-define('CTRL_PATH', CORE_PATH . CTRL_DIR . DS); // 控制器路径
-define('STATIC_PATH', ROOT_PATH . STATIC_DIR . DS); // 静态资源路径
-define('THEME_PATH', ROOT_PATH . THEME_DIR . DS); // 主题模板路径
-define('PLUGIN_PATH', ROOT_PATH . PLUGIN_DIR . DS); // 插件路径
+define('CORE_PATH', dirname(__FILE__)); // 核心模块路径
+define('DATA_PATH', ROOT_PATH . DS . DATA_DIR); // 数据模块路径
+define('MODEL_PATH', CORE_PATH . DS . 'models' . DS); // 数据模型路径
+define('VIEW_PATH', CORE_PATH . DS . 'views' . DS); // 视图模板路径
+define('CTRL_PATH', CORE_PATH . DS . 'controllers' . DS); // 控制器路径
+define('STATIC_PATH', ROOT_PATH . DS . 'static' . DS); // 静态资源路径
+define('THEME_PATH', ROOT_PATH . DS . THEME_DIR); // 主题模板路径
+define('PLUGIN_PATH', ROOT_PATH . DS . PLUGIN_DIR . DS); // 插件路径
 
-core::load_file(CORE_PATH . 'info.php'); // 系统基本信息
-core::load_file(CORE_PATH . 'library' . DS . 'global.function.php'); // 全局函数
+core::load_file(CORE_PATH . DS . 'info.php'); // 系统基本信息
+core::load_file(CORE_PATH . DS . 'library' . DS . 'global.function.php'); // 全局函数
 core::load_class('Model', '', 0);
 
 /**
@@ -106,11 +101,11 @@ abstract class core
      */
     public static function load_theme()
     {
-        if (is_mobile() && !empty(self::$config['SITE_MOBILE']) && is_dir(THEME_PATH . self::$config['SITE_MOBILE'])) {
+        if (is_mobile() && !empty(self::$config['SITE_MOBILE']) && is_dir(THEME_PATH . DS . self::$config['SITE_MOBILE'])) {
             // 设置了移动端主题并且是移动端访问
             define('SITE_THEME', self::$config['SITE_MOBILE']);
         } else {
-            define('SITE_THEME', is_dir(THEME_PATH . self::$config['SITE_THEME']) ? self::$config['SITE_THEME'] : 'default');
+            define('SITE_THEME', is_dir(THEME_PATH . DS . self::$config['SITE_THEME']) ? self::$config['SITE_THEME'] : 'default');
         }
     }
 
@@ -145,7 +140,7 @@ abstract class core
     public static function load_config($file)
     {
         static $configs = array();
-        $path = DATA_PATH . 'config' . DS . $file . '.ini.php';
+        $path = DATA_PATH . DS . 'config' . DS . $file . '.ini.php';
         if (file_exists($path)) {
             $configs[$file] = include $path;
             return $configs[$file];
@@ -183,8 +178,8 @@ abstract class core
                 return true;
             }
         }
-        if (file_exists(CORE_PATH . $path . DS . $classname . '.class.php')) {
-            include CORE_PATH . $path . DS . $classname . '.class.php';
+        if (file_exists(CORE_PATH . DS . $path . DS . $classname . '.class.php')) {
+            include CORE_PATH . DS . $path . DS . $classname . '.class.php';
             $name = $classname;
             if ($initialize) {
                 $classes[$key] = new $name;

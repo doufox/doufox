@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -226,7 +226,7 @@ class AttachmentController extends API
             $this->watermark($path . $filename);
         }
 
-        return array('result' => $result, 'path' => HTTP_URL . $path . $filename, 'file' => $file, 'ext' => $dir == 'image' ? 1 : $ext);
+        return array('result' => $result, 'path' => HTTP_URL . '/' . $path . $filename, 'file' => $file, 'ext' => $dir == 'image' ? 1 : $ext);
     }
 
     /**
@@ -295,14 +295,14 @@ class AttachmentController extends API
      */
     public function kindeditor_managerAction()
     {
-        $root_path = ROOT_PATH . $this->dir;
-        $root_url = HTTP_URL . $this->dir;
+        $root_path = ROOT_PATH . DS . $this->dir;
+        $root_url = HTTP_URL . '/' . $this->dir;
         //用户目录设定
         $admin = $this->getAdmin();
         if (empty($admin) && $this->memberinfo) {
             $id = $this->memberinfo['id'];
             if ($id) { // 用户附件目录
-                $root_path .= 'member/' . $id . '/';
+                $root_path .= 'member' . DS . $id . DS;
                 $root_url .= 'member/' . $id . '/';
                 if (!file_exists($root_path)) {
                     mkdir($root_path);
@@ -318,7 +318,7 @@ class AttachmentController extends API
         //目录名
         $dir_name = $this->get('dir') == 'image' ? 'image' : 'file';
         if ($dir_name !== '') {
-            $root_path .= $dir_name . "/";
+            $root_path .= $dir_name . DS;
             $root_url .= $dir_name . "/";
             if (!file_exists($root_path)) {
                 mkdir($root_path);
@@ -326,13 +326,13 @@ class AttachmentController extends API
         }
         //根据path参数，设置各路径和URL
         if (empty($_GET['path'])) {
-            $current_path = realpath($root_path) . '/';
+            $current_path = realpath($root_path) . DS;
             $current_url = $root_url;
             $current_dir_path = '';
             $moveup_dir_path = '';
         } else {
             $_GET['path'] = str_replace('%2F', '', $_GET['path']);
-            $current_path = realpath($root_path) . '/' . $_GET['path'];
+            $current_path = realpath($root_path) . DS . $_GET['path'];
             $current_url = $root_url . $_GET['path'];
             $current_dir_path = $_GET['path'];
             $moveup_dir_path = preg_replace('/(.*?)[^\/]+\/$/', '$1', $current_dir_path);

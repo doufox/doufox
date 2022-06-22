@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -17,7 +17,7 @@ class Admin extends Controller
         parent::__construct();
         $this->is_admin_login();
         define('IN_ADMIN', true);
-        core::load_file(CORE_PATH . 'library' . DS . 'fields.function.php');
+        core::load_file(CORE_PATH . DS . 'library' . DS . 'fields.function.php');
         $this->init_common_data();
     }
 
@@ -59,7 +59,7 @@ class Admin extends Controller
         }
 
         $url = core::get_namespace_id() == 'admin'
-            ? url('admin/login', array('url' => urlencode(HTTP_URL . ENTRY_FILE . '?' . $_SERVER['QUERY_STRING'])))
+            ? url('admin/login', array('url' => urlencode(HTTP_URL . '/' . ENTRY_FILE . '?' . $_SERVER['QUERY_STRING'])))
             : url('admin/login');
         $this->redirect($url);
     }

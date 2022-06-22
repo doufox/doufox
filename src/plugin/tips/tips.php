@@ -9,7 +9,7 @@ Author URL: https://doufox.com
 */
 
 
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 

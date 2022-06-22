@@ -104,7 +104,7 @@
     </form>
     <form class="form-horizontal" action="" method="post" id="dform" onsubmit="return check();">
         <input type="hidden" name="step" value="3">
-        <?php if (!$error) {?>
+        <?php if (empty($error)) {?>
         <div class="form-group">
             <label class="col-sm-4 control-label" for="db_host">数据库主机：</label>
             <div class="col-sm-8">

@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -17,9 +17,9 @@ class view
 
     public function __construct()
     {
-        $this->view_dir = THEME_PATH;
+        $this->view_dir = THEME_PATH . DS;
         // 编译主题模板生成的文件路径
-        $this->compile_dir = DATA_PATH . 'cache' . DS . 'theme' . DS;
+        $this->compile_dir = DATA_PATH . DS . 'cache' . DS . 'theme' . DS;
     }
 
     /**
@@ -93,7 +93,7 @@ class view
     protected function load_view_file($view_file)
     {
         if (!is_file($view_file)) {
-            exit('模板文件不存在' . ': ' . $view_file);
+            exit('模板文件不存在: ' . $view_file);
         }
 
         $view_content = file_get_contents($view_file);
@@ -481,7 +481,7 @@ class view
         //     extract($this->_options, EXTR_PREFIX_SAME, 'data');
         //     $this->_options = array();
         // }
-        $view_file = DATA_PATH . DS . 'cache' . DS . 'page_' . $file_name . '.cache.php';
+        $view_file = DATA_PATH . DS .'cache' . DS . 'page_' . $file_name . '.cache.php';
         // $this->create_compile_file($view_file, $view_content);
         // $compile_file = $this->get_compile_file($file_name);
         // if ($this->is_compile($view_file, $compile_file)) {

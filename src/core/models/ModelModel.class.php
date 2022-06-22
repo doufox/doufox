@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -59,11 +59,11 @@ class ModelModel extends Model
     {
         $table = ucfirst($table);
 
-        if (!defined('IN_CMS')) {
+        if (!defined('IN_CRONLITE')) {
             exit();
         }
         $content = "<?php" . PHP_EOL . PHP_EOL .
-            "if (!defined('IN_CMS')) {" . PHP_EOL .
+            "if (!defined('IN_CRONLITE')) {" . PHP_EOL .
             "    exit();" . PHP_EOL .
             "}" . PHP_EOL .
             "class " . $table . "Model extends Model {" . PHP_EOL . PHP_EOL .

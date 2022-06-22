@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -147,7 +147,7 @@ function getfile($url)
         $url = substr($url, 1);
     }
 
-    return HTTP_URL . $url;
+    return HTTP_URL . '/' . $url;
 }
 
 /**
@@ -156,7 +156,7 @@ function getfile($url)
 function image($url)
 {
     if (empty($url) || strlen($url) == 1) {
-        return HTTP_URL . 'static/img/nopic.gif';
+        return HTTP_URL . '/static/img/nopic.gif';
     }
 
     if (substr($url, 0, 7) == 'http://') {
@@ -171,7 +171,7 @@ function image($url)
         $url = substr($url, 1);
     }
 
-    return HTTP_URL . $url;
+    return HTTP_URL . '/' . $url;
 }
 
 /**
@@ -181,14 +181,14 @@ function thumb($img, $width = null, $height = null)
 {
     $config = core::get_site_config();
     if (empty($img) || strlen($img) == 3) {
-        return HTTP_URL . 'static/img/nopic.gif';
+        return HTTP_URL . '/static/img/nopic.gif';
     }
 
-    if (file_exists(ROOT_PATH . $img)) {
+    if (file_exists(ROOT_PATH . DS . $img)) {
         $ext = substr(strrchr(trim($img), '.'), 1);
-        if ($width && $height && file_exists(ROOT_PATH . $img)) {
+        if ($width && $height && file_exists(ROOT_PATH . DS . $img)) {
             $thumb = $img . '.thumb.' . $width . 'x' . $height . '.' . $ext;
-            if (!file_exists(ROOT_PATH . $thumb)) {
+            if (!file_exists(ROOT_PATH . DS . $thumb)) {
                 $image = core::load_class('image_lib');
                 $image->set_image_size($width, $height)->make_limit_image($img, $thumb);
             }
@@ -198,7 +198,7 @@ function thumb($img, $width = null, $height = null)
         if ($config['SITE_THUMB_WIDTH'] && $config['SITE_THUMB_HEIGHT']) {
             $thumb = $img . '.thumb.' . $config['SITE_THUMB_WIDTH'] . 'x' . $config['SITE_THUMB_HEIGHT'] . '.' . $ext;
             unset($config);
-            if (file_exists(ROOT_PATH . $thumb)) {
+            if (file_exists(ROOT_PATH . DS . $thumb)) {
                 return image($thumb);
             }
         }
@@ -467,7 +467,7 @@ function getUrl($data, $page = 0)
         $url = !is_numeric($page) || $page > 1 ? preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['SHOW_PAGE_URL']) : preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['SHOW_URL']);
         $url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(safe_replace('\\2'))", $url);
         unset($config, $cat);
-        return HTTP_URL . $url;
+        return HTTP_URL . '/' . $url;
     }
     unset($config, $cat);
     $params = array('id' => $data['id']);
@@ -504,7 +504,7 @@ function getCaturl($data, $page = 0)
         $url = !is_numeric($page) || $page > 1 ? preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['LIST_PAGE_URL']) : preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $config['LIST_URL']);
         $url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(safe_replace('\\2'))", $url);
         unset($config, $data);
-        return HTTP_URL . $url;
+        return HTTP_URL . '/' . $url;
     }
     if ($config['URL_LIST_TYPE']) {
         $params = array('catpath' => $data['catpath']);
@@ -751,15 +751,15 @@ function set_cache($cache_file, $value)
     }
 
     // 缓存文件
-    $cache_file = DATA_PATH . 'cache' . DS . $cache_file . '.cache.php';
+    $cache_file = DATA_PATH . DS .'cache' . DS . $cache_file . '.cache.php';
     // 分析缓存内容
     $value = (!is_array($value)) ? serialize(trim($value)) : serialize($value);
     // 分析缓存目录
-    if (!is_dir(DATA_PATH . 'cache' . DS)) {
-        mkdir(DATA_PATH . 'cache' . DS, 0777);
+    if (!is_dir(DATA_PATH . DS .'cache' . DS)) {
+        mkdir(DATA_PATH . DS .'cache' . DS, 0777);
     } else {
-        if (!is_writeable(DATA_PATH . 'cache' . DS)) {
-            chmod(DATA_PATH . 'cache' . DS, 0777);
+        if (!is_writeable(DATA_PATH . DS .'cache' . DS)) {
+            chmod(DATA_PATH . DS .'cache' . DS, 0777);
         }
     }
     return file_put_contents($cache_file, $value, LOCK_EX) ? true : false;
@@ -778,7 +778,7 @@ function get_cache($cache_file)
     }
 
     // 缓存文件
-    $cache_file = DATA_PATH . 'cache' . DS . $cache_file . '.cache.php';
+    $cache_file = DATA_PATH . DS .'cache' . DS . $cache_file . '.cache.php';
     return is_file($cache_file) ? unserialize(file_get_contents($cache_file)) : false;
 }
 
@@ -795,7 +795,7 @@ function delete_cache($cache_file)
     }
 
     // 缓存文件
-    $cache_file = DATA_PATH . 'cache' . DS . $cache_file . '.cache.php';
+    $cache_file = DATA_PATH . DS .'cache' . DS . $cache_file . '.cache.php';
     return is_file($cache_file) ? unlink($cache_file) : true;
 }
 

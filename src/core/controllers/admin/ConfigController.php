@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -117,7 +117,7 @@ class ConfigController extends Admin
             } else {
                 $postadmin['ADMIN_PASS'] = md5(md5($postadmin['ADMIN_PASS']));
             }
-            $admin_content = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) exit();" . PHP_EOL . "return array(" . PHP_EOL;
+            $admin_content = "<?php" . PHP_EOL . "if (!defined('IN_CRONLITE')) exit();" . PHP_EOL . "return array(" . PHP_EOL;
             $adminsystem = array();
             foreach ($postadmin as $k => $val) {
                 if (!in_array($k, $adminsystem)) {
@@ -126,7 +126,7 @@ class ConfigController extends Admin
                 }
             }
             $admin_content .= PHP_EOL . ");";
-            file_put_contents(DATA_PATH . 'config' . DS . 'admin.ini.php', $admin_content);
+            file_put_contents(DATA_PATH . DS .'config' . DS . 'admin.ini.php', $admin_content);
             $this->show_message('修改成功', 1, url('admin/config/admin'));
         }
         include $this->views('admin/config');
@@ -262,13 +262,13 @@ class ConfigController extends Admin
     {
         $postdata['RAND_CODE'] = md5(microtime());
         $postdata = array_merge($this->site_config, $postdata);
-        $content = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) {" . PHP_EOL . "    exit();" . PHP_EOL . "}" . PHP_EOL . PHP_EOL . "return array(" . PHP_EOL;
+        $content = "<?php" . PHP_EOL . "if (!defined('IN_CRONLITE')) {" . PHP_EOL . "    exit();" . PHP_EOL . "}" . PHP_EOL . PHP_EOL . "return array(" . PHP_EOL;
         foreach ($postdata as $k => $v) {
             $value = $v == 'false' || $v == 'true' ? $v : "'" . $v . "'";
             $content .= "    '" . strtoupper($k) . "'" . $this->setspace($k) . " => " . $value . ", // " . $this->configTips[$k] . PHP_EOL;
         }
         $content .= PHP_EOL . ");";
-        file_put_contents(DATA_PATH . 'config' . DS . 'config.ini.php', $content);
+        file_put_contents(DATA_PATH . DS .'config' . DS . 'config.ini.php', $content);
         return true;
     }
 

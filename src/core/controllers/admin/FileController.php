@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -9,7 +9,7 @@ class FileController extends Admin
     public function __construct()
     {
         parent::__construct();
-        $this->root_path = ROOT_PATH;
+        $this->root_path = ROOT_PATH . DS;
         $this->exclude_items = array(); // 禁止访问的文件列表
         $this->is_windows = DIRECTORY_SEPARATOR == '\\';
         $this->iconv_input_encoding = 'UTF-8';

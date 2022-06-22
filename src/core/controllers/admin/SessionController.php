@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -14,7 +14,7 @@ class SessionController extends Admin
     public function indexAction()
     {
         $file_list = core::load_class('file_list');
-        $dir = DATA_PATH . 'session' . DS;
+        $dir = DATA_PATH . DS .'session' . DS;
         if (!is_dir($dir)) {
             mkdir($dir, 0777);
         }

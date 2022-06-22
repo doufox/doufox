@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -31,7 +31,7 @@ class IndexController extends Admin
         include $this->views('admin/index');
 
         // 缓存
-        if (!file_exists(DATA_PATH . 'cache' . DS . "category.cache.php")) {
+        if (!file_exists(DATA_PATH . DS . 'cache' . DS . "category.cache.php")) {
             echo '<script type="text/javascript">location.href="' . url('admin/cache/update') . '";</script>';
         }
     }

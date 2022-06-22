@@ -4,7 +4,7 @@
  * 控制器基类
  */
 
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -37,7 +37,7 @@ abstract class Controller
      */
     public function __construct()
     {
-        if (!file_exists(DATA_PATH . 'installed')) {
+        if (!file_exists(DATA_PATH . DS .'installed')) {
             $this->redirect(url('install/index'));
         }
         if (get_magic_quotes_runtime()) {
@@ -91,7 +91,7 @@ abstract class Controller
             'site_name' => $this->site_config['SITE_NAME'],
             'site_slogan' => $this->site_config['SITE_SLOGAN'],
             'icp_filing_number' => $this->site_config['ICP_FILING_NUMBER'],
-            'site_template' => HTTP_URL . THEME_DIR . '/' . SITE_THEME . '/',
+            'site_template' => HTTP_URL . '/' . THEME_DIR . '/' . SITE_THEME . '/',
             'cats' => $this->category_cache,
             'member_model' => $this->membermodel,
             'member' => $this->memberinfo,
@@ -299,7 +299,7 @@ abstract class Controller
      */
     protected function getFields($fields, $data = array())
     {
-        core::load_file(CORE_PATH . 'library' . DS . 'fields.function.php');
+        core::load_file(CORE_PATH . DS . 'library' . DS . 'fields.function.php');
         $data_fields = '';
         if (empty($fields['data'])) {
             return false;

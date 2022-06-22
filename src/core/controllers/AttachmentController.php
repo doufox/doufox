@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -226,7 +226,7 @@ class AttachmentController extends Controller
             $this->watermark($path . $filename);
         }
 
-        return array('result' => $result, 'path' => HTTP_URL . $path . $filename, 'file' => $file, 'ext' => $dir == 'image' ? 1 : $ext);
+        return array('result' => $result, 'path' => HTTP_URL . '/' . $path . $filename, 'file' => $file, 'ext' => $dir == 'image' ? 1 : $ext);
     }
 
     /**
@@ -295,8 +295,8 @@ class AttachmentController extends Controller
      */
     public function kindeditor_managerAction()
     {
-        $root_path = ROOT_PATH . $this->dir;
-        $root_url = HTTP_URL . $this->dir;
+        $root_path = ROOT_PATH . DS .$this->dir;
+        $root_url = HTTP_URL . '/' . $this->dir;
         //用户目录设定
         $admin = $this->getAdmin();
         if (empty($admin) && $this->memberinfo) {

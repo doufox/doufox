@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -13,7 +13,7 @@ class InstallController
     public function __construct()
     {
         $this->status = 'default';
-        if (file_exists(DATA_PATH . 'installed')) {
+        if (file_exists(DATA_PATH . DS .'installed')) {
             $this->status = 'success';
             include $this->views('install/installed');
             exit();
@@ -55,7 +55,7 @@ class InstallController
                 if (!is_writable(DATA_PATH)) {
                     $error = '系统目录data没有写入权限, 无法进行安装！';
                 }
-                if (!is_writable(ROOT_PATH . 'upload')) {
+                if (!is_writable(ROOT_PATH . DS. 'upload')) {
                     $error = '系统目录upload没有写入权限, 无法进行安装！';
                 }
                 include $this->views('install/2');
@@ -93,7 +93,7 @@ class InstallController
                 mysql_query('SET NAMES utf8');
 
                 // 保存数据库配置文件
-                $content = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) exit();" . PHP_EOL . PHP_EOL . "return array(" . PHP_EOL . PHP_EOL;
+                $content = "<?php" . PHP_EOL . "if (!defined('IN_CRONLITE')) exit();" . PHP_EOL . PHP_EOL . "return array(" . PHP_EOL . PHP_EOL;
                 $content .= "    'host'     => '" . $tdb_host . "', " . PHP_EOL;
                 $content .= "    'username' => '" . $tdb_user . "', " . PHP_EOL;
                 $content .= "    'password' => '" . $tdb_pass . "', " . PHP_EOL;
@@ -101,21 +101,21 @@ class InstallController
                 $content .= "    'prefix'   => '" . $ttb_pre . "', " . PHP_EOL;
                 $content .= "    'charset'  => 'utf8', " . PHP_EOL;
                 $content .= PHP_EOL . ");";
-                if (!file_put_contents(DATA_PATH . 'config' . DS . 'database.ini.php', $content)) {
+                if (!file_put_contents(DATA_PATH . DS .'config' . DS . 'database.ini.php', $content)) {
                     dexit('数据库配置文件保存失败, 请检查文件权限！');
                 }
 
                 // // 保存管理员配置文件
-                // $admincontent  = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) exit();" . PHP_EOL . PHP_EOL . "return array(" . PHP_EOL . PHP_EOL;
+                // $admincontent  = "<?php" . PHP_EOL . "if (!defined('IN_CRONLITE')) exit();" . PHP_EOL . PHP_EOL . "return array(" . PHP_EOL . PHP_EOL;
                 // $admincontent .= " 'ADMIN_NAME' => '" . $username . "', " . PHP_EOL;
                 // $admincontent .= " 'ADMIN_PASS' => '" . md5(md5($password)) . "', " . PHP_EOL;
                 // $admincontent .= PHP_EOL . ");";
-                // if (!file_put_contents(DATA_PATH .  'config' . DS . 'admin.ini.php', $admincontent)) {
+                // if (!file_put_contents(DATA_PATH . DS . 'config' . DS . 'admin.ini.php', $admincontent)) {
                 //     dexit('数据库配置文件保存失败, 请检查文件权限！');
                 // }
 
                 // 导入表结构
-                $sql = file_get_contents(VIEW_PATH . 'install/initdata.sql');
+                $sql = file_get_contents(VIEW_PATH . 'install' . DS . 'initdata.sql');
                 // 表前缀处理
                 $sql = str_replace('doufox_', $ttb_pre, $sql);
                 // 超级管理员默认帐号密码
@@ -182,7 +182,7 @@ class InstallController
                 mysql_query($query) or die(exit('数据导入出错<hr>' . mysql_error() . '<br>SQL语句：<br>' . $query));
             }
         }
-        file_put_contents(DATA_PATH . 'installed', time());
+        file_put_contents(DATA_PATH . DS .'installed', time());
     }
 
     /** 加载视图模板文件，系统内置默认模板

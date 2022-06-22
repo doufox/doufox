@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -60,7 +60,7 @@ class CacheController extends Admin
             ),
         );
         $file_list = core::load_class('file_list');
-        $dir = DATA_PATH . 'cache' . DS;
+        $dir = DATA_PATH . DS . 'cache' . DS;
         if (!is_dir($dir)) {
             mkdir($dir, 0777);
         }
@@ -139,7 +139,7 @@ class CacheController extends Admin
     /** 删除缓存文件 */
     public function deleteAction()
     {
-        $dir = DATA_PATH . 'cache' . DS;
+        $dir = DATA_PATH . DS .'cache' . DS;
         $path = urldecode($this->get('path'));
         if (@unlink($dir . $path)) {
             $this->show_message('删除成功', 1, url('admin/cache/index'));

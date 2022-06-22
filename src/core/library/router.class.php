@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -17,7 +17,7 @@ class router
 
     public function __construct()
     {
-        $this->path_info = strtolower(trim(str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['PATH_INFO']), '/'));
+        $this->path_info = isset($_SERVER['PATH_INFO']) ? strtolower(trim(str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['PATH_INFO']), '/')) : null;
         $this->search_string = isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] ? $_SERVER['QUERY_STRING'] : $_SERVER['REQUEST_URI'];
         parse_str($this->search_string, $this->search_array);
         $_GET = array_merge($_GET, $this->search_array);
