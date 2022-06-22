@@ -99,6 +99,10 @@ $member = array(
             'name' => '用户昵称',
             'show' => 1
         ),
+        'realname' => array(
+            'name' => '真实姓名',
+            'show' => 1
+        ),
         'email' => array(
             'name' => '邮箱地址',
             'show' => 1

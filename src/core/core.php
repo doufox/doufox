@@ -2,7 +2,6 @@
 
 // 系统入口文件
 define('IN_CRONLITE', true);
-error_reporting(E_ALL ^ E_NOTICE);
 
 // 系统常量
 date_default_timezone_set('Asia/Shanghai'); // 系统时区设置

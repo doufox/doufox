@@ -67,6 +67,7 @@ class CategoryController extends Admin
         </tr>";
         $tree->init($categorys);
         $categorys = $tree->get_tree(0, $str);
+        $msg = '';
         include $this->views('admin/category/list');
     }
 
@@ -141,6 +142,29 @@ class CategoryController extends Admin
                 $this->category->url($result, getCaturl($data));
                 $this->show_message($this->getCacheCode('category') . '添加成功', 1, url('admin/category/index'));
             }
+        } else {
+            $msg = '';
+            $data = array(
+                'catname' => '',
+                'catpath' => '',
+                'typeid' => '',
+                'modelid' => '',
+                'categorytpl' => '',
+                'listtpl' => '',
+                'showtpl' => '',
+                'searchtpl' => '',
+                'msgtpl' => '',
+                'http' => '',
+                'islook' => '',
+                'ispost' => '',
+                'verify' => '',
+                'isnewtab' => '',
+                'pagesize' => '',
+                'image' => '',
+                'seo_title' => '',
+                'seo_keywords' => '',
+                'seo_description' => ''
+            );
         }
         $content_model = get_cache('contentmodel');
         $page_model = get_cache('pagemodel');

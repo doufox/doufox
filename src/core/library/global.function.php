@@ -1,6 +1,6 @@
 <?php
 if (!defined('IN_CRONLITE')) {
-    exit();
+    exit('Access Deined!');
 }
 
 /**
@@ -779,7 +779,10 @@ function get_cache($cache_file)
 
     // 缓存文件
     $cache_file = DATA_PATH . DS .'cache' . DS . $cache_file . '.cache.php';
-    return is_file($cache_file) ? unserialize(file_get_contents($cache_file)) : false;
+    if (is_file($cache_file)) {
+        return unserialize(file_get_contents($cache_file));
+    }
+    return false;
 }
 
 /**

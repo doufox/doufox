@@ -10,7 +10,7 @@ Author URL: https://doufox.com
 
 
 if (!defined('IN_CRONLITE')) {
-    exit();
+    exit('Access Deined!');
 }
 
 function plugin_helloworld_css()
