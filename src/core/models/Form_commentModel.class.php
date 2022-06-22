@@ -1,4 +1,7 @@
 <?php
+if (!defined('IN_CRONLITE')) {
+    exit();
+}
 
 class Form_commentModel extends Model
 {

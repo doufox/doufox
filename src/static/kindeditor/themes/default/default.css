@@ -788,7 +788,7 @@
 	opacity:0.5;
 }
 .ke-button-common {
-	background: url(background.png) no-repeat scroll 0 -25px transparent;
+	background: url(background.png) no-repeat;
 	cursor: pointer;
 	height: 23px;
 	line-height: 23px;
@@ -800,7 +800,6 @@
 .ke-button-outer {
 	background-position: 0 -25px;
 	padding: 0;
-	position: relative;
 	display: -moz-inline-stack;
 	display: inline-block;
 	vertical-align: middle;
@@ -809,13 +808,12 @@
 }
 .ke-button {
 	background-position: right -25px;
-	padding: 0 12px;
-	margin: 0;
+	padding: 0 14px 0 12px;
+	margin: 0 0 0 2px;
 	font-family: "sans serif",tahoma,verdana,helvetica;
 	border: 0 none;
 	color: #333;
 	font-size: 12px;
-	left: 2px;
 	text-decoration: none;
 }
 /* inputbox */
@@ -862,12 +860,13 @@
 	overflow: hidden;
 	margin: 0;
 	padding: 0;
+	*height: 25px;
 }
 .ke-upload-area .ke-upload-file {
 	position: absolute;
+	font-size: 60px;
 	top: 0;
 	right: 0;
-	height: 25px;
 	padding: 0;
 	margin: 0;
 	z-index: 811212;
@@ -1015,7 +1014,61 @@
 	background-color: #E9EFF6;
 }
 
-
+/* emoticons */
+.ke-plugin-emoticons {
+	position: relative;
+}
+.ke-plugin-emoticons .ke-preview {
+	position: absolute;
+	text-align: center;
+	margin: 2px;
+	padding: 10px;
+	top: 0;
+	border: 1px solid #A0A0A0;
+	background-color: #FFFFFF;
+	display: none;
+}
+.ke-plugin-emoticons .ke-preview-img {
+	border:0;
+	margin:0;
+	padding:0;
+}
+.ke-plugin-emoticons .ke-table {
+	border:0;
+	margin:0;
+	padding:0;
+	border-collapse:separate;
+}
+.ke-plugin-emoticons .ke-cell {
+	margin:0;
+	padding:1px;
+	border:1px solid #F0F0EE;
+	cursor:pointer;
+}
+.ke-plugin-emoticons .ke-on {
+	border: 1px solid #5690D2;
+	background-color: #E9EFF6;
+}
+.ke-plugin-emoticons .ke-img {
+	display:block;
+	background-repeat:no-repeat;
+	overflow:hidden;
+	margin:2px;
+	width:24px;
+	height:24px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+.ke-plugin-emoticons .ke-page {
+	text-align: right;
+	margin: 5px;
+	padding: 0;
+	border: 0;
+	font: 12px/1 "sans serif",tahoma,verdana,helvetica;
+	color: #333;
+	text-decoration: none;
+}
 .ke-plugin-plainpaste-textarea,
 .ke-plugin-wordpaste-iframe {
 	display: block;

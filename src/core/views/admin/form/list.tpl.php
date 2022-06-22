@@ -1,6 +1,6 @@
-<?php include $this->admin_view('header');?>
-<?php include $this->admin_view('navbar');?>
-<?php include $this->admin_view('common/msg');?>
+<?php include $this->views('admin/header');?>
+<?php include $this->views('admin/navbar');?>
+<?php include $this->views('admin/common/msg');?>
 
 <script type="text/javascript">
     function setC() {
@@ -95,4 +95,4 @@
     </div>
 </div>
 
-<?php include $this->admin_view('footer');?>
+<?php include $this->views('admin/footer');?>

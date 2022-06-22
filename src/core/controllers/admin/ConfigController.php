@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -17,7 +17,7 @@ class ConfigController extends Admin
             'SITE_THEME' => '桌面端主题样式, 默认default',
             'SITE_MOBILE' => '移动端主题样式, 默认mobile',
             'SITE_NAME' => '网站名称',
-            'SITE_SLOGAN' => '网站头部标语',
+            'SITE_SLOGAN' => '网站宣传标语',
             'SITE_TITLE' => '网站首页SEO标题',
             'SITE_KEYWORDS' => '网站SEO关键字',
             'SITE_DESCRIPTION' => '网站SEO描述信息',
@@ -74,11 +74,11 @@ class ConfigController extends Admin
         $theme = array_diff($arr, array('index.html'));
         unset($arr, $file_list);
         $msg = $this->msg_result;
-        include $this->admin_view('config/index');
+        include $this->views('admin/config/index');
     }
 
     /**
-     * 会员设置
+     * 用户设置
      */
     public function memberAction()
     {
@@ -92,10 +92,10 @@ class ConfigController extends Admin
             $data = array_merge($data, $post_data);
             unset($post_data);
         }
-        // 会员模型列表
+        // 用户模型列表
         $membermodel = $this->membermodel;
         $msg = $this->msg_result;
-        include $this->admin_view('config/member');
+        include $this->views('admin/config/member');
     }
 
     /**
@@ -117,7 +117,7 @@ class ConfigController extends Admin
             } else {
                 $postadmin['ADMIN_PASS'] = md5(md5($postadmin['ADMIN_PASS']));
             }
-            $admin_content = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) exit();" . PHP_EOL . "return array(" . PHP_EOL;
+            $admin_content = "<?php" . PHP_EOL . "if (!defined('IN_CRONLITE')) exit();" . PHP_EOL . "return array(" . PHP_EOL;
             $adminsystem = array();
             foreach ($postadmin as $k => $val) {
                 if (!in_array($k, $adminsystem)) {
@@ -126,10 +126,10 @@ class ConfigController extends Admin
                 }
             }
             $admin_content .= PHP_EOL . ");";
-            file_put_contents(DATA_PATH . 'config' . DS . 'admin.ini.php', $admin_content);
+            file_put_contents(DATA_PATH . DS .'config' . DS . 'admin.ini.php', $admin_content);
             $this->show_message('修改成功', 1, url('admin/config/admin'));
         }
-        include $this->admin_view('config');
+        include $this->views('admin/config');
     }
 
     /**
@@ -149,7 +149,7 @@ class ConfigController extends Admin
             unset($post_data);
         }
         $msg = $this->msg_result;
-        include $this->admin_view('config/url');
+        include $this->views('admin/config/url');
     }
 
     /**
@@ -169,7 +169,7 @@ class ConfigController extends Admin
             unset($post_data);
         }
         $msg = $this->msg_result;
-        include $this->admin_view('config/watermark');
+        include $this->views('admin/config/watermark');
     }
 
     /**
@@ -190,7 +190,7 @@ class ConfigController extends Admin
             unset($post_data);
         }
         $msg = $this->msg_result;
-        include $this->admin_view('config/weixin');
+        include $this->views('admin/config/weixin');
     }
 
     /**
@@ -212,7 +212,7 @@ class ConfigController extends Admin
             unset($post_data);
         }
         $msg = $this->msg_result;
-        include $this->admin_view('config/security');
+        include $this->views('admin/config/security');
     }
 
     /**
@@ -232,7 +232,7 @@ class ConfigController extends Admin
             unset($post_data);
         }
         $msg = $this->msg_result;
-        include $this->admin_view('config/attachment');
+        include $this->views('admin/config/attachment');
     }
 
     /**
@@ -252,7 +252,7 @@ class ConfigController extends Admin
             unset($post_data);
         }
         $msg = $this->msg_result;
-        include $this->admin_view('config/database');
+        include $this->views('admin/config/database');
     }
 
     /**
@@ -262,13 +262,13 @@ class ConfigController extends Admin
     {
         $postdata['RAND_CODE'] = md5(microtime());
         $postdata = array_merge($this->site_config, $postdata);
-        $content = "<?php" . PHP_EOL . "if (!defined('IN_CMS')) {" . PHP_EOL . "    exit();" . PHP_EOL . "}" . PHP_EOL . PHP_EOL . "return array(" . PHP_EOL;
+        $content = "<?php" . PHP_EOL . "if (!defined('IN_CRONLITE')) {" . PHP_EOL . "    exit();" . PHP_EOL . "}" . PHP_EOL . PHP_EOL . "return array(" . PHP_EOL;
         foreach ($postdata as $k => $v) {
             $value = $v == 'false' || $v == 'true' ? $v : "'" . $v . "'";
             $content .= "    '" . strtoupper($k) . "'" . $this->setspace($k) . " => " . $value . ", // " . $this->configTips[$k] . PHP_EOL;
         }
         $content .= PHP_EOL . ");";
-        file_put_contents(DATA_PATH . 'config' . DS . 'config.ini.php', $content);
+        file_put_contents(DATA_PATH . DS .'config' . DS . 'config.ini.php', $content);
         return true;
     }
 

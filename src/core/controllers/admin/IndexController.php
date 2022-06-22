@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -28,10 +28,10 @@ class IndexController extends Admin
         // $client_url = 'https://doufox.com/client.php?'.$data.'&verify='.$verify; // 反馈到官方网站
         $sysinfo['mysqlv'] = $pars['mysql'];
         $sysinfo['domain'] = $pars['domain'];
-        include $this->admin_view('index');
+        include $this->views('admin/index');
 
         // 缓存
-        if (!file_exists(DATA_PATH . 'cache' . DS . "category.cache.php")) {
+        if (!file_exists(DATA_PATH . DS . 'cache' . DS . "category.cache.php")) {
             echo '<script type="text/javascript">location.href="' . url('admin/cache/update') . '";</script>';
         }
     }
@@ -58,7 +58,7 @@ class IndexController extends Admin
 
         $sysinfo['mysqlv'] = $pars['mysql'];
         $sysinfo['domain'] = $pars['domain'];
-        include $this->admin_view('main');
+        include $this->views('admin/main');
     }
 
     /**

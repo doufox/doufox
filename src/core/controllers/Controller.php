@@ -4,8 +4,8 @@
  * 控制器基类
  */
 
-if (!defined('IN_CMS')) {
-    exit();
+if (!defined('IN_CRONLITE')) {
+    exit('Access Deined!');
 }
 
 abstract class Controller
@@ -37,7 +37,7 @@ abstract class Controller
      */
     public function __construct()
     {
-        if (!file_exists(DATA_PATH . 'installed')) {
+        if (!file_exists(DATA_PATH . DS .'installed')) {
             $this->redirect(url('install/index'));
         }
         if (get_magic_quotes_runtime()) {
@@ -80,7 +80,7 @@ abstract class Controller
         //     $this->account = $db->account->findAll();
         // }
 
-        // 载入会员系统缓存
+        // 载入用户系统缓存
         $this->member = core::load_model('member');
         $this->membermodel = get_cache('membermodel');
         $this->memberinfo = $this->getMember();
@@ -91,10 +91,11 @@ abstract class Controller
             'site_name' => $this->site_config['SITE_NAME'],
             'site_slogan' => $this->site_config['SITE_SLOGAN'],
             'icp_filing_number' => $this->site_config['ICP_FILING_NUMBER'],
-            'site_template' => HTTP_URL . THEME_DIR . '/' . SITE_THEME . '/',
+            'site_template' => HTTP_URL . '/' . THEME_DIR . '/' . SITE_THEME . '/',
             'cats' => $this->category_cache,
             'member_model' => $this->membermodel,
             'member' => $this->memberinfo,
+            'member_type' => $this->memberinfo['member_type'],
             'app_execution_time' => appExecutionTime(),
         ));
     }
@@ -151,6 +152,22 @@ abstract class Controller
     }
 
     /**
+     * 是否已登陆
+     */
+    protected function is_logged()
+    {
+        return $this->memberinfo && isset($this->memberinfo['id']);
+    }
+
+    /**
+     * 是否系统管理身份
+     */
+    public function is_admin()
+    {
+        return self::is_logged() && isset($this->memberinfo['member_type']) && $this->memberinfo['member_type'] == 'member_admin';
+    }
+
+    /**
      * 获取当前运行程序的网址域名
      */
     public static function get_server_name()
@@ -194,19 +211,6 @@ abstract class Controller
     }
 
     /**
-     * 公共页面，显示前台页面，内置页面
-     */
-    public function show_public($page)
-    {
-
-        $site_title = $this->site_config['SITE_TITLE'];
-        $site_keywords = $this->site_config['SITE_KEYWORDS'];
-        $site_description = $this->site_config['SITE_DESCRIPTION'];
-        include $this->public_view($page);
-        exit;
-    }
-
-    /**
      * 公共页面，提示信息页面跳转
      * msg    消息内容
      * status 返回结果状态  1=成功 2=错误 默认错误
@@ -216,7 +220,7 @@ abstract class Controller
     public function show_message($msg, $status = 2, $url = HTTP_REFERER, $time = 2000)
     {
 
-        include $this->public_view('msg');
+        include $this->views('public/msg');
         exit;
     }
 
@@ -259,7 +263,7 @@ abstract class Controller
     }
 
     /**
-     * 获取会员信息
+     * 获取用户信息
      */
     protected function getMember()
     {
@@ -270,6 +274,7 @@ abstract class Controller
                 $_memberinfo = $this->member->find($uid);
                 $member_table = $this->membermodel[$_memberinfo['modelid']]['tablename'];
                 if ($_memberinfo && $member_table) {
+                    $_memberinfo['member_type'] = $member_table;
                     $_member = core::load_model($member_table);
                     $memberdata = $_member->find($uid);
                     if ($memberdata) {
@@ -290,7 +295,7 @@ abstract class Controller
      */
     protected function getFields($fields, $data = array())
     {
-        core::load_file(CORE_PATH . 'library' . DS . 'fields.function.php');
+        core::load_file(CORE_PATH . DS . 'library' . DS . 'fields.function.php');
         $data_fields = '';
         if (empty($fields['data'])) {
             return false;
@@ -492,7 +497,7 @@ abstract class Controller
     }
 
     /**
-     * 可在会员中心显示的表单
+     * 可在用户中心显示的表单
      */
     protected function getFormMember()
     {
@@ -535,19 +540,11 @@ abstract class Controller
         return $data;
     }
 
-    /** 加载后台视图模板
-     * @param string $file 文件名
+    /** 加载视图模板文件，系统内置默认模板
+     * @param string $file 文件名 如 admin/login、install/footer
      */
-    protected function admin_view($file)
+    protected function views($file)
     {
-        return ADMIN_PATH . $file . '.tpl.php';
-    }
-
-    /** 加载前台视图模板，内置默认模板
-     * @param string $file 文件名
-     */
-    protected function public_view($file)
-    {
-        return PUBLIC_PATH . $file . '.tpl.php';
+        return VIEW_PATH . $file . '.tpl.php';
     }
 }

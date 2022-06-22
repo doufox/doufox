@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -31,7 +31,7 @@ class ContentController extends API
      */
     public function addAction()
     {
-        if (!$this->inlogged()) {
+        if (!$this->is_logged()) {
             $this->response(401, NULL, 'Unauthorized');
         }
         if ($this->is_post()) {
@@ -59,7 +59,7 @@ class ContentController extends API
 
             $this->checkFields($fields, $data, 1); // 验证自定义字段
             
-            $data['username'] = $this->session->get('user_id');
+            $data['username'] = $this->session->get('member_id');
             $data['time'] = $data['time'] ? $data['time'] : time();
             $data['modelid'] = $modelid;
             $result = $this->content->set(0, $model[$modelid]['tablename'], $data);
@@ -82,7 +82,7 @@ class ContentController extends API
      */
     public function editAction()
     {
-        if (!$this->inlogged()) {
+        if (!$this->is_logged()) {
             $this->response(401, NULL, 'Unauthorized');
         }
         $id = (int) $this->get('id');
@@ -153,7 +153,7 @@ class ContentController extends API
         $tree->init($categorys);
         $category = $tree->get_tree(0, $str);
 
-        include $this->admin_view('content/add');
+        include $this->views('admin/content/add');
     }
 
     /**
@@ -161,7 +161,7 @@ class ContentController extends API
      */
     public function delAction($id = 0, $catid = 0, $all = 0)
     {
-        if (!$this->inlogged()) {
+        if (!$this->is_logged()) {
             $this->response(401, NULL, 'Unauthorized');
         }
         $id = $id ? $id : (int) $this->get('id');
@@ -309,7 +309,7 @@ class ContentController extends API
             $str = "<option value='\$catid' \$selected \$disabled>\$spacer \$catname</option>";
             $tree->init($categorys);
             $category = $tree->get_tree(0, $str);
-            include $this->admin_view('content/url');
+            include $this->views('admin/content/url');
         }
     }
 

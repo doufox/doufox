@@ -14,7 +14,7 @@ KindEditor.plugin('flash', function(K) {
 		formatUploadUrl = K.undef(self.formatUploadUrl, true),
 		extraParams = K.undef(self.extraFileUploadParams, {}),
 		filePostName = K.undef(self.filePostName, 'imgFile'),
-		uploadJson = K.undef(self.uploadJson, admin_command.sitepath + '?c=attachment&a=kindeditor_upload');
+		uploadJson = K.undef(self.uploadJson, self.basePath + 'php/upload_json.php');
 	self.plugin.flash = {
 		edit : function() {
 			var html = [
@@ -153,6 +153,8 @@ KindEditor.plugin('flash', function(K) {
 		},
 		'delete' : function() {
 			self.plugin.getSelectedFlash().remove();
+			// [IE] 删除图片后立即点击图片按钮出错
+			self.addBookmark();
 		}
 	};
 	self.clickToolbar(name, self.plugin.flash.edit);

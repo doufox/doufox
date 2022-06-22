@@ -1,0 +1,32 @@
+{template header.html}
+
+<div class="container">
+    <div class="page-header">
+        <h1>{$msg}</h1>
+    </div>
+    <div class="alert alert-{if $status == 1}success{else}info{/if}">
+        <p>
+            {if $url == null }
+            <button class="btn btn-link" href="javascript:history.back();">[返回上一页]</button>
+            {else if $url == 'close' }
+            <button class="btn btn-link" type="button" name="close" onClick="window.close();">[关闭]</button>
+            {else if $url == 'back' }
+            <script type="text/javascript">
+                setTimeout(function () {
+                    history.back();
+                }, {$time});
+            </script>
+            {else}
+            <a class="btn btn-link" href="{$url}">[如果您的浏览器没有自动跳转，请点击这里]</a>
+            <script type="text/javascript">
+                setTimeout(function () {
+                    location.href = {$url};
+                }, {$time});
+            </script>
+            {/if}
+            <a class="btn btn-link" href="/">[返回首页]</a>
+        </p>
+    </div>
+</div>
+
+{template footer.html}

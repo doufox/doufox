@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -11,7 +11,7 @@ class AttachmentController extends API
     public function __construct()
     {
         parent::__construct();
-        if (core::get_action_id() != 'ajaxswfupload' && !$this->session->get('user_id') && !$this->cookie->get('member_id')) {
+        if (core::get_action_id() != 'ajaxswfupload' && !$this->is_logged()) {
             $this->attMsg('无权限操作，请登录。');
         }
 
@@ -27,13 +27,13 @@ class AttachmentController extends API
         if (empty($admin) && $this->memberinfo) {
             $id = $this->memberinfo['id'];
             if ($id) {
-                $this->dir .= 'member/' . $id . '/'; //会员附件目录
+                $this->dir .= 'member/' . $id . '/'; // 用户附件目录
                 if (!file_exists($this->dir)) {
                     mkdir($this->dir);
                 }
 
             }
-        } elseif (!$this->session->get('user_id')) {
+        } elseif (!$this->is_logged()) {
             $this->attMsg('游客不允许操作');
         }
         $iframe = $this->get('iframe') ? 1 : 0;
@@ -72,7 +72,7 @@ class AttachmentController extends API
         $pdir = url('attachment/album', array('dir' => str_replace(basename($dir), '', $dir), 'iframe' => $iframe, 'admin' => $admin));
         $dir = $this->dir . $dir;
         $istop = $dir ? 1 : 0;
-        include $this->admin_view('attachment/album');
+        include $this->views('admin/attachment/album');
     }
 
     /**
@@ -103,7 +103,7 @@ class AttachmentController extends API
             $data = $row;
             $url = url('attachment/image', array('w' => $w, 'h' => $h, 'size' => $size, 'admin' => $this->post('admin')));
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $size . 'MB';
-            include $this->admin_view('attachment/upload_result');
+            include $this->views('admin/attachment/upload_result');
         } else {
             $w = (int) $this->get('w');
             $h = (int) $this->get('h');
@@ -116,7 +116,7 @@ class AttachmentController extends API
             $note = '图片格式jpg、jpeg、gif、png，图片大小不超过' . $s . 'MB';
             $size = $s;
             $isimage = 1; //如果是图片上传，就显示高宽输入框
-            include $this->admin_view('attachment/upload');
+            include $this->views('admin/attachment/upload');
 
         }
     }
@@ -143,7 +143,7 @@ class AttachmentController extends API
 
         $admin = $this->getAdmin();
         $sessionid = '1';
-        include $this->admin_view('attachment/swfupload');
+        include $this->views('admin/attachment/swfupload');
     }
 
     /**
@@ -172,10 +172,10 @@ class AttachmentController extends API
             }
             $data = $row;
             $url = url('attachment/file', array('size' => $size, 'type' => $this->get('type'), 'admin' => $this->post('admin')));
-            include $this->admin_view('attachment/upload_result');
+            include $this->views('admin/attachment/upload_result');
         } else {
             $admin = $this->getAdmin();
-            include $this->admin_view('attachment/upload');
+            include $this->views('admin/attachment/upload');
 
         }
     }
@@ -196,11 +196,11 @@ class AttachmentController extends API
         $path = $this->dir;
         $upload = core::load_class('file_upload');
         if (empty($admin) && $this->memberinfo) {
-            $uid = $this->memberinfo['id']; //会员附件归类
+            $uid = $this->memberinfo['id']; // 用户附件归类
             if ($uid) {
                 $path .= 'member/' . $uid . '/';
             }
-        } elseif (!$this->session->get('user_id')) {
+        } elseif (!$this->is_logged()) {
             if (!$this->post('SWFUPLOADSESSID')) {
                 $this->attMsg('无权限', $stype);
             }
@@ -226,7 +226,7 @@ class AttachmentController extends API
             $this->watermark($path . $filename);
         }
 
-        return array('result' => $result, 'path' => HTTP_URL . $path . $filename, 'file' => $file, 'ext' => $dir == 'image' ? 1 : $ext);
+        return array('result' => $result, 'path' => HTTP_URL . '/' . $path . $filename, 'file' => $file, 'ext' => $dir == 'image' ? 1 : $ext);
     }
 
     /**
@@ -295,21 +295,21 @@ class AttachmentController extends API
      */
     public function kindeditor_managerAction()
     {
-        $root_path = ROOT_PATH . $this->dir;
-        $root_url = HTTP_URL . $this->dir;
+        $root_path = ROOT_PATH . DS . $this->dir;
+        $root_url = HTTP_URL . '/' . $this->dir;
         //用户目录设定
         $admin = $this->getAdmin();
         if (empty($admin) && $this->memberinfo) {
             $id = $this->memberinfo['id'];
-            if ($id) { //会员附件目录
-                $root_path .= 'member/' . $id . '/';
+            if ($id) { // 用户附件目录
+                $root_path .= 'member' . DS . $id . DS;
                 $root_url .= 'member/' . $id . '/';
                 if (!file_exists($root_path)) {
                     mkdir($root_path);
                 }
 
             }
-        } elseif (!$this->session->get('user_id')) {
+        } elseif (!$this->is_logged()) {
             //属于游客
             exit;
         }
@@ -318,7 +318,7 @@ class AttachmentController extends API
         //目录名
         $dir_name = $this->get('dir') == 'image' ? 'image' : 'file';
         if ($dir_name !== '') {
-            $root_path .= $dir_name . "/";
+            $root_path .= $dir_name . DS;
             $root_url .= $dir_name . "/";
             if (!file_exists($root_path)) {
                 mkdir($root_path);
@@ -326,13 +326,13 @@ class AttachmentController extends API
         }
         //根据path参数，设置各路径和URL
         if (empty($_GET['path'])) {
-            $current_path = realpath($root_path) . '/';
+            $current_path = realpath($root_path) . DS;
             $current_url = $root_url;
             $current_dir_path = '';
             $moveup_dir_path = '';
         } else {
             $_GET['path'] = str_replace('%2F', '', $_GET['path']);
-            $current_path = realpath($root_path) . '/' . $_GET['path'];
+            $current_path = realpath($root_path) . DS . $_GET['path'];
             $current_url = $root_url . $_GET['path'];
             $current_dir_path = $_GET['path'];
             $moveup_dir_path = preg_replace('/(.*?)[^\/]+\/$/', '$1', $current_dir_path);

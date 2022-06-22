@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -23,7 +23,7 @@ class HtmlController extends Admin
      */
     public function indexAction()
     {
-        include $this->admin_view('html/index');
+        include $this->views('admin/html/index');
     }
 
     /**
@@ -35,7 +35,7 @@ class HtmlController extends Admin
         core::load_file(CTRL_PATH . 'IndexController.php');
         $c = new IndexController();
         $c->indexAction();
-        if (!file_put_contents(ROOT_PATH . 'index.html', ob_get_clean(), LOCK_EX)) {
+        if (!file_put_contents(ROOT_PATH . DS . 'index.html', ob_get_clean(), LOCK_EX)) {
             $this->show_message($url . '生成失败！', 2, '');
         }
 
@@ -70,7 +70,7 @@ class HtmlController extends Admin
         $str = "<option value='\$catid' \$selected>\$spacer \$catname</option>";
         $tree->init($category_select);
         $category_select = $tree->get_tree_category(0, $str, '2', $catid);
-        include $this->admin_view('html/create_html');
+        include $this->views('admin/html/create_html');
     }
 
     /**
@@ -198,7 +198,7 @@ class HtmlController extends Admin
         $str = "<option value='\$catid' \$selected>\$spacer \$catname</option>";
         $tree->init($category_select);
         $category_select = $tree->get_tree_category(0, $str, '2', $catid);
-        include $this->admin_view('html/create_html');
+        include $this->views('admin/html/create_html');
     }
 
     /**
@@ -273,11 +273,11 @@ class HtmlController extends Admin
         }
         $url = $cat['catpath'] . DS . $url;
         if (substr($url, -5) != '.html') {
-            mkdirs(ROOT_PATH . $url);
-            $htmlfile = ROOT_PATH . $url . DS . 'index.html';
+            mkdirs(ROOT_PATH . DS . $url);
+            $htmlfile = ROOT_PATH . DS . $url . DS . 'index.html';
         } else {
-            mkdirs(ROOT_PATH . dirname($url));
-            $htmlfile = ROOT_PATH . $url;
+            mkdirs(ROOT_PATH . DS . dirname($url));
+            $htmlfile = ROOT_PATH . DS . $url;
         }
         ob_start();
         $_GET['catid'] = $cat['catid'];
@@ -305,13 +305,13 @@ class HtmlController extends Admin
         } else {
             $url = preg_replace('#{([a-z_0-9]+)}#e', '\$content[\\1]', $this->site_config['SHOW_URL']);
         }
-        $url = SITE_PATH . $url;
+        $url = HTTP_URL . $url;
         if (substr($url, -5) != '.html') {
-            mkdirs(ROOT_PATH . $url);
-            $htmlfile = ROOT_PATH . $url . DS . 'index.html';
+            mkdirs(ROOT_PATH . DS . $url);
+            $htmlfile = ROOT_PATH . DS . $url . DS . 'index.html';
         } else {
-            mkdirs(ROOT_PATH . dirname($url));
-            $htmlfile = ROOT_PATH . $url;
+            mkdirs(ROOT_PATH . DS . dirname($url));
+            $htmlfile = ROOT_PATH . DS . $url;
         }
 
         ob_start();
@@ -339,13 +339,13 @@ class HtmlController extends Admin
                     for ($i = 1; $i <= $pagenumber; $i++) {
                         $content['page'] = $i;
                         $url = preg_replace('#{([a-z_0-9]+)}#e', '\$content[\\1]', $this->site_config['SHOW_PAGE_URL']);
-                        $url = SITE_PATH . $url;
+                        $url = HTTP_URL . $url;
                         if (substr($url, -5) != '.html') {
-                            mkdirs(ROOT_PATH . $url);
-                            $htmlfile = ROOT_PATH . $url . DS . 'index.html';
+                            mkdirs(ROOT_PATH . DS . $url);
+                            $htmlfile = ROOT_PATH . DS . $url . DS . 'index.html';
                         } else {
-                            mkdirs(ROOT_PATH . dirname($url));
-                            $htmlfile = ROOT_PATH . $url;
+                            mkdirs(ROOT_PATH . DS . dirname($url));
+                            $htmlfile = ROOT_PATH . DS . $url;
                         }
                         @unlink($htmlfile);
                     }
@@ -379,7 +379,7 @@ class HtmlController extends Admin
             'member' => $this->member_info,
             'site_url' => HTTP_URL,
             'site_name' => $this->site_config['SITE_NAME'],
-            'site_template' => HTTP_URL . THEME_DIR . '/' . SITE_THEME . '/',
+            'site_template' => HTTP_URL . '/' . THEME_DIR . '/' . SITE_THEME . '/',
         ));
         $this->view->display($category['showtpl']);
 

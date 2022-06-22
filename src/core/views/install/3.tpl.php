@@ -1,10 +1,7 @@
-<?php include $this->install_view("header");?>
+<?php include $this->views("install/header");?>
 
-    <script type="text/javascript">
-        function $(ID) {return document.getElementById(ID);}
-    </script>
     <div class="panel-body">
-        <p class="lead text-center">安装成功</p>
+        <p class="lead text-center">处理中。。</p>
         <hr />
         <p>
             <label>后台管理地址：</label>
@@ -19,9 +16,22 @@
             <span><?php echo $password; ?></span>
         </p>
         <hr />
-        <div class="text-center">
+        <iframe src="<?php echo url('install/cache', array('time' => $time)); ?>" width="0" height="0" frameborder="0"></iframe>
+        <div id="update-tips">
+            <p class="alert alert-info">加载缓存中。。。</p>
+        </div>
+        <div class="text-center success" style="display: none;">
             <a class="btn btn-default" href="<?php echo url('admin'); ?>">登录后台</a>
         </div>
     </div>
 
-<?php include $this->install_view("footer");?>
+<script type="text/javascript">
+    function updateSuccess() {
+        $('#update-tips p').text('系统已安装成功，模型数据已加载成功。');
+        $('#update-tips p').removeClass('alert-info').addClass('alert-success');
+        $('.lead').text('安装成功');
+        $('.success').show();
+    }
+</script>
+
+<?php include $this->views("install/footer");?>

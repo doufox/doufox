@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -59,11 +59,11 @@ class MemberController extends Admin
         $pagination = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
 
         $membermodel = $this->membermodel;
-        include $this->admin_view('member/list');
+        include $this->views('admin/member/list');
     }
 
     /*
-     * 添加会员
+     * 添加用户
      */
     public function addAction()
     {
@@ -72,7 +72,7 @@ class MemberController extends Admin
             $this->check($data);
             $data['modelid'] = (!isset($data['modelid']) || empty($data['modelid'])) ? $this->site_config['MEMBER_MODELID'] : $data['modelid'];
             if (!isset($this->membermodel[$data['modelid']])) {
-                $this->show_message('会员模型不存在');
+                $this->show_message('用户模型不存在');
             }
             $data['password'] = md5(md5($data['password']));
             $data['regdate'] = time();
@@ -82,7 +82,7 @@ class MemberController extends Admin
             $this->show_message('添加成功', 1, url('admin/member'));
         }
         $membermodel = $this->membermodel;
-        include $this->admin_view('member/add');
+        include $this->views('admin/member/add');
     }
 
     /*
@@ -93,12 +93,12 @@ class MemberController extends Admin
         $id = (int) $this->get('id');
         $data = $this->member->find($id);
         if (empty($data)) {
-            $this->show_message('会员不存在');
+            $this->show_message('ID为' . $id . '的用户不存在！');
         }
 
         $model = $this->membermodel[$data['modelid']];
         if (empty($model)) {
-            $this->show_message('会员模型不存在');
+            $this->show_message('用户模型不存在');
         }
         $info = core::load_model($model['tablename']);
         if (empty($info)) {
@@ -133,11 +133,11 @@ class MemberController extends Admin
         $count[2] = $this->member->count('member', NULL, 'status=0');
         $model = $model;
         $info = $_data;
-        include $this->admin_view('member/edit');
+        include $this->views('admin/member/edit');
     }
 
     /**
-     * 删除会员
+     * 删除用户
      */
     public function delAction()
     {
@@ -148,14 +148,14 @@ class MemberController extends Admin
 
         $data = $this->member->find($id);
         if (empty($data)) {
-            $this->show_message('会员不存在');
+            $this->show_message('用户不存在');
         }
 
         $modelist = $this->member->from('contentmodel')->where('typeid=1')->select();
 
-        // 删除会员
+        // 删除用户
         $this->member->delete('id=' . $id);
-        // 删除会员模型数据
+        // 删除用户模型数据
         $table = $this->membermodel[$data['modelid']]['tablename'];
         if ($table) {
             $model = core::load_model($table);
@@ -170,7 +170,7 @@ class MemberController extends Admin
                 $db->delete('userid=' . $id);
             }
         }
-        // 删除会员附件目录
+        // 删除用户附件目录
         $path = 'upload/member/' . $id . '/';
         if (file_exists($path)) {
             $file_list = core::load_class('file_list');

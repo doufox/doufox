@@ -1,7 +1,7 @@
-<?php include $this->admin_view('header');?>
+<?php include $this->views('admin/header');?>
 
-<?php include $this->admin_view('navbar');?>
-<?php include $this->admin_view('common/msg');?>
+<?php include $this->views('admin/navbar');?>
+<?php include $this->views('admin/common/msg');?>
 
 <div class="container-fluid">
     <div class="row">
@@ -12,8 +12,8 @@
                 </div>
                 <div class="list-group">
                     <a class="list-group-item" href="<?php echo url('admin/category/add'); ?>">添加栏目</a>
-                    <a class="list-group-item" href="<?php echo url('admin/member/index'); ?>">会员列表</a>
-                    <a class="list-group-item" href="<?php echo url('admin/member/add'); ?>">添加会员</a>
+                    <a class="list-group-item" href="<?php echo url('admin/member/index'); ?>">用户列表</a>
+                    <a class="list-group-item" href="<?php echo url('admin/member/add'); ?>">添加用户</a>
                     <a class="list-group-item" href="<?php echo url('admin/attachment'); ?>">查看附件</a>
                     <a class="list-group-item" href="<?php echo url('admin/backup'); ?>">备份管理</a>
                     <a class="list-group-item" href="<?php echo url('admin/cache'); ?>">更新缓存</a>
@@ -72,4 +72,4 @@
     </div>
 </div>
 
-<?php include $this->admin_view('footer');?>
+<?php include $this->views('admin/footer');?>

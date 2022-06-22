@@ -1,6 +1,6 @@
-<?php include $this->admin_view('header'); ?>
-<?php include $this->admin_view('navbar'); ?>
-<?php include $this->admin_view('common/msg');?>
+<?php include $this->views('admin/header'); ?>
+<?php include $this->views('admin/navbar'); ?>
+<?php include $this->views('admin/common/msg');?>
 
 <script type="text/javascript">
     function ajaxemail() {
@@ -18,11 +18,11 @@
         <div class="col-sm-3 col-md-3 col-lg-2 page_menu">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="panel-title">会员管理</span>
+                    <span class="panel-title">用户管理</span>
                 </div>
                 <div class="list-group">
-                    <a class="list-group-item" href="<?php echo url('admin/member/index'); ?>">会员列表</a>
-                    <a class="list-group-item" href="<?php echo url('admin/member/add'); ?>">添加会员</a>
+                    <a class="list-group-item" href="<?php echo url('admin/member/index'); ?>">用户列表</a>
+                    <a class="list-group-item" href="<?php echo url('admin/member/add'); ?>">添加用户</a>
                     <a class="list-group-item" href="<?php echo url('member/register'); ?>" target="_blank">前台注册</a>
                     <a class="list-group-item" href="<?php echo url('admin/member/cache'); ?>">更新缓存</a>
                 </div>
@@ -32,7 +32,7 @@
             <form method="post" action="" class="form-inline">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <span class="panel-title">编辑会员</span>
+                        <span class="panel-title">编辑用户</span>
                         <div class="pull-right">
                             <a class="btn btn-default btn-xs" href="<?php echo url('admin/member'); ?>">列表</a>
                             <a class="btn btn-default btn-xs" href="<?php echo url('admin/member/add'); ?>">添加</a>
@@ -42,7 +42,7 @@
                         <table width="100%" class="table_form">
                             <tbody>
                                 <tr>
-                                    <th width="100">会员类型：</th>
+                                    <th width="100">用户类型：</th>
                                     <td><?php echo $model['modelname']; ?></td>
                                 </tr>
                                 <tr>
@@ -50,8 +50,12 @@
                                     <td><?php echo $data['username']; ?></td>
                                 </tr>
                                 <tr>
-                                    <th>会员昵称：</th>
+                                    <th>用户昵称：</th>
                                     <td><input class="form-control" type="text" size="50" value="<?php echo $data['nickname']; ?>" name="data[nickname]" maxlength="50"></td>
+                                </tr>
+                                <tr>
+                                    <th>真实姓名：</th>
+                                    <td><input class="form-control" type="text" size="50" value="<?php echo $data['realname']; ?>" name="data[realname]" maxlength="50"></td>
                                 </tr>
                                 <tr>
                                     <th>重置密码：</th>
@@ -82,13 +86,12 @@
                                         <label class="label-group"><input type="radio" <?php if (isset($data['status']) && $data['status'] == 0) { ?>checked<?php } ?> value="0" name="data[status]">未审核</label>
                                     </td>
                                 </tr>
-                                <?php if ($model) {
-                                    echo $data_fields;
-                                } ?>
+                                <?php if ($model) { echo $data_fields; } ?>
                             </tbody>
                         </table>
                         <hr />
-                        <button type="submit" class="btn btn-default" value="提交" name="submit">提交</button>
+                        <button type="submit" class="btn btn-primary btn-sm" value="提交" name="submit">提交</button>
+                        <a class="btn btn-default btn-sm" href="<?php echo url('admin/member'); ?>">取消</a>
                     </div>
                 </div>
             </form>
@@ -96,4 +99,4 @@
     </div>
 </div>
 
-<?php include $this->admin_view('footer'); ?>
+<?php include $this->views('admin/footer'); ?>

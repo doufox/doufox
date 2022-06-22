@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -95,7 +95,7 @@ class ContentController extends Member
             'category' => $category,
             'site_keywords' => $this->site_config['SITE_KEYWORDS'],
             'site_description' => $this->site_config['SITE_DESCRIPTION'],
-            'site_title' => $this->cmodel[$modelid]['modelname'] . ' - 会员中心 - ' . $this->site_config['SITE_NAME'],
+            'site_title' => $this->cmodel[$modelid]['modelname'] . ' - 用户中心 - ' . $this->site_config['SITE_NAME'],
             'page_title' => $this->cmodel[$modelid]['modelname'] . ' - 内容管理',
             'page_url' => url('member/index'),
             'page_position' => $this->cmodel[$modelid]['modelname'] . ' - 内容管理',
@@ -186,7 +186,7 @@ class ContentController extends Member
             'category' => $category,
             'site_keywords' => $this->site_config['SITE_KEYWORDS'],
             'site_description' => $this->site_config['SITE_DESCRIPTION'],
-            'site_title' => '发布内容 - 会员中心 - ' . $this->site_config['SITE_NAME'],
+            'site_title' => '发布内容 - 用户中心 - ' . $this->site_config['SITE_NAME'],
             'page_title' => '发布内容',
             'page_url' => url('member/content/add'),
             'page_position' => '<a href="' . url('member/content/add') . '" title="发布内容">发布内容</a>',
@@ -287,7 +287,7 @@ class ContentController extends Member
             'category' => $category,
             'site_keywords' => $this->site_config['SITE_KEYWORDS'],
             'site_description' => $this->site_config['SITE_DESCRIPTION'],
-            'site_title' => '编辑内容 - 会员中心 -' . $this->site_config['SITE_NAME'],
+            'site_title' => '编辑内容 - 用户中心 -' . $this->site_config['SITE_NAME'],
             'page_title' => '编辑内容',
             'page_url' => url('member/content/edit'),
             'page_position' => '<a href="' . url('member/content/edit', array('id' => $id)) . '" title="编辑内容">编辑内容</a>',
@@ -341,7 +341,7 @@ class ContentController extends Member
             'listdata' => $data,
             'page' => $page,
             'pagination' => $pagination,
-            'site_title' => $this->form[$modelid]['joinname'] . $this->form[$modelid]['modelname'] . ' - 会员中心 - ' . $this->site_config['SITE_NAME'],
+            'site_title' => $this->form[$modelid]['joinname'] . $this->form[$modelid]['modelname'] . ' - 用户中心 - ' . $this->site_config['SITE_NAME'],
             'showfields' => isset($this->form[$modelid]['setting']['form']['membershow']) ? $this->form[$modelid]['setting']['form']['membershow'] : array(),
             'form' => $this->form[$modelid],
             'modelid' => $modelid,
@@ -385,7 +385,7 @@ class ContentController extends Member
                 'form' => $model,
                 'burl' => HTTP_REFERER,
                 'modelid' => $modelid,
-                'site_title' => $model['joinname'] . $model['modelname'] . ' - 会员中心 - ' . $this->site_config['SITE_NAME'],
+                'site_title' => $model['joinname'] . $model['modelname'] . ' - 用户中心 - ' . $this->site_config['SITE_NAME'],
                 'data_fields' => $this->getFields($model['fields'], $data),
             ));
             $this->view->display('member/form_show.html');

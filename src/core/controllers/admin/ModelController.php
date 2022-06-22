@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -17,13 +17,13 @@ class ModelController extends Admin
         parent::__construct();
         $this->modelType = array(
             1 => 'content', // 内容模型表
-            2 => 'member',  // 会员模型表
+            2 => 'member',  // 用户模型表
             3 => 'form',    // 表单模型表
             4 => 'page',    // 单页模型表
         );
         $this->modelTypeName = array(
             1 => '内容模型',
-            2 => '会员模型',
+            2 => '用户模型',
             3 => '表单模型',
             4 => '单页模型',
         );
@@ -48,7 +48,7 @@ class ModelController extends Admin
         $modelTypeName = $this->modelTypeName;
         $modelname = $modelTypeName[$typeid];
         $list = $this->_model->where('typeid=' . $typeid)->select();
-        include $this->admin_view('model/list');
+        include $this->views('admin/model/list');
     }
 
     public function addAction()
@@ -87,7 +87,7 @@ class ModelController extends Admin
                 'searchtpl' => $search,
                 'pagetpl' => $pagetpl,
                 'msgtpl' => $msgtpl,
-                'typeid' => $this->typeid,
+                'typeid' => $this->typeid
             );
             if ($modelid = $this->_model->set(0, $data)) {
                 if ($this->typeid != 3) {
@@ -110,7 +110,7 @@ class ModelController extends Admin
         $modeltype = $this->modelType;
         $modelTypeName = $this->modelTypeName;
         $page_title = '添加' . $modelTypeName[$typeid]; // 格式：添加表单模型
-        include $this->admin_view('model/add');
+        include $this->views('admin/model/add');
     }
 
     public function editAction()
@@ -122,19 +122,15 @@ class ModelController extends Admin
                 $this->show_message('该模型不存在！');
             }
 
-            // $categorytpl = $this->post('categorytpl');
-            // $listtpl = $this->post('listtpl');
-            // $showtpl = $this->post('showtpl');
-            // $searchtpl = $this->post('searchtpl');
-            // $pagetpl = $this->post('pagetpl');
             $update = array(
                 'joinid' => $this->post('joinid'),
-                'listtpl' => $this->post('listtpl'),
-                'showtpl' => $this->post('showtpl'),
                 'modelname' => $this->post('modelname'),
-                'categorytpl' => $this->post('categorytpl'),
-                'searchtpl' => $this->post('searchtpl'),
-                'pagetpl' => $this->post('pagetpl'),
+                'categorytpl' => $this->post('categorytpl') ? $this->post('categorytpl') : '',
+                'listtpl' => $this->post('listtpl') ? $this->post('listtpl') : '',
+                'showtpl' => $this->post('showtpl') ? $this->post('showtpl') : '',
+                'searchtpl' => $this->post('searchtpl') ? $this->post('searchtpl') : '',
+                'pagetpl' => $this->post('pagetpl') ? $this->post('pagetpl') : '',
+                'msgtpl' => $this->post('msgtpl') ? $this->post('msgtpl') : ''
             );
             $this->_model->set($modelid, $update);
             if ($this->typeid != 3) {
@@ -165,7 +161,7 @@ class ModelController extends Admin
         $modeltype = $this->modelType;
         $modelTypeName = $this->modelTypeName;
         $page_title = '编辑' . $modelTypeName[$typeid] . '[' . $data['modelname'] . ']'; // 格式：编辑表单模型[文章评论]
-        include $this->admin_view('model/add');
+        include $this->views('admin/model/add');
     }
 
     public function delAction()
@@ -210,7 +206,7 @@ class ModelController extends Admin
         $typeid = $this->typeid;
         $modelTypeName = $this->modelTypeName;
         $list = $field->where('modelid=' . $modelid)->order('listorder ASC')->select();
-        include $this->admin_view('model/fields');
+        include $this->views('admin/model/fields');
     }
 
     /**
@@ -292,7 +288,7 @@ class ModelController extends Admin
         $modeltype = $this->modelType;
         $typename = $this->modelTypeName;
         $merge = $field->where('modelid=' . $modelid)->where('formtype=?', 'fields')->select();
-        include $this->admin_view('model/addfield');
+        include $this->views('admin/model/addfield');
     }
 
     /**
@@ -352,7 +348,7 @@ class ModelController extends Admin
         $typename = $this->modelTypeName;
         $merge = $field->where('modelid=' . $modelid)->where('formtype=?', 'fields')->select();
 
-        include $this->admin_view('model/addfield');
+        include $this->views('admin/model/addfield');
     }
 
     /**
@@ -385,7 +381,7 @@ class ModelController extends Admin
         $name = $data['modelname'];
         $data = $field;
 
-        include $this->admin_view('model/ajaxedit');
+        include $this->views('admin/model/ajaxedit');
     }
 
     /**
@@ -501,13 +497,38 @@ class ModelController extends Admin
                         }
                     }
                 }
-                if ($typeid == 1 && !isset($setting['default'])) {
-                    $setting['default'] = array(
-                        'title' => array('name' => '标题', 'show' => 1),
-                        'keywords' => array('name' => '关键字', 'show' => 1),
-                        'thumb' => array('name' => '缩略图', 'show' => 1),
-                        'description' => array('name' => '描述', 'show' => 1),
-                    );
+                if (!isset($setting['default'])) {
+                    // 内置字段
+                    if ($typeid == 1 || $typeid == 4) {
+                        // 内容模型/页面模型
+                        $setting['default'] = array(
+                            'title' => array('name' => '标题', 'show' => 1),
+                            'keywords' => array('name' => '关键字', 'show' => 1),
+                            'thumb' => array('name' => '缩略图', 'show' => 1),
+                            'description' => array('name' => '描述', 'show' => 1)
+                        );
+                    } elseif ($typeid == 2) {
+                        // 用户模型
+                        $setting['default'] = array(
+                            'username' => array('name' => '用户名', 'show' => 1),
+                            'nickname' => array('name' => '用户昵称', 'show' => 1),
+                            'realname' => array('name' => '真实姓名', 'show' => 1),
+                            'email' => array('name' => '邮箱地址', 'show' => 1),
+                            'avatar' => array('name' => '用户头像', 'show' => 1),
+                            'regdate' => array('name' => '注册时间', 'show' => 1),
+                            'regip' => array('name' => '注册IP', 'show' => 1),
+                            'status' => array('name' => '用户状态', 'show' => 1)
+                        );
+                    } elseif ($typeid == 3) {
+                        // 表单模型
+                        $setting['default'] = array(
+                            'username' => array('name' => '用户名', 'show' => 1),
+                            'listorder' => array('name' => '排序编号', 'show' => 1),
+                            'status' => array('name' => '状态', 'show' => 1),
+                            'time' => array('name' => '提交时间', 'show' => 1),
+                            'ip' => array('name' => 'IP地址', 'show' => 1)
+                        );
+                    }
                     $this->_model->update(array('setting' => array2string($setting)), 'modelid=' . $id);
                 }
                 $data[$id]['fields']['data'] = $_fields;

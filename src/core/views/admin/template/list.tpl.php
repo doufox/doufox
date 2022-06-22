@@ -1,6 +1,6 @@
-<?php include $this->admin_view('header'); ?>
-<?php include $this->admin_view('navbar'); ?>
-<?php include $this->admin_view('common/msg');?>
+<?php include $this->views('admin/header'); ?>
+<?php include $this->views('admin/navbar'); ?>
+<?php include $this->views('admin/common/msg');?>
 
 <div class="container-fluid">
     <div class="row">
@@ -22,8 +22,8 @@
                     <div class="panel-heading">
                         <span class="panel-title">模板管理</span>
                         <div class="pull-right">
-                            <a class="btn btn-default btn-xs" href="<?php echo url('admin/template/index'); ?>">列表</a>
                             <a class="btn btn-default btn-xs" href="<?php echo url('admin/template/add'); ?>">添加</a>
+                            <a class="btn btn-default btn-xs" href="<?php echo url('admin/template/index'); ?>">列表</a>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -33,12 +33,10 @@
                                     <div class="thumbnail">
                                         <img src="<?php echo $v['image']; ?>" alt="模板预览图">
                                         <div class="caption">
-                                            <h3><?php echo $v['path']; ?></h3>
-                                            <p>模板描述</p>
+                                            <h3><?php echo $v['theme']; ?></h3>
                                             <p>
-                                                <a href="<?php echo url('admin/template/item', array('item' => $v['path'])); ?>" class="btn btn-primary btn-sm" role="button">详情</a>
-                                                <a href="<?php echo url('admin/template/item', array('item' => $v['path'])); ?>" class="btn btn-primary btn-sm" role="button">详情</a>
-                                                <a href="<?php echo url('index', array('template' => $v['path'])); ?>" class="btn btn-default btn-sm" role="button">预览</a>
+                                                <a href="<?php echo url('admin/template/item', array('theme' => $v['theme'])); ?>" class="btn btn-primary btn-sm" role="button">详情</a>
+                                                <a href="<?php echo url('index', array('template' => $v['theme'])); ?>" class="btn btn-default btn-sm" role="button">启用</a>
                                                 <a href="#" class="btn btn-danger btn-sm" role="button">删除</a>
                                             </p>
                                         </div>
@@ -54,4 +52,4 @@
     </div>
 </div>
 
-<?php include $this->admin_view('footer'); ?>
+<?php include $this->views('admin/footer'); ?>

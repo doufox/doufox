@@ -1,6 +1,6 @@
-<?php include $this->admin_view('header');?>
-<?php include $this->admin_view('navbar');?>
-<?php include $this->admin_view('common/msg');?>
+<?php include $this->views('admin/header');?>
+<?php include $this->views('admin/navbar');?>
+<?php include $this->views('admin/common/msg');?>
 
 <div class="container-fluid">
     <div class="row">
@@ -32,7 +32,7 @@
                     </ul>
                     <form method="post" action="" class="form-inline">
                         <input type="hidden" value="<?php echo $catid; ?>" name="catid">
-                        <input type="hidden" value="<?php echo $data['typeid']; ?>" name="typeid">
+                        <!-- <input type="hidden" value="<?php echo $data['typeid']; ?>" name="typeid"> -->
                         <div class="tab-content">
                             <div role="tabpanel" id="basic" class="tab-pane active">
                                 <table width="100%" class="table_form">
@@ -198,7 +198,7 @@
                                         <th width="100">查看权限：</th>
                                         <td>
                                             <label class="label-group"><input name="data[islook]" type="radio" value="0"<?php if ($data['islook']==0) { ?> checked<?php } ?> >任何人可查看</label>
-                                            <label class="label-group"><input name="data[islook]" type="radio" value="1"<?php if ($data['islook']==1) { ?> checked<?php } ?> >会员可查看</label>
+                                            <label class="label-group"><input name="data[islook]" type="radio" value="1"<?php if ($data['islook']==1) { ?> checked<?php } ?> >登录用户可查看</label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -206,7 +206,7 @@
                                         <td>
                                             <label class="label-group"><input name="data[ispost]" type="radio" value="0"<?php if ($data['ispost']==0) { ?> checked<?php } ?> >禁止投稿</label>
                                             <label class="label-group"><input name="data[ispost]" type="radio" value="1"<?php if ($data['ispost']==1) { ?> checked<?php } ?> >任何人可投稿</label>
-                                            <label class="label-group"><input name="data[ispost]" type="radio" value="2"<?php if ($data['ispost']==2) { ?> checked<?php } ?> >会员可投稿</label>
+                                            <label class="label-group"><input name="data[ispost]" type="radio" value="2"<?php if ($data['ispost']==2) { ?> checked<?php } ?> >登录用户可投稿</label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -309,4 +309,4 @@
     settype(<?php echo $data['typeid']; ?>);
 </script>
 
-<?php include $this->admin_view('footer'); ?>
+<?php include $this->views('admin/footer'); ?>

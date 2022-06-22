@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -13,6 +13,6 @@ class FeedbackController extends Admin
 
     public function indexAction()
     {
-        include $this->admin_view('feedback/help');
+        include $this->views('admin/feedback/help');
     }
 }

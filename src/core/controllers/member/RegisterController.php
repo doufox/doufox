@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -17,7 +17,7 @@ class RegisterController extends Member
     public function indexAction()
     {
         if (!$this->site_config['MEMBER_REGISTER']) {
-            $this->show_message('系统未开放会员注册功能');
+            $this->show_message('系统未开放用户注册功能');
         }
 
         if (!$this->isLogin(1)) {
@@ -42,10 +42,10 @@ class RegisterController extends Member
         }
         $this->view->assign(array(
             'membermodel' => $this->membermodel,
-            'site_title' => '会员注册 - ' . $this->site_config['SITE_NAME'],
-            'page_title' => '会员注册',
+            'site_title' => '用户注册 - ' . $this->site_config['SITE_NAME'],
+            'page_title' => '用户注册',
             'page_url' => url('member/register'),
-            'page_position' => "<a href=\"" . url('member/register') . "\" title=\"会员注册\">会员注册</a>",
+            'page_position' => '<a href="' . url('member/register') . '" title="用户注册">用户注册</a>',
             'site_keywords' => $this->site_config['SITE_KEYWORDS'],
             'site_description' => $this->site_config['SITE_DESCRIPTION'],
             'member_default_modelid' => $this->site_config['MEMBER_MODELID'],
@@ -105,7 +105,7 @@ class RegisterController extends Member
 
         $data['modelid'] = (!isset($data['modelid']) || empty($data['modelid'])) ? $this->site_config['MEMBER_MODELID'] : $data['modelid'];
         if (!isset($this->membermodel[$data['modelid']])) {
-            $this->show_message('会员模型不存在');
+            $this->show_message('用户模型不存在');
         }
         $data['regdate'] = time();
         $data['regip'] = get_user_ip();

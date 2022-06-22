@@ -1,22 +1,3 @@
-DROP TABLE IF EXISTS `doufox_account`;
-CREATE TABLE IF NOT EXISTS `doufox_account` (
-  `userid` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(20) DEFAULT NULL,
-  `password` VARCHAR(32) DEFAULT NULL,
-  `roleid` SMALLINT(5) DEFAULT '0',
-  `realname` VARCHAR(50) NOT NULL DEFAULT '',
-  `auth` TEXT NOT NULL,
-  `list_size` SMALLINT(5) NOT NULL,
-  `left_width` SMALLINT(5) NOT NULL DEFAULT '150',
-  `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`userid`),
-  KEY `username` (`username`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-INSERT INTO `doufox_account` (`userid`, `username`, `password`, `roleid`, `realname`, `auth`, `list_size`, `left_width`) VALUES
-(1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 1, '超级管理员', '', 10, 150);
-
 DROP TABLE IF EXISTS `doufox_block`;
 CREATE TABLE IF NOT EXISTS `doufox_block` (
   `id` SMALLINT(8) NOT NULL AUTO_INCREMENT,
@@ -40,28 +21,28 @@ CREATE TABLE IF NOT EXISTS `doufox_category` (
   `arrchildid` VARCHAR(255) NOT NULL,
   `catname` VARCHAR(30) NOT NULL,
   `catpath` VARCHAR(30) NOT NULL,
-  `image` VARCHAR(100) NOT NULL,
+  `image` VARCHAR(100) NOT NULL DEFAULT '',
   `content` mediumtext NOT NULL,
-  `seo_title` VARCHAR(255) NOT NULL,
-  `seo_keywords` VARCHAR(255) NOT NULL,
-  `seo_description` VARCHAR(255) NOT NULL,
+  `seo_title` VARCHAR(255) NOT NULL DEFAULT '',
+  `seo_keywords` VARCHAR(255) NOT NULL DEFAULT '',
+  `seo_description` VARCHAR(255) NOT NULL DEFAULT '',
   `url` VARCHAR(100) NOT NULL,
-  `http` VARCHAR(255) NOT NULL,
+  `http` VARCHAR(255) NOT NULL DEFAULT '',
   `items` mediumint(8) UNSIGNED NOT NULL DEFAULT '0',
   `listorder` SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0',
   `ismenu` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' COMMENT '作为菜单显示在导航栏',
   `isnewtab` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '打开方式0当前页打开1新窗口打开',
   `redirect` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '0确认页跳转1直接跳转',
-  `ispost` SMALLINT(2) NOT NULL COMMENT '是否可投稿',
+  `ispost` SMALLINT(2) NOT NULL DEFAULT '0' COMMENT '是否可投稿',
   `verify` SMALLINT(2) NOT NULL DEFAULT '0',
-  `islook` SMALLINT(2) NOT NULL,
+  `islook` SMALLINT(2) NOT NULL DEFAULT '0',
   `categorytpl` VARCHAR(50) NOT NULL COMMENT '内部栏目模板',
   `listtpl` VARCHAR(50) NOT NULL COMMENT '文章列表模板',
   `showtpl` VARCHAR(50) NOT NULL COMMENT '文章模板',
   `searchtpl` VARCHAR(50) NOT NULL COMMENT '搜索页模板',
   `pagetpl` VARCHAR(50) NOT NULL COMMENT '内部页面模板',
-  `msgtpl` VARCHAR(50) NOT NULL COMMENT '消息页面模板',
-  `pagesize` SMALLINT(5) NOT NULL COMMENT '默认列表尺寸',
+  `msgtpl` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '消息页面模板',
+  `pagesize` SMALLINT(5) NOT NULL DEFAULT '10' COMMENT '默认列表尺寸',
   `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
   `time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`catid`),
@@ -70,6 +51,10 @@ CREATE TABLE IF NOT EXISTS `doufox_category` (
   KEY `parentid` (`parentid`),
   KEY `modelid` (`modelid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO `doufox_category` (`catid`, `typeid`, `modelid`, `parentid`, `arrparentid`, `child`, `arrchildid`, `catname`, `catpath`, `content`, `url`, `ispost`, `islook`, `categorytpl`, `listtpl`, `showtpl`, `searchtpl`, `pagetpl`, `msgtpl`)
+VALUES (1, 1, 1, 0, '1', 0, '', '最新动态', 'news', '', '/index.php?c=index&a=category&catid=1', 0, 0, 'category_article.html', 'list_article.html', 'show_article.html', 'search.html', 'page.html', 'msg.html');
+
 
 DROP TABLE IF EXISTS `doufox_content`;
 CREATE TABLE IF NOT EXISTS `doufox_content` (
@@ -159,6 +144,7 @@ CREATE TABLE IF NOT EXISTS `doufox_member` (
   `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` CHAR(20) NOT NULL DEFAULT '',
   `nickname` VARCHAR(50) DEFAULT '',
+  `realname` VARCHAR(50) DEFAULT '',
   `password` CHAR(32) NOT NULL DEFAULT '',
   `salt` CHAR(10) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
@@ -168,8 +154,31 @@ CREATE TABLE IF NOT EXISTS `doufox_member` (
   `regdate` INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `regip` VARCHAR(50) NOT NULL,
   `status` TINYINT(1) NOT NULL DEFAULT '0',
+  `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO `doufox_member` (`id`, `username`, `nickname`, `realname`, `password`, `salt`, `email`, `avatar`, `modelid`, `credits`, `regdate`, `regip`, `status`)
+VALUES (1, 'admin', '管理员', '超级管理员', 'c3284d0f94606de1fd2af172aba15bf3', '', 'admin@doufox.com', '', 6, 0, 0, '', 1);
+
+DROP TABLE IF EXISTS `doufox_member_admin`;
+CREATE TABLE IF NOT EXISTS `doufox_member_admin` (
+  `id` mediumint(8) NOT NULL,
+  `roleid` SMALLINT(5) DEFAULT '0',
+  `auth` TEXT NOT NULL,
+  `list_size` SMALLINT(5) NOT NULL,
+  `left_width` SMALLINT(5) NOT NULL DEFAULT '150',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO `doufox_member_admin` (`id`, `roleid`, `auth`, `list_size`, `left_width`) VALUES (1, 1, '', 10, 150);
+
+DROP TABLE IF EXISTS `doufox_member_normal`;
+CREATE TABLE IF NOT EXISTS `doufox_member_normal` (
+  `id` mediumint(8) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `doufox_model`;
@@ -198,7 +207,9 @@ INSERT INTO `doufox_model` (`modelid`, `typeid`, `modelname`, `tablename`, `cate
 (2, 1, '产品内容', 'content_product', 'category_product.html', 'list_product.html', 'show_product.html', 'search.html', 'page.html', 'msg.html', 0, 'a:1:{s:7:"default";a:4:{s:5:"title";a:2:{s:4:"name";s:6:"标题";s:4:"show";s:1:"1";}s:8:"keywords";a:2:{s:4:"name";s:9:"关键字";s:4:"show";s:1:"1";}s:5:"thumb";a:2:{s:4:"name";s:9:"缩略图";s:4:"show";s:1:"1";}s:11:"description";a:2:{s:4:"name";s:6:"描述";s:4:"show";s:1:"1";}}}'),
 (3, 3, '在线留言', 'form_gestbook', 'form.html', 'list_gestbook.html', 'show_gestbook.html', 'search.html', 'page.html', 'msg.html', 0, 'a:1:{s:7:"default";a:5:{s:8:"username";a:2:{s:4:"name";s:9:"用户名";s:4:"show";s:1:"0";}s:9:"listorder";a:2:{s:4:"name";s:12:"排序编号";s:4:"show";s:1:"0";}s:6:"status";a:2:{s:4:"name";s:6:"状态";s:4:"show";s:1:"0";}s:4:"time";a:2:{s:4:"name";s:12:"提交时间";s:4:"show";s:1:"0";}s:2:"ip";a:2:{s:4:"name";s:8:"IP地址";s:4:"show";s:1:"0";}}}'),
 (4, 3, '文章评论', 'form_comment', 'form.html', 'list_comment.html', 'show_comment.html', 'search.html', 'page.html', 'msg.html', 0, 'a:1:{s:7:"default";a:5:{s:8:"username";a:2:{s:4:"name";s:9:"用户名";s:4:"show";s:1:"1";}s:9:"listorder";a:2:{s:4:"name";s:12:"排序编号";s:4:"show";s:1:"1";}s:6:"status";a:2:{s:4:"name";s:6:"状态";s:4:"show";s:1:"1";}s:4:"time";a:2:{s:4:"name";s:12:"提交时间";s:4:"show";s:1:"1";}s:2:"ip";a:2:{s:4:"name";s:8:"IP地址";s:4:"show";s:1:"1";}}}'),
-(5, 4, '单页模型', 'page_normal', '', '', '', '', 'page.html', 'msg.html', 0, '');
+(5, 4, '单页模型', 'page_normal', '', '', '', '', 'page.html', 'msg.html', 0, ''),
+(6, 2, '系统管理员', 'member_admin', 'category_admin.html', 'list_admin.html', 'show_admin.html', 'search_admin.html', '', '', 0,        'a:1:{s:7:"default";a:8:{s:8:"username";a:2:{s:4:"name";s:9:"用户名";s:4:"show";s:1:"1";}s:8:"nickname";a:2:{s:4:"name";s:12:"用户昵称";s:4:"show";s:1:"1";}s:8:"realname";a:2:{s:4:"name";s:12:"真实姓名";s:4:"show";s:1:"1";}s:5:"email";a:2:{s:4:"name";s:12:"邮箱地址";s:4:"show";s:1:"1";}s:6:"avatar";a:2:{s:4:"name";s:12:"用户头像";s:4:"show";s:1:"1";}s:7:"regdate";a:2:{s:4:"name";s:12:"注册时间";s:4:"show";s:1:"1";}s:5:"regip";a:2:{s:4:"name";s:8:"注册IP";s:4:"show";s:1:"1";}s:6:"status";a:2:{s:4:"name";s:12:"用户状态";s:4:"show";s:1:"1";}}}'),
+(7, 2, '网站注册会员', 'member_normal', 'category_normal.html', 'list_normal.html', 'show_normal.html', 'search_normal.html', '', '', 0, 'a:1:{s:7:"default";a:8:{s:8:"username";a:2:{s:4:"name";s:9:"用户名";s:4:"show";s:1:"1";}s:8:"nickname";a:2:{s:4:"name";s:12:"用户昵称";s:4:"show";s:1:"1";}s:8:"realname";a:2:{s:4:"name";s:12:"真实姓名";s:4:"show";s:1:"1";}s:5:"email";a:2:{s:4:"name";s:12:"邮箱地址";s:4:"show";s:1:"1";}s:6:"avatar";a:2:{s:4:"name";s:12:"用户头像";s:4:"show";s:1:"1";}s:7:"regdate";a:2:{s:4:"name";s:12:"注册时间";s:4:"show";s:1:"1";}s:5:"regip";a:2:{s:4:"name";s:8:"注册IP";s:4:"show";s:1:"1";}s:6:"status";a:2:{s:4:"name";s:12:"用户状态";s:4:"show";s:1:"1";}}}');
 
 DROP TABLE IF EXISTS `doufox_model_field`;
 CREATE TABLE IF NOT EXISTS `doufox_model_field`(
@@ -223,13 +234,15 @@ CREATE TABLE IF NOT EXISTS `doufox_model_field`(
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO `doufox_model_field` (`fieldid`, `modelid`, `field`, `name`, `type`, `length`, `indexkey`, `isshow`, `tips`, `not_null`, `pattern`, `errortips`, `formtype`, `setting`, `listorder`, `disabled`) VALUES
-(1, 1, 'content', '内容 ', '', '', '', 1, '', 0, '', '', 'editor', '', 0, 0),
-(2, 2, 'content', '内容 ', '', '', '', 1, '', 0, '', '', 'editor', '', 0, 0),
+(1, 1, 'content', '内容', '', '', '', 1, '', 0, '', '', 'editor', '', 0, 0),
+(2, 2, 'content', '内容', '', '', '', 1, '', 0, '', '', 'editor', '', 0, 0),
 (3, 3, 'yourname', '您的姓名', '', '', '', 1, '', 1, '', '', 'input', 'array (\n  ''size'' => ''150'',\n  ''default'' => '''',\n)', 0, 0),
 (4, 3, 'yourqq', '联系QQ', '', '', '', 1, '', 0, '', '', 'input', 'array (\n  ''size'' => ''150'',\n  ''default'' => '''',\n)', 0, 0),
 (8, 3, 'yourphoneno', '联系电话', '', '', '', 1, '', 1, '/^[0-9.-]+$/', '请填入您的联系电话，方便我们联系您', 'input', 'array (\n  ''size'' => ''150'',\n  ''default'' => '''',\n)', 0, 0),
 (7, 3, 'messagecontent', '留言内容', 'TEXT', '50000', '', 1, '', 1, '', '', 'textarea', 'array (\n  ''width'' => ''400'',\n  ''height'' => ''90'',\n  ''default'' => ''留下您的手机号码，我们会尽快回复您！'',\n)', 0, 0),
-(9, 1, 'tag', '标签', '', '', '', 1, '', 0, '', '', 'input', 'array (\n  ''size'' => ''150'',\n  ''default'' => '''',\n)', 0, 0);
+(9, 1, 'tag', '标签', '', '', '', 1, '', 0, '', '', 'input', 'array (\n  ''size'' => ''150'',\n  ''default'' => '''',\n)', 0, 0),
+(10, 6, 'roleid', '用户角色', '', '', '', 1, '用户角色', 1, '', '', 'input', 'array (\n  ''size'' => ''150'',\n  ''default'' => ''0'',\n)', 0, 0),
+(11, 6, 'auth', '权限配置', 'TEXT', '50000', '', 1, '权限配置', 1, '', '', 'textarea', 'array (\n  ''width'' => ''400'',\n  ''height'' => ''90'',\n  ''default'' => '''',\n)', 0, 0);
 
 DROP TABLE IF EXISTS `doufox_plugin`;
 CREATE TABLE IF NOT EXISTS `doufox_plugin`(

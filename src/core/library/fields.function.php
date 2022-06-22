@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -327,19 +327,22 @@ function content_editor($name, $content = '', $setting = '')
     $page = !isset($setting['system']) && $name == 'content' ? ", '|', 'pagebreak'" : '';
     $source = core::get_namespace_id() != 'admin' ? '' : "'source',";
     if (!defined('CMS_EDITOR_LD')) {
-        $str .= '<script type="text/javascript" src="/static/kindeditor/kindeditor.js"></script>';
+        $str .= '<script type="text/javascript" src="/static/kindeditor/kindeditor.min.js"></script>';
         define('CMS_EDITOR_LD', 1); // 防止重复加载JS
     }
     if ($type) {
         $str .= "
         <script type=\"text/javascript\">KindEditor.ready(function(K) {
             K.create('#" . $id . "', {
+                width: '100%',
                 allowFileManager : true,
-                resizeType : 0,
+                uploadJson: '" . url('admin/attachment/kindeditor_upload') . "',
+                fileManagerJson: '" . url('admin/attachment/kindeditor_manager') . "',
+                resizeMode: true,
+                resizeType: 1,
                 items : [
-                    'fullscreen', " . $source . " '|', 'preview', 'code', 'paste',
-                    'plainpaste', 'wordpaste', '|', 'image',
-                    'flash', 'media', 'table', 'hr',  'baidumap',  'link', 'unlink' , '|', 'justifyleft', 'justifycenter', 'justifyright',
+                    'fullscreen', " . $source . " '|', 'preview', 'code', 'paste', 'plainpaste', 'wordpaste', '|',
+                    'image', 'insertfile', 'media', 'table', 'hr',  'baidumap',  'link', 'unlink' , '|', 'justifyleft', 'justifycenter', 'justifyright',
                     'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
                     'superscript', 'clearhtml', 'quickformat',  '|', 'formatblock', 'fontname', 'fontsize', '|', 'forecolor',  'bold',
                     'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat'" . $page . "
@@ -353,7 +356,8 @@ function content_editor($name, $content = '', $setting = '')
             K.create('#" . $id . "', {
                 allowFileManager : true,
                 allowImageUpload : false,
-                resizeType : 0 ,
+                uploadJson: '" . url('attachment/kindeditor_upload') . "',
+                fileManagerJson: '" . url('attachment/kindeditor_manager') . "',
                 items : [
                     'fullscreen', " . $source . " '|', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
                     'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', '|', 'image', 'link' , 'clearhtml'

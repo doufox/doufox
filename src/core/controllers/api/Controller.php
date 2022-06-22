@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -11,7 +11,7 @@ class API extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->userid = $this->session->get('user_id');
+        $this->userid = $this->session->get('member_id');
     }
 
     /**
@@ -19,21 +19,9 @@ class API extends Controller
      */
     public function is_admin_login($return = 0)
     {
-        $userid = $this->session->get('user_id');
+        $userid = $this->session->get('member_id');
         if (empty($this->userid)) {
             $this->response(401, NULL, 'Unauthorized');
-        }
-    }
-
-    /**
-     * 是否已登陆
-     */
-    protected function inlogged()
-    {
-        if ($this->memberinfo) {
-            return true;
-        } else {
-            return false;
         }
     }
 

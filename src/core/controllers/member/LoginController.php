@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -26,21 +26,25 @@ class LoginController extends Member
                 $this->show_message('验证码不正确');
             }
 
-            if (empty($data['username']) || empty($data['password'])) {
-                $this->show_message('用户名或密码不能为空');
+            if (empty($data['username'])) {
+                $this->show_message('用户名不能为空');
+            }
+
+            if (empty($data['password'])) {
+                $this->show_message('密码不能为空');
             }
 
             $member = $this->member->where('username=?', $data['username'])->select(false);
-            $time = empty($data['cookie']) ? 24 * 3600 : 360 * 24 * 3600; //会话保存时间。
             $backurl = $data['back'] ? urldecode($data['back']) : url('member/index');
             if (empty($member)) {
-                $this->show_message('会员名不存在');
+                $this->show_message('用户名不存在');
             }
 
             if ($member['password'] != md5(md5($data['password']))) {
                 $this->show_message('密码错误');
             }
 
+            $time = empty($data['cookie']) ? 24 * 3600 : 360 * 24 * 3600; // 会话保存时间，true则一年否则默认24小时。
             $this->cookie->set('member_id', $member['id'], $time);
             $this->cookie->set('member_code', substr(md5($this->site_config['RAND_CODE'] . $member['id']), 5, 20), $time);
             $this->show_message('登录成功', 1, $backurl);
@@ -53,7 +57,7 @@ class LoginController extends Member
             'member_logincode' => $this->site_config['MEMBER_LOGINCODE'],
             'page_title' => '会员登录',
             'page_url' => url('member/login'),
-            'page_position' => "<a href=\"" . url('member/login') . "\" title=\"会员登录\">会员登录</a>",
+            'page_position' => '<a href="' . url('member/login') . '" title="用户登录">用户登录</a>',
             'backurl' => urlencode($backurl),
         ));
         $this->view->display('member/login.html');

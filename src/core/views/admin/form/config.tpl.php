@@ -1,6 +1,6 @@
-<?php include $this->admin_view('header');?>
-<?php include $this->admin_view('navbar');?>
-<?php include $this->admin_view('common/msg');?>
+<?php include $this->views('admin/header');?>
+<?php include $this->views('admin/navbar');?>
+<?php include $this->views('admin/common/msg');?>
 
 <div class="container-fluid">
     <div class="row">
@@ -71,16 +71,16 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>是否在会员中心显示：</th>
+                                            <th>是否在用户中心显示：</th>
                                             <td>
                                                 <label class="label-group"><input type="radio" <?php if (empty($model['setting']['form']['member'])) {?>checked<?php }?> value="0" name="setting[form][member]">关闭</label>
                                                 <label class="label-group"><input type="radio" <?php if ($model['setting']['form']['member'] == 1) {?>checked<?php }?> value="1" name="setting[form][member]">打开</label>
-                                                <div class="show-tips">会员中心能查看到用户提交的内容</div>
+                                                <div class="show-tips">用户中心能查看到用户提交的内容</div>
                                             </td>
                                         </tr>
 
                                         <tr>
-                                            <th>同一会员（游客）提交一次：</th>
+                                            <th>同一用户（游客）提交一次：</th>
                                             <td>
                                                 <label class="label-group"><input type="radio" <?php if ($model['setting']['form']['num'] == 1) {?>checked<?php }?> value="1" name="setting[form][num]">一次</label>
                                             </td>
@@ -97,7 +97,7 @@
                                             <th>表单自定义字段：<?php echo $t['name']; ?>: </th>
                                             <td>
                                                 <label class="label-group"><input type="checkbox" value="<?php echo $t['field']; ?>" name="setting[form][show][]" <?php if (@in_array($t['field'], $model['setting']['form']['show'])) {?>checked<?php }?>>在后台管理列表显示</label>
-                                                <label class="label-group"><input type="checkbox" value="<?php echo $t['field']; ?>" name="setting[form][membershow][]" <?php if (@in_array($t['field'], $model['setting']['form']['membershow'])) {?>checked<?php }?>>在会员中心管理列表显示</label>
+                                                <label class="label-group"><input type="checkbox" value="<?php echo $t['field']; ?>" name="setting[form][membershow][]" <?php if (@in_array($t['field'], $model['setting']['form']['membershow'])) {?>checked<?php }?>>在用户中心管理列表显示</label>
                                             </td>
                                         </tr>
                                         <?php }}?>
@@ -130,4 +130,4 @@
     </div>
 </div>
 
-<?php include $this->admin_view('footer');?>
+<?php include $this->views('admin/footer');?>

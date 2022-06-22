@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -67,7 +67,8 @@ class CategoryController extends Admin
         </tr>";
         $tree->init($categorys);
         $categorys = $tree->get_tree(0, $str);
-        include $this->admin_view('category/list');
+        $msg = '';
+        include $this->views('admin/category/list');
     }
 
     /**
@@ -141,6 +142,29 @@ class CategoryController extends Admin
                 $this->category->url($result, getCaturl($data));
                 $this->show_message($this->getCacheCode('category') . '添加成功', 1, url('admin/category/index'));
             }
+        } else {
+            $msg = '';
+            $data = array(
+                'catname' => '',
+                'catpath' => '',
+                'typeid' => '',
+                'modelid' => '',
+                'categorytpl' => '',
+                'listtpl' => '',
+                'showtpl' => '',
+                'searchtpl' => '',
+                'msgtpl' => '',
+                'http' => '',
+                'islook' => '',
+                'ispost' => '',
+                'verify' => '',
+                'isnewtab' => '',
+                'pagesize' => '',
+                'image' => '',
+                'seo_title' => '',
+                'seo_keywords' => '',
+                'seo_description' => ''
+            );
         }
         $content_model = get_cache('contentmodel');
         $page_model = get_cache('pagemodel');
@@ -165,7 +189,7 @@ class CategoryController extends Admin
         $tree->init($category_select);
         $category_select = $tree->get_tree_category(0, $str, '2', $catid);
 
-        include $this->admin_view('category/add');
+        include $this->views('admin/category/add');
     }
 
     /**
@@ -191,7 +215,7 @@ class CategoryController extends Admin
             if ($this->category->check_catpath($catid, $data['catpath'])) {
                 $this->show_message('栏目路径为空或者已经存在');
             }
-            $data['typeid'] = $this->post('typeid');
+            // $data['typeid'] = $this->post('typeid');
             $result = $this->category->set($catid, $data);
             if (is_numeric($result)) {
                 $html = '<script type="text/javascript">parent.document.getElementById("leftMain").src ="' . url("admin/content/category") . '";</script>';
@@ -219,7 +243,7 @@ class CategoryController extends Admin
         $str = "<option value='\$catid' \$selected>\$spacer \$catname</option>";
         $tree->init($category_select);
         $category_select = $tree->get_tree_category(0, $str, '2', $data['parentid']);
-        include $this->admin_view('category/add');
+        include $this->views('admin/category/add');
     }
 
     /**

@@ -1,6 +1,6 @@
-<?php include $this->admin_view('header'); ?>
-<?php include $this->admin_view('navbar'); ?>
-<?php include $this->admin_view('common/msg');?>
+<?php include $this->views('admin/header'); ?>
+<?php include $this->views('admin/navbar'); ?>
+<?php include $this->views('admin/common/msg');?>
 
 <div class="container-fluid">
     <div class="row">
@@ -8,9 +8,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading">模型类型</div>
                 <div class="list-group">
-                    <?php foreach ($modelTypeName as $key => $value) { ?>
-                        <a class="list-group-item <?php if ($typeid == $key) {echo 'active';} ?>" href="<?php echo url('admin/model/index', array('typeid' => $key)); ?>"><?php echo $value; ?></a>
-                    <?php } ?>
                     <a class="list-group-item" href="<?php echo url('admin/model/add', array('typeid' => $typeid)); ?>">添加<?php echo $modelname ? $modelname : '模型'; ?></a>
                     <a class="list-group-item" href="<?php echo url('admin/model/cache'); ?>">更新缓存</a>
                 </div>
@@ -23,6 +20,11 @@
                     <div class="pull-right">
                         <a class="btn btn-default btn-xs" href="<?php echo url('admin/model/add', array('typeid' => $typeid)); ?>">添加<?php echo $modelname ? $modelname : '模型'; ?></a>
                     </div>
+                </div>
+                <div class="panel-body">
+                    <?php foreach ($modelTypeName as $key => $value) { ?>
+                        <a class="btn btn-sm <?php echo $typeid == $key ? 'btn-success' : 'btn-default'; ?>" href="<?php echo url('admin/model/index', array('typeid' => $key)); ?>"><?php echo $value; ?></a>
+                    <?php } ?>
                 </div>
                 <table class="table table-bordered table-hover" width="100%">
                     <thead>
@@ -50,8 +52,10 @@
                                     <td>
                                         <a href="<?php echo url('admin/model/fields', array('typeid' => $typeid, 'modelid' => $t['modelid'])); ?>">字段管理</a>
                                         <a href="<?php echo url('admin/model/edit', array('typeid' => $typeid, 'modelid' => $t['modelid'])); ?>">编辑</a>
-                                        <a href="javascript:model_disable('<?php echo $t['modelid']; ?>', '<?php echo $disable; ?>');"><?php echo $status; ?></a>
-                                        <a href="javascript:model_delete('<?php echo $t['modelid']; ?>', '<?php echo $t['modelname']; ?>')">删除</a>
+                                        <?php if ($t['tablename'] != 'member_admin'): ?>
+                                            <a href="javascript:model_disable('<?php echo $t['modelid']; ?>', '<?php echo $disable; ?>');"><?php echo $status; ?></a>
+                                            <a href="javascript:model_delete('<?php echo $t['modelid']; ?>', '<?php echo $t['modelname']; ?>')">删除</a>
+                                        <?php endif;?>
                                     </td>
                                 </tr>
                             <?php }
@@ -99,4 +103,4 @@
     })
 </script>
 
-<?php include $this->admin_view('footer'); ?>
+<?php include $this->views('admin/footer'); ?>

@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -18,7 +18,7 @@ class AccountController extends Admin
     {
         $list = $this->account->select();
         $page_title = '系统账号管理';
-        include $this->admin_view('account/list');
+        include $this->views('admin/account/list');
     }
 
     public function addAction()
@@ -46,7 +46,7 @@ class AccountController extends Admin
         }
         $page_title = '添加账号';
         $cats = get_cache('category');
-        include $this->admin_view('account/add');
+        include $this->views('admin/account/add');
     }
 
     public function editAction()
@@ -77,7 +77,7 @@ class AccountController extends Admin
             $this->show_message('修改成功', 1);
         }
         $page_title = '修改账号';
-        include $this->admin_view('account/edit');
+        include $this->views('admin/account/edit');
     }
 
     public function delAction()
@@ -127,6 +127,6 @@ class AccountController extends Admin
         }
         $data = $this->account->find($this->userid);
         $page_title = '我的信息';
-        include $this->admin_view('account/me');
+        include $this->views('admin/account/me');
     }
 }

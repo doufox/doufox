@@ -1,4 +1,4 @@
-<?php include $this->install_view("header");?>
+<?php include $this->views("install/header");?>
 
 <script type="text/javascript">
     function $(ID) {return document.getElementById(ID);}
@@ -104,7 +104,7 @@
     </form>
     <form class="form-horizontal" action="" method="post" id="dform" onsubmit="return check();">
         <input type="hidden" name="step" value="3">
-        <?php if (!$error) {?>
+        <?php if (empty($error)) {?>
         <div class="form-group">
             <label class="col-sm-4 control-label" for="db_host">数据库主机：</label>
             <div class="col-sm-8">
@@ -168,4 +168,4 @@
     </form>
 </div>
 
-<?php include $this->install_view("footer");?>
+<?php include $this->views("install/footer");?>

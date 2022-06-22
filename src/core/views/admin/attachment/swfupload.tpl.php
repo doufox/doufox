@@ -1,4 +1,4 @@
-<?php include $this->admin_view('header');?>
+<?php include $this->views('admin/header');?>
 
 <link href="/static/swfupload/swfupload.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/static/swfupload/swfupload.js"></script>

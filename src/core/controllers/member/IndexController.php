@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -50,16 +50,16 @@ class IndexController extends Member
             'form' => $this->getFormMember(),
             'site_keywords' => $this->site_config['SITE_KEYWORDS'],
             'site_description' => $this->site_config['SITE_DESCRIPTION'],
-            'site_title' => '会员中心 - ' . $this->site_config['SITE_NAME'],
-            'page_title' => '会员中心',
+            'site_title' => '用户中心 - ' . $this->site_config['SITE_NAME'],
+            'page_title' => '用户中心',
             'page_url' => url('member/index'),
-            'page_position' => '<a href="' . url('member/index') . '" title="会员中心">会员中心</a>',
+            'page_position' => '<a href="' . url('member/index') . '" title="用户中心">用户中心</a>',
         ));
         $this->view->display('member/index.html');
     }
 
     /**
-     * 会员列表
+     * 用户列表
      */
     public function listAction()
     {
@@ -67,7 +67,7 @@ class IndexController extends Member
         $page = $page ? $page : 1;
         $mid = (int) $this->get('modelid');
         if ($mid && !isset($this->membermodel[$mid])) {
-            $this->show_message('会员模型不存在');
+            $this->show_message('用户模型不存在');
         }
 
         $this->view->assign(array(
@@ -75,10 +75,10 @@ class IndexController extends Member
             'modelid' => $mid,
             'site_keywords' => $this->site_config['SITE_KEYWORDS'],
             'site_description' => $this->site_config['SITE_DESCRIPTION'],
-            'site_title' => '会员列表 - ' . $this->site_config['SITE_NAME'],
-            'page_title' => '会员列表',
+            'site_title' => '用户列表 - ' . $this->site_config['SITE_NAME'],
+            'page_title' => '用户列表',
             'page_url' => url('member/index/list'),
-            'page_position' => '<a href="' . url('member/index/list') . '" title="会员列表">会员列表</a>',
+            'page_position' => '<a href="' . url('member/index/list') . '" title="用户列表">用户列表</a>',
         ));
         $this->view->display('list_member.html');
     }
@@ -114,7 +114,7 @@ class IndexController extends Member
             'data_fields' => $data_fields,
             'site_keywords' => $this->site_config['SITE_KEYWORDS'],
             'site_description' => $this->site_config['SITE_DESCRIPTION'],
-            'site_title' => '修改资料 - 会员中心 - ' . $this->site_config['SITE_NAME'],
+            'site_title' => '修改资料 - 用户中心 - ' . $this->site_config['SITE_NAME'],
             'page_title' => '修改资料',
             'page_url' => url('member/index/edit'),
             'page_position' => '<a href="' . url('member/index/edit') . '" title="修改资料">修改资料</a>',
@@ -143,7 +143,7 @@ class IndexController extends Member
         $this->view->assign(array(
             'site_keywords' => $this->site_config['SITE_KEYWORDS'],
             'site_description' => $this->site_config['SITE_DESCRIPTION'],
-            'site_title' => '修改密码 - 会员中心 - ' . $this->site_config['SITE_NAME'],
+            'site_title' => '修改密码 - 用户中心 - ' . $this->site_config['SITE_NAME'],
             'page_title' => '修改密码',
             'page_url' => url('member/index/password'),
             'page_position' => '<a href="' . url('member/index/password') . '" title="修改密码">修改密码</a>',

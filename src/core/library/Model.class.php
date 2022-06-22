@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_CMS')) {
+if (!defined('IN_CRONLITE')) {
     exit();
 }
 
@@ -14,6 +14,7 @@ abstract class Model
     protected $table_field;
     protected $field_type;
     protected $db;
+    protected $myrow;
     protected $_parts;
     public $primary_key;
     public $cache_dir;
@@ -40,7 +41,7 @@ abstract class Model
         $this->dbname = $params['dbname'];
         $params['charset'] = ($params['charset']) ? trim($params['charset']) : 'utf8';
         $this->prefix = ($params['prefix']) ? trim($params['prefix']) : '';
-        $this->cache_dir = DATA_PATH . 'models' . DS;
+        $this->cache_dir = DATA_PATH . DS .'models' . DS;
         core::load_class('mysql', '', 0);
         $this->db = mysql::getInstance($params);
 
@@ -169,7 +170,7 @@ abstract class Model
             'fields' => $this->table_field,
             'types' => $this->field_type,
         );
-        $cache_content = "<?php\r\nif (!defined('IN_CMS')) exit();\r\nreturn " . var_export($cache_data_array, true) . ";";
+        $cache_content = "<?php\r\nif (!defined('IN_CRONLITE')) exit();\r\nreturn " . var_export($cache_data_array, true) . ";";
         // 分析model缓存文件目录
         if (!is_dir($this->cache_dir)) {
             // 生成目录
