@@ -5,7 +5,7 @@
  */
 
 if (!defined('IN_CRONLITE')) {
-    exit();
+    exit('Access Deined!');
 }
 
 abstract class Controller
@@ -156,11 +156,7 @@ abstract class Controller
      */
     protected function is_logged()
     {
-        if ($this->memberinfo && isset($this->memberinfo['id'])) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->memberinfo && isset($this->memberinfo['id']);
     }
 
     /**

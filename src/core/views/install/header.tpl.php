@@ -16,6 +16,7 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico"/>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" mce_href="/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
     <style type="text/css">
         .container {
             max-width: 460px;

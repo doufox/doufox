@@ -21,28 +21,28 @@ CREATE TABLE IF NOT EXISTS `doufox_category` (
   `arrchildid` VARCHAR(255) NOT NULL,
   `catname` VARCHAR(30) NOT NULL,
   `catpath` VARCHAR(30) NOT NULL,
-  `image` VARCHAR(100) NOT NULL,
+  `image` VARCHAR(100) NOT NULL DEFAULT '',
   `content` mediumtext NOT NULL,
-  `seo_title` VARCHAR(255) NOT NULL,
-  `seo_keywords` VARCHAR(255) NOT NULL,
-  `seo_description` VARCHAR(255) NOT NULL,
+  `seo_title` VARCHAR(255) NOT NULL DEFAULT '',
+  `seo_keywords` VARCHAR(255) NOT NULL DEFAULT '',
+  `seo_description` VARCHAR(255) NOT NULL DEFAULT '',
   `url` VARCHAR(100) NOT NULL,
-  `http` VARCHAR(255) NOT NULL,
+  `http` VARCHAR(255) NOT NULL DEFAULT '',
   `items` mediumint(8) UNSIGNED NOT NULL DEFAULT '0',
   `listorder` SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0',
   `ismenu` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' COMMENT '作为菜单显示在导航栏',
   `isnewtab` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '打开方式0当前页打开1新窗口打开',
   `redirect` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '0确认页跳转1直接跳转',
-  `ispost` SMALLINT(2) NOT NULL COMMENT '是否可投稿',
+  `ispost` SMALLINT(2) NOT NULL DEFAULT '0' COMMENT '是否可投稿',
   `verify` SMALLINT(2) NOT NULL DEFAULT '0',
-  `islook` SMALLINT(2) NOT NULL,
+  `islook` SMALLINT(2) NOT NULL DEFAULT '0',
   `categorytpl` VARCHAR(50) NOT NULL COMMENT '内部栏目模板',
   `listtpl` VARCHAR(50) NOT NULL COMMENT '文章列表模板',
   `showtpl` VARCHAR(50) NOT NULL COMMENT '文章模板',
   `searchtpl` VARCHAR(50) NOT NULL COMMENT '搜索页模板',
   `pagetpl` VARCHAR(50) NOT NULL COMMENT '内部页面模板',
-  `msgtpl` VARCHAR(50) NOT NULL COMMENT '消息页面模板',
-  `pagesize` SMALLINT(5) NOT NULL COMMENT '默认列表尺寸',
+  `msgtpl` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '消息页面模板',
+  `pagesize` SMALLINT(5) NOT NULL DEFAULT '10' COMMENT '默认列表尺寸',
   `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
   `time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`catid`),
@@ -51,6 +51,10 @@ CREATE TABLE IF NOT EXISTS `doufox_category` (
   KEY `parentid` (`parentid`),
   KEY `modelid` (`modelid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO `doufox_category` (`catid`, `typeid`, `modelid`, `parentid`, `arrparentid`, `child`, `arrchildid`, `catname`, `catpath`, `content`, `url`, `ispost`, `islook`, `categorytpl`, `listtpl`, `showtpl`, `searchtpl`, `pagetpl`, `msgtpl`)
+VALUES (1, 1, 1, 0, '1', 0, '', '最新动态', 'news', '', '/index.php?c=index&a=category&catid=1', 0, 0, 'category_article.html', 'list_article.html', 'show_article.html', 'search.html', 'page.html', 'msg.html');
+
 
 DROP TABLE IF EXISTS `doufox_content`;
 CREATE TABLE IF NOT EXISTS `doufox_content` (

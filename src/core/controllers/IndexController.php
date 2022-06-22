@@ -1,6 +1,6 @@
 <?php
 if (!defined('IN_CRONLITE')) {
-    exit();
+    exit('Access Deined!');
 }
 
 class IndexController extends Controller

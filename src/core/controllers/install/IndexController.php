@@ -6,7 +6,7 @@ if (!defined('IN_CRONLITE')) {
 /**
  * 系统安装模块
  */
-class InstallController
+class IndexController
 {
     public $status; // 状态
 
@@ -120,7 +120,10 @@ class InstallController
                 $sql = str_replace('doufox_', $ttb_pre, $sql);
                 // 超级管理员默认帐号密码
                 $sql = preg_replace("/\s*'admin'\s*,\s*'c3284d0f94606de1fd2af172aba15bf3'/", " '" . $username . "', '" . md5(md5($password)) . "'", $sql);
-                $this->installsql($sql);
+                $time = time();
+                $this->installsql($sql, $time);
+                // 展示安装成功页
+                $time = md5($time); // 成功页验证时间戳
                 include $this->views('install/3');
                 break;
             case 'db_test': // 测试连接
@@ -162,7 +165,7 @@ class InstallController
     }
 
     // 执行sql语句
-    private function installsql($sql)
+    private function installsql($sql, $time)
     {
         $sql = str_replace("\r", "\n", $sql);
         $ret = array();
@@ -182,7 +185,7 @@ class InstallController
                 mysql_query($query) or die(exit('数据导入出错<hr>' . mysql_error() . '<br>SQL语句：<br>' . $query));
             }
         }
-        file_put_contents(DATA_PATH . DS .'installed', time());
+        file_put_contents(DATA_PATH . DS .'installed', $time);
     }
 
     /** 加载视图模板文件，系统内置默认模板
