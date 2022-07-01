@@ -1,5 +1,5 @@
 # 相关程序生成的文件
-/src/data/cache
+cache/
 /src/data/config/database.ini.php
 /src/data/session
 /src/data/models

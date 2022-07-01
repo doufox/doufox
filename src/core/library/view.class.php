@@ -17,9 +17,10 @@ class view
 
     public function __construct()
     {
+        // 模板路径
         $this->view_dir = THEME_PATH . DS;
         // 编译主题模板生成的文件路径
-        $this->compile_dir = DATA_PATH . DS . 'cache' . DS . 'theme' . DS;
+        $this->compile_dir = CACHE_PATH . DS . 'theme' . DS;
     }
 
     /**
@@ -481,7 +482,7 @@ class view
         //     extract($this->_options, EXTR_PREFIX_SAME, 'data');
         //     $this->_options = array();
         // }
-        $view_file = DATA_PATH . DS .'cache' . DS . 'page_' . $file_name . '.cache.php';
+        $view_file = CACHE_PATH . DS . 'page_' . $file_name . '.cache.php';
         // $this->create_compile_file($view_file, $view_content);
         // $compile_file = $this->get_compile_file($file_name);
         // if ($this->is_compile($view_file, $compile_file)) {

@@ -21,6 +21,7 @@ define('THEME_DIR', 'theme'); // 主题模板文件夹
 // 路径
 define('CORE_PATH', dirname(__FILE__)); // 核心模块路径
 define('DATA_PATH', ROOT_PATH . DS . DATA_DIR); // 数据模块路径
+define('CACHE_PATH', ROOT_PATH . DS . 'cache'); // 数据缓存路径
 define('MODEL_PATH', CORE_PATH . DS . 'models' . DS); // 数据模型路径
 define('VIEW_PATH', CORE_PATH . DS . 'views' . DS); // 视图模板路径
 define('CTRL_PATH', CORE_PATH . DS . 'controllers' . DS); // 控制器路径

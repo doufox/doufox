@@ -180,7 +180,7 @@ class TemplateController extends Admin
         $list = $file_list->get_file_list(THEME_PATH);
         // $list = array_diff($list, array('index.html'));
         foreach ($list as $file_path) {
-            $dir = DATA_PATH . DS .'cache' . DS . THEME_DIR . DS . $file_path . DS;
+            $dir = CACHE_PATH . DS . THEME_DIR . DS . $file_path . DS;
             $file_list->delete_dir($dir);
             if (!file_exists($dir)) {
                 mkdir($dir, 0777, true);

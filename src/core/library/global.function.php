@@ -751,15 +751,15 @@ function set_cache($cache_file, $value)
     }
 
     // 缓存文件
-    $cache_file = DATA_PATH . DS .'cache' . DS . $cache_file . '.cache.php';
+    $cache_file = CACHE_PATH . DS . $cache_file . '.cache.php';
     // 分析缓存内容
     $value = (!is_array($value)) ? serialize(trim($value)) : serialize($value);
     // 分析缓存目录
-    if (!is_dir(DATA_PATH . DS .'cache' . DS)) {
-        mkdir(DATA_PATH . DS .'cache' . DS, 0777);
+    if (!is_dir(CACHE_PATH . DS)) {
+        mkdir(CACHE_PATH . DS, 0777);
     } else {
-        if (!is_writeable(DATA_PATH . DS .'cache' . DS)) {
-            chmod(DATA_PATH . DS .'cache' . DS, 0777);
+        if (!is_writeable(CACHE_PATH . DS)) {
+            chmod(CACHE_PATH . DS, 0777);
         }
     }
     return file_put_contents($cache_file, $value, LOCK_EX) ? true : false;
@@ -778,7 +778,7 @@ function get_cache($cache_file)
     }
 
     // 缓存文件
-    $cache_file = DATA_PATH . DS .'cache' . DS . $cache_file . '.cache.php';
+    $cache_file = CACHE_PATH . DS . $cache_file . '.cache.php';
     if (is_file($cache_file)) {
         return unserialize(file_get_contents($cache_file));
     }
@@ -798,7 +798,7 @@ function delete_cache($cache_file)
     }
 
     // 缓存文件
-    $cache_file = DATA_PATH . DS .'cache' . DS . $cache_file . '.cache.php';
+    $cache_file = CACHE_PATH . DS . $cache_file . '.cache.php';
     return is_file($cache_file) ? unlink($cache_file) : true;
 }
 
