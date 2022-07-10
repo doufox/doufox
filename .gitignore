@@ -1,8 +1,6 @@
 # 相关程序生成的文件
 cache/
 /src/data/config/database.ini.php
-/src/data/session
-/src/data/models
 # 测试
 test
 

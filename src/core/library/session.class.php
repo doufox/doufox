@@ -48,7 +48,7 @@ class Session
         }
 
         // 设置项目系统session的存放目录
-        $sessionPath = DATA_PATH . DS .'session' . DS;
+        $sessionPath = CACHE_PATH . DS .'session' . DS;
         if (is_dir($sessionPath) && is_writable($sessionPath)) {
             session_save_path($sessionPath);
         }

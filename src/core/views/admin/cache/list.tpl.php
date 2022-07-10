@@ -29,7 +29,7 @@
                         <tr>
                             <th>#</th>
                             <th>类型</th>
-                            <th>路径</th>
+                            <th>文件</th>
                             <th>大小</th>
                             <th>生成时间</th>
                             <th>更新时间</th>
@@ -41,7 +41,7 @@
                             <tr>
                                 <td><?php echo $v['index']; ?></td>
                                 <td><?php echo $v['desc']; ?></td>
-                                <td>/data/cache/<?php echo $v['name']; ?></td>
+                                <td><?php echo $v['name']; ?></td>
                                 <td><?php echo $v['size'] ?></td>
                                 <td><?php echo $v['ctime']; ?></td>
                                 <td><?php echo $v['mtime']; ?></td>
@@ -52,7 +52,7 @@
                         <?php } ?>
                     </tbody>
                 </table>
-                <div class="panel-body">缓存目录：/data/cache/</div>
+                <div class="panel-body">缓存目录：/cache/</div>
             </div>
         </div>
     </div>

@@ -27,7 +27,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>文件(存储位置：/data/session)</th>
+                            <th>文件</th>
                             <th>大小</th>
                             <th>创建时间</th>
                             <th>更新时间</th>
@@ -45,7 +45,7 @@
                         <?php } ?>
                     </tbody>
                 </table>
-                <div class="panel-body"></div>
+                <div class="panel-body">存储位置：/cache/session/</div>
             </div>
         </div>
     </div>

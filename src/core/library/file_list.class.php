@@ -74,7 +74,7 @@ class file_list
 
         $handle = opendir($dir);
         $files = array();
-        $filter = array_merge(array('.', '..', '.cvs', '.svn'), $filter);
+        $filter = array_merge(array('.', '..', '.cvs', '.svn', '.git'), $filter);
 
         while (false !== ($file = readdir($handle))) {
             // filter some files
