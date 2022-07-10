@@ -1,8 +1,9 @@
 # 相关程序生成的文件
-cache/
+/src/cache/*
 /src/data/config/database.ini.php
 # 测试
-test
+/test/
+!/**/**/index.html
 
 # 开发工具文件
 .project
