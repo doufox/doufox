@@ -27,6 +27,7 @@
                     <a class="list-group-item" href="<?php echo url('admin/config/attachment'); ?>">附件设置</a>
                     <a class="list-group-item" href="<?php echo url('admin/config/weixin'); ?>">微信公众号</a>
                     <a class="list-group-item" href="<?php echo url('admin/config/security'); ?>">安全设置</a>
+                    <a class="list-group-item" href="<?php echo url('admin/config/robots'); ?>">Robots</a>
                     <a class="list-group-item" href="<?php echo url('admin/config/database'); ?>">数据库</a>
                 </div>
             </div>

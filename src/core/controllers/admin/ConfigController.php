@@ -99,37 +99,28 @@ class ConfigController extends Admin
     }
 
     /**
-     * 本地管理员帐号
-     * 已废弃，暂不用
+     * Robots 爬虫规则设置
      */
-    public function localadminAction()
+    public function robotsAction()
     {
-        // 获取管理员配置
-        $admin = core::load_config('admin');
+        // 文件路径
+        $file = ROOT_PATH . DS .'robots.txt';
+        // 提交的数据
         if ($this->isPostForm()) {
-            $configdata = $this->post('data');
-            $configdata['RAND_CODE'] = md5(microtime());
-
-            // 本地管理员账号
-            $postadmin = $this->post('admin');
-            if (empty($postadmin['ADMIN_PASS'])) {
-                $postadmin['ADMIN_PASS'] = $admin['ADMIN_PASS'];
-            } else {
-                $postadmin['ADMIN_PASS'] = md5(md5($postadmin['ADMIN_PASS']));
-            }
-            $admin_content = "<?php" . PHP_EOL . "if (!defined('IN_CRONLITE')) exit();" . PHP_EOL . "return array(" . PHP_EOL;
-            $adminsystem = array();
-            foreach ($postadmin as $k => $val) {
-                if (!in_array($k, $adminsystem)) {
-                    $value = $val == 'false' || $val == 'true' ? $val : "'" . $val . "'";
-                    $admin_content .= "    '" . strtoupper($k) . "'" . $this->setspace($k) . " => " . $value . ", " . PHP_EOL;
-                }
-            }
-            $admin_content .= PHP_EOL . ");";
-            file_put_contents(DATA_PATH . DS .'config' . DS . 'admin.ini.php', $admin_content);
-            $this->show_message('修改成功', 1, url('admin/config/admin'));
+            $post_data = $this->post('data');
+            file_put_contents($file, $post_data);
+            $this->show_message('修改成功', 1, url('admin/config/robots'));
         }
-        include $this->views('admin/config');
+        $data = array(
+            'robots' => ''
+        );
+        // 获取当前配置信息
+        if (is_file($file)) {
+            $data['robots'] = file_get_contents($file);
+        }
+
+        // 加载视图
+        include $this->views('admin/config/robots');
     }
 
     /**
