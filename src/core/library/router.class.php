@@ -65,7 +65,7 @@ class router
                     }
                 } else if ($this->isController('', $URI[0])) {
                     $controller = $URI[0];
-                    if ($URI[0] != 'theme' && $URI[0] != 'static') {
+                    if ($URI[0] != 'template' && $URI[0] != 'static') {
                         $action = $URI[1];
                     }
                 } else {
@@ -148,13 +148,13 @@ class router
 // }
 // // $controller_name = trim((isset($url_info_array['c']) && $url_info_array['c']) ? $url_info_array['c'] : 'Index');
 // if (isset(self::$pathinfo[1])) {
-//     if (self::$pathinfo[1] == DATA_DIR || self::$pathinfo[1] == CORE_DIR) {
+//     if (self::$pathinfo[1] == DIR_DATA || self::$pathinfo[1] == DIR_CORE) {
 //         header("HTTP/1.0 403 Forbidden");
 //         exit();
 //     } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == STATIC_DIR) {
 //         $controller_name = STATIC_DIR; // 静态资源
-//     } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == 'theme') {
-//         $controller_name = 'theme'; // 主题资源
+//     } else if (isset(self::$pathinfo[1]) && self::$pathinfo[1] == 'template') {
+//         $controller_name = 'template'; // 主题资源
 //     }
 // } else if (isset($url_info_array['c']) && $url_info_array['c']) {
 //     $controller_name = trim($url_info_array['c']);

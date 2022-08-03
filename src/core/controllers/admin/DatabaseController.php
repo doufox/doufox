@@ -78,7 +78,7 @@ class DatabaseController extends Admin
                     foreach ($_dir as $c) {
                         $size += filesize($dir . $path . DS . $c);
                     }
-                    $sqldir = DS . DATA_DIR . DS . 'bakup' . DS . $path . DS;
+                    $sqldir = DS . DIR_DATA . DS . 'bakup' . DS . $path . DS;
                     $list[] = array('path' => $path, 'size' => formatFileSize($size, 2), 'sqldir' => $sqldir);
                     clearstatcache();
                 }

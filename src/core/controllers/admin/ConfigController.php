@@ -71,7 +71,7 @@ class ConfigController extends Admin
         $file_list = core::load_class('file_list');
         $arr = $file_list->get_file_list(THEME_PATH);
         // 主题文件夹列表
-        $theme = array_diff($arr, array('index.html'));
+        $template = array_diff($arr, array('index.html'));
         unset($arr, $file_list);
         $msg = $this->msg_result;
         include $this->views('admin/config/index');

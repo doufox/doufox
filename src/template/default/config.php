@@ -1,11 +1,11 @@
 <?php return array (
   'file_explan' => 
   array (
-    'theme|bootstrap|' => 
+    'template|default|' => 
     array (
       'css' => '样式',
       'img' => '图片',
-      'member' => '用户中心模板',
+      'member' => '会员中心模板',
       'banner.html' => '横幅图片模板',
       'bookmark_category.html' => '书签栏目模板',
       'bookmark_list.html' => '书签列表模板',
@@ -14,7 +14,7 @@
       'category_download.html' => '下载栏目模板',
       'category_product.html' => '产品栏目模板',
       'config.php' => '模板备注文件',
-      'breadcrumb.html' => '导航栏',
+      'crumbs.html' => '导航栏',
       'footer.html' => '通用底部模板',
       'form.html' => '表单模板',
       'header.html' => '通用头部模板',
@@ -31,11 +31,11 @@
       'show_product.html' => '产品内容展示模板',
       'sidebar.html' => '内页左侧模板',
     ),
-    'theme|bootstrap|css|' => 
+    'template|default|css|' => 
     array (
       'style.css' => '公共样式',
     ),
-    'theme|bootstrap|member|' => 
+    'template|default|member|' => 
     array (
       'content_add.html' => '添加内容',
       'content_list.html' => '内容列表',

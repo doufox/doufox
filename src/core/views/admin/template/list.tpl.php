@@ -33,10 +33,10 @@
                                     <div class="thumbnail">
                                         <img src="<?php echo $v['image']; ?>" alt="模板预览图">
                                         <div class="caption">
-                                            <h3><?php echo $v['theme']; ?></h3>
+                                            <h3><?php echo $v['template']; ?></h3>
                                             <p>
-                                                <a href="<?php echo url('admin/template/item', array('theme' => $v['theme'])); ?>" class="btn btn-primary btn-sm" role="button">详情</a>
-                                                <a href="<?php echo url('index', array('template' => $v['theme'])); ?>" class="btn btn-default btn-sm" role="button">启用</a>
+                                                <a href="<?php echo url('admin/template/item', array('template' => $v['template'])); ?>" class="btn btn-primary btn-sm" role="button">详情</a>
+                                                <a href="<?php echo url('index', array('template' => $v['template'])); ?>" class="btn btn-default btn-sm" role="button">启用</a>
                                                 <a href="#" class="btn btn-danger btn-sm" role="button">删除</a>
                                             </p>
                                         </div>

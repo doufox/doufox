@@ -11,7 +11,7 @@
                 </div>
                 <div class="list-group">
                     <a class="list-group-item active" href="<?php echo url('admin/template/index'); ?>">模板管理</a>
-                    <a class="list-group-item" href="<?php echo url('admin/template/add', array('theme' => urldecode($theme), 'dir' => urldecode($dir))); ?>">添加模板</a>
+                    <a class="list-group-item" href="<?php echo url('admin/template/add', array('template' => urldecode($template), 'dir' => urldecode($dir))); ?>">添加模板</a>
                     <a class="list-group-item" href="<?php echo url('admin/template/cache'); ?>">更新缓存</a>
                 </div>
             </div>
@@ -29,8 +29,8 @@
                         <div class="form form-inline">
                             <select class="form-control" onchange="window.location.href = this.options[this.selectedIndex].value;">
                                 <option disabled>==切换主题==</option>
-                                <?php foreach ($theme_list as $v) { ?>
-                                    <option <?php echo $v == $theme ? 'selected' : ''; ?> value="<?php echo url('admin/template/item', array('theme' => $v)); ?>"><?php echo ucfirst($v); ?></option>
+                                <?php foreach ($template_list as $v) { ?>
+                                    <option <?php echo $v == $template ? 'selected' : ''; ?> value="<?php echo url('admin/template/item', array('template' => $v)); ?>"><?php echo ucfirst($v); ?></option>
                                 <?php } ?>
                             </select>
                             <?php if ($dir != '/') { ?>
@@ -56,9 +56,9 @@
                                     $filename = basename($v);
                                     if (is_dir($v)) {
                                         echo '<tr>';
-                                        echo '<td><img src="/static/img/folder-closed.gif" /> <a href="' . url('admin/template/item', array('theme' => urldecode($theme), 'dir' => urldecode($dir . $filename . DS))) . '">' . $filename . '</a></td>';
+                                        echo '<td><img src="/static/img/folder-closed.gif" /> <a href="' . url('admin/template/item', array('template' => urldecode($template), 'dir' => urldecode($dir . $filename . DS))) . '">' . $filename . '</a></td>';
                                         echo '<td><input type="text" class="form-control input-sm" name="file_explan[' . $encode_local . '][' . $filename . ']" value="' . (isset($file_explan[$encode_local][$filename]) ? $file_explan[$encode_local][$filename] : "") . '"></td>';
-                                        echo '<td><a class="btn btn-default btn-sm" href="' . url('admin/template/item', array('theme' => urldecode($theme), 'dir' => urldecode($dir . $filename . DS))) . '"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>';
+                                        echo '<td><a class="btn btn-default btn-sm" href="' . url('admin/template/item', array('template' => urldecode($template), 'dir' => urldecode($dir . $filename . DS))) . '"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>';
                                         echo '</tr>';
                                     }
                                 endforeach;
@@ -70,7 +70,7 @@
                                         echo '<td><input type="text" class="form-control input-sm" name="file_explan[' . $encode_local . '][' . $filename . ']" value="' . (isset($file_explan[$encode_local][$filename]) ? $file_explan[$encode_local][$filename] : "") . '"></td>';
                                         $ext = strtolower(trim(substr(strrchr($filename, '.'), 1, 10)));
                                         if (in_array($ext, array('html', 'css', 'js', 'txt'))) {
-                                            echo '<td> <a class="btn btn-default btn-sm" href="' . url('admin/template/edit', array('theme' => urldecode($theme), 'dir' => urldecode($dir), 'file' => urldecode($filename))) . '"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>';
+                                            echo '<td> <a class="btn btn-default btn-sm" href="' . url('admin/template/edit', array('template' => urldecode($template), 'dir' => urldecode($dir), 'file' => urldecode($filename))) . '"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>';
                                         } else {
                                             echo '<td></td>';
                                         }

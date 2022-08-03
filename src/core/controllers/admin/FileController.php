@@ -23,7 +23,7 @@ class FileController extends Admin
         // foreach ($path_list as $x) {
         //     $list[] = array(
         //         'path' => $x,
-        //         'image' => THEME_DIR . DS . $x . DS . 'preview.png',
+        //         'image' => DIR_TEMPLATE . DS . $x . DS . 'preview.png',
         //     );
         // }
         // unset($file_list, $path_list);

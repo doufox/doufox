@@ -6,7 +6,7 @@ if (!defined('IN_CRONLITE')) {
 /**
  * 主题文件加载
  */
-class ThemeController
+class TemplateController
 {
     public static $pathinfo;
 
@@ -17,7 +17,7 @@ class ThemeController
     {
         $path = explode('?', $_SERVER['REQUEST_URI']);
         $file = $path[0];
-        $file = strtr($file, array('/theme' => ''));
+        $file = strtr($file, array('/template' => ''));
         $file_real_path = THEME_PATH . DS . $file;
         if (!file_exists($file_real_path) || !is_file($file_real_path)) {
             header("HTTP/1.0 404 Not Found");

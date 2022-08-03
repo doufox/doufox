@@ -59,7 +59,7 @@ class CacheController extends Admin
                 'controller' => 'model',
                 'title' => '单页模型'
             ),
-            'theme' => array(
+            'template' => array(
                 'controller' => 'template',
                 'title' => '主题'
             ),

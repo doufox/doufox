@@ -13,14 +13,14 @@ class view
     public $view_dir;
     public $compile_dir;
     public $_options = array();
-    public $theme;
+    public $template;
 
     public function __construct()
     {
         // 模板路径
         $this->view_dir = THEME_PATH . DS;
         // 编译主题模板生成的文件路径
-        $this->compile_dir = CACHE_PATH . DS . 'theme' . DS;
+        $this->compile_dir = CACHE_PATH . DS . DIR_TEMPLATE . DS;
     }
 
     /**

@@ -19,7 +19,7 @@ class IndexController
             exit();
         }
         if (!is_writable(DATA_PATH)) {
-            exit('系统数据目录（/' . DATA_DIR . '/）没有读写权限, 安装程序无法进行 !');
+            exit('系统数据目录（/' . DIR_DATA . '/）没有读写权限, 安装程序无法进行 !');
         }
     }
 

@@ -20,7 +20,7 @@
                 </div>
                 <div class="list-group">
                     <a class="list-group-item" href="<?php echo url('admin/template/index'); ?>">模板管理</a>
-                    <a class="list-group-item active" href="<?php echo url('admin/template/add', array('theme' => urldecode($theme), 'dir' => urldecode($dir))); ?>">添加模板</a>
+                    <a class="list-group-item active" href="<?php echo url('admin/template/add', array('template' => urldecode($template), 'dir' => urldecode($dir))); ?>">添加模板</a>
                     <a class="list-group-item" href="<?php echo url('admin/template/cache'); ?>">更新缓存</a>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                                     <input type="text" class="form-control" size="20" readonly value="<?php echo $cur_path; ?>" placeholder="当前位置" />
                                 </span>
                             <?php else: ?>
-                                <a class="btn btn-default" href="<?php echo url('admin/template/item', array('theme' => urldecode($theme), 'dir' => urldecode($dir))); ?>">
+                                <a class="btn btn-default" href="<?php echo url('admin/template/item', array('template' => urldecode($template), 'dir' => urldecode($dir))); ?>">
                                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 返回
                                 </a>
                                 <span class="input-group">
