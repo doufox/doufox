@@ -42,7 +42,7 @@ function url($route, $params = null)
     // $count = count($arr);
     $config = core::get_site_config();
     $url = '';
-    if (is_dir(CTRL_PATH . $arr[0])) {
+    if (is_dir(PATH_CONTROLER . $arr[0])) {
         if (!empty($config['ADMIN_LOGINPATH']) && $arr[0] == 'admin') {
             // 拼接为自定义路径
             $url .= '?s=' . strtolower($config['ADMIN_LOGINPATH']);
@@ -184,11 +184,11 @@ function thumb($img, $width = null, $height = null)
         return HTTP_URL . '/static/img/nopic.gif';
     }
 
-    if (file_exists(ROOT_PATH . DS . $img)) {
+    if (file_exists(PATH_ROOT . DS . $img)) {
         $ext = substr(strrchr(trim($img), '.'), 1);
-        if ($width && $height && file_exists(ROOT_PATH . DS . $img)) {
+        if ($width && $height && file_exists(PATH_ROOT . DS . $img)) {
             $thumb = $img . '.thumb.' . $width . 'x' . $height . '.' . $ext;
-            if (!file_exists(ROOT_PATH . DS . $thumb)) {
+            if (!file_exists(PATH_ROOT . DS . $thumb)) {
                 $image = core::load_class('image_lib');
                 $image->set_image_size($width, $height)->make_limit_image($img, $thumb);
             }
@@ -198,7 +198,7 @@ function thumb($img, $width = null, $height = null)
         if ($config['SITE_THUMB_WIDTH'] && $config['SITE_THUMB_HEIGHT']) {
             $thumb = $img . '.thumb.' . $config['SITE_THUMB_WIDTH'] . 'x' . $config['SITE_THUMB_HEIGHT'] . '.' . $ext;
             unset($config);
-            if (file_exists(ROOT_PATH . DS . $thumb)) {
+            if (file_exists(PATH_ROOT . DS . $thumb)) {
                 return image($thumb);
             }
         }
@@ -751,15 +751,15 @@ function set_cache($cache_file, $value)
     }
 
     // 缓存文件
-    $cache_file = CACHE_PATH . DS . $cache_file . '.cache.php';
+    $cache_file = PATH_CACHE . DS . $cache_file . '.cache.php';
     // 分析缓存内容
     $value = (!is_array($value)) ? serialize(trim($value)) : serialize($value);
     // 分析缓存目录
-    if (!is_dir(CACHE_PATH . DS)) {
-        mkdir(CACHE_PATH . DS, 0777);
+    if (!is_dir(PATH_CACHE . DS)) {
+        mkdir(PATH_CACHE . DS, 0777);
     } else {
-        if (!is_writeable(CACHE_PATH . DS)) {
-            chmod(CACHE_PATH . DS, 0777);
+        if (!is_writeable(PATH_CACHE . DS)) {
+            chmod(PATH_CACHE . DS, 0777);
         }
     }
     return file_put_contents($cache_file, $value, LOCK_EX) ? true : false;
@@ -778,7 +778,7 @@ function get_cache($cache_file)
     }
 
     // 缓存文件
-    $cache_file = CACHE_PATH . DS . $cache_file . '.cache.php';
+    $cache_file = PATH_CACHE . DS . $cache_file . '.cache.php';
     if (is_file($cache_file)) {
         return unserialize(file_get_contents($cache_file));
     }
@@ -798,7 +798,7 @@ function delete_cache($cache_file)
     }
 
     // 缓存文件
-    $cache_file = CACHE_PATH . DS . $cache_file . '.cache.php';
+    $cache_file = PATH_CACHE . DS . $cache_file . '.cache.php';
     return is_file($cache_file) ? unlink($cache_file) : true;
 }
 
@@ -930,13 +930,13 @@ function doHookAction($hook)
 function getPluginFiles()
 {
     $plugin_list = array();
-    $plugin_dir = @dir(PLUGIN_PATH);
+    $plugin_dir = @dir(PATH_PLUGIN);
     if ($plugin_dir) {
         while (($file = $plugin_dir->read()) !== false) {
             if (preg_match('|^\.+$|', $file)) {
                 continue;
             }
-            $dir = PLUGIN_PATH . $file;
+            $dir = PATH_PLUGIN . $file;
             if (is_dir($dir)) {
                 $sub_dir = @dir($dir);
                 if ($sub_dir) {
@@ -966,7 +966,7 @@ function getPluginFiles()
  */
 function getPluginData($plugin)
 {
-    $file_path = PLUGIN_PATH . $plugin . DS . $plugin . '.php';
+    $file_path = PATH_PLUGIN . $plugin . DS . $plugin . '.php';
     if (!file_exists($file_path)) {
         return array();
     }
@@ -1001,7 +1001,7 @@ function getPluginData($plugin)
  */
 function checkPlugin($plugin)
 {
-    if (is_string($plugin) && preg_match("/^[\w\-\/]+\.php$/", $plugin) && file_exists(PLUGIN_PATH . $plugin)) {
+    if (is_string($plugin) && preg_match("/^[\w\-\/]+\.php$/", $plugin) && file_exists(PATH_PLUGIN . $plugin)) {
         return true;
     } else {
         return false;

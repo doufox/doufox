@@ -166,7 +166,7 @@ class image_lib
     public function __construct()
     {
         $this->font_size = 14;
-        $this->font_name = STATIC_PATH . 'fonts/elephant.ttf';
+        $this->font_name = PATH_STATIC . 'fonts/elephant.ttf';
         return true;
     }
 
@@ -571,7 +571,7 @@ class image_lib
      */
     public function make_image_watermark($source, $w_pos = null)
     {
-        $w_img = STATIC_PATH . 'watermark' . DS . 'watermark.png';
+        $w_img = PATH_STATIC . 'watermark' . DS . 'watermark.png';
         if (!(extension_loaded('gd') && preg_match("/\.(jpg|jpeg|gif|png)/i", $source, $m) && file_exists($source) && function_exists('imagecreatefrom' . ($m[1] == 'jpg' ? 'jpeg' : $m[1])))) {
             return false;
         }

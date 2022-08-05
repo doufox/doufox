@@ -14,7 +14,7 @@ class CacheController extends Controller
 
     public function __construct()
     {
-        if (!file_exists(DATA_PATH . DS .'installed')) {
+        if (!file_exists(PATH_DATA . DS .'installed')) {
             // 未安装
             http_response_code(400);
             exit();
@@ -25,7 +25,7 @@ class CacheController extends Controller
             http_response_code(403);
             exit();
         }
-        $_time = file_get_contents(DATA_PATH . DS .'installed');
+        $_time = file_get_contents(PATH_DATA . DS .'installed');
         if ($time != md5($_time)) {
             // 验证失败
             http_response_code(401);

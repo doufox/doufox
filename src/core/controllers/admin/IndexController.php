@@ -31,7 +31,7 @@ class IndexController extends Admin
         include $this->views('admin/index');
 
         // 缓存
-        if (!file_exists(CACHE_PATH . DS . "category.cache.php")) {
+        if (!file_exists(PATH_CACHE . DS . "category.cache.php")) {
             echo '<script type="text/javascript">location.href="' . url('admin/cache/update') . '";</script>';
         }
     }

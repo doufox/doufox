@@ -38,7 +38,7 @@ class SitemapController extends Admin
         }
         $xml .= '</urlset>';
         echo $xml;
-        file_put_contents(ROOT_PATH . DS . 'sitemap.xml', $xml, LOCK_EX);
+        file_put_contents(PATH_ROOT . DS . 'sitemap.xml', $xml, LOCK_EX);
 
         $this->show_message("生成<a target='_blank' href='http://{$_SERVER['HTTP_HOST']}/sitemap.xml' >sitemap.xml</a> 成功", 1, '#');
 

@@ -17,7 +17,7 @@ class Admin extends Controller
         parent::__construct();
         $this->is_admin_login();
         define('IN_ADMIN', true);
-        core::load_file(CORE_PATH . DS . 'library' . DS . 'fields.function.php');
+        core::load_file(PATH_CORE . DS . 'library' . DS . 'fields.function.php');
         $this->init_common_data();
     }
 
@@ -106,7 +106,7 @@ class Admin extends Controller
     {
         $controller = ucfirst($c) . 'Controller';
         $action = $a . 'Action';
-        $file = CTRL_PATH . 'admin' . DS . $controller . '.php';
+        $file = PATH_CONTROLER . 'admin' . DS . $controller . '.php';
         if (!file_exists($file)) {
             return false;
         }

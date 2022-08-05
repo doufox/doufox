@@ -93,20 +93,20 @@ class ContentModel extends Model
         // 删除静态文件
         $filehtml = substr($data['url'], strlen(Controller::get_base_url()));
         $filehtml = substr($filehtml, 0, 9) == 'index.php' ? null : $filehtml;
-        if ($filehtml && file_exists(ROOT_PATH . DS . $filehtml)) {
+        if ($filehtml && file_exists(PATH_ROOT . DS . $filehtml)) {
             @unlink($filehtml);
         }
 
         // 删除缩略图
-        if ($data['thumb'] && file_exists(ROOT_PATH . DS . $data['thumb'])) {
-            @unlink(ROOT_PATH . DS . $data['thumb']);
+        if ($data['thumb'] && file_exists(PATH_ROOT . DS . $data['thumb'])) {
+            @unlink(PATH_ROOT . DS . $data['thumb']);
         }
 
         $ext = substr(strrchr(trim($data['thumb']), '.'), 1);
         $site_config = core::get_site_config();
         $thumb = $data['thumb'] . '.thumb.' . $site_config['SITE_THUMB_WIDTH'] . 'x' . $site_config['SITE_THUMB_HEIGHT'] . '.' . $ext;
-        if (file_exists(ROOT_PATH . DS . $thumb)) {
-            @unlink(ROOT_PATH . DS . $thumb);
+        if (file_exists(PATH_ROOT . DS . $thumb)) {
+            @unlink(PATH_ROOT . DS . $thumb);
         }
 
         // 删除关联表单数据

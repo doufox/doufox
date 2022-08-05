@@ -28,7 +28,7 @@ class checkcode
 
     public function __construct()
     {
-        $this->font = STATIC_PATH . 'fonts/elephant.ttf';
+        $this->font = PATH_STATIC . 'fonts/elephant.ttf';
     }
 
     /**

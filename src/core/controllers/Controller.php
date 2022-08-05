@@ -37,7 +37,7 @@ abstract class Controller
      */
     public function __construct()
     {
-        if (!file_exists(DATA_PATH . DS .'installed')) {
+        if (!file_exists(PATH_DATA . DS .'installed')) {
             $this->redirect(url('install/index'));
         }
         if (get_magic_quotes_runtime()) {
@@ -68,7 +68,7 @@ abstract class Controller
             foreach ($this->plugin_cache as $i) {
                 $p = $i['plugin'] . DS . $i['plugin'] . '.php';
                 if (true === checkPlugin($p) && (bool) ($i['status']) === true) {
-                    core::load_file(PLUGIN_PATH . $p);
+                    core::load_file(PATH_PLUGIN . $p);
                 }
             }
         }
@@ -295,7 +295,7 @@ abstract class Controller
      */
     protected function getFields($fields, $data = array())
     {
-        core::load_file(CORE_PATH . DS . 'library' . DS . 'fields.function.php');
+        core::load_file(PATH_CORE . DS . 'library' . DS . 'fields.function.php');
         $data_fields = '';
         if (empty($fields['data'])) {
             return false;
@@ -545,6 +545,6 @@ abstract class Controller
      */
     protected function views($file)
     {
-        return VIEW_PATH . $file . '.tpl.php';
+        return PATH_VIEW . $file . '.tpl.php';
     }
 }

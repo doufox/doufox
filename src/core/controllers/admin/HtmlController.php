@@ -32,10 +32,10 @@ class HtmlController extends Admin
     public function homeAction()
     {
         ob_start();
-        core::load_file(CTRL_PATH . 'IndexController.php');
+        core::load_file(PATH_CONTROLER . 'IndexController.php');
         $c = new IndexController();
         $c->indexAction();
-        if (!file_put_contents(ROOT_PATH . DS . 'index.html', ob_get_clean(), LOCK_EX)) {
+        if (!file_put_contents(PATH_ROOT . DS . 'index.html', ob_get_clean(), LOCK_EX)) {
             $this->show_message($url . '生成失败！', 2, '');
         }
 
@@ -273,16 +273,16 @@ class HtmlController extends Admin
         }
         $url = $cat['catpath'] . DS . $url;
         if (substr($url, -5) != '.html') {
-            mkdirs(ROOT_PATH . DS . $url);
-            $htmlfile = ROOT_PATH . DS . $url . DS . 'index.html';
+            mkdirs(PATH_ROOT . DS . $url);
+            $htmlfile = PATH_ROOT . DS . $url . DS . 'index.html';
         } else {
-            mkdirs(ROOT_PATH . DS . dirname($url));
-            $htmlfile = ROOT_PATH . DS . $url;
+            mkdirs(PATH_ROOT . DS . dirname($url));
+            $htmlfile = PATH_ROOT . DS . $url;
         }
         ob_start();
         $_GET['catid'] = $cat['catid'];
         $_GET['page'] = $page;
-        core::load_file(CTRL_PATH . 'IndexController.php');
+        core::load_file(PATH_CONTROLER . 'IndexController.php');
         $c = new IndexController();
         $c->listAction();
         if (!file_put_contents($htmlfile, ob_get_clean(), LOCK_EX)) {
@@ -307,11 +307,11 @@ class HtmlController extends Admin
         }
         $url = HTTP_URL . $url;
         if (substr($url, -5) != '.html') {
-            mkdirs(ROOT_PATH . DS . $url);
-            $htmlfile = ROOT_PATH . DS . $url . DS . 'index.html';
+            mkdirs(PATH_ROOT . DS . $url);
+            $htmlfile = PATH_ROOT . DS . $url . DS . 'index.html';
         } else {
-            mkdirs(ROOT_PATH . DS . dirname($url));
-            $htmlfile = ROOT_PATH . DS . $url;
+            mkdirs(PATH_ROOT . DS . dirname($url));
+            $htmlfile = PATH_ROOT . DS . $url;
         }
 
         ob_start();
@@ -341,11 +341,11 @@ class HtmlController extends Admin
                         $url = preg_replace('#{([a-z_0-9]+)}#e', '\$content[\\1]', $this->site_config['SHOW_PAGE_URL']);
                         $url = HTTP_URL . $url;
                         if (substr($url, -5) != '.html') {
-                            mkdirs(ROOT_PATH . DS . $url);
-                            $htmlfile = ROOT_PATH . DS . $url . DS . 'index.html';
+                            mkdirs(PATH_ROOT . DS . $url);
+                            $htmlfile = PATH_ROOT . DS . $url . DS . 'index.html';
                         } else {
-                            mkdirs(ROOT_PATH . DS . dirname($url));
-                            $htmlfile = ROOT_PATH . DS . $url;
+                            mkdirs(PATH_ROOT . DS . dirname($url));
+                            $htmlfile = PATH_ROOT . DS . $url;
                         }
                         @unlink($htmlfile);
                     }

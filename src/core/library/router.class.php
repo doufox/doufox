@@ -97,7 +97,7 @@ class router
             // 属于自定义后台路径返回true
             return true;
         }
-        if (is_dir(CTRL_PATH . $path)) {
+        if (is_dir(PATH_CONTROLER . $path)) {
             return true;
         }
         return false;
@@ -105,7 +105,7 @@ class router
 
     private function isController($path = '', $file)
     {
-        if (is_file(CTRL_PATH . $path . ucfirst($file) . 'Controller.php')) {
+        if (is_file(PATH_CONTROLER . $path . ucfirst($file) . 'Controller.php')) {
             return true;
         }
         return false;

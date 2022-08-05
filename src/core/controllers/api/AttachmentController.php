@@ -57,7 +57,7 @@ class AttachmentController extends API
 
                 $path = $dir . $t . '/';
                 $ext = is_dir($this->dir . $path) ? 'dir' : strtolower(trim(substr(strrchr($t, '.'), 1, 10)));
-                $ico = file_exists(STATIC_PATH . 'img/ext/' . $ext . '.gif') ? $ext . '.gif' : $ext . '.png';
+                $ico = file_exists(PATH_STATIC . 'img/ext/' . $ext . '.gif') ? $ext . '.gif' : $ext . '.png';
 
                 $list[] = array(
                     'name' => $t,
@@ -295,7 +295,7 @@ class AttachmentController extends API
      */
     public function kindeditor_managerAction()
     {
-        $root_path = ROOT_PATH . DS . $this->dir;
+        $root_path = PATH_ROOT . DS . $this->dir;
         $root_url = HTTP_URL . '/' . $this->dir;
         //用户目录设定
         $admin = $this->getAdmin();

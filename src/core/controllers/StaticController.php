@@ -17,7 +17,7 @@ class StaticController
     {
         $path = explode('?', $_SERVER['REQUEST_URI']);
         $file = $path[0];
-        $file_real_path = DATA_PATH . DS .$file;
+        $file_real_path = PATH_DATA . DS .$file;
         if (!file_exists($file_real_path) || !is_file($file_real_path)) {
             header("HTTP/1.0 404 Not Found");
             header('Refresh: 10; url=' . HTTP_PRE. HTTP_HOST);

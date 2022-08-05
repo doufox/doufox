@@ -13,12 +13,12 @@ class IndexController
     public function __construct()
     {
         $this->status = 'default';
-        if (file_exists(DATA_PATH . DS .'installed')) {
+        if (file_exists(PATH_DATA . DS .'installed')) {
             $this->status = 'success';
             include $this->views('install/installed');
             exit();
         }
-        if (!is_writable(DATA_PATH)) {
+        if (!is_writable(PATH_DATA)) {
             exit('系统数据目录（/' . DIR_DATA . '/）没有读写权限, 安装程序无法进行 !');
         }
     }
@@ -52,10 +52,10 @@ class IndexController
                 if (!function_exists('json_decode')) {
                     $error = '服务器环境不支持JSON, 无法进行安装！';
                 }
-                if (!is_writable(DATA_PATH)) {
+                if (!is_writable(PATH_DATA)) {
                     $error = '系统目录data没有写入权限, 无法进行安装！';
                 }
-                if (!is_writable(ROOT_PATH . DS. 'upload')) {
+                if (!is_writable(PATH_ROOT . DS. 'upload')) {
                     $error = '系统目录upload没有写入权限, 无法进行安装！';
                 }
                 include $this->views('install/2');
@@ -101,7 +101,7 @@ class IndexController
                 $content .= "    'prefix'   => '" . $ttb_pre . "', " . PHP_EOL;
                 $content .= "    'charset'  => 'utf8', " . PHP_EOL;
                 $content .= PHP_EOL . ");";
-                if (!file_put_contents(DATA_PATH . DS .'config' . DS . 'database.ini.php', $content)) {
+                if (!file_put_contents(PATH_DATA . DS .'config' . DS . 'database.ini.php', $content)) {
                     dexit('数据库配置文件保存失败, 请检查文件权限！');
                 }
 
@@ -110,12 +110,12 @@ class IndexController
                 // $admincontent .= " 'ADMIN_NAME' => '" . $username . "', " . PHP_EOL;
                 // $admincontent .= " 'ADMIN_PASS' => '" . md5(md5($password)) . "', " . PHP_EOL;
                 // $admincontent .= PHP_EOL . ");";
-                // if (!file_put_contents(DATA_PATH . DS . 'config' . DS . 'admin.ini.php', $admincontent)) {
+                // if (!file_put_contents(PATH_DATA . DS . 'config' . DS . 'admin.ini.php', $admincontent)) {
                 //     dexit('数据库配置文件保存失败, 请检查文件权限！');
                 // }
 
                 // 导入表结构
-                $sql = file_get_contents(VIEW_PATH . 'install' . DS . 'initdata.sql');
+                $sql = file_get_contents(PATH_VIEW . 'install' . DS . 'initdata.sql');
                 // 表前缀处理
                 $sql = str_replace('doufox_', $ttb_pre, $sql);
                 // 超级管理员默认帐号密码
@@ -185,7 +185,7 @@ class IndexController
                 mysql_query($query) or die(exit('数据导入出错<hr>' . mysql_error() . '<br>SQL语句：<br>' . $query));
             }
         }
-        file_put_contents(DATA_PATH . DS .'installed', $time);
+        file_put_contents(PATH_DATA . DS .'installed', $time);
     }
 
     /** 加载视图模板文件，系统内置默认模板
@@ -193,6 +193,6 @@ class IndexController
      */
     protected function views($file)
     {
-        return VIEW_PATH . $file . '.tpl.php';
+        return PATH_VIEW . $file . '.tpl.php';
     }
 }

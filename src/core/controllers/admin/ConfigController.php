@@ -69,7 +69,7 @@ class ConfigController extends Admin
         }
 
         $file_list = core::load_class('file_list');
-        $arr = $file_list->get_file_list(THEME_PATH);
+        $arr = $file_list->get_file_list(PATH_TEMPLATE);
         // 主题文件夹列表
         $template = array_diff($arr, array('index.html'));
         unset($arr, $file_list);
@@ -104,7 +104,7 @@ class ConfigController extends Admin
     public function robotsAction()
     {
         // 文件路径
-        $file = ROOT_PATH . DS .'robots.txt';
+        $file = PATH_ROOT . DS .'robots.txt';
         // 提交的数据
         if ($this->isPostForm()) {
             $post_data = $this->post('data');
@@ -259,7 +259,7 @@ class ConfigController extends Admin
             $content .= "    '" . strtoupper($k) . "'" . $this->setspace($k) . " => " . $value . ", // " . $this->configTips[$k] . PHP_EOL;
         }
         $content .= PHP_EOL . ");";
-        file_put_contents(DATA_PATH . DS .'config' . DS . 'config.ini.php', $content);
+        file_put_contents(PATH_DATA . DS .'config' . DS . 'config.ini.php', $content);
         return true;
     }
 

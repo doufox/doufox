@@ -64,7 +64,7 @@
                                     <select class="form-control" name="data[SITE_THEME]">
                                         <?php if (is_array($template)) {
                                             foreach ($template as $t) {
-                                                if (is_dir(THEME_PATH . DS . $t)) { ?>
+                                                if (is_dir(PATH_TEMPLATE . DS . $t)) { ?>
                                                     <option value="<?php echo $t; ?>" <?php if ($data['SITE_THEME'] == $t) { ?>selected<?php } ?>><?php echo $t; ?></option>
                                                 <?php }
                                             }
@@ -78,7 +78,7 @@
                                     <select class="form-control" name="data[SITE_MOBILE]">
                                         <?php if (is_array($template)) {
                                             foreach ($template as $t) {
-                                                if (is_dir(THEME_PATH . DS . $t)) { ?>
+                                                if (is_dir(PATH_TEMPLATE . DS . $t)) { ?>
                                                     <option value="<?php echo $t; ?>" <?php if ($data['SITE_MOBILE'] == $t) { ?>selected<?php } ?>><?php echo $t; ?></option>
                                                 <?php }
                                             }

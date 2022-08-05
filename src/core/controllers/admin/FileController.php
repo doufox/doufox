@@ -9,7 +9,7 @@ class FileController extends Admin
     public function __construct()
     {
         parent::__construct();
-        $this->root_path = ROOT_PATH . DS;
+        $this->root_path = PATH_ROOT . DS;
         $this->exclude_items = array(); // 禁止访问的文件列表
         $this->is_windows = DIRECTORY_SEPARATOR == '\\';
         $this->iconv_input_encoding = 'UTF-8';
@@ -18,7 +18,7 @@ class FileController extends Admin
     public function indexAction()
     {
         // $file_list = core::load_class('file_list');
-        // $path_list = $file_list->get_file_list(ROOT_PATH);
+        // $path_list = $file_list->get_file_list(PATH_ROOT);
         // $list = array();
         // foreach ($path_list as $x) {
         //     $list[] = array(
@@ -29,7 +29,7 @@ class FileController extends Admin
         // unset($file_list, $path_list);
         // print_r($file_list);
         // print_r($path_list);
-        // $root_path = ROOT_PATH;
+        // $root_path = PATH_ROOT;
         // $num_files = 3;
         // $num_folders = 5;
         // $all_files_size = 0;

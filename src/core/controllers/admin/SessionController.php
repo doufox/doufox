@@ -14,7 +14,7 @@ class SessionController extends Admin
     public function indexAction()
     {
         $file_list = core::load_class('file_list');
-        $dir = CACHE_PATH . DS .'session' . DS;
+        $dir = PATH_CACHE . DS .'session' . DS;
         if (!is_dir($dir)) {
             mkdir($dir, 0777);
         }

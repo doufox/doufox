@@ -10,7 +10,7 @@ class CacheController extends Admin
     public function __construct()
     {
         parent::__construct();
-        $this->cache_dir = CACHE_PATH . DS;
+        $this->cache_dir = PATH_CACHE . DS;
         if (!is_dir($this->cache_dir)) {
             mkdir($this->cache_dir, 0777);
         }

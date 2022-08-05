@@ -19,18 +19,18 @@ define('DIR_PLUGIN', 'plugin'); // 插件文件夹
 define('DIR_TEMPLATE', 'template'); // 主题模板文件夹
 
 // 路径
-define('CORE_PATH', dirname(__FILE__)); // 核心模块路径
-define('DATA_PATH', ROOT_PATH . DS . DIR_DATA); // 数据模块路径
-define('CACHE_PATH', ROOT_PATH . DS . 'cache'); // 数据缓存路径
-define('MODEL_PATH', CORE_PATH . DS . 'models' . DS); // 数据模型路径
-define('VIEW_PATH', CORE_PATH . DS . 'views' . DS); // 视图模板路径
-define('CTRL_PATH', CORE_PATH . DS . 'controllers' . DS); // 控制器路径
-define('STATIC_PATH', ROOT_PATH . DS . 'static' . DS); // 静态资源路径
-define('THEME_PATH', ROOT_PATH . DS . DIR_TEMPLATE); // 主题模板路径
-define('PLUGIN_PATH', ROOT_PATH . DS . DIR_PLUGIN . DS); // 插件路径
+define('PATH_CORE', dirname(__FILE__)); // 核心模块路径
+define('PATH_DATA', PATH_ROOT . DS . DIR_DATA); // 数据模块路径
+define('PATH_CACHE', PATH_ROOT . DS . 'cache'); // 数据缓存路径
+define('PATH_STATIC', PATH_ROOT . DS . 'static' . DS); // 静态资源路径
+define('PATH_TEMPLATE', PATH_ROOT . DS . DIR_TEMPLATE); // 主题模板路径
+define('PATH_PLUGIN', PATH_ROOT . DS . DIR_PLUGIN . DS); // 插件路径
+define('PATH_MODEL', PATH_CORE . DS . 'models' . DS); // 数据模型路径
+define('PATH_VIEW', PATH_CORE . DS . 'views' . DS); // 视图模板路径
+define('PATH_CONTROLER', PATH_CORE . DS . 'controllers' . DS); // 控制器路径
 
-core::load_file(CORE_PATH . DS . 'info.php'); // 系统基本信息
-core::load_file(CORE_PATH . DS . 'library' . DS . 'global.function.php'); // 全局函数
+core::load_file(PATH_CORE . DS . 'info.php'); // 系统基本信息
+core::load_file(PATH_CORE . DS . 'library' . DS . 'global.function.php'); // 全局函数
 core::load_class('Model', '', 0);
 
 /**
@@ -71,18 +71,18 @@ abstract class core
             $namespace = self::$namespace;
             $controller = self::$controller . 'Controller';
             $action = self::$action . 'Action';
-            self::load_file(CTRL_PATH . 'Controller.php');
-            if ($namespace && is_dir(CTRL_PATH . $namespace)) {
-                $controller_file = CTRL_PATH . $namespace . DS . $controller . '.php';
+            self::load_file(PATH_CONTROLER . 'Controller.php');
+            if ($namespace && is_dir(PATH_CONTROLER . $namespace)) {
+                $controller_file = PATH_CONTROLER . $namespace . DS . $controller . '.php';
                 if (!is_file($controller_file)) {
                     exit('Controller does not exist.');
                 }
-                if (is_file(CTRL_PATH . $namespace . DS . 'Controller.php')) {
-                    include_once CTRL_PATH . $namespace . DS . 'Controller.php';
+                if (is_file(PATH_CONTROLER . $namespace . DS . 'Controller.php')) {
+                    include_once PATH_CONTROLER . $namespace . DS . 'Controller.php';
                 }
                 include_once $controller_file;
-            } elseif (is_file(CTRL_PATH . $controller . '.php')) {
-                include_once CTRL_PATH . $controller . '.php';
+            } elseif (is_file(PATH_CONTROLER . $controller . '.php')) {
+                include_once PATH_CONTROLER . $controller . '.php';
             } else {
                 exit('Controller does not exist.');
             }
@@ -101,11 +101,11 @@ abstract class core
      */
     public static function load_template()
     {
-        if (is_mobile() && !empty(self::$config['SITE_MOBILE']) && is_dir(THEME_PATH . DS . self::$config['SITE_MOBILE'])) {
+        if (is_mobile() && !empty(self::$config['SITE_MOBILE']) && is_dir(PATH_TEMPLATE . DS . self::$config['SITE_MOBILE'])) {
             // 设置了移动端主题并且是移动端访问
             define('SITE_THEME', self::$config['SITE_MOBILE']);
         } else {
-            define('SITE_THEME', is_dir(THEME_PATH . DS . self::$config['SITE_THEME']) ? self::$config['SITE_THEME'] : 'default');
+            define('SITE_THEME', is_dir(PATH_TEMPLATE . DS . self::$config['SITE_THEME']) ? self::$config['SITE_THEME'] : 'default');
         }
     }
 
@@ -140,7 +140,7 @@ abstract class core
     public static function load_config($file)
     {
         static $configs = array();
-        $path = DATA_PATH . DS . 'config' . DS . $file . '.ini.php';
+        $path = PATH_DATA . DS . 'config' . DS . $file . '.ini.php';
         if (file_exists($path)) {
             $configs[$file] = include $path;
             return $configs[$file];
@@ -178,8 +178,8 @@ abstract class core
                 return true;
             }
         }
-        if (file_exists(CORE_PATH . DS . $path . DS . $classname . '.class.php')) {
-            include CORE_PATH . DS . $path . DS . $classname . '.class.php';
+        if (file_exists(PATH_CORE . DS . $path . DS . $classname . '.class.php')) {
+            include PATH_CORE . DS . $path . DS . $classname . '.class.php';
             $name = $classname;
             if ($initialize) {
                 $classes[$key] = new $name;

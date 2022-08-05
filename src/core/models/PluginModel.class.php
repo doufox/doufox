@@ -19,7 +19,7 @@ class PluginModel extends Model
      */
     function get_plugin_info($pluginFile)
     {
-        $pluginData = implode('', file(PLUGIN_PATH . $pluginFile));
+        $pluginData = implode('', file(PATH_PLUGIN . $pluginFile));
         preg_match("/Plugin Name:(.*)/i", $pluginData, $plugin_name);
         preg_match("/Version:(.*)/i", $pluginData, $version);
         preg_match("/Plugin URL:(.*)/i", $pluginData, $plugin_url);
@@ -30,7 +30,7 @@ class PluginModel extends Model
         $active_plugins = Option::get('active_plugins');
         $ret = explode('/', $pluginFile);
         $plugin = $ret[0];
-        $setting = (file_exists(PLUGIN_PATH . $plugin . '/' . $plugin . '_setting.php') && in_array($pluginFile, $active_plugins)) ? true : false;
+        $setting = (file_exists(PATH_PLUGIN . $plugin . '/' . $plugin . '_setting.php') && in_array($pluginFile, $active_plugins)) ? true : false;
 
         $plugin_name = isset($plugin_name[1]) ? strip_tags(trim($plugin_name[1])) : '';
         $version = isset($version[1]) ? strip_tags(trim($version[1])) : '';

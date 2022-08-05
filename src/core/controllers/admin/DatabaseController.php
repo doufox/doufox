@@ -46,7 +46,7 @@ class DatabaseController extends Admin
     public function importAction()
     {
         $file_list = core::load_class('file_list');
-        $dir = DATA_PATH . DS .'bakup' . DS;
+        $dir = PATH_DATA . DS .'bakup' . DS;
         $path = $this->get('path');
         if ($path && is_dir($dir . $path)) {
             $fileid = $this->get('fileid');
@@ -90,7 +90,7 @@ class DatabaseController extends Admin
     /** 删除单个备份文件 */
     public function delbackedfileAction()
     {
-        $dir = DATA_PATH . DS .'bakup' . DS;
+        $dir = PATH_DATA . DS .'bakup' . DS;
         $path = $this->get('path');
         if ($path && is_dir($dir . $path)) {
             $file_list = core::load_class('file_list');
@@ -255,7 +255,7 @@ class DatabaseController extends Admin
             $startfrom = $numrows == $offset ? $startfrom : 0;
         }
         $i = $startfrom ? $i - 1 : $i;
-        $dir = DATA_PATH . DS .'bakup' . DS;
+        $dir = PATH_DATA . DS .'bakup' . DS;
         if (!is_dir($dir)) {
             mkdir($dir, 0777);
             file_put_contents($dir . 'index.html', '');
@@ -288,7 +288,7 @@ class DatabaseController extends Admin
      */
     private function importdb($path, $fileid = 1)
     {
-        $dir = DATA_PATH . DS .'bakup' . DS;
+        $dir = PATH_DATA . DS .'bakup' . DS;
         $fid = $fileid ? $fileid : 1;
 
         $data = scandir($dir . $path); //扫描备份目录

@@ -17,7 +17,7 @@ class TemplateController extends Admin
     {
         // list all template dir
         $class_file_list = core::load_class('file_list');
-        $template_list = $class_file_list->get_file_list(THEME_PATH, array('.DS_Store', 'index.html'));
+        $template_list = $class_file_list->get_file_list(PATH_TEMPLATE, array('.DS_Store', 'index.html'));
         $list = array();
         foreach ($template_list as $x) {
             $list[] = array(
@@ -32,7 +32,7 @@ class TemplateController extends Admin
     public function itemAction()
     {
         $class_file_list = core::load_class('file_list');
-        $template_list = $class_file_list->get_file_list(THEME_PATH, array('.DS_Store', 'index.html'));
+        $template_list = $class_file_list->get_file_list(PATH_TEMPLATE, array('.DS_Store', 'index.html'));
         unset($class_file_list);
         $template = $this->get('template') ? urldecode($this->get('template')) : 'default';
         if (!empty($template)) {
@@ -41,7 +41,7 @@ class TemplateController extends Admin
             }
         }
 
-        $template_path = THEME_PATH . DS . $template . DS;
+        $template_path = PATH_TEMPLATE . DS . $template . DS;
 
         $dir = $this->get('dir') ? urldecode($this->get('dir')) : '/';
         $dir = str_replace(DS . DS, DS, $dir);
@@ -73,7 +73,7 @@ class TemplateController extends Admin
 
     public function updatefilenameAction()
     {
-        $this->dir = THEME_PATH . DS . SITE_THEME . DS;
+        $this->dir = PATH_TEMPLATE . DS . SITE_THEME . DS;
         if (file_exists($this->dir . 'config.php')) {
             $info = include $this->dir . 'config.php';
         }
@@ -90,13 +90,13 @@ class TemplateController extends Admin
     public function editAction()
     {
         $template = $this->get('template') ? urldecode($this->get('template')) : '';
-        if (!file_exists(THEME_PATH . DS . $template)) {
+        if (!file_exists(PATH_TEMPLATE . DS . $template)) {
             $this->show_message('该模板不存在！', 2, url('admin/template'));
         }
         $filename = urldecode($this->get('file'));
         $dir = $this->get('dir') ? urldecode($this->get('dir')) : '/';
         $dir = str_replace(DS . DS, DS, $dir);
-        $filepath = THEME_PATH . DS . $template . $dir . $filename;
+        $filepath = PATH_TEMPLATE . DS . $template . $dir . $filename;
         $cur_path = DS . DIR_TEMPLATE. DS . $template . $dir . $filename;
         if (!is_file($filepath)) {
             $this->show_message($cur_path . '该文件不存在！', 2, url('admin/template/item', array('dir' => $dir)));
@@ -120,7 +120,7 @@ class TemplateController extends Admin
         $template = $this->get('template') ? urldecode($this->get('template')) : 'default';
         $dir = $this->get('dir') ? urldecode($this->get('dir')) : '/';
         $dir = str_replace(DS . DS, DS, $dir);
-        $filepath = THEME_PATH . DS . $template . $dir;
+        $filepath = PATH_TEMPLATE . DS . $template . $dir;
         if (!file_exists($filepath)) {
             $this->show_message('文件夹不存在！', 2, url('admin/template/item', array('template' => $template)));
         } else if (!is_writable($filepath)) {
@@ -177,10 +177,10 @@ class TemplateController extends Admin
     public function cacheAction($show = 0)
     {
         $file_list = core::load_class('file_list');
-        $list = $file_list->get_file_list(THEME_PATH);
+        $list = $file_list->get_file_list(PATH_TEMPLATE);
         // $list = array_diff($list, array('index.html'));
         foreach ($list as $file_path) {
-            $dir = CACHE_PATH . DS . DIR_TEMPLATE . DS . $file_path . DS;
+            $dir = PATH_CACHE . DS . DIR_TEMPLATE . DS . $file_path . DS;
             $file_list->delete_dir($dir);
             if (!file_exists($dir)) {
                 mkdir($dir, 0777, true);
