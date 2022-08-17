@@ -27,7 +27,8 @@
                         <span class="panel-title">Robots 爬虫规则设置</span>
                     </div>
                     <div class="panel-body">
-                      <textarea class="form-control" name="data[robots]" cols="60" rows="10" placeholder="输入 Robots 抓取规则"><?php echo $data['robots']; ?></textarea>
+                        <p>Robots 文件连接：<a class="btn btn-link" href="<?php echo HTTP_URL; ?>/robots.txt" target="_blank"><?php echo HTTP_URL; ?>/robots.txt</a></p>
+                        <textarea class="form-control" name="data[robots]" cols="60" rows="10" placeholder="输入 Robots 抓取规则"><?php echo $data['robots']; ?></textarea>
                     </div>
                     <div class="panel-footer">
                         <button type="submit" name="submit" class="btn btn-default">提交</button>
