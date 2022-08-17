@@ -33,31 +33,29 @@ class MemberController extends Admin
         $page = (int) $this->get('page');
         $page = (!$page) ? 1 : $page;
         $modelid = (int) $this->get('modelid');
+        $status = $this->get('status');
         $pagination = core::load_class('pagination');
         $pagination->loadconfig();
         $where = '1';
+        $params = array();
+        $params['page'] = '{page}';
         if ($modelid) {
-            $where .= ' and modelid=' . $modelid;
+            $params['modelid'] = $modelid;
+            $where .= ' AND modelid=' . $modelid;
+        }
+        if ($status == '1') {
+            $params['status'] = 1;
+            $where .= ' AND status=1';
+        } elseif ($status == '0') {
+            $params['status'] = 0;
+            $where .= ' AND status=0';
         }
 
-        $total = $this->member->count('member', NULL, $where);
         $pagesize = 15; // 分页数量
-        $urlparam = array();
-        if ($modelid) {
-            $urlparam['modelid'] = $modelid;
-        }
-
-        $urlparam['status'] = $status;
-        $urlparam['page'] = '{page}';
-        $url = url('admin/member/index', $urlparam);
-        $select = $this->member->page_limit($page, $pagesize)->order(array('status ASC', 'id DESC'));
-        if ($modelid) {
-            $select->where('modelid=' . $modelid);
-        }
-
-        $list = $select->select();
+        $total = $this->member->count('member', NULL, $where);
+        $url = url('admin/member/index', $params);
+        $list = $this->member->page_limit($page, $pagesize)->where($where)->order(array('status ASC', 'id DESC'))->select();
         $pagination = $pagination->total($total)->url($url)->num($pagesize)->page($page)->output();
-
         $membermodel = $this->membermodel;
         include $this->views('admin/member/list');
     }

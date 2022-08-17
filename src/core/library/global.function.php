@@ -85,11 +85,7 @@ function url($route, $params = null)
  */
 function appExecutionTime()
 {
-    $tmp = explode(' ', APP_START_TIME);
-    $start = $tmp[1] + $tmp[0];
-    $tmp = explode(' ', microtime());
-    $now = $tmp[1] + $tmp[0];
-    return number_format($now - $start, 6);
+    return number_format(microtime(true) - APP_START_TIME, 6);
 }
 
 /**

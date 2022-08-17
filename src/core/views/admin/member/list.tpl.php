@@ -61,7 +61,7 @@
                                         <td><a href="<?php echo url('admin/member/edit', array('id' => $t['id'])); ?>"><?php echo $t['username']; ?></a></td>
                                         <td><?php echo $t['nickname']; ?></a></td>
                                         <td><?php echo $t['realname']; ?></a></td>
-                                        <td><a href="<?php echo url('admin/member/index', array('modelid' => $t['modelid'])); ?>"><?php echo $membermodel[$t['modelid']]['modelname']; ?></a></td>
+                                        <td><a href="<?php echo url('admin/member/index', array('modelid' => $t['modelid'], 'status' => $status)); ?>"><?php echo $membermodel[$t['modelid']]['modelname']; ?></a></td>
                                         <td><?php echo date('Y-m-d H:i:s', $t['regdate']); ?></td>
                                         <td><?php echo $t['regip']; ?></td>
                                         <td>

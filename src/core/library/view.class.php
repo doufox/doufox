@@ -147,7 +147,7 @@ class view
 
             "<?php \$this->attachment(\\1);?>",
 
-            "<?php \$return = \$this->_category(\"\\1\");  if (is_array(\$return)) { foreach (\$return as \$key=>\$vdata) { \$arrchilds = @explode(',', \$vdata['arrchilds']);    \$current = in_array(\$catid, \$arrchilds);?>",
+            "<?php \$return = \$this->_category(\"\\1\");  if (is_array(\$return)) { foreach (\$return as \$key=>\$vdata) { \$arrchilds = @explode(',', \$vdata['arrchilds']);    \$current = isset(\$catid) && in_array(\$catid, \$arrchilds);?>",
             "<?php } } ?>",
 
             "<?php \$return_\\2 = \$this->_listdata(\"\\1 return=\\2\"); extract(\$return_\\2); if (is_array(\$return_\\2)) { foreach (\$return_\\2 as \$key_\\2=>\$\\2) { ?>",
@@ -177,6 +177,7 @@ class view
      */
     protected function _category($param)
     {
+        $data = array();
         $_param = explode(' ', $param);
         $param = array();
         foreach ($_param as $p) {
@@ -197,41 +198,40 @@ class view
                 }
             }
         }
-        $parentid = $system['parentid'] ? $system['parentid'] : 0;
+        $parentid = isset($system['parentid']) ? $system['parentid'] : 0;
         $cats = get_cache('category');
         $i = 1;
         foreach ($cats as $catid => $cat) {
-            if ($system['num']) {
+            if (isset($system['num'])) {
                 if ($i > $system['num']) {
                     break;
                 }
             }
 
-            if (!$system['ismenu']) {
-                if (!$cat['ismenu']) {
+            if (!isset($system['ismenu'])) {
+                if (!isset($cat['ismenu'])) {
                     continue;
                 }
             }
 
-            if ($system['typeid']) {
+            if (isset($system['typeid'])) {
                 if ($cat['typeid'] != $system['typeid']) {
                     continue;
                 }
             }
 
-            if ($system['modelid']) {
+            if (isset($system['modelid'])) {
                 if ($cat['modelid'] != $system['modelid']) {
                     continue;
                 }
             }
 
-            if ($system['catid']) {
+            if (isset($system['catid'])) {
                 $catids = explode(',', $system['catid']);
                 if (!in_array($cat['catid'], $catids)) {
                     continue;
                 }
-            } else
-            if ($cat['parentid'] != $parentid) {
+            } elseif ($cat['parentid'] != $parentid) {
                 continue;
             }
 
@@ -353,7 +353,7 @@ class view
         }
         // ORDER排序
         $order = '';
-        if ($system['order']) {
+        if (isset($system['order'])) {
             if (strtoupper($system['order']) == 'RAND()') {
                 $order .= ' ORDER BY RAND()';
             } else {
@@ -380,19 +380,20 @@ class view
         }
         // limit与分页
         $limit = '';
-        if ($system['num']) {
+        $pagination = '';
+        if (isset($system['num'])) {
             $limit = ' LIMIT ' . $system['num'];
         } elseif (isset($system['page'])) {
             $pageurl = '';
             $system['page'] = (int) $system['page'] ? (int) $system['page'] : 1;
-            if ($system['urlrule']) {
+            if (isset($system['urlrule'])) {
                 $pageurl = str_replace(array('_page_', '[page]'), '{page}', $system['urlrule']);
                 $pagesize = $system['pagesize'] ? $system['pagesize'] : (isset($cat['pagesize']) ? $cat['pagesize'] : 10);
             } elseif ($cat) {
                 $pageurl = getCaturl($cat, '{page}');
-                $pagesize = $system['pagesize'] ? $system['pagesize'] : $cat['pagesize'];
+                $pagesize = isset($system['pagesize']) ? $system['pagesize'] : $cat['pagesize'];
             } else {
-                $pagesize = $system['pagesize'] ? $system['pagesize'] : 10;
+                $pagesize = isset($system['pagesize']) ? $system['pagesize'] : 10;
                 $pageurl = '{page}';
             }
             $sql = 'SELECT count(*) AS total ' . $from . ' ' . $where;

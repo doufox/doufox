@@ -17,6 +17,8 @@ abstract class Controller
     protected $site_config;
 
     protected $account;
+    protected $menu;
+    protected $menu_cache;
     protected $member;
     protected $memberinfo;
     protected $membermodel;
@@ -58,10 +60,11 @@ abstract class Controller
         $this->category = core::load_model('category');
         $this->content = core::load_model('content');
         $this->account = core::load_model('account');
+        $this->menu = core::load_model('menu');
         $this->plugin = core::load_model('plugin');
         $this->category_cache = get_cache('category');
         $this->category_dir_cache = get_cache('category_dir');
-        $this->account_cache = get_cache('account');
+        $this->menu_cache = get_cache('menu');
         $this->plugin_cache = get_cache('plugin');
 
         if ($this->plugin_cache && is_array($this->plugin_cache)) {
@@ -128,6 +131,7 @@ abstract class Controller
         if (!is_array($name)) {
             return htmlspecialchars(trim($name));
         }
+        $post_array = array();
         foreach ($name as $key => $value) {
             $post_array[$key] = self::post($value, 1);
         }

@@ -12,6 +12,9 @@
                     <li <?php if ($this->current_nav == 'content') echo 'class="active"'; ?>>
                         <a href="<?php echo url('admin/content'); ?>">内容</a>
                     </li>
+                    <li <?php if ($this->current_nav == 'menu') echo 'class="active"'; ?>>
+                        <a href="<?php echo url('admin/menu'); ?>">菜单</a>
+                    </li>
                     <li <?php if ($this->current_nav == 'category') echo 'class="active"'; ?>>
                         <a href="<?php echo url('admin/category'); ?>">栏目</a>
                     </li>
