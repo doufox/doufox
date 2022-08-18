@@ -54,7 +54,7 @@ class ModelModel extends Model
         $this->query("DELETE FROM `" . $this->prefix . "model_field` where modelid=" . $data['modelid']);
     }
 
-    // 创建模型
+    // 创建自定义模型
     protected function create_model($table)
     {
         $table = ucfirst($table);
@@ -74,16 +74,18 @@ class ModelModel extends Model
             "        return \$this->get_table_fields();" . PHP_EOL .
             "    }" . PHP_EOL . PHP_EOL .
             "}";
-        $file = PATH_MODEL . $table . 'Model.class.php';
+        // $file = PATH_MODEL . $table . 'Model.class.php';
+        $file = PATH_DATA . DS . 'models' . DS . $table . 'Model.class.php';
         file_put_contents($file, $content);
     }
 
-    // 删除模型文件
+    // 删除自定义模型文件
     protected function del_model($table)
     {
         $table = ucfirst($table);
 
-        $file = PATH_MODEL . $table . 'Model.class.php';
+        // $file = PATH_MODEL . $table . 'Model.class.php';
+        $file = PATH_DATA . DS . 'models' . DS . $table . 'Model.class.php';
         if (file_exists($file)) {
             @unlink($file);
         }

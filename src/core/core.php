@@ -1,9 +1,7 @@
 <?php
 
-// 系统入口文件
-define('IN_CRONLITE', true);
-
 // 系统常量
+define('IN_CRONLITE', true);
 define('APP_START_TIME', microtime(true)); // 设置程序开始执行时间
 date_default_timezone_set('Asia/Shanghai'); // 系统时区设置
 define('HTTP_REFERER', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''); // 来源
@@ -178,8 +176,13 @@ abstract class core
                 return true;
             }
         }
-        if (file_exists(PATH_CORE . DS . $path . DS . $classname . '.class.php')) {
-            include PATH_CORE . DS . $path . DS . $classname . '.class.php';
+        $file = PATH_CORE . DS . $path . DS . $classname . '.class.php';
+        if (!file_exists($file)) {
+            // 数据目录：查找自定义类
+            $file = PATH_DATA . DS . $path . DS . $classname . '.class.php';
+        }
+        if (file_exists($file)) {
+            include $file;
             $name = $classname;
             if ($initialize) {
                 $classes[$key] = new $name;
@@ -187,9 +190,8 @@ abstract class core
                 $classes[$key] = true;
             }
             return $classes[$key];
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
