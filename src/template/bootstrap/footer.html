@@ -4,14 +4,13 @@
         <div class="row">
             <div class="col-md-6 col-sm-6">
                 <p class="text-muted">
-                    <span>&copy; CopyRight {function.date('Y')}&nbsp;{php echo APP_NAME} All Rights Reserved.</span>
-                    <span>={$app_execution_time}=</span>
+                    <span>&copy; {function.date('Y')}&nbsp;<a href="https://crogram.com" target="_blank">程江科技</a> All Rights Reserved.</span>
+                    {if $site_icp_filing_number}<span><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">{$site_icp_filing_number}</a></span>{/if}
                 </p>
             </div>
             <div class="col-md-6 col-sm-6">
                 <p class="pull-right">
-                    {if $icp_filing_number}<span><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">{$icp_filing_number}</a></span>{/if}
-
+                    <span>time: {$app_execution_time}</span>
                     <span>Powered by <a href="{php echo APP_SITE}">{php echo APP_NAME}</a></span>
                 </p>
             </div>

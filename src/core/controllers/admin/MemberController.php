@@ -129,7 +129,6 @@ class MemberController extends Admin
         $count[0] = $this->member->count('member', NULL, '1');
         $count[1] = $this->member->count('member', NULL, 'status=1');
         $count[2] = $this->member->count('member', NULL, 'status=0');
-        $model = $model;
         $info = $_data;
         include $this->views('admin/member/edit');
     }
@@ -140,8 +139,12 @@ class MemberController extends Admin
     public function delAction()
     {
         $id = (int) $this->get('id');
+        if ($id == 1) {
+            // 禁止删除超级管理员
+            $this->show_message('禁止操作');
+        }
         if (empty($id)) {
-            $this->show_message('参数不存在');
+            $this->show_message('缺失参数 id');
         }
 
         $data = $this->member->find($id);

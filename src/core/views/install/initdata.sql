@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `doufox_block` (
   `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
   `time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `doufox_category`;
 CREATE TABLE IF NOT EXISTS `doufox_category` (
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `doufox_category` (
   KEY `ismenu` (`ismenu`),
   KEY `parentid` (`parentid`),
   KEY `modelid` (`modelid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `doufox_category` (`catid`, `typeid`, `modelid`, `parentid`, `arrparentid`, `child`, `arrchildid`, `catname`, `catpath`, `content`, `url`, `ispost`, `islook`, `categorytpl`, `listtpl`, `showtpl`, `searchtpl`, `pagetpl`, `msgtpl`)
 VALUES (1, 1, 1, 0, '1', 0, '', '最新动态', 'news', '', '/index.php?c=index&a=category&catid=1', 0, 0, 'category_article.html', 'list_article.html', 'show_article.html', 'search.html', 'page.html', 'msg.html');
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `doufox_content` (
   KEY `list` (`catid`,`status`,`time`),
   KEY `top` (`catid`,`status`,`hits`),
   KEY `admin` (`listorder`,`catid`,`modelid`,`status`,`time`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `doufox_content_article`;
 CREATE TABLE IF NOT EXISTS `doufox_content_article` (
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `doufox_content_article` (
   `tag` VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `catid` (`catid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `doufox_content_product`;
 CREATE TABLE IF NOT EXISTS `doufox_content_product` (
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `doufox_content_product` (
   `content` mediumtext NOT NULL,
   PRIMARY KEY (`id`),
   KEY `catid` (`catid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `doufox_form_comment`;
 CREATE TABLE IF NOT EXISTS `doufox_form_comment` (
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `doufox_form_comment` (
   KEY `time` (`time`),
   KEY `userid` (`userid`),
   KEY `cid` (`cid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `doufox_form_gestbook`;
 CREATE TABLE IF NOT EXISTS `doufox_form_gestbook` (
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `doufox_form_gestbook` (
   KEY `time` (`time`),
   KEY `userid` (`userid`),
   KEY `cid` (`cid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `doufox_member`;
 CREATE TABLE IF NOT EXISTS `doufox_member` (
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `doufox_member` (
   `time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `doufox_member` (`id`, `username`, `nickname`, `realname`, `password`, `salt`, `email`, `avatar`, `modelid`, `credits`, `regdate`, `regip`, `status`)
 VALUES (1, 'admin', '管理员', '超级管理员', 'c3284d0f94606de1fd2af172aba15bf3', '', 'admin@doufox.com', '', 6, 0, 0, '', 1);
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `doufox_member_admin` (
   `list_size` SMALLINT(5) NOT NULL,
   `left_width` SMALLINT(5) NOT NULL DEFAULT '150',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `doufox_member_admin` (`id`, `roleid`, `auth`, `list_size`, `left_width`) VALUES (1, 1, '', 10, 150);
 
@@ -179,7 +179,7 @@ DROP TABLE IF EXISTS `doufox_member_normal`;
 CREATE TABLE IF NOT EXISTS `doufox_member_normal` (
   `id` mediumint(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `doufox_model`;
 CREATE TABLE IF NOT EXISTS `doufox_model`(
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `doufox_model`(
   PRIMARY KEY (`modelid`),
   KEY `typeid` (`typeid`),
   KEY `joinid` (`joinid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `doufox_model` (`modelid`, `typeid`, `modelname`, `tablename`, `categorytpl`, `listtpl`, `showtpl`, `searchtpl`, `pagetpl`, `msgtpl`, `joinid`, `setting`) VALUES
 (1, 1, '文章内容', 'content_article', 'category_article.html', 'list_article.html', 'show_article.html', 'search.html', 'page.html', 'msg.html', 0, 'a:1:{s:7:"default";a:4:{s:5:"title";a:2:{s:4:"name";s:6:"标题";s:4:"show";s:1:"1";}s:8:"keywords";a:2:{s:4:"name";s:9:"关键字";s:4:"show";s:1:"1";}s:5:"thumb";a:2:{s:4:"name";s:9:"缩略图";s:4:"show";s:1:"1";}s:11:"description";a:2:{s:4:"name";s:6:"描述";s:4:"show";s:1:"1";}}}'),
@@ -231,7 +231,7 @@ CREATE TABLE IF NOT EXISTS `doufox_model_field`(
   `disabled` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
   PRIMARY KEY (`fieldid`),
   KEY `modelid` (`modelid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `doufox_model_field` (`fieldid`, `modelid`, `field`, `name`, `type`, `length`, `indexkey`, `isshow`, `tips`, `not_null`, `pattern`, `errortips`, `formtype`, `setting`, `listorder`, `disabled`) VALUES
 (1, 1, 'content', '内容', '', '', '', 1, '', 0, '', '', 'editor', '', 0, 0),
@@ -260,11 +260,11 @@ CREATE TABLE IF NOT EXISTS `doufox_plugin`(
     `create_time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
     `time` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
     PRIMARY KEY(`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `doufox_plugin` (`official`, `plugin`, `name`, `version`, `url`, `description`, `author`, `author_url`, `status`) VALUES
-(1, 'tips', '温馨提示', '1.0', 'https://doufox.com', '内置插件，它会在您管理主页面显示一句温馨的小提示。', 'doufox', 'https://doufox.com', 1),
-(1, 'helloworld', 'Hello World', '1.0', 'https://doufox.com', '内置插件，它会在您每个管理页面显示一句"Hello World !"。', 'doufox', 'https://doufox.com', 1);
+(1, 'tips', '温馨提示', '1.0', 'http://doufox.com', '内置插件，它会在您管理主页面显示一句温馨的小提示。', 'doufox', 'http://doufox.com', 1),
+(1, 'helloworld', 'Hello World', '1.0', 'http://doufox.com', '内置插件，它会在您每个管理页面显示一句"Hello World !"。', 'doufox', 'http://doufox.com', 1);
 
 DROP TABLE IF EXISTS `doufox_attachment`;
 CREATE TABLE `doufox_attachment` (
@@ -281,4 +281,4 @@ CREATE TABLE `doufox_attachment` (
     `update_time` bigint(20) NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`),
     KEY `contentid` (`contentid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;

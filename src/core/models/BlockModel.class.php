@@ -11,4 +11,8 @@ class BlockModel extends Model
         return $this->primary_key = 'id';
     }
 
+    public function get_fields()
+    {
+        return $this->get_table_fields();
+    }
 }

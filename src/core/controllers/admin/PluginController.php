@@ -18,25 +18,61 @@ class PluginController extends Admin
         $this->load_list();
     }
 
+    public function doAction()
+    {
+        // /admin/plugin/do?mod=oauth
+        $id = (int) $this->get('id');
+        $data = $this->plugin->find($id);
+        if (empty($data)) {
+            $this->show_message('插件不存在');
+        }
+        // // 每个管理界面顶部插入样式和内容
+        // addHookAction('admin_head', 'plugin_helloworld_css');
+        // addHookAction('admin_top', 'plugin_helloworld');
+    }
+
+    public function infoAction()
+    {
+        $id = (int) $this->get('id');
+        $data = $this->plugin->find($id);
+        if (empty($data)) {
+            $this->show_message('插件不存在');
+        }
+        $data['has_config'] = false;
+        $settings_file = PATH_PLUGIN . $data['plugin'] . DS . $data['plugin'] . '_settings.php';
+        if (file_exists($settings_file)) {
+            $data['has_config'] = true;
+            $data['setting'] = string2array($data['setting']);
+        }
+
+        include $this->views('admin/plugin/info');
+    }
+
     public function settingAction()
     {
         $id = (int) $this->get('id');
         $data = $this->plugin->find($id);
         if (empty($data)) {
-            $this->show_message('区块不存在');
+            $this->show_message('插件不存在');
         }
-
+        $settings_file = PATH_PLUGIN . $data['plugin'] . DS . $data['plugin'] . '_settings.php';
+        if (!file_exists($settings_file)) {
+            $this->show_message('插件不存在配置项 ！');
+        }
         if ($this->isPostForm()) {
-            unset($data);
-            $data = $this->post('data');
-
-            if (empty($data['name']) || empty($data['content'])) {
-                $this->show_message('名称或者内容不能为空');
-            }
-
-            $this->plugin->update($data, 'id=' . $id);
-            $this->show_message($this->getCacheCode('plugin') . '编辑成功', 1, url('admin/plugin'));
+            $settings = $this->post('settings');
+            $post_data = array(
+                'setting' => array2string($settings)
+            );
+            $this->plugin->update($post_data, 'id=' . $id);
+            $this->show_message(
+                $this->getCacheCode('plugin') . '编辑成功',
+                1,
+                url('admin/plugin/setting', array('id' => $id))
+            );
         }
+
+        $settings = string2array($data['setting']);
         include $this->views('admin/plugin/setting');
     }
 
@@ -44,15 +80,15 @@ class PluginController extends Admin
     {
 
         $plugin = get_cache('plugin');
-        print_r($plugin);
+        // print_r($plugin);
         // $a  = array(
         //     'name' => 'Hello World',
         //     'plugin' => 'helloworld',
         //     'version' => '1.0',
         //     'description' => '内置插件，它会在您每个管理页面显示一句"Hello World !"。',
-        //     'url' => 'https://doufox.com',
+        //     'url' => 'http://doufox.com',
         //     'author' => 'doufox',
-        //     'author_url' => 'https://doufox.com'
+        //     'author_url' => 'http://doufox.com'
         // );
         // $this->plugin->insert($a);
     }

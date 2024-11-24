@@ -12,6 +12,11 @@
     <meta name="generator" content="{$site_generator}"/>
     <meta name="keywords" content="{$site_keywords}"/>
     <meta name="description" content="{$site_description}"/>
+    <meta property="og:type" content="document"/>
+    <meta property="og:title" content="{$site_title}"/>
+    <meta property="og:description" content="{$site_description}"/>
+    <meta property="og:url" content="{$site_url}" />
+
     <title>{$site_title}</title>
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/template/bootstrap/css/style.css" type="text/css"/>
@@ -58,7 +63,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                {nav num=6}<li{if $current} class="active"{/if}><a href="{$vdata['url']}">{$vdata['catname']}</a></li>{/nav}
+                {category num=6}<li{if $current} class="active"{/if}><a href="{$vdata['url']}">{$vdata['catname']}</a></li>{/category}
             </ul>
             <ul class="nav navbar-nav navbar-right">{if $member}
                 <li class="account dropdown">

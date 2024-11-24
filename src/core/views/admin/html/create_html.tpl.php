@@ -10,6 +10,7 @@
                     <span class="panel-title">静态化管理</span>
                 </div>
                 <div class="list-group">
+                    <a class="list-group-item" href="<?php echo url('admin/sitemap/index'); ?>">网站地图</a>
                     <a class="list-group-item" href="<?php echo url('admin/html/index'); ?>">页面静态化</a>
                     <a class="list-group-item" href="<?php echo url('admin/html/home'); ?>">生成首页</a>
                     <a class="list-group-item" href="<?php echo url('admin/html/category'); ?>">生成栏目页</a>

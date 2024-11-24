@@ -39,6 +39,8 @@ class BlockController extends Admin
                 $this->msg_result = '内容不能为空，请重新填写';
                 $this->load_add($data);
             }
+            $data['create_time'] = date('Y-m-d H:i:s');
+            $data['update_time'] = date('Y-m-d H:i:s');
 
             $this->block->insert($data);
             $this->msg_result = '添加成功';
@@ -49,9 +51,12 @@ class BlockController extends Admin
         }
     }
 
-    public function editAction($id = 0)
+    public function editAction($id = null)
     {
         $id = $id ? $id : (int) $this->get('id');
+        if (empty($id)) {
+            $this->show_message('缺少参数 id', 1);
+        }
         $data = $this->block->find($id);
         if (empty($data)) {
             $this->msg_result = '区块不存在';
@@ -60,23 +65,26 @@ class BlockController extends Admin
 
         if ($this->isPostForm()) {
             unset($data);
-            $data = $this->post('data');
-            if (empty($data['type'])) {
+            $new_data = $this->post('data');
+            if (empty($new_data['type'])) {
                 $this->msg_result = '类型不能为空，请重新选择';
                 $this->load_edit($id);
             }
-            if (empty($data['name'])) {
+            if (empty($new_data['name'])) {
                 $this->msg_result = '名称不能为空，请重新填写';
                 $this->load_edit($id);
             }
 
-            $data['content'] = $data['content_' . $data['type']];
-            if (empty($data['content'])) {
+            $new_data['content'] = $new_data['content_' . $new_data['type']];
+            if (empty($new_data['content'])) {
                 $this->msg_result = '内容不能为空，请重新填写';
                 $this->load_edit($id);
             }
+            // $new_data['create_time'] = date('Y-m-d H:i:s');
+            $new_data['update_time'] = date('Y-m-d H:i:s');
+            // print_r($new_data);exit;
 
-            $this->block->update($data, 'id=' . $id);
+            $this->block->update($new_data, 'id=' . $id);
             $this->cacheAction();
             $this->msg_result = '编辑成功';
             $this->load_edit($id);
@@ -85,9 +93,12 @@ class BlockController extends Admin
         include $this->views('admin/block/add');
     }
 
-    public function delAction($id = 0)
+    public function delAction($id = null)
     {
         $id = $id ? $id : (int) $this->get('id');
+        if (empty($id)) {
+            $this->show_message('缺少参数 id', 1);
+        }
         $this->block->delete('id=' . $id);
         $this->cacheAction();
         $this->msg_result = '删除成功';
@@ -98,11 +109,19 @@ class BlockController extends Admin
     {
         $list = $this->block->findAll();
         $data = array();
+        $data_code = array();
         foreach ($list as $t) {
             $data[$t['id']] = $t;
+            $data_code[$t['name']] = $t;
         }
+        // ID 索引
         set_cache('block', $data);
-        if ($show) $this->show_message('缓存更新成功', 1);
+        // code 索引
+        set_cache('block_code', $data_code);
+        unset($data, $data_code);
+        if ($show) {
+            $this->show_message('缓存更新成功', 1);
+        }
     }
 
     private function load_list()
@@ -135,5 +154,4 @@ class BlockController extends Admin
         include $this->views('admin/block/add');
         exit;
     }
-
 }

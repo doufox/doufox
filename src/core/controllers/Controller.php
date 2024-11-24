@@ -93,7 +93,7 @@ abstract class Controller
             'site_url' => HTTP_URL,
             'site_name' => $this->site_config['SITE_NAME'],
             'site_slogan' => $this->site_config['SITE_SLOGAN'],
-            'icp_filing_number' => $this->site_config['ICP_FILING_NUMBER'],
+            'site_icp_filing_number' => $this->site_config['SITE_ICP_FILING_NUMBER'],
             'site_template' => HTTP_URL . '/' . DIR_TEMPLATE . '/' . SITE_THEME . '/',
             'cats' => $this->category_cache,
             'member_model' => $this->membermodel,

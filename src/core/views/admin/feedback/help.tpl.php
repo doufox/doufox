@@ -26,7 +26,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">在线技术支持</div>
                         <div class="panel-body">
-                        <p>社区支持: <a href="https://doufox.com" target="_blank">社区支持</a></p>
+                        <p>社区支持: <a href="http://doufox.com" target="_blank">社区支持</a></p>
                         <p>联系 QQ: <a href="https://wpa.qq.com/msgrd?v=3&uin=350430869&Site=pay&Menu=yes" target="_blank">350430869</a></p>
                         <p>联系邮箱: <a href="mailto:service@doufox.com">service@doufox.com</a></p>
                         <p>官方网站: <a href="<?php echo APP_SITE;?>" target="_blank"><?php echo APP_SITE;?></a></p>

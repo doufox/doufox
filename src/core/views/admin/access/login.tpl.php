@@ -88,6 +88,7 @@
                         </form>
                     </div>
                 </div>
+                <?php doHookAction('admin_login_form_foot'); echo PHP_EOL; ?>
             </div>
             <div class="panel-footer text-center">
                 <span>Copyright &copy; <?php echo date("Y"); ?></span>

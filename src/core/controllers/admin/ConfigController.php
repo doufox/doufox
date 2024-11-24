@@ -14,41 +14,41 @@ class ConfigController extends Admin
     {
         parent::__construct();
         $this->configTips = array(
-            'SITE_THEME' => '桌面端主题样式, 默认default',
-            'SITE_MOBILE' => '移动端主题样式, 默认mobile',
-            'SITE_NAME' => '网站名称',
-            'SITE_SLOGAN' => '网站宣传标语',
-            'SITE_TITLE' => '网站首页SEO标题',
-            'SITE_KEYWORDS' => '网站SEO关键字',
-            'SITE_DESCRIPTION' => '网站SEO描述信息',
-            'SITE_WATERMARK' => '水印功能',
-            'SITE_WATERMARK_ALPHA' => '图片水印透明度',
-            'SITE_WATERMARK_TEXT' => '文字水印',
-            'SITE_WATERMARK_SIZE' => '文字大小',
-            'SITE_WATERMARK_POS' => '水印位置',
-            'SITE_THUMB_WIDTH' => '内容缩略图默认宽度',
-            'SITE_THUMB_HEIGHT' => '内容缩略图默认高度',
-            'MEMBER_MODELID' => '默认会员模型',
-            'MEMBER_REGISTER' => '新会员注册',
-            'MEMBER_STATUS' => '新会员审核',
-            'MEMBER_REGCODE' => '注册验证码',
-            'MEMBER_LOGINCODE' => '登录验证码',
-            'DIY_URL' => '开启伪静态',
-            'LIST_URL' => '栏目url',
-            'LIST_PAGE_URL' => '栏目带分页url',
-            'SHOW_URL' => '内容页url',
-            'SHOW_PAGE_URL' => '内容分页url',
-            'HIDE_ENTRY_FILE' => '隐藏入口文件需要服务器配置默认文件，如index.php。当服务器配置的默认文件与程序入口文件一致时，设置才生效',
-            'URL_LIST_TYPE' => '栏目参数形式，ID形式：catid=123，目录形式：catpath=catpath',
-            'RAND_CODE' => '随机代码',
-            'WEIXIN_MP_OPENED' => '微信公众号开关',
-            'WEIXIN_MP_URL' => '接收来自微信服务器的请求,必须以http://或https://开头',
-            'WEIXIN_MP_TOKEN' => '微信服务器的验证token,必须为英文或数字，长度为3-32字符',
-            'WEIXIN_MP_AESKEY' => 'EncodingAESKey,消息加密密钥由43位字符组成',
-            'ADMIN_LOGINCODE' => '后台登录需要输入验证码',
-            'ADMIN_LOGINPATH' => '后台登录路径默认admin',
-            'ICP_FILING_NUMBER' => '网站ICP备案号',
-            'STORAGE_TYPE' => '附件存储形式'
+            'SITE_THEME'             => '桌面端主题样式, 默认default',
+            'SITE_MOBILE'            => '移动端主题样式, 默认mobile',
+            'SITE_NAME'              => '网站名称',
+            'SITE_SLOGAN'            => '网站宣传标语',
+            'SITE_TITLE'             => '网站首页SEO标题',
+            'SITE_KEYWORDS'          => '网站SEO关键字',
+            'SITE_DESCRIPTION'       => '网站SEO描述信息',
+            'SITE_WATERMARK'         => '水印功能',
+            'SITE_WATERMARK_ALPHA'   => '图片水印透明度',
+            'SITE_WATERMARK_TEXT'    => '文字水印',
+            'SITE_WATERMARK_SIZE'    => '文字大小',
+            'SITE_WATERMARK_POS'     => '水印位置',
+            'SITE_THUMB_WIDTH'       => '内容缩略图默认宽度',
+            'SITE_THUMB_HEIGHT'      => '内容缩略图默认高度',
+            'MEMBER_MODELID'         => '默认会员模型',
+            'MEMBER_REGISTER'        => '新会员注册',
+            'MEMBER_STATUS'          => '新会员审核',
+            'MEMBER_REGCODE'         => '注册验证码',
+            'MEMBER_LOGINCODE'       => '登录验证码',
+            'DIY_URL'                => '开启伪静态',
+            'LIST_URL'               => '栏目url',
+            'LIST_PAGE_URL'          => '栏目带分页url',
+            'SHOW_URL'               => '内容页url',
+            'SHOW_PAGE_URL'          => '内容分页url',
+            'HIDE_ENTRY_FILE'        => '隐藏入口文件需要服务器配置默认文件，如index.php。当服务器配置的默认文件与程序入口文件一致时，设置才生效',
+            'URL_LIST_TYPE'          => '栏目参数形式，ID形式：catid=123，目录形式：catpath=catpath',
+            'RAND_CODE'              => '随机代码',
+            'WEIXIN_MP_OPENED'       => '微信公众号开关',
+            'WEIXIN_MP_URL'          => '接收来自微信服务器的请求,必须以http://或https://开头',
+            'WEIXIN_MP_TOKEN'        => '微信服务器的验证token,必须为英文或数字，长度为3-32字符',
+            'WEIXIN_MP_AESKEY'       => 'EncodingAESKey,消息加密密钥由43位字符组成',
+            'ADMIN_LOGINCODE'        => '后台登录需要输入验证码',
+            'ADMIN_LOGINPATH'        => '后台登录路径默认admin',
+            'SITE_ICP_FILING_NUMBER' => '网站ICP备案号',
+            'STORAGE_TYPE'           => '附件存储形式'
         );
     }
 
@@ -233,15 +233,39 @@ class ConfigController extends Admin
     {
         if ($this->isPostForm()) {
             $postdata = $this->post('data');
-            // $this->save_config($postdata);
-            $this->msg_result = '功能未实现！';
+            // 拼接文件内容
+            $content = "<?php" . PHP_EOL . "if (!defined('IN_CRONLITE')) exit();" . PHP_EOL . PHP_EOL . "return array(" . PHP_EOL;
+            $content .= "    'db_host'     => '" . $postdata['db_host']     . "'," . PHP_EOL;
+            $content .= "    'db_username' => '" . $postdata['db_username'] . "'," . PHP_EOL;
+            $content .= "    'db_password' => '" . $postdata['db_password'] . "'," . PHP_EOL;
+            $content .= "    'db_name'     => '" . $postdata['db_name']     . "'," . PHP_EOL;
+            $content .= "    'db_prefix'   => '" . $postdata['db_prefix']   . "'," . PHP_EOL;
+            $content .= "    'db_charset'  => '" . $postdata['db_charset']  . "'";
+            $content .= PHP_EOL . ");";
+            // 保存数据库配置文件
+            if (!file_put_contents(PATH_DATA . DS . 'config' . DS . 'database.ini.php', $content)) {
+                dexit('数据库配置文件保存失败, 请检查文件权限！');
+            }
+            $this->msg_result = '修改成功';
+            unset($content);
+            unset($postdata);
         }
         // 获取当前配置信息
-        $data = $this->site_config;
-        if (isset($post_data)) {
-            $data = array_merge($data, $post_data);
-            unset($post_data);
+        // 加载数据库配置文件
+        $data = core::load_config('database');
+        if (!is_array($data)) {
+            exit('数据库配置文件不存在');
         }
+        foreach ($data as $key => $value) {
+            $data[$key] = trim($value);
+        }
+
+        $data['db_host'] = trim($data['db_host']);
+        $data['db_username'] = trim($data['db_username']);
+        $data['db_password'] = trim($data['db_password']);
+        $data['db_name'] = trim($data['db_name']);
+        $data['db_charset'] = ($data['db_charset']) ? trim($data['db_charset']) : '';
+        $data['db_prefix'] = ($data['db_prefix']) ? trim($data['db_prefix']) : '';
         $msg = $this->msg_result;
         include $this->views('admin/config/database');
     }

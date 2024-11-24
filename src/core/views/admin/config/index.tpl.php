@@ -89,7 +89,7 @@
                             <tr>
                                 <th>网站ICP备案号</th>
                                 <td>
-                                    <input class="form-control" type="text" size="30" placeholder="网站ICP备案号（如：沪ICP备12345678号）" name="data[ICP_FILING_NUMBER]" value="<?php echo $data['ICP_FILING_NUMBER']; ?>" />
+                                    <input class="form-control" type="text" size="30" placeholder="网站ICP备案号（如：沪ICP备12345678号）" name="data[SITE_ICP_FILING_NUMBER]" value="<?php echo $data['SITE_ICP_FILING_NUMBER']; ?>" />
                                 </td>
                             </tr>
                         </table>

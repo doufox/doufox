@@ -34,19 +34,19 @@ abstract class Model
             $params[$key] = trim($value);
         }
 
-        $params['host'] = trim($params['host']);
-        $params['username'] = trim($params['username']);
-        $params['password'] = trim($params['password']);
-        $params['dbname'] = trim($params['dbname']);
-        $this->dbname = $params['dbname'];
-        $params['charset'] = ($params['charset']) ? trim($params['charset']) : 'utf8';
-        $this->prefix = ($params['prefix']) ? trim($params['prefix']) : '';
+        $params['db_host']     = trim($params['db_host']);
+        $params['db_username'] = trim($params['db_username']);
+        $params['db_password'] = trim($params['db_password']);
+        $params['db_name']     = trim($params['db_name']);
+        $params['db_charset']  = ($params['db_charset']) ? trim($params['db_charset']) : 'utf8mb4';
+        $this->dbname = $params['db_name'];
+        $this->prefix = ($params['db_prefix']) ? trim($params['db_prefix']) : '';
         $this->cache_dir = PATH_CACHE . DS .'models' . DS;
         core::load_class('mysql', '', 0);
         $this->db = mysql::getInstance($params);
 
-        unset($params['username']);
-        unset($params['password']);
+        unset($params['db_username']);
+        unset($params['db_password']);
         return true;
     }
 

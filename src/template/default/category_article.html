@@ -6,7 +6,7 @@
             {template sidebar.html}
         </div>
         <div class="w740 fr bg">
-            {template crumbs.html} {nav parentid=$catid typeid=1}
+            {template crumbs.html} {category parentid=$catid typeid=1}
             <div class="category-list">
                 <div class="category-title">
                     <span class="title">{$vdata['catname']}</span>
@@ -21,7 +21,7 @@
                     {/list}
                 </ul>
             </div>
-            {/nav}
+            {/category}
         </div>
     </div>
 </div>

@@ -30,8 +30,11 @@
                         <input name="id" type="hidden" value="<?php echo $data['id']; ?>">
                         <table width="100%" class="table_form">
                             <tr>
-                                <th width="80">区块名称：</th>
-                                <td><input class="form-control" type="text" name="data[name]" value="<?php echo $data['name']; ?>" size="40" /></td>
+                                <th width="80">区块标识：</th>
+                                <td>
+                                    <input class="form-control" type="text" name="data[name]" value="<?php echo $data['name']; ?>" size="40" />
+                                    <p class="show-tips">标识支持字母和数字（a-zA-Z0-9_-），必须字母开头</p>
+                                </td>
                             </tr>
                             <tr>
                                 <th width="80">编辑方式：</th>

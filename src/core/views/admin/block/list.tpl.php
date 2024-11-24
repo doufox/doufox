@@ -28,18 +28,18 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>区块名称</th>
-                            <th>备注</th>
+                            <th>标识</th>
                             <th>模板调用代码</th>
+                            <th>备注</th>
                             <th>操作</th>
                         </tr>
                     <tbody>
                         <?php if (is_array($list)) { foreach ($list as $t) { ?>
                         <tr>
                             <td><?php echo $t['id']; ?></td>
-                            <td><a href="<?php echo url('admin/block/edit',array('id'=>$t['id'])); ?>"><?php echo $t['name']; ?></a></td>
+                            <td><a href="<?php echo url('admin/block/edit', ['id' => $t['id']]); ?>" title="编辑"><?php echo $t['name']; ?></a></td>
+                            <td>{block <?php echo $t['id']; ?>} 或 {block <?php echo $t['name']; ?>}</td>
                             <td><?php echo $t['remark']; ?></td>
-                            <td>{block <?php echo $t['id']; ?>}</td>
                             <td>
                                 <a href="<?php echo url('admin/block/edit', array('id'=>$t['id'])); ?>" title="编辑"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                 <a href="#modal-confirm" title="删除" data-toggle="modal" name="删除区块" onclick="block_delete(this);" data-id="<?php echo $t['id']; ?>" data-name="<?php echo $t['name']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>

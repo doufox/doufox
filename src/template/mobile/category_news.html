@@ -36,7 +36,7 @@ $(document).ready(function(){
 
  <div id="deals">
     <input name="list_id" id="list_id" type="hidden" value="1">
-{nav  parentid=$catid typeid=1}
+{category  parentid=$catid typeid=1}
 <h3><span class="bt">{$vdata['catname']}</span> <span class="more"><a href="{$vdata['url']}">更多&gt;&gt;</a></span></h3>
 {list catid=$vdata[catid] num=3 order=time}
 <section class="news">
@@ -45,16 +45,16 @@ $(document).ready(function(){
 </a>
 </section>
 {/list}
-{/nav}
+{/category}
 </div>
 
 
 <div class="newlist">
  <input name="list_id" id="list_id" type="hidden" value="1">
  <ul class="tabs" style="margin-top: 0">
-{nav  parentid=$catid typeid=1}
+{category  parentid=$catid typeid=1}
   <li><a href="{$vdata['url']}">{$vdata['catname']}</a></li>
-{/nav}
+{/category}
  </ul>
  <br class="clear" />
  <div class="flexslider2"><ul class="slides"></ul></div>

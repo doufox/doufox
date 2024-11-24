@@ -1,5 +1,9 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
+
+// ini_set('display_errors', 'On');
+// error_reporting(E_ALL);
+// error_reporting(-1);
+
 /**
  * 系统入口文件
  */

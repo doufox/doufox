@@ -18,18 +18,18 @@ class mysql
     public function __construct($params = array())
     {
         // 检测参数信息是否完整
-        if (!$params['host'] || !$params['username'] || !$params['dbname']) {
-            exit('Mysql数据库配置文件不完整');
+        if (!$params['db_host'] || !$params['db_username'] || !$params['db_name']) {
+            exit('MySQL 数据库配置文件不完整');
         }
 
-        // 实例化mysql连接ID
-        $this->db_link = @mysql_connect($params['host'], $params['username'], $params['password']);
+        // 实例化 MySQL 连接ID
+        $this->db_link = @mysql_connect($params['db_host'], $params['db_username'], $params['db_password']);
         if (!$this->db_link) {
-            exit('Mysql服务器连接失败 ');
+            exit('MySQL 服务器连接失败');
         } else {
-            if (mysql_select_db($params['dbname'], $this->db_link)) {
+            if (mysql_select_db($params['db_name'], $this->db_link)) {
                 // 设置数据库编码
-                mysql_query("SET NAMES {$params['charset']}", $this->db_link);
+                mysql_query("SET NAMES {$params['db_charset']}", $this->db_link);
                 if (version_compare($this->get_server_info(), '5.0.2', '>=')) {
                     mysql_query("SET SESSION SQL_MODE=''", $this->db_link);
                 }

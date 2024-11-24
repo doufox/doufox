@@ -1,10 +1,15 @@
 # 相关程序生成的文件
 /src/cache/*
-/src/data/config/database.ini.php
-# 测试
-/test/
+/src/data/*
+/src/data/installed
+sitemap.html
+sitemap.xml
+sitemap.txt
+# 保留文件夹目录 index.html
 !/**/**/index.html
 
+# 测试
+/test/
 # 开发工具文件
 .project
 .settings
@@ -14,3 +19,4 @@
 .netbeans
 .DS_Store
 .vscode
+

@@ -113,12 +113,13 @@ class view
         // 正则表达式匹配的模板标签
         $regex_array = array(
             '#{template\s+(.+?)\s*}#is',
-            '#{block\s+([0-9]+)}#i',
+            '#{block\s+([0-9]+)\s?}#i',
+            '#{block\s+([a-zA-Z0-9_-]+)\s?}#',
 
             '#{attachment\s+([0-9]+)}#i',
 
-            '#{nav\s+(.+?)\s?}#i',
-            '#{\/nav}#i',
+            '#{category\s+(.+?)\s?}#i',
+            '#{\/category}#i',
 
             '#{list\s+(.+?)return=(.+?)\s?}#i',
             '#{list\s+(.+?)\s?}#i',
@@ -143,7 +144,8 @@ class view
         // 替换直接变量输出
         $replace_array = array(
             "<?php include \$this->_include('\\1'); echo PHP_EOL; ?>",
-            "<?php \$this->block(\\1);?>",
+            "<?php \$this->block_id(\\1);?>",
+            "<?php \$this->block_code(\"\\1\");?>",
 
             "<?php \$this->attachment(\\1);?>",
 
@@ -425,15 +427,25 @@ class view
     /**
      * 区块
      */
-    protected function block($id)
+    protected function block_id($id)
     {
         $data = get_cache('block');
         $row = $data[$id];
-        if (empty($row)) {
-            return null;
+        if (!empty($row)) {
+            echo htmlspecialchars_decode($row['content']);
         }
+    }
 
-        echo htmlspecialchars_decode($row['content']);
+    /**
+     * 区块
+     */
+    protected function block_code($code)
+    {
+        $data = get_cache('block_code');
+        $row = $data[$code];
+        if (!empty($row)) {
+            echo htmlspecialchars_decode($row['content']);
+        }
     }
 
     /**

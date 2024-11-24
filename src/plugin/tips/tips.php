@@ -2,10 +2,10 @@
 /*
 Name: 小贴士
 Version: 1.0
-URL: https://doufox.com
+URL: http://doufox.com
 Description: 内置插件，它会在您管理主页面显示一句温馨的小提示。
-Author: doufox
-Author URL: https://doufox.com
+Author: Doufox
+Author URL: http://doufox.com
 */
 
 
@@ -14,12 +14,12 @@ if (!defined('IN_CRONLITE')) {
 }
 
 
-function tips_css()
+function plugin_tips_css()
 {
     echo '<style type="text/css">#plugin_admin_tips {color: #0006ff; text-align: center;}</style>';
 }
 
-function tips()
+function plugin_tips()
 {
     $array_tips = array(
         '你永远都不知道，明天和未来哪个会先到',
@@ -32,5 +32,5 @@ function tips()
 }
 
 // 管理主页面显示
-addHookAction('admin_index_top', 'tips_css'); // head 头部插入 CSS 样式
-addHookAction('admin_index_content_top', 'tips');
+addHookAction('admin_index_top', 'plugin_tips_css'); // head 头部插入 CSS 样式
+addHookAction('admin_index_content_top', 'plugin_tips');

@@ -70,7 +70,10 @@
                             </tr>
                             <tr>
                                 <th><font color="red">*</font>栏目目录：</th>
-                                <td><input type="text" class="form-control" size="30" value="<?php echo $data['catpath']; ?>" name="data[catpath]" id="dir_text"></td>
+                                <td>
+                                    <input type="text" class="form-control" size="30" value="<?php echo $data['catpath']; ?>" name="data[catpath]" id="dir_text">
+                                    <div class="show-tips">栏目的 URL 路径，仅支持字母格式</div>
+                                </td>
                             </tr>
                             <tr>
                                 <th width="100"><font color="red">*</font>上级栏目：</th>

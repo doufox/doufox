@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9 col-sm-8 mainbody">
-            {nav parentid=$catid typeid=1}
+            {category parentid=$catid typeid=1}
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="{$vdata['url']}">{$vdata['catname']}</a>
@@ -18,7 +18,7 @@
                 </ul>
             </div>
             <div class="text-center">{$pagination}</div>
-            {/nav}
+            {/category}
         </div>
         <div class="col-md-3 col-sm-4">
             {template sidebar.html}

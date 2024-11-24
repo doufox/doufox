@@ -12,9 +12,9 @@
                     <li <?php if ($this->current_nav == 'content') echo 'class="active"'; ?>>
                         <a href="<?php echo url('admin/content'); ?>">内容</a>
                     </li>
-                    <li <?php if ($this->current_nav == 'menu') echo 'class="active"'; ?>>
+                    <!-- <li <?php if ($this->current_nav == 'menu') echo 'class="active"'; ?>>
                         <a href="<?php echo url('admin/menu'); ?>">菜单</a>
-                    </li>
+                    </li> -->
                     <li <?php if ($this->current_nav == 'category') echo 'class="active"'; ?>>
                         <a href="<?php echo url('admin/category'); ?>">栏目</a>
                     </li>
@@ -57,7 +57,7 @@
                             <li><a href="<?php echo url('admin/backup'); ?>">备份管理</a></li>
                             <li><a href="<?php echo url('admin/cache'); ?>">缓存文件</a></li>
                             <li><a href="<?php echo url('admin/session'); ?>">用户会话</a></li>
-                            <li><a href="<?php echo url('admin/html'); ?>">网页静态化</a>
+                            <li><a href="<?php echo url('admin/html'); ?>">搜索引擎优化</a>
                             <li role="separator" class="divider"></li>
                             <li><a href="<?php echo url('admin/cache/update'); ?>">更新全站缓存</a></li>
                             <li><a href="<?php echo url('admin/content/updateurl'); ?>">更新内容URL</a></li>

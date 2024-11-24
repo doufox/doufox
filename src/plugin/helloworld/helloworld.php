@@ -2,10 +2,10 @@
 /*
 Name: Hello World
 Version: 1.0
-URL: https://doufox.com
+URL: http://doufox.com
 Description: 内置插件，它会在您每个管理页面显示一句"Hello World !"。
-Author: doufox
-Author URL: https://doufox.com
+Author: Doufox
+Author URL: http://doufox.com
 */
 
 

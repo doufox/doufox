@@ -47,10 +47,10 @@ abstract class core
      */
     public static function load()
     {
+        
         self::$config = self::load_config('config');
         self::$router = self::load_class('router');
         $request = self::$router->get();
-
         self::$namespace = $request['namespace'];
         self::$controller = $request['controller'];
         self::$action = $request['action'];

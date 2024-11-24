@@ -3,23 +3,23 @@
 {template member/header.html}
 
 <div class="member">
-	    <div class="w210 fl">
-		{template member/left.html}
+        <div class="w210 fl">
+        {template member/left.html}
         </div>
-	    <div class="w740 fr">
-		<div class="page bg">
+        <div class="w740 fr">
+        <div class="page bg">
                 <form action="" method="post">
                 <div class="datatablepage">
                 <table width="100%" border="0">
                   <tr>
                     <td>
-					<select name="catid">
-                    {nav  }
+                    <select name="catid">
+                    {category  }
                     <option value="{$vdata['catid']}">{$vdata['catname']}</option>
-                    {/nav}
-					</select>
-					<input type="submit" class="button" value="发布文档" name="submit">
-					</td>
+                    {/category}
+                    </select>
+                    <input type="submit" class="button" value="发布文档" name="submit">
+                    </td>
                     <td align="right">{$pagination}</td>
                   </tr>
                 </table>
@@ -37,9 +37,9 @@
                      {loop $list $t}
                       <tr>
                         <td><a href="{$t['url']}" target="_blank">
-						{if $t['status']==0}<font color="#FF0000">[未审]</font>
-						{else if $t['status']==2}<font color="#0000FF">[头条]</font>{/if}
-						{$t['title']}</a></td>
+                        {if $t['status']==0}<font color="#FF0000">[未审]</font>
+                        {else if $t['status']==2}<font color="#0000FF">[头条]</font>{/if}
+                        {$t['title']}</a></td>
                         <td><a href="{$cats[$t['catid']]['url']}" target="_blank">{$cats[$t['catid']]['catname']}</a></td>
                         <td>{function.date("Y-m-d H:i:s", $t['time'])}</td>
                         <td>
@@ -50,9 +50,9 @@
                     </tbody>
                 </table>
                </form>
-			  
-		   <div class="blank10 clear"></div>		
-		</div>
+              
+           <div class="blank10 clear"></div>		
+        </div>
 
         </div>
 </div>
