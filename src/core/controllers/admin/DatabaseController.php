@@ -91,7 +91,8 @@ class DatabaseController extends Admin
     public function delbackedfileAction()
     {
         $dir = PATH_DATA . DS .'bakup' . DS;
-        $path = $this->get('path');
+        $path = $this->get('path') ? $this->get('path') : '';
+        $path = remove_leading_chars($path);
         if ($path && is_dir($dir . $path)) {
             $file_list = core::load_class('file_list');
             $file_list->delete_dir($dir . $path);

@@ -1011,3 +1011,21 @@ function status_label($status, $is = "是", $not = "否")
 {
     return (bool) $status ? $is : $not;
 }
+
+/**
+ * 移除路径开头部分的多余字符
+ * @param string $path
+ * @return string
+ */
+function remove_leading_chars($path) {
+    // 使用正则表达式，匹配路径开头的 . 或 / 或 \
+    // 使用括号来捕捉这些字符
+    if (preg_match('/^([\.\/\\\]+)/', $path, $matches)) {
+        // 移除开头的这些字符
+        // 除路径开头部分的多余字符，但保留最后一个字符。
+        $path = substr($path, strlen($matches[0]) - 1);
+        // 判断这最后一个字符是否是.
+        $path = preg_replace('/^[\/\\\]+/', '', $path); // 只移除开头的 / 和 \
+    }
+    return $path;
+}

@@ -59,7 +59,7 @@ class FileController extends Admin
         //     $this->attMsg('游客不允许操作');
         // }
         $dir = $this->get('dir') ? $this->get('dir') : '';
-        $dir = $this->remove_leading_chars($dir);
+        $dir = remove_leading_chars($dir);
         $dir = substr($dir, 0, 1) == '/' ? substr($dir, 1) : $dir;
         $dir = str_replace(array('\\', '//'), '/', $dir);
         $file_list = core::load_class('file_list');
@@ -130,7 +130,7 @@ class FileController extends Admin
     public function viewAction()
     {
         $file = $this->get('file') ? $this->get('file') : '';
-        $file = $this->remove_leading_chars($file);
+        $file = remove_leading_chars($file);
         $file = str_replace(array('\\', '//'), '/', $file);
         // 绝对路径
         $file_path = $this->root_path . $file;
@@ -246,7 +246,7 @@ class FileController extends Admin
     public function downloadAction()
     {
         $filename = $this->get('file') ? $this->get('file') : '';
-        $file = $this->remove_leading_chars($filename);
+        $file = remove_leading_chars($filename);
         $file = str_replace(array('\\', '//'), '/', $file);
         $file_path = $this->root_path . $file;
 
@@ -284,7 +284,7 @@ class FileController extends Admin
     public function editAction()
     {
         $filename = $this->get('file') ? $this->get('file') : '';
-        $file = $this->remove_leading_chars($filename);
+        $file = remove_leading_chars($filename);
         $file = str_replace(array('\\', '//'), '/', $file);
         $file_path = $this->root_path . $file;
 
@@ -302,7 +302,7 @@ class FileController extends Admin
     public function delAction()
     {
         $filename = $this->get('file') ? $this->get('file') : '';
-        $file = $this->remove_leading_chars($filename);
+        $file = remove_leading_chars($filename);
         $file = str_replace(array('\\', '//'), '/', $file);
         $file_path = $this->root_path . $file;
         $folder = '';
@@ -587,24 +587,6 @@ class FileController extends Admin
         $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
         $power = $size > 0 ? floor(log($size, 1024)) : 0;
         return sprintf('%s %s', round($size / pow(1024, $power), 2), $units[$power]);
-    }
-
-    /**
-     * 移除路径开头部分的多余字符
-     * @param string $path
-     * @return string
-     */
-    public function remove_leading_chars($path) {
-        // 使用正则表达式，匹配路径开头的 . 或 / 或 \
-        // 使用括号来捕捉这些字符
-        if (preg_match('/^([\.\/\\\]+)/', $path, $matches)) {
-            // 移除开头的这些字符
-            // 除路径开头部分的多余字符，但保留最后一个字符。
-            $path = substr($path, strlen($matches[0]) - 1);
-            // 判断这最后一个字符是否是.
-            $path = preg_replace('/^[\/\\\]+/', '', $path); // 只移除开头的 / 和 \
-        }
-        return $path;
     }
 
     /**
