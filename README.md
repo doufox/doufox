@@ -11,7 +11,7 @@ Crogram Doufox 程江网站内容管理系统，是一款基于 PHP 和 MySQL �
 1. 将 src 文件夹下的所有文件上传到服务器站点目录；
 2. 在浏览器上访问您的站点域名会出现安装界面，按照提示填写后提交；
 3. 安装成功，开始愉快的玩耍吧；
-4. Apache 重写规则请参考文件 src/.htaccess Nginx 配置参考文件 src/nginx.conf；
+4. Apache 重写规则请参考文件 src/.htaccess，Nginx 配置参考文件 src/nginx.conf；
 
 ## 问题反馈
 
@@ -37,4 +37,4 @@ Doufox 采用 [MIT License](./LICENSE) 许可发布。
 
 ## 版权信息
 
-版权所有 Copyright © 2018-present [CROGRAM](https://crogram.com)
+版权所有 Copyright © 2018-2024 [CROGRAM](https://crogram.com)

@@ -24,12 +24,13 @@ return array(
     'MEMBER_REGCODE'          => '1', // 注册验证码
     'MEMBER_LOGINCODE'        => '1', // 登录验证码
     'DIY_URL'                 => '1', // 开启伪静态
+    'INDEX_URL'               => 'index.html', // 首页url
     'LIST_URL'                => '{catpath}.html', // 栏目url
     'LIST_PAGE_URL'           => '{catpath}-{page}.html', // 栏目带分页url
     'SHOW_URL'                => 'article-{id}.html', // 内容页url
     'SHOW_PAGE_URL'           => 'article-{id}-{page}.html', // 内容分页url
-    'HIDE_ENTRY_FILE'         => true, // 隐藏入口文件需要服务器配置默认文件，如index.php。当服务器配置的默认文件与程序入口文件一致时，设置才生效
-    'URL_LIST_TYPE'           => true, // 栏目参数形式，ID形式：catid=123，目录形式：catpath=catpath
+    'HIDE_ENTRY_FILE'         => '1', // 隐藏入口文件需要服务器配置默认文件，如index.php。当服务器配置的默认文件与程序入口文件一致时，设置才生效
+    'URL_LIST_TYPE'           => '1', // 栏目参数形式，ID形式：catid=123，目录形式：catpath=catpath
     'WEIXIN_MP_OPENED'        => '', // 微信公众号开关
     'WEIXIN_MP_URL'           => '', // 接收来自微信服务器的请求,必须以http://或https://开头
     'WEIXIN_MP_TOKEN'         => '', // 微信服务器的验证token,必须为英文或数字，长度为3-32字符

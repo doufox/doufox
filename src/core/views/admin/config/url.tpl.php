@@ -68,6 +68,12 @@
                             </tbody>
                             <tbody class="url-type-diy" style="display:<?php if (empty($data['DIY_URL'])) { ?>none<?php } ?>">
                                 <tr>
+                                    <th>首页</th>
+                                    <td>
+                                        <input class="form-control" type="text" name="data[INDEX_URL]" value="<?php echo $data['INDEX_URL']; ?>" size="40" placeholder="index.html|index.htm|index等" />
+                                    </td>
+                                </tr>
+                                <tr>
                                     <th>栏目页</th>
                                     <td>
                                         <input class="form-control" type="text" name="data[LIST_URL]" value="<?php echo $data['LIST_URL']; ?>" size="40" placeholder="可以使用{catpath}和{catid}组合" />

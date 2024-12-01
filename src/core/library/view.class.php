@@ -195,7 +195,7 @@ class view
         $system = array();
         if (is_array($param)) {
             foreach ($param as $key => $val) {
-                if (in_array($key, array('catid', 'typeid', 'modelid', 'parentid', 'num', 'ismenu'))) {
+                if (in_array($key, array('catid', 'typeid', 'modelid', 'parentid', 'num', 'ismenu', 'ispost'))) {
                     $system[$key] = $val;
                 }
             }
@@ -210,8 +210,26 @@ class view
                 }
             }
 
-            if (!isset($system['ismenu'])) {
-                if (!isset($cat['ismenu'])) {
+            if (isset($system['ismenu'])) {
+                if ($cat['ismenu'] != $system['ismenu']) {
+                    continue;
+                }
+            }
+
+            if (isset($system['verify'])) {
+                if ($cat['verify'] != $system['verify']) {
+                    continue;
+                }
+            }
+
+            if (isset($system['ispost'])) {
+                if ($cat['ispost'] != $system['ispost']) {
+                    continue;
+                }
+            }
+
+            if (isset($system['islook'])) {
+                if ($cat['islook'] != $system['islook']) {
                     continue;
                 }
             }

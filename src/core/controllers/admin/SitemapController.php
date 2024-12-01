@@ -13,7 +13,7 @@ class SitemapController extends Admin
 
     public function indexAction()
     {
-        include $this->views('admin/html/sitemap');
+        include $this->views('admin/sitemap/index');
     }
 
     /**
@@ -73,8 +73,9 @@ class SitemapController extends Admin
         foreach ($data_content as $v) {
             $html .= '<li><a href="' . $v['url'] . '">' . $v['title'] . '</a></li>' . PHP_EOL;
         }
-        $html .= '</ul>' . PHP_EOL;
-        $html .= '</body></html>';
+        $html .= '</ul>
+</body>
+</html>';
 
         file_put_contents(PATH_ROOT . DS . 'sitemap.html', $html, LOCK_EX);
 

@@ -34,6 +34,7 @@ class ConfigController extends Admin
             'MEMBER_REGCODE'         => '注册验证码',
             'MEMBER_LOGINCODE'       => '登录验证码',
             'DIY_URL'                => '开启伪静态',
+            'INDEX_URL'              => '首页url',
             'LIST_URL'               => '栏目url',
             'LIST_PAGE_URL'          => '栏目带分页url',
             'SHOW_URL'               => '内容页url',

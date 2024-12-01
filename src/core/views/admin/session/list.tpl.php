@@ -19,9 +19,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="panel-title">会话列表</span>
-                    <div class="pull-right">
-                        <span>会话总数：<?php echo $idx; ?></span>
-                    </div>
+                </div>
+                <div class="panel-body">
+                    <span>会话总数：<?php echo $idx; ?>，存储位置：/cache/session/</span>
                 </div>
                 <table class="table table-bordered table-hover" width="100%">
                     <thead>
@@ -45,7 +45,7 @@
                         <?php } ?>
                     </tbody>
                 </table>
-                <div class="panel-body">存储位置：/cache/session/</div>
+                <div class="panel-body"><span>会话总数：<?php echo $idx; ?></span></div>
             </div>
         </div>
     </div>

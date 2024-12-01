@@ -46,7 +46,6 @@ class router
         if (!empty($this->path_info)) {
             // 先解析路由查看是否内容路径
             $result = $this->parseContentURL($this->path_info);
-
             if ($result) {
                 $namespace = '';
                 $controller = 'Index';
@@ -138,7 +137,6 @@ class router
                 }
             }
         }
-        // print_r($namespace);echo 345;exit;
         $this->router['namespace'] = strtolower($namespace);
         $this->router['controller'] = ucfirst(strtolower($controller));
         $this->router['action'] = strtolower($action);
@@ -155,11 +153,15 @@ class router
     {
         // 路由配置信息
         $config = [
+            // 'INDEX_URL'  => core::get_site_config('INDEX_URL'),
             'SHOW_URL'      => core::get_site_config('SHOW_URL'),
             'SHOW_PAGE_URL' => core::get_site_config('SHOW_PAGE_URL'),
             'LIST_URL'      => core::get_site_config('LIST_URL'),
             'LIST_PAGE_URL' => core::get_site_config('LIST_PAGE_URL'),
         ];
+        if ($path === core::get_site_config('INDEX_URL')) {
+            return array('action' => 'index');
+        }
         // echo 'URL内容分割: ' . $path . PHP_EOL;
         // /^(?=.*[a-zA-Z])[a-zA-Z0-9]*$/ // 匹配栏目地址，字符，可以有字母和数字组成，数字可有可无，但必须有字母。
         foreach ($config as $key => $value) {
