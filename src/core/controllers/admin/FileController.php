@@ -5,6 +5,10 @@ if (!defined('IN_CRONLITE')) {
 
 class FileController extends Admin
 {
+    private $root_path;
+    private $exclude_items;
+    private $is_windows;
+    private $iconv_input_encoding;
 
     public function __construct()
     {
@@ -55,12 +59,17 @@ class FileController extends Admin
         //     $this->attMsg('游客不允许操作');
         // }
         $dir = $this->get('dir') ? $this->get('dir') : '';
-        $dir = str_replace(array('..\\', '../', './', '.\\'), '', trim($dir));
-
+        $dir = $this->remove_leading_chars($dir);
         $dir = substr($dir, 0, 1) == '/' ? substr($dir, 1) : $dir;
         $dir = str_replace(array('\\', '//'), '/', $dir);
         $file_list = core::load_class('file_list');
-        $data = $file_list->get_file_list($this->root_path . $dir);
+        $dir_path = $this->root_path . $dir;
+
+        if ($dir_path == '' || !file_exists($dir_path) || in_array($dir, $this->exclude_items)) {
+            $this->show_message('目录不存在！');
+        }
+
+        $data = $file_list->get_file_list($dir_path);
         $list = array();
         $calc_folder = false;
         if ($data) {
@@ -110,29 +119,28 @@ class FileController extends Admin
         }
         $pdir = url('admin/file/list', array('dir' => str_replace(basename($dir), '', $dir)));
         $dir = $this->root_path . $dir;
+        $root_path = $this->root_path;
         $istop = $dir ? 1 : 0;
         include $this->views('admin/file/list');
     }
 
-    /** 文件预览
-     * 
+    /**
+     * 文件预览
      */
     public function viewAction()
     {
-        $filename = $this->get('file') ? $this->get('file') : '';
-        $filename = str_replace(array('..\\', '../', './', '.\\'), '', trim($filename));
-        $file = substr($filename, 0, 1) == '/' ? substr($filename, 1) : $filename;
+        $file = $this->get('file') ? $this->get('file') : '';
+        $file = $this->remove_leading_chars($file);
         $file = str_replace(array('\\', '//'), '/', $file);
+        // 绝对路径
         $file_path = $this->root_path . $file;
-        $filename = $this->convert_filename($filename);
+        // 相对路径
+        $filename = $this->convert_filename($file);
         // $file = $_GET['view'];
         // $quickView = (isset($_GET['quickView']) && $_GET['quickView'] == 1) ? true : false;
         $quickView = true;
-        // $file = fm_clean_path($file, false);
-        // $file = str_replace('/', '', $file);
-        if ($file == '' || !is_file($file_path) || in_array($file, $this->exclude_items)) {
+        if ($file == '' || !file_exists($file_path) || in_array($file, $this->exclude_items)) {
             $this->show_message('文件不存在！');
-            // fm_redirect(FM_SELF_URL . '?p=' . urlencode(FM_PATH));
         }
 
         $file_url = $this->get_base_url() . $this->convert_filename($file);
@@ -149,16 +157,14 @@ class FileController extends Admin
         $is_audio = false;
         $is_video = false;
         $is_text = false;
+
         $is_onlineViewer = false;
+        $use_highlight = true;
 
         $file_type = '文件';
         $filenames = false; // for zip
         $content = ''; // for text
-        // $online_viewer = strtolower(FM_DOC_VIEWER);
 
-        // if ($online_viewer && $online_viewer !== 'false' && in_array($ext, fm_get_onlineViewer_exts())) {
-        //     $is_onlineViewer = true;
-        // } else
         if ($ext == 'zip' || $ext == 'tar') {
             $is_zip = true;
             $file_type = '压缩包';
@@ -209,7 +215,7 @@ class FileController extends Admin
                     $content = iconv($this->iconv_input_encoding, 'UTF-8//IGNORE', $content);
                 }
             }
-            if (FM_USE_HIGHLIGHTJS) {
+            if ($use_highlight) {
                 // highlight
                 $hljs_classes = array(
                     'shtml' => 'xml',
@@ -240,12 +246,11 @@ class FileController extends Admin
     public function downloadAction()
     {
         $filename = $this->get('file') ? $this->get('file') : '';
-        $filename = str_replace(array('..\\', '../', './', '.\\'), '', trim($filename));
-        $file = substr($filename, 0, 1) == '/' ? substr($filename, 1) : $filename;
+        $file = $this->remove_leading_chars($filename);
         $file = str_replace(array('\\', '//'), '/', $file);
         $file_path = $this->root_path . $file;
 
-        if ($filename != '' && $file_path != '' && is_file($file_path)) {
+        if ($filename != '' && $file != '' && file_exists($file_path)) {
             $this->download_file($file_path, $filename, 1024);
             exit;
         } else {
@@ -279,12 +284,11 @@ class FileController extends Admin
     public function editAction()
     {
         $filename = $this->get('file') ? $this->get('file') : '';
-        $filename = str_replace(array('..\\', '../', './', '.\\'), '', trim($filename));
-        $file = substr($filename, 0, 1) == '/' ? substr($filename, 1) : $filename;
+        $file = $this->remove_leading_chars($filename);
         $file = str_replace(array('\\', '//'), '/', $file);
         $file_path = $this->root_path . $file;
 
-        if ($filename != '' && $file_path != '' && is_file($file_path)) {
+        if ($filename != '' && $file != '' && file_exists($file_path)) {
             $content = file_get_contents($file_path);
             include $this->views('admin/file/edit');
         } else {
@@ -297,29 +301,28 @@ class FileController extends Admin
      */
     public function delAction()
     {
-
         $filename = $this->get('file') ? $this->get('file') : '';
-        $filename = str_replace(array('..\\', '../', './', '.\\'), '', trim($filename));
-        $file = substr($filename, 0, 1) == '/' ? substr($filename, 1) : $filename;
+        $file = $this->remove_leading_chars($filename);
         $file = str_replace(array('\\', '//'), '/', $file);
         $file_path = $this->root_path . $file;
         $folder = '';
 
         // Delete file / folder
-        if ($file != '' && $file != '..' && $file != '.') {
-            $is_dir = is_dir($file_path);
-            $parent = files_get_parent_path($file);
-            if (fm_rdelete($file_path)) {
-                $msg = $is_dir ? 'Folder <b>%s</b> deleted' : 'File <b>%s</b> deleted';
-                fm_set_msg(sprintf($msg, $this->encode_html($file)));
-                $this->redirect(url('admin/file/list', array('dir' => $parent)));
-            } else {
-                $msg = $is_dir ? 'Folder <b>%s</b> not deleted' : 'File <b>%s</b> not deleted';
-                fm_set_msg(sprintf($msg, $this->encode_html($file)), 'error');
-                $this->redirect(url('admin/file/list', array('dir' => $parent)));
-            }
+        if ($file != '' && $file != '..' && $file != '.' && $filename != '' && $file != '' && file_exists($file_path)) {
+            $this->show_message('未实现！');
+            // $is_dir = is_dir($file_path);
+            // $parent = files_get_parent_path($file);
+            // if (rdelete($file_path)) {
+            //     $msg = $is_dir ? 'Folder <b>%s</b> deleted' : 'File <b>%s</b> deleted';
+            //     set_msg(sprintf($msg, $this->encode_html($file)));
+            //     $this->redirect(url('admin/file/list', array('dir' => $parent)));
+            // } else {
+            //     $msg = $is_dir ? 'Folder <b>%s</b> not deleted' : 'File <b>%s</b> not deleted';
+            //     set_msg(sprintf($msg, $this->encode_html($file)), 'error');
+            //     $this->redirect(url('admin/file/list', array('dir' => $parent)));
+            // }
         } else {
-            $this->show_message('错误的文件');
+            $this->show_message('文件不存在');
         }
     }
 
@@ -500,7 +503,6 @@ class FileController extends Admin
         return $img;
     }
 
-
     /**
      * Get mime type
      * @param string $file_path
@@ -585,6 +587,24 @@ class FileController extends Admin
         $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
         $power = $size > 0 ? floor(log($size, 1024)) : 0;
         return sprintf('%s %s', round($size / pow(1024, $power), 2), $units[$power]);
+    }
+
+    /**
+     * 移除路径开头部分的多余字符
+     * @param string $path
+     * @return string
+     */
+    public function remove_leading_chars($path) {
+        // 使用正则表达式，匹配路径开头的 . 或 / 或 \
+        // 使用括号来捕捉这些字符
+        if (preg_match('/^([\.\/\\\]+)/', $path, $matches)) {
+            // 移除开头的这些字符
+            // 除路径开头部分的多余字符，但保留最后一个字符。
+            $path = substr($path, strlen($matches[0]) - 1);
+            // 判断这最后一个字符是否是.
+            $path = preg_replace('/^[\/\\\]+/', '', $path); // 只移除开头的 / 和 \
+        }
+        return $path;
     }
 
     /**
@@ -743,7 +763,7 @@ class FileController extends Admin
      */
     function convert_filename($filename)
     {
-        if ($this->convert_filename && function_exists('iconv')) {
+        if (function_exists('iconv')) {
             $filename = iconv($this->iconv_input_encoding, 'UTF-8//IGNORE', $filename);
         }
         return $filename;
