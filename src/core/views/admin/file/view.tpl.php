@@ -59,28 +59,20 @@ include_once $this->views('admin/common/msg');
                                 <td><?php echo $file; ?></td>
                             </tr>
                             <tr>
-                                <td>文件路径：</td>
-                                <td><?php echo $file_path; ?></td>
-                            </tr>
-                            <tr>
                                 <td>文件类型：</td>
-                                <td><?php echo $file_type; ?></td>
+                                <td><?php echo $file_type; ?>（MIME：<?php echo $mime_type ?>）</td>
                             </tr>
                             <tr>
                                 <td>文件名：</td>
                                 <td><?php echo $this->encode_html($filename) ?></td>
                             </tr>
                             <tr>
-                                <td>文件路径：</td>
+                                <td>完整路径：</td>
                                 <td><?php echo $this->encode_html($file_path) ?></td>
                             </tr>
                             <tr>
                                 <td>文件大小：</td>
                                 <td><?php echo $this->get_filesize($filesize) ?><?php if ($filesize >= 1000) : ?> (<?php echo sprintf('%s bytes', $filesize) ?>)<?php endif; ?></td>
-                            </tr>
-                            <tr>
-                                <td>MIME类型：</td>
-                                <td><?php echo $mime_type ?></td>
                             </tr>
                         <?php if ($is_zip) { ?>
                             <tr>
@@ -110,7 +102,7 @@ include_once $this->views('admin/common/msg');
                             </tr>
                         <?php } if ($is_text) { ?>
                             <tr>
-                                <td>Charset</td>
+                                <td>编码</td>
                                 <td><?php echo $charset; ?></td>
                             </tr>
                         <?php } ?>
